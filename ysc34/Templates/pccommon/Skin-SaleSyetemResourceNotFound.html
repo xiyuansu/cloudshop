@@ -1,0 +1,16 @@
+﻿<%<Hi:Common_Header runat="server"  />%>
+<form runat="server">
+<style>
+.buy_qq_notice { padding-top: 180px; padding-bottom: 250px; overflow: hidden; text-align: left;}
+.buy_qq_notice img{ padding-left: 160px; float: left;}
+.buy_qq_notice b{float: left; width: 500px;  font-weight:lighter; font-size: 24px; padding-top: 45px; color: #666; margin-left: 20px;}
+</style>
+<div class="main">	
+	<!--页面位置导航_start-->
+     <h5  class="buy_qq_notice"> 
+     <img src="../images/404-PC.jpg">
+     <b><% <asp:Literal runat="server" ID="litMsg" /> %><% <asp:Literal runat="server" ID="litNotFindMsg" Text="对不起，您访问的页面不存在" /> %></b> </h5>
+</div>
+</form>
+<%<Hi:Common_Footer runat="server"   />%>
+

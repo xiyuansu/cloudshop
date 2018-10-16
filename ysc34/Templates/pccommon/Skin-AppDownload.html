@@ -1,0 +1,36 @@
+﻿<%<hi:common_header runat="server" />%>
+<style type="text/css">
+    .box {width:600px; margin:30px auto; height:500px;}
+    .box .appleft {width:280px; float:left; text-align:center; }
+    .box .appleft img{ margin:160px 0 0 0;}
+    .box .appleft .iosqrcode img{margin:50px 0;}
+    .box .appright {width:320px; float:left; background:url(../images/mobbilebg.png) no-repeat top center; height:500px; }
+    .box .appright img{ width:200px; margin:150px 60px;}
+    h2 { font-family:'Microsoft YaHei'; font-size:30px; text-align:center; margin:0px; padding:0px;  margin-bottom:50px;width:100%;  border-bottom:2px solid #ff0000; color:#333; }
+</style>
+<div class="main" id="main1">
+    <h2>手机客户端下载</h2>
+    <div class="box">
+        
+        <div class="appleft">
+            <a href="javascript:void(0)" runat="server" id="androidlink" ClientIDMode="Static"><%<asp:Image ID="userPicture" runat="server" ImageUrl="/images/Android.png" ClientIDMode="Static" />%></a><br />
+            <a href="javascript:void(0)" runat="server" class="iosqrcode" id="ioslink" ClientIDMode="Static"><%<asp:image imageurl="/images/appstore.png" runat="server" />%></a></div>
+        <div class="appright">
+            <div class="qrCode" id="androidQrcode"><%<asp:Image id="AndroidQrCode" width="200px" runat="server"></asp:Image></div>
+            <div class="qrCode iosqrcode hide" id="isoQrcode"><%<asp:Image id="IosQrCode" width="200px" runat="server"></asp:Image></div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function (e) {
+        $("#androidlink").mouseover(function (e) {
+            $("#androidQrcode").removeClass("hide");
+            $("#isoQrcode").addClass("hide");
+        });
+        $("#ioslink").mouseover(function (e) {
+            $("#isoQrcode").removeClass("hide");
+            $("#androidQrcode").addClass("hide");
+        });
+    });
+</script>
+<%<hi:common_footer runat="server" />%>

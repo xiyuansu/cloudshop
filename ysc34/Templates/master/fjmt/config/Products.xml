@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Subject SubjectId="1" Type="simple" CategoryId="223" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="1" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="2" Type="simple" CategoryId="223" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="2" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="3" Type="simple" CategoryId="309" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="2" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="4" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="2" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="5" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="60" ImageSizeRange="60" SkinName="/HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="6" Type="tab" TabTitle1="美食城" TabTitle2="美食城" TabTitle3="美食城" TabTitle4="美食城" TabTitle5="美食城" TabTitle6="" TabTitle7="" TabTitle8="" Where1=",,54" Where2=",," Where3="273,," Where4="70,," Where5="177,," Where6=",," Where7=",," Where8=",," MaxNum="6" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="7" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="8" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="9" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="10" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <!-- Blue Begin -->
+  <Subject SubjectId="11" Type="simple" CategoryId="70" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="5" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="12" Type="simple" CategoryId="107" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="13" Type="simple" CategoryId="107" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="14" Type="simple" CategoryId="107" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="15" Type="simple" CategoryId="107" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="16" Type="simple" CategoryId="107" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="17" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="false" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="160" ImageSizeRange="60" SkinName="/HomeTags/SubjectProduct/Common_SubjectProduct_Top2.html" />
+  <Subject SubjectId="20" Type="top" CategoryId="" MaxNum="6" ImageNum="6" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="60" ImageSizeRange="60" SkinName="/HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="21" Type="tab" TabTitle1="数码产品" TabTitle2="护肤美容" TabTitle3="汽车配件" TabTitle4="家具建材" TabTitle5="速读法" TabTitle6="阿道夫" TabTitle7="" TabTitle8="" Where1=",," Where2="20,," Where3="26,," Where4="17,," Where5="13,," Where6="23,," Where7=",," Where8=",," MaxNum="6" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="22" Type="floor" Title="玩具动漫" AdUrl="http://google9.com" TitelUrl="http://sian.com" SkinName="/HomeTags/SubjectProduct/Common_SubjectProduct_Floor.html" ImageTitle="/templates/master/default/UploadImage/titleimg/20130911105735_6802.jpg" IsShowMoreLink="false" AdImage="/templates/master/default/UploadImage/advertimg/20130911162528_3767.jpg" CategoryId="309" TagId="" BrandId="" MaxNum="4" SubCategoryNum="5" ImageSize="100" ImageSizeRange="100" AdImageSize="240*254" TitleImageSize="28*36" />
+  <Subject SubjectId="23" Type="simple" CategoryId="107" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="100" ImageSizeRange="100" />
+</root>

@@ -1,0 +1,482 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    body {
+        background-color: #fbf9fe;
+        padding-bottom: 5.25rem;
+    }
+
+    .members_goodspic ul li .b_mingoods_wrapper .replace {
+        text-align: center;
+        padding: 0 0.25rem;
+    }
+
+    .members_goodspic ul li .b_mingoods_wrapper .text-ellipsis {
+        text-align: center;
+    }
+
+    #div_InvalidText {
+        clear: both;
+        float: left;
+        width: 100%;
+        background: #fff;
+    }
+
+    #cartProducts {
+        background: #fbf9fe;
+        float: left;
+        width: 100%;
+    }
+    .item-media{ color:#f44336;}
+    .goods-box-shopcart .price{ color:#ff5252; font-size:0.5rem;}
+.goods-box-shopcart .price span{ font-size:0.75rem; font-weight:bold;}
+</style>
+<form runat="server">
+    <div class="kong" id="empty">
+        <img src="/images/cart_null.png" />
+        <p>购物车没有商品哦~</p>
+    </div>
+    <div class="p_like hide">
+        <div class="p_like_line">
+            <span></span>
+            <h3>猜你喜欢</h3>
+        </div>
+        <div class="members_con" style="margin:0;">
+            <section class="members_goodspic mt_0">
+                <ul>
+                    <%
+                    <Hi:WapTemplatedRepeater ID="rp_guest" runat="server" TemplateFile="Tags/skin-Common_Guest.ascx" />%>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <style>
+    </style>
+    <div id="cart">
+        <div class="item_content">
+            <div class="shoppingStepBar clearfix">
+                <h3 class="title"></h3>
+                <a href="javascript:;" id="eidt"><span>编辑</span><font style="display:none">完成</font></a>
+            </div>
+        </div>
+
+        <div class="item_content mt_15">
+            <div id="cartProducts" runat="server" visible="false" clientidmode="static">
+                <asp:Repeater ID="rptSupplier" runat="server">
+                    <itemtemplate>
+                        <div class="suplist">
+                            <div class="memtitle" id="divSupplier" runat="server"><asp:Literal ID="ltsupplierName" runat="server" Text='' />&nbsp;</div>
+                            <hi:WapTemplatedRepeater id="rptCartProducts" templatefile="/Tags/skin-Common_CartProducts.ascx" runat="server" />
+                        </div>
+                    </itemtemplate>
+                </asp:Repeater>
+
+                <div id="divcartgift">
+                    <hi:waptemplatedrepeater id="rptCartGifts" runat="server" templatefile="/Tags/Skin-Common_WAPGiftList.ascx" />
+                </div>
+
+                <div id="div_InvalidText">
+                    <!--失效的产品显示位置-->
+                    <hi:WapTemplatedRepeater id="rptCartProducts_Invalid" templatefile="/Tags/skin-Common_CartProducts.ascx" runat="server" />
+                </div>
+            </div>
+            <p class="notes" id="storeNotes" style="display:none;">购物车内有支持上门自提商品，<span onclick="selectGetBySelf()">仅提交支持自提的商品。</span></p>
+        </div>
+        <div class="cart_info">
+
+            <div class="cart_info_left" id="chkAllSelect">
+                <label class="label-checkbox item-content">
+                    <input type="checkbox" id="chk_list" />
+                    <div class="item-media"><i class="icon icon-form-checkbox" id="test"></i></div>
+                </label>
+                <span id="spanAllSelect">&nbsp;全选</span>
+            </div>
+            <div class="cart_price">
+                总价：
+                <span>
+                    <strong id="totalPrice">￥<asp:literal runat="server" id="litTotal" ClientIDMode="Static" /></strong>
+                </span>
+                <p>（不含运费）</p>
+            </div>
+        </div>
+        <a id="aLink" href="SubmmitOrder.aspx" class="pay2">
+            结算
+        </a>
+        <div class="cart_delete">
+            <a id="btnClearCart" class="pay">删除</a>
+        </div>
+    </div>
+
+
+
+    <input type="hidden" runat="server" id="hidUserPoints" />
+    <input type="hidden" id="hidIsOpenStore" runat="server" value="" clientidmode="static" /><!-- 系统是否开启门店上门自提 -->
+    <hi:Common_ContextMenu id="ContextMenu" runat="server" />
+    <script src="/Utility/jquery.cookie.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#cartProducts .suplist").eq(0).removeClass("suplist").addClass("supone");//供应商组第一个 样式改变
+        })
+
+        $('#all').click(function () {
+            $("input[type='checkbox']").prop("checked", this.checked); //改变多选框状态
+        });
+        $(document).ready(function () {
+            if ($('#cartProducts').length<=0) {
+                $('#cart').addClass('hide');
+                $('#empty').show();
+                $('.p_like').removeClass('hide');
+            } else {
+                $('#cart').removeClass('hide');
+                $('#empty').hide();
+                $('.p_like').addClass('hide');
+            }
+            if ($('input[name="buyNum"]').size() <= 0 && $('input[name = "buyGiftNum"]').size() <= 0) {
+                $("#eidt").hide();
+            }
+            if ($('input[name="buyNum"]').size() <= 0 || $(":checkbox[name=ck_productId]").size() <= 0) {
+                $("#spanAllSelect").hide();
+                $("#chkAllSelect").hide();
+            }
+            $('#chk_list').click(function () {
+                $("input[name='ck_productId']").prop("checked", this.checked);
+                changeBuyProduct();
+            });
+
+            $("#eidt").click(function () {
+                $(".cart_delete,#eidt span,#eidt font,.cart_price,#aLink,.name,.cart_num,.icon_trash,.info_b,.pro_num,.cart_sku span").toggle();
+            });
+
+            changeBuyProduct();
+        });
+
+        //修改了勾选的商品
+        function changeBuyProduct() {
+
+            var ckids = getSelectProductckids();
+            if (ckids == "" && $('input[name="buyGiftNum"]').size() <= 0) {
+                $("#aLink").css("background", "#ccc");
+                $("#aLink").attr("href", "javascript:alert_h('没有选中任何商品')");
+                //return false;
+            }
+            else {
+                $("#aLink").css("background", "#ff5722");
+            }
+            var amount = getSelectProductAmount();
+            getSelectALLProductckids();
+
+            $.cookie("ckids", ckids, {
+                expires: 3
+            });
+
+            $.ajax({
+                url: "/API/ShoppingCartHandler.ashx",
+                type: "post",
+                dataType: "json",
+                timeout: 10000,
+                data: {
+                    ckids: ckids,
+                    client: "wap"
+                },
+                async: false,
+                success: function (data) {
+                    if (data.status == undefined) {
+                        if (ckids.length > 0) {
+                            $("#totalPrice").text("￥" + data.StrStoreTotalAmount);
+                        }
+                        else {
+                            $("#totalPrice").text("￥0.00");
+                        }
+                        if (data.StrTotalAmount == 0) {
+                            //判断是否有积分礼品
+                            if ($('input[name="buyGiftNum"]').size() > 0) {
+                                $("#aLink").attr("href", "SubmmitOrder.aspx");
+                            }
+                            else {
+                                if (ckids != "") {
+                                    $("#aLink").attr("href", "SubmmitOrder.aspx?productSku=" + ckids);
+                                }
+                                else {
+                                    $("#aLink").attr("href", "javascript:alert_h('没有选择任何商品')");
+                                }
+                            }
+                        }
+                        else {
+                            $("#aLink").attr("href", "SubmmitOrder.aspx?productSku=" + ckids);
+                        }
+                    } else {
+                        $("#aLink").attr("href", "javascript:alert_h('" + data.msg + "')");
+                    }
+                }
+            });
+        }
+
+        $("#btnClearCart").click(function (e) {
+            var ckids = getSelectProductckids();
+            if (ckids == "") {
+                alert_h("没有选择任何商品");
+                return false;
+            }
+            deleteProducts(ckids);
+        });
+
+        // 删除购物车商品
+        function deleteProducts(ckids) {
+            myConfirmBox('操作提示', '确定要从购物车里删除该商品吗？', '确认删除', '取消', function () {
+                $.ajax({
+                    url: "/API/ShoppingCartHandler.ashx",
+                    type: "post",
+                    dataType: "json",
+                    timeout: 10000,
+                    data: {
+                        ck_productId: ckids,
+                        action: "ClearCart",
+                        client: "wap"
+                    },
+                    async: false,
+                    success: function (data) {
+                        if (data.status == "true") {
+                            document.location.href = "ShoppingCart.aspx?rnd=" + Math.random();
+                        }
+                        else {
+                            alert_h(data.msg);
+                        }
+                    }
+                });
+            }, null);
+        }
+
+        // 获取选中购买的产品
+        function getSelectProductckids() {
+            var chk = $(":checkbox[name=ck_productId]:checked");
+            var ck_productId = "";
+            $(chk).each(function () {
+                ck_productId += $(this).val() + ",";
+            });
+            ck_productId = ck_productId.substring(0, ck_productId.length - 1);
+            return ck_productId;
+        }
+        // 是否全部选中
+        function getSelectALLProductckids() {
+            var b = true;
+            var chk = $(":checkbox[name=ck_productId]");
+            if (chk.size() > 0) {
+                $(chk).each(function () {
+                    if (!$(this).is(':checked')) {
+                        b = false;
+                        return false;
+                    }
+                });
+            }
+            $('#chk_list').prop("checked", b);
+        }
+
+        // 获取选中购买的产品数量
+        function getSelectProductAmount() {
+            var buyNum = $("input[name=buyNum]");
+            var amount = 0;
+            $(buyNum).each(function () {
+                if ($(this).parent().parent().find(":checkbox[name=ck_productId]:checked").length > 0) {
+                    amount += parseInt($(this).val());
+                }
+            });
+            return amount;
+        }
+
+        $(function () {
+            //$(".info_b_pu").hide();
+            if ($("#hidIsOpenStore").val() == "true" && $(".info_b_pu").length>0) {
+                $("#storeNotes").show();   //显示商品上门自提
+            }
+            else {
+                $("#storeNotes").hide();
+            }
+
+            $("#eidt").click(function () {
+                $(".cart_num").each(function () {
+                    var test = $(this).siblings(".pro_num").children(".ui_textinput").val();
+                    $(this).text("x" + test);
+                })
+            })          
+
+            $('div[name="spAdd"]').bind("click", function () {
+                var number = $(this).parent().find('[name="buyNum"]');
+                number.val(parseInt(number.val()) + 1);
+                var skuId = $(this).attr("skuid");
+                chageCartProductQuantity(number, skuId);
+
+            });
+            $('div[name="spSub"]').bind("click", function () {
+                var number = $(this).parent().find('[name="buyNum"]');
+                var skuId = $(this).attr("skuid");
+
+                var num = parseInt(number.val()) - 1;
+                if (num > 0) number.val(parseInt(number.val()) - 1);
+                chageCartProductQuantity(number, skuId);
+            });
+            $('[name="buyNum"]').unbind('blur').blur(function () {
+                var skuId = $(this).attr("skuid");
+                chageCartProductQuantity(this, skuId);
+            });
+
+            $('div[name="spGiftAdd"]').bind("click", function () {
+                var currentPoints = $("#vShoppingCart_hidUserPoints").val();
+                var txtBuyNum = $(this).parent().find('[name="buyGiftNum"]');
+                var needPoint = txtBuyNum.attr("needPoints");
+                var currentNum = parseInt(txtBuyNum.val());
+                currentNum = currentNum + 1;
+                if (needPoint * currentNum > currentPoints) {
+                    alert_h("您的积分不足");
+                    currentNum = currentNum-1;
+                }
+                txtBuyNum.val(currentNum);
+                chageCartGiftQuantity(txtBuyNum);
+            });
+            $('div[name="spGiftSub"]').bind("click", function () {
+                var number = $(this).parent().find('[name="buyGiftNum"]');
+                var num = parseInt(number.val()) - 1;
+                if (num > 0) number.val(parseInt(number.val()) - 1);
+                chageCartGiftQuantity(number);
+            });
+            $('[name="buyGiftNum"]').unbind('blur').blur(function () {
+                var currentPoints = $("#vShoppingCart_hidUserPoints").val();
+                var needPoint = $(this).attr("needPoints");
+                var currentNum = parseInt($(this).val());
+                if (needPoint * currentNum > currentPoints) {
+                    alert_h("您的积分不足");
+                    $(this).val(1);
+                }
+                chageCartGiftQuantity(this);
+            });
+        });
+
+        function chageCartProductQuantity(obj, skuId) {
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post',
+                dataType: 'json',
+                timeout: 10000,
+                data: {
+                    action: "ChageQuantity",
+                    skuId: $(obj).attr("skuId"),
+                    quantity: parseInt($(obj).val())
+                },
+                success: function (resultData) {
+                    if (resultData.Status != "OK") {
+                        //alert("最多只可购买" + resultData.Status + "件");
+                        $(obj).val(resultData.Quantity);
+                    } else {
+                        $("i[gid=giftNum_" + skuId).text(parseInt($(obj).val()));
+                        $("#spanPrice" + skuId).html(resultData.adjustedPrice);
+                        changeBuyProduct();
+                    }
+                }
+            });
+        }
+        function chageCartGiftQuantity(obj) {
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post',
+                dataType: 'text',
+                timeout: 10000,
+                data: {
+                    action: "ChageGiftQuantity",
+                    giftId: $(obj).attr("giftId"),
+                    quantity: parseInt($(obj).val())
+                },
+                success: function (resultData) {
+                    if (resultData.length > 0) {
+                        //alert(resultData);
+                    }
+                }
+            });
+        }
+        function onGiftClick(obj, giftId) {
+            myConfirmBox('操作提示', '确定要从购物车里删除该礼品吗？', '确认删除', '取消', function () {
+                $.ajax({
+                    url: "/API/VshopProcess.ashx",
+                    type: 'post',
+                    dataType: 'text',
+                    timeout: 10000,
+                    data: {
+                        action: "DeleteCartGift",
+                        giftId: giftId
+                    },
+                    success: function (aa) {
+                        if (aa == "OK") {
+                            $(obj).parent().parent().parent().remove();
+                        }
+                    }
+                });
+            });
+        }
+        //判断商品是否支持上门自提
+        function productHasStore() {
+            var productIds = "";
+            $(".info_b_pu").each(function () {
+                var productId = $(this).attr("productId");
+                productIds += productId + ",";
+            })
+            if (productIds != "")
+                productIds = productIds.substring(0, productIds.lastIndexOf(","));
+            $.ajax({
+                url: "/API/ShoppingCartHandler.ashx",
+                type: "post",
+                dataType: "json",
+                timeout: 10000,
+                data: { action: 'ProductsHasStore', productIds: productIds, client: "wap" },
+                async: false,
+                success: function (data) {
+                    if (data.status == 'true') {
+                        var hasStoreProductIds = data.productIds;
+                        if (hasStoreProductIds.length > 0) {
+                            var pids = hasStoreProductIds.split(",");
+                            for (var i = 0; i < pids.length; i++) {
+                                var productid = pids[i];
+                                $(".info_b_pu[productId='" + productid + "']").show();
+                            }
+                            if ($(".info_b_pu").length == pids.length) {
+                                $("#storeNotes").hide();
+                            } else {
+                                $("#storeNotes").show();
+                            }
+                        }
+                        else {
+                            $("#storeNotes").hide();
+                        }
+                    }
+                }
+            });
+        }
+        function selectGetBySelf() {
+            $(".info_b_pu").each(function () {
+                var skuid = $(this).attr("skuid");
+                if ($(this).is(":visible")) {
+                    $("#ck_" + skuid).prop("checked", true);
+                }
+                else {
+                    $("#ck_" + skuid).prop("checked", false);
+                }
+            });
+            changeBuyProduct();
+        }
+
+        $(function () {
+            $("#cartProducts .info_border:last").css("border", "0");
+        })
+    </script>
+    <script src="/utility/vshoping.helper.js?v=3.0" type="text/javascript"></script>
+    <script>
+        //禁用右上角菜单
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        });
+
+        $(function () {
+            var w = $(".members_goodspic ul li .b_mingoods_wrapper a img").width();
+
+            $(".members_goodspic ul li .b_mingoods_wrapper a img").height(w);
+        });
+    </script>
+
+
+</form>

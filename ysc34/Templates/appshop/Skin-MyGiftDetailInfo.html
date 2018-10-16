@@ -1,0 +1,17 @@
+﻿<%<hi:common_appheader runat="server" />%>
+<form runat="server" role="form">
+    <!--<img src="/images/order_4.jpg" class="prize_img" />-->
+    <%<asp:Image id="imgPrize" runat="server" class="prize_img"></asp:Image>%>
+    <div class="prize_title">
+        <h3><%<asp:Literal ID="litName" runat="server"></asp:Literal>%></h3>
+        <span><%<asp:Literal ID="litMarketPrice" runat="server"></asp:Literal>%></span>
+    </div>
+    <div class="prize_info">
+        <h3>奖品描述</h3>
+        <div>
+            <%<asp:Literal ID="litDescript" runat="server"></asp:Literal>%>
+        </div>
+    </div>
+    <a href="javascript:void(0);" id="goBuy" class="btn_lqjp" runat="server">领取奖品</a>
+</form>
+<hi:common_appfooter runat="server" />

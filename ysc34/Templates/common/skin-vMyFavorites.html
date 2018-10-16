@@ -1,0 +1,121 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .info_border {
+        border: 0;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #e7e5ea;
+    }
+
+    .goods-box-shopcart {
+        padding: 0.75rem 0.75rem 0 2.25rem;
+        width: 100%;
+    }
+</style>
+<div class="kong" id="empty">
+    <img src="/images/favorite_null.png">
+    <p>收藏夹为空~</p>
+</div>
+<div class="pbox fav">
+    <Hi:WapTemplatedRepeater ID="rptProducts" TemplateFile="/Tags/skin-Common_MyFavorites.ascx" runat="server" />
+</div>
+<div class="fav_fot" id="fav_fot" runat="server">
+    <label class="label-checkbox item-content">
+        <input type="checkbox" name="all" id="all" />
+        <div class="item-media"><i class="icon icon-form-checkbox" id="test"></i></div>
+    </label>
+
+    全选
+    <button class="btn btn_orange_solid" onclick="Submit()">删除</button>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var obj = $('label');
+        var i = 1;
+        obj.each(function () {
+            $(this).attr('for', "checkboxFiveInput" + i); //获取数量递增添加ID
+            i = i + 1;
+        });
+        var obj = $('input');
+        var a = 1;
+        obj.each(function () {
+            $(this).attr('id', "checkboxFiveInput" + a); //获取数量递增添加ID
+            a = a + 1;
+        });
+
+    });
+    function getSelectALLChecked() {
+        var favProductCount = $("input[name='ck_FavoriteId']").length;
+        var checkedCount = $("input[name='ck_FavoriteId']:checked").length;
+        $("input[name='all']").prop("checked", favProductCount == checkedCount);
+    }
+</script>
+
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<script type="text/javascript">
+    $('#all').click(function () {
+        $("input[type='checkbox']").prop("checked", this.checked);//改变多选框状态
+    });
+
+
+    $(function () {
+        if (!$.trim($('.pbox').html())) {
+            $('.pbox').addClass('hide');
+            $('#empty').show();
+        }
+        else { $('#empty').hide(); }
+
+        $("input[name='ck_FavoriteId']").click(function () {
+            var chks = $("input[name='ck_FavoriteId']:checked");
+            var all = $("input[name='ck_FavoriteId']").length;
+            var len = chks.length;
+            if ( len != all) {
+                $("input[name='all']").attr("checked", false);
+            } else {
+                $("input[name='all']").attr("checked", true);
+            }
+        })
+
+    });
+  
+    // 获取选中购买的产品
+    function getSelectFavoriteckids() {
+        var chk = $(":checkbox[name=ck_FavoriteId]:checked");
+        var ck_FavoriteId = "";
+
+        $(chk).each(function () {
+            ck_FavoriteId += $(this).val() + ",";
+        });
+
+        ck_FavoriteId = ck_FavoriteId.substring(0, ck_FavoriteId.length - 1);
+
+        return ck_FavoriteId;
+    }
+
+    function Submit() {
+
+        var ids = getSelectFavoriteckids();
+
+        if (ids == "") {
+            alert_h("没有选择任何项");
+            return;
+        }
+
+        myConfirm('操作提示', '您确定要删除选择的商品吗？', '确定删除', function () {
+            var data = {};
+            data.favoriteId = ids;
+            $.post("/api/VshopProcess.ashx?action=DelFavorite", data, function (json) {
+                if (json.success === true) {
+                    location.reload();
+                } else {
+                    alert_h(json.msg);
+                }
+            });
+        });
+    }
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

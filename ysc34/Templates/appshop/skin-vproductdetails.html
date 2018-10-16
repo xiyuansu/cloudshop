@@ -1,0 +1,18 @@
+﻿<hi:common_appheader runat="server" skinname="/tags/skin-Common_NoLoginHeader.html" />
+<div class="goods-detail pbox bgColor-white btns-fixed-padding">
+    <asp:literal runat="server" id="litDescription" />
+</div>
+<style>
+    .app-btns-fixed { text-align: center; position: fixed; bottom: 0px; display: block; width: 100%; max-width: 650px; padding: 5px 0; background-color: #fff; border-top: 1px #E6E9ED solid; }
+    .goods-detail img{width: 100% !important;height:auto !important; }
+</style>
+<script src="/utility/appproduct.helper.js" type="application/javascript"> </script>
+<script src="/script/swipe.js"></script>
+<script>
+	$(function(){
+		$("img").removeAttr("width","auto");
+		$("img").removeAttr("height","auto");
+	});
+</script>
+<hi:common_appfooter runat="server" />
+

@@ -1,0 +1,79 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form runat="server" id="form1">
+<script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+<style>
+.ychongzhi ul li em input{ margin-top: 0px; height:auto; line-height:auto;}
+</style>
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置><span><a href="url:home">首页</a></span>><span><a href="url:user_UserDefault">会员中心</a></span>><span><a
+            href="#">预付款充值</a></span></div>
+    <div class="hyzxconter">
+        <div class="hyzxconterl">
+            <%<Hi:Common_User_Menu runat="server" />%>
+            <div class="hyzxconterl1">
+            </div>
+        </div>
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1">
+                    预付款充值</div>
+                <%<Hi:SmallStatusMessage ID="Status" runat="server" Visible="False" /> %>
+                <div class="yfu_chongzhi">
+                    <div class="yfu_chongzhi_l">
+                        <span><%<Hi:FormatedMoneyLabel ID="litAccountAmount" runat="server"  />%><em>账户总余额</em></span>
+                        <span><%<Hi:FormatedMoneyLabel ID="litRequestBalance" runat="server"  />%><em>提现冻结金额</em></span>
+                        <span><%<Hi:FormatedMoneyLabel ID="litUseableBalance1" runat="server"  />%><em>可用余额</em></span>
+                        <span><a href="url:user_MyAccountSummary">账户明细</a> <a href="url:user_RequestBalanceDraw">申请提现</a></span>  
+                        </div>
+                </div>
+                <div class="ychongzhi">
+                    <ul>
+                        <li>
+                            <h1>
+                                用户名：</h1>
+                            <em>
+                                <%<asp:Literal ID="litUserName" runat="server" />%></em></li>
+                        <li>
+                            <h1>
+                                可用余额：</h1>
+                            <em class="ychongzhi_em">
+                                <%<Hi:FormatedMoneyLabel ID="litUseableBalance" runat="server" />%></em></li>
+                        <li>
+                            <h1>
+                                支付方式：</h1>
+                            <em>
+                                <%<asp:RadioButtonList ID="rbtnPaymentMode" runat="server" RepeatDirection="Horizontal"></asp:RadioButtonList>%></em></li>
+                        <li>
+                            <h1>
+                                充值金额：</h1>
+                            <em>
+                                <%<asp:TextBox ID="txtReChargeBalance" runat="server" class="input-text" />%></em></li>
+                    </ul>
+                    <div class="xiayibu">
+                        <%<asp:Button runat="server" ID="btnReCharge" Text="下一步" class="input_next" OnClientClick="return PageIsValid();" />%></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function nTabs(thisObj, Num) {
+        if (thisObj.className == "active") return;
+        var tabObj = thisObj.parentNode.id;
+        var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+        for (i = 0; i < tabList.length; i++) {
+            if (i == Num) {
+                thisObj.className = "active";
+                document.getElementById(tabObj + "_Content" + i).style.display = "block";
+            } else {
+                tabList[i].className = "normal";
+                document.getElementById(tabObj + "_Content" + i).style.display = "none";
+            }
+        }
+    }
+</script>
+<div class="hyzxfooter">
+</div>
+</form>
+<%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Ad Id="1" Type="slide" Image1="/templates/master/jianyishh/UploadImage/advertimg/20160523171359_0737.jpg" Image2="/templates/master/jianyishh/UploadImage/advertimg/20160524110253_4431.jpg" Image3="/templates/master/jianyishh/UploadImage/advertimg/20160523154159_3351.png" Image4="" Image5="" Image6="" Image7="" Image8="" Image9="" Image10="" Url1="" Url2="" Url3="" Url4="" Url5="" Url6="" Url7="" Url8="" Url9="" Url10="" AdImageSize="858*270" />
+  <Ad Id="2" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140108092650_4462.jpg" Url="" AdImageSize="1200*61" />
+  <Ad Id="3" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140108175113_3282.jpg" Url="" AdImageSize="190*240" />
+  <Ad Id="4" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109093054_5794.jpg" Url="" AdImageSize="190*240" />
+  <Ad Id="5" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109093740_1536.jpg" Url="" AdImageSize="190*240" />
+  <Ad Id="6" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109093745_1919.jpg" Url="" AdImageSize="190*240" />
+  <Ad Id="7" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109093750_5772.jpg" Url="" AdImageSize="190*240" />
+  <Ad Id="9" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109140829_0610.jpg" Url="" AdImageSize="212*155" />
+  <Ad Id="10" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109140832_5592.jpg" Url="" AdImageSize="158*151" />
+  <Ad Id="10" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160523095124_9304.jpg" Url="" AdImageSize="360*445" />
+  <Ad Id="11" Type="custom" Html="&amp;lt;p&amp;gt;&amp;lt;img src=&amp;quot;/templates/master/jianyishh/UploadImage/AdvertImg/20140108143652_3342.jpg&amp;quot; title=&amp;quot;AD11&amp;quot; alt=&amp;quot;AD11&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt; &amp;lt;img src=&amp;quot;/templates/master/jianyishh/UploadImage/AdvertImg/20140108143702_3798.jpg&amp;quot; title=&amp;quot;AD11&amp;quot; alt=&amp;quot;AD11&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt; &amp;lt;img src=&amp;quot;/templates/master/jianyishh/UploadImage/AdvertImg/20140108143716_4496.jpg&amp;quot; title=&amp;quot;AD11&amp;quot; alt=&amp;quot;AD11&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;&amp;lt;/p&amp;gt;&#xA;&amp;lt;p&amp;gt;&amp;lt;img src=&amp;quot;/templates/master/jianyishh/UploadImage/AdvertImg/20140108143725_8281.jpg&amp;quot; title=&amp;quot;AD11&amp;quot; alt=&amp;quot;AD11&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;&amp;amp;nbsp;&amp;amp;nbsp;&amp;lt;/p&amp;gt;" />
+  <Ad Id="12" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20160523095148_0399.jpg" Url="" AdImageSize="360*445" />
+  <Ad Id="13" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20160523095236_0714.jpg" Url="" AdImageSize="360*445" />
+  <Ad Id="14" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109100032_6491.jpg" Url="" AdImageSize="225*28" />
+  <Ad Id="15" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20140109100039_9355.jpg" Url="" AdImageSize="221*36" />
+  <Ad Id="16" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/2.jpg" Url="" AdImageSize="210*90" />
+  <Ad Id="17" Type="custom" Html="&amp;lt;span class=&amp;quot;span1&amp;quot;&amp;gt;   &#xA;                &amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;网站地图&amp;lt;/a&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;span2&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;个人中心&amp;lt;/a&amp;gt;&amp;lt;/span&amp;gt;" />
+  <Ad Id="18" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/ad-018.jpg" Url="" AdImageSize="320*360" />
+  <Ad Id="19" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/ad-08.jpg" Url="" AdImageSize="1200*110" />
+  <Ad Id="20" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/ad20.jpg" Url="" AdImageSize="195*45" />
+  <Ad Id="21" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20160509103359_9882.jpg" Url="" AdImageSize="1200*110" />
+  <Ad Id="22" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/ad-09.jpg" Url="" AdImageSize="360*445" />
+  <Ad Id="23" Type="custom" Html="&amp;lt;div style=&amp;quot;background:#fe3f37;text-align:center;&amp;quot;&amp;gt;&#xA;	&amp;lt;img src=&amp;quot;/templates/master/default/UploadImage/AdvertImg/20160331145919_8098.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt; &#xA;&amp;lt;/div&amp;gt;" />
+  <Ad Id="24" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/ad-10.jpg" Url="" AdImageSize="385*220" />
+  <Ad Id="25" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20141215173510_3348.png" Url="" AdImageSize="210*455" />
+  <Ad Id="26" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20141215172613_9873.png" Url="" AdImageSize="210*455" />
+  <Ad Id="27" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20150804194719_1093.png" Url="" AdImageSize="210*90" />
+  <Ad Id="28" Type="image" Image="/templates/master/jianyishh/UploadImage/advertimg/20160315173553_2670.png" Url="" AdImageSize="180*65" />
+  <Ad Id="29" Type="custom" Html="&amp;lt;div class=&amp;quot;list&amp;quot;&amp;gt;&#xA;	&amp;lt;a target=&amp;quot;_blank&amp;quot; href=&amp;quot;http://wpa.qq.com/msgrd?v=3&amp;amp;uin=123456&amp;amp;site=qq&amp;amp;menu=yes&amp;quot;&amp;gt; &amp;lt;img src=&amp;quot;http://wpa.qq.com/pa?p=2:123456:52&amp;quot; /&amp;gt; &amp;lt;em&amp;gt;客服老罗&amp;lt;/em&amp;gt;&amp;lt;/a&amp;gt; &#xA;&amp;lt;/div&amp;gt;&#xA;&amp;lt;div class=&amp;quot;list&amp;quot;&amp;gt;&#xA;	&amp;lt;a target=&amp;quot;_blank&amp;quot; href=&amp;quot;http://wpa.qq.com/msgrd?v=3&amp;amp;uin=123456&amp;amp;site=qq&amp;amp;menu=yes&amp;quot;&amp;gt; &amp;lt;img src=&amp;quot;http://wpa.qq.com/pa?p=2:123456:52&amp;quot; /&amp;gt; &amp;lt;em&amp;gt;客服小罗&amp;lt;/em&amp;gt; &amp;lt;/a&amp;gt; &#xA;&amp;lt;/div&amp;gt;" />
+  <Ad Id="30" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/default/UploadImage/AdvertImg/20160418100121_4541.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt;&amp;lt;img src=&amp;quot;/templates/master/jianyishh/UploadImage/AdvertImg/20160418100121_6905.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt;&amp;lt;img src=&amp;quot;/templates/master/default/UploadImage/AdvertImg/20160418100121_9475.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt;" />
+  <Ad Id="31" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/jianyishh/UploadImage/AdvertImg/20160316155855_3112.png&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt;&amp;lt;br /&amp;gt;" />
+</root>

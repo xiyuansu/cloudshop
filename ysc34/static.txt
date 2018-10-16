@@ -1,0 +1,2 @@
+在从服务器接收结果时发生传输级错误。 (provider: Shared Memory Provider, error: 0 - 重叠 I/O 事件不在信号状态中。)-2018/7/8 19:28:58
+

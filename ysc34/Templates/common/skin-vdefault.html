@@ -1,0 +1,150 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="container bg">
+    <header id="search-nav">
+        <div class="img-title">
+            <div id="slides">
+                <hi:WapTemplatedRepeater id="rptSlide" templatefile="/Tags/skin-Common_Slide.ascx"
+                                         runat="server" />
+            </div>
+            <div class="search-posi"></div>
+            <div class="search">
+                <div class="input-group">
+                    <span class="input-group-addon class"><a href="ProductSearch.aspx"></a></span>
+                    <input type="text" id="txtkey" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="搜索商品">
+                    <button type="button" onclick="searchProducts()" class="btn"></button>
+                    <span id="sConsult" runat="server" class="input-group-addon ser"></span>
+                    <a id="aConsult" runat="server" href="javascript:NTKF.im_openInPageChat()">在线客服</a>
+                </div>
+            </div>
+        </div>
+        <nav class="clearfix">
+            <hi:WapTemplatedRepeater id="rptNavigate" templatefile="/Tags/skin-Common_Navigate.ascx"
+                                     runat="server" />
+        </nav>
+    </header>
+    <div id="rem-shop">
+        <ul class="clearfix">
+            <hi:WapTemplatedRepeater id="rptTopics" templatefile="/Tags/skin-Common_Topics.ascx"
+                                     runat="server" />
+        </ul>
+    </div>
+    <div id="guesslike" runat="server">
+        <ul class="clearfix">
+         <hi:WapTemplatedRepeater id="rptLikeProducts" runat="server" templatefile="/Tags/skin-Common_LikeProducts.ascx"></hi:WapTemplatedRepeater>
+        </ul>
+        <h3>猜你喜欢</h3>
+    </div>
+    <div id="hot-shop">
+        <h3><strong>热卖商品</strong></h3>
+        <ul class="clearfix">
+            <hi:WapTemplatedRepeater id="rptProducts" templatefile="/Tags/skin-Common_DefaultProducts.ascx"
+                                     runat="server" />
+        </ul>
+    </div>
+    <p class="text-center" style="margin-bottom:10px;"><hi:licensecontrol runat="server" /></p>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function searchProducts() {
+        window.location.href = "ProductList.aspx?keyWord=" + escape($("#txtkey").val());
+    }
+    
+    $(function () {
+        var slidesImg = $('#slides img');
+        var width = 650, height = 320;
+        if (slidesImg.length > 1) {
+            $('#slides').slidesjs({
+                width: width,
+                height: height,
+                play: {
+                    active: true,
+                    auto: true,
+                    interval: 4000,
+                    swap: true
+                }
+            });
+            $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+        }
+        else {
+            var link = slidesImg.parent();
+            $('#slides').css('display', 'block').html('<div style="width:100%;"></div>');
+            $('#slides div').append(link);
+        }
+
+
+        $.each($('[name="icon"]'), function (i, item) {
+            var img = $($(item).find('img')[0]);
+            var url = img.attr('src');
+            if (url.indexOf('.') == -1) { //不包含.则为字体
+                img.remove();
+                var slashIndex = url.lastIndexOf('/');
+                url = url.substring(slashIndex + 1);
+                $(item).html('<span class="' + url + '"></span>');
+            }
+        });
+    });
+    $(function () {
+        function loaded() {
+            setTimeout(function () {
+                new iScroll('vDefault_guesslike', { hideScrollbar: false, hScrollbar: false });
+            }, 100);
+        };
+        loaded();
+    })
+    $(function () {
+        //初始化订单状态的背景图片
+        $('#ico i').each(function (i) {
+            $(this).css('background-position', '0 ' + (-i * 20) + 'px');
+        })
+        $('#wrapper1 .tab-shop').eq(0).show();
+        $('#hot-shop .img').width($('#hot-shop .img').parent().width());
+        function setHeWi() {
+            $('#vDefault_guesslike ul li div').width($('#vDefault_guesslike').width() / 3.5);
+            setH(320, 317, $('#hot-shop .img'));
+            setH(233, 340, $('#rem-shop li').eq(0));           
+            $('#rem-shop li img').eq(0).css({width:"100%",height:"100%"});
+            setH(405, 123, $('#rem-shop li').eq(1));
+            $('#rem-shop li img').eq(1).css({ width: "100%", height: "100%" });
+            setH(202, 215, $('#rem-shop li').eq(2));
+            $('#rem-shop li img').eq(2).css({ width: "100%", height: "100%" });
+            setH(202, 215, $('#rem-shop li').eq(3));
+            $('#rem-shop li img').eq(3).css({ width: "100%", height: "100%" });
+            setH(213, 160, $('#vDefault_guesslike li div'));
+            $('#imgh .img').height($('#wrapper1 li').width());
+            $('#imgh .img').width($('#wrapper1 li').width());
+            $('#vDefault_guesslike ul').width($('#vDefault_guesslike ul li').width() * $('#vDefault_guesslike ul li').length + $('#vDefault_guesslike ul li').length + 3);
+            $('#wrapper,#wrapper1').height($(document).height() - $('header').height() - $('nav').height());
+            $('#rem-shop li').eq(0).find('div').width($('#rem-shop li').eq(0).find('div').parent().width());
+            $('#rem-shop li').eq(0).find('div').height($('#rem-shop li').eq(0).find('div').parent().height());
+            $('#rem-shop li').eq(1).find('div').width($('#rem-shop li').eq(1).find('div').parent().width());
+            $('#rem-shop li').eq(1).find('div').height($('#rem-shop li').eq(1).find('div').parent().height());
+            $('#rem-shop li').eq(2).find('div').width($('#rem-shop li').eq(2).find('div').parent().width());
+            $('#rem-shop li').eq(2).find('div').height($('#rem-shop li').eq(2).find('div').parent().height());
+            $('#rem-shop li').eq(3).find('div').width($('#rem-shop li').eq(3).find('div').parent().width());
+            $('#rem-shop li').eq(3).find('div').height($('#rem-shop li').eq(3).find('div').parent().height());
+        }
+        setHeWi();
+        function setH(maxW, minH, obj) {
+            var point = obj.width() / maxW;
+            obj.height(point * minH);
+        }
+        $('#wrapper li').click(function () {
+            $('#wrapper li').removeClass('active');
+            $(this).addClass('active');
+            $('#wrapper1 .tab-shop').hide();
+            $('#wrapper1 .tab-shop').eq($(this).index()).show();
+        })
+        $(window).resize(function () {
+            setHeWi();
+        });
+    })
+
+</script>
+<hi:common_wapfooter runat="server" />

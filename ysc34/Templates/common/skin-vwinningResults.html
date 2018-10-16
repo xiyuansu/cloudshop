@@ -1,0 +1,68 @@
+﻿<Hi:Common_WapHeader  runat="server" />
+<script type="text/javascript">
+    var returnurl = document.referrer;
+    function GetId() {
+        var id = window.location.search.substr(window.location.search.indexOf("=") + 1);
+        if (id.indexOf("&") > 0)
+            id = id.substr(0, id.indexOf("&"));
+        return id;
+    }
+
+    function Submit() {
+        if ($("#txtName").val() == '' || $("#txtPhone").val() == '') {
+            alert_h("请填写完整领奖人信息");
+            return;
+        }
+
+        var data = {};
+        data.id = GetId();
+        data.name = $("#txtName").val();
+        data.phone = $("#txtPhone").val();
+        $.post("/api/VshopProcess.ashx?action=SubmitWinnerInfo", data, function (json) {
+            submitStatus = false;
+            if (json.success === true) {
+
+                alert_h("提交信息成功！", function () {
+                    if (returnurl != "" && returnurl != null) {
+                        //window.location.href = returnurl;
+                        location.href = "default.aspx";
+                    }
+                    else {
+                        location.href = "default.aspx";
+                    }
+
+                });
+
+            }
+            else {
+                alert_h("您已经填写过领奖信息了！", function () {
+                    location.href = "default.aspx";
+                });
+
+            }
+        });
+    }
+
+    $("body").css("background-color", "#e7452c");
+</script>
+<section id="content" style="background:#e7452c; margin:0">
+     <div class="w_result">
+        <div class="w_img">
+           <img src="../images/process/w_r.jpg">
+           <p> <asp:Literal runat="server" ID="litPrizeLevel" /></p>
+        </div>
+        <div class="w_info">
+           <div class="w_info2">
+              <h2>领奖人信息登记：</h2>
+              <div class="qb_mb10 qb_flex">
+                  <input type="text" id="txtName" clientidmode="Static" class="mod_input flex_box" runat="server" style="height:35px;" placeholder="请填写您的姓名">
+              </div>
+              <div class="qb_mb10 qb_flex">
+                  <input type="text" id="txtPhone" class="mod_input flex_box" clientidmode="Static" runat="server" style="height:35px;" placeholder="请填写您的手机">
+              </div>
+           </div>
+           <div class="w_btn"><a href="javascript:void(0)" onclick="Submit()">确认领奖人信息</a></div>
+        </div>
+     </div> 
+</section>
+<Hi:Common_WapFooter runat="server" />

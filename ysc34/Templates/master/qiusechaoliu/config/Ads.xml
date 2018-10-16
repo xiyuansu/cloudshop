@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Ad Id="1" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140610152012_3142.jpg" Url="" AdImageSize="134*28" />
+  <Ad Id="2" Type="slide" Image1="/templates/master/qiusechaoliu/UploadImage/AdvertImg/qise_22.jpg" Image2="/templates/master/qiusechaoliu/UploadImage/AdvertImg/qise_22.jpg" Image3="/templates/master/qiusechaoliu/UploadImage/AdvertImg/qise_22.jpg" Image4="" Image5="" Image6="" Image7="" Image8="" Image9="" Image10="" Url1="" Url2="" Url3="" Url4="" Url5="" Url6="" Url7="" Url8="" Url9="" Url10="" AdImageSize="1920*450" />
+  <Ad Id="3" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140611105659_7611.jpg" Url="" AdImageSize="241*132" />
+  <Ad Id="4" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140611111328_5197.jpg" Url="" AdImageSize="956*301" />
+  <Ad Id="5" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140611152255_9894.jpg" Url="" AdImageSize="393*130" />
+  <Ad Id="6" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140611152255_9894.jpg" Url="" AdImageSize="393*130" />
+  <Ad Id="7" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140611152255_9894.jpg" Url="" AdImageSize="393*130" />
+  <Ad Id="8" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140611160240_3378.jpg" Url="" AdImageSize="393*130" />
+  <Ad Id="9" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140611162603_4779.jpg" Url="" AdImageSize="393*130" />
+  <Ad Id="10" Type="custom" Html="&amp;lt;div&amp;gt;&amp;lt;b&amp;gt;订购热线&amp;lt;/b&amp;gt;(仅收市话费)&amp;lt;/div&amp;gt;&#xA;                 &amp;lt;p style=&amp;quot;font-weight:bold;font-size:14px;color:#a40001;font-family:Verdana;&amp;quot;&amp;gt;400-666-8999&amp;lt;/p&amp;gt;&#xA;    &#xA;                 &amp;lt;div&amp;gt;&amp;lt;b&amp;gt;客户务服热线&amp;lt;/b&amp;gt;(仅收市话费)&amp;lt;/div&amp;gt;&#xA;                 &amp;lt;p style=&amp;quot;font-weight:bold;font-size:14px;color:#a40001;font-family:Verdana;&amp;quot;&amp;gt;400-666-8999&amp;lt;/p&amp;gt;" />
+  <Ad Id="11" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140323200703_3265.jpg" Url="" AdImageSize="1200*48" />
+  <Ad Id="498" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/qiusechaoliu/UploadImage/AdvertImg/20140324194241_6398.jpg&amp;quot; alt=&amp;quot;&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" />
+  <Ad Id="499" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/qiusechaoliu/UploadImage/AdvertImg/20140324194241_6398.jpg&amp;quot; alt=&amp;quot;&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" />
+  <Ad Id="500" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20140323210347_0322.jpg" Url="" AdImageSize="204*276" />
+  <Ad Id="12" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20150206092352_2179.jpg" Url="http://www.xiaolidu.com/OnlineGifts.aspx" AdImageSize="1200*360" />
+  <Ad Id="13" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20150206092352_2179.jpg" Url="http://www.xiaolidu.com/OnlineGifts.aspx" AdImageSize="1200*360" />
+  <Ad Id="14" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20150206092352_2179.jpg" Url="http://www.xiaolidu.com/OnlineGifts.aspx" AdImageSize="1200*360" />
+  <Ad Id="15" Type="image" Image="/templates/master/qiusechaoliu/UploadImage/advertimg/20150206092352_2179.jpg" Url="http://www.xiaolidu.com/OnlineGifts.aspx" AdImageSize="1200*360" />
+  <Ad Id="23" Type="custom" Html="&amp;lt;div style=&amp;quot;background:#fe3f37;text-align:center;&amp;quot;&amp;gt;&#xA;	&amp;lt;img src=&amp;quot;/templates/master/qiusechaoliu/UploadImage/AdvertImg/20160331145919_8098.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt; &#xA;&amp;lt;/div&amp;gt;" />
+</root>

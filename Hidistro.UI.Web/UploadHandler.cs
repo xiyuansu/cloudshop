@@ -1,0 +1,147 @@
+using Hidistro.SaleSystem.Store;
+using System;
+using System.IO;
+using System.Linq;
+using System.Web;
+
+public class UploadHandler : Handler
+{
+	public UploadConfig UploadConfig
+	{
+		get;
+		private set;
+	}
+
+	public UploadResult Result
+	{
+		get;
+		private set;
+	}
+
+	public int SupplierId
+	{
+		get;
+		private set;
+	}
+
+	public UploadHandler(HttpContext context, UploadConfig config, int supplierId)
+		: base(context)
+	{
+		this.UploadConfig = config;
+		this.Result = new UploadResult
+		{
+			State = UploadState.Unknown
+		};
+		this.SupplierId = supplierId;
+	}
+
+	public override void Process()
+	{
+		byte[] array = null;
+		string text = null;
+		int fileSize = 0;
+		if (this.UploadConfig.Base64)
+		{
+			text = this.UploadConfig.Base64Filename;
+			array = Convert.FromBase64String(base.Request[this.UploadConfig.UploadFieldName]);
+		}
+		else
+		{
+			HttpPostedFile httpPostedFile = base.Request.Files[this.UploadConfig.UploadFieldName];
+			text = httpPostedFile.FileName;
+			if (!this.CheckFileType(text))
+			{
+				this.Result.State = UploadState.TypeNotAllow;
+				this.WriteResult();
+				return;
+			}
+			if (!this.CheckFileSize(httpPostedFile.ContentLength))
+			{
+				this.Result.State = UploadState.SizeLimitExceed;
+				this.WriteResult();
+				return;
+			}
+			fileSize = httpPostedFile.ContentLength;
+			array = new byte[httpPostedFile.ContentLength];
+			try
+			{
+				httpPostedFile.InputStream.Read(array, 0, httpPostedFile.ContentLength);
+			}
+			catch (Exception)
+			{
+				this.Result.State = UploadState.NetworkError;
+				this.WriteResult();
+			}
+		}
+		this.Result.OriginFileName = text;
+		string text2 = PathFormatter.Format(text, this.UploadConfig.PathFormat);
+		if (this.SupplierId > 0)
+		{
+			text2 = string.Format(text2, this.SupplierId);
+		}
+		string path = base.Server.MapPath(text2);
+		try
+		{
+			if (!Directory.Exists(Path.GetDirectoryName(path)))
+			{
+				Directory.CreateDirectory(Path.GetDirectoryName(path));
+			}
+			GalleryHelper.AddPhote(Convert.ToInt32(base.Request.Form["cate_id"]), this.Result.OriginFileName, text2, fileSize, this.SupplierId);
+			File.WriteAllBytes(path, array);
+			this.Result.Url = text2;
+			this.Result.State = UploadState.Success;
+		}
+		catch (Exception ex2)
+		{
+			this.Result.State = UploadState.FileAccessError;
+			this.Result.ErrorMessage = ex2.Message;
+		}
+		finally
+		{
+			this.WriteResult();
+		}
+	}
+
+	private void WriteResult()
+	{
+		base.WriteJson(new
+		{
+			state = this.GetStateMessage(this.Result.State),
+			url = this.Result.Url,
+			title = this.Result.OriginFileName,
+			original = this.Result.OriginFileName,
+			error = this.Result.ErrorMessage
+		});
+	}
+
+	private string GetStateMessage(UploadState state)
+	{
+		switch (state)
+		{
+		case UploadState.Success:
+			return "SUCCESS";
+		case UploadState.FileAccessError:
+			return "文件访问出错，请检查写入权限";
+		case UploadState.SizeLimitExceed:
+			return "文件大小超出服务器限制";
+		case UploadState.TypeNotAllow:
+			return "不允许的文件格式";
+		case UploadState.NetworkError:
+			return "网络错误";
+		default:
+			return "未知错误";
+		}
+	}
+
+	private bool CheckFileType(string filename)
+	{
+		string value = Path.GetExtension(filename).ToLower();
+		return (from x in this.UploadConfig.AllowExtensions
+		select x.ToLower()).Contains(value);
+	}
+
+	private bool CheckFileSize(int size)
+	{
+		return size < this.UploadConfig.SizeLimit;
+	}
+}

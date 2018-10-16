@@ -1,0 +1,64 @@
+﻿
+.col-sm-12 {
+    padding: 0 !important;
+}
+
+.upload-img-box {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.2rem;
+    margin: 0 1rem 30px 0;
+    float: left;
+    position: relative;
+}
+
+.img-upload-btn {
+    border: 0;
+    background: #ccc;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-weight: normal !important;
+    font-size: 0.7rem !important;
+    color: #fff;
+    line-height: 1.25rem;
+    text-align:center;
+}
+
+.imageContainer h3 {
+    margin-top: 0;
+}
+
+.upload-img-box img {
+    border: 0;
+    border-radius: 0.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.glyphicon-plus:before {
+    font-size: 0.7rem;
+    line-height: 2.5rem;
+}
+
+.upload-img-box .remove-img {
+    width: 0.75rem;
+    height: 0.75rem;
+    position: absolute;
+    display: inline-block;
+    line-height: 1;
+    border-radius: 0.325rem;
+    z-index: 4;
+    right: -0.25rem;
+    top: -0.25rem;
+    background: url(/Templates/common/images/upl_img_del.png);
+    background-size: 100% 100%;
+    opacity: 1;
+}
+
+.Prompt {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-block;
+    position: fixed;
+    background: rgba(0,0,0,0.5);
+}

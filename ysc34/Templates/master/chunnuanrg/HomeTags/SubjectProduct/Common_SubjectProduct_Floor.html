@@ -1,0 +1,40 @@
+﻿<div class="floor_hd">
+    <div>
+        <span class="icon">
+            <a href="$TitelUrl$"><img src="$ImageTitle$"></a>
+        </span>
+        <span class="title">$Title$</span>
+    </div>
+    <ul>
+        <foreach data="SubCategory">
+            <li><a href="$SubUrl$">$SubName$</a></li>
+        </foreach>
+    </ul>
+    <em><a href="$MoreLink$">更多>></a></em>
+</div>
+<div class="floor_bd">
+    <div class="floor_ad">
+        <a href="$AdUrl$"><img src="$AdImage$" /></a>
+    </div>
+    <div class="floor_pro">
+        <ul>
+            <foreach data="Products">
+                <li>
+                    <div class="pic">
+                        <a target="_blank" href="$Url$">
+                            <img src="$ThumbnailUrl$"
+                                 alt="$ProductName$">
+                        </a>
+                    </div>
+                    <div class="name">
+                        <a target="_blank" href="$Url$">$ProductName$</a>
+                    </div>
+                    <div class="price">
+                        <b><em>￥</em>$RankPrice$</b><span><em>￥</em>$MarketPrice$</span>
+                    </div>
+                    <a class="productview" target="_blank" href="$Url$">查看详细</a>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+</div>

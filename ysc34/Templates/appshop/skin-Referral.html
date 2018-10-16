@@ -1,0 +1,54 @@
+﻿<hi:common_appheader runat="server" />
+<style>
+     .wytg {
+        left: 0.75rem;
+        width: 4rem !important;
+    }
+</style>
+<div class="commission">
+    <div class="info1">
+        <em>已赚取(元)</em>
+        <b><asp:Literal id="litAllSplittin" runat="server"></asp:Literal></b>
+        <a href="SplittinDraws.aspx" class="tixian">提现</a>
+    </div>
+
+    <div class="info2">
+        <ul>
+            <li>
+                <span>¥<asp:Literal id="litUserSplittin" runat="server"></asp:Literal></span>
+                <em><i class="dot icon-icon_dot_24"></i>可提现</em>
+            </li>
+            <li>
+                <span>¥<asp:Literal id="litDrawSplittin" runat="server"></asp:Literal></span>
+                <em><i class="dot icon-icon_dot_24"></i>已提现</em>
+            </li>
+
+            <li>
+                <span>¥<asp:Literal id="litNoUserSplittin" runat="server"></asp:Literal></span>
+                <em><i class="dot icon-icon_dot_24"></i>未结算</em>
+            </li>
+
+        </ul>
+    </div>
+    <%<input type="hidden" runat="server" clientidmode="static" value="20" id="pageTotal" />%>
+    <div class="info3">
+        <div class="title">奖励明细</div>
+        <div class="con">
+            <ul>
+                <%
+                <hi:AppshopTemplatedRepeater id="rptAccountSummary" templatefile="/Tags/skin-Common_ReferralDetail.ascx" runat="server" />%>
+            </ul>
+        </div>
+        <div id="pager">
+        </div>
+    </div>
+
+</div>
+<script src="../../Utility/pager.js"></script>
+<script>
+    $(function () {
+        vshopPager('pager', $('#pageTotal').val(), 1, 10);
+    });
+
+</script>
+<hi:common_appfooter runat="server" />

@@ -1,0 +1,36 @@
+﻿<%<hi:common_header runat="server" />%>
+
+<div class="main">
+    <div class="registeragreement">
+        <ul class="RegisterAgreement_tit">分销员注册协议</ul>
+        <ul class="registeragreement_c">
+            <li>
+                <div id="registerAgreement_div_Common_Register_Clause">
+                    <%<asp:Literal ID="litlAgreemen" runat="server" />%>
+                    <input type="button" id="btnRegister" name="btnRegister" class="xieyi_btn" style=" margin:25px 245px;" />
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function (e) {
+
+        var ReferralUserId = getParam("ReferralUserId");
+        var again = getParam("again");
+        if (again != "1" && ReferralUserId != null && parseInt(ReferralUserId) > 0) {
+            location.href = "/Register.aspx?goDefault=true";
+        }
+        $("#btnRegister").click(function (e) {
+            if (again != null && again == "1") {
+                location.href = "/user/ReferralRegister.aspx?again=1";
+            }
+            else {
+                location.href = "Register.aspx?ReferralUserId=" + ReferralUserId + "&toReferral=true";
+            }
+        });
+
+    });
+</script>
+<%<hi:common_footer runat="server" />%>
+

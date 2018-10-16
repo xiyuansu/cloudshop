@@ -1,0 +1,184 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<div class="main" id="main1">
+ <style>
+ .main{ background:#faf6f7; width:100%; margin-top:0px;}
+ .tab_img div{ height:390px;}
+ .footer{ margin-top:0px;}
+ </style>
+ <script>
+$(function(){$(".my_left_cat_list:even").addClass("shenshe")})
+</script>
+
+
+<div class="mainad"> <script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+<hi:common_slidead runat="server" adid="11" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+     <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_11").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+</div>
+<div class="xwdtair">
+<div class="xwdtairc">
+<div class="xwdtaircy">
+<div><hi:common_customad runat="server" adid="4" isdelayedloading="true"></hi:common_customad></div>
+<script type="text/javascript">
+function nTabs(thisObj,Num){
+if(thisObj.className == "active")return;
+var tabObj = thisObj.parentNode.id;
+var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+for(i=0; i <tabList.length; i++)
+{
+  if (i == Num)
+  {
+   thisObj.className = "active"; 
+      document.getElementById(tabObj+"_Content"+i).style.display = "block";
+  }else{
+   tabList[i].className = "normal"; 
+   document.getElementById(tabObj+"_Content"+i).style.display = "none";
+  }
+} 
+}
+</script>
+
+<div class="nTab">
+		<div class="TabTitle">
+		<ul id="myTab">
+		<li class="active" onmouseover="nTabs(this,0);">商城公告</li>
+		<li class="normal" onmouseover="nTabs(this,1);">商城资讯</li> 			      
+		</ul>
+		</div>
+	    <div class="TabContent">
+	<div id="myTab_Content0"><ul><%<hi:common_affichelist runat="server" templatefile="/hometags/Common_Comment/Skin-Common_AfficheList.ascx" maxnum="20" />%></ul></div>
+	<div id="myTab_Content1" class="none">   <hi:common_subjectarticle commentid="31" runat="server"></hi:common_subjectarticle></div>
+	</div>	
+</div>
+
+
+</div>
+</div>
+</div>
+<div class="tuanqiangou">
+<div class="tuanqiangoul">  <div class="hd">爆款团购</div>
+	<script src="../../../Utility/time.js"></script><div class="bd"> <ul>
+          <hi:common_goodslist_latestgroupbuy runat="server" maxnum="1"></hi:common_goodslist_latestgroupbuy>
+        </ul>
+		</div>
+		</div>
+<div class="tuanqiangour">
+<div class="hd">限时抢购</div>
+            <div class="bd">
+            <ul>
+            <hi:common_goodslist_latestcountdownbuy runat="server" maxnum="4"></hi:common_goodslist_latestcountdownbuy>
+            </ul>
+            </div>
+</div>
+</div>
+<div class="w1200 zuixincp pt20">
+<div class="zuixincptop">
+<hi:common_subjecttitle runat="server" commentid="3" isdelayedloading="true"></hi:common_subjecttitle>
+<hi:common_subjectmorelink runat="server" commentid="5" isdelayedloading="true"></hi:common_subjectmorelink>
+</div>
+<div class="zuixincpcot"> 
+<hi:common_customad runat="server" adid="5" isdelayedloading="true"></hi:common_customad>
+</div>
+</div>
+
+<!--floor1-->
+ <div class="w1200s o-hidden pt20 shangpins">
+ 
+ <div class="zuixincptop">
+ <hi:common_subjecttitle runat="server" commentid="7" isdelayedloading="true"></hi:common_subjecttitle>
+ <hi:common_subjectmorelink runat="server" commentid="9" isdelayedloading="true"></hi:common_subjectmorelink>
+ <hi:common_subjectkeyword runat="server" commentid="8" isdelayedloading="true"></hi:common_subjectkeyword> 
+ </div>
+ <div class="shangpcont"><script>$(function(){$(".pro_simple220 li:nth-child(1)").css({"margin-top":"0px"});
+ $(".pro_simple220 li:nth-child(2)").css({"margin-top":"0px"})
+ $(".pro_simple220 li:nth-child(3)").css({"margin-top":"0px"})
+ })</script>
+ <div class="shangpcontc"> 
+ <div class="shangpcontcl">
+ <hi:common_imagead runat="server" adid="8" isdelayedloading="true"></hi:common_imagead>
+ <hi:common_subjectcategory runat="server" commentid="6" isdelayedloading="true"></hi:common_subjectcategory></div>
+ <div class="shangpcontcc"><hi:common_subjectproduct_simple runat="server" subjectid="2" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+ <div class="shangpcontcr"> <div class="top"><hi:common_subjectproduct_top runat="server" subjectid="11" isdelayedloading="true"></hi:common_subjectproduct_top></div>
+ <hi:common_imagead runat="server" adid="9" isdelayedloading="true"></hi:common_imagead></div>
+ </div> 
+  
+ <div><hi:common_subjectbrand runat="server" commentid="2" isdelayedloading="true"></hi:common_subjectbrand> </div>
+</div>
+</div>
+
+<!--floor2-->
+<div class="w1200s o-hidden pt20 shangpins">
+ 
+ <div class="zuixincptop">
+ <hi:common_subjecttitle runat="server" commentid="11" isdelayedloading="true"></hi:common_subjecttitle>
+ <hi:common_subjectmorelink runat="server" commentid="13" isdelayedloading="true"></hi:common_subjectmorelink>
+ <hi:common_subjectkeyword runat="server" commentid="12" isdelayedloading="true"></hi:common_subjectkeyword>
+ </div>
+ <div class="shangpcont"> 
+ <div class="shangpcontc"> 
+ <div class="shangpcontcl">
+            <hi:common_imagead runat="server" adid="33" isdelayedloading="true"></hi:common_imagead>
+            <hi:common_subjectcategory runat="server" commentid="14" isdelayedloading="true"></hi:common_subjectcategory></div>
+ <div class="shangpcontcc"><hi:common_subjectproduct_simple runat="server" subjectid="12" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+ <div class="shangpcontcr"><div class="top"><hi:common_subjectproduct_top runat="server" subjectid="13" isdelayedloading="true"></hi:common_subjectproduct_top></div>
+ <hi:common_imagead runat="server" adid="34" isdelayedloading="true"></hi:common_imagead></div>
+ </div>  
+<div> <hi:common_subjectbrand runat="server" commentid="19" isdelayedloading="true"></hi:common_subjectbrand> </div>
+</div>
+</div>
+
+<!--floor3-->
+<div class="w1200s o-hidden pt20 shangpins">
+ 
+ <div class="zuixincptop"><hi:common_subjecttitle runat="server" commentid="20" isdelayedloading="true"></hi:common_subjecttitle>
+ <hi:common_subjectmorelink runat="server" commentid="22" isdelayedloading="true"></hi:common_subjectmorelink>
+ <hi:common_subjectkeyword runat="server" commentid="21" isdelayedloading="true"></hi:common_subjectkeyword></div>
+ <div class="shangpcont"> 
+ <div class="shangpcontc"> 
+ <div class="shangpcontcl"><hi:common_subjectcategory runat="server" commentid="23" isdelayedloading="true"></hi:common_subjectcategory>
+            <hi:common_imagead runat="server" adid="35" isdelayedloading="true"></hi:common_imagead></div>
+ <div class="shangpcontcc"><hi:common_subjectproduct_simple runat="server" subjectid="14" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+ <div class="shangpcontcr"> <div class="top"><hi:common_subjectproduct_top runat="server" subjectid="15" isdelayedloading="true"></hi:common_subjectproduct_top></div>
+ <hi:common_imagead runat="server" adid="36" isdelayedloading="true"></hi:common_imagead></div>
+ </div>  
+<div> <hi:common_subjectbrand runat="server" commentid="24" isdelayedloading="true"></hi:common_subjectbrand> </div>
+</div>
+</div>
+
+<!--floor4-->
+<div class="w1200s o-hidden pt20 shangpins">
+ 
+ <div class="zuixincptop"><hi:common_subjecttitle runat="server" commentid="25" isdelayedloading="true"></hi:common_subjecttitle>
+ <hi:common_subjectmorelink runat="server" commentid="27" isdelayedloading="true"></hi:common_subjectmorelink>
+ <hi:common_subjectkeyword runat="server" commentid="26" isdelayedloading="true"></hi:common_subjectkeyword></div>
+ <div class="shangpcont"> 
+ <div class="shangpcontc"> 
+ <div class="shangpcontcl"><hi:common_subjectcategory runat="server" commentid="28" isdelayedloading="true"></hi:common_subjectcategory>
+            <hi:common_imagead runat="server" adid="37" isdelayedloading="true"></hi:common_imagead></div>
+ <div class="shangpcontcc"><hi:common_subjectproduct_simple runat="server" subjectid="16" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+ <div class="shangpcontcr"><div class="top"> <hi:common_subjectproduct_top runat="server" subjectid="18" isdelayedloading="true"></hi:common_subjectproduct_top></div>
+ <hi:common_imagead runat="server" adid="38" isdelayedloading="true"></hi:common_imagead></div>
+ </div>  
+ <div><hi:common_subjectbrand runat="server" commentid="29" isdelayedloading="true"></hi:common_subjectbrand> </div>
+</div>
+</div>
+
+ <div class="w1200 o-hidden pt20">
+    
+        <hi:common_slidead runat="server" adid="3" isdelayedloading="true"></hi:common_slidead></div> 
+
+
+
+
+
+
+
+</div>
+
+<!--main-content结束-->
+<%<hi:common_footer runat="server" skinname="/hometags/Skin-Common_Footer.ascx" />%>

@@ -1,0 +1,271 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+    <hi:pagetitle runat="server" />
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="/style/index.css?v=3.4" type="text/css" />
+    <link rel="stylesheet" href="/style/fonts/style.css?v=3.4" type="text/css" />
+    <link rel="stylesheet" href="/style/css.css?v=3.4" type="text/css" />
+    <Hi:WapHeadContainer ID="WapHeadContainer1" runat="server" />
+    <script type="text/javascript" src="/script/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/script/mui.min.js"></script>
+    <script type="text/javascript" src="/script/main.js"></script>
+    <script type="text/javascript" src="/Utility/common.js?v=3.4"></script>
+    <script src="/script/iscroll.js"></script>
+    <script src="/Utility/traffic.js?v=3.31"></script>
+    <script type="text/javascript">
+        var sessionid = null;
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        $(".pbox").hide();
+        var type = 2;
+
+
+        document.addEventListener('plusready', function () {
+            var ms = plus.webview.currentWebview();
+            var url = ms.url;
+            // 登录
+            var userid = getCookie("Shop-Member");
+            var siteinfostr = plus.storage.getItem('wapsiteinfo') || "{}";
+            var siteInfo = JSON.parse(siteinfostr);
+       
+            if (siteInfo.UserInfo) {
+                sessionid=siteInfo.UserInfo.sessionid;
+            }
+            $(".pbox").show();
+        });
+
+        function isLogin(sessionid, type) {
+            if (sessionid == "" || sessionid == null) {
+                OpenUrl('login');
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+
+        function goToShoppingCart() {
+            OpenUrl("shopcart");
+        }
+
+        function goHomePage() {
+            OpenUrl("home");
+        }
+		
+		
+		 function goCategoryPage(){
+        	OpenUrl("category");
+        }
+        
+        function goUserCenterPage(){
+        	OpenUrl("userhome")
+        }
+
+        function loadSessionid(sessionid) {
+            if (sessionid != "") {
+                loadIframeURL("/AppShop/AppLogin.aspx?sessionid=" + sessionid);
+            }
+            else
+                loadIframeURL("hishop://webLogin/openLogin/null");
+        }
+
+        function openLogin(ret, sessionId) {
+            if (ret == 0) {
+                loadIframeURL("/AppShop/AppLogin.aspx?sessionid=" + sessionId)
+                document.location.reload();
+            }
+        }
+        $(document).ready(function (e) {
+			
+			 $("#navbar li").on("click",function(){
+				var pagename=this.dataset.page;
+				 
+			switch(pagename){
+				case "home":
+				goHomePage();
+				break;
+				case "category":
+				goCategoryPage();
+				break;
+				case "shopcart":
+				goToShoppingCart();
+				break;
+				default:
+				goUserCenterPage();
+				break;
+			};
+			});
+			
+			
+			
+			
+            //监控商品详情点击
+            mui(document).on("tap", "a", function () {
+                if ($(this).hasClass("AppProductDetail")) {
+                    var pid = this.dataset.pid;
+                    OpenUrl("product-detail", '{"productid":' + pid + '}');
+                } else {
+                    var strhref = $(this).attr("href");
+                    var eventclick = $(this).attr("onclick");
+                    if (strhref && strhref != undefined && strhref.indexOf('javascript') < 0 && strhref != "#") {
+                        if (strhref.indexOf('SplittinRule.aspx') < 0) {
+                            location.href = strhref;
+                        } else {
+                            OpenUrl('Extension');
+                        }
+
+                    } else {
+                        //if (eventclick.indexOf('javascript') < 0 && eventclick != undefined && eventclick != "") {
+                        $(this).trigger("click");
+                        // }
+                    }
+                }
+            });
+            var loadMessage = "";
+            if ($("#LoadMessage").length > 0)
+                loadMessage = decodeURI($("#LoadMessage").val().Trim());
+            var errorToPage = "";
+            if ($("#ErrorToPage").length > 0)
+                errorToPage = $("#ErrorToPage").val().Trim();
+
+            if (loadMessage != undefined && loadMessage != "") {
+                alert_h(loadMessage, function (e) {
+                    if (errorToPage != "") {
+                        returnUrl = getParam("returnUrl");
+                        referrerUrl = document.referrer;
+                        if (errorToPage == "goReturnUrl") {
+                            if (returnUrl != undefined && returnUrl != "") {
+                                document.location.replace(returnUrl);
+                            }
+                        }
+                        else if (errorToPage == "goReferralUrl") {
+                            if (referrerUrl != undefined && referrerUrl != "") {
+                                document.location.replace(referrerUrl);
+                            }
+                        }
+                        else if (errorToPage == "goLoginUrl") {
+                            ToLogin();
+                        }
+                        else if (errorToPage == "goShoppingCart") {
+                            goToShoppingCart();
+                        }
+                        else if (errorToPage == "goHomeUrl") {
+                            goHomePage();
+                        }
+                        else {
+                            document.location.replace(errorToPage);
+                        }
+                    }
+                });
+            }
+        });
+        //去注册
+        function ToRegister() {
+            OpenUrl("register");
+        }
+
+        function toAppNullWeb() { }
+
+
+        //去登录
+        function ToLogin() {
+            var ms = plus.webview.currentWebview();
+            var url = ms.url;
+            // 登录
+            var userid = getCookie("Shop-Member");
+            if (userid == undefined || userid == "") {// 如果web端没登录
+                var siteinfostr = plus.storage.getItem('wapsiteinfo') || "{}";
+
+                var siteInfo = JSON.parse(siteinfostr);
+                var sessionid = null;
+                if (siteInfo.UserInfo) {
+                    sessionid = siteInfo.UserInfo.sessionid;
+                }
+
+                if (sessionid != undefined && sessionid != null && sessionid != "") {
+                    document.location.href = "/AppShop/AppLogin.aspx?sessionid=" + sessionid + "&returnUrl=" + encodeURIComponent(document.location.href);
+                }
+                else
+                    isLogin(sessionid);
+            }
+        }
+        //关闭网页
+        function ClosePage() {
+            var openwebview = plus.webview.getWebviewById("appauto");
+//          if (openwebview == null) {
+//              openwebview = plus.webview.getWebviewById("appauto");
+//          }
+            mui.fire(openwebview, "ClosePage");
+        }
+
+        function CheckLogin() {
+            var ms = plus.webview.currentWebview();
+            var url = ms.url;
+            // 登录
+            var userid = getCookie("Shop-Member");
+            if (userid == undefined || userid == "") {// 如果web端没登录
+                var siteinfostr = plus.storage.getItem('wapsiteinfo') || "{}";
+
+                var siteInfo = JSON.parse(siteinfostr);
+                var sessionid = null;
+                if (siteInfo.UserInfo) {
+                    sessionid=siteInfo.UserInfo.sessionid;
+                }
+
+                if (sessionid != undefined && sessionid != null && sessionid != "") {
+                    document.location.href = "/AppShop/AppLogin.aspx?sessionid=" + sessionid + "&returnUrl=" + encodeURIComponent(document.location.href);
+                }
+                else
+                    isLogin(sessionid);
+                return "";
+            }
+            else {                
+                return userid;
+            }
+        }
+      
+
+        function OpenUrl(pagename, param) {
+            var openwebview = plus.webview.getWebviewById("appauto");
+            mui.fire(openwebview, "OpenUrl", { 'pagename': pagename, 'extend': param });
+        }
+		
+		
+		
+   //监听"..."打开导航菜单        
+        document.addEventListener("showAppNav", function (e) {
+		    var display = document.getElementById('navbar').style.display;
+			if(display == "none" || display == '') {
+				document.getElementById('navbar').style.display = 'block';
+			} else if(display == "block") {
+				document.getElementById('navbar').style.display = 'none';
+			}
+ 
+		
+			
+		});
+				
+		
+		
+    </script>
+</head>
+<body>
+		<div class="nav-bar" id="navbar" style="display: none;">
+			<ul>
+				<li data-page="home"><i class="icon-icon_home"></i>首页</li>
+				<li data-page="category"><i class="icon-icon_category-03"></i>分类</li>
+				<li data-page="shopcart"><i class="icon-icon_cart"></i>购物车</li>
+				<li data-page="user"><i class="icon-icon_account"></i>个人中心</li>						
+			</ul>
+		</div>		
+ 

@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wxapplet_pay.aspx.cs" Inherits="Hidistro.UI.Web.Pay.wxapplet_pay" %>

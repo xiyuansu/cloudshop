@@ -1,0 +1,24 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置><a href="/">首页</a>><a href="/user/UserDefault.aspx">会员中心</a>><%<asp:Literal ID="litbanner" runat="server" Text="手机验证" />%></div>
+    <div class="hyzxconter">
+        <%<Hi:Common_User_Menu runat="server" />%>
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1"><%<asp:Literal ID="littitle" runat="server" Text="手机验证" />%></div>
+                <div class="yanzh_pic no">
+                    <span><%<asp:Literal ID="litimage" runat="server" />%></span><span class="col">完成</span>
+                    </div>
+                <div class="yxyz">
+                    <span class="yxyz_span1">恭喜您,<%<asp:Literal ID="litmsg" runat="server" Text="手机验证" />%>成功！</span>
+                    <span class="yxyz_span2"><em style="margin-top: 3px;">最新安全评级：</em> <em>
+                        <%<Hi:MemberSafeGradeLiteral ID="litSafeGrade" runat="server" /> %></em></span>
+                    <span class="yxyz_span3">
+                        <%<asp:Literal ID="litGrade" runat="server" Text="您的账户安全级还能提升哦，快去 <a href='MyAccount.aspx'>账户安全</a> 完善其它安全设置提高评级吧！" />%></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

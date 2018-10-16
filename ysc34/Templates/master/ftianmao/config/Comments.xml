@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="2" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="5" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="6" Type="article" Title="文章中心" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="8" MaxNum="5" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="7" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="24" ImageSize="132*80" />
+  <Comment Id="8" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="9" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="10" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="11" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="13" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="14" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="15" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="16" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="17" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="18" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="19" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="20" Type="title" Title="" ImageTitle="/templates/master/ftianmao/images/main/m2.jpg" TitleImageSize="118*16" />
+  <Comment Id="21" Type="title" Title="女装" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="22" Type="keyword" CategoryId="2" MaxNum="10" />
+  <Comment Id="23" Type="morelink" Title="更多商品》" CategoryId="2" />
+  <Comment Id="24" Type="title" Title="美容护肤" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="25" Type="title" Title="男装" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="26" Type="title" Title="鞋包" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="27" Type="title" Title="运动户外" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="28" Type="title" Title="手机数码" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="29" Type="title" Title="家用电器" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="53" Type="title" Title="母婴/玩具/童装" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="31" Type="title" Title="食品" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="32" Type="title" Title="家装家纺" ImageTitle="" TitleImageSize="191*90" />
+  <Comment Id="33" Type="keyword" CategoryId="20" MaxNum="10" />
+  <Comment Id="34" Type="keyword" CategoryId="3" MaxNum="10" />
+  <Comment Id="35" Type="keyword" CategoryId="5" MaxNum="10" />
+  <Comment Id="36" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="37" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="38" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="39" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="40" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="41" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="42" Type="morelink" Title="更多商品》" CategoryId="20" />
+  <Comment Id="43" Type="morelink" Title="更多商品》" CategoryId="273" />
+  <Comment Id="44" Type="morelink" Title="更多商品》" CategoryId="5" />
+  <Comment Id="45" Type="morelink" Title="更多商品》" CategoryId="" />
+  <Comment Id="46" Type="morelink" Title="更多商品》" CategoryId="273" />
+  <Comment Id="47" Type="morelink" Title="更多商品》" CategoryId="273" />
+  <Comment Id="48" Type="morelink" Title="更多商品》" CategoryId="273" />
+  <Comment Id="49" Type="morelink" Title="更多商品》" CategoryId="273" />
+  <Comment Id="50" Type="morelink" Title="更多商品》" CategoryId="273" />
+  <Comment Id="51" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="100" ImageSize="102*40" />
+  <Comment Id="52" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="100" ImageSize="102*40" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

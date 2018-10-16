@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="100" ImageSize="102*40" />
+  <Comment Id="3" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="4" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="8" ImageSize="85*40" />
+  <Comment Id="5" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="6" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="8" ImageSize="85*40" />
+  <Comment Id="7" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="8" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="8" ImageSize="85*40" />
+  <Comment Id="9" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="10" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="8" ImageSize="85*40" />
+  <Comment Id="11" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="12" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="8" ImageSize="85*40" />
+  <Comment Id="13" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="14" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="15" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="16" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="17" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="18" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="19" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="20" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="21" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="22" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="23" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="24" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="25" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="26" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="27" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="28" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="29" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="48" ImageSize="90*40" />
+  <Comment Id="58" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="31" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="32" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="33" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="34" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="35" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="36" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="37" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="38" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="39" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="40" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="41" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="42" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="43" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="44" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="45" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="46" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="47" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="48" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="49" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="50" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="51" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="52" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="53" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="54" Type="morelink" Title="更多&gt;&gt;" CategoryId="273" />
+  <Comment Id="55" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="30" ImageSize="102*40" />
+  <Comment Id="56" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="30" ImageSize="102*40" />
+  <Comment Id="57" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="20" ImageSize="102*40" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

@@ -1,0 +1,46 @@
+﻿<hi:common_appheader runat="server" checklogin="false" />
+
+<div class="pbox">
+    <%<asp:Literal ID="litReferralRegisterAgreement" runat="server" />%>
+    <hr />
+    <button class="btn btn-info btn-block" id="btnToRegister">立即成为分销员</button>
+</div>
+<script type="text/javascript">
+    ReferralUserId = getParam("ReferralUserId");
+    if (ReferralUserId != null && ReferralUserId != "" && document.domain.toLocaleLowerCase() != "localhost") {
+        var pageurl = document.location.href.toLowerCase();
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+        if (!bIsIpad && !bIsIphoneOs && !bIsMidp && !bIsUc7 && !bIsUc && !bIsAndroid && !bIsCE && !bIsWM) {
+            DirectUrl = "/ReferralAgreement.aspx?ReferralUserId=" + ReferralUserId;
+            location.href = DirectUrl;
+        }
+    }
+</script>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function (e) {
+        var again = getParam("again");
+        if (again != null && again == "1") {
+            $("#btnToRegister").val("重新填写申请表单");
+        }
+        $("#btnToRegister").click(function (e) {
+            var again = getParam("again");
+            if (again != null && again == "1") {
+                location.href = "ReferralRegister.aspx?again=1";
+            }
+            else {
+                ToRegister();
+            }
+        });
+    });
+</script>
+
+<hi:Common_AppFooter runat="server" />

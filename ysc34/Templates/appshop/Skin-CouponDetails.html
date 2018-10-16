@@ -1,0 +1,105 @@
+﻿<hi:common_appheader runat="server" />
+<style>
+    body {
+        padding: 0.75rem;
+    }
+</style>
+<div class="kong">
+    <img src="/images/coupon_null.png" />
+    <p>
+        该优惠券不存在或已经过期~
+    </p>
+</div>
+<div id="couponContent">
+    <div class="coupon_details">
+        <h1 class="coupon_title"><span id="w_s"><asp:literal runat="server" id="litCouponName" /></span></h1>
+        <span class="coupon_price"><i>￥</i><asp:literal runat="server" id="litPrice" /></span>
+        <span class="coupon_notes"><asp:literal runat="server" id="litCanUseProducts" /></span>
+    </div>
+    <div class="coupon_details_rule">
+        <span>使用限制：<asp:literal runat="server" id="litOrderUseLimit" /></span>
+        <span>有效时间：<asp:literal runat="server" id="litStartTime" /> - <asp:literal runat="server" id="litClosingTime" /></span>
+    </div>
+    <div class="btn_c">
+        <a href="javascript:onGetCouponClick();" id="aGetCoupon">立即领取</a>
+    </div>
+</div>
+<input id="hidCouponId" type="hidden" runat="server" clientidmode="Static" />
+<input id="hidCanUseProducts" type="hidden" runat="server" clientidmode="Static" />
+<input id="hidCanShow" type="hidden" runat="server" clientidmode="Static" />
+<script type="text/javascript">
+    var lastSubmitTime = new Date();
+    var submitTimes = 0;
+    //领取优惠券
+    function onGetCouponClick() {
+        //两秒内重复点击直接返回false
+        var tempDate = new Date();
+        if ((tempDate.getTime() - lastSubmitTime.getTime()) < 2000 && submitTimes > 0) {
+            lastSubmitTime = new Date();
+            submitTimes += 1;
+            return false;
+        }
+        lastSubmitTime = new Date();
+        submitTimes += 1;
+        $("#aGetCoupon").attr("disabled", "disabled");
+        var cid = $("#hidCouponId").val();
+        $.ajax({
+            url: '../API/CouponHandler.ashx',
+            type: 'POST',
+            dataType: 'text',
+            data: { action: "UserGetCoupon", couponId: cid },
+            timeout: 5000,
+            error: function () {
+                alert('操作错误,请与系统管理员联系!');
+            },
+            success: function (result) {
+                if (result == "请登录") {
+                    alert_h("您还没有登录，请先登录后再领取优惠券！", function () {
+                        ToLogin();
+                    });
+                }
+                else if (result == "领取成功") {
+                    alert_h("领取成功！", function () {
+                        $("#aGetCoupon").html("去购物");
+                        var proskuids = $("#hidCanUseProducts").val();
+                        goToUseCoupon(proskuids, cid);
+                        $("#aGetCoupon").attr("disabled", false);
+                    });
+                }
+                else {
+                    alert_h(result);
+                }
+            }
+        });
+    }
+
+    $(function () {
+        var w = $("#w_s").width();
+        var m = 0 - (w / 2 + 36);
+        $("#w_s").css("margin-left", m);
+
+        $(".kong").hide();
+        if ($("#hidCanShow").val() == "1") {
+            $("#couponContent").hide();
+            $(".kong").show();
+        }
+    })
+
+    function goToUseCoupon(productIds, id) {
+        var type = GetAgentType();
+        if (productIds == "") {
+            if (type == 2) {
+                window.HiCmd.webGoHome(0)
+            } else if (type == 1) {
+                loadIframeURL("hishop://webGoHome/null/0");
+            }
+        } else {
+            // 设置标题
+            if (type == 2)
+                window.HiCmd.webFindProductByCouponId(id);
+            else if (type == 1)
+                loadIframeURL("hishop://webFindProductByCouponId/null/" + id);
+        }
+    }
+</script>
+<hi:common_appfooter runat="server" />

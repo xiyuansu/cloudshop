@@ -1,0 +1,66 @@
+﻿<%<Hi:Common_Header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<div class="main" id="main1">
+
+<style>
+body{ background:#f8f8f8;}
+.main{ width:auto; margin:0px;}
+</style>
+
+
+
+
+<div class="box1">
+<div class="box1_l">
+<div class="ad2"><Hi:Common_ImageAd runat="server" AdId="2" /></div>
+<div class="hot-key" >
+                    <em>热门关键词</em>
+                    <Hi:Common_SubjectKeyword ID="Common_SubjectKeyword1" runat="server" CommentId="1" />
+                </div>
+
+</div>
+ <script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+<div class="box1_m">
+   <Hi:Common_SlideAd runat="server" AdId="3" />
+</div>
+
+<div class="box1_r">
+<div class="ad1"><Hi:Common_CustomAd runat="server" AdId="1" /></div>
+<div class="gongao">
+<div class="gongao_title">
+<span>商城公告</span> <em><a href="url:Affiches">更多》</a></em>
+</div>
+<div class="gongao_con">
+  <ul>
+  <%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="6" />%>
+                          </ul>
+</div>
+
+</div>
+
+</div>
+</div>
+
+    <div class="w1200 o-hidden mt10" style=" background:#FFF; border:1px solid #DDDDDD; border-bottom:none;">
+      
+    <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+    <Hi:Common_SubjectProduct_Tab runat="server" SubjectId="6" />
+ 
+    
+
+    </div>
+    
+    <div class="w1200 pt20"><Hi:Common_ImageAd runat="server" AdId="4" /></div>
+    <div class="w1200 pt20"><Hi:Common_ImageAd runat="server" AdId="6" /></div>
+    <div class="w1200 pt20"><Hi:Common_CustomAd runat="server" AdId="5" /></div>
+   
+    <div class="w1200 pt20 footer_link">
+      <h2>友情链接：</h2>  <Hi:Common_FriendLinks runat="server" TemplateFile="/HomeTags/Common_Comment/Skin-Common_FriendLinks.ascx" />
+    </div>
+    
+  
+   
+
+
+ <%<Hi:Common_Footer runat="server"/>%>
+

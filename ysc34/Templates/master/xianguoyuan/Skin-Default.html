@@ -1,0 +1,99 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/default/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/default/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+<style>.main{ width:auto; padding:0px;} </style>
+<div class="main" id="main">
+    <div class="carousel-2014 pb20">
+       <div class="banner w1200 o-hidden m0">
+               <script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+               <Hi:Common_SlideAd runat="server" AdId="1"/>
+       </div>
+    </div>
+    
+    <div class="commcol w1200 o-hidden m0  both">
+        <div class="floor-title"><Hi:Common_CustomAd runat="server" AdId="13" /></div>
+        <ul>
+            <li class="fl"><Hi:Common_ImageAd runat="server" AdId="2" /></li>
+            <li class="fl"><Hi:Common_ImageAd runat="server" AdId="3" /></li>
+            <li class="fl"><Hi:Common_ImageAd runat="server" AdId="4" /></li>
+            <li class="fl"><Hi:Common_ImageAd runat="server" AdId="5" /></li>
+        </ul>
+    </div>
+    
+    <div class="commcol w1200 o-hidden m0  both">
+        <div class="floor-title"><Hi:Common_CustomAd runat="server" AdId="14" /></div>
+        <ul class="hot1">
+            <li class="fl">
+               <div><Hi:Common_ImageAd runat="server" AdId="6" /></div>
+               <div><Hi:Common_ImageAd runat="server" AdId="7" /></div>
+            </li>
+            <li class="fl">
+               <div><Hi:Common_ImageAd runat="server" AdId="8" /></div>
+               <div><Hi:Common_ImageAd runat="server" AdId="9" /></div>
+            </li>
+            <li class="fl">
+               <div><Hi:Common_ImageAd runat="server" AdId="10" /></div>
+               <div><Hi:Common_ImageAd runat="server" AdId="11" /></div>
+            </li>
+        </ul>
+    </div>
+
+   <div class="ann-brand w1200 m0 o-hidden">
+      <div class="ann fl o-hidden yahei">
+          <ul class="bor">
+            <h2>网站公告</h2>
+           <%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="4" />%>
+           </ul>
+           <ul>
+           <Hi:Common_SubjectArticle CommentId="1" runat="server" />
+           </ul>
+      </div>
+      <div class="brand1 fr o-hidden">
+        <Hi:Common_SubjectBrand runat="server" CommentId="2" />
+      </div>
+   </div>
+
+
+ 
+    <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+    
+</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

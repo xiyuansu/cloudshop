@@ -1,0 +1,331 @@
+﻿<hi:common_appheader runat="server" />
+<div class="att-popup">
+    <div class="att-popup-container deliveryed">
+        <ul id="deliveryed">
+            <li id="IsWithdrawToAccount" drtype="4">预付款</li>
+            <li id="IsDefault" drtype="1">银行卡</li>
+            <li id="IsWeixin" drtype="2">微信</li>
+            <li id="IsAlipay" drtype="3">支付宝</li>
+        </ul>
+        <span class="close_pop close_drawtype">取消</span>
+    </div>
+</div>
+
+<header class="orderlist_tab">
+    <ul id="head_tab">
+        <li><a class="tab_active" href="#">申请提现</a></li>
+        <li><a href="SplittinDrawRecords.aspx">提现记录</a></li>
+    </ul>
+</header>
+
+<form id="form" role="form" class="pbox clearfix apply form-horizontal">
+    <input id="requestBalance" type="hidden" runat="server" />
+
+    <div class="tk_main">
+        <div class="tk_group">
+            <label for="username">提现金额</label>
+            <div class="input-group">
+                <input type="text" id="txtAmount" placeholder="填写你的提现的金额">
+                <p class="color_9 fs_20">最多可提现￥<span id="spanMaxdraws"><%<asp:literal id="lblBanlance" runat="server" />%></span>&nbsp;&nbsp;最小提现￥<span id="spanMindraws"><%<asp:literal id="lblminDraws" runat="server" />%></span>,微信支付最小提现金额为<span>1</span>元</p>
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="phone">提现方式</label>
+            <div class="input-group  delivery"></div>
+            <input type="hidden" id="DrawRequestType" value="">
+            <input type="hidden" id="CanDrawRequestType" runat="server">
+        </div>
+
+        <div class="tk_group RInfo IsAlipay">
+            <label for="txtBankName">真实姓名</label>
+            <div class="input-group">
+                <input id="txtAlipayRealName" type="text" placeholder="填写你的真实姓名" />
+            </div>
+        </div>
+
+        <div class="tk_group RInfo IsAlipay">
+            <label for="txtBankName">收款账号</label>
+            <div class="input-group">
+                <input id="txtAlipayCode" type="text" placeholder="填写你的收款账号" />
+            </div>
+        </div>
+
+        <div class="tk_group RInfo IsDefault">
+            <label for="txtBankName">开户银行</label>
+            <div class="input-group">
+                <input id="txtBankName" type="text" placeholder="填写你的开户银行" />
+            </div>
+        </div>
+        <div class="tk_group RInfo IsDefault">
+            <label for="txtAccountName">开户姓名</label>
+            <div class="input-group">
+                <input id="txtAccountName" type="text" placeholder="填写你的银行开户名" />
+            </div>
+        </div>
+
+        <div class="tk_group RInfo IsDefault">
+            <label for="txtMerchantCode">提现账号</label>
+            <div class="input-group">
+                <input id="txtMerchantCode" type="text" placeholder="填写你的提现账号" />
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="txtRemark">备注</label>
+            <div class="input-group">
+                <input id="txtRemark" type="text" placeholder="填写备注信息" />
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="phone">交易密码</label>
+            <div class="input-group">
+                <input type="password" class="form-control col-r" id="txtTradePassword" placeholder="填写你的交易密码" />
+            </div>
+        </div>
+    </div>
+    <div class="btn_tk">
+        <button id="btnDraws" type="button" class="btn_login">申请提现</button>
+    </div>
+    <p class="text-muted" style="float: left; width: 100%; padding: 30px;">上次提现日期<%<asp:literal id="lblLastDrawTime" runat="server" />%></p>
+    <script type="text/javascript">
+        var minDraws = 0;
+        $(document).ready(function (e) {
+            var canDraws = parseInt($("#WAPSplittinDraws_CanDrawRequestType").val());
+            if (canDraws < 8) {
+                $("#IsAlipay").remove();
+            } else {
+                canDraws = canDraws - 8;
+            }
+            if (canDraws < 4) {
+                $("#IsWeixin").remove();
+            } else {
+                canDraws = canDraws - 4;
+            }
+            if (canDraws < 2) {
+                $("#IsDefault").remove();
+            } else {
+                canDraws = canDraws - 2;
+            }
+            if (canDraws < 1) {
+                $("#IsWithdrawToAccount").remove();
+            }
+            $(".close_drawtype").click(function (e) {
+                $('.att-popup').removeClass('is-visible');
+            });
+            $("#deliveryed li").each(function () {
+                $(this).click(function () {
+                    SetInfo($(this).attr("id"));
+                    $(".delivery").html($(this).html());
+                    $("#DrawRequestType").val($(this).attr("drtype"));
+                    $('.att-popup').removeClass('is-visible');
+                });
+            });
+
+            if ($("#deliveryed li").length > 0) {
+                $("#deliveryed li").eq(0).click();
+            } else {
+                SetInfo('IsWithdrawToAccount');
+            }
+
+            $("#btnDraws").click(function (e) {
+                var data = getdata();
+
+                if (check(data)) {
+                    $.post("/api/VshopProcess.ashx", data, function (json) {
+
+                        if (json.success == "true") {
+                            alert_h(json.msg, function () {
+                                location.href = "SplittinDrawRecords.aspx";
+                            });
+                        }
+                        else {
+                            alert_h(json.msg);
+                        }
+                    }, "json");
+                }
+            });
+
+        });
+        function SetInfo(radName) {
+
+            $(".RInfo").each(function () {
+                var Txt = $(this).find("input");
+                if (Txt.val() == "") { Txt.val("0"); }
+            })
+            $("." + radName).each(function () {
+                var Txt = $(this).find("input");
+                if (Txt.val() == "0") { Txt.val(""); }
+            })
+
+            $(".RInfo").hide(); $("." + radName).show();
+            if (radName == "IsWeixin") {
+                var Amount = parseFloat($("#spanMindraws").html());
+                minDraws = Amount;
+                if (isNaN(Amount)) {
+                    Amount = 0;
+                }
+                $("#spanMindraws").html(Amount > 1 ? Amount.toFixed(2) : "1.00");
+            }
+            else {
+                if (minDraws > 0) {
+                    $("#spanMindraws").html(minDraws);
+                }
+            }
+        }
+
+        function getdata() {
+            var data = {};
+            data.drawtype = $("#DrawRequestType").val().trim();
+            data.RealName = $("#txtAlipayRealName").val().trim()
+            data.Code = $("#txtAlipayCode").val().trim()
+            data.MinAmount = $("#spanMindraws").html().trim();
+
+            data.Amount = $("#txtAmount").val().trim();
+            data.MaxAmount = $("#spanMaxdraws").html().trim();
+            data.BankName = $("#txtBankName").val().trim();
+            data.AccountName = $("#txtAccountName").val().trim();
+            data.MerchantCode = $("#txtMerchantCode").val().trim();
+            data.Remark = $("#txtRemark").val().trim();
+            data.TradePassword = $("#txtTradePassword").val().trim();
+            data.Decimals = data.Amount.substr(data.Amount.indexOf(".") + 1).lengh;
+            data.action = "SplittinDraws";
+            return data;
+        }
+        function check(data) {
+            with (data) {
+
+                //是否已经存在提现验证
+                var requestBalance = $("#WAPSplittinDraws_requestBalance").val();
+
+                if (requestBalance != "" && parseInt(requestBalance) > 0) {
+                    alert_h("上笔提现管理员还没有处理，只有处理完后才能再次申请提现！");
+                    return false;
+                }
+
+                if (!Amount) {
+                    alert_h("请输入您需要填提现的金额！");
+                    return false;
+                }
+                if (isNaN(Amount)) {
+                    alert_h("提现金额只可以输入数字！");
+                    return false;
+                }
+                //提现金额验证
+                var decimals = 0;
+
+                if (Amount.indexOf(".") != -1) {
+                    decimals = Amount.substr(Amount.indexOf(".") + 1).length;
+                }
+
+                if (decimals > 2) {
+                    alert_h("提现金额不能超过2位小数！");
+                    return false;
+                }
+
+                if (MaxAmount <= 0) {
+                    alert_h("你的提现余额不足！");
+                    return false;
+                }
+                if (parseFloat(Amount) > parseFloat(MaxAmount)) {
+                    alert_h("请输入提现金额小于或者等于可用金额！");
+                    return false;
+                }
+                if (parseFloat(Amount) < parseFloat(MinAmount)) {
+                    alert_h("请输入提现金额大于或者等于单次提现最小限额！");
+                    return false;
+                }
+                var r = /(0|(0+(\.[0-9]{1,2}))|[1-9]\d*(\.\d{1,2})?)/g;
+                if (!r.test(Amount)) {
+                    alert_h("请输入有效金额！");
+                    return false;
+                }
+                if (!drawtype || drawtype<1) {
+                    alert_h("请选择提现方式！");
+                    return false;
+                }
+
+                if (drawtype == 3) {
+                    //真实名称
+                    if (RealName.length == 0) {
+                        alert_h("真实名称不能为空！");
+                        return false;
+                    }
+                    if (RealName.length > 20) {
+                        alert_h("真实名称长度限制在20字符以内！");
+                        return false;
+                    }
+                    //收款账号
+                    if (Code.length == 0) {
+                        alert_h("收款账号不能为空！");
+                        return false;
+                    }
+                    if (Code.length > 60) {
+                        alert_h("收款账号长度限制在60字符以内！");
+                        return false;
+                    }
+                }
+                if (drawtype == 1) {
+                    //开户银行验证
+                    if (BankName.length == 0) {
+                        alert_h("开户银行不能为空！");
+                        return false;
+                    }
+                    if (BankName.length > 60) {
+                        alert_h("开户银行长度限制在60字符以内！");
+                        return false;
+                    }
+
+                    //银行开户名验证
+                    if (AccountName.length == 0) {
+                        alert_h("银行开户名不能为空！");
+                        return false;
+                    }
+                    if (AccountName.length > 30) {
+                        alert_h("银行开户名长度限制在30字符以内！");
+                        return false;
+                    }
+
+                    //提现账号验证
+                    if (MerchantCode.length == 0) {
+                        alert_h("提现账号不能为空！");
+                        return false;
+                    }
+                    if (MerchantCode.length > 100) {
+                        alert_h("提现账号限制在100个字符以内！");
+                        return false;
+                    }
+                }
+
+                //交易密码验证
+                if (TradePassword.length == 0) {
+                    alert_h("交易密码不能为空！");
+                    return false;
+                }
+                if (TradePassword.length < 6 || TradePassword.length > 20) {
+                    alert_h("交易密码必须在6-20个字符之间！");
+                    return false;
+                }
+
+                //注备验证
+                if (Remark.length > 300) {
+                    alert_h("请填写详细的提现备注，大小限制300个字符以内！");
+                    return false;
+                }
+
+            }
+
+            return true;
+        }
+
+        //function changeAccount(chk) {
+        //    if ($(chk).is(':checked')) {
+        //        $("#WAPSplittinDraws_divaccount").hide();
+        //    } else {
+        //        $("#WAPSplittinDraws_divaccount").show();
+        //    }
+        //}
+    </script>
+</form>
+<hi:common_appfooter runat="server" />

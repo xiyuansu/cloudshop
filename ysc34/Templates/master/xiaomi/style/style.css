@@ -1,0 +1,476 @@
+body{ padding: 0; margin: 0; width: 100%; min-width:1190;}
+*,html{ padding: 0; margin: 0;}
+a{ text-decoration: none;}
+li{ list-style: none;}
+.home{ width: 48px; height: 48px; text-align: center; vertical-align: middle; display:inline-block; background: #4b4847;}
+.home img{ padding-top: 15px;}
+.container {
+    width: 1190;
+    margin-right: auto;
+    margin-left: auto;
+}
+.site-topbar { 
+	font-size: 14px;
+	color: #b0b0b0;
+	background: #474443;
+}
+
+.site-topbar a {
+	color: #b0b0b0; margin-right:26px;
+}
+
+.site-topbar a:hover {
+	color: #fff
+}
+
+.site-topbar .topbar-nav {
+	float: left;
+	height: 48px;
+	line-height: 48px;
+	overflow: hidden;
+	_zoom: 1
+}
+.sep{ color: #4d4a49;}
+
+.site-topbar .topbar-cart,.site-topbar .topbar-info {
+	position: relative;
+	float: right;
+	_display: inline;
+	height: 48px
+}
+ 
+.img_cart{ margin-right: 8px;}
+.site-topbar .topbar-info {
+	line-height: 48px
+}
+
+.site-topbar .topbar-info .link{
+	float: left
+}
+
+.site-topbar .topbar-info .link {
+	padding: 0 5px; margin-right: 20px;
+	text-align: center
+}
+.site-topbar .topbar-info .img{ margin-left: 8px; position: relative; top: -2px;}
+.site-topbar .cart-mini {
+	position: relative;
+	z-index: 32;
+	display: block;
+	height: 48px;
+	line-height: 48px; padding: 0 16px;
+	text-align: center;
+	color: #b0b0b0;
+	background: #424242
+}
+
+.site-topbar .cart-mini i {
+	margin-right: 4px;
+	font-size: 20px;
+	line-height: 20px;
+	vertical-align: -4px
+}
+
+.site-topbar .cart-mini-num {
+	margin-left: -4px
+}
+
+.site-topbar .cart-menu {
+	display: none;
+	position: absolute;
+	right: 0;
+	right: -1px \9;
+	top: 48px;
+	z-index: 31;
+	width: 316px;
+	padding: 15px 0 0;
+	color: #424242;
+	background: #fff;
+	border: 1px solid #e0e0e0 \9;
+	border-top: 0 \9;
+	-webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 10px rgba(0,0,0,0.15)
+}
+
+.site-topbar .cart-menu .loading {
+	margin: 5px 20px 20px;
+	text-align: center
+}
+
+.site-topbar .cart-menu .msg {
+	margin: 5px 20px 20px;
+	text-align: center
+}
+.site-header { 
+    height: 72px; margin-top: 22px; margin-bottom: 22px;
+}
+.site-header .header-logo {
+    float: left;
+    width: 200px; margin-right: 42px; padding-top: 18px;
+}
+
+.site-header .header-nav {
+    float: left;
+    width: 600px; overflow: hidden;
+}
+.site-header .nav-list {
+    position: relative;
+    z-index: 10;
+    float: left;
+    width: 720px;
+    height: 72px;
+    margin: 0;
+    padding-left:30px;
+    list-style-type: none;
+    font-size: 18px; 
+}
+
+.site-header .nav-list li { float: left; font-size: 18px; height: 72px; line-height: 72px; }
+.site-header .nav-list li a span {
+    display: block;
+    float: left;
+    line-height: 72px; 
+    padding: 0 15px; color: #212121;
+}
+.site-header .nav-list li ul {
+    display: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0px;
+    top: 48px;
+    border: 1px solid #f75733;
+    border-top: 0px;
+    width: 300px;
+    background: #fff;
+}
+
+.site-header .nav-item .link {
+    display: block;
+    padding: 26px 10px 38px;
+    color: #212121;
+}
+.site-header .header-search {
+    float: right;
+    width: 290px;
+    margin-top: 12px;
+}
+.site-header .search-text {
+    width: 219px;
+    height: 48px;
+    padding: 0 10px;
+    border: 1px solid #e0e0e0; border-right: none;
+    font-size: 14px;
+    line-height: 48px; color: #bdbdbd;
+}
+.site-header .search-btn {
+    width: 48px; float: right;
+    height: 48px;
+    border: 1px solid #e0e0e0;
+    font-size: 24px;
+    line-height: 24px;
+    background:#f5f3f0 url(../images/search.png) center center no-repeat;
+}
+
+.home-hero {
+    position: relative; 
+}
+.home-hero-slider {
+    position: relative;
+    height: 460px;
+    overflow: hidden;
+    _zoom: 1;
+}
+.ui-wrapper {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+.home-hero-slider .slide {
+    display: none;
+    width: 1190;
+    height: 460px;
+}
+
+.slider {
+    margin: 0 auto;
+}
+
+.flexslider {
+    margin-top: 22px;
+    margin-bottom: 10px; 
+}
+
+.flex-caption {
+    position: absolute;
+    bottom: 20px;
+    max-width: 920px; 
+    margin: 0;
+    background: #1d1d1d; /* browsers that don't support rgba */
+    background: rgba(0, 0, 0, .7);
+    font-size: 14px;
+    line-height: 24px;
+    color: #eaeaea;
+    text-align: left;
+    font-style: italic;
+}
+.flex-prev{ background: url(../images/scroll-right.png) no-repeat -125px 50%; right: 0;}
+.flex-next{ background: url(../images/scroll-right.png) no-repeat -84px 50%; left: 234px;}
+.flex-prev:hover {	background-position: -42px 50%}
+
+.flex-next:hover {background-position: 0 50%}
+	
+.flex-direction-nav{
+	
+}
+.flex-direction-nav li a{position: absolute;
+    top: 50%;
+    z-index: 99;
+    width: 41px;
+    height: 69px;
+    margin-top: -35px;
+    text-indent: -9999px;
+    overflow: hidden;}
+/*left_sid nav*/
+.left-nav {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 230px;
+    height: 460px;
+    background: rgba(0,0,0,0.5);
+    z-index: 101;
+}
+
+    .left-nav .pro-menu {
+        width: 230px;
+        height: 420px; padding: 20px 0;
+    }
+
+.left-nav .pro-menu .menu-inner {
+    position: relative;
+    top: 0;
+}
+
+.left-nav .T-menu01 .brand {
+    display: inline-block;
+    float: right;
+    width: 240px;
+    height: 358px;
+    padding: 20px 0;
+}
+
+    .left-nav .T-menu01 .brand img {
+        width: 100px;
+        height: 40px;
+        float: left;
+        overflow: hidden;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    .left-nav .T-menu01 .brand h5 {
+        font-size: 16px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+
+        .left-nav .T-menu01 .brand h5 b {
+            float: right;
+            font-size: 12px;
+            color: #f0f0f0;
+            line-height: 30px;
+        }
+
+.left-nav .nav-hover {
+    position: absolute;
+    display: none;
+    width: 740px;
+    min-height: 456px;
+    top: 0px;
+    left: 230px; /*left*/
+    border: 2px solid #ff7043;
+    overflow: hidden;
+    background-color: #fff;
+    z-index: 10000;
+}
+
+.left-nav .nav-hover00 {
+    top: -1px;
+}
+
+.left-nav .cat-01:hover .nav-hover {
+    display: block;
+}
+
+.left-nav .T-menu01 {
+     
+    width: 740px;
+    overflow: hidden;
+}
+
+    .left-nav .T-menu01 .L-menu {
+        position: relative;
+        float: left;
+        width: 460px;
+        height: 100%;
+        padding: 20px 20px;
+        font-size: 12px;
+    }
+
+        .left-nav .T-menu01 .L-menu div {
+            width: 100%;
+            overflow: hidden;
+            line-height: 30px;
+        }
+
+            .left-nav .T-menu01 .L-menu div h4 {
+                display: inline-block;
+                float: left;
+                padding-right: 10px;
+                white-space: nowrap;
+                width: 80px;
+                overflow: hidden;
+                padding: 5px 0;
+            }
+
+                .left-nav .T-menu01 .L-menu div h4 a {
+                    color: #333333;
+                }
+
+            .left-nav .T-menu01 .L-menu div span {
+                border-top: 1px solid #eeeeee;
+                display: block;
+                float: left;
+                height: 100%;
+                overflow: hidden; /*white-space: nowrap;*/
+                width: 370px;
+                padding: 5px 0;
+            }
+
+            .left-nav .T-menu01 .L-menu div:first-of-type span {
+                border: none;
+            }
+
+            .left-nav .T-menu01 .L-menu div span a {
+                padding-right: 10px;
+                float: left;
+                color: #f0f0f0;
+            }
+
+                .left-nav .T-menu01 .L-menu div span a:hover {
+                    color: #ff5722;
+                }
+
+            .left-nav .T-menu01 .L-menu div i {
+                padding: 8px 5px;
+                color: #f0f0f0;
+                font-size: 12px;
+                font-weight: normal;
+                display: block;
+                float: left;
+            }
+
+.left-nav .pro-menu dl:hover {
+    position: relative;
+    z-index: 10001;
+    background: #ff7043;
+    color: #f0f0f0;
+}
+
+    .left-nav .pro-menu dl:hover a {
+        color: #fff;
+    }
+
+.left-nav .pro-menu dl {
+    position: relative;
+    width: 190px; padding: 0 20px;
+    line-height: 40px;
+    height: 40px;
+}
+
+    .left-nav .pro-menu dl dt {
+        height: 40px;
+        line-height:40px;
+        background: url(../../images/left_icon.png) no-repeat 180px;
+    }
+
+        .left-nav .pro-menu dl dt:hover {
+            background: url(../../images/icon_hove.png) no-repeat 180px;
+        }
+
+        .left-nav .pro-menu dl dt span {
+            display: none;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            vertical-align: middle;
+        }
+
+.left-nav .pro-menu dd a:hover {
+    color: #ff5722;
+}
+
+.left-nav .pro-menu dl dt a {    width: 170px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: #f0f0f0;
+    line-height: 15px;
+    display: inline-block;
+    padding-left: 5px;
+    position: relative;
+    font-weight: lighter;
+    line-height: 38px;
+}
+
+.left-nav .pro-menu dl dd {
+    padding-left: 30px;
+    display: none;
+    line-height: 17px;
+    white-space: nowrap;
+    margin-right: 12px;
+    overflow: hidden;
+    height: 18px;
+}
+
+    .left-nav .pro-menu dl dd a {
+        font-size: 12px;
+        color: #C4C4C4;
+        padding-right: 5px;
+        float: left;
+    }
+/*end*/
+.swiper-button-next, .swiper-button-prev{ top: 0!important;}
+.swiper-container{ padding-top: 48px;}
+
+.banner_ad{ overflow: hidden; margin-bottom: 30px;}
+.banner_ad li{ float: left; width: 292px; height: 160px; margin-right: 10px;}
+.banner_ad li:last-child{ margin-right: 0; text-align: right;}
+.banner_ad li a{ display: inline-block;}
+.banner_ad li img{ width: 100%; overflow: hidden;}
+ 
+   .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }

@@ -1,0 +1,142 @@
+﻿<hi:common_appheader runat="server" skinname="/tags/skin-Common_NoLoginHeader.html" />
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<input type="hidden" runat="server" id="hidden_skus" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidden_skuItem" clientidmode="Static" />
+<input type="hidden" id="txCartQuantity" value="" clientidmode="Static" runat="server" />
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdTimestamp" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdNonceStr" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdSignature" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdSource" runat="server" ClientIDMode="Static">
+
+<div id="slides">
+    <hi:AppshopTemplatedRepeater id="rptProductImages" templatefile="/Tags/skin-Common_Slide.ascx"
+                             runat="server" />
+</div>
+<div class="cd_xs">
+    <div class="cd_info">
+        <div class="cd_title">
+            <asp:literal runat="server" id="litProdcutName" />
+        </div>
+        <div class="intro text-muted fs_28" id="divShortDescription" runat="server">
+            <asp:literal runat="server" id="litGroupbuyDescription" />
+        </div>
+        <div class="cd_price">
+            抢购价：¥<b><asp:literal runat="server" id="price" /></b>
+            <del id="delOldSalePrice">
+                原价：¥<asp:literal runat="server" id="salePrice" />
+            </del>
+
+        </div>
+        <div class="price mt_30 ">
+            <span class="color_9 info">
+                已团<asp:literal runat="server" id="soldCount" /><asp:Literal runat=server id="litUnit1">件</asp:Literal>（<span id="maxCount">
+                    团购最多可团：<asp:literal runat="server"
+                                        id="litMaxCount" /><asp:Literal runat=server id="litUnit2">件</asp:Literal>
+                </span> <span id="minCount">还需<asp:literal runat="server" id="minSuccessCount" /><asp:Literal runat=server id="litUnit3">件</asp:Literal>成团</span>
+                ）
+            </span>
+        </div>
+    </div>
+
+    <div class="cd_time">
+        <i class="icon_cdtime icon-icon_time"></i>
+        <span id="tuan_time"></span><span id="t_d"></span><span id="t_h"></span></span><span id="t_m"></span><span id="t_s"></span>
+    </div>
+</div>
+<div class="cd_single mt_30" id="divspecification">
+    选择规格
+    <i class="icon_angle_right"></i>
+</div>
+
+<div class="cd_single mt_30" onclick="javascript:location.href='ProductReview.aspx?ProductId='+$('#txtProductId').val();">
+    商品评价&nbsp;<i class="icon_pingjia">(<asp:literal runat="server" id="litReviewsCount" />)</i>
+    <i class="icon_angle_right"></i>
+</div>
+
+<div class="mt_30 cd_pro_info">
+    <asp:literal runat="server" id="litDescription" />
+</div>
+<div class="cd_btn btn_1">
+    <a id="buyButtonNew">立刻参团</a>
+</div>
+<input type="text" style="display: none;" runat="server" id="txtProductId" clientidmode="Static" />
+<input type="hidden" runat="server" clientidmode="Static" id="litGroupbuyId" />
+<input type="hidden" value="2014/04/23 9:27:46" id="startTime" runat="server" clientidmode="Static">
+<input type="hidden" value="2014/04/23 9:28:56" id="endTime" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuySoldCount" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuyMaxCount" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuyMinCount" runat="server" clientidmode="Static">
+<input type="hidden" id="nowTime" runat="server" clientidmode="Static">
+<input type="hidden" id="skuStock" value="0" runat="server" clientidmode="Static" />
+<script src="/script/carousel.js"></script>
+<script src="/utility/vgroupbuy.helper.js?v=3.0" type="application/javascript"> </script>
+<script type="text/javascript" src="/Utility/jquery.scrollLoading.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var slidesImg = $('#slides img');
+        var width = 650, height = 650;
+        if (slidesImg.length > 1) {
+            $('#slides').slidesjs({
+                width: width,
+                height: height
+                //play: {
+                //    active: true,
+                //    auto: true,
+                //    interval: 4000,
+                //    swap: true
+                //}
+            });
+            $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+        }
+        else {
+
+            $('#slides').css('display', 'block').html('<div style="width:100%;"><a href="javascript:;"></a></div>');
+            $('#slides div a').append(slidesImg);
+        }
+        $('#slides img').scrollLoading();
+    });
+
+
+    $(function () {
+        var soldCount = parseInt($('#groupBuySoldCount').val());
+        var minCount = parseInt($('#groupBuyMinCount').val());
+        if (soldCount < minCount)
+            $('#maxCount').hide();
+        else
+            $('#minCount').hide();
+
+        if (!$.trim($('#gbContent').html())) {
+            $('#gbContentContainer').hide();
+        }
+
+        $('#divspecification,#buyButtonNew').on('click', function (event) {
+            event.preventDefault();
+            $('.att-popup').addClass('is-visible');
+            getDefaultGroupBuyPrice();
+        });
+    });
+
+    $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+    setInterval(GetRTime, 1000);
+    if ($("#attrtable tr").length <= 0) {
+        $("#attrtable").parent().hide();
+    }
+
+    $(window).scroll(function () {
+        setScrollLoading();
+    });
+    function setScrollLoading() {
+        $("img").scrollLoading();
+        $("iframe").each(function () {
+            if (!$(this).attr("src")) {
+                $(this).attr("src", $(this).attr("data-url"));
+            }
+        });
+    }
+</script>
+<hi:Common_SKUSubmitOrder id="skuSubmitOrder" runat="server" />

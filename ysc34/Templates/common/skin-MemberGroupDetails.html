@@ -1,0 +1,258 @@
+﻿<hi:common_wapheader runat="server" />
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<style>
+    .pintuan_btn {
+        position: fixed;
+        bottom: 0;
+        left: 0px;
+        width: 100%;
+        border-top: 1px solid #ebebeb;
+        text-align: center;
+        background: #fff;
+    }
+
+    .pro_tab {
+        float: none;
+        border-bottom: none;
+        margin-top: 0;
+    }
+
+    .zhezhao {
+        background: #000;
+        top: 0px;
+        left: 0px;
+        opacity: 0.85;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        display: none;
+    }
+
+        .zhezhao img {
+            margin-right: 0.75rem;
+            float: right;
+        }
+</style>
+
+<div class="huoping_xq">
+
+    <div class="product">
+        <div class="pic"><%<asp:image id="imgThumbnailUrl100" runat="server"></asp:image> %></div>
+        <div class="info">
+            <div class="name"><a href="#"><%<asp:Literal runat="server" ID="litProductName" />%> </a></div>
+            <div class="price">火拼价：￥<%<asp:Literal runat="server" ID="litSalePrice" />%></div>
+            <div class="time" id="litRemainTimeHtml"></div>
+        </div>
+    </div>
+
+
+    <div class="product">
+        <div class="item">已参团的小伙伴，还差 <em><%<asp:Literal runat="server" ID="litNeedPerson" />%></em> 人</div>
+        <div class="man_list">
+            <ul>
+                <Hi:WapTemplatedRepeater ID="rptFightGroups" TemplateFile="/Tags/skin-Common_FightGroups.ascx" runat="server" />
+            </ul>
+        </div>
+
+    </div>
+
+    <hi:Common_FightGroupRule runat="server" id="fightGroupRule" />
+    <div class="product">
+        <div class="review"><span>商品评价  <em><%<asp:Literal runat="server" ID="litProductReviewCount" />%></em></span> <b></b></div>
+    </div>
+
+    <div class="pro_tab">
+        <div class="pro_tab_flex">
+            <a href="javascript:;" class="tab tab_active">商品详情</a>
+        </div>
+        <div class="pro_tab_flex">
+            <a href="javascript:;" class="tab">商品咨询&nbsp;</a><i class="icon_badge1">
+               ( <asp:literal runat="server" id="litConsultationsCount" />)
+            </i>
+        </div>
+    </div>
+    <div class="pro_tab mt_0" style="padding:15px">
+        <div class="pro_info" id="tab1">
+            <asp:literal runat="server" id="litDescription" />
+        </div>
+        <div class="pro_info" id="tab2" style="display:none;">
+            <div class="kong" id="divConsultationEmpty" runat="server">
+                <img src="/images/comment_null.png">
+                <div>暂时没有咨询哦~</div>
+            </div>
+            <ul class="consult">
+                <Hi:WapTemplatedRepeater ID="rptProductConsultations" TemplateFile="/Tags/skin-Common_ProductConsultation.ascx" runat="server" />
+
+            </ul>
+            <a href="#" class="FAB_consult"></a>
+        </div>
+    </div>
+    <div class="pintuan_btn"> <a class="share_pic">邀请好友参团</a></div>
+</div>
+<div class="zhezhao"><img src="../images/new/share_pic.png"></div>
+<div class="coupons_popup">
+    <div class="att-popup-container" style="height:17.5rem;">
+        <div class="coupons_title">
+            <span class="fs_28">领取优惠券</span>
+            <a href="javascript:;" class="pop_close icon-icon_close_48"></a>
+        </div>
+        <div id="consult">
+            <span>手机/邮箱</span>
+            <input type="text" id="txtUserName" />
+            <span>咨询内容：</span>
+            <textarea id="txtConsultation"></textarea>
+            <a class="sub_consult" onclick="SubmitConsultation()">提交</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/script/jquery-1.11.0.min.js"></script>
+<script src="/script/main.js"></script>
+<script src="/utility/time.js" type="text/javascript"></script>
+<a href="javascript:scroll(0,0)" class="go_top"></a>
+<script type="text/javascript">
+    var intervalId = 0;
+    var nowTime;
+    function showtime() {
+
+        var strstartTime = document.getElementById("hfStartTime").value;
+        var strTime = document.getElementById("hfEndTime").value; //2011-01-06 11:40:00
+
+        var year = strTime.split("-")[0];
+        var month = strTime.split("-")[1];
+        var day = strTime.split("-")[2].replace(strTime.substr(strTime.indexOf(" ")), "");
+        var hour = strTime.split(" ")[1].split(":")[0];
+        var minutes = strTime.split(" ")[1].split(":")[1];
+        var seconds = strTime.split(" ")[1].split(":")[2];
+
+        //alert(year + "年" + month + "月" + day + "日" + hour + "小时" + minutes + "分" + seconds + "秒");
+        var eTime = new Date(year, month, day, hour, minutes, seconds);
+        if (eTime > nowTime) {
+            showTimeList(strTime, "litRemainTimeHtml", "1", strstartTime, nowTime);
+            nowTime.setSeconds(nowTime.getSeconds() + 1);
+        }
+        else {
+
+            showTimeList(strTime, "litRemainTimeHtml", "1", strstartTime, nowTime, refreshFightGroup);
+            clearInterval(intervalId);
+        }
+
+    }
+
+    $(document).ready(function () {
+        nowTime = new Date($('#hfNowTime').val());
+        var strstartTime = document.getElementById("hfStartTime").value;
+        var strTime = document.getElementById("hfEndTime").value; //2011-01-06 11:40:00
+        var eTime = new Date(strTime);
+        if (eTime == "Invalid Date") {
+            var year = strTime.split("-")[0];
+            var month = strTime.split("-")[1];
+            var day = strTime.split("-")[2].replace(strTime.substr(strTime.indexOf(" ")), "");
+            var hour = strTime.split(" ")[1].split(":")[0];
+            var minutes = strTime.split(" ")[1].split(":")[1];
+            var seconds = strTime.split(" ")[1].split(":")[2];
+            eTime = new Date(year, month - 1, day, hour, minutes, seconds);
+        }
+        if (nowTime == "Invalid Date") {
+            var year = $('#hfNowTime').val().split("-")[0];
+            var month = $('#hfNowTime').val().split("-")[1];
+            var day = $('#hfNowTime').val().split("-")[2].replace($('#hfNowTime').val().substr($('#hfNowTime').val().indexOf(" ")), "");
+            var hour = $('#hfNowTime').val().split(" ")[1].split(":")[0];
+            var minutes = $('#hfNowTime').val().split(" ")[1].split(":")[1];
+            var seconds = $('#hfNowTime').val().split(" ")[1].split(":")[2];
+            nowTime = new Date(year, month - 1, day, hour, minutes, seconds);
+        }
+        if (eTime < nowTime) {
+
+            showTimeList(strTime, "litRemainTimeHtml", "1", strstartTime, nowTime);
+        } else {
+            intervalId = setInterval(showtime, 1000);
+        }
+
+
+    });
+
+    function refreshFightGroup() {
+        location.reload();
+    }
+</script>
+<script type="text/javascript">
+    function SubmitConsultation() {
+        if ($("#txtConsultation").val() == "") {
+            alert_h("必须填写咨询内容");
+            return;
+        }
+
+        var userName = $("#txtUserName").val();
+        if (userName == "") {
+            alert_h("必须填写手机或邮箱");
+            return;
+        }
+
+        var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{1,4}$/;
+
+        var cellReg = /^0?(13|15|18|14|17)[0-9]{9}$/g;
+
+
+        if (!emailReg.test(userName) && !cellReg.test(userName)) {
+            alert_h("只能填写手机或邮箱");
+            return;
+        }
+
+        var id = $("#hiddenProductId").val();
+        var data = {};
+        data.ProductId = id;
+        data.ConsultationText = $("#txtConsultation").val();
+        data.userName = userName;
+
+        $.post("/API/VshopProcess.ashx?action=AddProductConsultations", data, function (json) {
+            if (json.success === true) {
+                alert_h("提交成功", function () {
+                    location.reload();
+                });
+
+            }
+            else {
+                alert_h(json.msg);
+            }
+        });
+    }
+    $(function () {
+        $('.share_pic,.huoping_box').click(function () {
+            $('.zhezhao').css('display', 'block');
+        })
+        $('.zhezhao').click(function () {
+            $('.zhezhao').css('display', 'none');
+        })
+        $("[name=description]").attr("content", $("#hidDescription").val())
+        $("title").text($("#hidTitle").val());
+
+        $(".tab").click(function () {
+            if ($(this).hasClass("tab_active"))
+                return;
+            $(this).addClass("tab_active");
+            $(this).parent().siblings().children(".tab").removeClass("tab_active");
+            $(".pro_info").toggle();
+        });
+
+        $('.FAB_consult').on('click', function () {
+            $('.coupons_popup').addClass('is-visible');
+            $("#consult").show();
+            $('.coupons_title span').text("商品咨询");
+        });
+    })
+
+
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<input type="hidden" runat="server" id="hfStartTime" clientidmode="Static" />
+<input type="hidden" runat="server" id="hfEndTime" clientidmode="Static" />
+<input type="hidden" runat="server" id="hfNowTime" clientidmode="Static" />
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTimestamp" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdNonceStr" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdSignature" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static" />
+<script language="javascript" type="text/javascript" src="/Utility/wxShare.js?v=3.0"></script>

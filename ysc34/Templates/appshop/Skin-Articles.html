@@ -1,0 +1,166 @@
+﻿<hi:common_appheader runat="server" skinname="/tags/skin-Common_NoLoginHeader.html" />
+<style>
+    .text-center {
+        text-align: center;
+        padding: 2rem 0;
+        display: none;
+    }
+
+    .listtitle {
+        height: 1.5rem;
+        line-height: 1.5rem;
+        font-size: 0.7rem;
+    }
+    #wrapper li {
+        float: left;
+        margin-right: 25px;
+        white-space: nowrap;
+    }
+
+        #wrapper li.current {
+            border-bottom: 3px solid #666;
+            line-height: 47px;
+        }
+
+            #wrapper li a:hover, #wrapper li.current a {
+                color: #222;
+            }
+
+    #wrapper ul {
+        position: absolute;
+        display: flex;
+    }
+
+    #wrapper {
+        position: relative;
+        overflow: hidden;
+        height: 50px;
+        line-height: 50px;
+        background: #fff;
+        padding: 0 10px;
+    }
+
+    .main {
+        background: #F5F5F5;
+        padding: 0;
+    }
+
+    .articlelist {
+        background: #fff;
+        margin-top: 10px;
+    }
+
+</style>
+<p class="text-center" id="empty">
+    没有找到相关文章
+</p>
+<div class="main" id="articlelistContainer">
+    <div class="form-search" style="display:none;">
+        <input id="txtKeywords" type="text" class="form-control search-query">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-warning" data-type="last" onclick="searchs()">搜索</button>
+        </span>
+    </div>
+    <div id="category" style="display:none" class="listtitle">【<a href="ArticleCategory.aspx">文章分类</a>】&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a href="#" id="category_link">文章搜索</a></div>
+    <script src="/script/iscroll.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            var categoryId = parseInt(getParam("CategoryId"));
+            if (isNaN(categoryId) || categoryId <= 0) {
+                $("#wrapper ul li").eq(0).addClass("current");
+            }
+            //    if ($("#wrapper ul li.current").length > 0) {
+            //        var current_li = $("#wrapper ul li.current").prop("outerHTML");//将当前分类移动到第一个
+            //        $("#wrapper ul li.current").remove();
+            //        $("#wrapper ul").prepend(current_li);
+            //    }
+        })
+        var myscroll;
+        function loaded() {
+            myscroll = new iScroll("wrapper", {
+                hScrollbar: false
+            });
+            myscroll.scrollToElement('.current', 500);
+        }
+        window.addEventListener("DOMContentLoaded", loaded, false);
+    </script>
+    <div id="wrapper">
+
+        <ul><li><a href="Articles">全部</a></li><Hi:AppshopTemplatedRepeater id="rpt_ArticleCategory" runat="server" templatefile="/Tags/skin-Common_ArticleListCategory.ascx" /></ul>
+    </div>
+    <div class="articlelist clearfix" id="articlelist">
+        <ul>
+            <hi:AppshopTemplatedRepeater id="rptArticles" templatefile="/Tags/skin-Common_Articles.ascx"
+                                     runat="server" />
+        </ul>
+    </div>
+</div>
+<div id="pager">
+</div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtCategoryName" />
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtCategoryId" />
+<hi:common_appfooter runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+
+    $(function () {
+        var categoryId = parseInt($("#txtCategoryId").val());
+        if (isNaN(categoryId)) categoryId = 0;
+        var categoryName = $("#txtCategoryName").val();
+        if (categoryId == 0) categoryName = "文章搜索";
+        $("#category_link").html(categoryName);
+        $("#category_link").attr("href", "Articles.aspx?categoryId=" + categoryId);
+        if ($('#articlelist ul li').length == 0) {
+            $('#articlelistContainer').addClass('hide');
+            $('#empty').removeClass('hide');
+        }
+
+
+
+        var sort = getParam('sort');
+        var order = getParam('order');
+        if (sort && order) {
+            var selectedLink = $('.sort a[name="' + sort + '"]');
+            if (order == 'desc')
+                selectedLink.find('div').addClass('down');
+            else
+                selectedLink.find('div').addClass('up');
+        }
+
+        var sortLink = $('.sort a[href="#"]');
+        var categoryId = getParam('categoryId');
+
+        var keyWords = getParam('keyWord');
+        if (keyWords)
+            $("#txtKeywords").val(keyWords);
+
+
+        $.each(sortLink, function (i, link) {
+            link = $(link);
+            url = '/Appshop/Articles.aspx?categoryId=' + categoryId + '&keyWord=' + escape(keyWords);
+            if (i > 0) {//第一个为默认面，不设置排序
+                url += '&sort=' + link.attr('name');
+                if (link.find('div.up').length > 0)
+                    url += '&order=desc';
+                else
+                    url += '&order=asc';
+            }
+            link.attr('href', url);
+        });
+
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+
+    });
+    function searchs() {
+
+        var key = $("#txtKeywords").val();
+        var categoryId = getParam('categoryId');
+        var url = "/Appshop/Articles?categoryId=" + categoryId + "&keyWord=" + escape(key);
+
+        window.location.href = url;
+    }
+
+
+</script>

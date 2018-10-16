@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="6" ImageSize="102*40" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="5" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="6" Type="category" CategoryId="309" MaxNum="18" />
+  <Comment Id="7" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172016_5562.jpg" TitleImageSize="28*36" />
+  <Comment Id="8" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="9" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="10" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="11" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172041_8656.jpg" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="223" MaxNum="10" />
+  <Comment Id="13" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="14" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="15" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172055_5624.jpg" TitleImageSize="28*36" />
+  <Comment Id="16" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="17" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="18" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="19" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="102*40" />
+  <!-- Fangetao Begin -->
+  <Comment Id="20" Type="brand" CategoryId="1" IsShowLogo="true" IsShowTitle="true" MaxNum="6" ImageSize="98*83" />
+  <Comment Id="21" Type="morelink" Title="查看更多" CategoryId="" />
+  <Comment Id="22" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="23" Type="brand" CategoryId="5" IsShowLogo="true" IsShowTitle="true" MaxNum="6" ImageSize="98*83" />
+  <Comment Id="24" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="25" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="26" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="27" Type="brand" CategoryId="9" IsShowLogo="true" IsShowTitle="true" MaxNum="6" ImageSize="98*83" />
+  <Comment Id="28" Type="brand" CategoryId="13" IsShowLogo="true" IsShowTitle="true" MaxNum="6" ImageSize="98*83" />
+  <Comment Id="29" Type="brand" CategoryId="17" IsShowLogo="true" IsShowTitle="true" MaxNum="6" ImageSize="98*83" />
+  <Comment Id="35" Type="title" Title="1F 生活日用" ImageTitle="" TitleImageSize="100*40" />
+  <Comment Id="31" Type="title" Title="2F 生活日用" ImageTitle="" TitleImageSize="100*40" />
+  <Comment Id="32" Type="title" Title="3F 生活日用" ImageTitle="" TitleImageSize="100*40" />
+  <Comment Id="33" Type="title" Title="4F 生活日用" ImageTitle="" TitleImageSize="100*40" />
+  <Comment Id="34" Type="title" Title="5F 生活日用" ImageTitle="" TitleImageSize="100*40" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

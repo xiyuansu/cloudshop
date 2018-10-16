@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+    <hi:pagetitle runat="server" />
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" name="viewport" />
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta name="format-detection" content="telephone=no" />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="/Admin/Shop/PublicMob/css/dist/style.css">
+    <link rel="stylesheet" href="/Admin/Shop/PublicMob/css/SpsBtn.css">
+    <Hi:WapHeadContainer ID="WapHeadContainer1" runat="server" />
+    <link rel="stylesheet" href="/Utility/bootflat/bootstrap.min.css" rev="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="/Utility/bootflat/bootflat.min.css" rev="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="/Utility/icomoon/style.css" rev="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/css.css" rev="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/mycss.css" rev="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/main.css" rev="stylesheet" type="text/css">
+    <script src="/script/jquery-1.11.0.min.js" id="jquery"></script>
+    <script type="text/javascript" src="/script/mui.min.js"></script>
+    <script src="/script/jquery.slides.min.js"></script>
+    <script src="/Utility/bootstrap-validation.min.js"></script>
+    <script src="/Utility/common.js?v=3.0" type="text/javascript"></script>
+    <script src="/script/main.js"></script>
+    <script src="/script/iscroll.js"></script>
+    <script language="javascript" type="text/javascript">
+        document.addEventListener('plusready', function () {
+            returnUrl = getParam("returnUrl");
+            var ms = plus.webview.currentWebview();
+            var url = ms.url;
+            // 登录
+            var userid = getCookie("Shop-Member");
+            if (userid == undefined || userid == "") {// 如果web端没登录
+                var siteinfostr = plus.storage.getItem('wapsiteinfo') || "{}";
+
+                var siteInfo = JSON.parse(siteinfostr);
+                var sessionid = null;
+                if (siteInfo.UserInfo) {
+                    sessionid=siteInfo.UserInfo.sessionid;
+                }
+
+                if (sessionid != undefined && sessionid != null && sessionid != "") {
+                    document.location.href = "/AppShop/AppLogin.aspx?sessionid=" + sessionid + "&returnUrl=" + encodeURIComponent(returnUrl);
+                }
+                else
+                    isLogin(sessionid);
+
+                $(".pbox").show();
+            }
+
+
+                function isLogin(sessionid, type) {
+                    if (sessionid == "" || sessionid == null) {
+                        OpenUrl('login');
+                    } else {
+                        return true;
+                    }
+                }
+        });
+
+        function OpenUrl(pagename, param) {
+            var openwebview = plus.webview.getWebviewById("appauto");
+//          if (openwebview == null) {
+//              openwebview = plus.webview.getWebviewById("appauto");
+//          }
+            mui.fire(openwebview, "OpenUrl", { 'pagename': pagename, 'extend': param });
+        }
+    </script>
+</head>
+<body>
+    <div class="pbox"></div>
+</body>
+</html>

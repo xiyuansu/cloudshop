@@ -1,0 +1,564 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+<form runat="server" id="form1">
+    <style>
+        .yanzheng_input2 { float: left; height: auto; }
+        .input-text { height: 35px; line-height: 35px; }
+        .yanzheng_input2 { margin-top: 0px; }
+        .yanzheng_input3:hover { background: #fe5722; color: #fff; }
+        .zc_name { margin-top: 10px; margin-bottom: 0px; height: 37px; }
+        .yanzhengma { padding-left: 0px; }
+        .zhuce_input2 { height: 35px; line-height: 35px; }
+        .yanzheng_input3 { margin: 0px; height: 37px; }
+        .focus { padding-left: 100px; color: #dddddd; }
+        .zc_name em { padding-right: 5px; width: 85px; color: #585858; font-size: 12px; }
+    </style>
+    <div class="hyzxmain">
+        <div class="hyzxconty">
+            当前位置：<span><a href="/">首页</a></span>><span><a href="/user/UserDefault.aspx">会员中心</a></span>><span><a href="#">分销员申请表单</a></span>
+        </div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<Hi:Common_User_Menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <div class="dingdan_box1">分销员申请表单</div>
+                    <div style="margin-top:10px;">
+                        <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+                    </div>
+                    <div class="bTop_BomPadding10">
+                        <div class="yzyouxiang_box1 m_top">
+                            <div class="yzyoux1">
+                                <em>店铺名称：</em><span><%<asp:TextBox ID="txtShopName" runat="server" Width="260" maxlength="100" clientidmode="Static" class="input-text" />%></span>
+                            </div>
+                            <div class="yzyoux1" id="divRealName">
+                                <em>真实姓名：</em><span><%<asp:TextBox ID="txtRealName" runat="server" Width="260" maxlength="10" clientidmode="Static" class="input-text" />%></span>
+                            </div>
+                            <div class="yzyoux1" id="divEmail">
+                                <em>邮箱：</em>
+                                <span><%<asp:TextBox ID="txtEmail" runat="server" Width="260" clientidmode="Static" class="input-text" onblur="testEmail(this)" />%></span>
+                            </div>
+                            <div class="yzyoux1" id="divPhone">
+                                <em>手机号码：</em>
+                                <span><%<asp:TextBox ID="txtPhone" runat="server" Width="260" clientidmode="Static" class="input-text" onblur="testPhone(this)" />%></span>
+                            </div>
+                            <div class="zc_name" id="divimgcode">
+                                <%<asp:HiddenField ID="hidIsVidateImageCode" runat="server" ClientIDMode="Static" />%>
+                                <em class="yanzhengma">图形验证码：</em>
+                                <span><%<asp:TextBox ID="txtNumber" clientidmode="Static" CssClass="input-text" runat="server" MaxLength="4" autocomplete="off" tabindex="6" />%></span>
+
+                                <div>
+                                    <span class="yanzheng_input2"><img id="imgVerifyCode" src='' style="vertical-align: middle; border-style: none;" alt="" /></span>
+                                    <span class="yanzheng_input4">看不清？<a href="javascript:refreshCode();">换一张</a></span>
+                                </div>
+                                <span id="txtNumber_succeed" class="zc_tishi">验证码输入正确</span>
+                                <span class="zc_tishi2" id="txtNumber_error"></span>
+
+                            </div>
+                            <div class="zc_name" id="normaldiv">
+                                <em class="yanzhengma">短信验证码：</em>
+                                <span><%<asp:TextBox ID="txtPhoneCode" clientidmode="Static" CssClass="zhuce_input2" runat="server" MaxLength="4" autocomplete="off" tabindex="7" />%></span>
+                                <div class="yanzheng_input2">
+                                    <span><input id="phoneVerifyCode" type="button" value="获取验证码" class="yanzheng_input3 " /></span>
+                                </div>
+                                <span id="txtPhoneCode_succeed" class="zc_tishi">手机验证码输入正确</span>
+                                <span class="zc_tishi2" id="txtPhoneCode_error"></span>
+                            </div>
+                            <div class="yzyoux1" id="divArea">
+                                <em>所在地区：</em><span><%<Hi:RegionSelector runat="server" id="dropRegions" />%></span>
+                            </div>
+                            <div class="yzyoux1" id="divAddress">
+                                <em>详细地址：</em><span><%<asp:TextBox ID="txtAddress" runat="server" Width="260" clientidmode="Static" class="input-text" />%></span>
+                            </div>
+                            <div class="yzyoux1">
+                                <br />
+                                <em>&nbsp;</em>
+                                <p><label class="labeldefault"></label><%<asp:Button ID="btnReferral" runat="server" Text="提交申请" OnClientClick="return validatorForm()" class="input_next" />%></p>
+                            </div><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" runat="server" id="hidValidateRealName" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidValidatePhone" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidValidateEmail" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidValidateAddress" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidIsPromoterValidatePhone" clientidmode="Static" />
+
+
+    <script type="text/javascript" language="javascript">
+        function validatorForm() {
+            if ($("#txtShopName").val().length <= 0 || $("#txtShopName").val().length > 100) {
+                alert("请输入店铺名称,名称长度必须在1-100字符之间");
+                return false;
+            }
+            if ($("#hidValidateRealName").val() == "1" && $("#txtRealName").val().length <= 0) {
+                alert("真实姓名不能为空");
+                return false;
+            }
+            if ($("#txtRealName").val().length > 10) {
+                alert("真实姓名长度不能超过10个字符");
+                return false;
+            }
+            var tempemail = $("#txtEmail").val();
+            if ($("#hidValidateEmail").val() == "1" && tempemail.length <= 0) {
+                alert("邮箱地址不能为空");
+                return false;
+            }
+            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*([a-zA-Z0-9])+\.([a-zA-Z]{1,4})$/;
+            if (tempemail.length > 0 && !myreg.test(tempemail)) {
+                alert('请输入正确的邮箱地址');
+                return false;
+            }
+            if ($("#hidValidatePhone").val() == "1" && $("#txtPhone").val().length <= 0) {
+                alert("手机号码不能为空");
+                return false;
+            }
+            if ($("#txtPhone").val().length > 0 && !Reg_mobbile.test($("#txtPhone").val())) {
+                alert("请输入正确的手机号码");
+                return false;
+            }
+            if ($("#hidValidatePhone").val() == "1" && $("#hidIsPromoterValidatePhone").val() == "1" && $("#txtNumber").val().length <= 0) {
+                alert("请输入图形验证码");
+                return false;
+            }
+            if ($("#hidValidatePhone").val() == "1" && $("#hidIsPromoterValidatePhone").val() == "1" && $("#txtPhoneCode").val().length <= 0) {
+                alert("请输入手机短信验证码");
+                return false;
+            }
+            var RegionId = $("#regionSelectorValue").val();
+            if ($("#hidValidateAddress").val() == "1" && (RegionId == "" || RegionId == undefined || RegionId == "0")) {
+                alert("请选择所在地区");
+                return false;
+            }
+            if ($("#hidValidateAddress").val() == "1" && ($("#txtAddress").val().length < 2 || $("#txtAddress").val().length > 50)) {
+                alert("请输入详细地址，长度为2-50个字符");
+                return false;
+            }
+            return true;
+        }
+        $(document).ready(function () {
+            if ($("#hidIsPromoterValidatePhone").val() != "1") {
+                $("#divimgcode").hide();
+                $("#normaldiv").hide();
+            }
+            if ($("#hidValidateRealName").val() != "1") {
+                $("#divRealName").hide();
+            }
+            if ($("#hidValidateEmail").val() != "1") {
+                $("#divEmail").hide();
+            }
+            if ($("#hidValidatePhone").val() != "1") {
+                $("#divPhone").hide();
+                $("#divimgcode").hide();
+                $("#normaldiv").hide();
+            }
+            if ($("#hidValidateAddress").val() != "1") {
+                $("#divArea").hide();
+                $("#divAddress").hide();
+            }
+            $("#phoneVerifyCode").click(function () {
+                if ($("#txtNumber").val().length == 0) {
+                    alert("请输入图形验证码");
+                    return;
+                }
+                var phone = $("#txtPhone").val();
+                if (!Reg_mobbile.test(phone)) {
+                    alert("请输入正确的手机号码");
+                    return;
+                }
+                var imgCode = $("#txtNumber").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Handler/MemberHandler.ashx?action=SendReferralRegisterPhoneCode",
+                    data: { Phone: phone, imgCode: imgCode },
+                    success: function (result) {
+                        if (result.success == "true") {
+                            var time = 1000;
+                            var interval;
+                            var count = 0;
+                            function fun() {
+                                count++;
+                                if (count >= 60) {
+                                    $("#phoneVerifyCode").attr("disabled", false);
+                                    $("#phoneVerifyCode").attr("value", "重新发送");
+                                    clearInterval(interval);
+                                }
+                                else {
+                                    $("#phoneVerifyCode").attr("value", "发送成功（" + (60 - count) + ")");
+                                }
+                            }
+                            $("#phoneVerifyCode").attr("disabled", "true");
+                            interval = setInterval(fun, time);
+                        }
+                        else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            });
+        });
+        document.getElementById('imgVerifyCode').src = "/VerifyCodeImage";
+        function refreshCode() {
+            var img = document.getElementById("imgVerifyCode");
+
+            if (img != null) {
+                var currentDate = new Date();
+                img.src = "/VerifyCodeImage?t=" + currentDate.getTime();
+            }
+        }
+        function testPhone(obj) {
+            if (!Reg_mobbile.test($(obj).val())) {
+                alert("请输入正确的手机号码");
+                return;
+            }
+        }
+        function testEmail(obj) {
+            var r = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*([a-zA-Z0-9])+\.([a-zA-Z]{1,4})$/;
+            if (!r.test($(obj).val())) {
+                alert("请输入正确的邮箱地址");
+                return;
+            }
+        }
+
+
+        var validateRegExp = {
+            decmal: "^([+-]?)\\d*\\.\\d+$", //浮点数
+            decmal1: "^[1-9]\\d*.\\d*|0.\\d*[1-9]\\d*$", //正浮点数
+            decmal2: "^-([1-9]\\d*.\\d*|0.\\d*[1-9]\\d*)$", //负浮点数
+            decmal3: "^-?([1-9]\\d*.\\d*|0.\\d*[1-9]\\d*|0?.0+|0)$", //浮点数
+            decmal4: "^[1-9]\\d*.\\d*|0.\\d*[1-9]\\d*|0?.0+|0$", //非负浮点数（正浮点数 + 0）
+            decmal5: "^(-([1-9]\\d*.\\d*|0.\\d*[1-9]\\d*))|0?.0+|0$", //非正浮点数（负浮点数 + 0）
+            intege: "^-?[1-9]\\d*$", //整数
+            intege1: "^[1-9]\\d*$", //正整数
+            intege2: "^-[1-9]\\d*$", //负整数
+            num: "^([+-]?)\\d*\\.?\\d+$", //数字
+            num1: "^[1-9]\\d*|0$", //正数（正整数 + 0）
+            num2: "^-[1-9]\\d*|0$", //负数（负整数 + 0）
+            ascii: "^[\\x00-\\xFF]+$", //仅ACSII字符
+            chinese: "^[\\u4e00-\\u9fa5]+$", //仅中文
+            color: "^[a-fA-F0-9]{6}$", //颜色
+            date: "^\\d{4}(\\-|\\/|\.)\\d{1,2}\\1\\d{1,2}$", //日期
+            email: "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$", //邮件
+            idcard: "^[1-9]([0-9]{14}|[0-9]{17})$", //身份证
+            ip4: "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$", //ip地址
+            letter: "^[A-Za-z]+$", //字母
+            letter_l: "^[a-z]+$", //小写字母
+            letter_u: "^[A-Z]+$", //大写字母
+            mobile: "^0?(13|15|18|14|17)[0-9]{9}$", //手机
+            notempty: "^\\S+$", //非空
+            password: "^.*[A-Za-z0-9\\w_-]+.*$", //密码
+            fullNumber: "^[0-9]+$", //数字
+            picture: "(.*)\\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)$", //图片
+            qq: "^[1-9]*[1-9][0-9]*$", //QQ号码
+            rar: "(.*)\\.(rar|zip|7zip|tgz)$", //压缩文件
+            tel: "^[0-9\-()（）]{7,18}$", //电话号码的函数(包括验证国内区号,国际区号,分机号)
+            url: "^http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$", //url
+            username: "(^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$)|(^0?(13|15|18|14|17)[0-9]{9}$)", //用户名
+            deptname: "^[A-Za-z0-9_()（）\\-\\u4e00-\\u9fa5]+$", //单位名
+            zipcode: "^\\d{6}$", //邮编
+            realname: "^[A-Za-z\\u4e00-\\u9fa5]+$", // 真实姓名
+            companyname: "^[A-Za-z0-9_()（）\\-\\u4e00-\\u9fa5]+$",
+            companyaddr: "^[A-Za-z0-9_()（）\\#\\-\\u4e00-\\u9fa5]+$",
+            companysite: "^http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&#=]*)?$"
+        };
+
+        //主函数
+        (function ($) {
+            $.fn.jdValidate = function (option, callback, def) {
+                var ele = this;
+                var id = ele.attr("id");
+                var type = ele.attr("type");
+                var rel = ele.attr("rel");
+                var _onFocus = $("#" + id + validateSettings.onFocus.container);
+                var _succeed = $("#" + id + validateSettings.succeed.container);
+                var _isNull = $("#" + id + validateSettings.isNull.container);
+                var _error = $("#" + id + validateSettings.error.container);
+                if (def == true) {
+                    var str = ele.val();
+                    var tag = ele.attr("sta");
+                    if (str == "" || str == "-1") {
+                        validateSettings.isNull.run({
+                            prompts: option,
+                            element: ele,
+                            isNullEle: _isNull,
+                            succeedEle: _succeed
+                        }, option.isNull);
+                    } else if (tag == 1 || tag == 2) {
+                        return;
+                    } else {
+                        callback({
+                            prompts: option,
+                            element: ele,
+                            value: str,
+                            errorEle: _error,
+                            succeedEle: _succeed
+                        });
+                    }
+                } else {
+                    if (typeof def == "string") {
+                        ele.val(def);
+                    }
+                    if (type == "checkbox" || type == "radio") {
+                        if (ele.attr("checked") == true) {
+                            ele.attr("sta", validateSettings.succeed.state);
+                        }
+                    }
+                    switch (type) {
+                        case "text":
+                        case "password":
+                            ele.bind("focus", function () {
+                                var str = ele.val();
+                                if (str == def) {
+                                    ele.val("");
+                                }
+                                if (id == "txtPassword") {
+                                    $("#pwdstrength").hide();
+                                }
+                                validateSettings.onFocus.run({
+                                    prompts: option,
+                                    element: ele,
+                                    value: str,
+                                    onFocusEle: _onFocus,
+                                    succeedEle: _succeed
+                                }, option.onFocus);
+                            })
+                                .bind("blur", function () {
+                                    var str = ele.val();
+                                    if (str == "") {
+                                        ele.val(def);
+                                    }
+                                    if (validateRules.isNull(str)) {
+                                        validateSettings.isNull.run({
+                                            prompts: option,
+                                            element: ele,
+                                            value: str,
+                                            isNullEle: _isNull,
+                                            succeedEle: _succeed
+                                        }, "");
+                                    } else {
+                                        callback({
+                                            prompts: option,
+                                            element: ele,
+                                            value: str,
+                                            errorEle: _error,
+                                            isNullEle: _isNull,
+                                            succeedEle: _succeed
+                                        });
+                                    }
+                                });
+                            break;
+                        default:
+                            if (rel && rel == "select") {
+                                ele.bind("change", function () {
+                                    var str = ele.val();
+                                    callback({
+                                        prompts: option,
+                                        element: ele,
+                                        value: str,
+                                        errorEle: _error,
+                                        isNullEle: _isNull,
+                                        succeedEle: _succeed
+                                    });
+                                })
+                            } else {
+                                ele.bind("click", function () {
+                                    callback({
+                                        prompts: option,
+                                        element: ele,
+                                        errorEle: _error,
+                                        isNullEle: _isNull,
+                                        succeedEle: _succeed
+                                    });
+                                })
+                            }
+                            break;
+                    }
+                }
+            }
+        })(jQuery);
+
+        //配置
+        var validateSettings = {
+            onFocus: {
+                state: null,
+                container: "_error",
+                style: "focus",
+                run: function (option, str) {
+                    if (!validateRules.checkType(option.element)) {
+                        option.element.removeClass(validateSettings.INPUT_style2).addClass(validateSettings.INPUT_style1);
+                    }
+                    option.succeedEle.removeClass(validateSettings.succeed.style);
+                    option.onFocusEle.removeClass().addClass(validateSettings.onFocus.style).html(str);
+                }
+            },
+            isNull: {
+                state: 0,
+                container: "_error",
+                style: "null",
+                run: function (option, str) {
+                    option.element.attr("sta", 0);
+                    if (!validateRules.checkType(option.element)) {
+                        if (str != "") {
+                            option.element.removeClass(validateSettings.INPUT_style1).addClass(validateSettings.INPUT_style2);
+                        } else {
+                            option.element.removeClass(validateSettings.INPUT_style2).removeClass(validateSettings.INPUT_style1);
+                        }
+                    }
+                    option.succeedEle.removeClass(validateSettings.succeed.style);
+                    option.isNullEle.removeClass().addClass(validateSettings.isNull.style).html(str);
+                }
+            },
+            error: {
+                state: 1,
+                container: "_error",
+                style: "error",
+                run: function (option, str) {
+                    option.element.attr("sta", 1);
+                    if (!validateRules.checkType(option.element)) {
+                        option.element.removeClass(validateSettings.INPUT_style1).addClass(validateSettings.INPUT_style2);
+                    }
+                    option.succeedEle.removeClass(validateSettings.succeed.style);
+                    option.errorEle.removeClass().addClass(validateSettings.error.style).html(str);
+                }
+            },
+            succeed: {
+                state: 2,
+                container: "_succeed",
+                style: "succeed",
+                run: function (option) {
+                    option.element.attr("sta", 2);
+                    option.errorEle.empty();
+
+                    if (!validateRules.checkType(option.element)) {
+                        option.element.removeClass(validateSettings.INPUT_style1).removeClass(validateSettings.INPUT_style2);
+                    }
+                    if (option.element.attr("id") == "schoolinput" && $("#schoolid").val() == "") {
+                        return;
+                    }
+                    option.isNullEle.removeClass();
+                    option.succeedEle.addClass(validateSettings.succeed.style);
+                }
+            },
+            INPUT_style1: "highlight1",
+            INPUT_style2: "highlight2"
+
+        };
+
+        //验证规则
+        var validateRules = {
+            isNull: function (str) {
+                return (str == "" || typeof str != "string");
+            },
+            betweenLength: function (str, _min, _max) {
+                return (str.length >= _min && str.length <= _max);
+            },
+            isEmail: function (str) {
+                return new RegExp(validateRegExp.email).test(str);
+            },
+            isMobile: function (str) {
+                return new RegExp(validateRegExp.mobile).test(str);
+            },
+            isRealName: function (str) {
+                return new RegExp(validateRegExp.realname).test(str);
+            },
+            checkType: function (element) {
+                return (element.attr("type") == "checkbox" || element.attr("type") == "radio" || element.attr("rel") == "select");
+            }
+        };
+        //验证文本
+        var validatePrompt = {
+            authcode: {
+                onFocus: "请输入图片中的字符，不区分大小写",
+                succeed: "",
+                isNull: "请输入验证码",
+                error: "验证码错误"
+            },
+            authPhonecode: {
+                onFocus: "请输入手机验证码，不区分大小写",
+                succeed: "",
+                isNull: "请输入手机验证码",
+                error: "手机验证码错误"
+            },
+            empty: {
+                onFocus: "",
+                succeed: "",
+                isNull: "",
+                error: ""
+            }
+        };
+
+        var nameold, emailold, authcodeold, authphonecodeold;
+        var namestate = false, emailstate = false, authcodestate = false; authphonecodestate = false;
+
+        //回调函数
+        var validateFunction = {
+            authcode: function (option) {
+                authcodeold = option.value;
+                option.errorEle.html("<span style='color:#999'>检验中……</span>");
+                $.getJSON("/Handler/MemberHandler.ashx?action=CheckAuthcode&code=" + escape(option.value) + "&r=" + Math.random(), function (date) {
+                    if (date.success == "true") {
+                        validateSettings.succeed.run(option);
+                        authcodestate = true;
+                    } else {
+                        validateSettings.error.run(option, option.prompts.error);
+                        authcodestate = false;
+                    }
+                });
+            },
+            authPhonecode: function (option) {
+                authphonecodeold = option.value;
+                option.errorEle.html("<span style='color:#999'>检验中……</span>");
+                var phone = $("#txtPhone").val();
+                $.getJSON("/Handler/MemberHandler.ashx?action=CheckAuthPhonecode&code=" + escape(option.value) + "&phone=" + phone + "&r=" + Math.random(), function (date) {
+                    if (date.success == "true") {
+                        validateSettings.succeed.run(option);
+                        authphonecodestate = true;
+                    } else {
+                        validateSettings.error.run(option, option.prompts.error);
+                        authphonecodestate = false;
+                    }
+                });
+            },
+            FORM_submit: function (elements) {
+                var bool = true;
+
+                for (var i = 0; i < elements.length; i++) {
+
+                    if ($(elements[i]).attr("sta") == 2) {
+                        bool = true;
+                    }
+                    else {
+                        bool = false;
+                        break;
+                    }
+                }
+
+                return bool;
+            }
+        };
+
+        $.extend(validateFunction, {
+            FORM_validate: function () {
+
+                $("#txtNumber").jdValidate(validatePrompt.authcode, validateFunction.authcode, true);
+                $("#txtPhoneCode").jdValidate(validatePrompt.authPhonecode, validateFunction.authPhonecode, true);
+
+                return validateFunction.FORM_submit(["#txtNumber", "#txtPhoneCode"]);
+            }
+        });
+
+        //验证码验证
+        $("#txtNumber").jdValidate(validatePrompt.authcode, validateFunction.authcode);
+
+        //手机验证码验证
+        $("#txtPhoneCode").jdValidate(validatePrompt.authPhonecode, validateFunction.authPhonecode);
+
+    </script>
+</form>
+<%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

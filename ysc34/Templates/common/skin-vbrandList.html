@@ -1,0 +1,21 @@
+﻿<Hi:Common_WapHeader runat="server" />
+<style>
+    .brand{
+        display:inline-block;
+        padding:0.75rem;
+    }
+    .brand .well{
+        width:100%;
+        margin-bottom: 0.75rem;
+        /*padding:0.5rem 0.5rem 0 0.5rem;*/
+    }
+    .brand .well .name{
+        margin-top:0;
+        line-height:3;
+    }
+</style>
+	<div class="brand">
+        <Hi:WapTemplatedRepeater ID="rptBrands" TemplateFile="/Tags/skin-Common_Brands.ascx" runat="server" />
+	</div>
+
+<hi:Common_WapFooter runat="server" />

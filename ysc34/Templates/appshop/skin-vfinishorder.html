@@ -1,0 +1,99 @@
+﻿<hi:common_appheader runat="server"  />
+<style>
+.pbox{ width:70%; margin:0 auto; overflow:hidden;}
+#btnToPay{ color:#fff; background:#fe5722;}
+#Continue{ margin:0 10px;}
+    .panel-heading {
+        text-align: left;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #e7e5ea;
+        padding-left: 0 !important;
+        margin: 0 0.75rem;
+    }
+
+    .offline-help {
+        padding: 0.75rem;
+    }
+</style>
+<input type="hidden" runat="server" clientidmode="Static" id="litPaymentType" />
+<div class="pbox" id="loadPanel" runat="server" style="padding-bottom:60px;">
+    <div id="orderSuccess" class="well text-center orderMsg">
+        <div class="font-xl" style="display:none;">
+            <span class="glyphicon glyphicon-ok"></span>恭喜，订单提交成功！
+        </div>
+        <div class="">
+            您需要支付<asp:literal runat="server" id="litPaymentText" />：<span class="text-danger">
+                ¥<asp:literal runat="server" id="litOrderTotal" />
+            </span>
+            <br />
+            付款方式：<span>
+                <%<asp:Literal runat="server" ID="litPaymentName" />%>
+            </span>
+            <br />
+            <span style="color:red;"><%<asp:Literal runat="server" ID="litErrorMsg" />%></span>
+        </div>
+        <div class="btns">
+            <a id="linkToDetail" class="btn btn-success" role="button">查看该订单</a>
+            <a href="javascript:void(0)" onclick="javascript: goHomePage();" class="btn btn-default" id="Continue" role="button">继续逛逛</a>
+            <a href="#" class="btn btn-danger" role="button" id="btnToPay" runat="server">立即支付</a>
+        </div>
+    </div>
+    <div class="panel panel-default order-list" id="helper" runat="server">
+        <div class="panel-heading">
+            线下支付帮助
+        </div>
+        <div class="panel-body offline-help">
+            <asp:literal runat="server" id="litHelperText" />
+        </div>
+    </div>
+</div>
+
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        padding: 0 0 60px 0;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    .main {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .bg {
+        background: #000;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+    }
+
+    .main img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(function () {
+        if ($('#litPaymentType').val() == '0')
+            $('#helper').hide();
+
+        $('#linkToDetail').attr('href', '/AppShop/MemberOrderDetails.aspx?OrderId=' + getParam('OrderId'));
+        if (getParam('onlyHelp'))
+            $('#orderSuccess').hide();
+
+    });
+
+</script>
+<hi:common_appfooter runat="server" />

@@ -1,0 +1,286 @@
+﻿<hi:common_wapheader runat="server" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidErrorMsg" />
+<input type="hidden" id="action" runat="server" value="set" ClientIDMode="Static" />
+<form id="form" role="form" class="pbox clearfix form-horizontal" runat="server">
+    <div class="tk_main">
+        <div id="first" class="hide">
+            <div class="tk_group">
+                <label>已绑邮箱</label>
+                <div class="input-group">
+                    <input type="text" id="txtFirstEmail" runat="server" ClientIDMode="Static" placeholder="请输入要绑定的邮箱">
+                </div>
+            </div>
+            <div class="tk_group" style="border-bottom:1px solid #e7e5ea;">
+                <label>验证码</label>
+                <div class="input-group">
+                    <input type="text" id="txtFirstNumber" style="width:5rem;" placeholder="请输入验证码">
+                    <input id="emailVerifyCode" type="button" value="获取验证码" style="width:5rem;" class="yanzhengma_btn" />
+                </div>
+
+            </div>
+        </div>
+        <div id="next" class="hide">
+            <div class="tk_group">
+                <label>邮箱</label>
+                <div class="input-group">
+                    <input type="text" id="txtEmail" placeholder="请输入要绑定的邮箱">
+                </div>
+            </div>
+            <div class="tk_group">
+                <label>验证码</label>
+                <div class="input-group">
+                    <input type="text" id="txtNumber" style="width:5rem;" placeholder="请输入验证码">
+                    <input id="emailVerifyCode1" type="button" value="获取验证码" style="width:5rem;" class="yanzhengma_btn" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="btn_tk">
+        <input type="button" id="btnNext" value="下一步" class="btn_login hide" />
+        <input type="button" id="btnVerify" value="验证邮箱" class="btn_login hide" />
+        <input type="button" id="btnSubmit" value="立即绑定" class="btn_login hide" />
+        <input type="button" id="btnSetpwd" value="设置密码" class="btn_login hide" />
+        <input type="button" id="btnCancel" onclick="window.history.go(-1);" value="取消" class="btn_qx" />
+    </div>
+</form>
+<script language="javascript" type="text/javascript">
+    var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{1,4}$/;
+    var cellPhoneReg = /^(0?(13|15|18|14|17)[0-9]{9})$/g;
+    $(document).ready(function (e) {
+
+        if ($("#hidErrorMsg").val() != "") {
+            alert_h($("#hidErrorMsg").val(), function (e) {
+                document.location.href = "AccountManagement.aspx";
+            });
+
+        }
+        var action = $("#action").val();
+        if (action == "modify")//修改绑定
+        {
+            $("#first").removeClass("hide").show();
+            $("#next").hide();
+            $("#btnNext").removeClass("hide").show();
+            $("#btnSubmit").hide();
+            $("#btnVerify").hide();
+        }
+        else if (action == "verify") {//验证邮箱
+            $("#first").removeClass("hide").show();
+            $("#next").hide();
+            $("#btnNext").removeClass("hide").hide();
+            $("#btnSubmit").hide();
+            $("#btnVerify").removeClass("hide").show();
+        }
+        else {//绑定手机
+            $("#first").hide();
+            $("#next").removeClass("hide").show();
+            $("#btnNext").hide();
+            $("#btnSubmit").removeClass("hide").show();
+            $("#btnVerify").hide();
+        }
+        $("#btnNext").click(function (e) {
+            var verifyCode = $("#txtFirstNumber").val().trim();
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "CheckEmailCode", verifyCode: verifyCode },
+                success: function (resultData) {
+
+                    if (resultData.Status == "ok") {
+                        var msg = "验证成功,下一步进行新邮箱绑定！"
+                        alert_h(msg, function () {
+                            $("#btnNext").hide();
+                            $("#first").hide();
+                            $("#btnSubmit").removeClass("hide").show();
+                            $("#next").removeClass("hide").show();
+
+                        });
+                    }
+                    else if (resultData.Status == "nologined") {
+                        alert_h("请您先登录！");
+                        document.location.href = "MemberCenter.aspx";
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+
+                }
+            });
+        });
+
+        $("#btnVerify").click(function (e) {
+            var verifyCode = $("#txtFirstNumber").val().trim();            
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "CheckEmailCode", verifyCode: verifyCode, UpdateStatus: true },
+                success: function (resultData) {
+
+                    if (resultData.Status == "ok") {
+                        var msg = "邮箱验证成功！"
+                        alert_h(msg, function () {
+
+                            document.location.href = "AccountManagement.aspx"
+                        });
+                    }
+                    else if (resultData.Status == "nologined") {
+                        alert_h("请您先登录！");
+                        document.location.href = "MemberCenter.aspx";
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+
+                }
+            });
+        });
+
+        $("#btnSetpwd").click(function (e) {
+            var password = $.trim($("#text_password").val());
+            var password1 = $.trim($("#text_password1").val());
+            if (!password || password.length < 6 || password.length > 20) {
+                alert_h('密码不能为空，长度不少于6个字符且不超过20字符');
+                return;
+            }
+
+            if (password != password1) {
+                alert_h("两次输入不一致.");
+                return;
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "SetPassword", password: password },
+                success: function (resultData) {
+
+                    if (resultData.Status == "ok") {
+
+                        alert_h("密码设置成功,请记住您的密码！", function () {
+                            document.location.href = "AccountManagement.aspx"
+
+                        });
+                    }
+                    else if (resultData.Status == "nologined") {
+                        alert_h("请您先登录！");
+                        document.location.href = "MemberCenter.aspx";
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+
+                }
+            });
+        });
+        $("#btnSubmit").click(function (e) {
+            var email = $("#txtEmail").val();
+            var verifyCode = $("#txtNumber").val();
+            if (email == "" || !emailReg.test(email)) {
+                alert_h("请输入正确的邮箱地址");
+                return false;
+            }
+            else {
+                $.ajax({
+                    url: "/API/VshopProcess.ashx",
+                    type: 'post', dataType: 'json', timeout: 10000,
+                    data: { action: "BindEmail", email: email, verifyCode: verifyCode },
+                    success: function (resultData) {
+
+                        if (resultData.Status == "ok") {
+                            var msg = "邮箱绑定成功！"
+                            if (resultData.SetPwd == "true") {
+                                msg = "邮箱绑定成功,请输入新的登录密码!";
+                            }
+                            alert_h(msg, function () {
+                                if (resultData.SetPwd == "true") {
+                                    $("#btnSubmit").hide();
+                                    $("#setpwdPanel").removeClass("hidden");
+                                    $("#btnSetpwd").removeClass("hidden");
+                                    $("#emailPanel").hide();
+                                    $("#btnCancel").hide();
+                                }
+                                else {
+                                    document.location.href = "AccountManagement.aspx"
+                                }
+
+                            });
+                        }
+                        else if (resultData.Status == "nologined") {
+                            alert_h("请您先登录！");
+                            document.location.href = "MemberCenter.aspx";
+                        }
+                        else {
+                            alert_h(resultData.msg);
+                        }
+
+                    }
+                });
+            }
+        });
+
+        $("#emailVerifyCode").click(function (e) {
+            //var email = $("#txtFirstEmail").val();
+            var time = 1000;
+            var interval;
+            var count = 0;
+            function fun() {
+                count++;
+                if (count >= 60) {
+                    $("#emailVerifyCode").attr("value", "重新发送");
+                    clearInterval(interval);
+                }
+                else {
+                    $("#emailVerifyCode").attr("value", "发送成功（" + (60 - count) + ")");
+                }
+            }
+
+
+            var email = "";
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx?action=SendEmailVerifyCode",
+                data: { Email: email },
+                success: function (result) {
+                    if (result.success == "true") {
+                        interval = setInterval(fun, time);
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        $("#emailVerifyCode1").click(function (e) {
+            var time = 1000;
+            var interval;
+            var count = 0;
+
+            function fun() {
+                count++;
+                if (count >= 60) {
+                    $("#emailVerifyCode1").attr("value", "重新发送");
+                    clearInterval(interval);
+                }
+                else {
+                    $("#emailVerifyCode1").attr("value", "发送成功（" + (60 - count) + ")");
+                }
+            }
+
+
+            var email = $("#txtEmail").val();
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx?action=SendEmailVerifyCode&needValidate=2",
+                data: { Email: email },
+                success: function (result) {
+                    if (result.success == "true") {
+                        interval = setInterval(fun, time);
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

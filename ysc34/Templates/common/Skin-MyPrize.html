@@ -1,0 +1,126 @@
+﻿<%<hi:common_wapheader runat="server" />%>
+<form runat="server" role="form">
+    <input type="hidden" id="hidstaut" value="1" runat="server" ClientIDMode="Static" />
+    <ul id="myTab1" class="mp-nav">
+        <li><a href="MyPrize?staut=1" class="tab_active tab1">未领取</a> </li>
+        <li><a href="MyPrize?staut=2" class="tab2">已领取</a> </li>
+    </ul>
+    <div class="prize_tab">
+        <div id="tab1">
+            <script id="prize" type="text/html">
+                {{each Records as value i}}
+                <div class="mp_list">
+                    <img src="{{Records[i].AwardPic}}">
+                    <div class="mp_list_1">
+                        <h3>{{Records[i].AwardName}}</h3>
+                        <em>x1</em>
+                    </div>
+                    <div class="mp_list_2">
+                        <span>{{Records[i].CreateDate}}</span><br>
+                        <a href="MyGiftDetailInfo.aspx?RecordId={{Records[i].RecordId}}" class="btn_lq">领取</a>
+                    </div>
+                </div>
+                {{/each}}
+            </script>
+        </div>
+        <div class="prize_tab" id="tab2" style="display:none;">
+            <script id="acceptprize" type="text/html">
+                {{each Records as value i}}
+                <a href="{{Records[i].Link}}">
+                    <div class="mp_list">
+                        <img src="{{Records[i].AwardPic}}" />
+                        <div class="mp_list_1">
+                            <h3 style="line-height:2.5rem;">{{Records[i].AwardName}}</h3>
+                        </div>
+                        <div class="mp_list_2" style="margin-right:1rem;">
+                            <span style="line-height:2.5rem;">{{Records[i].CreateDate}}</span>
+                        </div>
+                        <span class="icon_viewdetial icon-icon_right2"></span>
+                    </div>
+                </a>
+                {{/each}}
+            </script>
+        </div>
+    </div>
+
+</form>
+<script type="text/javascript" src="/Utility/artTemplate.js"></script>
+<script>
+    $(function () {
+        var staut = $("#hidstaut").val();
+        if (staut == "2") {
+            //已领取奖品
+            $(".tab2").addClass("tab_active");
+            $(".tab2").parent().siblings().children(".tab1").removeClass("tab_active");
+            $("#tab1").hide();
+            $("#tab2").show();
+            BindAcceptPrize();
+        }
+        else {
+            //未领取奖品
+            $(".tab1").addClass("tab_active");
+            $(".tab1").parent().siblings().children(".tab2").removeClass("tab_active");
+            $("#tab1").show();
+            $("#tab2").hide();
+            BindNoAcceptPrize();
+        }
+    })
+
+   
+    var currentPage = 1;
+    var pageSize = 10;
+    var totalCount = 0;
+
+    function BindAcceptPrize() {
+        $.ajax({
+            url: "/api/ActivitysHandler.ashx?action=GetCurrUserAcceptPrize",
+            type: 'post',
+            dataType: 'json',
+            data: { "pageindex": currentPage, "pageSize": pageSize },
+            timeout: 10000,
+            success: function (resultData) {
+                if (resultData.Code == "0") {
+                    var data = resultData;
+                    var html = template('acceptprize', data);
+                    document.getElementById('tab2').innerHTML += html;
+                    currentPage = currentPage + 1;
+                }
+                else if (resultData.Code == "1")
+                {
+                    //加载完成
+                }
+                else {
+                    //无数据
+                }
+            }
+        });
+    }
+
+    function BindNoAcceptPrize() {
+        $.ajax({
+            url: "/api/ActivitysHandler.ashx?action=GetCurrUserNoAcceptPrize",
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            timeout: 10000,
+            success: function (resultData) {               
+                var data = resultData;
+                var html = template('prize', data);
+                document.getElementById('tab1').innerHTML = html;
+            }
+        });
+    }
+
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    $(window).scroll(function () {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度 
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            if ($("#tab1").is(":hidden")) {
+                BindAcceptPrize();
+            }
+        }
+    });
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

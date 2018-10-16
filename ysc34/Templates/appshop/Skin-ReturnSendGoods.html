@@ -1,0 +1,154 @@
+﻿<hi:common_appheader runat="server" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidErrorMsg" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtOrderId" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtSkuId" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtReturnsId" />
+<input type="hidden" id="txtExpress" runat="server" ClientIDMode="Static" />
+<style>
+    .pay_list {
+        height: 17rem;
+        overflow-x: scroll;
+    }
+      .line_1{
+        line-height:1.2rem;
+        padding:0.5rem;
+    }
+</style>
+<form id="form" role="form" class="pbox clearfix form-horizontal" runat="server">
+    <div class="att-popup express">
+        <div class="att-popup-container">
+            <div class="pay_title">选择物流公司</div>
+            <hi:WapExpressList id="ExpressList" ClientIDMode="static" runat="server"></hi:WapExpressList>
+            <a class="btn_submiit">确定</a>
+            <a href="#" class="att-popup-close pop_close" id="payment_close"></a>
+        </div>
+    </div>
+    <div class="tk_main">
+        <div class="tk_group">
+            <label>退货订单</label>
+            <div class="input-group selectReason">
+                <asp:Literal id="txtShowOrderId" runat="server"></asp:Literal>
+            </div>
+        </div>
+        <div class="tk_group ">
+            <label> 退货商品</label>
+            <div class="input-group line_1">
+                <asp:Literal id="txtProductName" runat="server"></asp:Literal>
+            </div>
+        </div>
+        <div class="tk_group">
+            <label for="Quantity"> 换货地址</label>
+            <div class="input-group line_1 ">
+                <asp:Literal id="txtReturnAddress" runat="server"></asp:Literal>
+            </div>
+        </div>
+        <div class="tk_group" id="open_express">
+            <label>物流公司</label>
+            <div class="input-group">
+                <asp:Literal runat="server" id="litExpressName">请选择物流公司</asp:Literal>
+            </div>
+            <span class="icon_viewdetial"></span>
+        </div>
+
+        <div class="tk_group">
+            <label>物流编号</label>
+            <div class="input-group  selectRefundType">
+                <%<asp:TextBox ID="txtShipOrderNumber" runat="server" ClientIDMode="Static" class="form-control col-r" placeholder="请填写物流编号" />%>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="btn_tk">
+        <input type="button" id="btnSendGoods" value="退货发货" runat="server" ClientIDMode="Static" class="btn_login" />
+        <input type="button" id="btnCancel" value="取    消" class="btn_qx" />
+
+    </div>
+
+    <div class="form-group" style=" display: none;">
+        <label for="Quantity" class="col-l"></label>
+        <div class="input-group col-r selectExpress">
+
+        </div>
+    </div>
+
+</form>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function (e) {
+        if ($("#hidErrorMsg").val() != "") {
+            alert_h($("#hidErrorMsg").val(), function (e) {
+                document.location.href = "AfterSaleOrders";
+            });
+        }
+
+        if ($("#txtExpress").val() != "") {
+            $('.selectExpress button').html($("#txtExpress").val());
+        }
+
+        $("#btnCancel").click(function (e) {
+            window.history.go(-1);
+        });
+
+        $("#open_express").click(function (e) {
+            $('.express').addClass('is-visible');
+        });
+
+
+        //确认售后类型选择按钮点击
+        $(".express .btn_submiit").click(function (e) {
+            var express = $("input[name='chk_express']:checked").val();
+            if (express == "") {
+                alert_h("请选择物流公司");
+                return false;
+            }
+            $("#open_express .input-group").text(express);
+            $("#txtExpress").val(express);
+            $(".express").removeClass('is-visible');
+        });
+
+        $("#btnSendGoods").click(function (e) {
+            var ReturnsId = parseInt($("#txtReturnsId").val());
+            if (isNaN(ReturnsId)) {
+                alert_h("错误的退货信息");
+                return false;
+            }
+            var express = $("#txtExpress").val();
+            if (express == "") {
+                alert_h("请选择快递公司");
+                return false;
+            }
+            var shipOrderNumber = $("#txtShipOrderNumber").val();
+            if (shipOrderNumber == "") {
+                alert_h("请输入快递编号");
+                return false;
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "ReturnSendGoods", ReturnsId: ReturnsId, express: express, shipOrderNumber: shipOrderNumber },
+                success: function (resultData) {
+                    if (resultData.Status == "1") {
+                        alert_h("退货发货成功！", function () {
+                            location.href = "UserReturnDetail?ReturnId=" + ReturnsId;
+                        });
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert(XMLHttpRequest.status + "-" + XMLHttpRequest.readyState + "-" + textStatus);
+                }
+            });
+        });
+
+        $('#selectExpress li a').click(function () {
+            $('.selectExpress button').html($(this).html() + '<span class="caret"></span>');
+            $("#txtExpress").val($(this).attr('name'));
+        });
+
+    });
+
+</script>
+<hi:common_appfooter runat="server" />

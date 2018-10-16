@@ -1,0 +1,40 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="tk_main">
+    <div class="tk_group">
+        <label for="username">申请时间</label>
+        <asp:literal runat="server" id="litRequestDate" />
+    </div>
+    <div class="tk_group">
+        <label for="username">提现金额</label>
+        ￥<%<Hi:FormatedMoneyLabel ID="litAmount" runat="server" />%>
+    </div>
+    <div class="tk_group">
+        <label for="username">提现帐号 </label>
+        <asp:literal ID="litAccount" runat="server" />
+    </div>
+    <div class="tk_group">
+        <label for="username">审核状态</label>
+        <span class="text-danger"><asp:literal runat="server" id="litStatus" /></span>
+    </div>
+    <div class="tk_group">
+        <label for="username">审核日期</label>
+        <asp:literal runat="server" id="litAccountDate" />
+    </div>
+
+    <div class="tk_group">
+        <label for="username">备注</label>
+        <span class="text-danger"><asp:literal runat="server" id="litMark" /></span>
+    </div>  
+</div>
+<div class="btn_tk">
+    <input type="button" id="btngoback" value="返回提现记录" class="btn btn_login" />
+</div>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $("#btngoback").click(function (e) {
+            history.go(-1);
+        })
+    });
+</script>
+
+<hi:common_wapfooter runat="server" />

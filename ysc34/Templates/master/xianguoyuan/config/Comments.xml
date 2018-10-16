@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="article" Title="商城资讯" ImageTitle="" AdImage=" " CategoryId="" MaxNum="4" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="6" ImageSize="177*42" />
+  <Comment Id="18" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="102*40" />
+  <Comment Id="19" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="102*40" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="75*34" />
+</root>

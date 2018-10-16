@@ -1,0 +1,237 @@
+﻿<hi:common_wapheader runat="server" skinname="/tags/skin-Common-NewHeader.html" />
+
+<div class="member_tips" style="display:none" id="memberaccounttips"><i class="icon_warning"></i><a href="AccountManagement.aspx">为了您的账户安全，请及时绑定邮箱或手机。</a><i class="icon_close"></i></div>
+<div class="header">
+    <div class="sign_set pd24">
+        <div class="signbox">
+            <a href="javascript:onUserSignIn()" runat="server" id="aLinkSignIn"><div class="iconfont icon-icon_3  fl sign_icon"></div>签到</a>
+        </div>
+        <div class="set fr">
+            <a href="AccountManagement" class="iconfont icon-icon_4"></a>
+        </div>
+    </div>
+    <div class="userInfoBox">
+        <div class="Info">
+            <div class="userImg"><%<asp:Image ID="userPicture" runat="server" ImageUrl="/images/headerimg.png" ClientIDMode="Static" /> %></div>
+            <div class="userInfo">
+                <h2><asp:literal runat="server" id="litUserName" /></h2>
+                <div class="pointsBox">
+                    <div class="member"><asp:literal runat="server" id="litMemberGrade" /></div>
+                    <div class="point">
+                        <img src="/images/userhome/sign_coin.png">
+                        <em><asp:literal runat="server" id="litPoints" />分</em>
+                    </div>
+                </div>
+            </div>
+            <div class="Distribution" id="divReferralCenter" clientidmode="static" runat="server"><a href="ReferralCenter">分销中心</a></div>
+        </div>
+        <div class="Collection_Consultation">
+            <div class="Collection fl">
+                <a href="MyFavorites">
+                    <span><asp:literal id="litFavoritesCount" runat="server" /></span>
+                    <em>我的收藏</em>
+                </a>
+            </div>
+            <div class="Consultation fr">
+                <a href="MyConsultations">
+                    <span><asp:literal id="litMyConsulations" runat="server" /></span>
+                    <em>我的咨询</em>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--我的订单-->
+<div class="user_order">
+    <div class="hd">
+        <span>我的订单</span>
+        <a href="MemberOrders">查看全部<em class="iconfont icon-angle-right"></em></a>
+    </div>
+    <ul class="order_num">
+        <li>
+            <a href="MemberOrders?status=1">
+                <div class="iconfont icon-order_"></div>
+                <span>待付款</span>
+                <em id="iWaitForPayCount" runat="server" class="num"><asp:literal runat="server" id="litWaitForPayCount" /></em>
+            </a>
+        </li>
+        <li>
+            <a href="MemberOrders?status=2&itemstatus=0">
+                <div class="iconfont icon-order_1"></div>
+                <span>待发货</span>
+                <em id="iWaitForSend" runat="server" class="num"><asp:literal runat="server" id="litWaitForSend" /></em>
+            </a>
+        </li>
+        <li>
+            <a href="MemberOrders?status=3&itemstatus=0">
+                <div class="iconfont icon-order_2"></div>
+                <span>待收货</span>
+                <em id="iWaitForRecieveCount" runat="server" class="num"><asp:literal runat="server" id="litWaitForRecieveCount" /></em>
+            </a>
+        </li>
+        <li>
+            <a href="MemberOrders?status=21">
+                <div class="iconfont icon-order_4"></div>
+                <span>待评论</span>
+                <em id="iWaitReviewCount" runat="server" class="num"><asp:literal runat="server" id="litWaitReviewCount" /></em>
+            </a>
+        </li>
+        <li>
+            <a href="AfterSaleOrders">
+                <div class="iconfont icon-order_3"></div>
+                <span>售后</span>
+                <em id="iAfterSaleCount" runat="server" class="num"><asp:literal runat="server" id="litAfterSaleCount" /></em>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!--常用功能-->
+<div class="commonBox">
+    <div class="hd">常用功能</div>
+    <div class="commonList">
+        <ul>
+            <li>
+                <a href="MyAccountSummary">
+                    <img src="/images/userhome/icon_deposit.png">
+                    <span>预存款</span>
+                    <asp:Literal id="litAccountTip" runat="server">充值享优惠</asp:Literal>
+                </a>
+            </li>
+            <li>
+                <a href="Point">
+                    <img src="/images/userhome/icon_point.png">
+                    <span>我的积分</span>
+                    <em><asp:literal runat="server" id="litPoints1" /></em>
+                </a>
+            </li>
+            <li>
+                <a href="MemberCoupons?usedType=1">
+                    <img src="/images/userhome/icon_coupn.png">
+                    <span>优惠券</span>
+                    <em><b id="coupn_count"><asp:literal runat="server" id="litCouponsCount" /></b></em>
+                </a>
+            </li>
+            <li>
+                <a href="MemberWeiXinRedEnvelopeCoupons?usedType=1">
+                    <img class="height36" src="/images/userhome/icon_envelopes.png">
+                    <span>代金红包</span>
+                    <em><asp:literal runat="server" id="litCouponsWeiXinRedEnvelopeCount" /></em>
+                </a>
+            </li>
+            <li>
+                <a href="MyPrize">
+                    <img class="height36" src="/images/userhome/icon_prize.png">
+                    <span>我的奖品</span>
+                    <em><asp:literal runat="server" id="litPrizeCount" /></em>
+                </a>
+            </li>
+            <li  id="liReferralLink" runat="server">
+                <a href="SplittinRule" id="referralLink" runat="server">
+                    <img class="height36" src="/images/userhome/icon_extension.png">
+                    <span>我要分销</span>
+                    <em></em>
+                </a>
+            </li>
+            <li>
+                <a href="MemberGroups">
+                    <img class="height40" src="/images/userhome/icon_fight.png">
+                    <span>火拼团</span>
+                    <em><% <asp:literal runat="server" ID="ltFightGroupActiveNumber"></asp:literal>%></em>
+                </a>
+            </li>
+            <li>
+                <a href="EditShippingAddress">
+                    <img class="height40" src="/images/userhome/icon_address.png">
+                    <span>收货地址</span>
+                    <em></em>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+<div class="container bg">
+
+</div>
+<hi:common_wapguanzhu runat="server"></hi:common_wapguanzhu>
+<input type="hidden" id="txt_referralStatus" runat="server" clientidmode="Static" />
+<input type="hidden" id="hidAccountStatus" runat="server" value="0" clientidmode="Static" />
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+
+    $(document).ready(function () {
+        $("#vMemberCenter_imgSignIn").bind("click", function () { onUserSignIn() });
+        if ($("#hidAccountStatus").val() != "0") {
+            $("#memberaccounttips").show();
+            var wait = setInterval(function () {
+                clearInterval(wait);
+                //执行code
+                $("#memberaccounttips").hide();
+            }, 30000);
+        }
+        $("#memberaccounttips .icon_close").click(function () {
+            $("#memberaccounttips").hide();
+        })
+
+    });
+    function onUserSignIn() {
+        var signInSource = GetSignInSouce();
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "signIn", SignInSource: signInSource },
+            success: function (resultData) {
+                if (resultData.result.status == "1") {
+                    var settingConDays = resultData.result.settingDays;
+                    var currentPoints = resultData.result.integral;
+                    $("#currentPoints").html(currentPoints);
+                    var pointDay = resultData.result.points;
+                    $("#vMemberCenter_aLinkSignIn").hide();
+                    if (pointDay > 0) {
+                        if (settingConDays > 0) {
+                            if (resultData.result.continuDays == "0") {
+                                alert_h("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~,连续签到了 " + settingConDays + " 天，额外获得了 " + resultData.result.continuPoints + " 分");
+                            }
+                            else if (resultData.result.continuDays < settingConDays) {
+                                var days = settingConDays - resultData.result.continuDays;
+                                alert_h("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~,您已连续签到了 " + resultData.result.continuDays + " 天，再签到 " + days + " 天，将额外获得 " + resultData.result.continuPoints + " 分哦~");
+                            }
+                            else {
+                                alert_h("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~");
+                            }
+                        }
+                        else {
+                            alert_h("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~");
+                        }
+                    }
+                    else {
+                        alert_h("恭喜您，签到成功！");
+                    }
+                }
+                else {
+                    alert_h("您今天已经签到过了");
+                }
+            }
+        });
+    }
+
+    //签到来源  定义数字与注册来源相同
+    function GetSignInSouce() {
+        var iSourceOrder = 1;
+        url = document.location.href.toLowerCase();
+        if (url.indexOf("/wapshop/") > -1) iSourceOrder = 2;
+        if (url.indexOf("/vshop/") > -1) iSourceOrder = 3;
+        if (url.indexOf("/alioh/") > -1) iSourceOrder = 4;
+        if (url.indexOf("/appshop/") > -1) iSourceOrder = 5;
+        return iSourceOrder;
+    }
+</script>
+<hi:common_wapfooter runat="server" skinname="/tags/skin-Common_UserFooter.html" />

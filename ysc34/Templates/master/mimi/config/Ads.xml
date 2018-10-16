@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Ad Id="1" Type="slide" Image1="/templates/master/mimi/UploadImage/advertimg/20130911162839_9256.jpg" Image2="/templates/master/mimi/UploadImage/advertimg/20130911163017_0502.jpg" Image3="/templates/master/mimi/UploadImage/advertimg/20130911163039_7395.jpg" Image4="" Image5="" Image6="" Image7="" Image8="" Image9="" Image10="" Url1="http://www.baidu.com" Url2="" Url3="" Url4="" Url5="" Url6="" Url7="" Url8="" Url9="" Url10="" AdImageSize="1000*195" />
+  <Ad Id="2" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20140725232930_9434.jpg" Url="" AdImageSize="664*380" />
+  <Ad Id="3" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20140725232945_6873.jpg" Url="" AdImageSize="333*126" />
+  <Ad Id="4" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20140725232945_8203.jpg" Url="" AdImageSize="333*126" />
+  <Ad Id="5" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20140725232945_7483.jpg" Url="" AdImageSize="333*126" />
+  <Ad Id="6" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20140726005628_1588.jpg" Url="" AdImageSize="333*268" />
+  <Ad Id="7" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20140726005628_2229.jpg" Url="" AdImageSize="333*268" />
+  <Ad Id="8" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20140726011016_1592.jpg" Url="" AdImageSize="1000*90" />
+  <Ad Id="9" Type="custom" Html="&amp;lt;div class=&amp;quot; font18&amp;quot; style=&amp;quot;text-align:center;&amp;quot;&amp;gt;&amp;lt;span style=&amp;quot;font-family:Arial;font-size:24px;&amp;quot;&amp;gt;400-999-8888&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&#xA;        &amp;lt;div style=&amp;quot;text-align:center;&amp;quot;&amp;gt;&amp;lt;span style=&amp;quot;font-family:&amp;#39;Microsoft YaHei&amp;#39;;&amp;quot;&amp;gt;周一至周日8：00-18：00&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&#xA;&amp;lt;span style=&amp;quot;font-family:&amp;#39;Microsoft YaHei&amp;#39;;&amp;quot;&amp;gt;         &amp;lt;/span&amp;gt;&amp;lt;div style=&amp;quot;text-align:center;&amp;quot;&amp;gt;&amp;lt;span style=&amp;quot;font-family:&amp;#39;Microsoft YaHei&amp;#39;;&amp;quot;&amp;gt;（仅收市话费）&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&#xA;&amp;lt;span style=&amp;quot;font-family:&amp;#39;Microsoft YaHei&amp;#39;;&amp;quot;&amp;gt;         &amp;lt;/span&amp;gt;&amp;lt;div style=&amp;quot;text-align:center;background-color:#ff4a00;width:100px;padding:5px;color:#ffffff;background-position:initial initial;background-repeat:initial initial;margin:0 auto;&amp;quot;&amp;gt;&amp;lt;span style=&amp;quot;font-family:&amp;#39;Microsoft YaHei&amp;#39;;margin:0 auto;&amp;quot;&amp;gt;24小时在线服务&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;" />
+  <Ad Id="10" Type="custom" Html="网站公告" />
+  <Ad Id="11" Type="custom" Html="&amp;lt;em&amp;gt;HOT&amp;lt;/em&amp;gt;热销商品排行" />
+  <Ad Id="12" Type="custom" Html="分类导航" />
+  <Ad Id="13" Type="custom" Html="&amp;lt;em&amp;gt;HOT&amp;lt;/em&amp;gt;热销商品排行" />
+  <Ad Id="554" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/1.jpg" Url="" AdImageSize="210*300" />
+  <Ad Id="555" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/2.jpg" Url="" AdImageSize="210*90" />
+  <Ad Id="556" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/2.jpg" Url="" AdImageSize="210*90" />
+  <Ad Id="557" Type="image" Image="/templates/master/mimi/UploadImage/advertimg/20131008152902_6219.jpg" Url="" AdImageSize="210*90" />
+  <Ad Id="23" Type="custom" Html="&amp;lt;div style=&amp;quot;background:#fe3f37;text-align:center;&amp;quot;&amp;gt;&#xA;	&amp;lt;img src=&amp;quot;/templates/master/mimi/UploadImage/AdvertImg/20160331145919_8098.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt; &#xA;&amp;lt;/div&amp;gt;" />
+</root>

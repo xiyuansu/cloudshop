@@ -1,0 +1,152 @@
+﻿<hi:common_appheader runat="server" skinname="/tags/skin-Common_NoLoginHeader.html" />
+
+<div class="no_sotre">
+    <img src="/images/no_store.png" style="display:none;" id="imgnonstore" />
+    <span id="sansearchstroe"><img src="/images/locating.gif" width="80" /><b style="float: left;width: 100%;color: #666;">正在定位...</b></span>
+</div>
+<ul class="store_list" id="store_list"></ul>
+<div class="map_popup">
+    <div class="att-popup-container" style="height:100%;">
+        <div class="map_title">
+            查看地图
+            <a href="javascript:;" class="pop_close icon-icon_close_48"></a>
+        </div>
+        <div id="container" style="height: 100%;" class="map_popup_container"></div>
+    </div>
+</div>
+<input type="hidden" id="hidLatitude" />
+<input type="hidden" id="hidLongitude" />
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script src="../Utility/vPosition.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var type = GetAgentType();
+if($(".appcouponinfo").text()!=""){
+	$("body").css("padding-top", "50px");
+	}
+        $(".no_store").hide();
+        $('.pop_close').on('click', function () {
+            closeMap();
+        });
+        //loadStoresData("28.189419,112.997681");   //测试用
+        if (type == 2) {
+            //if (navigator.geolocation) {
+            //    navigator.geolocation.getCurrentPosition(getPositionSuccess, ShowError);
+            //}
+            var geolocation = new qq.maps.Geolocation("SYJBZ-DSLR3-IWX3Q-3XNTM-ELURH-23FTP", "myapp");
+            if (geolocation) {
+                geolocation.getLocation(getPositionSuccess, ShowError);
+            }
+            else {
+                //跳转到定位失败状态页面
+                window.location.href = "NoPositionTip.aspx";
+            }
+        } else if (type == 1) {
+            var lat = getQueryString("lat");
+            var lng = getQueryString("lng");          
+            qq.maps.convertor.translate(new qq.maps.LatLng(lat, lng), 1, function (res) {
+                latlng = res[0];
+                loadStoresData(latlng);
+            });
+        }
+
+    });
+    function getPositionSuccess(position) {
+        //var lat = position.coords.latitude;
+        //var lng = position.coords.longitude;
+        //qq.maps.convertor.translate(new qq.maps.LatLng(lat, lng), 1, function (res) {
+        //    latlng = res[0];
+        //    loadStoresData(latlng);
+        //});
+        var lat = position.lat;
+        var lng = position.lng;
+        loadStoresData(lat + "," + lng);
+    }
+    //定位错误
+    //function ShowError(error) {
+    //    switch (error.code) {
+    //        case error.PERMISSION_DENIED:              
+    //            break;
+    //        case error.POSITION_UNAVAILABLE:             
+    //            break;
+    //        case error.TIMEOUT:             
+    //            break;
+    //        case error.UNKNOWN_ERROR:             
+    //            break;
+    //    }
+    //}
+    function closeMap() {
+        $('.map_popup').removeClass('is-visible');
+    }
+    function loadStoresData(fromLatLng) {
+        var productId = getQueryString("productId");
+        if (fromLatLng == undefined || fromLatLng == "") {
+            alert("无法获取您的当前位置，请确认是否开启定位服务");
+            return;
+        }
+        $.post('../API/DepotHandler.ashx?action=GetStoreList&fromLatLng=' + fromLatLng + '&productId=' + productId, function (result) {
+            if (result == "无法定位") {
+                alert("无法获取您的当前位置，请确认是否开启定位服务");
+            }
+            else {
+                if (result.length > 0) {
+                    setTimeout(function () {
+                        $(".no_sotre").hide();
+                        $("#sansearchstroe").hide();
+                        $("#imgnonstore").hide();
+                        for (var i = 0; i < result.length; i++) {
+                            var n = result[i];
+                            var userhtm = getStoreHtml(n);
+                            $("#store_list").append(userhtm);
+                        }
+                    }, 2000);
+                }
+                else {
+                    setTimeout(function () {
+                        $(".no_sotre").show();
+                        $("#sansearchstroe").hide();
+                        $("#imgnonstore").show();
+                    }, 2000);
+                }
+            }
+        });
+    }
+    function getStoreHtml(obj) {
+        var arr = new Array();
+        arr.push('<li>');
+        arr.push('<h1 onclick="window.location.href=\'StoreDetail.aspx?storeId=' + obj.StoreId + '\'">' + obj.StoreName + '</h1>');
+        arr.push('<span class="store_list_address" onclick="window.location.href=\'StoreDetail.aspx?storeId=' + obj.StoreId + '\'">' + obj.Address + '</span>');
+        arr.push('<div class="store_list_tel" onclick="window.location.href=\'StoreDetail.aspx?storeId=' + obj.StoreId + '\'"><span>电话：' + obj.Tel + '</span>' + obj.Distance + '</div>');
+        arr.push('<div class="store_list_map"><a href="javascript:onMapClick(\'' + obj.Latitude + '\',\'' + obj.Longitude + '\');">查看地图</a><a href="tel://' + obj.Tel + '">联系商家</a></div>');
+        arr.push('<i class="icon_angle_right"></i>');
+        arr.push('</li>');
+        return arr.join("");
+    }
+    function onMapClick(latitude, longitude) {
+        $("#hidLatitude").val(latitude);
+        $("#hidLongitude").val(longitude);
+        $('.map_popup').addClass('is-visible');
+        var center = new qq.maps.LatLng(latitude, longitude);
+        var map = new qq.maps.Map(document.getElementById('container'), {
+            center: center,
+            zoom: 18,
+            draggable: true,
+            scrollwheel: true
+        });
+        var marker = new qq.maps.Marker({
+            position: center,
+            map: map
+        });
+    }
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+</script>
+
+
+
+<hi:common_appfooter runat="server" />

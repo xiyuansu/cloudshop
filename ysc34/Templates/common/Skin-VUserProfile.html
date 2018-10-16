@@ -1,0 +1,210 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="att-popup">
+    <div class="att-popup-container deliveryed">
+        <ul id="sexed">
+            <li>男士</li>
+            <li>女士</li>
+        </ul>
+        <span class="close_pop">取消</span>
+    </div>
+</div>
+<style type="text/css">
+    .img {
+        border: 0.1rem solid rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        float: right;
+        height: 3rem;
+        overflow: hidden;
+        width: 3rem;
+    }
+
+        .img img {
+            height: 100%;
+            width: 100%;
+        }
+</style>
+<div class="pbox">
+    <div class="tk_main">
+
+        <div class="tk_group">
+            <label for="username">头像</label>
+            <div class="input-group selectReason">
+                <div class="img">
+
+                    <div class="imageContainer" style="display: inline-block;">
+                        <span name="userPictureImage" class="imgbox"></span>
+                        <span class="uploadImages">
+                            <input type="hidden" runat="server" clientidmode="Static" id="hidUploadImages" />
+                        </span>
+                    </div>
+                    <input type="hidden" clientidmode="Static" runat="server" id="hidUserPicture" />
+                </div>
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="username">真实姓名</label>
+            <div class="input-group selectReason">
+                <input id="txtRealName" runat="server" clientidmode="Static" type="text" placeholder="输入真实姓名">
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="username">性别</label>
+            <div class="input-group selectReason">
+                <input id="txtSex" runat="server" clientidmode="Static" type="text" placeholder="请选择性别" readonly="readonly">
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="username">生日</label>
+            <div class="input-group selectReason">
+                <input id="txtBirthday" runat="server" clientidmode="Static" type="text" placeholder="请选择日期">
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="username">QQ</label>
+            <div class="input-group selectReason">
+                <input id="txtQQ" runat="server" clientidmode="Static" type="text" placeholder="输入QQ">
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label for="username">昵称</label>
+            <div class="input-group selectReason">
+                <input id="txtMSN" runat="server" clientidmode="Static" type="text" placeholder="输入昵称">
+            </div>
+        </div>
+        <hi:common_waplocateaddress runat="server"></hi:common_waplocateaddress>
+    </div>
+
+    <div class="btn_tk">
+        <button type="button" onclick="UpdateMember()" class="btn_login">
+            保存
+        </button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#txtSex").click(function (e) {
+        $('.att-popup').addClass('is-visible');
+    });
+    $("#sexed li").click(function () {
+        $("#txtSex").val($(this).text());
+        $('.att-popup').removeClass('is-visible');
+    });
+    $(".close_pop").click(function () {
+        $('.att-popup').removeClass('is-visible');
+    });
+</script>
+<link rel="stylesheet" href="/Utility/mobiscrolldate/mobiscroll_date.css" />
+<script src="/Utility/mobiscrolldate/mobiscroll_date.js"></script>
+<script src="/Utility/mobiscrolldate/mobiscroll.js"></script>
+<script type="text/javascript" src="/utility/jquery.hishopUpload.user.js?v=3.4"></script>
+<script type="text/javascript" src="/utility/jquery.form.js"></script>
+<script type="text/javascript" src="/Utility/star/star-rating.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var currYear = (new Date()).getFullYear();
+        var opt = {};
+        opt.date = { preset: 'date' };
+        opt.datetime = { preset: 'datetime' };
+        opt.time = { preset: 'time' };
+        opt.default = {
+            theme: 'android-ics light',
+            display: 'modal', //显示方式
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            lang: 'zh',
+            showNow: true,
+            nowText: "今天",
+            startYear: currYear - 50, //开始年份
+            endYear: currYear + 10 //结束年份
+        };
+        initImageUpload();
+        $("#txtBirthday").mobiscroll($.extend(opt['date'], opt['default']));
+
+    });
+
+    function UpdateMember() {
+
+        var RealName = $("#txtRealName").val();
+        var Sex = $("#txtSex").val();
+        var Birthday = $("#txtBirthday").val();
+        var QQ = $("#txtQQ").val();
+        var MSN = $("#txtMSN").val();
+        var regionId = $("#region").val();
+        var address = $("#address").val();
+        var Gender = 0;
+        if (Sex == "男士") {
+            Gender = "1";
+        } else if (Sex == "女士") {
+            Gender = "2";
+        }
+        getUploadImages();
+
+        var uploadImages = $(".imageContainer").find(".uploadImages input").val();
+
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post',
+            dataType: 'json',
+            timeout: 10000,
+            data: {
+                action: "UpdateInformationMember",
+                gender: Gender,
+                realName: RealName,
+                birthday: Birthday,
+                qQ: QQ,
+                mSN: MSN,
+                picture: uploadImages,
+                regionId: regionId,
+                address: address
+
+            },
+            success: function (resultData) {
+                alert_h(resultData.Msg, function (e) {
+                    document.location.href = "AccountManagement.aspx";
+                });
+            }
+        });
+    }
+
+    // 初始化图片上传控件
+    function initImageUpload() {
+        var imgSrcs = $("#hidUserPicture").val();
+        var arySrcs = imgSrcs.split(',');
+        var url = ImageUploadPath;
+        $(".imageContainer").each(function () {
+            $(this).find('span[name="userPictureImage"]').hishopUpload(
+            {
+                title: '',
+                url: url,
+                imageDescript: '',
+                displayImgSrc: arySrcs,
+                imgFieldName: "userPictureImage",
+                defaultImg: '',
+                pictureSize: '',
+                imagesCount: 1,
+                dataWidth: 4,
+                fileMaxSize: 2,
+                showDelIcon: false,
+                foldName: 'review'
+            });
+        });
+    }
+
+    //获取上传成功后的图片路径
+    function getUploadImages() {
+        $(".imageContainer").each(function () {
+
+            var aryImgs = $(this).find('span[name="userPictureImage"]').hishopUpload("getImgSrc");
+
+
+            $(this).find(".uploadImages input").val(aryImgs);
+        });
+        return true;
+    }
+
+</script>

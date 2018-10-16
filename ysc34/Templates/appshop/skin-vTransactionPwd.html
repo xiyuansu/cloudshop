@@ -1,0 +1,93 @@
+﻿<hi:common_appheader runat="server" />
+<div class="tk_main">
+    <div class="tk_group">
+        <label for="username">订单号</label>
+        <div class="input-group ">
+            <asp:literal runat="server" id="OrderId" />
+        </div>
+    </div>
+    <div class="tk_group">
+        <label for="username">应付总额</label>
+        <div class="input-group ">
+            ￥<asp:literal runat="server" id="litOrderTotal" />
+        </div>
+    </div>
+    <div class="tk_group">
+        <label for="username">交易密码</label>
+        <div class="input-group ">
+            <input id="txtPassword" type="password" placeholder="请输入您的交易密码">
+        </div>
+    </div>
+</div>
+<div class="btn_tk">
+    <button type="button" id="btnTransactionPwd" class="btn_login" onclick="TransactionPwd(this);">确认</button>
+</div>
+<script src="/Utility/vshopSelector/vshopSelector.js" type="text/javascript"></script>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnShowOrHid").click(function (e) {
+            if ($("#txtPassword").attr("type") == "text") {
+                $("#txtPassword").attr("type", "password");
+            }
+            else {
+                $("#txtPassword").attr("type", "text");
+            }
+        });
+    });
+
+
+    function TransactionPwd(btn) {
+        var clickTime = $(btn).attr("ctime");
+        var nowTime = new Date().getTime();
+        if (clickTime != 'undefined' && (nowTime - clickTime < 3000)) {
+            return false;
+        }
+        $(btn).attr("ctime", nowTime);
+        password = $.trim($("#txtPassword").val());
+        if (!password || password.length < 6) {
+            alert_h('密码不能为空并且至少要6个字符');
+        }
+        else {
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json',
+                data: { action: "Transactionsubmitorder", password: password, orderid: getParam("OrderId") },
+                success: function (resultData) {
+                    if (resultData.success) {
+                        if ($("#txtIsFightGroup").val() == "true") {
+                            $.ajax({
+                                url: "/AppShop/AppShopHandler.ashx",
+                                type: 'post', dataType: 'json', timeout: 10000,
+                                data: { action: "FightGroupShare", OrderId: getParam("OrderId") },
+                                success: function (resultData) {
+                                    var shareJson = "{\"Result\":{\"ShareImage\":\"" + resultData.Result.ShareImage + "\",\"ShareTitle\":\"" + resultData.Result.ShareTitle + "\",\"ShareContent\":\"" + resultData.Result.ShareContent + "\",\"ShareLink\":\"" + resultData.Result.ShareLink + "\"}}";
+                                    goFightGroupSuccess(resultData.Result.Status, resultData.Result.NeedJoinNumber, shareJson);
+                                }
+                            });
+                        }
+                        else {
+                            alert_h("交易成功！", function () {
+                                location.href = "MemberOrderDetails.aspx?OrderId=" + getParam("OrderId");
+                            });
+                        }
+                    }
+                    else {
+                        alert_h(resultData.mesg);
+                        $("#txtPassword").val("");
+                    }
+                }
+            });
+        }
+    }
+
+
+
+</script>
+<hi:common_appfooter runat="server" />

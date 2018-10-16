@@ -1,0 +1,109 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<script src="/utility/globals.js" type="text/javascript"></script>
+<style>
+input[type="checkbox"], input[type="radio"]{ margin-right: 10px; }
+</style>
+<div class="hyzxmain">
+    <div class="hyzxconty">
+                 当前位置><span><a href="url:home">首页</a></span>><span><a href="url:user_UserDefault">会员中心</a></span>><span><a href="#">商品批量购买</a></span></div>
+    <div class="hyzxconter">
+        <%<Hi:Common_User_Menu runat="server" />%>
+        <form runat="server">
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1">
+                    商品批量购买</div>
+                <div class="tuikuan_con">
+                    <span>商品名称：
+                        <%<asp:TextBox runat="server" ID="txtProductName" CssClass="input-text2" /> %></span>
+                   <span>
+                        <%<Hi:Common_CategoriesDropDownList ID="ddlCategories" runat="server" NullToDisplay="--请选择分类--"  CssClass="select_text"/>%></span>
+                    <span>
+                        <%<Hi:BrandCategoriesDropDownList runat="server" ID="dropBrandCategories" NullToDisplay="--请选择品牌--" CssClass="select_text" />%></span>
+                   <span><%<asp:Button Text="查询" class="btn_cx" ID="imgbtnSearch" runat="server" /> %></span>
+                </div>
+                <div class="shuaixuan1">
+                    <div class="quanxuan">
+                        <span class="qu"><a href="javascript:void(0);" onclick="checkboxall()">全选</a></span> <span class="qu"><a
+                            href="javascript:void(0);" onclick="antiAll()">反选</a></span> <span>
+                                <%<asp:Button ID="btnBatchBuy" Text="批量购买" runat="server" class="btn_style_bar" OnClientClick="return CheckBatchBuy()"/>%></span></div>
+                </div>
+                  <span><%<Hi:SmallStatusMessage id="Status" runat="server" />%></span>
+                <div class="shouhuoxx1_con">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_box1 top_border">
+                        <tr id="spqingdan_title">
+                            <td align="center" width="7.1%" style="border-right:1px solid #ddd !important">
+                                选择
+                            </td>
+                            <td  align="center" width="12.4%">
+                                商品图片
+                            </td>
+                            <td align="center" >
+                                商品名称
+                            </td>
+                            <td width="30%" align="center">
+                                规格
+                            </td>
+                            <td width="8%" align="center">
+                                购买数量
+                            </td>
+                            <td  align="center">
+                                库存
+                            </td>
+                            <td align="center">
+                                一口价
+                            </td>
+                        </tr>
+                         <%<Hi:Common_BatchBuy_ProductList ID="grdProducts" runat="server" TemplateFile="/ascx/Tags/Common_UserCenter/SKin-Common_BatchBuy_ProductList.ascx" />%>                       
+                    </table>
+                </div>
+                <div class="page">
+                    <div class="pagination">
+                        <%<UI:Pager runat="server" ShowTotalPages="true" ID="pager"/>%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    <script type="text/javascript">
+        function antiAll() {
+            $("input[type='checkbox']").each(function () {
+                $(this).attr("checked", !$(this).attr("checked")); //!$(this).attr("checked")判断复选框的状态：如果选中则取反
+            });
+        }
+       
+        function checkboxall() {
+            $("input[type='checkbox']").attr("checked", true);
+        }
+        $("input[name='CheckBoxGroup']").bind("change", function () {
+            if ($(this).attr("checked"))
+                $("input[chk='" + $(this).val() + "']").attr("checked", true);
+            else
+                $("input[chk='" + $(this).val() + "']").attr("checked", false);
+        })
+        $(".goumai_input[type='text']").bind("blur", function () {
+            CheckProductNum(this);
+        })
+        function CheckProductNum(obj) {
+            var stocks = $(obj).parent().parent().next("td").find("div").text().trim();
+            obj.value = obj.value.replace(/[^0-9_]/g, '');
+            var pronum = obj.value.replace(/\s/g, "");
+            if (pronum == "" || parseInt(pronum) <= 0) {
+                obj.value = "1";
+                return false;
+            }
+            if (parseInt(pronum) > parseInt(stocks)) {
+                obj.value = stocks;
+                return false;
+            }
+
+            function CheckBatchBuy() {
+                if ($("input[name='chkskus']:checked").length == 0) {
+                    alert("还没有选择任何的商品！");
+                    return false;
+                }
+            }
+        }
+    </script>
+    <%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

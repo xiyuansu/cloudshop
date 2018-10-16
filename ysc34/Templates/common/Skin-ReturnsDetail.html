@@ -1,0 +1,139 @@
+﻿<hi:common_wapheader runat="server" />
+<form id="form" role="form" class="pbox clearfix form-horizontal" runat="server">
+    <link href="/Utility/imgpreview/mobile-photo-preview.css" rel="stylesheet">
+    <input type="hidden" runat="server" ClientIDMode="Static" id="hidErrorMsg" />
+    <input type="hidden" runat="server" ClientIDMode="Static" id="txtReturnsId" />
+    <input type="hidden" runat="server" ClientIDMode="Static" id="txtIsRefund" value="0" />
+    <input type="hidden" id="hidUploadImages" runat="server" ClientIDMode="Static" />
+    <input type="hidden" id="hidOldImages" value="\Templates\common\images\nophoto.jpg" runat="server" ClientIDMode="Static" />
+    <div class="panel panel-default order-list">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                售后编号：
+                <span><asp:Literal id="txtAfterSaleId" runat="server"></asp:Literal></span>
+            </h3>
+            <span class="order_shipping">
+                <span><asp:Literal id="litStatus" runat="server"></asp:Literal></span>
+            </span>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body_1 step2 mt_0">
+                <hi:common_orderitem_aftersales runat="server"></hi:common_orderitem_aftersales>
+            </div>
+            <div class="panel-body_2">
+                <ul class="return_list">
+                    <li>
+                        <span>订单编号：</span><font><asp:Literal id="txtOrderId" runat="server"></asp:Literal></font>
+                    </li>
+
+                    <li>
+                        <span>申请原因：</span><font><asp:Literal id="txtReturnReason" runat="server"></asp:Literal></font>
+                    </li>
+                    <li class="returnRow">
+                        <span>退货数量：</span><font><asp:Literal id="txtQuantity" runat="server"></asp:Literal></font>
+                    </li>
+                    <li>
+                        <span>退款金额：</span><font><asp:Literal id="txtRefundMoney" runat="server"></asp:Literal>元</font>
+                    </li>
+                    <li>
+                        <span>退款方式：</span><font><asp:Literal id="txtRefundType" runat="server"></asp:Literal></font>
+                    </li>
+                    <li id="bankRow1" runat="server" visible="false">
+                        <span>开户银行：</span><font><asp:Literal id="litBankName" runat="server"></asp:Literal></font>
+                    </li>
+                    <li id="bankRow2" runat="server" visible="false">
+                        <span>开户名字：</span><font><asp:Literal id="litBankAccountName" runat="server"></asp:Literal></font>
+                    </li>
+                    <li id="bankRow3" runat="server" visible="false">
+                        <span>银行账号：</span><font><asp:Literal id="litBankAccountNo" runat="server"></asp:Literal></font>
+                    </li>
+                    <li>
+                        <span>买家备注：</span><font><asp:Literal id="txtMemo" runat="server"></asp:Literal></font>
+                    </li>                 
+                    <li id="ExpressRow" runat="server" class="returnRow">
+                        <span>快递公司：</span>
+                        <font><asp:Literal id="txtExpress" runat="server"></asp:Literal></font>
+                    </li>
+
+                    <li id="ExpressNumberRow" runat="server" class="returnRow">
+                        <span>快递编号：</span>
+                        <font><asp:Literal id="txtExpressNo" runat="server"></asp:Literal></font>
+                    </li>
+                    <li id="AdminRemarkRow" runat="server">
+                        <span>商家留言：</span><font><asp:Literal id="txtAdminRemark" runat="server"></asp:Literal></font>
+                    </li>
+                    <li>
+                        <span>售后凭证：</span>
+                        <div class="preview-list"><asp:literal id="litCredentialsImg" runat="server"></asp:literal></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="logistics_2 returns_step" style="margin-top:0;">
+        <div class="returns_step_head">售后进度<i class="icon_up" style="display:none;"></i><i class="icon_down"></i></div>
+        <asp:Literal id="litStep" runat="server"></asp:Literal>      
+    </div>
+    <div class="btn_tk">
+        <input type="button" id="btnSendGoods" runat="server" value="退货发货" clientidmode="static" class="btn_login" />
+        <input type="button" id="btnLogistic" runat="server" value="查看物流" clientidmode="static" class="btn_login" />
+        <input type="button" id="btnCancel" onclick="window.history.go(-1);" value="返回" class="btn_qx" />
+    </div>
+</form>
+<script src="/Utility/imgpreview/dialog.js"></script>
+<script src="/Utility/imgpreview/mobile-photo-preview.js"></script>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function (e) {
+        if ($("#hidErrorMsg").val() != "") {
+            alert_h($("#hidErrorMsg").val(), function (e) {
+                document.location.href = "AfterSaleOrders";
+            });
+
+        }
+
+        var ReturnsId = $("#txtReturnsId").val();
+
+        $("#btnReferral").click(function (e) {
+            document.location.href = "AfterSaleOrders.aspx";
+        })
+
+        $("#btnSendGoods").click(function (e) {
+            document.location.href = "ReturnSendGoods.aspx?ReturnsId=" + ReturnsId;
+        })
+
+        $("#btnLogistic").click(function (e) {
+            document.location.href = "MyLogistics.aspx?ReturnsId=" + ReturnsId;
+        })
+
+   
+    });
+    
+    $(function () {
+        $(".returns_step_head").click(function () {
+            $(".returns_step ul").toggle();
+            $(".returns_step_head i").toggle();
+        })
+    })
+
+    $(function () {
+        var a = "<b class='a1'></b>";
+        $(".logistics_2 ul li:last-child .color_6").append(a);
+    })
+
+    $('.preview-list').MobilePhotoPreview({
+        trigger: '.preview',
+        show: function (c) {
+            var del = $('<span class="icon-del"></span>');
+            var close = $('<span class="ui-dialog-close js-dialog-close pop_close icon-icon_close_48"></span>')
+            $('.imgViewTop', c).append(del);
+            $('.imgViewTop', c).append(close);
+            var _this = this;
+            del.click(function () {
+                _this.current.remove();
+                _this.hide();
+            });
+        }
+    });
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

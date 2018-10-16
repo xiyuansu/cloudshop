@@ -1,0 +1,69 @@
+﻿<hi:common_appheader runat="server" />
+<link rel="stylesheet" href="/style/css.css" type="text/css" />
+<!--<div class="mtop-n"><em><a href="#">返回</a></em><span>选择城市</span><i></i></div>-->
+<div class="chooseCity">
+    <div class="dleft">
+        <div class="dlefts">
+            <ul id="ulProvince">
+            </ul>
+        </div>
+    </div>
+    <div class="dright">
+        <ul class="city" id="ulCity">
+        </ul>
+    </div>
+</div>
+<input type="hidden" id="hidShippingId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidShipTo" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidCellphone" runat="server" ClientIDMode="Static" />
+<script>
+    $(function () {
+        loadProvince();
+    });
+
+    function loadProvince() {
+        $.ajax({
+            url: "/Handler/RegionHandler.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "getregions", parentId: 0 },
+            success: function (resultData) {
+                if (resultData.Status == "OK") {
+                    var regions = eval(resultData.Regions);
+                    $.each(regions, function (index, ele) {
+                        $("#ulProvince").append('<li><a href="#" RegionId="' + ele.RegionId + '">' + ele.RegionName + '</a></li>');
+                    });
+                    $("#ulProvince li a").click(function () {
+                        $("#ulProvince li a").removeClass("selected");
+                        $(this).addClass("selected");
+                        var pid = $(this).attr("RegionId");
+                        loadCity(pid);
+                    });
+                    $("#ulProvince li a").eq(0).click();
+                }
+            }
+        });
+    }
+    function loadCity(parentRegionId) {
+        $.ajax({
+            url: "/Handler/RegionHandler.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "getregions", parentId: parentRegionId },
+            success: function (resultData) {
+                if (resultData.Status == "OK") {
+                    var regions = eval(resultData.Regions);
+                    $("#ulCity").empty();
+                    $.each(regions, function (index, ele) {
+                        $("#ulCity").append('<li><a href="#" RegionName="' + ele.RegionName + '">' + ele.RegionName + '</a></li>');
+                    });
+                    $("#ulCity li a").click(function () {
+                        var returnUrl = getParam("returnUrl");
+                        $("#ulCity li a").removeClass("select");
+                        $(this).addClass("select");
+                        var name = $(this).attr("RegionName");
+                        window.location.href = "ChangeMapPosition.aspx?cityName=" + escape(name) + "&ShippingId=" + $("#hidShippingId").val() + "&shipTo=" + $("#hidShipTo").val() + "&cellphone=" + $("#hidCellphone").val() + "&returnUrl=" + returnUrl;
+                    });
+                }
+            }
+        });
+    }
+</script>

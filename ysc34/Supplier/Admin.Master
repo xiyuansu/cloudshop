@@ -1,0 +1,484 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="Hidistro.UI.Web.Supplier.AdminMaster" %>
+
+<%@ Register TagPrefix="Hi" Namespace="Hidistro.UI.Common.Controls" Assembly="Hidistro.UI.Common.Controls" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <Hi:PageTitle ID="PageTitle1" runat="server" />
+    <script type="text/javascript" src="/utility/jquery-1.8.3.min.js" ></script>
+    <Hi:HeadContainer runat="server" />
+    <link rel="stylesheet" href="/admin/css/bootstrap.min.css?v=3.35" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/supplier/css/css.css?v=3.35" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/admin/css/windows.css?v=3.35" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/admin/css/pagevalidator.css?v=3.35" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/utility/skins/blue.css?v=3.35" />
+    <link rel="stylesheet" href="/admin/css/bootstrap-datetimepicker.css?v=3.35" type="text/css" media="screen" />
+    
+    <link href="/Utility/icheck/square/red.css?v=3.35" rel="stylesheet" />
+    <link href="/Utility/easydropdown/easydropdown.css?v=3.35" rel="stylesheet" />
+    <link href="/Utility/iconfont/iconfont.css?v=3.35" rel="Stylesheet" />
+    <script type="text/javascript" src="/utility/jquery.artDialog.js" ></script>
+    <script type="text/javascript" src="/utility/iframeTools.js" ></script>
+    <script type="text/javascript" src="/utility/Window.js?v=3.35" ></script>
+    <script type="text/javascript" src="/utility/globals.js?v=3.35" ></script>
+    <script type="text/javascript" src="/utility/windows.js?v=3.35" ></script>
+    <script type="text/javascript" src="/utility/layer.min.js" ></script>
+    <script type="text/javascript" src="/utility/jquery.cookie.js" ></script>
+    <script type="text/javascript" src="/admin/script/pagevalidator.js" ></script>
+    <script type="text/javascript" src="/Utility/icheck/icheck.min.js"></script>
+    <script type="text/javascript" src="/Admin/Shop/Public/plugins/jbox/jquery.jbox-min.js"></script>
+    <script type="text/javascript" src="/Admin/js/HiShopComPlugin.js"></script>
+    <script type="text/javascript" src="/Utility/easydropdown/jquery.easydropdown.js"></script>
+    <script type="text/javascript" src="/Utility/nicescroll/jquery.nicescroll.js"></script>
+    <script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/admin/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <style type="text/css">
+        #popdiv { width: 296px; height: 120px; border: 2px solid #0091d5; display: none; overflow: hidden; }
+
+            #popdiv .title { width: 296px; background: #0091d5; color: #fff; height: 30px; line-height: 30px; margin: 0px; padding: 0px 8px; border-bottom: 0 none; }
+
+            #popdiv p { background: #fff; line-height: 18px; color: #333; margin: 0px; padding: 10px; width: 276px; }
+
+                #popdiv p span { color: red; margin: 0px 5px; }
+
+                #popdiv p a.detail { color: #0091ea; float: right; }
+
+            #popdiv .title img { vertical-align: middle; margin-top: -2px; margin-left: 3px; }
+
+            #popdiv .title #closediv { float: right; cursor: pointer; margin-top: 7px; }
+    </style>
+    <asp:ContentPlaceHolder ID="headHolder" runat="server">
+        <!--功能页面独有的脚本文件、样式文件的引用-->
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="validateHolder" runat="server">
+        <!--客户端验证-->
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        //全选
+        $(function () {
+            $('#checkall').on('ifChecked', function (event) {
+                $("input[name*='CheckBoxGroup']").iCheck('check');
+                $("input[name*='checkboxCol']").iCheck('check');
+            });
+            $('#checkall').on('ifUnchecked', function (event) {
+                $("input[name*='CheckBoxGroup']").iCheck('uncheck');
+                $("input[name*='checkboxCol']").iCheck('uncheck');
+            });
+
+        })
+
+        $(document).ready(function () {
+            /*列表添加鼠标移动效果*/
+            // $(".datalist table tr").each(function (index, domEle){if(index!=0){$(this).mouseover(function(){$(this).addClass("currentcolor");}).mouseout(function(){$(this).removeClass("currentcolor")});}})	
+            $(".datalist table tr,.list table tr").each(function (index, domEle) {
+                if (index != 0) {
+                    //  if ($(this).attr("class") != "table_title")
+                    //  $(this).mouseover(function () { $(this).css("background", "#f6faf1"); }).mouseout(function () { $(this).css("background", "#ffffff") });
+                }
+                if (BrowsVersion() == true) {
+                    $(this).children("td").each(function (indexTd, objTd) {
+                        var htmlTd = $(objTd).html().trim();
+                        if (htmlTd.length < 1) {
+                            $(objTd).css("display", "none");
+                            //$(objTd).parent("tr").css("display","none");
+                        }
+                    })
+                }
+            })
+
+        });
+        function BrowsVersion() {
+            var Sys = {};
+            var ua = navigator.userAgent.toLowerCase();
+            var s;
+            (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+            (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+            (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+            (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+            (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+            //以下进行测试
+            if (Sys.ie) return false;
+            if (Sys.firefox) return true; /*document.write('Firefox: ' + Sys.firefox);*/
+            if (Sys.chrome) return false;
+            if (Sys.opera) return false;
+            if (Sys.safari) return false;
+        }
+    </script>
+    <script type="text/javascript">
+        function GetPageInnerWidth() {
+            var pageWidth = window.innerWidth;
+            if (typeof pageWidth != "number") {
+                if (document.compatMode == "number") {
+                    pageWidth = document.documentElement.clientWidth;
+                } else {
+                    pageWidth = document.body.clientWidth;
+                }
+            }
+            return pageWidth;
+        }
+        var lastTime = new Date();
+
+
+        $(document).ready(function () {
+
+            //回车查询
+            var _btnsearch = $("#btnSearch");
+            if (_btnsearch.length > 0) {
+                $(".searcharea input[type='text']").on("keypress", function (event) {
+                    if (event.keyCode == 13) {
+                        $("#btnSearch").trigger("click");
+                        event.returnValue = false;
+                        event.stopPropagation();
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+            }
+
+            //订单信息提示
+            $('<audio src="/admin/tishi.mp3" controls="controls"  id="audio" loop="loop" style="display: none"></audio>').appendTo("body");
+            var pageWidth = GetPageInnerWidth();
+            if (pageWidth != 900 && pageWidth != 300 && $.cookie != undefined) {
+                lastTime = $.cookie("popTime");
+                if (lastTime == null || lastTime == "" || lastTime == "Invalid Date" || (new Date(lastTime) == "Invalid Date"))
+                    lastTime = new Date();
+                else
+                    lastTime = new Date(lastTime);
+                lastTime = lastTime.getFullYear() + "-" + (lastTime.getMonth() + 1) + "-" + lastTime.getDate() + " " + lastTime.getHours() + ":" + lastTime.getMinutes() + ":" + lastTime.getSeconds();
+                GetNewlyOrderInfo();
+
+            }
+        });
+        var poplayer = null;
+        var popobj = null;
+        function GetNewlyOrderInfo() {
+            $.ajax({
+                url: "/Supplier/SupplierAdmin.ashx",
+                type: 'post', dataType: 'json', timeout: 50000,
+                data: { action: "getneworders", lasttime: lastTime },
+                success: function (resultData) {
+                    $("#greetingtext").hide();
+                    var status = resultData.status;
+                    lastTime = resultData.lastTime;
+                    $.cookie("popTime", new Date(lastTime));
+                    if (status == "1") {
+                        play();
+                        var payCount = parseInt(resultData.PayCount);
+                        var total = 0;
+                        var onlyCreat = false, onlyPay = false, onlyRefund = false, onlyReplace = false, onlyReturn = false;
+                        if (payCount > 0) {
+                            $("#paytext").show().html($("#paytext").html().replace("{$quantity$}", payCount));
+                            total += 1;
+                            onlyPay = true;
+                            $("#greetingtext").show();
+                        }
+                        else
+                            $("#paytext").hide();
+                        if (parseInt(resultData.OrdersCount) > 0) {
+                            total += 1;
+                            onlyCreat = true;
+                            $("#greetingtext").show();
+                            $("#createtext").show().html($("#createtext").html().replace("{$quantity$}", resultData.OrdersCount));
+                        }
+                        else
+                            $("#createtext").hide();
+                        if (parseInt(resultData.RefundOrderCount) > 0) {
+                            total += 1;
+                            onlyRefund = true;
+                            $("#refundtext").show().html($("#refundtext").html().replace("{$quantity$}", resultData.RefundOrderCount));
+                        }
+                        else
+                            $("#refundtext").hide();
+                        if (parseInt(resultData.ReturnsOrderCount) > 0) {
+                            $("#returntext").show().html($("#returntext").html().replace("{$quantity$}", resultData.ReturnsOrderCount));
+                            total += 1;
+                            onlyReturn = true;
+                        }
+                        else 
+                            $("#returntext").hide();
+                        if (parseInt(resultData.ReplacementOrderCount) > 0) {
+                            $("#replacetext").show().html($("#replacetext").html().replace("{$quantity$}", resultData.ReplacementOrderCount));
+                            total += 1;
+                            onlyReplace = true;
+                        }
+                    else
+                        $("#replacetext").hide();
+                    if (parseInt(resultData.RefundOrderCount) > 0) {
+                        $("#refundtext").show().html($("#refundtext").html().replace("{$quantity$}", resultData.RefundOrderCount));
+                        total += 1;
+
+                    }
+                        else
+                        $("#refundtext").hide();
+                        if (total > 1) {
+                            $("#detailLink").attr("href", "/Supplier/sales/ManageOrder.aspx");
+                        }
+                        else {
+                            if (onlyPay)
+                                $("#detailLink").attr("href", "/Supplier/sales/ManageOrder.aspx?orderStatus=2");
+                            if (onlyCreat)
+                                $("#detailLink").attr("href", "/Supplier/sales/ManageOrder.aspx?orderStatus=1");                     
+                            if (onlyReplace)
+                                $("#detailLink").attr("href", "/Supplier/sales/replaceapply.aspx");
+                            if (onlyReturn)
+                                $("#detailLink").attr("href", "/Supplier/sales/returnsapply.aspx");
+                        }
+                        poplayer = $.layer({
+                            type: 1,
+                            title: false,
+                            area: ['auto', 'auto'],
+                            border: [0], //去掉默认边框
+                            shade: [0], //去掉遮罩
+                            closeBtn: [0, false], //去掉默认关闭按钮
+                            shift: 'right-bottom', //从左动画弹出
+                            time: 20,
+                            offset: ['10px', '10px'],
+                            page: {
+                                dom: '#popdiv'
+                            }
+                        });
+
+                    }
+
+                    setTimeout("GetNewlyOrderInfo()", 300000);//10分后重新调用该方法
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    GetNewlyOrderInfo();
+                }
+            });
+        }
+
+        //自设关闭
+        $(function () {
+            $("#closediv").bind('click', function () {
+                layer.close(poplayer);
+                stop();
+            });
+        });
+      
+
+
+        function play() {
+            var audio = $("#audio")[0];
+            audio.play();
+            setTimeout("stop()", 2800);
+        }
+
+        function stop() {
+            var audio = $("#audio")[0];
+            audio.pause();
+        }
+
+    </script>
+</head>
+<body id="niceScroll">
+    <form id="thisForm" runat="server">
+        <!--主菜单-->
+        <div class="topchannel clearfix" style="display: none">
+            <div class="channelshell">
+                <div class="menutab">
+                    <ul class="clearfix">
+                        <asp:Literal runat="server" ID="mainMenuHolder" />
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--二级菜单-->
+        <div class="subchannel clearfix" style="display: none">
+            <div class="channelshell">
+                <div class="menutab">
+                    <ul class="clearfix">
+                        <asp:Literal runat="server" ID="subMenuHolder" />
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--面包屑-->
+        <div class="blank5 clearfix"></div>
+        <!--功能区-->
+        <div id="mainhtml">
+            <asp:ContentPlaceHolder ID="contentHolder" runat="server">
+                <!--功能页面-->
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <div id="popdiv">
+        <div class="title">
+            <span id="closediv">
+                <img src="/Utility/pics/close.png" /></span><img src="/Utility/pics/sound.png" />&nbsp;订单提醒
+        </div>
+        <p>
+            <samp id="greetingtext">您好，</samp><samp id="createtext"><a href="/Supplier/sales/ManageOrder.aspx?orderStatus=0"><span>{$quantity$}</span></a>个订单创建成功，</samp>
+            <samp id="paytext"><a href="/Supplier/sales/ManageOrder.aspx?orderStatus=2"><span>{$quantity$}</span></a>个订单已付款成功，</samp>
+            <samp id="returntext"><a href="/Supplier/sales/returnsapply.aspx?HandleStatus=0"><span>{$quantity$}</span></a>个订单申请退货，</samp>
+            <samp id="refundtext"><a href="/Supplier/sales/ManageOrder.aspx?orderStatus=0"><span>{$quantity$}</span></a>个订单申请退款，</samp>
+            <samp id="replacetext"><a href="/Supplier/sales/replaceapply.aspx?HandleStatus=0"><span>{$quantity$}</span></a>个订单申请换货，</samp>请尽快处理！<br />
+            <a href="/Supplier/sales/ManageOrder.aspx" class="detail" target="_self" id="detailLink">查看详情</a>
+        </p>
+    </div>
+     <script type="text/javascript">
+
+         function CheckClickAll() {
+             $("ins.iCheck-helper").each(function () {
+                 if (!$(this).prev().is(":checked"))
+                     $(this).trigger("click");
+             });
+         }
+         //反选
+
+         function CheckReverse() {
+             $("ins.iCheck-helper").each(function () {
+                 if ($(this).prev().is(":checked"))
+                     $(this).trigger("click");
+             });
+         }
+         //单选复选框
+         $('.icheck').iCheck({
+             checkboxClass: 'icheckbox_square-red',
+             radioClass: 'iradio_square-red',
+             increaseArea: '20%',
+         });
+
+         //滚动条
+         $("#niceScroll").niceScroll({
+             cursorcolor: "#404750",
+             cursoropacitymax: 1,
+             cursoropacitymin: 0,
+             touchbehavior: false,
+             cursorwidth: "5px",
+             cursorborder: "0",
+             cursorborderradius: "5px"
+         });
+
+         //更多搜索条件
+         $(function () {
+             var moreHTML = $("#so_more").html();
+             $("#so_more").toggle(function () {
+                 $(this).html('精简搜索条件&nbsp;<i class="glyphicon glyphicon-menu-up"></i>');
+             },
+             function () {
+                 $(this).html(moreHTML)
+             })
+             $("#so_more").click(function () {
+                 $("#so_more_none").toggle(function () {
+                     if ($('#so_more_none').is(':hidden')) {
+                         $("#so_more_input").val("0");
+                     } else {
+                         $("#so_more_input").val("1");
+                     }
+                 });
+             });
+
+
+             $('[data-toggle="tooltip"]').tooltip();
+
+
+             //后台titlenav
+             $(".title-nav li").click(function () {
+                 $(this).addClass("hover").siblings().removeClass('hover');
+             });
+         });
+
+         $(function () {
+             $('.hishop_menu_scroll', window.parent.document).css("opacity", "1")
+         })
+
+         //bootstrap模态窗激活改变父窗口左菜单
+         $(function () {
+             $('.modal ').on('shown.bs.modal', function () {
+                 $('.hishop_menu_scroll', window.parent.document).css("opacity", "0.3");
+             })
+
+             $('.modal ').on('hidden.bs.modal', function () {
+                 $('.hishop_menu_scroll', window.parent.document).css("opacity", "1");
+             })
+         })
+         ///输入页码按回车键自动跳转至指定分页
+         document.onkeydown = function (event) {
+             var e = event || window.event || arguments.callee.caller.arguments[0];
+             if (e && e.keyCode == 13) {
+                 if (document.activeElement.id == "txtGoto") {
+                     var pageBox = document.activeElement;
+                     var pagetext = $(pageBox).parent().text();
+                     var startIndex = pagetext.indexOf("/") + 1;
+                     var len = pagetext.indexOf("页") - startIndex;
+                     var pagetotal = parseInt(pagetext.substr(startIndex, len));
+                     if (isNaN(pagetotal)) {
+                         pagetotal = 1;
+                     }
+                     var pageIndex = parseInt($(pageBox).val());
+                     if (isNaN(pageIndex) || pageIndex > pagetotal) {
+                         $(pageBox).val(pagetotal);
+                     }
+                     pageBox.nextElementSibling.click();
+                     return false;
+                 }
+             }
+         };
+
+         $(function () {
+             $("#txtGoto").next().click(function (e) {
+                 var pagetext = $("#txtGoto").parent().text();
+                 var startIndex = pagetext.indexOf("/") + 1;
+                 var len = pagetext.indexOf("页") - startIndex;
+                 var pagetotal = parseInt(pagetext.substr(startIndex, len));
+                 if (isNaN(pagetotal)) {
+                     pagetotal = 1;
+                 }
+                 var pageIndex = parseInt($("#txtGoto").val());
+                 if (isNaN(pageIndex) || pageIndex > pagetotal) {
+                     pageIndex = pagetotal;
+                     $("#txtGoto").val(pagetotal);
+                 }
+
+                 location.href = AppendParameter('pageindex', pageIndex);
+                 return false;
+             })
+         });
+
+
+         function myConfirmBox(title, content, ensureText, cancelText, ensuredCallback, cancelCallbak) {
+             var myConfirmCode = '<div class="modal fade" id="myConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                  <div class="modal-dialog">\
+                    <div class="modal-content">\
+                      <div class="modal-header">\
+                        <h4 class="modal-title" id="myModalLabel">' + title + '</h4>\
+                      </div>\
+                      <div class="modal-body">\
+                        ' + content + '\
+                      </div>\
+                      <div class="modal-footer">\
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'+ cancelText + ' </button>\
+                        <button type="button" class="btn btn-danger">' + ensureText + '</button>\
+                      </div>\
+                    </div>\
+                  </div>\
+                </div>';
+             if ($("#myConfirm").length == 0) {
+                 $("body").append(myConfirmCode);
+             }
+             $('#myConfirm').modal();
+             $('.hishop_menu_scroll', window.parent.document).css("opacity", "0.2");
+             $('#myConfirm button.btn-danger').unbind("click", "");
+             $('#myConfirm button.btn-default').unbind("click", "");
+             $('#myConfirm button.btn-default').click(function (event) {
+                 if (cancelCallbak)
+                     cancelCallbak();
+                 $('#myConfirm').modal('hide');
+                 $('.hishop_menu_scroll', window.parent.document).css("opacity", "1");
+             });
+             $('#myConfirm button.btn-danger').click(function (event) {
+                 if (ensuredCallback)
+                     ensuredCallback();
+                 $('#myConfirm').modal('hide');
+             });
+         }
+         </script>
+</body>
+</html>

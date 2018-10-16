@@ -1,0 +1,114 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="pb_0">
+    <hi:WapTemplatedRepeater id="rptvShipping" templatefile="/Tags/skin-Common_ShippingAddresses.ascx"
+                             runat="server" />
+</div>
+<div class="btn_tk" style=" position:fixed; bottom:0;z-index:9999;">
+    <a id="aLinkToAdd" runat="server"><input id="AddAddress" type="button" class="btn_login" style=" margin-bottom:0;" value="新增一个收货地址"></a>
+</div>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+
+<script type="text/javascript">
+
+    $("input[name='radIsDefault']").click(function (e) {
+        if ($(this).attr("IsDefault") == "True") {
+            return false;
+        }
+        var addressId = $(this).attr("AddressId");
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: {
+                shippingid: addressId,
+                action: "SetDefaultShippingAddress"
+            },
+            success: function (resultData) {
+                if (resultData.success) {
+                    alert_h("设置成功", function (e) {
+                        location.href = "ShippingAddresses";
+                    });
+                }
+                else {
+                    alert_h("设置失败");
+                }
+            }
+        });
+    });
+
+    function SetDefault(obj, target) {
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: {
+                shippingid: obj,
+                action: "SetDefaultShippingAddress"
+            },
+            success: function (resultData) {
+                if (resultData.success) {
+                    var returnURL = window.location.search.substr(window.location.search.indexOf("returnUrl=") + 10);
+                    if (returnURL != undefined) {
+                        location.href = decodeURIComponent(returnURL);
+                    }
+                    //$("li").removeClass("active");
+                    //$("li").has($(target)).addClass("active");
+                }
+                else {
+                    alert_h("设置失败");
+                }
+            }
+        });
+    }
+
+    function UpdateShipping(shippingId) {
+        if (window.location.search.indexOf("returnUrl=") == -1) {
+            location.href = "EditShippingAddress.aspx?ShippingId=" + shippingId;
+            return false;
+        }
+        var returnURL = window.location.search.substr(window.location.search.indexOf("returnUrl=") + 10);
+        if (returnURL == undefined) {
+            location.href = "EditShippingAddress.aspx?ShippingId=" + shippingId;
+            return false;
+
+        }
+        location.href = "EditShippingAddress.aspx?ShippingId=" + shippingId + "&returnUrl=" + returnURL;
+    }
+
+    function DeleteShippingAddress(obj, target) {
+        myConfirmBox('操作提示', '确定要删除该地址吗？', '确认删除', '取消', function () {
+            if ($("li").has($(target)).hasClass("active")) {
+                alert_h("不能删除默认地址，请先默认其它地址！");
+                return;
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: {
+                    shippingid: obj,
+                    action: "DelShippingAddress",
+                },
+                success: function (resultData) {
+                    if (resultData.success) {
+                        location.reload();
+                    }
+                    else {
+                        alert_h("删除失败");
+                    }
+                }
+            });
+
+
+        })
+
+
+
+
+
+    }
+
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

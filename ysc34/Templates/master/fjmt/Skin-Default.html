@@ -1,0 +1,198 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<div class="main" id="main1">
+<style>
+.main{ width:auto;}
+.tab_img div { height:390px;}
+</style>
+<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+    <!--banner--> 
+    <div class="lunboad"> <hi:common_slidead runat="server" adid="3" isdelayedloading="true" isfullscreen="true"></hi:common_slidead></div>
+    <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_3").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+    <!--banner上的抢购和团购--> 
+    <div class="luntuangou">
+        <div class="luntuangocu">
+            <div class="tuangouc borderright">
+				<script src="/Utility/time.js" type="text/javascript"></script>
+                <div class="tuangouname">限时抢购</div>
+                <div id="wrap2" class="box2">
+                    <ul>
+                        <hi:common_goodslist_latestcountdownbuy runat="server" maxnum="10"></hi:common_goodslist_latestcountdownbuy>
+                    </ul>
+                </div>
+                <div id="prev2" class="prev2"><img src="/images/blue/t_prev.jpg"></div>
+                <div id="next2" class="next2"><img src="/images/blue/t-next.jpg"></div>
+            </div>
+            
+            <div class="tuangouc">
+                <div class="tuangouname">团购</div>
+                <div id="wrap1" class="box2">
+                  <ul>
+                     <hi:common_goodslist_latestgroupbuy runat="server" maxnum="5"></hi:common_goodslist_latestgroupbuy>
+                  </ul>
+                </div>
+                <div id="prev1" class="prev2"><img src="/images/blue/t_prev.jpg"></div>
+                <div id="next1" class="next2"><img src="/images/blue/t-next.jpg"></div>
+            </div>
+            
+            <!-- min gg -->
+            <div class="clearboth"><hi:common_imagead adid="28" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+        </div>
+    </div> 
+	<script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+    
+    <!-- 选项卡 -->
+    <div><hi:common_subjectproduct_tab runat="server" subjectid="21" isdelayedloading="true"></hi:common_subjectproduct_tab></div>
+    <!-- max gg -->
+    <div class="w1200 mt30"><hi:common_imagead adid="29" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+    <!-- max gg -->
+    <div class="w1200">
+		<script>
+        $(function(){$(".floatl li:nth-child(5)").css({"padding-bottom":"8px"});$(".floatl li:nth-child(6)").css({"padding-bottom":"8px"});$(".floatl li:nth-child(7)").css({"padding-bottom":"8px"});$(".floatl li:nth-child(8)").css({"padding-bottom":"8px"})})
+        </script>
+        <div class="floor floor-first mt20">
+            <div class="floor-hd">
+                <div class="floor-hd-l">
+                    <h2><hi:common_subjecttitle commentid="21" runat="server" isdelayedloading="true"></hi:common_subjecttitle></h2>
+                </div>
+                <div class="floor-hd-r">
+                    <hi:common_subjectkeyword commentid="25" runat="server" isdelayedloading="true"></hi:common_subjectkeyword>
+                    <hi:common_subjectmorelink commentid="29" runat="server" isdelayedloading="true"></hi:common_subjectmorelink>
+                </div>
+            </div>
+            <div class="floor-bd">
+                <div class="floor-bd-l">
+                    <div class="dajixhua">大家都喜欢</div>
+                    <div><hi:common_subjectbrand runat="server" commentid="45" isdelayedloading="true"></hi:common_subjectbrand></div>
+                </div>
+                <div class="floor-bd-r">
+                    <div class="floatl"><hi:common_subjectproduct_simple subjectid="12" runat="server" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+                    <div class="rightsad"> <hi:common_imagead adid="53" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gg mt20"><hi:common_imagead adid="52" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+        <!-- end floor-first -->
+        <div class="floor floor-two">
+            <div class="floor-hd">
+                <div class="floor-hd-l">
+                    <h2><hi:common_subjecttitle commentid="22" runat="server" isdelayedloading="true"></hi:common_subjecttitle></h2>
+                </div>
+                <div class="floor-hd-r">
+                    <hi:common_subjectkeyword commentid="26" runat="server" isdelayedloading="true"></hi:common_subjectkeyword>
+                    <hi:common_subjectmorelink commentid="49" runat="server" isdelayedloading="true"></hi:common_subjectmorelink>            
+                </div>
+            </div>
+            <div class="floor-bd">
+                <div class="floor-bd-l">
+                    <div class="dajixhua">大家都喜欢</div>
+                    <div><hi:common_subjectbrand runat="server" commentid="46" isdelayedloading="true"></hi:common_subjectbrand></div>
+                </div>
+                <div class="floor-bd-r">
+                    <div class="floatl"><hi:common_subjectproduct_simple subjectid="13" runat="server" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+                    <div class="rightsad"><hi:common_imagead adid="24" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+                </div>
+            </div>
+        </div>
+        <!-- end floor-two -->
+        <div class="gg"><hi:common_imagead adid="21" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+        <div class="floor floor-three">
+            <div class="floor-hd">
+                <div class="floor-hd-l">
+                    <h2><hi:common_subjecttitle commentid="23" runat="server" isdelayedloading="true"></hi:common_subjecttitle></h2>
+                </div>
+                <div class="floor-hd-r">
+                    <hi:common_subjectkeyword commentid="27" runat="server" isdelayedloading="true"></hi:common_subjectkeyword>
+                    <hi:common_subjectmorelink commentid="31" runat="server" isdelayedloading="true"></hi:common_subjectmorelink>
+                </div>
+            </div>
+            <div class="floor-bd">
+                <div class="floor-bd-l">
+                    <div class="dajixhua">大家都喜欢</div>
+                    <div><hi:common_subjectbrand runat="server" commentid="47" isdelayedloading="true"></hi:common_subjectbrand></div>
+                </div>
+                <div class="floor-bd-r">
+                    <div class="floatl"><hi:common_subjectproduct_simple subjectid="14" runat="server" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+                    <div class="rightsad"> <hi:common_imagead adid="25" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+                </div>
+            </div>
+        </div>
+        <!-- end floor-three -->
+        <div class="gg mt20"><hi:common_imagead adid="51" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+        <div class="floor floor-four">
+            <div class="floor-hd">
+                <div class="floor-hd-l">
+                    <h2><hi:common_subjecttitle commentid="24" runat="server" isdelayedloading="true"></hi:common_subjecttitle></h2>
+                </div>
+                <div class="floor-hd-r">
+                    <hi:common_subjectkeyword commentid="28" runat="server" isdelayedloading="true"></hi:common_subjectkeyword>
+                    <hi:common_subjectmorelink commentid="32" runat="server" isdelayedloading="true"></hi:common_subjectmorelink>
+                </div>
+            </div>
+            <div class="floor-bd">
+                <div class="floor-bd-l">
+                    <div class="dajixhua">大家都喜欢</div>
+                    <div><hi:common_subjectbrand runat="server" commentid="48" isdelayedloading="true"></hi:common_subjectbrand></div>
+                </div>
+                <div class="floor-bd-r">
+                    <div class="floatl"> <hi:common_subjectproduct_simple subjectid="15" runat="server" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+                    <div class="rightsad"> <hi:common_imagead adid="26" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+                </div>
+            </div>
+        </div>
+        <!-- end floor-four -->
+        <div class="gg mt20"><hi:common_imagead adid="22" runat="server" isdelayedloading="true"></hi:common_imagead></div>
+    </div>
+<!-- end wrap -->
+<!-- 团购 & 小轮播 -->
+<script src="/templates/master/fjmt/js/marquee.js"></script>
+    <script type="text/javascript">
+    $(function() {
+	    $('#wrap1').marquee({
+		    auto: true,
+		    speed: 1000,
+			interval: 3000,
+		    showNum: 1,
+		    stepLen: 1,
+		    prevElement: $('#prev1'),
+		    nextElement: $('#next1')
+	    });
+		$('#wrap2').marquee({
+		    auto: true,
+		    speed: 1000,
+			interval: 2000,
+		    showNum: 1,
+		    stepLen: 1,
+		    prevElement: $('#prev2'),
+		    nextElement: $('#next2')
+	    });
+    })
+    </script>
+<!--xuanxiangka-->
+<script type="text/javascript">
+function nTabs(thisObj,Num){
+if(thisObj.className == "active")return;
+var tabObj = thisObj.parentNode.id;
+var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+for(i=0; i <tabList.length; i++)
+{
+  if (i == Num)
+  {
+   thisObj.className = "active"; 
+      document.getElementById(tabObj+"_Content"+i).style.display = "block";
+  }else{
+   tabList[i].className = "normal"; 
+   document.getElementById(tabObj+"_Content"+i).style.display = "none";
+  }
+} 
+}
+</script>
+</div>
+<!--main-content结束-->
+<%<Hi:Common_Footer runat="server"/>%>

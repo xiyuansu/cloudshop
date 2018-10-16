@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Applet.master.cs" Inherits="Hidistro.UI.Web.Applet.Applet" %>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>全网商城3.4开发站</title>
+
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <link rel="stylesheet" href="/templates/common/style/index.css?v=3.35" type="text/css" />
+    <link rel="stylesheet" href="/templates/common/style/css.css?v=3.35" type="text/css" />
+    <link rel="stylesheet" href="/templates/common/style/style.css?v=3.35" type="text/css" />
+    <link rel="stylesheet" href="/templates/common/style/fonts/style.css?v=3.35" type="text/css" />
+    <script language="javascript" type="text/javascript"> 
+                                var HasWapRight = true;
+                                var IsOpenStores = true;
+                                var ClientPath = "WapShop";
+                                var ImageServerUrl = "";
+                                var ImageUploadPath = "/admin/UploadHandler.ashx?action=newupload";
+                                var StoreDefaultPage = "Platform";
+                                var qqMapAPIKey = "MF5BZ-AQV6F-3TQJ5-J6TQJ-QHE2K-MKBK4";
+                            </script>
+
+    <script type="text/javascript" src="/templates/common/script/jquery-1.11.0.min.js?v=3.0"></script>
+    <script src="/templates/common/script/jquery.slides.min.js?v=3.0"></script>
+    <script type="text/javascript" src="/templates/common/script/main.js?v=3.3"></script>
+    <script type="text/javascript" src="/Utility/common.js?v=3.35"></script>
+    <script src="/Utility/traffic.js?v=3.31"></script>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            if ($("#hidIsLogin").length > 0) {
+                if ($("#hidIsLogin").val() == "false") {//没有登录的处理
+                    wx.miniProgram.navigateTo("/pages/login/login");//没有登录则跳转登录页面
+                }
+            }
+        })
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

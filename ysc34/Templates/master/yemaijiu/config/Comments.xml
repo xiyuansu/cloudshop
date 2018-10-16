@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="1" MaxNum="8" />
+  <Comment Id="2" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="5" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="6" Type="article" Title="文章中心" ImageTitle="" AdImage="" CategoryId="" MaxNum="5" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="7" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="9" ImageSize="88*30" />
+  <Comment Id="8" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="9" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="10" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="11" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="13" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="14" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="15" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="16" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="17" Type="title" Title="葡萄酒" ImageTitle="/templates/master/yemaijiu/UploadImage/titleimg/20140523163830_8828.jpg" TitleImageSize="28*36" />
+  <Comment Id="18" Type="keyword" CategoryId="70" MaxNum="10" />
+  <Comment Id="19" Type="morelink" Title="更多商品" CategoryId="273" />
+  <Comment Id="20" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="88*30" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

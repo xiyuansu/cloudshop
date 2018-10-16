@@ -1,0 +1,57 @@
+@import url(dialog.css);
+/*
+ * license: http://www.lovewebgames.com/jsmodule/index.html 
+ */
+.ui-preview {
+    background-color: #fff;
+    border: none;
+    color: #fff;
+}
+
+#imgPreview > div {
+    background: url(loading.gif) no-repeat center center;
+    background-size: 4rem 4rem;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 0;
+    position: relative;
+}
+
+    #imgPreview > div img {
+        position: absolute;
+    }
+
+.ui-preview .imgViewTop {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    background-color: #f7f7f8;
+    border-bottom:1px solid #ebebeb;
+    text-align:center;
+}
+
+.imgViewTop em {
+    color: #333;
+}
+
+.ui-preview .ui-dialog-close {
+    font-size: 24px;
+    z-index: 2;
+    line-height: 1;
+    top:7px;
+    padding: 0 0.5rem 3px 0.5rem;
+}
+
+#imgPreview {
+    position: absolute;
+}
+
+.pos-relative {
+    position: relative;
+}

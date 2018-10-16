@@ -1,0 +1,326 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/qwang/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/qwang/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+ <script type="text/javascript" src="/templates/master/qwang/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		slideshowSpeed:5000,
+		pauseOnAction: false
+	});
+});
+</script>
+    <script>
+        $.ajaxSetup({
+            cache: false
+        });
+
+        $(function () {
+            setScrollLoading();
+        })
+
+        function setScrollLoading() {
+            $("img").scrollLoading();
+            $("iframe").each(function () {
+                if (!$(this).attr("src")) {
+                    $(this).attr("src", $(this).attr("data-url"));
+                }
+            });
+        }
+
+        $(window).scroll(function () {
+            setScrollLoading();
+        });
+    </script>
+<div  id="main">
+	<div class="top-banner">
+		<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="11" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_11").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+	</div>
+	
+<div class="main-content">
+
+<div class="w1200 o-hidden gundong">
+<div class="gundongl">
+<div class="Display_entity_n_tab rollBox"  >
+<div class="Display_entity_n_tab_licon"><img src="/templates/master/qwang/js/qguo_27.gif" onmousedown="ISL_GoDown()" onmouseup="ISL_StopDown()"  style=" cursor:pointer;" /></div>
+<div class="Cont" id="ISL_Cont">
+<div class="ScrCont">
+<div id="List1">
+<!-- 图片列表 begin -->
+<ul>
+<hi:common_customad runat="server" adid="17" isdelayedloading="true"></hi:common_customad>
+</ul>
+
+</div>
+<div id="List2"></div>
+</div>		 </div>
+<div  class="Display_entity_n_tab_ricon"><img src="/templates/master/qwang/js/qguo_24.gif"  onmousedown="ISL_GoUp()" onmouseup="ISL_StopUp()" onmouseout="ISL_StopUp()"  style="cursor:pointer;"/></div>
+</div>
+
+</div>
+<div class="gundongr"><div class="huodong">最新活动</div>
+<ul>   <%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="5" />%></ul>
+</div>
+</div>
+
+	
+<div class="w1200 o-hidden pt20">
+<div class="jptuijian">	<hi:common_customad runat="server" adid="18" isdelayedloading="true"></hi:common_customad></div>
+<hi:common_customad runat="server" adid="19" isdelayedloading="true"></hi:common_customad>
+</div>
+
+<script language="javascript" type="text/javascript">
+<!--//--><![CDATA[//><!--
+//图片滚动列表 mengjia 070816
+var Speed = 10; //速度(毫秒)
+var Space = 10; //每次移动(px)
+var PageWidth = 285; //翻页宽度
+var fill = 0; //整体移位
+var MoveLock = false;
+var MoveTimeObj;
+var Comp = 0;
+var AutoPlayObj = null;
+GetObj("List2").innerHTML = GetObj("List1").innerHTML;
+GetObj('ISL_Cont').scrollLeft = fill;
+GetObj("ISL_Cont").onmouseover = function(){clearInterval(AutoPlayObj);}
+GetObj("ISL_Cont").onmouseout = function(){AutoPlay();}
+AutoPlay();
+function GetObj(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval
+
+('document.all.'+objName)}}
+function AutoPlay(){ //自动滚动
+clearInterval(AutoPlayObj);
+AutoPlayObj = setInterval('ISL_GoDown();ISL_StopDown();',3000); //间隔时间
+}
+function ISL_GoUp(){ //上翻开始
+if(MoveLock) return;
+clearInterval(AutoPlayObj);
+MoveLock = true;
+MoveTimeObj = setInterval('ISL_ScrUp();',Speed);
+}
+function ISL_StopUp(){ //上翻停止
+clearInterval(MoveTimeObj);
+if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0){
+Comp = fill - (GetObj('ISL_Cont').scrollLeft % PageWidth);
+CompScr();
+}else{
+MoveLock = false;
+}
+AutoPlay();
+}
+function ISL_ScrUp(){ //上翻动作
+if(GetObj('ISL_Cont').scrollLeft <= 0){GetObj('ISL_Cont').scrollLeft = GetObj
+
+('ISL_Cont').scrollLeft + GetObj('List1').offsetWidth}
+GetObj('ISL_Cont').scrollLeft -= Space ;
+}
+function ISL_GoDown(){ //下翻
+clearInterval(MoveTimeObj);
+if(MoveLock) return;
+clearInterval(AutoPlayObj);
+MoveLock = true;
+ISL_ScrDown();
+MoveTimeObj = setInterval('ISL_ScrDown()',Speed);
+}
+function ISL_StopDown(){ //下翻停止
+clearInterval(MoveTimeObj);
+if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0 ){
+Comp = PageWidth - GetObj('ISL_Cont').scrollLeft % PageWidth + fill;
+CompScr();
+}else{
+MoveLock = false;
+}
+AutoPlay();
+}
+function ISL_ScrDown(){ //下翻动作
+if(GetObj('ISL_Cont').scrollLeft >= GetObj('List1').scrollWidth){GetObj('ISL_Cont').scrollLeft =
+
+GetObj('ISL_Cont').scrollLeft - GetObj('List1').scrollWidth;}
+GetObj('ISL_Cont').scrollLeft += Space ;
+}
+function CompScr(){
+var num;
+if(Comp == 0){MoveLock = false;return;}
+if(Comp < 0){ //上翻
+if(Comp < -Space){
+Comp += Space;
+num = Space;
+}else{
+num = -Comp;
+Comp = 0;
+}
+GetObj('ISL_Cont').scrollLeft -= num;
+setTimeout('CompScr()',Speed);
+}else{ //下翻
+if(Comp > Space){
+Comp -= Space;
+num = Space;
+}else{
+num = Comp;
+Comp = 0;
+}
+GetObj('ISL_Cont').scrollLeft += num;
+setTimeout('CompScr()',Speed);
+}
+}
+//--><!]]>
+</script>
+
+<script src="../../../Utility/time.js"></script>
+ <div class="w1200 o-hidden chuxiao">
+ <div class="xianshiq discount-sp">
+ <div class="xianshiqtop">限时抢购</div>
+ <div class="xianshiqianggou dis-limited">
+ <ul class="lim-pro">
+				<hi:common_goodslist_latestcountdownbuy runat="server" maxnum="4"></hi:common_goodslist_latestcountdownbuy>
+			</ul>
+ </div>
+ </div>
+ <div class="tuangou"><div class="xianshiqtop">团购</div>
+ <div class="tuangoucont">  <script src="../../../Utility/time.js" type="text/javascript"></script>
+   <ul>
+                            <Hi:Common_GoodsList_LatestGroupBuy runat="server" MaxNum="1" />
+                          </ul>
+ </div>
+ 
+ </div>
+ </div>
+ 
+ 
+
+	
+
+	 <div class="w1200 o-hidden pt30">
+     <div class="shangpinctop"> 
+     <Hi:Common_SubjectTitle runat="server" CommentId="3" />
+     <Hi:Common_SubjectMoreLink runat="server" CommentId="5" />
+     <Hi:Common_SubjectKeyword runat="server" CommentId="4" />
+       </div>
+     <div class="shangpincont">
+     
+     <em class="left"><hi:common_imagead runat="server" adid="22" isdelayedloading="true"></hi:common_imagead></em>
+     <span class="right"><hi:common_imagead runat="server" adid="20" isdelayedloading="true"></hi:common_imagead></span></div>
+     <hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="1"></hi:common_subjectproduct_simple>
+   </div>
+
+ 
+
+    <div class="w1200 o-hidden pt30">
+     <div class="shangpinctop">
+     <Hi:Common_SubjectTitle runat="server" CommentId="7" /> 
+     <Hi:Common_SubjectMoreLink runat="server" CommentId="9" />
+     <Hi:Common_SubjectKeyword runat="server" CommentId="8" />
+       </div>
+     <div class="shangpincont">
+     <em class="left"><hi:common_imagead runat="server" adid="24" isdelayedloading="true"></hi:common_imagead></em>
+     <span class="right"><hi:common_imagead runat="server" adid="25" isdelayedloading="true"></hi:common_imagead></span>
+     </div>
+      <hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="2"></hi:common_subjectproduct_simple>
+     
+   </div>
+   
+  <div class="w1200 o-hidden pt30">
+     <div class="shangpinctop"> 
+     <Hi:Common_SubjectTitle runat="server" CommentId="11" /> 
+     <Hi:Common_SubjectMoreLink runat="server" CommentId="13" />
+         <Hi:Common_SubjectKeyword runat="server" CommentId="12" />
+       </div>
+     <div class="shangpincont">
+     <em class="left"><hi:common_imagead runat="server" adid="26" isdelayedloading="true"></hi:common_imagead></em>
+     <span class="right"><hi:common_imagead runat="server" adid="27" isdelayedloading="true"></hi:common_imagead></span>
+       </div>
+    <hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="3"></hi:common_subjectproduct_simple>
+   
+   </div>
+   <div class="w1200 o-hidden pt30">
+     <div class="shangpinctop"> 
+     <Hi:Common_SubjectTitle runat="server" CommentId="15" /> 
+     <Hi:Common_SubjectMoreLink runat="server" CommentId="17" />
+     <Hi:Common_SubjectKeyword runat="server" CommentId="16" />
+       </div>
+     <div class="shangpincont">
+     <em class="left"><hi:common_imagead runat="server" adid="28" isdelayedloading="true"></hi:common_imagead></em>
+     <span class="right"><hi:common_imagead runat="server" adid="29" isdelayedloading="true"></hi:common_imagead></span></div>
+<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="4"></hi:common_subjectproduct_simple>
+   </div>
+   
+	
+		<div style="clear:both"></div>
+		
+		<div class="mall-news">
+			<div class="news">
+				<div class="td-bd">
+					<hi:common_imagead runat="server" adid="16" isdelayedloading="true"></hi:common_imagead>
+				</div>
+				<div class="news-list">
+					<h4>商城资讯</h4>
+					<ul>
+						<hi:common_subjectarticle commentid="19" runat="server" isdelayedloading="true"></hi:common_subjectarticle>
+					</ul>
+				</div>
+			</div>
+			<div class="review">
+				<span class="rspan">
+                    <h4>最新评论</h4>
+                </span>
+				<ul>
+					<%
+                    <hi:common_latestreview maxnum="6" templatefile="HomeTags/Skin-Common_LatestReview.ascx" runat="server" /> %>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="horizontal-ad">
+		<hi:common_imagead runat="server" adid="21" isdelayedloading="true"></hi:common_imagead>
+	</div>
+	
+	</div>
+	<div style="clear:both"></div>
+	</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

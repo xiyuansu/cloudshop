@@ -1,0 +1,356 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<script src="/utility/jquery.artDialog.js" type="text/javascript"></script>
+<script src="/utility/iframeTools.js" type="text/javascript"></script>
+<script src="/utility/Window.js" type="text/javascript"></script>
+<script src="/Utility/expressInfo.js?v=3.4" type="text/javascript"></script>
+<link rel="stylesheet" href="/utility/skins/blue.css?v=3.0" />
+<style>
+    .shouhuoxx1_con img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .ddgl_1 td {
+        color: #999;
+        border-right: 1px solid #f0f0f0;
+    }
+
+    .ddgl_1 span {
+        display: inline;
+    }
+
+    .tab_box1 td {
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .dingdanxx .tab_box1 {
+        width: 99.9%;
+    }
+
+    .tab_box1 {
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+        .tab_box1 tbody tr td.rbnone.bbnone {
+            border-left: 1px solid #f0f0f0;
+        }
+
+    #spqingdan_title td em {
+        padding-left: 0;
+    }
+
+    #spqingdan_title .txt1 em {
+        background: url(../images/users/new/txt1_03.jpg) no-repeat 90px 16px;
+        background-position: 70px 10px;
+    }
+
+    #spqingdan_title .txt2, #spqingdan_title .txt2 span {
+        width: 100px;
+        text-align: center;
+    }
+</style>
+<form name="aspnetForm" method="post" runat="server" id="aspnetForm">
+    <div class="hyzxmain">
+        <div class="hyzxconty">
+            当前位置：<span><a href="/">首页</a></span>><span><a href="/User/UserDefault">会员中心</a></span>><span>
+                <a href="#">订单管理</a>
+            </span>
+        </div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">  
+                    <%<Hi:SmallStatusMessage id="Status" runat="server" Width="200" Visible="False" />%>
+                    <div class="dingdan_box1">订单管理 </div>
+                    <div class="tuikuan_con">
+                        <span>关键字：  <%<asp:TextBox ID="txtOrderId" placeholder="商品名称/订单编号" runat="server" CssClass="input-text2" />%></span>
+                        <span style="display: none;">商品名称：<%<asp:TextBox ID="txtProductName" runat="server" CssClass="input-text2" />%></span>
+                        <span style="display: none;">物流单号：<%<asp:TextBox ID="txtShipId" runat="server" CssClass="input-text2" />%></span>
+                        <span style="display: none;">收货人：<%<asp:TextBox ID="txtShipTo" runat="server" CssClass="input_huohao" />%></span>
+                        <span style="display: none;">状态：<%<Hi:OrderStautsDropDownList ID="dropOrderStatus" CssClass="select1_text" runat="server" />%></span>
+                        <span>
+                            订单提交时间：
+                            <%<Hi:CalendarPanel runat="server" ClientIDMode="Static" ID="calendarStartDate" NotFloatLeft="true" CssClass="input_huohao"></Hi:CalendarPanel>%>
+                            &nbsp; &nbsp;至 &nbsp; &nbsp;
+                            <%<Hi:CalendarPanel runat="server" ClientIDMode="Static" ID="calendarEndDate" NotFloatLeft="true" IsEndDate="true" CssClass="input_huohao"></Hi:CalendarPanel>%>
+                        </span><span>
+                            <%<asp:Button ID="imgbtnSearch" runat="server" Text="查询" class="btn_cx" /> %>
+                        </span>
+                        <%<asp:Literal runat="server" ID="litOrderTotal" />%>
+                        <%<asp:Literal ID="litOrderStatus" runat="server"></asp:Literal>%>
+                    </div>
+                    <div class="shouhuoxx1_con">
+                        <%<hi:common_ordermanage_orderlist skinname="" runat="server" />%>
+                    </div>
+                    <div class="page">
+                        <%<hi:Pager runat="server" ShowTotalPages="true" ID="pager" CssClass="feiye" />%>
+                    </div>
+                    <div class="shouhuoxx1_con">
+                        <div id="pay_div" style="display: none">
+                            <div class="frame-content" style="width: 300px; overflow: hidden;">
+                                <p>
+                                    再次确认您选择的支付方式，您也可以重新选择。
+                                </p>                               
+                                <p>
+                                    <span class="frame-span frame-input130"><em>*</em>&nbsp;确认支付方式：</span> <span>
+                                        <abbr class="formselect">
+                                            <%<asp:DropDownList id="dropPayType" runat="server" />%>
+                                        </abbr>
+                                    </span>
+                                </p>
+                                <p id="msgP" style="color: #cc0000"></p> 
+                            </div>
+                            <div style="color:red;" id="demodiv" runat="server" visible="false">
+                                【演示站点，请勿真实购买】
+                            </div>
+                        </div>
+                        <select id="dropPayType_all" style="display:none"></select>
+
+                        <div style="display: none">
+                            <input type="hidden" id="hdorderId" runat="server" />
+                            <%<asp:Button ID="btnOk" runat="server" Text="确 定" CssClass="submit_DAqueding" />%>
+                            <%<asp:Button ID="btnPay" runat="server" Text="确 定" CssClass="submit_DAqueding" />%>
+                        </div>
+                        <div style="display: none">
+                            <%<asp:Button ID="btnViewMessage" runat="server" Text="确 定" ClientIDMode="static" CssClass="submit_DAqueding" />%>
+                        </div>
+                        <!--查看管理员备注-->
+                        <div id="viewmessage_div" style="display:none">
+                            <div class="frame-content" style="width: 400px; overflow: hidden;">
+                                <p id="message_con"></p>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function (e) {
+                                $("#dropPayType_all").html($("#UserOrders_dropPayType").html());
+                            });
+                            var type = "";
+                            function validatorForm() {
+                                if ($("#msgP").html() != "") {
+                                    return false;
+                                }
+                                if (type == "pay") {
+                                    if ($("#UserOrders_dropPayType").val() == "") {
+                                        alert("请选择支付方式");
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }
+
+                            function PayOrderFun(obj) {
+
+                                //var Iscontinue = false;
+                                $.ajax({
+                                    url: "../API/VshopProcess.ashx",
+                                    type: 'post', dataType: 'json', timeout: 10000,
+                                    data: {
+                                        action: "PayCheckOrder",
+                                        orderId: $(obj).attr("oId")
+                                    },
+                                    async: false,
+                                    success: function (resultData) {
+                                        if (resultData.ErrorCode == "0") {
+                                            showpayselect(obj);
+                                        }
+                                        else if (resultData.ErrorCode == "004" || resultData.ErrorCode == "005") {
+                                            var xtarget = $(obj).offset().left;
+                                            var ytarget = $(obj).offset().top;
+                                            var w = $("body").width();
+                                            $("#divshow").css("top", 450 + "px");
+                                            $("#divshow").css("left", w / 2 - 180 + "px");
+                                            if ($(document).scrollTop() <= 145) {
+                                                $("#divshow").css("top", parseInt(ytarget - 125) + "px");
+                                            }
+                                            $(".btn-continue").bind("click", function () { $("#divshow").css('display', 'none'); $(".modal_qt").remove(); });
+                                            $("#divshow").css('display', 'block');
+                                            var bg = "<div class='modal_qt'></div>";
+                                            $('body').append(bg);
+                                            if (resultData.ErrorCode == "004") {
+                                                $("#spcounttype").text("您来晚了，订单中有商品已删除或已下架。");
+                                                $(".btn-continue").bind("click", function () {
+                                                    $("#divshow").css('display', 'none');
+                                                    $(".modal_qt").remove();
+                                                    window.location.reload();
+                                                });
+                                            }
+                                            else {
+                                                $("#spcounttype").text("您来晚了，订单中有商品库存不足，请联系卖家处理。");
+                                                $(".btn-continue").bind("click", function () {
+                                                    $("#divshow").css('display', 'none');
+                                                    $(".modal_qt").remove();
+                                                });
+                                            }
+                                        }
+                                        else { alert(resultData.msg); }
+                                    }
+                                });
+                                //return false;
+                            }
+
+                            function showpayselect(obj) {
+                                //限购和团购不支持货到付款和线下付款
+                                var countdownid = parseInt($(obj).attr("countdownid"));
+                                var groupbuyid = parseInt($(obj).attr("groupbuyid"));
+                                var fightGroupId = parseInt($(obj).attr("FightGroupId"));
+                                var preSaleId = parseInt($(obj).attr("preSaleId"));
+                                if (isNaN(countdownid)) {
+                                    countdownid = 0;
+                                }
+                                if (isNaN(groupbuyid)) {
+                                    groupbuyid = 0;
+                                }
+                                if (isNaN(fightGroupId)) {
+                                    fightGroupId = 0;
+                                }
+                                if (isNaN(preSaleId)) {
+                                    preSaleId = 0;
+                                }
+                                $("#UserOrders_dropPayType").empty();
+                                if (fightGroupId > 0) {
+                                    $("#dropPayType_all option").each(function () {
+                                        var isBackReturn = $(this).attr("IsBackReturn");//如果不支持原路返回则删除
+                                        if (isBackReturn == "true") {
+                                            $("#UserOrders_dropPayType").append("<option value=\"" + $(this).val() + "\">" + $(this).text() + "</option>");
+                                        }
+                                    });
+                                } else {
+                                    if (countdownid > 0 || groupbuyid > 0) {
+                                        $("#dropPayType_all option").each(function () {
+                                            var gateway = $(this).attr("gateway");
+                                            if (gateway != "hishop.plugins.payment.bankrequest" && gateway != "hishop.plugins.payment.podrequest") {
+                                                $("#UserOrders_dropPayType").append("<option value=\"" + $(this).val() + "\">" + $(this).text() + "</option>");
+                                            }
+
+                                        });
+                                    }
+                                    else {
+                                        $("#dropPayType_all option").each(function () {
+                                            if (preSaleId > 0) {
+                                                var gateway = $(this).attr("gateway");
+                                                if (gateway != "hishop.plugins.payment.podrequest") {
+                                                    $("#UserOrders_dropPayType").append("<option value=\"" + $(this).val() + "\">" + $(this).text() + "</option>");
+                                                }
+                                            }
+                                            else {
+                                                $("#UserOrders_dropPayType").append("<option value=\"" + $(this).val() + "\">" + $(this).text() + "</option>");
+                                            }
+                                        });
+                                    }
+                                }
+                                type = "pay";
+                                setArryText('UserOrders_hdorderId', $(obj).attr("oId"));
+                                $("#UserOrders_dropPayType").val($(obj).attr("pId"));
+                                setArryText('UserOrders_dropPayType', $(obj).attr("pId"));
+                                $("#msgP").html("");
+                                DialogShow("确认支付方式", "payselect", "pay_div", "UserOrders_btnPay");
+                            }
+
+                            //申请退款
+                            function ApplyForRefund(obj) {
+                                type = "refund";
+                                var orderId = $(obj).attr("OrderId");
+                                var SkuId = $(obj).attr("SkuId");
+                                if (SkuId == undefined) SkuId = "";
+                                window.location.href = "/User/RefundApply?OrderId=" + orderId + "&SkuId=" + SkuId;
+                                //DialogFrame(RefundUrl, "申请退款", 400, 450, function () { });
+                                return false;
+                            }
+                            //申请售后
+                            function ToAfterSales(obj) {
+                                type = "refund";
+                                var orderId = $(obj).attr("OrderId");
+                                var SkuId = $(obj).attr("SkuId");
+                                if (SkuId == undefined) SkuId = "";
+                                var RefundUrl = "/User/RefundApply.aspx?OrderId=" + orderId + "&SkuId=" + SkuId;
+                                window.location.href = "/User/AfterSalesApply?OrderId=" + orderId + "&SkuId=" + SkuId;
+                            }
+                            function ViewMessage(obj) {
+                                var content = $(obj).attr("content");
+                                var title = $(obj).attr("title");
+                                if (title == undefined || title == "") {
+                                    title = $(obj).text();
+                                }
+                                $("#message_con").html(content);
+                                DialogShow(title, "viewmessage", "viewmessage_div", "btnViewMessage");
+                                return false;
+                            }
+                        </script>
+                        <!-- InstanceEndEditable -->
+                    </div>
+                    <%<asp:Panel ID="panl_productcommentTip" runat="server" Visible="false">%>
+                    <script type="text/javascript">
+                        $(function () {
+                            var hideItem = '<div class="j_modal_qt modal-backdrop  in"></div>';
+                            $("body").append(hideItem);
+                            $(".j_close").click(function () {
+                                $(".j_orderCompletedshow").hide();
+                                $(".j_modal_qt").remove();
+                            });
+                            $(".j_goCommentLink").click(function () {
+                                if (typeof ($("#UserOrders_goCommentLink").val()) != "undefined" && ($("#UserOrders_goCommentLink").val() != "")) {
+                                    location.href = $("#UserOrders_goCommentLink").val();
+                                }
+                            });
+                        });
+
+                    </script>
+                          <!--订单完成提示-->
+                          <div class="j_orderCompletedshow modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="top:200px;display:block">
+                              <div class="modal-dialog modal-sm" role="document">
+                                  <div class="modal-content">
+                                      <div class="orderFinishedT">
+                                          <h3>订单完成</h3>
+                                          <p>写商品评价可获得积分奖励！</p>
+                                          <%<asp:HiddenField ID="goCommentLink" runat="server" />%>
+                                          <div class="btnpingj"><input name="" value="去评价" class="j_goCommentLink btn btn-primary" style="padding:6px 0px;"></div>
+                                          <button type="button" class="j_close close guanbi" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                    </asp:Panel>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="user_order">
+        <div id="divshow" class="dialog">
+            <div class="dialog_title">
+                <div class="dialog_title_l"><span>付款失败</span></div>
+                <div class="dialog_title_r"> </div>
+            </div>
+            <div class="dialog_cartitem">
+                <p><span id="spcounttype">您来晚了，订单中有商品库存不足请联系卖家处理。</span></p>
+                <div class="btnbar">
+                    <a class="btn-continue">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('.dialog_title_r').click(function () {
+                $('.dialog').hide();
+                $('.modal_qt').hide();
+            })
+        })
+
+        $(document).ready(function (e) {
+            if ($(".tab_box1").length < 1) {
+                $("#StatusList").addClass("null");
+            }
+            $("#StatusList .txt2 span").click(function (e) {
+                var status = $(this).attr("Status");
+                window.location.href = "?orderStatus=" + status;
+            })
+        });
+    </script>
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

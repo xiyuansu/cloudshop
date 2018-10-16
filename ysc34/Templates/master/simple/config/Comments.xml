@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--<Comment Id="1" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="" MaxNum="2" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="2" Type="category" CategoryId="109" MaxNum="16" />
+  <Comment Id="3" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="92*39" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="5" Type="brand" CategoryId="37" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="88*30" />
+  <Comment Id="6" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="86*29" />
+  <Comment Id="7" Type="attribute" CategoryId="309" MaxNum="5" />
+  <Comment Id="8" Type="title" Title="精挑细选" ImageTitle="/templates/master/default/UploadImage/titleimg/20141215174546_7619.png" TitleImageSize="200*150" />
+  <Comment Id="9" Type="morelink" Title="更多&amp;gt;&amp;gt;" CategoryId="20" />
+  <Comment Id="10" Type="title" Title="美容护肤" ImageTitle="/templates/master/default/UploadImage/titleimg/20141215174632_6925.png" TitleImageSize="28*36" />
+  <Comment Id="11" Type="category" CategoryId="20" MaxNum="14" />
+  <Comment Id="12" Type="keyword" CategoryId="223" MaxNum="10" />
+  <Comment Id="13" Type="title" Title="智能手机" ImageTitle="/templates/master/default/UploadImage/titleimg/20141215174708_4012.png" TitleImageSize="28*36" />
+  <Comment Id="14" Type="morelink" Title="更多&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="15" Type="keyword" CategoryId="273" MaxNum="10" />
+  <Comment Id="16" Type="category" CategoryId="13" MaxNum="8" />
+  <Comment Id="17" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="86*29" />-->
+  <Comment Id="1" Type="title" Title="" ImageTitle="/templates/master/simple/UploadImage/titleimg/t21.jpg" TitleImageSize="28*36" />
+  <Comment Id="2" Type="morelink" Title="查看更多&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="3" Type="title" Title="" ImageTitle="/templates/master/simple/UploadImage/titleimg/t26.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="morelink" Title="查看更多&amp;gt;" CategoryId="" />
+  <Comment Id="5" Type="keyword" CategoryId="" MaxNum="4" />
+  <Comment Id="6" Type="title" Title="" ImageTitle="/templates/master/simple/UploadImage/titleimg/t39.jpg" TitleImageSize="28*36" />
+  <Comment Id="7" Type="morelink" Title="查看更多&amp;gt;" CategoryId="" />
+  <Comment Id="8" Type="keyword" CategoryId="" MaxNum="4" />
+  <Comment Id="9" Type="title" Title="" ImageTitle="/templates/master/simple/UploadImage/titleimg/t40.jpg" TitleImageSize="28*36" />
+  <Comment Id="10" Type="morelink" Title="查看更多&amp;gt;" CategoryId="" />
+  <Comment Id="11" Type="keyword" CategoryId="" MaxNum="4" />
+  <Comment Id="12" Type="title" Title="" ImageTitle="/templates/master/simple/UploadImage/titleimg/t41.jpg" TitleImageSize="28*36" />
+  <Comment Id="13" Type="morelink" Title="查看更多&amp;gt;" CategoryId="" />
+  <Comment Id="14" Type="keyword" CategoryId="" MaxNum="4" />
+  <Comment Id="15" Type="title" Title="" ImageTitle="/templates/master/simple/UploadImage/titleimg/t43.jpg" TitleImageSize="28*36" />
+  <Comment Id="16" Type="morelink" Title="点击进入&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="18" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="88*30" />
+  <Comment Id="19" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="88*30" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

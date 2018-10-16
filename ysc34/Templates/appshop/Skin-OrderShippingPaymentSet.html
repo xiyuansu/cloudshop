@@ -1,0 +1,298 @@
+﻿<hi:common_appheader runat="server" />
+<form id="form" role="form" runat="server">
+    <input type="hidden" id="hidDeliveryTime" runat="server" value="任意时间" ClientIdMode="static" />
+    <input type="hidden" id="hidGetgoodsOnStores" runat="server" value="true" ClientIdMode="static" /><!--是否可以上门自提-->
+    <input type="hidden" id="hidHasStoresInCity" runat="server" value="true" ClientIdMode="static" /><!--支持上门自提，本市是否有门店支持-->
+    <input type="hidden" id="hidPaymentId_Podrequest" runat="server" value="0" ClientIdMode="static" /><!--货到付款支付ID-->
+    <input type="hidden" id="hidPaymentId_Offline" runat="server" value="0" ClientIdMode="static" /><!--线下支付ID-->
+    <input type="hidden" id="inputShippingModeId" runat="server" value="0" ClientIdMode="static" /><!--配送方式ID-->
+    <input type="hidden" id="hidStoreId" runat="server" value="0" ClientIdMode="static" /><!--门店ID-->
+    <input type="hidden" id="inputPaymentModeId" runat="server" value="" clientidmode="static" /><!--支付方式-->
+    <input type="hidden" id="hidShipAddressId" runat="server" value="0" clientidmode="static" /><!--收货地址Id -->
+    <input type="hidden" id="hidOnlinePayCount" runat="server" value="0" ClientIdMode="static" /><!--在线支付方式总数，等于0时不显示在线支付方式-->
+    <input type="hidden" id="hidHasSupplierProduct" runat="server" value="0" ClientIdMode="static" /><!--是否有供应商商品-->
+
+
+    <div class="att-popup">
+        <div class="att-popup-container deliveryed">
+            <ul id="deliveryed">
+                <li>任意时间</li>
+                <li>工作日</li>
+                <li>节假日</li>
+            </ul>
+            <span class="close_pop">取消</span>
+        </div>
+    </div>
+    <div class="step3">
+        <div class="step3_c" id="selectShipToDateDiv">
+            <h3>配送方式</h3>
+            <a href="javascript:;">快递配送</a>
+            <a href="javascript:;">上门自提</a>
+        </div>
+        <div class="delivery delivery_1">选择送货时间：<span>任意时间</span><i class="icon_viewdetial"></i></div>
+        <div class="step1 smzt" id="divStore">
+            <div class="step1_left">
+                <span class="icon_adress_1 mt_10"></span>
+            </div>
+            <div class="m step1-in ">
+                <a href="javascript:void(0)" onclick="goChoiceStore()" id="aStoreMsg">
+                    <div class="s1-name">
+                        <span><asp:literal runat="server" id="litStoreName" /></span>
+                    </div>
+                    <div class="color_6">
+                        <asp:literal runat="server" id="litAddress" />
+                    </div>
+                    <div>联系电话：<asp:literal runat="server" id="litTel" /></div>
+                </a>
+            </div>
+            <div class="step1_right">
+                <span class="icon_viewdetial"></span>
+            </div>
+        </div>
+    </div>
+    <div class="step3" style="border-bottom:1px solid #ebebeb">
+        <div class="step3_c" id="selectPaymentDiv">
+            <h3>支付方式</h3>
+            <a href="javascript:;" style="display:none;">在线支付</a>
+            <a href="javascript:;" style="display:none;">货到付款</a>
+            <a href="javascript:;" style="display:none;">到店支付</a>
+            <a href="javascript:;" style="display:none;">线下付款</a>
+        </div>
+    </div>
+    <div style="width:100%; position:fixed;bottom:0;left:0">
+        <input type="button" id="btnSubmit" value="确定" class="btn_fiexd" style="" />
+    </div>
+</form>
+<script>
+    $(function () {
+        var from = getParam("from").toLowerCase();
+        var isOnlyGifts = getParam("isOnlyGifts").toLowerCase() == "true";       
+        $("#btnSubmit").click(function (e) {
+            if ($("#hidDeliveryTime").val() == "" || $("#hidDeliveryTime").val() == undefined) {
+                alert_h("请选择送货时间");
+                return false;
+            }
+            if ($("#inputShippingModeId").val() == "" || $("#inputShippingModeId").val() == undefined) {
+                alert_h("请选择配送方式");
+                return false;
+            }
+            if ($("#inputPaymentModeId").val() == "" || $("#inputPaymentModeId").val() == undefined) {
+                if ($("#selectPaymentDiv").find("a:visible").length <= 0) {
+                    alert_h("商城暂未配置支付方式，请稍后提交");
+                }
+                else {
+                    alert_h("请选择支付方式");
+                }
+                return false;
+            }
+            if ($("#inputShippingModeId").val() == "-2" && $("#hidHasStoresInCity").val() != "false" && ($("#hidStoreId").val() == "" || $("#hidStoreId").val() == "0")) {
+                alert_h("您选择了上门自提，请选择自提的门店");
+                return false;
+            }
+            if ($("#inputShippingModeId").val() == "-2" && $("#hidHasStoresInCity").val() == "false") {
+                alert_h("您选择了上门自提，但本市无可自提的门店，请选择其他配送方式");
+                return false;
+            }
+            var submitUrl = "SubmmitOrder.aspx" + location.search;
+            submitUrl = replaceParam(submitUrl, "deliveryTime", $("#hidDeliveryTime").val());
+            submitUrl = replaceParam(submitUrl, "ShippingModeId", $("#inputShippingModeId").val());
+            submitUrl = replaceParam(submitUrl, "StoreId", $("#hidStoreId").val());
+            submitUrl = replaceParam(submitUrl, "PaymentModeId", $("#inputPaymentModeId").val());
+            submitUrl = replaceParam(submitUrl, "ShipAddressId", $("#hidShipAddressId").val());
+            location.replace(submitUrl);
+        });
+        //如果不支持上门自提，则不显示上门自提和  到店支付的选项
+        if ($("#hidGetgoodsOnStores").val() == "false" || isOnlyGifts || $("#hidHasSupplierProduct").val() == "1") {
+            $("#selectShipToDateDiv a").eq(1).hide();
+            $("#inputShippingModeId").val("0");
+            $("#selectShipToDateDiv a").eq(0).addClass("a_time").siblings().removeClass("a_time");
+            $("#selectPaymentDiv a").eq(2).hide();
+            if ($("#inputPaymentModeId").val() == "-3") {
+                $("#inputPaymentModeId").val(1);
+                $("#selectPaymentDiv a").eq(0).addClass("a_time").siblings().removeClass("a_time");
+            }
+            $("#divStore").hide();
+        }
+        else {
+            $("#selectPaymentDiv a").eq(2).show();
+            $("#divStore").show();
+        }
+        var onlinePayCount = parseInt($("#hidOnlinePayCount").val());
+        if (onlinePayCount > 0) {
+            $("#selectPaymentDiv a").eq(0).show();
+        }
+        //如果开启了货到付款
+        if ($("#hidPaymentId_Podrequest").val() == "1" && $("#hidHasSupplierProduct").val() != "1" && !isOnlyGifts) {
+            $("#selectPaymentDiv a").eq(1).show();
+        }
+        //如果开启了线下付款
+        if ($("#hidPaymentId_Offline").val() == "2" && $("#hidHasSupplierProduct").val() != "1" && !isOnlyGifts) {
+            $("#selectPaymentDiv a").eq(3).show();
+        }
+        //设置默认配送方式
+        if ($("#inputShippingModeId").val() == "0") {
+            $("#selectShipToDateDiv a").eq(0).addClass("a_time").siblings().removeClass("a_time");
+            $("#selectPaymentDiv a").eq(2).hide();
+            $("#divStore").hide();
+            if (from.toLowerCase() == "fightgroup") {
+                $("#selectPaymentDiv a").eq(1).hide();
+                $("#selectPaymentDiv a").eq(3).hide();
+            }
+        }
+        else {
+            $("#selectPaymentDiv a").eq(1).hide();
+            $("#selectPaymentDiv a").eq(3).hide();
+            if (from.toLowerCase() == "fightgroup") {
+                $("#selectShipToDateDiv a").eq(2).hide();
+                $("#selectPaymentDiv a").eq(2).hide();
+            }
+            $("#selectShipToDateDiv a").eq(1).addClass("a_time").siblings().removeClass("a_time");
+            $(".delivery").hide();
+        }
+
+        $(".delivery").click(function (e) {
+            $('.att-popup').addClass('is-visible');
+        });
+        $('.close_pop').on('click', function () {
+            $('.att-popup').removeClass('is-visible');
+        });
+        //设置默认配送时间
+        $(".delivery span").text($("#hidDeliveryTime").val());
+        //默认支付方式设置
+        var onlinePayCount = parseInt($("#hidOnlinePayCount").val());
+        if ($("#inputPaymentModeId").val() == "0" && onlinePayCount > 0) {
+            $("#selectPaymentDiv a").eq(0).addClass("a_time");
+            $("#selectPaymentDiv a").eq(0).show();
+        }
+        else if ($("#inputPaymentModeId").val() == $("#hidPaymentId_Podrequest").val()) {
+            $("#selectPaymentDiv a").eq(1).addClass("a_time");
+        }
+        else if ($("#inputPaymentModeId").val() == "-3") {
+            $("#selectPaymentDiv a").eq(2).addClass("a_time");
+        }
+        else if ($("#inputPaymentModeId").val() == $("#hidPaymentId_Offline").val()) {
+            $("#selectPaymentDiv a").eq(3).addClass("a_time");
+        }
+        else {
+            if ($("#selectPaymentDiv a").eq(1).is(":visible")) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Podrequest").val());
+                $(".selectPaymentDiv a").eq(1).addClass("a_time");
+            }
+            else if ($("#selectPaymentDiv a").eq(2).is(":visible")) {
+                $("#SubmmitOrder_inputPaymentModeId").val("-3");
+                $("#selectPaymentDiv a").eq(2).addClass("a_time");
+            }
+            else if ($("#selectPaymentDiv a").eq(3).is(":visible")) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Offline").val());
+                $("#selectPaymentDiv a").eq(3).addClass("a_time");
+            }
+            else {
+                $("#inputPaymentModeId").val("");
+              //  $("#btnSubmit").attr("disabled", true);
+            }
+        }
+
+        if ($("#hidStoreId").val() == "0" || $("#hidStoreId").val() == "") {
+            $("#aStoreMsg").html("请选择自提门店");
+        }
+
+        //如果本市无门店则提示
+        if ($("#hidGetgoodsOnStores").val() == "true" && $("#hidHasStoresInCity").val() == "false") {
+            $("#aStoreMsg").html("本市无可自提的门店");
+            $("#aStoreMsg").removeAttr("onclick");
+        }
+
+
+
+        //配送时间选择
+        $("#deliveryed li").on("click touchend", (function (e) {
+            $("#hidDeliveryTime").val($(this).text());
+            $(".delivery span").text($(this).text());
+            $(".close_pop").trigger("click");
+            $(".att-popup").removeClass("is-visible");
+        }));
+
+        //配送方式点击
+        $("#selectShipToDateDiv a").on("click touchend", function (e) {
+
+            var index = $("#selectShipToDateDiv a").index($(this));
+            $(this).addClass("a_time").siblings().removeClass("a_time");
+            //如果快递配送
+            if (index == 0) {
+                $("#inputShippingModeId").val("0");
+                var paymentId_PayAfterGetGoods = parseInt($("#hidPaymentId_Podrequest").val());
+                //如果后台配置了货到付款方式则显示货到付款，否则不显示
+                if (!isNaN(paymentId_PayAfterGetGoods) && paymentId_PayAfterGetGoods > 0 && (from != "fightgroup") && $("#hidHasSupplierProduct").val() != "1" && !isOnlyGifts) {
+                    $("#selectPaymentDiv a").eq(1).show();
+                }
+                else {
+                    $("#selectPaymentDiv a").eq(1).hide();
+                }
+
+                $("#selectPaymentDiv a").eq(2).hide();
+                //如果选择了快递配送，但是支付方式选择了到店支付则更改支付方式为在线支付
+                if ($("#inputPaymentModeId").val() == $("#hidPaymentId_Podrequest").val()) {
+                    $("#inputPaymentModeId").val("0");
+                    $("#selectPaymentDiv a").eq(0).addClass("a_time").siblings().removeClass("a_time");
+                }
+                if ($("#hidPaymentId_Offline").val() != "0" && (from != "fightgroup") && $("#hidHasSupplierProduct").val() != "1" && !isOnlyGifts) {
+                    $("#selectPaymentDiv a").eq(3).show();
+                }
+                $("#divStore").hide();
+                $(".delivery").show();
+            }//上门自提
+            else if (index == 1) {
+                $("#inputShippingModeId").val("-2");
+                if ($("#hidGetgoodsOnStores").val() != "false" && from.toLowerCase() != "fightgroup" && $("#hidHasSupplierProduct").val() != "1" && !isOnlyGifts) {
+                    $("#selectPaymentDiv a").eq(2).show();
+                }
+                else {
+                    $("#selectPaymentDiv a").eq(2).hide();
+                }
+                $("#selectPaymentDiv a").eq(1).hide();
+                $("#selectPaymentDiv a").eq(3).hide();
+                //如果选择了上门自提，但是支付方式选择了货到付款则更改支付方式为在线支付
+                if ($("#inputPaymentModeId").val() == $("#hidPaymentId_Podrequest").val()) {
+                    $("#inputPaymentModeId").val("0");
+                    $("#selectPaymentDiv a").eq(0).addClass("a_time").siblings().removeClass("a_time");
+                }
+                $("#divStore").show();
+                $(".delivery").hide();
+            }
+        });
+
+        //支付方式点击
+        $("#selectPaymentDiv a").on("click touchend", function (e) {
+            var index = $("#selectPaymentDiv a").index($(this));
+            $(this).addClass("a_time").siblings().removeClass("a_time");
+            if (index == 0) {
+                $("#inputPaymentModeId").val("0");
+            }
+            else if (index == 1) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Podrequest").val());
+            }
+            else if (index == 2) {
+                //到店支付
+                $("#inputPaymentModeId").val("-3");
+                if ($("#hidHasStoresInCity").val() == "false") {
+                    $("#selectPaymentDiv a").eq(0).addClass("a_time").siblings().removeClass("a_time");
+                }
+            }
+            else if (index == 3) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Offline").val());
+            }
+        });
+
+    })
+    function goChoiceStore() {
+        var submitUrl = "OrderStoresSet.aspx" + location.search;
+        submitUrl = replaceParam(submitUrl, "deliveryTime", $("#hidDeliveryTime").val());
+        submitUrl = replaceParam(submitUrl, "ShippingModeId", $("#inputShippingModeId").val());
+        submitUrl = replaceParam(submitUrl, "StoreId", $("#hidStoreId").val());
+        submitUrl = replaceParam(submitUrl, "PaymentModeId", $("#inputPaymentModeId").val());
+        submitUrl = replaceParam(submitUrl, "ShipAddressId", $("#hidShipAddressId").val());
+        location.replace(submitUrl);
+    }
+
+</script>
+<!--<hi:common_appfooter runat="server" />-->

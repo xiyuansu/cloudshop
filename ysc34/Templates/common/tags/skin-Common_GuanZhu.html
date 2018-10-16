@@ -1,0 +1,46 @@
+﻿<div id="guanzhuYL"></div>
+<div class="guanzhuct">
+    <div class="toumingdi"></div>
+    <div class="gerweimabg"><div class="gerweima"><img id="qrcode1" alt="" /></div></div><!--小灯笼-->
+    <div class="force-erweimabg"><asp:image id="QRCode" runat="server" ClientIDMode="Static"></asp:image></div>
+</div>
+<input type="hidden" id="hidIsForceAttention" runat="server" ClientIdMode="static" />
+<script>
+    $(document).ready(function () {
+        $("#qrcode1").attr("src", $("#QRCode").attr("src"));
+        var guanzhuct = $(".guanzhuct");
+        var isForceAttention = $("#hidIsForceAttention").val() == "true";
+        if (isForceAttention) {
+            guanzhuct.show();
+            $(".gerweimabg").hide();
+            $(".force-erweimabg").show();
+            $("#guanzhuYL").hide();
+        }
+        else {
+            $(".gerweimabg").show();
+            $(".force-erweimabg").hide();
+        }
+        $("#guanzhuYL").click(function () {
+            if (isForceAttention) {
+                $(".gerweimabg").hide();
+                $(".toumingdi").show();
+            }
+            else {
+                $(".gerweimabg").show();
+                $(".toumingdi").hide();
+            }
+            guanzhuct.show();
+        });
+        $(".gerweimabg").click(function (e) {
+            e.stopPropagation();
+            return true;
+        });
+            $(".guanzhuct").click(function () {
+                if (!isForceAttention) {
+                    guanzhuct.hide();
+                    $(".gerweimabg").hide();
+                    $(".toumingdi").hide();
+                }
+            })
+        });
+</script>

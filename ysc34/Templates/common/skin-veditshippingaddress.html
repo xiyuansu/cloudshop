@@ -1,0 +1,167 @@
+﻿<hi:common_wapheader runat="server" />
+<form id="form1" runat="server">
+    <input id="hidIsOpenCertification" value="" type="hidden" runat="server" clientidmode="static" />
+    <div class="pbox">
+        <div class="tk_main">
+            <div class="tk_group">
+                <label for="username">姓名</label>
+                <div class="input-group selectReason">
+                    <input id="shipTo" runat="server" clientidmode="Static" type="text" placeholder="请输入收货人姓名">
+                </div>
+            </div>
+            <div class="tk_group">
+                <label for="username">电话</label>
+                <div class="input-group selectReason">
+                    <input id="cellphone" runat="server" clientidmode="Static" type="text" placeholder="请填写收货人手机号">
+                </div>
+            </div>
+            <hi:common_waplocateaddress runat="server"></hi:common_waplocateaddress>
+            <hi:common_waplocateaddressupgrade runat="server"></hi:common_waplocateaddressupgrade>
+            <div class="toolbar-panel" style=" line-height:2rem;">
+                <label class="label-checkbox item-content">
+                    <input type="checkbox" id="chkIsDefault" style="-webkit-appearance:checkbox; width:16px; height:16px;" runat="server" clientidmode="Static" />
+                    <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                </label>
+                设为默认
+            </div>
+        </div>
+        <div class="btn_tk">
+            <button type="button" onclick="AddShippingAddress()" class="btn_login" id="butSubmit" clientidmode="Static">
+                保存收货地址
+            </button>
+            <input name="address" id="shipId" runat="server" clientidmode="Static" type="hidden" />
+        </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#butSubmit").text($("#hidIsOpenCertification").val());
+    });
+    function AddShippingAddress() {
+        var reg = new RegExp("[\u4e00-\u9fa5a-zA-Z ]+[\u4e00-\u9fa5_a-zA-Z0-9]*");
+        var isValite = true;
+        if ($("#shipTo").val() == "" || $("#shipTo").val().length < 2 || !reg.test($("#shipTo").val())) {
+            $("#shipTo").focus();
+            ShowMsg('请填写您的真实姓名', false);
+            //alert_h("收货人名字不能为空，只能是汉字或字母开头，长度在2-20个字符之间");
+            isValite = false;
+            return false;
+        }
+        else {
+            $("#divShipToTip").hide();
+        }
+       
+        if (!Reg_mobbile.test($("#cellphone").val())) {
+            $("#divCellphoneTip").show();
+            $("#cellphone").focus();
+            ShowMsg('请填写正确的手机号码', false);
+            //alert_h($("#cellphone").attr('placeholder'));
+            isValite = false;
+            return false;
+        }
+        else {
+            $("#divCellphoneTip").hide();
+        }
+
+        var latitude = $("#hidLatitude").val();
+        var longitude = $("#hidLongitude").val();
+        var regionLocation = "";
+        if ($("#shopRegion").length > 0) {
+            regionLocation = $("#shopRegion").html().trim();
+        }
+        if ($("#hidLatitude").length > 0 && (latitude == "" || regionLocation == "请选择地区")) {
+            isValite = false;
+            ShowMsg("请选择地区", false);
+            return false;
+        }
+
+        var regionId = parseInt($("#region").val());
+        if (isNaN(regionId) || regionId <= 0) {
+            isValite = false;
+            ShowMsg("请选择省市区街道", false);
+            return false;
+        }
+
+        if ($("#address").val() == "") {
+            $("#divAddressTip").show();
+            $("#address").focus();
+            ShowMsg("请输入详细地址", false);
+            isValite = false;
+            return false;
+        }
+        else {
+            $("#divAddressTip").hide();
+        }
+
+        if (!isValite)
+            return false;
+
+
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post',
+            dataType: 'json',
+            timeout: 10000,
+            data: {
+                action: "UpdateShippingAddress",
+                shipTo: $("#shipTo").val(),
+                address: $("#address").val(),
+                cellphone: $("#cellphone").val(),
+                regionSelectorValue: $("#region").val(),
+                shippingid: $('#shipId').val(),
+                IsDefault: $("#chkIsDefault").is(':checked'),
+                regionLocation: "",
+                latitude: latitude,
+                longitude: longitude,
+                BuildingNumber: $("#txtBuildingNumber").val()
+            },
+            success: function (resultData) {
+                if (resultData.success) {
+                    var returnUrl = getParam("returnUrl");
+                    if (returnUrl == null || returnUrl == "" || returnUrl == undefined) {
+                        var urlref = document.referrer;
+                        var currdomain = document.domain;
+                        if (urlref != "" && urlref != undefined && urlref.indexOf(currdomain) > -1 && urlref.indexOf("Login") == -1 && urlref.indexOf("ChangeMapPosition") == -1)
+                            if ($("#butSubmit").text() == "下一步") {
+                                //开启实名验证
+                                location.href = "SubmitIDInfo.aspx?ShippingId=" + $('#shipId').val() + "&returnUrl=" + urlref;;
+                            } else {
+                                location.href = urlref;
+                            }
+                        else {
+                            if ($("#butSubmit").text() == "下一步") {
+                                //开启实名验证
+                                location.href = "SubmitIDInfo.aspx?ShippingId=" + $('#shipId').val() + "&returnUrl=ShippingAddresses.aspx";
+                            } else {
+                                location.href = "ShippingAddresses.aspx";
+                            }
+                        }
+                        return false;
+                    }
+                    else {
+                        location.href = replaceParam(decodeURIComponent(returnUrl), "ShipAddressId", $('#shipId').val());
+                        //location.href = decodeURIComponent(returnUrl);
+                        return false;
+                    }
+                }
+                else {
+                    if (resultData.msg != undefined && resultData.msg != "") {
+                        alert_h("编辑失败," + resultData.msg);
+                    }
+                    else {
+                        alert_h("编辑失败,会员未登录或者错误地址信息！")
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

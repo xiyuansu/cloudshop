@@ -1,0 +1,212 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/simple/js/jquery.SuperSlide2.js"></script>
+ 
+<style>
+	.nav_box{ border-bottom:0;}
+</style>
+ 
+<div class="center" id="main">
+	<div class="tip">
+    		<hi:common_customad runat="server" adid="19" isdelayedloading="true"></hi:common_customad>
+    </div> 
+	<div class="banner">
+    	<div class="slider">
+          	<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="5" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_5").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+            <div class="pnBtn prev">
+                <span class="blackBg"></span><a class="arrow" href="javascript:void(0)" style="display: none;"></a>
+            </div>
+            <div class="pnBtn next">
+                <span class="blackBg"></span><a class="arrow" href="javascript:void(0)" style="display: none;"></a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="productclass">
+    	<div class="w950 m0">
+        	<div class="title">
+            	<h2><hi:common_customad runat="server" adid="6" isdelayedloading="true"></hi:common_customad></h2>
+                <div class="search">
+                    <Hi:Common_Search ID="Common_Search" runat="server" />
+                </div>
+            </div>
+            <div class="con">
+            	<script type="text/javascript" src="/templates/master/simple/js/jcarousellite.js"></script>
+            	<div class="carousel">
+                	<a href="javascript:void(0);" class="prev" id="prev-01"></a>
+                    <div class="jCarouselLite" id="demo-01">
+                    		<hi:common_customad runat="server" adid="7" isdelayedloading="true"></hi:common_customad>
+                    </div>
+                	<a href="javascript:void(0);" class="next" id="next-01"></a>
+                	<div class="clear"></div>
+                    <script type="text/javascript">
+						$(document).ready(function(){
+							$('#demo-01').jCarouselLite({
+								btnPrev: '#prev-01',
+								btnNext: '#next-01',
+								visible:7,
+								auto:3000
+							});		
+						});
+					</script>   
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="recommend">
+    	<div class="w950 m0">
+        	<div class="title">
+                <h2>	<hi:common_customad runat="server" adid="8" isdelayedloading="true"></hi:common_customad></h2>
+                <span class="more"><hi:common_customad runat="server" adid="9"></hi:common_customad></span>
+            </div>
+            <div class="con">
+            		<hi:common_customad runat="server" adid="10" isdelayedloading="true"></hi:common_customad>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="/templates/master/simple/js/scroll.1.3.js"></script>
+    <div class="newproduct w950 m0">
+    	<div class="title">
+        	<h2><hi:common_subjecttitle runat="server" commentid="1"></hi:common_subjecttitle></h2>
+            <span class="more"><hi:common_subjectmorelink runat="server" commentid="2"></hi:common_subjectmorelink></span>
+        </div>
+        <div class="con">
+        	<div id="sca1" class="warp-pic-list">
+                <div id="wrapBox1" class="wrapBox">
+                    <ul id="count1" class="count clearfix">
+                    	<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="1"></hi:common_subjectproduct_simple>
+                    </ul>
+                </div>
+            </div>
+            <a id="right1" class="prev btn1"></a>
+                <a id="left1" class="next btn1"></a>
+        </div>
+    </div>
+
+    
+    <div class="moudle w950 m0">
+    	<div class="moudle_top">
+        	<div class="info">
+            	<h2><hi:common_subjecttitle runat="server" commentid="3"></hi:common_subjecttitle></h2>
+                <ul class="fenlei">
+                	<hi:common_subjectkeyword runat="server" commentid="5"></hi:common_subjectkeyword>
+                </ul>
+                <div class="more"><hi:common_subjectmorelink runat="server" commentid="4"></hi:common_subjectmorelink></div>
+            </div>
+            <div class="adv"><hi:common_customad runat="server" adid="11" isdelayedloading="true"></hi:common_customad></div>
+        </div>
+        <div class="moudle_bot">
+        	<ul>
+        		<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="2"></hi:common_subjectproduct_simple>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="moudle w950 m0">
+    	<div class="moudle_top">
+        	<div class="info">
+            	<h2><hi:common_subjecttitle runat="server" commentid="6"></hi:common_subjecttitle></h2>
+                <ul class="fenlei">
+                	<hi:common_subjectkeyword runat="server" commentid="8"></hi:common_subjectkeyword>
+                </ul>
+                <div class="more"><hi:common_subjectmorelink runat="server" commentid="7"></hi:common_subjectmorelink></div>
+            </div>
+            <div class="adv"><hi:common_customad runat="server" adid="12" isdelayedloading="true"></hi:common_customad></div>
+        </div>
+        <div class="moudle_bot">
+        	<ul>
+        		<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="3"></hi:common_subjectproduct_simple>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="moudle w950 m0">
+    	<div class="moudle_top">
+        	<div class="info">
+            	<h2><hi:common_subjecttitle runat="server" commentid="9"></hi:common_subjecttitle></h2>
+                <ul class="fenlei">
+                	<hi:common_subjectkeyword runat="server" commentid="11"></hi:common_subjectkeyword>
+                </ul>
+                <div class="more"><hi:common_subjectmorelink runat="server" commentid="10"></hi:common_subjectmorelink></div>
+            </div>
+            <div class="adv"><hi:common_customad runat="server" adid="13" isdelayedloading="true"></hi:common_customad></div>
+        </div>
+        <div class="moudle_bot">
+        	<ul>
+        		<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="7"></hi:common_subjectproduct_simple>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="moudle w950 m0">
+    	<div class="moudle_top">
+        	<div class="info">
+            	<h2><hi:common_subjecttitle runat="server" commentid="12"></hi:common_subjecttitle></h2>
+                <ul class="fenlei">
+                	<hi:common_subjectkeyword runat="server" commentid="14"></hi:common_subjectkeyword>
+                </ul>
+                <div class="more"><hi:common_subjectmorelink runat="server" commentid="13"></hi:common_subjectmorelink></div>
+            </div>
+            <div class="adv"><hi:common_customad runat="server" adid="14" isdelayedloading="true"></hi:common_customad></div>
+        </div>
+        <div class="moudle_bot">
+        	<ul>
+        		<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="8"></hi:common_subjectproduct_simple>
+            </ul>
+        </div>
+    </div>
+    		
+    <div class="preferential w950 m0">
+    	<div class="adv"><hi:common_customad runat="server" adid="15"></hi:common_customad></div>
+    	<div class="right">
+        	<div class="title">
+            	<h2><hi:common_subjecttitle runat="server" commentid="15"></hi:common_subjecttitle></h2>
+                <span><hi:common_customad runat="server" adid="16" isdelayedloading="true"></hi:common_customad>
+                <hi:common_subjectmorelink runat="server" commentid="16"></hi:common_subjectmorelink></span>
+            </div>
+            <div class="con">
+            	<ul>
+                	<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="6"></hi:common_subjectproduct_simple>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <script type="text/javascript">
+	jQuery(".slider .bd li").first().before( jQuery(".slider .bd li").last() );				
+	jQuery(".slider").hover(function(){ jQuery(this).find(".arrow").stop(true,true).fadeIn(300) },function(){ jQuery(this).find(".arrow").fadeOut(300) });				
+	jQuery(".slider").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"leftLoop",  autoPlay:true, vis:3, autoPage:true, trigger:"click"});	
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+		$("#count1").dayuwscroll({
+			parent_ele:'#wrapBox1',
+			list_btn:'#tabT04',
+			pre_btn:'#left1',
+			next_btn:'#right1',
+			path: 'left',
+			auto:true,
+			time:3000,
+			num:4,
+			gd_num:4,
+			waite_time:500
+		});
+	
+	});
+</script>
+
+<!--main-content结束-->
+ 
+<%<hi:common_footer runat="server" />%>

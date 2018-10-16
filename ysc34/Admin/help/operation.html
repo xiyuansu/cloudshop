@@ -1,0 +1,47 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;" />
+    <title>无标题文档</title>
+    <link type="text/css" rel="stylesheet" href="style/layout.css" />
+    <script src="../../Utility/jquery-1.6.4.min.js"></script>
+    <script src="../../Utility/jquery.artDialog.js"></script>
+    <script src="../../Utility/iframeTools.js"></script>
+    <script>
+    function ShowSecondMenuLeft(firstnode, secondurl, threeurl) {
+        window.parent.ShowMenuLeft(firstnode, secondurl, threeurl);
+        art.dialog.close();
+    }
+    </script>
+</head>
+
+<body>  
+    <div class="ready_meun">
+        <h2>初次使用，向导将带您快速掌握商城平台使用方法</h2>
+        <ul>
+            <li>开始准备</li>
+            <li>录入数据</li>
+            <li>营销推广</li>
+            <li id="ready_pitch">业务管理</li>
+            <li>完成</li>
+        </ul>
+    </div>
+
+    <div class="ready_con">
+        <h2>支付方式</h2>
+        <p>系统已内置支付宝、财付通、银联网上支付、快钱等满足不同顾客消费习惯的20多种支付方式。<a href="javascript:ShowSecondMenuLeft('系统','sales/paymenttypes.aspx','sales/addpaymenttype.aspx')">现在添加</a></p>
+        <h2>运费管理</h2>
+        <p>您可根据不同的地区设置不同的运费标准。<a href="javascript:ShowSecondMenuLeft('系统','sales/manageshippingtemplates.aspx',null)">现在设置</a></p>
+        <h2>物流支持</h2>
+        <p>系统已内置了国内几十种主流物流公司接口，免去商家逐个对接的烦恼。<a href="javascript:ShowSecondMenuLeft('系统','sales/LogisticsCompany.aspx',null)">现在查看</a></p>
+        <h2>订单管理</h2>
+        <p>全网商城主要管理网站前台的会员订单</p>
+        <p>可以批量打印订单单据、自动填写快递单号、批量发货，效率飞跃式提高。<a href="javascript:ShowSecondMenuLeft('订 单','sales/manageorder.aspx',null)">开始管理</a></p>
+        <label></label>
+    </div>
+
+    <div class="guide_buttom2">
+        <span><a href="promote.html">上一步</a></span><em><a href="complete.html">下一步</a></em>
+    </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+﻿<hi:common_wapheader runat="server" />
+<meta name="description" content="">
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<style>
+    body {
+        background: #FFF;
+    }
+
+    .zhezhao {
+        background: #000;
+        top: 0px;
+        left: 0px;
+        opacity: 0.85;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        display: none;
+    }
+
+        .zhezhao img {
+            margin-right: 30px;
+            float: right;
+        }
+</style>
+
+    <div class="huoping_box" runat="server" ID="divIng">
+
+        <div class="item" id="litJoin" runat="server">您已参团成功，还差2人就可以团购成功了!</div>
+        <div class="item1" id="litCreate" runat="server">
+            <div class="state">您已开团成功，再邀请<em id="litNeedPerson" runat="server"></em>个好友就能拼团成功！</div>
+            
+        </div>
+        <div class="pic"><img src="../images/new/shouzhi_03.jpg"></div>
+        <div class="btn1"><a class="share_pic">去呼唤朋友</a></div>
+    </div>
+
+    <div class="huoping_box" runat="server" ID="divSuccess">
+        <div class="item2">恭喜您拼团成功！</div>
+        <div class="pic"><img src="../images/new/success_man.jpg"></div>
+        <div class="btn1"><a href="/vshop/FightGroupActivities.aspx">更多拼团</a></div>
+    </div>
+<div class="zhezhao"><img src="../images/new/share_pic.png"></div>
+<script type="text/javascript">
+    $(function () {
+        $('.share_pic,.huoping_box').click(function () {
+            $('.zhezhao').css('display', 'block');
+        })
+        $('.zhezhao').click(function () {
+            $('.zhezhao').css('display', 'none');
+        })
+        
+        $("[name=description]").attr("content", $("#hidDescription").val())
+        $("title").text($("#hidTitle").val());
+
+
+        var appId = $("#hdAppId").val();
+        var timestamp = $("#hdTimestamp").val();
+        var nonceStr = $("#hdNonceStr").val();
+        var signature = $("#hdSignature").val();
+
+        var title = $("#hdTitle").val();
+        var desc = $("#hdDesc").val();
+        var imgUrl = $("#hdImgUrl").val();
+        var link = $("#hdLink").val();
+
+
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: appId, // 必填，公众号的唯一标识
+            timestamp: timestamp, // 必填，生成签名的时间戳
+            nonceStr: nonceStr, // 必填，生成签名的随机串
+            signature: signature,// 必填，签名，见附录1
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+
+        wx.ready(function () {
+
+            wx.checkJsApi({
+                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
+                success: function (res) {
+
+                    if (res.checkResult.onMenuShareTimeline)   //朋友圈
+                    {
+
+                    }
+                    if (res.checkResult.onMenuShareAppMessage)  //朋友
+                    {
+                    }
+                }
+            });
+
+            wx.onMenuShareTimeline({
+                title: title, // 分享标题
+                link: link, // 分享链接
+                imgUrl: imgUrl, // 分享图标
+                success: function () {
+
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            wx.onMenuShareAppMessage({
+                title: title, // 分享标题
+                desc: desc, // 分享描述
+                link: link, // 分享链接
+                imgUrl: imgUrl, // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+
+        });
+
+        wx.error(function (res) {
+            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+            alert(JSON.stringify(res));
+        });
+    })
+
+
+</script>
+
+<hi:common_wapfooter runat="server" />
+
+
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidTitle" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidDescription" />
+
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTimestamp" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdNonceStr" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdSignature" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static" />

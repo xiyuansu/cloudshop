@@ -1,0 +1,148 @@
+﻿<link rel="stylesheet" href="/Admin/css/bootstrap.min.css" />
+<hi:common_appheader runat="server" />
+<style>
+    a:focus, a:hover {
+        color: #333;
+    }
+</style>
+<link rel="stylesheet" href="/Utility/star/star-rating.css" rev="stylesheet" type="text/css">
+<link href="/Utility/hishopUpload/hishopUpload.css" rel="stylesheet" />
+<form id="form" role="form" runat="server">
+    <%<asp:HiddenField runat="server" ID="hidOrderId" />%>
+    <%<hi:AppshopTemplatedRepeater id="rptRegisterCoupons" templatefile="/Tags/skin-Common_MemberSubmitProductReview.ascx" runat="server" />%>
+    <div class="btns-fixed" style="padding:0.5rem 0;">
+        <a class="btn_orange" id="btnSubmitReview">提交评价</a>
+    </div>
+</form>
+<script type="text/javascript" src="/utility/hishopUpload/jquery.hishopUpload.userWap.js"></script>
+<script type="text/javascript" src="/utility/jquery.form.js" ></script>
+<script src="/Utility/star/star-rating.js"></script>
+<script>
+    var lastSubmitTime = new Date();
+    var submitTimes = 0;
+    $(function () {
+
+        $(".rating-kv").rating();
+        $(".mainreview").each(function () {
+            //先选出 textarea 和 统计字数 dom 节点
+            var wordCount = $(this).find("#wordCount"),
+                textArea = wordCount.find("textarea"),
+                word = wordCount.find(".wordwrap");
+            //调用
+            statInputNum(textArea, word);
+        });
+        // 初始化图片上传控件
+        initImageUpload();
+        //提交
+        $("#btnSubmitReview").click(function () {
+
+            //两秒内重复点击直接返回false
+            var tempDate = new Date();
+            if ((tempDate.getTime() - lastSubmitTime.getTime()) < 2000 && submitTimes > 0) {
+                lastSubmitTime = new Date();
+                submitTimes += 1;
+                return false;
+            }
+            lastSubmitTime = new Date();
+            submitTimes += 1;
+            getUploadImages();
+            var object = new Array();
+
+            $(".like").each(function () {
+                $(this).find("input").eq(0).val($(this).find(".rating").val());
+            })
+            $(".mainreview").each(function () {
+                var productInfo = $(this).find(".ProductId").find("input").val();
+                var skuContent = $(this).find(".SKUContent").find("input").val();
+                var score = $(this).find(".like").find("input").eq(0).val();
+                var reviewText = $(this).find(".ReviewText").val();
+                var uploadImages = $(this).find(".uploadImages").find("input").val();
+
+                if (productInfo != "" && reviewText != "") {
+                    var review = new Object();
+                    review.ProductId = parseInt(productInfo.split('&')[0]);
+                    review.ReviewText = reviewText;
+                    review.OrderId = getParam("OrderId");
+                    review.SkuId = productInfo.split('&')[2];
+                    review.SkuContent = skuContent;
+                    review.Score = parseInt(score);
+                    review.ImageUrl1 = uploadImages;
+                    object.push(review);
+                }
+            });
+            if (object.length == 0) {
+                alert_h("请填写您的评论！");
+                return;
+            }
+            var jsonStr = JSON.stringify(object);
+            var params = {};
+            params.action = "SubmitReview";
+            params.DataJson = jsonStr;
+            $.ajax({
+                type: "POST",
+                url: "/API/ReviewHandler.ashx",
+                data: params,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.state) {
+                        alert_h(data.msg, function () { gotoReviewOrders(); });
+                    } else {
+                        alert_h(data.msg);
+                    }
+                }
+            });
+
+        });
+    });
+
+   
+        /*
+        * 剩余字数统计
+        * 注意 最大字数只需要在放数字的节点哪里直接写好即可
+        */
+        function statInputNum(textArea, numItem) {
+            var max = numItem.text(),
+                curLength;
+            textArea[0].setAttribute("maxlength", max);
+            curLength = textArea.val().length;
+            numItem.text(max - curLength);
+            textArea.on('input propertychange', function () {
+                numItem.text(max - $(this).val().length);
+            });
+        }
+        // 初始化图片上传控件
+        function initImageUpload() {
+            var url = ImageUploadPath;
+            $(".imageContainer").each(function () {
+                $(this).find('span[name="articleImage"]').hishopUpload(
+                {
+                    title: '',
+                    url: url,
+                    imageDescript: '',
+                    displayImgSrc: '',
+                    imgFieldName: "articleImage",
+                    defaultImg: '',
+                    pictureSize: '',
+                    imagesCount: 3,
+                    dataWidth: 4,
+                    fileMaxSize: 2,
+                    foldName:'review'
+                });
+            });
+        }
+
+        //获取上传成功后的图片路径
+        function getUploadImages() {
+            $(".imageContainer").each(function () {
+                var aryImgs = $(this).find('span[name="articleImage"]').hishopUpload("getImgSrc");
+                var imgSrcs = "";
+                $(aryImgs).each(function () {
+                    imgSrcs += this + ",";
+                });
+                $(this).find(".uploadImages input").val(imgSrcs);
+            });
+            return true;
+        }
+
+</script>
+<!--<hi:common_appfooter runat="server" />-->

@@ -1,0 +1,38 @@
+﻿<hi:Common_AppHeader runat="server" />
+<div class="commission-detail">
+    <div class="form-group">
+        <label for="username">用户名：</label>
+        <asp:literal runat="server" id="litUsername" />
+    </div>
+    <div class="form-group">
+        <label for="username">姓名：</label>
+        <asp:literal runat="server" id="litTrueName" />
+    </div>
+
+    <div class="form-group">
+        <label for="username">联系电话：</label>
+        <asp:literal runat="server" id="litTelphone" />
+    </div>
+    <div class="form-group">
+        <label for="username">订单量：</label>
+        <asp:literal runat="server" id="litOrderCount" />
+    </div>
+    <!--<div class="form-group">
+        <label for="username">贡献奖励(元) ：</label>
+        ￥<%<Hi:FormatedMoneyLabel NullToDisplay="0.00" ID="litAmount" runat="server" />%>
+    </div>-->
+    <div class="form-group">
+        <label for="username">注册日期：</label>
+        <span class="text-danger"><asp:literal runat="server" id="litCreateTime" /></span>
+    </div>
+    <input type="button" id="btngoback" value="返回下级会员" class="btn btn-danger btn-block" />
+</div>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $("#btngoback").click(function (e) {
+            history.go(-1);
+        })
+    });
+</script>
+
+<hi:Common_AppFooter runat="server" />

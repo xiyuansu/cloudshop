@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Subject SubjectId="1" Type="tab" TabTitle1="精品蛋糕" TabTitle2="欧式蛋糕" TabTitle3="婚礼蛋糕" TabTitle4="团购区" TabTitle5="" TabTitle6="" TabTitle7="" TabTitle8="" Where1="1,," Where2="5,," Where3="9,," Where4="13,," Where5=",," Where6=",," Where7=",," Where8=",," MaxNum="4" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="6" Type="top" CategoryId="" MaxNum="3" ImageNum="3" IsShowPrice="false" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="2" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="10" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="3" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="10" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="4" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="10" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="5" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="10" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="17" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="false" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="160" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top2.html" />
+</root>

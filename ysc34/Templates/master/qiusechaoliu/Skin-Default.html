@@ -1,0 +1,152 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/qiusechaoliu/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/qiusechaoliu/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+ 
+<div class="main" id="main">
+<style>
+.main{width:100%;margin-top:0;padding-top:0;}
+</style>
+  <script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+     <div class="banner o-hidden">
+       <hi:common_slidead runat="server" adid="2" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+     </div>
+     <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_2").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+  <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>   
+  <script src="../../../Utility/time.js" type="text/javascript"></script>   
+  <div class="w1200 o-hidden m0  pt10">
+     <div class="w1200 o-hidden">
+     
+        <div class="w958 o-hidden fl"><Hi:Common_SubjectProduct_Tab runat="server" SubjectId="1"  isdelayedloading="true"/></div>
+        
+        <div class="not o-hidden w241 fr">
+                <div class="hd o-hidden bold font14">商城公告</div>
+                <div class="bd o-hidden">
+                    <ul>
+                       <%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="6" />%>
+                    </ul>
+                </div>
+                <Hi:Common_ImageAd runat="server" AdId="3"  isdelayedloading="true"/>
+         </div>
+            
+      </div>
+  
+      <div class="ran w1200 o-hidden pt10">
+          <div class="ran-con o-hidden fl">
+                <div class="hd font14 bold pl10">&nbsp;&nbsp;销售排行榜</div>
+                <Hi:Common_SubjectProduct_Top runat="server" SubjectId="6"  isdelayedloading="true"/>
+          </div>
+          
+           <div class="w956 fr"><Hi:Common_ImageAd runat="server" AdId="4"  isdelayedloading="true"/></div>
+          
+      </div>
+      
+      <div class="w1200 o-hidden  pt10">
+          <div class="fl"><Hi:Common_ImageAd runat="server" AdId="5"  isdelayedloading="true"/></div>
+          <div class="fl pl10"><Hi:Common_ImageAd runat="server" AdId="6"  isdelayedloading="true"/></div>
+          <div class="fr"><Hi:Common_ImageAd runat="server" AdId="7"  isdelayedloading="true"/></div>
+      </div>
+     
+       <!--floor--->
+      <div class="w1200 o-hidden  pt10">
+      <div class="floor_hd">
+       <Hi:Common_SubjectTitle runat="server" CommentId="19" />
+      <em> <Hi:Common_SubjectMoreLink runat="server" CommentId="20" /></em>
+      </div>
+      
+      <div class="floor_bd"><Hi:Common_ImageAd runat="server" AdId="12"  isdelayedloading="true"/></div>
+      <div class="floor_pro"> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="2"  isdelayedloading="true"/></div>
+      </div>
+     
+     <!--floor--->
+      <div class="w1200 o-hidden  pt10">
+       <div class="floor_hd">
+       <Hi:Common_SubjectTitle runat="server" CommentId="21" />
+      <em> <Hi:Common_SubjectMoreLink runat="server" CommentId="22" /></em>
+      </div>
+      <div class="floor_bd"><Hi:Common_ImageAd runat="server" AdId="13"  isdelayedloading="true"/></div>
+      <div class="floor_pro"> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="3"  isdelayedloading="true"/></div>
+      </div>
+      
+      <!--floor--->
+      <div class="w1200 o-hidden  pt10">
+       <div class="floor_hd">
+       <Hi:Common_SubjectTitle runat="server" CommentId="23" />
+      <em> <Hi:Common_SubjectMoreLink runat="server" CommentId="24" /></em>
+      </div>
+      
+      <div class="floor_bd"><Hi:Common_ImageAd runat="server" AdId="14"  isdelayedloading="true"/></div>
+      <div class="floor_pro"> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="4"  isdelayedloading="true"/></div>
+      </div>
+      
+      <!--floor--->
+      <div class="w1200 o-hidden  pt10">
+       <div class="floor_hd">
+       <Hi:Common_SubjectTitle runat="server" CommentId="25" />
+      <em> <Hi:Common_SubjectMoreLink runat="server" CommentId="26" /></em>
+      </div>
+      <div class="floor_bd"><Hi:Common_ImageAd runat="server" AdId="15"  isdelayedloading="true"/></div>
+      <div class="floor_pro"> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="5"  isdelayedloading="true"/></div>
+      </div>
+
+      <div class="w1200 o-hidden  pt10"><Hi:Common_ImageAd runat="server" AdId="8"  isdelayedloading="true"/></div>
+
+
+      <div class="review w1200 o-hidden  pt10">
+            <div class="hd font14 bold">热门评论 <em>Popular evaluation</em></div>
+            <div  class="bd" >
+              <Hi:Common_ImageAd runat="server" AdId="9" />
+              <ul class="fr">
+                 <%<Hi:Common_LatestReview MaxNum="4" TemplateFile="HomeTags/Skin-Common_LatestReview.ascx" runat="server" /> %>
+              </ul>
+                
+            </div>
+       </div>
+
+
+    </div>
+ 
+</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

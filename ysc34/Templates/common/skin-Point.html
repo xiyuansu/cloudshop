@@ -1,0 +1,25 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="integral_body">
+    <div class="integral_top">
+        <div class="integral_top_l">
+            可用积分:
+            <br />
+            <font><asp:literal runat="server" id="litCurrentPoints" /></font>分
+        </div>
+        <a href="/wapshop/PointMall.aspx" class="btn_point">积分兑换</a>
+    </div>
+    <p>历史积分：<asp:literal runat="server" id="litHistoryPoints" /></p>
+    <ul>
+        <hi:WapTemplatedRepeater id="rptPointList" templatefile="/Tags/skin-Common_Point.ascx" runat="server" />
+    </ul>
+</div>
+<div id="pager">
+</div>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+    });
+</script>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="title" Title="活动专区" ImageTitle="/templates/master/default/UploadImage/titleimg/20130911105735_6802.jpg" TitleImageSize="28*36" />
+  <Comment Id="2" Type="morelink" Title="更多>>" CategoryId="273" />
+   <Comment Id="3" Type="title" Title="商品栏目" ImageTitle="/templates/master/default/UploadImage/titleimg/20130911105735_6802.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="morelink" Title="更多>>" CategoryId="273" />
+  <Comment Id="5" Type="title" Title="商品栏目2" ImageTitle="/templates/master/default/UploadImage/titleimg/20130911105735_6802.jpg" TitleImageSize="28*36" />
+  <Comment Id="6" Type="morelink" Title="更多>>" CategoryId="273" />
+  <Comment Id="7" Type="keyword" CategoryId="" MaxNum="10" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

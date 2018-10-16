@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="100*44" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="5" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="6" Type="category" CategoryId="309" MaxNum="18" />
+  <Comment Id="7" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172016_5562.jpg" TitleImageSize="28*36" />
+  <Comment Id="8" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="9" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="10" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="11" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172041_8656.jpg" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="13" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="14" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="15" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172055_5624.jpg" TitleImageSize="28*36" />
+  <Comment Id="16" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="17" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="18" Type="category" CategoryId="37" MaxNum="18" />
+  <!-- Blue Begin -->
+  <Comment Id="19" Type="title" Title="限量抢购" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="20" Type="title" Title="今日团" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="21" Type="title" Title="" ImageTitle="/templates/master/fjmt/UploadImage/titleimg/20160607153954_7928.jpg" TitleImageSize="200*40" />
+  <Comment Id="22" Type="title" Title="" ImageTitle="/templates/master/fjmt/UploadImage/titleimg/20160607153954_7928.jpg" TitleImageSize="200*40" />
+  <Comment Id="23" Type="title" Title="" ImageTitle="/templates/master/fjmt/UploadImage/titleimg/20160607153954_7928.jpg" TitleImageSize="200*40" />
+  <Comment Id="24" Type="title" Title="" ImageTitle="/templates/master/fjmt/UploadImage/titleimg/20160607153954_7928.jpg" TitleImageSize="200*40" />
+  <Comment Id="25" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="26" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="27" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="28" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="29" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="49" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="31" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="32" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="33" Type="title" Title="DIY攒机" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="34" Type="title" Title="特价商品" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="35" Type="title" Title="笔记本" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="36" Type="title" Title="数码影音" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="37" Type="category" CategoryId="37" MaxNum="10" />
+  <Comment Id="38" Type="category" CategoryId="177" MaxNum="10" />
+  <Comment Id="39" Type="category" CategoryId="223" MaxNum="10" />
+  <Comment Id="40" Type="category" CategoryId="309" MaxNum="10" />
+  <Comment Id="41" Type="title" Title="商城公告" ImageTitle="" TitleImageSize="189*29" />
+  <Comment Id="42" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="43" Type="title" Title="热门活动" ImageTitle="" TitleImageSize="189*40" />
+  <Comment Id="44" Type="title" Title="用户评价" ImageTitle="" TitleImageSize="189*40" />
+  <Comment Id="45" Type="brand" CategoryId="1" IsShowLogo="true" IsShowTitle="true" MaxNum="7" ImageSize="95*25" />
+  <Comment Id="46" Type="brand" CategoryId="5" IsShowLogo="true" IsShowTitle="true" MaxNum="7" ImageSize="95*25" />
+  <Comment Id="47" Type="brand" CategoryId="9" IsShowLogo="true" IsShowTitle="true" MaxNum="7" ImageSize="95*25" />
+  <Comment Id="48" Type="brand" CategoryId="13" IsShowLogo="true" IsShowTitle="true" MaxNum="7" ImageSize="95*25" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

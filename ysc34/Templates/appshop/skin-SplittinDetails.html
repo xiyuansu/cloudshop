@@ -1,0 +1,29 @@
+﻿<hi:Common_AppHeader runat="server" />
+<Hi:HiImage runat="server" ID="imgUrl" class="img-responsive" />
+<div class="pbox">
+    <div class="cash-commission sd">
+        <p>可提现奖励：</p>
+        <h2><i>￥</i><%<Hi:FormatedMoneyLabel ID="litSplittinDraws" runat="server" />%></h2>
+        <a href="SplittinDraws.aspx" class="btn btn-warning">我要提现</a>
+        <div class="sded">历史奖励：￥<%<Hi:FormatedMoneyLabel ID="litAllSplittin" runat="server" />%></div>
+    </div>
+
+
+    <br />
+    <hi:AppshopTemplatedRepeater id="rptSplittin" templatefile="/Tags/skin-Common_Referral_Splitin.ascx" runat="server" />
+    <div id="pager">
+    </div>
+</div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<hi:common_wapfooter runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+
+    });
+</script>
+
+
+
+

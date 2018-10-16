@@ -1,0 +1,96 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/meibang/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/meibang/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+ <script type="text/javascript" src="/templates/master/meibang/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		slideshowSpeed:5000,
+		pauseOnAction: false
+	});
+});
+</script>
+
+<div class="main-index" id="main">
+<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+<div class="mainlunbo"><hi:common_slidead runat="server" adid="11" isdelayedloading="true" isfullscreen="true"></hi:common_slidead></div>
+<script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_11").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+
+<div class="main">
+ <div class="bg_box1"><Hi:Common_CustomAd runat="server" AdId="17" /></div>  
+ 
+ <div class="bg_box2">
+  <div class="bg_box2_title"><span><Hi:Common_CustomAd runat="server" AdId="18" /></span>
+   <em> <Hi:Common_SubjectMoreLink runat="server" CommentId="9" /></em></div>
+  <div class="bg_box2_con"> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="11"  isdelayedloading="true"/></div>
+ </div>
+
+
+
+<div class="bg_box2">
+  <div class="bg_box2_title"><span><Hi:Common_CustomAd runat="server" AdId="21" /></span>
+   <em> <Hi:Common_SubjectMoreLink runat="server" CommentId="20" /></em></div>
+   
+   <div class="box2_ad1"><Hi:Common_CustomAd runat="server" AdId="22" /></div>
+  <div class="bg_box2_con"> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="15"  isdelayedloading="true"/></div>
+ </div>
+ 
+ 
+<div class="bg_box2">
+  <div class="bg_box2_title"><span><Hi:Common_CustomAd runat="server" AdId="19" /></span>
+   <em> <Hi:Common_SubjectMoreLink runat="server" CommentId="14" /></em></div>
+   
+   <div class="box2_ad1"><Hi:Common_CustomAd runat="server" AdId="20" /></div>
+  <div class="bg_box2_con"> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="14"  isdelayedloading="true"/></div>
+ </div>
+ 
+ 
+
+
+    
+</div>  </div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

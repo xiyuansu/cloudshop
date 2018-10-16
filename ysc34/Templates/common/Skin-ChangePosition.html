@@ -1,0 +1,229 @@
+﻿<hi:common_wapheader runat="server" />
+
+    <div class="changePo">
+        <div class="plr11 search bgfff">
+            <span id="spanCityName" runat="server" ClientIDMode="Static" onclick="goToChooseCity()"></span>
+            <form onsubmit="searchKeyword(1); return false;">
+                <div class="memberss">
+                    <input type="text" name="keyWord" id="txtKeyWord" value="" runat="server" ClientIDMode="Static" placeholder="请输入地址" />
+                    <button type="button" value="" class="sbutton" onclick="searchKeyword(1)"></button>
+                </div>
+            </form>
+        </div>
+        <div class="diangqwz" id="divCurrentPosition" runat="server" ClientIDMode="Static">
+            <h2 class="plr11">当前位置</h2>
+            <div class="plr11 ptb13 fonts07 bgfff o-hidden">
+                <span id="spanCurrentAddress"><!--<asp:literal runat="server" id="litCurrentAddress" />--></span><em><a href="#" onclick="restartPosition()">重新定位</a></em>
+            </div>
+        </div>
+        <div class="shouhdz" id="divDeliveryAddress">
+            <h2 class="plr11">收货地址</h2>
+            <div class="plr11 bgfff">
+                <ul id="locates">
+                    <hi:WapTemplatedRepeater id="rptShippingAddress" templatefile="/Tags/skin-Common_ChangePosition.ascx" runat="server" />
+                </ul>
+                <div id="shousuo" class="ptb13">还有<i>一</i>个收货地址</div>
+            </div>
+        </div>
+        <div class="fujdz" id="divAdr">
+            <h2 class="plr11">附近地址</h2>
+            <div class="plr11 bgfff">
+                <ul id="nearAddress">
+                </ul>
+                <div id="divMore" style="text-align:center; padding: 0px 15px 60px 15px;" onclick="searchKeyword(2)">
+                    加载更多...
+                </div>
+            </div>
+        </div>
+    </div>
+
+<input type="hidden" id="hdQQMapKey" runat="server" clientidmode="Static" />
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script src="../../Utility/vPosition.js"></script>
+<script>
+    var searchService;
+    var pageIndex = 0;
+    var pageCapacity = 10;
+    var listLength = 0;
+    var geocoder;
+    var hasData = true;
+    $(document).ready(function () {
+        listLength = $("#locates li").length;
+        if (listLength > 2) {
+            $("#locates li").eq(1).nextAll().hide();
+            $("#shousuo").html('还有<i>' + (listLength - 2) + '</i>个收货地址');
+            $("#shousuo").click(function () {
+                if ($("#locates li").eq(2).is(":hidden")) {
+                    $("#locates li").eq(1).nextAll().show();
+                    $("#shousuo").css({ "background": "url(/images/main/more3.png) no-repeat right center", "background-size": "7px 4px", "width": "14%" });
+                    $("#shousuo").html('收起');
+                }
+                else {
+                    $("#locates li").eq(1).nextAll().hide();
+                    $("#shousuo").css({ "background": "url(/images/main/more2.png) no-repeat right center", "background-size": "7px 4px", "width": "36%" });
+                    $("#shousuo").html('还有<i>' + (listLength - 2) + '</i>个收货地址');
+                }
+            });
+        }
+        else {
+            $("#shousuo").hide();
+            if (listLength == 0) {
+                $("#divDeliveryAddress").hide();
+            }
+        }
+        geocoder = new qq.maps.Geocoder({
+            complete: function (result) {
+                $("#divCurrentPosition").show();
+                $("#spanCurrentAddress").empty();
+                var aa = result.detail.addressComponents.country;
+                var preAdr = result.detail.addressComponents.country + result.detail.addressComponents.province + result.detail.addressComponents.city;
+                var address = result.detail.address.substring(preAdr.length);
+                $("#spanCurrentAddress").append('<a onclick="choosePosition(\'' + result.detail.location + '\',\'' + address + '\')">' + address + '</a>');
+                $(".diangqwz em").removeClass("btnAddToCart1");
+
+            },
+            setError: function (result) {
+                $("#divCurrentPosition").hide();
+                $(".diangqwz em").removeClass("btnAddToCart1");
+            }
+        });
+
+        //设置Poi检索服务，用于本地检索、周边检索
+        searchService = new qq.maps.SearchService({
+            //检索成功的回调函数
+            complete: function (results) {
+                
+                //设置回调函数参数
+                var pois = results.detail.pois;
+                if (pois == undefined) {
+                    $("#divMore").html("查询不到数据");
+                }
+                else {
+                    for (var i = 0, l = pois.length; i < l; i++) {
+                        var poi = pois[i];
+                        if (poi.latLng != undefined)
+                            $("#nearAddress").append('<li onclick="choosePosition(\'' + poi.latLng + '\',\'' + poi.name + '\')"><h3>' + poi.name + '</h3><p>' + (poi.address == undefined ? "" : poi.address) + '</p></li>');
+                    }
+                    if (pois.length < 10) {
+                        $("#divMore").html("附近没有更多地址了");
+                        hasData = false;
+                    }
+                    else {
+                        $("#divMore").html("加载更多...");
+                    }
+                    pageIndex++;
+                }
+            },
+            //若服务请求失败，则运行以下函数
+            error: function () {
+                $("#divMore").html("查询不到数据");
+            }
+        });
+        $("#divAdr").hide();
+        var keyword = $("#txtKeyWord").val();
+        if (keyword != "" && keyword != null) {
+            searchKeyword(1);
+            $("#txtKeyWord").val('');
+        }
+
+        restartPosition();
+    });
+	
+	 var buttonL=$('.sbutton').css('left');
+	 var inputPL=$('#txtKeyWord').css('padding-left');
+	  $("#txtKeyWord").focus(function () {
+            $(this).next().css('left','0.35rem');
+			$(this).css('padding-left','1.5rem').attr('placeholder','');
+			
+        });
+     
+	
+
+    //设置搜索的范围和关键字等属性
+    function searchKeyword(index) {
+        $("#divAdr").show();
+        var keyword = $("#txtKeyWord").val();
+        if (keyword == "") {
+            $("#txtKeyWord").focus();
+            return;
+        }
+        var region = $("#spanCityName").html();
+        if (index == 1) {
+            pageIndex = 0;
+            hasData = true;
+            $("#nearAddress").empty();
+        }
+        else {
+            if (!hasData) {
+                return;
+            }
+        }
+        //根据输入的城市设置搜索范围
+        searchService.setLocation(region);
+        //设置搜索页码
+        searchService.setPageIndex(pageIndex);
+        //设置每页的结果数
+        searchService.setPageCapacity(pageCapacity);
+        //根据输入的关键字在搜索范围内检索
+        searchService.search(keyword);
+    }
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    function scrollLoadData() {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            searchKeyword(2);
+        }
+    }
+    $(window).scroll(function () {
+        if (hasData)
+            scrollLoadData();
+    });
+    function choosePosition(latLng, address) {
+        changePosition(latLng, address);
+    }
+    function chooseShippingAddress(latLng, shippingId, address) {
+        if (latLng == "" || latLng == null || latLng == undefined) {
+            if (confirm("您的收货地址需要升级，现在去升级吗？")) {
+                window.location.href = "EditShippingAddress.aspx?ShippingId=" + shippingId;
+            }
+            return false;
+        }
+        changePosition(latLng, address);
+    }
+    function restartPosition() {
+    	$(".diangqwz em").addClass("btnAddToCart1");
+        var mapkey = $("#hdQQMapKey").val();
+        var geolocation = new qq.maps.Geolocation(mapkey, "myapp");
+        if (geolocation) {
+            geolocation.getLocation(getPositionSuccess);
+        }
+        else {
+            //跳转到定位失败状态页面
+            $("#divCurrentPosition").hide();
+        }
+
+
+        //临时测试
+        //var initLatLng = "28.18985,112.99767";
+        //var latlngStr = initLatLng.split(",", 2);
+        //var lat = parseFloat(latlngStr[0]);
+        //var lng = parseFloat(latlngStr[1]);
+        //var latLng = new qq.maps.LatLng(lat, lng);
+        //geocoder.getAddress(latLng);
+    }
+    function getPositionSuccess(position) {
+
+        var lat = parseFloat(position.lat);
+        var lng = parseFloat(position.lng);
+        var latLng = new qq.maps.LatLng(lat, lng);
+//alert(latLng);
+        geocoder.getAddress(latLng);
+    }
+    function goToChooseCity() {
+        window.location.href = "ChooseCity.aspx";
+    }
+</script>

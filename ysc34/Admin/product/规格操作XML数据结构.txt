@@ -1,0 +1,20 @@
+<xml>
+	<item skuId="" skuCode="" price="" aty="" alertQty="" weight="" purchasePrice="" costPrice="">
+		<attributes>
+			<attribute id="" valueId="" />
+		</attributes>
+		<memberPrices>
+			<memberGrande id="" price="" />
+		</memberPrices>
+		<distributorPrices>
+			<distributorGrande id="" price="" />
+		</distributorPrices>
+	</item>
+</xml>
+
+
+<xml>
+	<item attributeId="" usageMode="">
+		<attValue valueId="" valueStr="" />
+	</item>
+</xml>

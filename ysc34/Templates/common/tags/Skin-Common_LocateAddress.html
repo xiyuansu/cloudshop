@@ -1,0 +1,31 @@
+﻿<div class="tk_group">
+    <label for="username">地区</label>
+    <div class="input-group selectReason">
+        <div id="vshopRegion">
+            <asp:Literal ID="regionName" runat="server">请选择地区</asp:Literal>
+        </div>
+        <input name="region" id="region" runat="server" clientidmode="Static" style="display: none;" />
+    </div>
+</div>
+<div class="tk_group">
+    <label for="username">详细地址</label>
+    <div class="input-group selectReason">
+        <textarea id="address" name="address" runat="server" clientidmode="Static" rows="3" placeholder="请填写收货人详细地址"></textarea>
+        <input type="hidden" id="IsDeliveryScopeRegion" value="false" runat="server" clientidmode="Static" />
+    </div>
+</div>
+<div class="tk_group" id="divbuildernumber">
+    <label for="username">楼牌号</label>
+    <div class="input-group selectReason">
+        <textarea id="txtBuildingNumber" class="addtextarea" name="txtBuildingNumber" runat="server" clientidmode="Static" rows="3" placeholder="请填写楼牌号、门牌号"></textarea>
+    </div>
+</div>
+<script src="/Utility/regionSelector_FileData.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Utility/LocateAddress.js?v=3.31"></script>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        if (document.location.href.toLowerCase().indexOf("/userprofile") > -1) {
+            $("#divbuildernumber").hide();
+        }
+    })
+</script>

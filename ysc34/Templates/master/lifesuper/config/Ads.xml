@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Ad Id="1" Type="image" Image="/templates/master/lifesuper/UploadImage/advertimg/20140617195219_3427.jpg" Url="" AdImageSize="270*35" />
+  <Ad Id="2" Type="slide" Image1="/templates/master/lifesuper/UploadImage/advertimg/20140108142921_8694.jpg" Image2="/templates/master/lifesuper/UploadImage/advertimg/20140108142921_8694.jpg" Image3="/templates/master/lifesuper/UploadImage/advertimg/20140108142921_8694.jpg" Image4="/templates/master/lifesuper/UploadImage/advertimg/20140108142921_8694.jpg" Image5="" Image6="" Image7="" Image8="" Image9="" Image10="" Url1="" Url2="" Url3="" Url4="" Url5="" Url6="" Url7="" Url8="" Url9="" Url10="" AdImageSize="765*358" />
+  <Ad Id="3" Type="image" Image="/templates/master/lifesuper/UploadImage/advertimg/20140618201902_3585.jpg" Url="" AdImageSize="210*210" />
+  <Ad Id="4" Type="image" Image="/templates/master/lifesuper/UploadImage/advertimg/20140618211219_1873.jpg" Url="" AdImageSize="224*168" />
+  <Ad Id="5" Type="image" Image="/templates/master/lifesuper/UploadImage/advertimg/20140618224518_3114.jpg" Url="" AdImageSize="60*60" />
+  <Ad Id="6" Type="custom" Html="微信扫描二维码，红爆优惠触手可得" />
+  <Ad Id="7" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/lifesuper/UploadImage/AdvertImg/20140619214543_9967.jpg&amp;quot; title=&amp;quot;life_89&amp;quot; alt=&amp;quot;life_89&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" />
+  <Ad Id="8" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/lifesuper/UploadImage/AdvertImg/20140619214543_9967.jpg&amp;quot; title=&amp;quot;life_89&amp;quot; alt=&amp;quot;life_89&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" />
+  <Ad Id="9" Type="image" Image="/templates/master/lifesuper/UploadImage/advertimg/20140618224518_3115.jpg" Url="" AdImageSize="224*111" />
+  <Ad Id="10" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/lifesuper/UploadImage/AdvertImg/20140619214543_9967.jpg&amp;quot; title=&amp;quot;life_89&amp;quot; alt=&amp;quot;life_89&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" />
+  <Ad Id="11" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/lifesuper/UploadImage/AdvertImg/20140619214543_9967.jpg&amp;quot; title=&amp;quot;life_89&amp;quot; alt=&amp;quot;life_89&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" />
+  <Ad Id="12" Type="image" Image="/templates/master/lifesuper/UploadImage/advertimg/20140618224518_3115.jpg" Url="" AdImageSize="224*111" />
+  <Ad Id="13" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/lifesuper/UploadImage/AdvertImg/20140619214543_9967.jpg&amp;quot; title=&amp;quot;life_89&amp;quot; alt=&amp;quot;life_89&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" />
+  <Ad Id="14" Type="custom" Html="商城官方微信" />
+  <Ad Id="23" Type="custom" Html="&amp;lt;div style=&amp;quot;background:#fe3f37;text-align:center;&amp;quot;&amp;gt;&#xA;	&amp;lt;img src=&amp;quot;/templates/master/default/UploadImage/AdvertImg/20160331145919_8098.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt; &#xA;&amp;lt;/div&amp;gt;" />
+  <Ad Id="498" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/lifesuper/UploadImage/AdvertImg/20140625105003_4537.jpg&amp;quot; title=&amp;quot;2w&amp;quot; alt=&amp;quot;2w&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" AdImageSize="210*150" />
+  <Ad Id="499" Type="custom" Html="&amp;lt;img src=&amp;quot;/templates/master/lifesuper/UploadImage/AdvertImg/20140324194241_6398.jpg&amp;quot; alt=&amp;quot;&amp;quot; border=&amp;quot;0&amp;quot; /&amp;gt;" AdImageSize="204*276" />
+  <Ad Id="500" Type="image" Image="/templates/master/lifesuper/UploadImage/advertimg/20140323210347_0322.jpg" Url="" AdImageSize="204*276" />
+</root>

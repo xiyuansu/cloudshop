@@ -1,0 +1,503 @@
+/* CSS Document 2009.7 */
+/*
+	�������ҳ�����+ҳ���������
+	Exp��.Default_LeftBox{}
+	�����ע�ͺ�����������
+*/
+/* ȫ�� 2009.7.28*/
+body {
+    margin: 0;
+    padding: 0 0 12px 0;
+    font-size: 12px;
+    color: #000;
+    line-height: 1.8;
+    font-family: "Microsoft YaHei" !important;
+    background-color: #FFFFFF;
+}
+a:hover{
+    text-decoration:none !important;
+}
+form, ul, li, ol, li, dl, dt, dd, img, p, h1, h2, h3, h4, h5, h6, input {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 12px;
+}
+
+input, select {
+    font-size: 12px;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+strong {
+    font-weight: normal;
+}
+
+em {
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+/* Link ȫ��������ʽ 2009.7.28 */
+a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    a:hover {
+        color: #0000FF;
+        text-decoration: underline;
+    }
+
+.guide {
+    position: relative;
+    width: 753px;
+    height: 450px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border: 5px solid #0178b2;
+    border-radius: 6px;
+    behavior: url(ie-css3.htc);
+}
+
+.guide_close {
+    text-align: right;
+    padding-right: 4px;
+    height: 17px;
+    overflow: hidden;
+    display: none;
+}
+
+.guide_tit {
+    overflow: hidden;
+}
+
+.guide_con {
+    margin: 0 auto;
+    overflow: hidden;
+}
+.guide_con h2,
+.ready_meun h2{
+    font-size:18px;
+    line-height:60px;
+    padding:0 0 20px 10px;
+    color:#666;
+}
+
+    .guide_con ul {
+        width: 680px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+        .guide_con ul li {
+            float: left;
+            width: 100px;
+            overflow: hidden;
+            margin-right: 36px;
+            margin-bottom: 20px;
+            display: inline;
+        }
+
+.guide_con_about {
+    width: 480px;
+    margin: 0px atuo;
+    overflow: hidden;
+    font-family: "Microsoft yahei";
+    line-height: 20px;
+    color: #000000;
+}
+
+.copyright {
+    font-size: 16px;
+    margin-left: 15px;
+}
+
+.guide_con_waring {
+    font-size: 16px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 30px;
+    height: auto;
+    line-height: 30px;
+}
+
+.detail-frame {
+    display: none;
+}
+
+.arrow-left {
+    position: absolute;
+    width: 6px;
+    height: 9px;
+    top: 30px;
+    left: 0;
+    margin-left: -6px;
+    background: url(../images/arrow_gray.gif) no-repeat;
+}
+
+.arrow-right {
+    position: absolute;
+    width: 6px;
+    height: 9px;
+    top: 30px;
+    left: 180px;
+    background: url(../images/arrow_gray.gif) no-repeat -6px 0;
+}
+
+.detail-tip {
+    position: absolute;
+    width: 160px;
+    background: #fff;
+    border: 1px solid #3eb7db;
+    padding: 10px;
+}
+
+    .detail-tip h2 {
+        font-size: 18px;
+        line-height: 18px;
+        color: #0a8bb1;
+        font-weight: 700;
+        border-bottom: 1px dashed #c2e2eb;
+        height: 30px;
+        font-family: "Microsoft yahei";
+    }
+
+    .detail-tip p {
+        margin: 10px 0 0 0;
+        font-size: 12px;
+        color: #888989;
+    }
+.guide_con ul li a{
+    text-decoration:none;
+}
+#ckguide{
+    position:relative;
+    top:2px;
+}
+.guide_con ul li a span {
+    width:100%;
+    font-size:14px;
+    font-family:"Microsoft YaHei";
+    display:block;
+    text-align:center;
+    line-height:30px;
+    color:#666;
+}
+
+.guide_buttom {
+    height: 37px;
+    margin-top:20px;
+}
+
+.input input[type=text]:focus{
+    border:2px solid red
+}
+    .guide_buttom span {
+        display: block;
+        float: right;
+        width: 284px;
+        overflow: hidden;
+    }
+
+    .guide_buttom p {
+        float: left;
+        width: 339px;
+        overflow: hidden;
+        padding-left: 115px;
+    }
+
+        .guide_buttom p em {
+            background: url(../images/pic/samll_ico.jpg) no-repeat;
+            display: block;
+            height: 37px;
+            font-family: "Microsoft yahei";
+            font-size: 14px;
+            line-height: 55px;
+            padding-left: 48px;
+            color: #000;
+        }
+
+    .guide_buttom span em {
+        background: url(../images/pic/buttomback.jpg) no-repeat;
+        display: block;
+        margin-top: 3px;
+        height: 34px;
+    }
+
+        .guide_buttom a {
+            float:right;
+            line-height:40px;
+            font-family: "Microsoft yahei";
+            font-size: 18px;
+            width:114px;
+            height:40px;
+            background:url(../images/pic/buttomback.jpg) no-repeat;
+            color: #fff;
+            padding-left: 15px;
+            text-decoration:none;
+        }
+
+            .guide_buttom span em a:hover {
+                color: #0000FF;
+                text-decoration: none;
+            }
+
+.guide_option {
+    font-family: "Microsoft yahei";
+    font-size: 12px;
+    color: red;
+    float: left;
+    margin-left: 60px;
+    position:relative;
+    top:13px;
+    _margin-left: 30px;
+    margin-top:20px;
+}
+
+.guide_close2 {
+    font-family: "Microsoft yahei";
+    font-size: 12px;
+    color: #000000;
+    float: right;
+    margin-right: 50px;
+    _margin-right: 25px;
+    text-decoration: underline;
+    display: none;
+}
+
+.guide_optionbor {
+    height: 20px;
+    overflow: hidden;
+    line-height: 20px;
+    margin-top: 40px;
+}
+
+
+.ready_meun {
+    width: 670px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-bottom: 1px dashed #d5d8db;
+    padding-bottom: 10px;
+}
+
+    .ready_meun ul {
+        width: 700px;
+        overflow: hidden;
+    }
+
+        .ready_meun ul li {
+            float: left;
+            background: #ffd380;
+            width: 93px;
+            overflow: hidden;
+            height: 40px;
+            margin-right: 22px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            border-radius:10px;
+        }
+
+#ready_pitch {
+    font-weight: bold;
+    background: #ff7a59;
+}
+
+.ready_con {
+    width: 670px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+    .ready_con h2 {
+        font-weight: bold;
+        margin-top: 15px;
+        line-height: 20px;
+    }
+
+    .ready_con h3 {
+        font-weight: bold;
+        line-height: 20px;
+        color: #c90000;
+    }
+
+    .ready_con p {
+        line-height: 18px;
+    }
+
+        .ready_con p a {
+            color: #c90000;
+            background: url(../images/pic/text_a_ico.jpg) no-repeat 0 center;
+            padding-left: 16px;
+            margin-left: 10px;
+        }
+
+#delete_a {
+    background: none;
+    padding-left: 0px;
+    margin-left: 0px;
+    text-decoration: underline;
+}
+
+.guide_buttom2 {
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    width: 238px;
+    line-height: 40px;
+}
+
+    .guide_buttom2 span {
+        float:left;
+        width: 70px;
+        display: block;
+        width:114px;
+        height:40px;
+        background:url(../images/pic/buttompre.jpg) no-repeat;
+        color:#666;
+    }
+
+    .guide_buttom2 em {
+        display: block;
+        float:right;
+        background: url(../images/pic/buttomback.jpg) no-repeat;
+        width: 114px;
+        text-decoration:none;
+        height: 40px;
+        float: right;
+    }
+
+        .guide_buttom2 em a {
+
+            font-family: "Microsoft yahei";
+            font-size: 18px;
+            color: #ffff;
+            padding-left: 20px;
+        }
+
+    .guide_buttom2 span a {
+        font-family: "Microsoft yahei";
+        font-size: 16px;
+        padding-left:40px;
+        text-decoration:none;
+        color: #666;
+    }
+
+    .guide_buttom2 a:hover {
+        color: #666;
+        text-decoration: none;
+    }
+     .guide_buttom2 em a:hover{
+        color: #fff;
+        text-decoration: none;
+    }
+.guide_buttom3 {
+    width: 202px;
+    line-height: 34px;
+    margin: 0 auto;
+}
+
+    .guide_buttom3 span {
+        width: 70px;
+        float: left;
+        display: block;
+    }
+
+    .guide_buttom3 em {
+        display: block;
+        background: url(../images/pic/buttomback.jpg) no-repeat;
+        width: 132px;
+        height: 34px;
+        float: right;
+    }
+
+        .guide_buttom3 em a {
+            font-family: "Microsoft yahei";
+            font-size: 18px;
+            color: #525050;
+            padding-left: 20px;
+        }
+
+    .guide_buttom3 span a {
+        font-family: "Microsoft yahei";
+        font-size: 16px;
+        color: #066ba9;
+        text-decoration: underline;
+    }
+
+    .guide_buttom3 a:hover {
+        color: #0000FF;
+        text-decoration: none;
+    }
+
+.complete_tit {
+    width: 670px;
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: center;
+    font-family: "Microsoft yahei";
+    font-size: 14px;
+    color: #000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.complete_con {
+    width: 670px;
+    overflow: hidden;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+    .complete_con p {
+        color: #e60012;
+    }
+
+    .complete_con table {
+        border-left: 1px solid #c6c5c5;
+        border-top: 1px solid #c6c5c5;
+    }
+
+    .complete_con td {
+        border-bottom: 1px solid #c6c5c5;
+        border-right: 1px solid #c6c5c5;
+        padding: 5px 10px;
+        color: #393838;
+    }
+
+#complete_td {
+    width: 86px;
+    overflow: hidden;
+    height: 35px;
+    text-align: center;
+    background: #f4f3f3;
+    color: #262424;
+    font-weight: bold;
+}
+.over{
+    width:114px;
+    height:40px;
+    background:#00bcbf !important;
+    text-align:center !important;
+    border-radius:10px;
+}
+.over a{
+    padding-left:0 !important;
+}

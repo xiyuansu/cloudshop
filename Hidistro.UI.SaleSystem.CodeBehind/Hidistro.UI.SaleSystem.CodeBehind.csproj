@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{632BADEB-946D-48F8-ADB4-0321A056DDE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hidistro.UI.SaleSystem.CodeBehind</RootNamespace>
+    <AssemblyName>Hidistro.UI.SaleSystem.CodeBehind</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin">
+      <HintPath>..\dll\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP">
+      <HintPath>..\dll\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Affiches.cs" />
+    <Compile Include="AffichesDetails.cs" />
+    <Compile Include="AfterSalesApply.cs" />
+    <Compile Include="AliOHLogin.cs" />
+    <Compile Include="AliPayNotify.cs" />
+    <Compile Include="AppAccountSummaryDetails.cs" />
+    <Compile Include="AppAddShippingAddress.cs" />
+    <Compile Include="AppAfterSaleOrders.cs" />
+    <Compile Include="AppApplyRefund.cs" />
+    <Compile Include="AppApplyReturn.cs" />
+    <Compile Include="AppArticle.cs" />
+    <Compile Include="APPArticleCategory.cs" />
+    <Compile Include="APPArticleDetail.cs" />
+    <Compile Include="APPBigWheel.cs" />
+    <Compile Include="APPBrandDetail.cs" />
+    <Compile Include="APPBrandList.cs" />
+    <Compile Include="AppChangeMapPosition.cs" />
+    <Compile Include="APPChoiceShippingAddress.cs" />
+    <Compile Include="AppChooseMapCity.cs" />
+    <Compile Include="APPCountDownProductDetail.cs" />
+    <Compile Include="AppCountDownProductList.cs" />
+    <Compile Include="AppCountDownStoreProductDetail.cs" />
+    <Compile Include="AppCouponDetails.cs" />
+    <Compile Include="AppCouponsList.cs" />
+    <Compile Include="AppDevelopReferrals.cs" />
+    <Compile Include="AppDownload.cs" />
+    <Compile Include="AppDrawingBox.cs" />
+    <Compile Include="AppEditShippingAddress.cs" />
+    <Compile Include="AppFinishOrder.cs" />
+    <Compile Include="AppForgotTradePassword.cs" />
+    <Compile Include="APPGroupBuyList.cs" />
+    <Compile Include="APPGroupBuyProductDetail.cs" />
+    <Compile Include="AppMemberCoupons.cs" />
+    <Compile Include="AppMemberOrderDetails.cs" />
+    <Compile Include="AppMemberProductReview.cs" />
+    <Compile Include="AppMemberSubmitProductReview.cs" />
+    <Compile Include="AppMemberWeiXinRedEnvelopeCoupons.cs" />
+    <Compile Include="AppMyAccountSummary.cs" />
+    <Compile Include="AppMyConsultations.cs" />
+    <Compile Include="AppMyGiftDetailInfo.cs" />
+    <Compile Include="AppMyLogistics.cs" />
+    <Compile Include="AppMyPrize.cs" />
+    <Compile Include="AppOpenBalance.cs" />
+    <Compile Include="AppOrderShippingPaymentSet.cs" />
+    <Compile Include="AppOrderStoresSet.cs" />
+    <Compile Include="APPPoint.cs" />
+    <Compile Include="APPPointInfo.cs" />
+    <Compile Include="APPPointMall.cs" />
+    <Compile Include="APPPreSaleproductdetail.cs" />
+    <Compile Include="AppProductConsultations.cs" />
+    <Compile Include="AppProductDelete.cs" />
+    <Compile Include="AppProductDetailConsultations.cs" />
+    <Compile Include="AppProductDetails.cs" />
+    <Compile Include="AppProductReview.cs" />
+    <Compile Include="AppRechargeRequest.cs" />
+    <Compile Include="AppRecruitmentAgreement.cs" />
+    <Compile Include="AppReferral.cs" />
+    <Compile Include="AppReferralAgreement.cs" />
+    <Compile Include="APPReferralCenter.cs" />
+    <Compile Include="AppReferralRegister.cs" />
+    <Compile Include="AppReferralRegisterAgreement.cs" />
+    <Compile Include="AppReferralRegisterresults.cs" />
+    <Compile Include="AppRegisteredCoupons.cs" />
+    <Compile Include="AppRegisteredCouponsEnd.cs" />
+    <Compile Include="AppRegisteredCouponsOldUser.cs" />
+    <Compile Include="AppRequestBalanceDraw.cs" />
+    <Compile Include="AppRequestBalanceDrawRecords.cs" />
+    <Compile Include="AppRequestBalanceDraw_Detail.cs" />
+    <Compile Include="AppResourceNotFound.cs" />
+    <Compile Include="AppReturnSendGoods.cs" />
+    <Compile Include="APPScratch.cs" />
+    <Compile Include="AppSessionLogin.cs" />
+    <Compile Include="APPSetInvoice.cs" />
+    <Compile Include="AppSetPassword.cs" />
+    <Compile Include="AppShippingAddresses.cs" />
+    <Compile Include="AppShopInfo.cs" />
+    <Compile Include="AppShoppingCart.cs" />
+    <Compile Include="APPSmashEgg.cs" />
+    <Compile Include="AppSplittinDetails.cs" />
+    <Compile Include="AppSplittinDetail_Detail.cs" />
+    <Compile Include="AppSplittinDrawRecords.cs" />
+    <Compile Include="AppSplittinDraws.cs" />
+    <Compile Include="AppSplittinDraw_Detail.cs" />
+    <Compile Include="AppSplittinRule.cs" />
+    <Compile Include="AppSplittinRuleDetail.cs" />
+    <Compile Include="AppStoreAbout.cs" />
+    <Compile Include="AppStoreDetail.cs" />
+    <Compile Include="AppStoreHome.cs" />
+    <Compile Include="AppStoreList.cs" />
+    <Compile Include="AppStoreMarketing.cs" />
+    <Compile Include="AppSubMembers.cs" />
+    <Compile Include="AppSubMember_Detail.cs" />
+    <Compile Include="AppSubmitIDInfo.cs" />
+    <Compile Include="AppSubmmitOrder.cs" />
+    <Compile Include="AppSubReferrals.cs" />
+    <Compile Include="AppSubReferral_Detail.cs" />
+    <Compile Include="AppSupplierAbout.cs" />
+    <Compile Include="AppTopicHomePage.cs" />
+    <Compile Include="AppTransactionPwd.cs" />
+    <Compile Include="AppUpdateTranPassword.cs" />
+    <Compile Include="AppUserProfile.cs" />
+    <Compile Include="AppUserRefundDetail.cs" />
+    <Compile Include="AppUserRefunds.cs" />
+    <Compile Include="AppUserReturnDetail.cs" />
+    <Compile Include="AppUserReturns.cs" />
+    <Compile Include="AppViewQRCode.cs" />
+    <Compile Include="ArticleDetails.cs" />
+    <Compile Include="Articles.cs" />
+    <Compile Include="AttentionHNYSJY.cs" />
+    <Compile Include="AttentionYDGZ.cs" />
+    <Compile Include="Bank.cs" />
+    <Compile Include="BaseClasses\AppletTemplatedWebControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Brand.cs" />
+    <Compile Include="BrandDetails.cs" />
+    <Compile Include="ControlHelper.cs" />
+    <Compile Include="CountDownProducts.cs" />
+    <Compile Include="CountDownProductsDetails.cs" />
+    <Compile Include="Default.cs" />
+    <Compile Include="Desig_Templete.cs" />
+    <Compile Include="Favorites.cs" />
+    <Compile Include="FavourableDetails.cs" />
+    <Compile Include="FightGroupActivities.cs" />
+    <Compile Include="FightGroupActivityDetails.cs" />
+    <Compile Include="FightGroupActivityDetailsSoon.cs" />
+    <Compile Include="FightGroupDetails.cs" />
+    <Compile Include="FightGroupNever.cs" />
+    <Compile Include="FightGroupSuccess.cs" />
+    <Compile Include="FightGroupUser.cs" />
+    <Compile Include="FinishOrder.cs" />
+    <Compile Include="ForgotPassword.cs" />
+    <Compile Include="ForgotPasswordSuccess.cs" />
+    <Compile Include="ForgotTradePassword.cs" />
+    <Compile Include="GetRedEnvelope.cs" />
+    <Compile Include="GiftDetails.cs" />
+    <Compile Include="GroupBuyProductDetails.cs" />
+    <Compile Include="GroupBuyProducts.cs" />
+    <Compile Include="HelpDetails.cs" />
+    <Compile Include="Helps.cs" />
+    <Compile Include="HomePage.cs" />
+    <Compile Include="InpourNotify.cs" />
+    <Compile Include="InpourReturn.cs" />
+    <Compile Include="InpourTemplatedWebControl.cs" />
+    <Compile Include="Login.cs" />
+    <Compile Include="Logout.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LookLineItems.cs" />
+    <Compile Include="MemberGroupDetails.cs" />
+    <Compile Include="MemberGroupDetailsStatus.cs" />
+    <Compile Include="MemberGroups.cs" />
+    <Compile Include="MemberGroupsNever.cs" />
+    <Compile Include="MemberTemplatedWebControl.cs" />
+    <Compile Include="MyAccount.cs" />
+    <Compile Include="MyAccountSummary.cs" />
+    <Compile Include="MyCoupons.cs" />
+    <Compile Include="MyCoupons_WeiXinRedEnvelope.cs" />
+    <Compile Include="NewLineItemInfo.cs" />
+    <Compile Include="OnlineGifts.cs" />
+    <Compile Include="OpenBalance.cs" />
+    <Compile Include="OpenIdEntry.cs" />
+    <Compile Include="OpenIdFunction.cs" />
+    <Compile Include="OrderIDFactory.cs" />
+    <Compile Include="OrderNotify.cs" />
+    <Compile Include="OrderReturn.cs" />
+    <Compile Include="OrderReviews.cs" />
+    <Compile Include="Pay.cs" />
+    <Compile Include="PayGatewayInfo.cs" />
+    <Compile Include="PaymentTemplatedWebControl.cs" />
+    <Compile Include="PaySucceed.cs" />
+    <Compile Include="PcTopicHomePage.cs" />
+    <Compile Include="PopularizeGift.cs" />
+    <Compile Include="PreSaleProductDetails.cs" />
+    <Compile Include="ProductConsultations.cs" />
+    <Compile Include="ProductConsultationsAndReplay.cs" />
+    <Compile Include="ProductDelete.cs" />
+    <Compile Include="ProductDetails.cs" />
+    <Compile Include="ProductDetailsSaleRecord.cs" />
+    <Compile Include="ProductUnSales.cs" />
+    <Compile Include="PromotionHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QRCode.cs" />
+    <Compile Include="RechargeConfirm.cs" />
+    <Compile Include="RechargeRequest.cs" />
+    <Compile Include="RecruitmentAgreement.cs" />
+    <Compile Include="RedEnvelopeError.cs" />
+    <Compile Include="RedEnvelopeFinish.cs" />
+    <Compile Include="RedEnvelopePrompt.cs" />
+    <Compile Include="ReferralAgreement.cs" />
+    <Compile Include="ReferralRegister.cs" />
+    <Compile Include="ReferralRegisterAgreement.cs" />
+    <Compile Include="ReferralRegisterresults.cs" />
+    <Compile Include="RefundApply.cs" />
+    <Compile Include="Register.cs" />
+    <Compile Include="RegisterAgreement.cs" />
+    <Compile Include="RegisteredCoupons.cs" />
+    <Compile Include="RegisterUserSave.cs" />
+    <Compile Include="ReplyReceivedMessage.cs" />
+    <Compile Include="RequestBalanceDraw.cs" />
+    <Compile Include="RequestBalanceDrawConfirm.cs" />
+    <Compile Include="SaleSyetemResourceNotFound.cs" />
+    <Compile Include="SendRedEnvelope.cs" />
+    <Compile Include="ShoppingCart.cs" />
+    <Compile Include="SlideImage.cs" />
+    <Compile Include="SplittinDetails.cs" />
+    <Compile Include="SplittinDraws.cs" />
+    <Compile Include="StoreAppDownload.cs" />
+    <Compile Include="SubCategory.cs" />
+    <Compile Include="SubMembers.cs" />
+    <Compile Include="SubmitIDInfo.cs" />
+    <Compile Include="SubmmitOrder.cs" />
+    <Compile Include="SubReferrals.cs" />
+    <Compile Include="SupplierAbout.cs" />
+    <Compile Include="TopicHomePage.cs" />
+    <Compile Include="UnProductDetails.cs" />
+    <Compile Include="UnProductDetailsAudit.cs" />
+    <Compile Include="UpdatePassword.cs" />
+    <Compile Include="UpdatePasswordProtection.cs" />
+    <Compile Include="UpdateTranPassword.cs" />
+    <Compile Include="UserBatchBuy.cs" />
+    <Compile Include="UserCellPhoneVerification.cs" />
+    <Compile Include="UserConsultations.cs" />
+    <Compile Include="UserConsultationsNotReverted.cs" />
+    <Compile Include="UserDefault.cs" />
+    <Compile Include="UserEmailVerification.cs" />
+    <Compile Include="UserOrderDetails.cs" />
+    <Compile Include="UserOrders.cs" />
+    <Compile Include="UserPoints.cs" />
+    <Compile Include="UserProductReviews.cs" />
+    <Compile Include="UserProfile.cs" />
+    <Compile Include="UserReceivedMessages.cs" />
+    <Compile Include="UserRefundApply.cs" />
+    <Compile Include="UserRefundApplyDetails.cs" />
+    <Compile Include="UserReplaceApply.cs" />
+    <Compile Include="UserReplaceApplyDetails.cs" />
+    <Compile Include="UserReturnsApply.cs" />
+    <Compile Include="UserReturnsApplyDetails.cs" />
+    <Compile Include="UserSendedMessages.cs" />
+    <Compile Include="UserSendMessage.cs" />
+    <Compile Include="UserShippingAddresses.cs" />
+    <Compile Include="VerificationSuccess.cs" />
+    <Compile Include="VGetOpenId.cs" />
+    <Compile Include="ViewQRCode.cs" />
+    <Compile Include="VLogin.cs" />
+    <Compile Include="VSubmitIDInfo.cs" />
+    <Compile Include="VVote.cs" />
+    <Compile Include="WAPAccountManagement.cs" />
+    <Compile Include="WapAccountSummaryDetails.cs" />
+    <Compile Include="WAPActivity.cs" />
+    <Compile Include="WAPAddShippingAddress.cs" />
+    <Compile Include="WapAfterSaleOrders.cs" />
+    <Compile Include="WapAppDownload.cs" />
+    <Compile Include="WapApplyRefund.cs" />
+    <Compile Include="WapApplyReturn.cs" />
+    <Compile Include="WapArticle.cs" />
+    <Compile Include="WapArticleCategory.cs" />
+    <Compile Include="WapArticleDetail.cs" />
+    <Compile Include="WAPBigWheel.cs" />
+    <Compile Include="WAPBindEmail.cs" />
+    <Compile Include="WAPBindPhone.cs" />
+    <Compile Include="WAPBrandDetail.cs" />
+    <Compile Include="WAPBrandList.cs" />
+    <Compile Include="WAPChangeMapPosition.cs" />
+    <Compile Include="WapChangePassword.cs" />
+    <Compile Include="WAPChangePosition.cs" />
+    <Compile Include="WapChoiceShippingAddress.cs" />
+    <Compile Include="WAPChooseCity.cs" />
+    <Compile Include="WAPChooseMapCity.cs" />
+    <Compile Include="WapCombinationBuyDetail.cs" />
+    <Compile Include="WAPCountDownProductDetail.cs" />
+    <Compile Include="WapCountDownProductList.cs" />
+    <Compile Include="WAPCountDownStoreProductDetail.cs" />
+    <Compile Include="WapCouponDetails.cs" />
+    <Compile Include="WapCouponsList.cs" />
+    <Compile Include="WAPDevelopReferrals.cs" />
+    <Compile Include="WAPEditShippingAddress.cs" />
+    <Compile Include="WAPFinishOrder.cs" />
+    <Compile Include="WapForgetPassword.cs" />
+    <Compile Include="WAPForgotTradePassword.cs" />
+    <Compile Include="WAPGroupBuyList.cs" />
+    <Compile Include="WAPGroupBuyProductDetail.cs" />
+    <Compile Include="WAPImageTextDetails.cs" />
+    <Compile Include="WapInpourPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WAPLogin.cs" />
+    <Compile Include="WAPLoginGuide.cs" />
+    <Compile Include="WAPLogout.cs" />
+    <Compile Include="WAPMemberCenter.cs" />
+    <Compile Include="WAPMemberCoupons.cs" />
+    <Compile Include="WAPMemberOrderDetails.cs" />
+    <Compile Include="WAPMemberOrders.cs" />
+    <Compile Include="WAPMemberOrdersVCode.cs" />
+    <Compile Include="WapMemberProductReview.cs" />
+    <Compile Include="WapMemberSubmitProductReview.cs" />
+    <Compile Include="WAPMemberWeiXinRedEnvelopeCoupons.cs" />
+    <Compile Include="WAPMyAccountSummary.cs" />
+    <Compile Include="WAPMyConsultations.cs" />
+    <Compile Include="WAPMyFavorites.cs" />
+    <Compile Include="WAPMyGiftDetailInfo.cs" />
+    <Compile Include="WAPMyLogistics.cs" />
+    <Compile Include="WAPMyPrize.cs" />
+    <Compile Include="WAPNoPositionTip.cs" />
+    <Compile Include="WAPNoStoreTip.cs" />
+    <Compile Include="WAPOnlyWXOpenTip.cs" />
+    <Compile Include="WAPOpenBalance.cs" />
+    <Compile Include="WapOrderMessage.cs" />
+    <Compile Include="WapOrderShippingPaymentSet.cs" />
+    <Compile Include="WapOrderStoresSet.cs" />
+    <Compile Include="WAPPoint.cs" />
+    <Compile Include="WAPPointInfo.cs" />
+    <Compile Include="WAPPointMall.cs" />
+    <Compile Include="WAPPreSaleproductdetails.cs" />
+    <Compile Include="WAPProductConsultations.cs" />
+    <Compile Include="WAPProductDelete.cs" />
+    <Compile Include="WAPProductDetails.cs" />
+    <Compile Include="WAPProductList.cs" />
+    <Compile Include="WAPProductReview.cs" />
+    <Compile Include="WAPProductSearch.cs" />
+    <Compile Include="WAPRechargeRequest.cs" />
+    <Compile Include="WapRecruitmentAgreement.cs" />
+    <Compile Include="WAPReferral.cs" />
+    <Compile Include="WapReferralAgreement.cs" />
+    <Compile Include="WAPReferralCenter.cs" />
+    <Compile Include="WapReferralRegister.cs" />
+    <Compile Include="WapReferralRegisterAgreement.cs" />
+    <Compile Include="WapReferralRegisterresults.cs" />
+    <Compile Include="WapRegisteredCoupons.cs" />
+    <Compile Include="WapRegisteredCouponsEnd.cs" />
+    <Compile Include="WapRegisteredCouponsOldUser.cs" />
+    <Compile Include="WAPRequestBalanceDraw.cs" />
+    <Compile Include="WAPRequestBalanceDrawRecords.cs" />
+    <Compile Include="WAPRequestBalanceDraw_Detail.cs" />
+    <Compile Include="WAPResourceNotFound.cs" />
+    <Compile Include="WapReturnSendGoods.cs" />
+    <Compile Include="WAPScratch.cs" />
+    <Compile Include="WAPServiceMemberOrderDetails.cs" />
+    <Compile Include="WAPServiceProductDetails.cs" />
+    <Compile Include="WapServiceProductSubmitOrder.cs" />
+    <Compile Include="WAPSetInvoice.cs" />
+    <Compile Include="WAPSetPassword.cs" />
+    <Compile Include="WAPShakeCouponsForAttention.cs" />
+    <Compile Include="WAPShakeCouponsShow.cs" />
+    <Compile Include="WAPShakeGetCoupon.cs" />
+    <Compile Include="WAPShakeGetCouponsForAttention.cs" />
+    <Compile Include="WapShare.cs" />
+    <Compile Include="WAPShippingAddresses.cs" />
+    <Compile Include="WapShopInfo.cs" />
+    <Compile Include="WAPShoppingCart.cs" />
+    <Compile Include="WAPShoppingCartEmpty.cs" />
+    <Compile Include="WAPSignUp.cs" />
+    <Compile Include="WAPSlideImage.cs" />
+    <Compile Include="WAPSmashEgg.cs" />
+    <Compile Include="WapSplittinDetails.cs" />
+    <Compile Include="WapSplittinDetail_Detail.cs" />
+    <Compile Include="WAPSplittinDrawRecords.cs" />
+    <Compile Include="WAPSplittinDraws.cs" />
+    <Compile Include="WAPSplittinDraw_Detail.cs" />
+    <Compile Include="WAPSplittinRule.cs" />
+    <Compile Include="WAPSplittinRuleDetail.cs" />
+    <Compile Include="WapStoreAbout.cs" />
+    <Compile Include="WAPStoreDetail.cs" />
+    <Compile Include="WAPStoreHome.cs" />
+    <Compile Include="WAPStoreList.cs" />
+    <Compile Include="WAPStoreListQuery.cs" />
+    <Compile Include="WAPStoreListSearch.cs" />
+    <Compile Include="WAPStoreMarketing.cs" />
+    <Compile Include="WapStoreOrderPay.cs" />
+    <Compile Include="WAPStoreProductDetails.cs" />
+    <Compile Include="WAPStoreShoppingCart.cs" />
+    <Compile Include="WapSubMembers.cs" />
+    <Compile Include="WAPSubMember_Detail.cs" />
+    <Compile Include="WAPSubmitIDInfo.cs" />
+    <Compile Include="WAPSubmmitOrder.cs" />
+    <Compile Include="WapSubReferrals.cs" />
+    <Compile Include="WapSubReferral_Detail.cs" />
+    <Compile Include="WapSupplierAbout.cs" />
+    <Compile Include="WAPTicket.cs" />
+    <Compile Include="WAPTransactionPwd.cs" />
+    <Compile Include="WAPUpdateTranPassword.cs" />
+    <Compile Include="WAPUserInfo.cs" />
+    <Compile Include="WAPUserProfile.cs" />
+    <Compile Include="WapUserRefundDetail.cs" />
+    <Compile Include="WapUserRefunds.cs" />
+    <Compile Include="WapUserReturnDetail.cs" />
+    <Compile Include="WapUserReturns.cs" />
+    <Compile Include="WAPWinningResults.cs" />
+    <Compile Include="WXAliPay.cs" />
+    <Compile Include="WXQRCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hidistro.Context\Hidistro.Context.csproj">
+      <Project>{fe796bf0-cefd-4d7b-87d4-768a72f42bfa}</Project>
+      <Name>Hidistro.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Core\Hidistro.Core.csproj">
+      <Project>{08764b0b-caa2-4f97-8b26-67b2ec14825d}</Project>
+      <Name>Hidistro.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Entities\Hidistro.Entities.csproj">
+      <Project>{0a26b413-4cb7-4218-bfe9-674e5d0d0713}</Project>
+      <Name>Hidistro.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Messages\Hidistro.Messages.csproj">
+      <Project>{e1d9828b-bcee-476e-9e30-6f3cbda55bef}</Project>
+      <Name>Hidistro.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.SaleSystem\Hidistro.SaleSystem.csproj">
+      <Project>{af59cc0e-5801-4db4-bf5a-9fda1659fa1d}</Project>
+      <Name>Hidistro.SaleSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.SqlDal\Hidistro.SqlDal.csproj">
+      <Project>{e749357f-f0c5-47a3-8e00-e23fc13cc1c7}</Project>
+      <Name>Hidistro.SqlDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.UI.Common.Controls\Hidistro.UI.Common.Controls.csproj">
+      <Project>{165d61fb-1387-4c56-8bcc-d2aa4c6c5eea}</Project>
+      <Name>Hidistro.UI.Common.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.UI.SaleSystem.Tags\Hidistro.UI.SaleSystem.Tags.csproj">
+      <Project>{f7555fad-919e-4985-8e36-031b378ad432}</Project>
+      <Name>Hidistro.UI.SaleSystem.Tags</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hishop.Components.Validation\Hishop.Components.Validation.csproj">
+      <Project>{42d90a2a-02df-479f-a535-bde0465591aa}</Project>
+      <Name>Hishop.Components.Validation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hishop.Plugins\Hishop.Plugins.csproj">
+      <Project>{b3b87245-c163-4559-a16c-cb86d684f828}</Project>
+      <Name>Hishop.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

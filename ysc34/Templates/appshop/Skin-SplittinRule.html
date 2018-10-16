@@ -1,0 +1,136 @@
+﻿<hi:common_appheader runat="server" />
+<style>
+    body{
+        padding:0 0.75rem;
+    }
+    #SplittinRule_divRepeledReason{
+        border:1px dashed #e7e5ea;
+        background:#fff;
+        padding:0.75rem;
+        float:left;
+        width:100%;
+    }
+
+        #SplittinRule_divRepeledReason font {
+            width: 100%;
+            font-size: 0.6rem;
+            color: #000;
+            display: inline-block;
+        }
+
+        #SplittinRule_divRepeledReason span {
+            margin-top: 0.25rem;
+            color: #666;
+            display: inline-block;
+        }
+
+    .t_1 {
+        float: left;
+        font-size: 0.6rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<!--分享代金红包-->
+<div class="share_box" id="share" style="display: none;">
+<ul>
+	<li data-id="weixin" data-scene="WXSceneSession">
+    	<img src="/images/main/icon_wechat.png" />发送给朋友
+    </li>
+    <li data-id="weixin" data-scene="WXSceneTimeline">
+    	<img src="/images/main/icon_wxTimeLine.png" />分享到朋友圈
+    </li>
+	<li data-id="qq">
+    	<img src="/images/main/icon_qq.png" />分享到QQ
+    </li>
+	<li data-id="sinaweibo">
+    	<img src="/images/main/icon_weibo.png" />新浪微博
+    </li>            
+</ul>
+<div id="cancel">
+	<a class="cancel">取消</a>
+</div>
+</div>
+
+<div id="posterPanel" runat="server">
+
+    <%<asp:Image ID="userReferralQRCode" runat="server" ImageUrl="" width="100%" ClientIDMode="Static" /> %>
+    <div class="zhezhao">
+        <img src="../images/new/Splittin_pic.png" id="imghtmlfxvshop" runat="server">
+        <img src="../images/new/SplittinWap_pic.png" id="imghtmlfxwapshop" runat="server">
+    </div>
+    <script type="text/javascript">
+        String.prototype.replaceAll = function (str, tostr) {
+            oStr = this;
+            while (oStr.indexOf(str) > -1) {
+                oStr = oStr.replace(str, tostr);
+            }
+            return oStr;
+        }
+        $(document).ready(function () {
+        	var title = $("#hidExtendShareTitle").val();
+                var content = $("#hidExtendShareDetail").val();
+                var imgUrl = $("#hidExtendSharePic").val();
+                var shareUrl = $("#hidExtendShareUrl").val();
+                if (content == "") { content = title; }
+                shareJson = ("{\"title\":\"" + title + "\",\"content\":\"" + content + "\",\"imgurl\":\"" + imgUrl + "\",\"href\":\"" + shareUrl + "\"}").replaceAll("\\", "").replaceAll("\n\r", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll(" ", "");
+                shareJson = JSON.parse(shareJson);
+
+            $("#btnshare").click(function (e) {
+                var display = document.getElementById('share').style.display;
+						if (display == "none" || display == '') {
+							document.getElementById('share').style.display = 'block';
+						} else if (display == "block") {
+							document.getElementById('share').style.display = 'none';
+						}
+					})
+ 
+            
+            $("#share li").on("click",function(){
+            	var shareId=this.dataset.id;	
+				var scene=this.dataset.scene;	
+            	mui.fire(plus.webview.getWebviewById("appauto"), "ShareRefress", {'id': shareId, 'scene': scene , 'shareparem': shareJson });
+            })
+            
+        })
+ 
+	$("#cancel").click(function(){
+		$("#share").hide();
+		})						
+
+    </script>
+    <div class="share_bottom"><div class="share_btn2"><a href="javascript:void(0)" id="btnshare">分享我的专属链接<i class="icon_yongjin_11 icon-icon_share2"></i></a></div></div>
+</div>
+<div id="noreferralPanel" runat="server" visible="false">
+    <div class="notreferral">
+        <div class="img"><img src="/Utility/pics/group-1.png" alt="" /></div>
+        <div class="txt">您还不是本商城分销员噢~<br />申请成为分销员，分销有礼！</div>
+        <div class="btns">
+            <a href="ReferralRegisterAgreement" class="btn_login">了解分销员</a>
+            <a onclick="goHomePage()" class="btn-default">返回商城首页</a>
+        </div>
+    </div>
+</div>
+<div id="repeledPanel" runat="server" visible="false" clientidmode="static">
+    <div style="float:left;width:100%;padding:2.5rem;text-align:center;">
+        <img src="/images/clear_mob.png" style="width:4.2rem; margin:0 auto;" />
+    </div>
+    <div class="t_1">
+        您于 <asp:Literal id="repeledTime" runat="server"></asp:Literal>  被商城取消分销员资格。
+    </div>
+    <div id="divRepeledReason" runat="server" visible="false">
+        <font>商家解释：</font>
+        <span>
+            <asp:Literal id="repeledReason" runat="server"></asp:Literal>
+        </span>
+    </div>
+</div>
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTimestamp" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdNonceStr" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdSignature" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidExtendShareTitle" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidExtendShareDetail" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidExtendSharePic" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidExtendShareUrl" runat="server" ClientIDMode="Static" />
+<hi:common_appfooter runat="server" />

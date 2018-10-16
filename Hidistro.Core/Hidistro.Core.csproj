@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{08764B0B-CAA2-4F97-8B26-67B2EC14825D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hidistro.Core</RootNamespace>
+    <AssemblyName>Hidistro.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\dll\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching">
+      <HintPath>..\dll\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\dll\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\dll\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\dll\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\dll\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\dll\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\dll\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\dll\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AspNetCache.cs" />
+    <Compile Include="Attributes\GlobalCodeAttribute.cs" />
+    <Compile Include="BaseModel.cs" />
+    <Compile Include="CacheFactory.cs" />
+    <Compile Include="Configuration\HiConfiguration.cs" />
+    <Compile Include="Configuration\Provider.cs" />
+    <Compile Include="DataHelper.cs" />
+    <Compile Include="DataProviders.cs" />
+    <Compile Include="DataSetExtends.cs" />
+    <Compile Include="DbSetExtend.cs" />
+    <Compile Include="DictionaryExtends.cs" />
+    <Compile Include="DownloadHelper.cs" />
+    <Compile Include="Entities\DbQueryResult.cs" />
+    <Compile Include="Entities\Pagination.cs" />
+    <Compile Include="EntityMappingAttribute.cs" />
+    <Compile Include="EnumExtensions.cs" />
+    <Compile Include="Enums\FileClass.cs" />
+    <Compile Include="Enums\RedEnvelopeState.cs" />
+    <Compile Include="Enums\RedEnvelopeType.cs" />
+    <Compile Include="Enums\SortAction.cs" />
+    <Compile Include="Enums\SSLSettings.cs" />
+    <Compile Include="Enums\SystemRoles.cs" />
+    <Compile Include="Enums\VerifyCodeType.cs" />
+    <Compile Include="ExcelHelper.cs" />
+    <Compile Include="Extends\DateTimeExtends.cs" />
+    <Compile Include="Filter.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Helper\WebHelper.cs" />
+    <Compile Include="HiCache.cs" />
+    <Compile Include="HiCryptographer.cs" />
+    <Compile Include="HtmlCodingAttribute.cs" />
+    <Compile Include="IHiCache.cs" />
+    <Compile Include="ImageFormats.cs" />
+    <Compile Include="JavaScripts.cs" />
+    <Compile Include="Jobs\IJob.cs" />
+    <Compile Include="Jobs\Job.cs" />
+    <Compile Include="Jobs\Jobs.cs" />
+    <Compile Include="JsonHelper.cs" />
+    <Compile Include="LinqExtensions.cs" />
+    <Compile Include="MemCached.cs" />
+    <Compile Include="MemcachedClientService.cs" />
+    <Compile Include="ModelCopier.cs" />
+    <Compile Include="ObjectExtends.cs" />
+    <Compile Include="PageModel.cs" />
+    <Compile Include="ProductShowOrderPriority.cs" />
+    <Compile Include="ProductTempSQLADD.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryBase.cs" />
+    <Compile Include="RedisCache.cs" />
+    <Compile Include="ResourcesHelper.cs" />
+    <Compile Include="Serializer.cs" />
+    <Compile Include="TemplatePageControl.cs" />
+    <Compile Include="TypeUtil.cs" />
+    <Compile Include="UploadHelper.cs" />
+    <Compile Include="Urls\HttpHandlerRouteHandler.cs" />
+    <Compile Include="Urls\RouteConfig.cs" />
+    <Compile Include="Urls\RouteParameter.cs" />
+    <Compile Include="Urls\RouteParameterCollection.cs" />
+    <Compile Include="Urls\RoutingCollection.cs" />
+    <Compile Include="Urls\RoutingItem.cs" />
+    <Compile Include="Urls\WebRouteConfigurationSection.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

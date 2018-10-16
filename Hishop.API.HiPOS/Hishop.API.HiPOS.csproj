@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{813DEFE5-8B6A-4B1D-8798-476BB94CB104}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hishop.API.HiPOS</RootNamespace>
+    <AssemblyName>Hishop.API.HiPOS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdvancedAPIs.Auth\AuthApi.cs" />
+    <Compile Include="AdvancedAPIs.Auth\AuthJson\AuthResult.cs" />
+    <Compile Include="AdvancedAPIs.Auth\AuthJson\HishopAuthResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantApi.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\AlipayKeyResult.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\AuthCodeResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\AuthCodeResult.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\DetailResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\DetailResult.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\DeviceResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\HiPOSResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\HishopO2OResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\HishopO2OResult.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\MerchantAlipayKeyResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\MerchantResult.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\MerchantUpdateResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\PaymentsResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\PaymentsResult.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\StoreResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\TradesResponse.cs" />
+    <Compile Include="AdvancedAPIs.Merchant\MerchantJson\TradesResult.cs" />
+    <Compile Include="ButtonType.cs" />
+    <Compile Include="CardType.cs" />
+    <Compile Include="Card_CodeType.cs" />
+    <Compile Include="Card_DateInfo_Type.cs" />
+    <Compile Include="Card_UrlNameType.cs" />
+    <Compile Include="CheckSignature.cs" />
+    <Compile Include="CommonAPIs\AccessTokenBag.cs" />
+    <Compile Include="CommonAPIs\AccessTokenContainer.cs" />
+    <Compile Include="CommonAPIs\ApiHandlerWapper.cs" />
+    <Compile Include="CommonAPIs\CommonApi.cs" />
+    <Compile Include="Entities\AccessTokenResult.cs" />
+    <Compile Include="Entities\Extensions.cs" />
+    <Compile Include="Entities\IRequestMessageBase.cs" />
+    <Compile Include="Entities\IRequestMessageEventBase.cs" />
+    <Compile Include="Entities\IResponseMessageBase.cs" />
+    <Compile Include="Entities\RequestMessageBase.cs" />
+    <Compile Include="Entities\RequestMessageEventBase.cs" />
+    <Compile Include="Entities\RequestMessageText.cs" />
+    <Compile Include="Entities\Request\ConfirmingResponse.cs" />
+    <Compile Include="Entities\Request\ConfirmingResult.cs" />
+    <Compile Include="Entities\Request\OrderInfoResponse.cs" />
+    <Compile Include="Entities\Request\OrderInfoResult.cs" />
+    <Compile Include="Entities\ResponseMessageBase.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="GroupMessageType.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
+    <Compile Include="Helpers\EventHelper.cs" />
+    <Compile Include="Helpers\GpsHelper.cs" />
+    <Compile Include="Helpers\MD5UtilHelper.cs" />
+    <Compile Include="Helpers\MsgTypeHelper.cs" />
+    <Compile Include="Helpers\SHA1UtilHelper.cs" />
+    <Compile Include="HiPOSParameter.cs" />
+    <Compile Include="MemberCard_CustomField_NameType.cs" />
+    <Compile Include="OAuthScope.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestMessageFactory.cs" />
+    <Compile Include="RequestMsgType.cs" />
+    <Compile Include="ResponseMessageFactory.cs" />
+    <Compile Include="ResponseMsgType.cs" />
+    <Compile Include="ShakeAroundAppendType.cs" />
+    <Compile Include="ShakeAroundBindType.cs" />
+    <Compile Include="SHiShop.API.HiPOS.Entities.Request\PostModel.cs" />
+    <Compile Include="TenPayV3Type.cs" />
+    <Compile Include="UploadMediaFileType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HiShop.API.Setting\HiShop.API.Setting.csproj">
+      <Project>{01e0e2a7-45ee-4d24-b4e7-0c316292b118}</Project>
+      <Name>HiShop.API.Setting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

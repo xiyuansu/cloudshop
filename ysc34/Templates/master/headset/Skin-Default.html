@@ -1,0 +1,55 @@
+﻿<%<hi:common_header runat="server" />%>
+ <%<hi:common_rightlink runat="server" />%>
+<!--main-->
+<div id="main" class="imain">
+<div class="bannerg"><script src="../../../Utility/time.js"></script>
+<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="11" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_11").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+        </div>
+<div class="promise-ad"><hi:common_imagead runat="server" adid="2"></hi:common_imagead></div>
+<div class="icatebg"><div class="icate"><ul>
+<%<hi:common_productcategorylist templatefile="/HomeTags/Skin-Common_ProductCategoryList3.ascx" runat="server" />%>
+
+</ul></div>
+</div>
+
+
+<!--1-->
+<div class="bigad1"><hi:common_customad runat="server" adid="3"></hi:common_customad></div>
+<div class="pro1"><ul>
+<hi:common_subjectproduct_simple runat="server" subjectid="11"></hi:common_subjectproduct_simple>
+  </ul></div>
+  
+  
+<!--2-->
+<div class="bigad2"><hi:common_customad runat="server" adid="4"></hi:common_customad></div>
+  <div class="pro1"><ul>
+<hi:common_subjectproduct_simple runat="server" subjectid="12"></hi:common_subjectproduct_simple>
+  </ul></div>
+  
+<!--3-->
+<div class="bigad3"><hi:common_customad runat="server" adid="5"></hi:common_customad></div>
+  <div class="pro1"><ul>
+<hi:common_subjectproduct_simple runat="server" subjectid="13"></hi:common_subjectproduct_simple>
+  
+  </ul></div>
+
+<!--4-->
+<div class="bigad4"><hi:common_customad runat="server" adid="6"></hi:common_customad></div>
+  <div class="pro1"><ul>
+ <hi:common_subjectproduct_simple runat="server" subjectid="14"></hi:common_subjectproduct_simple>
+  </ul></div>
+
+<div class="bigad5"><hi:common_customad runat="server" adid="7"></hi:common_customad></div>
+<div class="bigad6"><hi:common_customad runat="server" adid="8"></hi:common_customad></div>
+</div>
+
+<!--main-content结束-->
+
+<%<Hi:Common_Footer runat="server"/>%>

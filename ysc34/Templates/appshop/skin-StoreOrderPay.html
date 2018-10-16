@@ -1,0 +1,76 @@
+﻿<hi:common_appheader runat="server" />
+<input type="hidden" runat="server" clientidmode="Static" id="litPaymentType" />
+<div class="pbox" id="loadPanel" runat="server" style="padding-bottom:60px;">
+    <div id="orderSuccess" class="well text-center orderMsg">
+        <div class="font-xl">
+            <span class="glyphicon glyphicon-ok"></span>&nbsp;门店支付,请确认您的支付信息。
+        </div>
+        <div class="">
+            您需要支付<asp:literal runat="server" id="litPaymentText" />：<span class="text-danger">
+                ¥<asp:literal runat="server" id="litOrderTotal" />
+            </span>
+            <br />
+            付款方式：<span>
+                <%<asp:Literal runat="server" ID="litPaymentName" />%>
+            </span>
+        </div>
+        <div class="btns">
+            <a id="linkToDetail" runat="server" class="btn btn-success" role="button">查看该订单</a>
+        </div>
+    </div>
+</div>
+<div class="pbox" id="errorPanel" runat="server" style="padding-bottom:60px;">
+    <div class="fail text-center orderMsg">
+        <div class="font-xl">
+            <span class="glyphicon glyphicon-alert"></span>&nbsp;门店支付,支付错误。
+        </div>
+        <div class="">
+            <br />
+            <span style="color:red;"><%<asp:Literal runat="server" ID="litErrorMsg" />%></span>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        padding: 0 0 60px 0;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    .main {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .bg {
+        background: #000;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+    }
+
+    .main img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+</style>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+
+

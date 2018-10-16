@@ -1,0 +1,144 @@
+﻿<hi:common_wapheader runat="server" />
+
+<div class="s_1">
+    <label for="txtKeywords" id="search"><i class="icon_search icon-icon_search_32"></i>搜索</label>
+    <input id="txtKeywords" type="search" />
+</div>
+
+<div class="s_2">
+    <asp:literal id="ltlCategories" runat="server"></asp:literal>
+</div>
+<hi:common_wapguanzhu runat="server"></hi:common_wapguanzhu>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<script type="text/javascript">
+    $(function () {
+        $(".slid_down").click(function () {
+            var pid = $(this).attr("pid");
+            var tid = $(this).attr("tid");
+            $(this).siblings("ul").html($("#hidpid_" + pid).val());
+            if ($(this).siblings("ul").is(':hidden')) {
+                //$(this).children("em").toggle();
+                $(this).siblings("ul").slideToggle();
+            }
+            if ($(this).parent(".s_3").siblings().children("ul").is(':visible')) {
+                $(this).parent(".s_3").siblings().children("ul").slideUp();
+                $(this).parent(".s_3").siblings().children(".slid_down").children("h3").children(" .icon_slipup").hide();
+                $(this).parent(".s_3").siblings().children(".slid_down").children("h3").children(".icon_slipdown").show();
+            }
+            if ($(this).children("h3").children(".icon_slipup").is(":visible")) {
+                $(this).siblings("ul").slideUp(function () {
+                    $(this).siblings().children("em").hide();
+                    $(this).siblings(".slid_down").children().children(" .icon_slipup").hide();
+                    $(this).siblings(".slid_down").children().children(" .icon_slipdown").show();
+                });
+            }
+            $(this).children("h3").children(" .icon_slipup").show();
+            $(this).children("em").show();
+            $(this).children("h3").children(".icon_slipdown").hide();
+            $(this).siblings().children("h3").children(" .icon_slipup").hide();
+            $(this).siblings().children("em").hide();
+            $(this).parent(".s_3").siblings().children(".slid_down").children("em").hide();
+            $(this).siblings().children("h3").children(".icon_slipdown").show();
+        });
+
+        $("#txtKeywords").focus(function () {
+            $("#search").hide();
+        });
+        $("#txtKeywords").blur(function () {
+            $("#search").show();
+        });
+
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                if ($("#txtKeywords").val() == "") {
+                    $("#search").show();
+                }
+                searchs();
+            }
+        });
+    })
+
+
+    function searchs() {
+        var key = $("#txtKeywords").val();
+        var str = window.location.search;
+
+        var categoryId;
+        categoryId = getParam("categoryId");
+        var storeId = getParam("storeId");
+        var url = "";
+        if (storeId > 0) {
+            url = "ProductList?storeId=" + storeId + "&keyWord=" + escape(key);
+        } else {
+            if (StoreDefaultPage == "StoreList") {
+                url = "StoreListSearch?Key=" + escape(key);
+            }
+            else {
+                url = "ProductList?keyWord=" + escape(key);
+            }
+        }
+
+        window.location.href = url;
+    }
+
+    $(document).ready(function () {
+        var str = window.location.search;
+        if (str.indexOf("keyWord=") != -1) {
+            var keyWord = getParam('keyWord');
+            if (keyWords)
+                $("#txtKeywords").val(keyWord);
+        }
+    });
+
+
+    $(".hfooter .glyphicon-refresh").click(function () {
+        location.reload();
+    })
+
+    $(".hfooter .glyphicon-arrow-left").click(function () {
+        history.go(-1);
+    })
+
+    //隐藏右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+
+    //隐藏底部菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+
+
+    function goUrl(url) {
+        //        alert(url);
+        //location.replace(url);
+        location.href = url;
+    }
+
+    $(function () {
+        var categoryItems = $('a.categoryItem');
+        var cateogryId, url;
+        var storeId = getParam("storeId");
+        var url = "";
+        if (storeId > 0) {
+            url = "ProductList?storeId=" + storeId + '&categoryId=' + cateogryId;
+        } else {
+            if (IsOpenStores) {
+                url = "StoreListSearch?categoryId=" + cateogryId;
+            }
+            else {
+                url = "ProductList?categoryId=" + cateogryId;
+            }
+        }
+        $.each(categoryItems, function (i, item) {
+            cateogryId = $(item).attr('value');
+            if ($(item).attr('name') == "True")
+                url = '?storeId=' + storeId + '&categoryId=' + cateogryId;
+            else
+                url = 'ProductList.aspx?storeId=' + storeId + '&categoryId=' + cateogryId;
+            $(item).attr('onclick', 'goUrl("' + url + '")').attr('href', 'javascript:;');
+
+        });
+    });
+</script>

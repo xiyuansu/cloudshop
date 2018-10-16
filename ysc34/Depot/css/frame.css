@@ -1,0 +1,435 @@
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    font-family: "微软雅黑", arial;
+    font-weight: normal;
+    border: 0px solid red;
+    position: absolute;
+    width: 100%;
+    float: left;
+    margin: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+blockquote {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    color: #333;
+}
+
+table,
+td,
+tr,
+th {
+    font-size: 12px;
+}
+
+li {
+    list-style-type: none;
+}
+
+img {
+    border: 0;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+caption,
+th {
+    text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+}
+
+.fB {
+    font-weight: bold;
+}
+
+.fI {
+    font-style: italic;
+}
+
+.f12px {
+    font-size: 12px;
+}
+
+.f14px {
+    font-size: 14px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+
+.martop10 {
+    margin-top: 10px;
+}
+
+.marbot10 {
+    margin-bottom: 10px;
+}
+
+.marleft10 {
+    margin-left: 10px;
+}
+
+.padtop8 {
+    padding-top: 10px;
+}
+
+.marlr8 {
+    margin: 0 8px;
+}
+
+.clean {
+    clear: both;
+    height: 0px;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+
+/****����****/
+
+.hishop_head {
+    width: 100%;
+    height: 60px;
+    background: #007ddb;
+    overflow: hidden;
+}
+
+.hishop_logo {
+    float: left;
+    width: 168px;
+    margin: 5px 0px 0px 0px;
+    overflow: hidden;
+}
+
+.hishop_logo img {   
+    margin:0px 0 0 30px; 
+}
+
+.hishop_banner {
+    height: 60px;
+    line-height: 43px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.hishop_banner .hishop_con2 {
+    float: left;
+}
+
+.hishop_banneritem_menu {
+    float: right;
+    margin-top: 5px;
+}
+.hishop_banneritem_menu a{
+	margin: 0 8px 0 0;
+}
+
+.hishop_banneritem {
+    color: #fff;
+    float: right;
+    width: 180px;
+    white-space: nowrap;  
+    right: 0;
+    height: 60px;
+    _height: 48px;
+}
+
+.hishop_banneritem .dropdown {
+    float: left;
+    width: 14px;
+    height: 15px;
+    margin: 19px 90px 0 0;
+    *margin: 4px 0 0 0;
+    right: 0;
+    *right: 100px;
+    position: absolute;
+}
+
+.hishop_banneritem p img {
+    margin-top: 0px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.dropdown-menu {
+    float: left;
+    z-index: 999;
+    margin: -3px 0 0 -70px;
+    padding: 0;    
+}
+.hishop_banneritem .dropdown:hover .dropdown-menu{
+	display: block;
+}
+
+.dropdown-menu li {
+    text-align: center;
+}
+
+.dropdown-menu li:hover a {
+    background: #ccc;
+}
+
+.hishop_banneritem a {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.hishop_banneritem span {
+    margin: 0px 5px 0px 10px;
+}
+
+.hishop_banneritem b {
+    width: 1px;
+    height: 11px;
+}
+
+.hishop_banneritem strong {
+    color: #C8ECFC
+}
+
+.hishop_menu {
+    float: left;
+    height: 60px;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.hishop_menu div {
+    float: right;
+    margin-left: 5px;
+    width: 75px;
+    height: 30px;
+}
+
+.hishop_menu a {
+    color: #deeefb;
+    display: inline-block;
+    width: 75px;
+    float: left;
+    height: 60px;
+    cursor: pointer;
+    line-height: 60px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.hishop_menu a.hishop_curent {
+    background: #006cc4;
+}
+
+.hishop_menu a:hover {
+    /*background: #02598d;*/
+    color: #fff;
+    text-decoration: none;
+    height: 60px;
+    margin-top: 0px;
+    line-height: 60px;
+}
+
+
+/***����߲˵���***/
+
+.hishop_content {
+    height: 100%;
+}
+
+.hishop_menu_scroll {
+    background: #424954;
+    height: 100% !important;
+    width: 168px;
+    position: absolute;
+    margin: 0px 0px;
+    display: none;
+    opacity:1 !important;
+}
+
+#menu_left {
+    background: #424954;
+    width: 168px;
+    position: absolute;
+    margin: 0px 0px;
+    height: 100%;
+    border-right: 0px solid #dde4e9;
+}
+
+.open_arrow,
+.close_arrow {
+    position: absolute;
+    overflow: hidden;
+    width: 7px;
+    cursor: pointer;
+    z-index: 99;
+    height: 100%;
+}
+
+#menu_arrow:hover {
+    background-color: #0371AC
+}
+
+.open_arrow {
+    left: 168px;
+    background: #fff url(../images/arrow-left.gif) no-repeat 1px 40%;
+}
+
+.close_arrow {
+    clear: both;
+    background: #fff url(../images/arrow-right.gif) no-repeat 2px 40%;
+    left: 0;
+}
+
+.hishop_menutitle {
+    width: 168px;
+    border-top:1px solid #5e646e;
+    overflow: hidden;
+    padding: 0 0 5px 0;
+}
+.hishop_menutitle i{
+    float: right;
+    color: #deeefb;
+    position: relative;
+    right: 10px;
+    top: 10px;
+    font-weight: normal;
+    font-size: 6px;
+}
+#menu_left div:first-child{
+    border-top: none;
+}
+
+.hishop_menutitle span {
+    /*background: #5f6875;*/
+    height: 31px;
+    line-height: 31px;    
+    margin: 0px 0px 1px 0px;
+    display: block;
+    font-size: 11px;
+    padding-left: 12px;
+    color: #a0a4a9;
+    cursor: pointer;
+    font-family: Helvetica Neue,Tahoma,Arial,'Hiragino Sans GB',"Microsoft Yahei";
+}
+
+.hishop_menutitle a {
+    clear: both;
+    color: #deeefb;
+    text-decoration: none;
+    height: 28px;
+    font-size: 13px;
+    margin: 1px 0 0px 0;
+    line-height: 25px;
+    padding-left: 20px;
+    cursor: pointer;
+    background: ;
+    display: block;
+    font-weight: normal;
+}
+
+.hishop_menutitle a:hover{
+    color: rgba(255,255,255,.87);
+    zoom: 1;
+    background: #5f6875;
+}
+.hishop_menutitle a.curent {
+    color: rgba(255,255,255,.87);
+    zoom: 1;
+    background: #007ddb;
+}
+
+
+/***�м�iframe***/
+
+.hishop_content_r {
+    overflow: visible;
+    position: absolute;
+    left: 7px;
+    width: 100%;
+    height: 100%;
+}
+
+.framecontent {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.hishop_banneritem .dropdown a .glyphicon{
+    margin: 1px 0 0 0;
+    font-size: 15px;
+}
+.hishop_menutitle span i{
+    font-style: normal;
+    margin:0 0 0 0;
+    padding: 0;
+    position: relative;
+    float: right;
+    font-size: 14px;
+    line-height: 10px;
+    color: #a0a4a9;
+}

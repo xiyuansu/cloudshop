@@ -1,0 +1,48 @@
+﻿<Hi:Common_WapHeader  runat="server" />
+
+<section id="content3">
+<form runat="server">  
+    <div class="s_img">
+        <div class="s_c">
+          <div class="textScratch"></div>
+          <div id="canvasScratch"></div>
+        </div>
+    </div>  
+    <div class="d_mt"> </div>
+   <div class="s_exp">
+         <h2>活动说明:</h2>
+         <p>
+             <asp:Literal runat="server" ID="litActivityDesc" />
+             <input type="hidden" id="hidIsUsePoint" runat="server" />
+       </p>
+   </div>
+   <div class="s_exp">
+         <h2>活动时间:</h2>
+         <p><asp:Literal runat="server" ID="litStartDate" /></p>
+         <p><asp:Literal runat="server" ID="litEndDate" /></p>
+   </div>
+   <div class="s_exp">
+         <h2>奖项设置:</h2>
+         <Hi:Common_PrizeNames runat="server" ID="litPrizeNames" />
+   </div>
+   <div class="s_exp">
+         <h2>中奖用户:</h2>
+         <Hi:Common_PrizeUsers runat="server" ID="litPrizeUsers" />
+   </div>
+  
+   </form>
+<input type="hidden" runat="server" id="hidFreeTimes" clientidmode="Static" />
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static" />
+
+<script type="text/javascript" src="/Utility/Scratch.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="/Utility/wxShare.js?v=3.0"></script>
+</section>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<style type="text/css">
+body{ padding-bottom:0!important; background:#d71936;}
+</style>

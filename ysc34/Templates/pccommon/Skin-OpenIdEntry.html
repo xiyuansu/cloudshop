@@ -1,0 +1,475 @@
+﻿<%<hi:common_header runat="server" />%>
+<link href="/style/OpenIdEntry.css?v=3.4" rel="stylesheet" type="text/css" media="">
+<form runat="server" clientidmode="Static" id="aspnetForm">
+    <asp:HiddenField ID="openId" runat="server" Value="" ClientIdMode="static" />
+    <asp:HiddenField ID="HIGW" runat="server" Value="" ClientIdMode="static" />
+    <asp:HiddenField ID="hidNickName" runat="server" Value="" ClientIdMode="static" />
+    <asp:HiddenField ID="hidUnionId" runat="server" Value="" ClientIdMode="static" />
+    <asp:HiddenField ID="hidHeadImage" runat="server" Value="" ClientIdMode="static" />
+    <!--强制绑定手机-->
+    <div class="wrapper" id="phoneBindPanel" runat="server">
+        <div class="phonebox">
+            <ul class="tab">
+                <li><a href="javascript:void(0)" class="hover">手机号绑定</a></li>
+                <li><a href="javascript:void(0)" class="right">已绑定帐号，立即关联</a></li>
+            </ul>
+            <div class="bindbox">
+                <h2>Hi,<%<asp:Label id="labNickName" runat="server">微信</asp:Label>%>，欢迎登录，帐号绑定后即可一键登录！</h2>
+                <div class="phonebind">
+                    <div class="notice">为了您的帐号安全，请绑定手机号</div>
+                    <ul>
+                        <li>
+                            <span>手机号码：</span><input id="txtCellphone" tabindex="1" type="text" placeholder="建议使用常用手机" />
+
+                        </li>
+                        <li id="divGeetest1" runat="server" clientidmode="static">
+                            <span>滑动验证：</span>
+                            <span id="captcha"></span>
+                        </li>
+                        <li id="divimgcode1" runat="server" clientidmode="static">
+                            <span id="emimgcode">图形验证码：</span><input id="txtNumber" tabindex="2" maxlength="4" style="width:80px;" type="text" autocomplete="off" placeholder="请输入验证码" />
+                            <img id="imgVerifyCode1" src='/VerifyCodeImage' style="vertical-align: middle; border-style: none;height:28px; width: 58px;" alt="" />
+
+                        </li>
+                        <li class="tip_s" id="imgcode" style="display:none;">
+                            <span id="txtNumber_succeed" class="zc_tishi">验证码输入正确</span>
+                            <span class="zc_tishi2" id="txtNumber_error"></span>
+                        </li>
+                        <li>
+                            <span>短信验证码：</span><input id="txtPhoneCode" tabindex="3" maxlength="4" style="width:80px;" type="text" autocomplete="off" placeholder="" />
+                            <input id="phoneVerifyCode" type="button" value="获取手机验证码" class="verifycode" />
+                        </li>
+                        <li class="tip_s" id="phonecode" style="display:none;">
+                            <span id="txtPhoneCode_succeed" class="zc_tishi">验证码输入正确</span>
+                            <span class="zc_tishi2" id="txtPhoneCode_error"></span>
+                        </li>
+                        <li>
+                            <span>设置密码：</span><input type="password" style="width:0px;height:0px;position:absolute;top:-999px;" /><input type="password" autocomplete="off" tabindex="4" maxlength="20" id="txtPassword" name="txtPassword" placeholder="请输入用户密码" />
+
+                        </li>
+                        <li><input type="checkbox" checked="checked" id="chkAgree1" class="chkagree" />本人已阅读、理解并同意本站的<a href="../../RegisterAgreement.aspx">会员注册协议</a></li>
+                        <li class="btnoper">
+                            <input type="button" ID="btnBindPhone" name="btnBindPhone" value="立即绑定" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="userbind" style="display:none;">
+                    <div class="notice">&nbsp;</div>
+                    <ul>
+                        <li>
+                            <span>用户名：</span><input id="txtUserName" tabindex="1" type="text" placeholder="请输入用户名" />
+
+                        </li>
+                        <li>
+                            <span>登录密码：</span><input type="password" style="width:0px;height:0px;position:absolute;top:-999px;" /><input type="password" autocomplete="off" tabindex="4" maxlength="20" id="txtPassword1" name="txtPassword1" placeholder="请输入密码" />
+
+                        </li>
+                        <li class="btnoper">
+                            <input type="button" ID="btnBindUser" name="btnBindUser" value="立即绑定" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" language="javascript">
+        var imgVerifyCode = document.getElementById('imgVerifyCode');
+        if (imgVerifyCode) {
+            document.getElementById('imgVerifyCode').src = "/VerifyCodeImage.aspx";
+        }
+
+        var captchaObj;
+        $(document).ready(function () {
+            if ($("#hidIsOpenGeetest").val() == "1") {
+                var handler = function (obj) {
+                    // 将验证码加到id为captcha的元素里
+                    captchaObj = obj;
+                    obj.appendTo("#captcha");
+                };
+                $.ajax({
+                    // 获取id，challenge，success（是否启用failback）
+                    url: "/getcaptcha.aspx",
+                    type: "get",
+                    dataType: "json", // 使用jsonp格式
+                    success: function (data) {
+                        // 使用initGeetest接口
+                        // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+                        // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+                        initGeetest({
+                            gt: data.gt,
+                            challenge: data.challenge,
+                            product: "float", // 产品形式
+                            offline: !data.success
+                        }, handler);
+                    }
+                });
+            }
+        });
+
+        function refreshCode() {
+            var img = document.getElementById("imgVerifyCode");
+
+            if (img != null) {
+                var currentDate = new Date();
+                img.src = "/VerifyCodeImage.aspx?t=" + currentDate.getTime();
+            }
+        }
+
+        function refreshCode2() {
+            var currentDate = new Date();
+            var url = "/VerifyCodeImage.aspx?t=" + currentDate.getTime();
+            $.post(url);
+        }
+        $(document).ready(function () {
+            $(".phonebox .tab a").click(function (e) {
+                var index = $(".phonebox .tab a").index(this);
+                $(".phonebox .tab a").removeClass("hover");
+                $(this).addClass("hover");
+                if (index == 0) {
+                    $(".phonebind").show();
+                    $(".userbind").hide();
+                }
+                else {
+                    $(".phonebind").hide();
+                    $(".userbind").show();
+                }
+            })
+            ///绑定手机
+            $("#btnBindPhone").click(function (e) {
+                var openId = $("#openId").val();
+                var openIdType = $("#HIGW").val();
+                var nickName = $("#hidNickName").val();
+                var unionId = $("#hidUnionId").val();
+                var cellphone = $("#txtCellphone").val().trim();
+                var headImage = $("#hidHeadImage").val();
+                if (cellphone == "" || cellphone.length != 11) {
+                    alert("请输入正确的手机号码");
+                    return;
+                }
+                if (!Reg_mobbile.test(cellphone)) {
+                    alert("请输入正确的手机号码");
+                    return;
+                }
+                var verfiyCode = $("#txtPhoneCode").val().trim();
+                if (verfiyCode == "" || verfiyCode.length != 4) {
+                    alert("请输入正确的手机验证");
+                    return;
+                }
+                var password = $("#txtPassword").val();
+                if (password == "" || password.length < 6 || password.length > 20) {
+                    alert("请输入密码，长度在6-20位之间");
+                    return false;
+                }
+                $.ajax({
+                    url: "/API/VshopProcess.ashx",
+                    type: 'post', dataType: 'json', timeout: 10000,
+                    data: { action: "CellPhoneRegister", Cellphone: cellphone, VerfiyCode: verfiyCode, Password: password, OpenId: openId, OpenIdType: openIdType, NickName: nickName, UnionId: unionId, HeadImage: headImage },
+                    success: function (resultData) {
+                        if (resultData.Status == "100") {
+                            alert(resultData.msg);
+                            location.href = "/User/UserDefault";
+                        }
+                        else if (resultData.Status == "215") {//手机号已绑定其它帐号
+                            if (window.confirm("您输入的手机号已绑定了其它帐号，是否登录")) {
+                                $(".phonebind").hide();
+                                $(".userbind").show();
+                            }
+                        }
+                        else {
+                            alert(resultData.msg);
+                            //$("#payment_close").trigger("click");
+                        }
+                    }
+                });
+            });
+            ///绑定用户
+            $("#btnBindUser").click(function (e) {
+                var openId = $("#openId").val();
+                var openIdType = $("#HIGW").val();
+                var nickName = $("#hidNickName").val();
+                var unionId = $("#hidUnionId").val();
+                var username = $("#txtUserName").val().trim();
+                var password = $("#txtPassword1").val();
+                var headImage = $("#hidHeadImage").val();
+                if (username == "") {
+                    alert("请输入正确的用户名");
+                    return false;
+                }
+                if (password == "" || password.length < 6 || password.length > 20) {
+                    alert("请输入密码，长度在6-20位之间");
+                    return false;
+                }
+                $.ajax({
+                    url: "/API/VshopProcess.ashx",
+                    type: 'post', dataType: 'json', timeout: 10000,
+                    data: { action: "OpenIdBindUser", UserName: username, Password: password, OpenId: openId, OpenIdType: openIdType, NickName: nickName, UnionId: unionId, HeadImage: headImage },
+                    success: function (resultData) {
+                        if (resultData.Status == "100") {
+                            alert(resultData.msg);
+                            location.replace("/User/UserDefault");
+                        }
+                        else {//
+                            alert(resultData.msg);
+                        }
+                    }
+                });
+            });
+            $("#phoneVerifyCode").click(function () {
+                if ($("#hidIsOpenGeetest").val() == "0" && $("#txtNumber").val().length == 0) {
+                    alert("请输入图形验证码");
+                    return;
+                }
+
+                var phone = $("#txtCellphone").length > 0 ? $("#txtCellphone").val() : $("#txtUserName").val();
+                var imgCode = $("#txtNumber").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Handler/MemberHandler.ashx?action=SendRegisterPhoneCode",
+                    data: $("#aspnetForm").serialize() + "&Phone=" + phone + "&imgCode=" + imgCode,
+                    success: function (result) {
+
+                        if (result.success == "true") {
+                            var time = 1000;
+                            var interval;
+                            var count = 0;
+
+                            function fun() {
+                                count++;
+                                if (count >= 60) {
+                                    $("#phoneVerifyCode").attr("disabled", false);
+                                    $("#phoneVerifyCode").attr("value", "重新发送");
+                                    clearInterval(interval);
+                                }
+                                else {
+                                    $("#phoneVerifyCode").attr("value", "发送成功（" + (60 - count) + ")");
+                                }
+                            }
+
+                            $("#phoneVerifyCode").attr("disabled", "true");
+                            interval = setInterval(fun, time);
+                        }
+                        else {
+                            if (result.msg == "该手机已被使用") {
+                                if (window.confirm("您输入的手机号已绑定了其它帐号，是否登录")) {
+                                    $(".phonebind").hide();
+                                    $(".userbind").show();
+                                }
+                                else {
+
+                                }
+                            }
+                            else {
+                                alert(result.msg);
+                            }
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
+    <div class="wrapper">
+        <asp:HiddenField ID="hidIsValidateEmail" runat="server" ClientIDMode="Static"></asp:HiddenField>
+        <%<asp:HiddenField ID="hidIsOpenGeetest" runat="server" ClientIDMode="Static" />%>
+        <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+    </div>
+    <!--原来的绑定用户逻辑-->
+    <div class="wrapper" id="userBindPanel" runat="server" visible="false">
+        <div class="login01">
+            <h2 id="bindText">只差这一步，即绑定商城账号，购物更安全</h2>
+            <ul>
+                <li class="title">没有账号？快速注册</li>
+                <li>
+                    <span><em id="utitle"><asp:literal runat="server" id="NameTitle">邮箱/手机：</asp:literal></em></span><%<asp:TextBox ID="txtUserName" name="txtUserName" runat="server" style="width:260px;" clientidmode="Static" tabindex="1" onblur="checkLength(this); refreshCode();" />%>
+
+                    <script type="text/javascript">
+                        var c;
+                        function checkLength(thisObj) {
+                            if ($("#utitle").html() == "邮箱：") {
+                                validateRegExp.username = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$";
+                                validatePrompt.username.error.beUsed = "该邮箱已被使用，请更换，如果您是&quot;{1}&quot;，请<a href='/user/login.aspx' class='flk13'>登录</a>";
+                                validatePrompt.username.error.badFormat = "用户名只能用邮箱注册";
+                            }
+                            else if ($("#utitle").html() == "手机：") {
+                                validateRegExp.username = /^0?(13|15|18|14|17|16|19)[0-9]{9}$/g;
+                                validatePrompt.username.error.beUsed = "该手机已被使用，请更换，如果您是&quot;{1}&quot;，请<a href='/user/login.aspx' class='flk13'>登录</a>";
+                                validatePrompt.username.error.badFormat = "用户名只能用手机注册";
+                            }
+
+                            var value = thisObj.value;
+                            var r = /^0?(13|15|18|14|17|16|19)[0-9]{9}$/g;
+                            if (c != value && c) {
+                                refreshCode();
+                                if (captchaObj) {
+                                    captchaObj.refresh();
+                                }
+                            }
+                            c = value;
+                            if (r.test(value)) {
+                                $("#normaldiv").css("display", "block");
+                                if ($("#emimgcode").text() == "邮箱验证码") {
+                                    refreshCode();
+                                }
+                                $("#txtNumber").val("");
+                                $("#emimgcode").text("图形验证码");
+
+                                if ($("#hidIsOpenGeetest").val() == "0") {
+                                    $("#imgVerifyCode").show();
+                                    $("#spanimagecode").show();
+                                    $("#divimgcode").show();
+                                    $("#divGeetest").hide();
+                                } else {
+                                    $("#divimgcode").hide();
+                                    $("#divGeetest").show();
+                                }
+
+                                $("#btnSendEmail").hide();
+                            }
+                            else {
+                                $("#normaldiv").css("display", "none");
+                                if ($("#hidIsOpenGeetest").val() == "0") {
+                                    $("#divimgcode").show();
+                                    $("#divGeetest").hide();
+                                } else {
+                                    $("#divGeetest").show();
+                                    $("#divimgcode").hide();
+                                }
+                                if ($("#hidIsValidateEmail").val() == "1") {
+                                    $("#emimgcode").text("邮箱验证码");
+                                    $("#imgVerifyCode").hide();
+                                    $("#btnSendEmail").show();
+                                    $("#spanimagecode").hide();
+                                    $("#divGeetest").hide();
+                                    $("#divimgcode").show();
+                                    refreshCode2();
+                                }
+                            }
+                        }
+
+                    </script>
+                </li>
+                <li class="tip_s">
+                    <span id="txtUserName_succeed" class="zc_tishi">账号可用</span>
+                    <span class="zc_tishi2" id="txtUserName_error"></span>
+                </li>
+                <li>
+                    <span>密码：</span><%<asp:TextBox ID="txtPassword" name="txtPassword" runat="server" clientidmode="Static" TextMode="Password" tabindex="4" style="width:260px;" />%>
+                </li>
+                <li class="tip_s">
+                    <span id="txtPassword_succeed" class="zc_tishi">密码可用</span>
+                    <span class="zc_tishi2" id="txtPassword_error"></span>
+                </li>
+                <div class="zc_anquan" id="pwdstrength">
+                    <em>密码安全度：</em> <b></b>
+                </div>
+                <li>
+                    <span>确认密码：</span><%<asp:TextBox ID="txtPassword2" name="txtPassword2" clientidmode="Static" runat="server" TextMode="Password" tabindex="5" style="width:260px;" />%>
+
+                </li>
+                <li class="tip_s">
+                    <span id="txtPassword2_succeed" class="zc_tishi">密码输入正确</span>
+                    <span class="zc_tishi2" id="txtPassword2_error"></span>
+                </li>
+                <li id="divRealName" visible="false" runat="server">
+                    <span>真实姓名：</span><%<asp:TextBox ID="txtRealName" name="txtRealName" runat="server" clientidmode="Static" tabindex="6" style="width:260px;" />%>
+                </li>
+                <li class="tip_s" id="divRealNametip" runat="server">
+                    <span id="txtRealName_succeed" class="zc_tishi"></span>
+                    <span class="zc_tishi2" id="txtRealName_error"></span>
+                </li>
+                <li id="divSex" visible="false" runat="server">
+                    <span>性别：</span><%<asp:RadioButton ID="chkMan" runat="server" Text="男士" Checked="true" GroupName="Sex" />%>
+                    <%<asp:RadioButton ID="chkWoman" runat="server" Text="女士" GroupName="Sex" />%>
+                </li>
+                <li id="divBirthday" visible="false" runat="server">
+                    <span>生日：</span>  <span><%<Hi:CalendarPanel runat="server" ClientIDMode="Static" ID="txtBirthday" name="txtBirthday" NotFloatLeft="true" IsEndDate="true" tabindex="8" CssClass="zhuce_input1" style="width:250px;"></Hi:CalendarPanel> %></span>
+                </li>
+                <li class="tip_s" id="divBirthdaytip" runat="server">
+                    <span id="txtBirthday_succeed" class="zc_tishi"></span>
+                    <span class="zc_tishi2" id="txtBirthday_error"></span>
+                </li>
+                <li id="divGeetest" runat="server" clientidmode="static">
+                    <span>滑动验证：</span>
+                    <span id="captcha"></span>
+                </li>
+                <li class="code" id="divimgcode" runat="server" clientidmode="static">
+                    <span id="emimgcode">图形验证码：</span><%<asp:TextBox ID="txtNumber" clientidmode="Static" runat="server" MaxLength="4" autocomplete="off" tabindex="9" />%>
+                    <div id="spanimagecode">
+                        <img id="imgVerifyCode" src='/VerifyCodeImage' style="vertical-align: middle; border-style: none;height: 34px;
+    width: 58px;" alt="" />
+                        <i>看不清<a href="javascript:refreshCode();">换一张</a></i>
+                    </div>
+                    <div>
+                        <input type="button" value="发送验证码" id="btnSendEmail" class="yanzheng_input3" style="display:none;" />
+                    </div>
+                </li>
+                <li class="tip_s" id="imgcode">
+                    <span id="txtNumber_succeed" class="zc_tishi">验证码输入正确</span>
+                    <span class="zc_tishi2" id="txtNumber_error"></span>
+                </li>
+                <li class="code" id="normaldiv" style="display:none;">
+                    <span>短信验证码：</span> <%<asp:TextBox ID="txtPhoneCode" clientidmode="Static" runat="server" autocomplete="off" MaxLength="4" tabindex="10" />%>
+                    <span id="phonespan"><input id="phoneVerifyCode" type="button" value="获取手机验证码" class="yanzheng_input3" /></span>
+                </li>
+                <li class="tip_s" id="phonecode" style="display:none;">
+                    <span id="txtPhoneCode_succeed" class="zc_tishi">验证码输入正确</span>
+                    <span class="zc_tishi2" id="txtPhoneCode_error"></span>
+                </li>
+                <li class="check"><%<asp:CheckBox ID="chkAgree" name="chkAgree" clientidmode="Static" runat="server" Checked="true" tabindex="11" />%>本人已阅读、理解并同意本站的<a href="../../RegisterAgreement.aspx">会员注册协议</a></li>
+                <li>
+                    <input type="button" ID="btnRegister" name="btnRegister" runat="server" class="btn" value="注册并绑定" />
+                </li>
+            </ul>
+        </div>
+        <div class="login02">
+            <h4>
+                <!--<a href="#">跳过这一步，直接购物</a>-->
+                <%<asp:LinkButton ID="btnLogin" runat="server" Text="跳过这一步，直接购物" />%>
+            </h4>
+            <ul>
+                <li class="title">已有账号？直接绑定</li>
+                <li><span>用户名：</span><%<asp:TextBox ID="txtBindUserName" runat="server" CssClass="inputbj" Width="240" />%></li>
+                <li><span>密码：</span><%<asp:TextBox Button="btnLogin" ID="txtBindPassword" runat="server" CssClass="inputbj" Width="240" TextMode="Password" />%></li>
+                <li>
+                    <%<asp:Button ID="btnBindingLogin" CssClass="btn" runat="server" Text="确认绑定" />%>
+                    <i><a href="/ForgotPassword.aspx" target="_blank">忘记密码</a></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript">
+
+        $("#btnSendEmail").bind("click", function () {
+            var tempemail = $("#txtUserName").val();
+            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*([a-zA-Z0-9])+\.([a-zA-Z]{1,4})$/;
+            if (!myreg.test(tempemail)) {
+                alert('请输入正确的邮箱');
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx?action=VerficationEmail",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                data: { email: tempemail },
+                success: function (result) {
+                    if (result.success) {
+                        alert(result.msg);
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+
+        //
+
+
+    </script>
+    <script type="text/javascript" src="/Utility/validate/OpenIdEntryValidate.js"></script>
+    <script src="/Utility/gt.js"></script>
+</form>
+<%<hi:common_footer runat="server" />%>
+

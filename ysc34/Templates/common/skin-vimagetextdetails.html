@@ -1,0 +1,27 @@
+﻿<Hi:Common_WapHeader runat="server" />
+<style>
+    body{
+        background:#fff;
+    }
+    .ui_mt15{
+        width:100%;
+    }
+    .ui_mt15 img{
+        width:100%;
+    }
+     .special_bri p{
+         padding:0 0.75rem;
+         line-height:1.8;
+     }
+    .special_bri img{
+        width:100%;
+    }
+</style>
+<section id="content">  
+         <div class="ui_mt15"><Hi:HiImage runat="server" ID="imgUrl" /></div>
+    <div class="line_hr2"></div>  
+    <div class="special_bri">
+        <asp:Literal runat="server" ID="litContent" />
+    </div>
+</section>
+<Hi:Common_WapFooter runat="server" />

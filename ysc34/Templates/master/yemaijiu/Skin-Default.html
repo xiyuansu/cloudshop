@@ -1,0 +1,308 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/yemaijiu/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/yemaijiu/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+<style type="text/css">
+.main{ width:auto; background:#ebebe8 ;}
+</style>
+<div class="main" id="main">
+
+    <div class="banner">
+     <script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="2" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_2").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+    </div>
+
+    <div class="w1200 o-hidden">
+        <!--tangou-->
+        <script type="text/javascript">
+            function nTabs(thisObj, Num) {
+                if (thisObj.className == "active") return;
+                var tabObj = thisObj.parentNode.id;
+                var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+                for (i = 0; i < tabList.length; i++) {
+                    if (i == Num) {
+                        thisObj.className = "active";
+                        document.getElementById(tabObj + "_Content" + i).style.display = "block";
+                    } else {
+                        tabList[i].className = "normal";
+                        document.getElementById(tabObj + "_Content" + i).style.display = "none";
+                    }
+                }
+            }
+        </script>
+        <div class="main_index">
+            <div class="main_part1">
+                <div class="main_ad2">
+                    <div class="nTab1">
+                        <div class="TabTitle">
+                            <ul id="myTab1">
+                                <li class="active" onmouseover="nTabs(this,0);"> <hi:common_subjecttitle runat="server" commentid="2" /></li>
+                                <li class="normal" onmouseover="nTabs(this,1);"><hi:common_subjecttitle runat="server" commentid="3" /></li>
+                                <li class="normal" onmouseover="nTabs(this,2);"><hi:common_subjecttitle runat="server" commentid="4" /></li>
+                                <li class="normal" onmouseover="nTabs(this,3);"><hi:common_subjecttitle runat="server" commentid="5" /></li>
+                            </ul>
+                        </div>
+                        <div class="TabContent">
+                            <div id="myTab1_Content0">
+                                <div class="pro_listnew">
+                                    <ul>
+                                        <hi:common_subjectproduct_simple runat="server" subjectid="1" />
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="myTab1_Content1" class="none">
+                                <div class="pro_listnew">
+                                    <ul>
+                                        <hi:common_subjectproduct_simple runat="server" subjectid="2" />
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="myTab1_Content2" class="none">
+                                <div class="pro_listnew">
+                                    <ul>
+                                        <hi:common_subjectproduct_simple runat="server" subjectid="3" />
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="myTab1_Content3" class="none">
+                                <div class="pro_listnew">
+                                    <ul>
+                                        <hi:common_subjectproduct_simple runat="server" subjectid="4" />
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="part1_r">
+                    <div class="main_ad3"><hi:common_imagead runat="server" adid="3" /></div>
+
+                    <div class="nTab2">
+                        <div class="TabTitle">
+                            <ul id="myTab2">
+                                <li class="active" onmouseover="nTabs(this,0);">商城公告</li>
+                                <li class="normal" onmouseover="nTabs(this,1);">文章中心</li>
+                            </ul>
+                        </div>
+                        <div class="TabContent">
+                            <div id="myTab2_Content0"><ul> <%<hi:common_affichelist runat="server" templatefile="HomeTags/Common_Comment/Skin-Common_AfficheList.ascx" maxnum="5" />%></ul></div>
+                            <div id="myTab2_Content1" class="none">   <hi:common_subjectarticle commentid="6" runat="server"></hi:common_subjectarticle></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="box1">
+                <div class="pinpai_title">品牌专区</div>
+                <div class="pinpai_con">
+                    <div class="main_brand">
+                        <ul>
+                            <hi:common_subjectbrand runat="server" commentid="7" />
+                        </ul>
+                    </div>
+                </div>
+                <div class="pinpai_title">热门分类</div>
+                <div class="pinpai_con1">
+
+                    <ul>
+                        <%
+                        <hi:common_productcategorylist templatefile="HomeTags/Skin-Common_ProductCategoryList2.ascx" runat="server" />%>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="main_part2">
+                <div class="limit_tab">
+                    <b class="limit_tabt"><em class="qg_em1">限时抢购</em> <em class="qg_em2"><a href="url:CountDownProducts">更多抢购 ></a></em></b>
+                    <ul>
+                        <script src="/utility/time.js" type="text/javascript"></script>
+                        <hi:common_goodslist_latestcountdownbuy maxnum="5" runat="server" />
+                    </ul>
+                </div>
+                <div class="group_tab_all">
+                    <div class="group_tab">
+                        <b class="group_tabt">今日团购</b>
+                        <hi:common_goodslist_latestgroupbuy runat="server" maxnum="1" />
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="box2">
+                <div class="box2_title">
+                    <div class="box2_title_1"><hi:common_subjecttitle runat="server" commentid="8" /></div>
+                    <div class="box2_title_2"><hi:common_subjectmorelink runat="server" commentid="10" /></div>
+                    <div class="box2_title_3"><hi:common_subjectkeyword runat="server" commentid="9" /></div>
+                </div>
+                <div class="box2_con">
+                    <div class="box2_con_l">
+                        <div class="box2_ad"> <hi:common_imagead runat="server" adid="4" /></div>
+                        <div class="pro_listnew1">
+                            <ul>
+                                <hi:common_subjectproduct_simple runat="server" subjectid="5" />
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box2_con_r">
+                        <div class="box2_con_r_title">本周销售排行</div>
+                        <ul class="saletopc">
+                            <hi:common_subjectproduct_top runat="server" subjectid="6" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box2">
+                <div class="box2_title">
+                    <div class="box2_title_1"><hi:common_subjecttitle runat="server" commentid="11" /></div>
+                    <div class="box2_title_2"><hi:common_subjectmorelink runat="server" commentid="13" /></div>
+                    <div class="box2_title_3"><hi:common_subjectkeyword runat="server" commentid="12" /></div>
+                </div>
+                <div class="box2_con">
+                    <div class="box2_con_l">
+                        <div class="box2_ad"> <hi:common_imagead runat="server" adid="5" /></div>
+                        <div class="pro_listnew1">
+                            <ul>
+                                <hi:common_subjectproduct_simple runat="server" subjectid="7" />
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box2_con_r">
+                        <div class="box2_con_r_title">本周销售排行</div>
+                        <ul class="saletopc">
+                            <hi:common_subjectproduct_top runat="server" subjectid="8" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box2">
+                <div class="box2_title">
+                    <div class="box2_title_1"><hi:common_subjecttitle runat="server" commentid="14" /></div>
+                    <div class="box2_title_2"><hi:common_subjectmorelink runat="server" commentid="16" /></div>
+                    <div class="box2_title_3"><hi:common_subjectkeyword runat="server" commentid="15" /></div>
+                </div>
+                <div class="box2_con">
+                    <div class="box2_con_l">
+                        <div class="box2_ad"> <hi:common_imagead runat="server" adid="6" /></div>
+                        <div class="pro_listnew1">
+                            <ul>
+                                <hi:common_subjectproduct_simple runat="server" subjectid="9" />
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box2_con_r">
+                        <div class="box2_con_r_title">本周销售排行</div>
+                        <ul class="saletopc">
+                            <hi:common_subjectproduct_top runat="server" subjectid="10" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box2">
+                <div class="box2_title">
+                    <div class="box2_title_1"><hi:common_subjecttitle runat="server" commentid="17" /></div>
+                    <div class="box2_title_2"><hi:common_subjectmorelink runat="server" commentid="19" /></div>
+                    <div class="box2_title_3"><hi:common_subjectkeyword runat="server" commentid="18" /></div>
+                </div>
+                <div class="box2_con">
+                    <div class="box2_con_l">
+                        <div class="box2_ad"> <hi:common_imagead runat="server" adid="7" /></div>
+                        <div class="pro_listnew1">
+                            <ul>
+                                <hi:common_subjectproduct_simple runat="server" subjectid="11" />
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box2_con_r">
+                        <div class="box2_con_r_title">本周销售排行</div>
+                        <ul class="saletopc">
+                            <hi:common_subjectproduct_top runat="server" subjectid="12" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="box3">
+                <div class="box3_l">
+                    <div class="box3_l_title"><b>促销信息</b></div>
+                    <div class="box3_l_con">
+                        <hi:common_imagead runat="server" adid="8" />
+                    </div>
+                </div>
+                <div class="box3_r">
+                    <div class="box3_r_title">他们说</div>
+                    <div class="box3_r_con">
+
+
+                        <div class="pinlun">
+                            <ul>
+                                <%
+                                <hi:common_latestreview maxnum="4" templatefile="HomeTags/Skin-Common_LatestReview.ascx" runat="server" /> %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

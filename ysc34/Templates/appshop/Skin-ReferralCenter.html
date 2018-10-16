@@ -1,0 +1,75 @@
+﻿<hi:common_appheader runat="server" skinname="/tags/skin-Common-NewHeader.html"/>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function (e) {
+        if ($(".btn").text() != "") {
+            $(".btn").show();
+        }
+    })
+</script>
+<link rel="stylesheet" href="/style/style.css?v=3.4" type="text/css" />
+<script type="text/javascript" src="/Templates/common/script/flexible.debug.js"></script>
+<script type="text/javascript" src="/Templates/common/script/flexible_css.debug.js"></script>	
+<div class="fx_header">
+    <div class="fxInfoBox">
+        <div class="fx_Info">
+            <div class="fx_userInfo">
+                <div class="fx_hd">
+                    <div class="fx_name"><asp:Literal id="litShopName" runat="server"></asp:Literal></div>
+                    <div class="btn" style="display:none;"><asp:Literal id="litGradeName" runat="server"></asp:Literal></div>
+                </div>
+                <div class="name_desc" id="divUpgrade" runat="server" clientidmode="static">再获得 <b><asp:Literal id="litUpgradeMoney" runat="server"></asp:Literal></b>元佣金升级为 <b><asp:Literal id="litNextGradeName" runat="server"></asp:Literal></b></div>
+            </div>
+            <div class="Distribution"><a href="SplittinRule">店铺分销</a></div>
+        </div>
+        <div class="drawalsBox pd24">
+            <div class="drawals fl">
+                <div><i>¥</i><span><asp:Literal id="litUserSplittin" runat="server"></asp:Literal></span></div>
+                <em>可提现</em>
+            </div>
+            <div class="drawals fl">
+                <div><i>¥</i><span><asp:Literal id="litHisotrySplittin" runat="server"></asp:Literal></span></div>
+                <em>历史赚取</em>
+            </div>
+            <div class="drawals fr">
+                <div><i>¥</i><span><asp:Literal id="litNoUserSplittin" runat="server"></asp:Literal></span></div>
+                <em>未结算</em>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--常用功能-->
+<div class="fx_common">
+    <ul>
+        <li>
+            <a href="Referral">
+                <em class="iconfont icon-icon_"></em>
+                <span>我的佣金</span>
+                <i class="iconfont icon-angle-right"></i>
+            </a>
+        </li>
+        <li>
+            <a href="SubMembers">
+                <em class="iconfont icon-icon_5"></em>
+                <span>我的下级</span>
+                <i class="iconfont icon-angle-right"></i>
+            </a>
+        </li>
+        <li>
+            <a href="ShopInfo">
+                <em class="iconfont icon-icon_2"></em>
+                <span>店铺信息</span>
+                <i class="iconfont icon-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<hi:common_appfooter runat="server" />
+

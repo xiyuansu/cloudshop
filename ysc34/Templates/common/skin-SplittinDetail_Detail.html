@@ -1,0 +1,41 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="commission-detail">
+    <div class="form-group">
+        <label for="username">订单编号：</label>
+        <asp:literal runat="server" id="litOrderNo" />
+    </div>
+    <div class="form-group">
+        <label for="username">订单金额：</label>
+        ￥<%<Hi:FormatedMoneyLabel ID="litOrderAmount" runat="server" />%>
+    </div>
+    <div class="form-group">
+        <label for="username">奖励 ：</label>
+        ￥<%<Hi:FormatedMoneyLabel ID="litSplittinAmount" runat="server" />%>
+    </div>
+    <div class="form-group">
+        <label for="username">奖励类型：</label>
+        <Hi:SplittingTypeNameLabel ID="litSplittinType" runat="server" SplittingType='<%# Eval("TradeType")%>' />
+    </div>
+    <div class="form-group">
+        <label for="username">奖励分配日期：</label>
+        <asp:literal runat="server" id="litSplittinDate" />
+    </div>
+    <div class="form-group">
+        <label for="username">状态：</label>
+        <span class="text-danger"><asp:literal runat="server" id="litStatus" /></span>
+    </div>
+    <div class="form-group">
+        <label for="username">备注：</label>
+        <span class="text-danger"><asp:literal runat="server" id="litMark" /></span>
+    </div>
+    <input type="button" id="btngoback" value="返回奖励明细" class="btn btn-danger btn-block" />
+</div>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $("#btngoback").click(function (e) {
+            history.go(-1);
+        })
+    });
+</script>
+
+<hi:common_wapfooter runat="server" />

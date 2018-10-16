@@ -1,0 +1,669 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form id="form1" runat="server">
+    <script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+    <script src="/utility/jquery.artDialog.js" type="text/javascript"></script>
+    <script src="/utility/iframeTools.js" type="text/javascript"></script>
+    <script src="/utility/Window.js" type="text/javascript"></script>
+    <script src="/Utility/expressInfo.js?v=3.4" type="text/javascript"></script>
+    <link rel="stylesheet" href="/utility/skins/blue.css?v=3.0" />
+    <style>
+        .shouhuoxx_con ul li { position: relative; width: 900px; }
+        li.invoice { display: none; }
+    </style>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function (e) {
+            $(".invoice font").each(function () {
+                if ($(this).html() == "") {
+                    $(this).parent().hide();
+                }
+            });
+        });
+    </script>
+    <asp:HiddenField runat="server" id="hidHiPOSTakeCode" ClientIdMode="static"></asp:HiddenField>
+    <asp:HiddenField runat="server" id="hidPreSaleId" ClientIdMode="static"></asp:HiddenField>
+    <asp:HiddenField runat="server" id="hidIsPayDeposit" ClientIdMode="static"></asp:HiddenField>
+    <asp:HiddenField runat="server" id="hidIsPaymentStore" ClientIdMode="static" value="0"></asp:HiddenField>
+    <div class="hyzxmain">
+        <div class="hyzxconty">
+            当前位置：<span><a href="/">首页</a></span>><span><a href="/User/UserDefault">会员中心</a></span>><span><a href="/User/UserOrders">订单管理</a></span>><span>
+                <a href="#">订单详细</a>
+            </span>
+        </div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div style="display: none">
+                <input type="hidden" id="hdorderId" runat="server" />
+                <%<asp:Button ID="btnOk" runat="server" Text="确 定" CssClass="submit_DAqueding" />%>
+                <%<asp:Button ID="btnPay" OnClientClick="this.form.target='_blank'" runat="server" Text="确 定" CssClass="submit_DAqueding" />%>
+            </div>
+            <div style="display: none">
+                <%<asp:Button ID="btnViewMessage" runat="server" Text="确 定" ClientIDMode="static" CssClass="submit_DAqueding" />%>
+            </div>
+            <!--查看管理员备注-->
+            <div id="viewmessage_div" style="display:none">
+                <div class="frame-content" style="width: 400px; overflow: hidden;">
+                    <p id="message_con"></p>
+                </div>
+            </div>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <%<Hi:SmallStatusMessage id="Status" runat="server" Width="200" Visible="False" />%>
+                    <div class="dingdan_box1">
+                        订单详细
+                    </div>
+                    <div class="dingdan_box2">
+                        <ul>
+                            <li id="title1">拍下商品</li>
+                            <li id="title2">定金支付成功</li>
+                            <li id="title3">尾款支付成功</li>
+                            <li id="title4">付款成功</li>
+                            <li id="title5">卖家发货</li>
+                            <li id="title6">确认收货</li>
+                            <li id="title7">申请退款</li>
+                            <li id="title8">退款成功</li>
+                            <li id="title9">申请退货/换货</li>
+                            <li id="title10">退货/换货完成</li>
+                        </ul>
+                        <div class="stop">
+                            <div class="item show" id="item1">
+                                <em id="em1">1</em>
+                            </div>
+                            <div class="item" id="item2">
+                                <span>&nbsp;</span> <em id="em2">2</em>
+                            </div>
+                            <div class="item" id="item3">
+                                <span>&nbsp;</span> <em id="em3">3</em>
+                            </div>
+                            <div class="item" id="item4">
+                                <span>&nbsp;</span> <em id="em4">4</em>
+                            </div>
+                            <div class="item" id="item5">
+                                <span>&nbsp;</span> <em id="em5">5</em>
+                            </div>
+                            <div class="item" id="item6">
+                                <span>&nbsp;</span> <em id="em6">6</em>
+                            </div>
+                            <div class="item" id="item7">
+                                <span>&nbsp;</span> <em id="em7">7</em>
+                            </div>
+                            <div class="item" id="item8">
+                                <span>&nbsp;</span> <em id="em8">8</em>
+                            </div>
+                            <div class="item" id="item9">
+                                <span>&nbsp;</span> <em id="em9">9</em>
+                            </div>
+                            <div class="item" id="item10">
+                                <span>&nbsp;</span> <em id="em10">10</em>
+                            </div>
+                        </div>
+                        <ul class="time">
+
+                            <li id="time1">
+                                <%<Hi:FormatedTimeLabel id="litAddOrderDate" runat="server"></Hi:FormatedTimeLabel>%>
+                            </li>
+                            <li id="time2">
+                                <%<Hi:FormatedTimeLabel id="litDepositPayDate" runat="server"></Hi:FormatedTimeLabel>%>
+                            </li>
+                            <li id="time3">
+                                <%<asp:literal id="litFinalPamentPayDate" runat="server"></asp:literal> %>
+                            </li>
+                            <li id="time4">
+                                <%<Hi:FormatedTimeLabel id="litPayDate" runat="server"></Hi:FormatedTimeLabel>%>
+                            </li>
+                            <li id="time5">
+                                <%<Hi:FormatedTimeLabel id="litShipDate" runat="server"></Hi:FormatedTimeLabel>%>
+                            </li>
+                            <li id="time6">
+                                <%<Hi:FormatedTimeLabel id="litResultDate" runat="server"></Hi:FormatedTimeLabel>%>
+                            </li>
+                            <li id="time7">
+                                <%<Hi:FormatedTimeLabel id="litPayBack" runat="server"></Hi:FormatedTimeLabel>%>
+                            </li>
+                            <li id="time8">
+                                <%<Hi:FormatedTimeLabel id="litBackShip" runat="server"></Hi:FormatedTimeLabel>%>
+                            </li>
+                            <li id="time9"></li>
+                            <li id="time10"></li>
+                        </ul>
+                    </div>
+                    <div class="dingdan_box3">
+                        <div class="dingdanhao">
+                            <span class="d_span1">订单号：<%<asp:Literal ID="litOrderId" runat="server"></asp:Literal>%></span>
+                            <span class="d_span2">状态：<hi:FightGroupStatusLabel id="litFightGroupStatusLabel" runat="server" style="float:right;" /> <em><%<Hi:OrderStatusLabel ID="lblOrderStatus" runat="server" />%></em></span>
+                            <span>下单日期：<%<Hi:FormatedTimeLabel id="litAddDate" runat="server"></Hi:FormatedTimeLabel>%></span>
+                            <span class="d_span3">
+                                <%<asp:LinkButton id="lkbtnConfirmOrder" isshow="true" runat="server" text="确认收货" visible="false" onclientclick="javascript: return confirm('确认收货？')" />%>
+                                <%<asp:LinkButton id="lkbtnCloseOrder" isshow="true" runat="server" text="取消" onclientclick="javascript:return confirm('确认取消？')" visible="false" />%>
+                                <a href="javascript:void(0)" onclick="return ApplyForRefund(this)" runat="server" id="lkbtnApplyForRefund" visible="false">申请退款</a>&nbsp;
+                                <a href="javascript:void(0)" onclick="ViewMessage(this)" runat="server" id="lkbtnViewMessage" visible="false">查看信息</a>
+
+                            </span>
+                        </div>
+                        <div class="d_beihzhu">
+                            买家备注：<%<asp:Literal ID="litRemark" runat="server"></asp:Literal>%>
+                        </div>
+
+                        <div class="d_beihzhu">
+                            <%<asp:label text="取消原因：" runat="server" id="lbCloseReason" visible="false"><asp:Literal ID="litCloseReason" runat="server" /></asp:label> %>
+                        </div>
+                        <% <asp:Panel ID="plOrderSended" runat="server" Visible="false">
+                            <table width="100%" border="0" cellspacing="1" cellpadding="0" class="bTop_Margin10 OrderDetails_table2">
+                                <tr align="left"><th colspan="2" style="padding-left:10px;">发货信息</th></tr>
+                                <tr>
+                                    <td>物流公司：</td>
+                                    <td class="cGray"><asp:Literal ID="litRealModeName" runat="server" /></td>
+                                </tr>
+                                <tr>
+                                    <td width="15%">发货单号：</td>
+                                    <td width="85%" class="cGray"><asp:Literal ID="litShippNumber" runat="server" /></td>
+                                </tr>
+                            </table>
+                        </asp:Panel>%>
+                        <%<asp:Panel Visible="false" runat="server" ID="plRefund">
+                            <table width="100%" border="0" cellspacing="1" cellpadding="0" class="bTop_Margin10 OrderDetails_table2">
+                                <th colspan="2">退款订单信息</th>
+                                <tr>
+                                    <td>退款总金额：</td>
+                                    <td class="cGray"><Hi:FormatedMoneyLabel ID="lblTotalBalance" runat="server" /></td>
+                                </tr>
+                                <tr>
+                                    <td width="15%">退款说明：</td>
+                                    <td width="85%" class="cGray"><asp:Literal ID="litRefundOrderRemark" runat="server" /></td>
+                                </tr>
+                            </table>
+                        </asp:Panel>%>
+                        <div class="dingdan_box4">
+                            <div class="nTab">
+                                <div class="TabTitle">
+                                    <ul id="myTab">
+                                        <li class="active" onmouseover="nTabs(this,0);">金额明细</li>
+                                        <li class="normal" onmouseover="nTabs(this,1);">物流跟踪</li>
+                                    </ul>
+                                </div>
+                                <div class="TabContent">
+                                    <div id="myTab_Content0">
+                                        <div class="item">
+                                            商品金额：<em><%<Hi:FormatedMoneyLabel ID="lbltotalPrice" runat="server" />%><%<asp:Literal runat="server" ID="lblBundlingPrice" /> %></em>
+                                        </div>
+                                        <div class="item">
+                                            配送方式：<em><%<asp:Literal ID="litModeName" runat="server" />%></em>
+                                        </div>
+                                        <div class="item">
+                                            打折活动：<em><%<Hi:FormatedMoneyLabel ID="lblDiscount" runat="server" />%></em><em><%<asp:HyperLink ID="litDiscountName" runat="server" /> %></em>
+                                        </div>
+                                        <div class="item">
+                                            运费：<em><%<Hi:FormatedMoneyLabel ID="lblFreight" runat="server" /> %><%<asp:HyperLink ID="litFreeName" runat="server" /> %></em>
+                                        </div>
+                                        <div class="item">
+                                            余额抵扣金额：<em><%<asp:Literal ID="litBalanceAmount" runat="server" />%></em>
+                                        </div>
+                                        <div class="item">
+                                            优惠券抵扣金额：<em><%<asp:Literal ID="litCouponValue" runat="server" />%></em>
+                                        </div>
+                                        <div class="item">
+                                            积分抵扣金额：<em><%<asp:Literal ID="litPointMoney" runat="server" />%></em>
+                                        </div>
+                                        <div class="item">
+                                            支付方式：<em><%<asp:Literal ID="litPaymentType" runat="server" />%></em>
+                                        </div>
+                                        <div class="item">
+                                            订单涨价或减价金额：<em><%<Hi:FormatedMoneyLabel ID="lblAdjustedDiscount" runat="server" />%></em>
+                                        </div>
+                                        <div class="item" id="divDeposit">
+                                            定金：<em><%<Hi:FormatedMoneyLabel ID="lblDeposit" runat="server" />%></em>
+                                        </div>
+                                        <div class="item" id="divFinalPayment">
+                                            尾款：<em><%<Hi:FormatedMoneyLabel ID="lblFinalPayment" runat="server" />%></em>
+                                        </div>
+                                        <div class="invoice item">
+                                            发票类型：<font><asp:literal runat="server" id="litInvoiceType" /></font>
+                                        </div>
+                                        <div class="invoice item" id="divInvoiceTitle" runat="server">
+                                            发票抬头：<font><%<asp:Literal ID="litInvoiceTitle" runat="server" />%></font>
+</div>
+                                        <div class="invoice item" id="divTax" runat="server">
+                                            税金：<em><%<Hi:FormatedMoneyLabel ID="litTax" runat="server" />%></em>
+                                        </div>
+                                        <div class="invoice item" id="divInvoiceTaxpayerNumber" runat="server">
+                                            纳税人识别号：<font><%<asp:Literal ID="litInvoiceTaxpayerNumber" runat="server" />%>
+</div>
+                                        <div class="invoice item">
+                                            注册地址：<font><asp:literal runat="server" id="litRegisterAddress" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                            注册电话：<font><asp:literal runat="server" id="litRegisterTel" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                            开户银行：<font><asp:literal runat="server" id="litOpenBank" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                            银行帐户：<font><asp:literal runat="server" id="litBankName" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                            收票人姓名：<font><asp:literal runat="server" id="litReceiveName" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                            收票人手机：<font><asp:literal runat="server" id="litReceiveMobbile" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                            收票人邮箱：<font><asp:literal runat="server" id="litReceiveEmail" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                           收票人地区：<font><asp:literal runat="server" id="litReceiveRegionName" /></font>
+                                        </div>
+                                        <div class="invoice item">
+                                            收票人地址：<font><asp:literal runat="server" id="litReceiveAddress" /></font>
+                                        </div>
+
+                                        <div class="item">
+                                            <%<asp:label text="退款金额：" runat="server" id="lbRefundMoney" visible="false"><Hi:FormatedMoneyLabel ID="lblRefundTotal" runat="server" /></asp:label> %>
+                                        </div>
+                                    </div>
+                                    <div id="myTab_Content1" class="none">
+                                        <div id="spExpressData">
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(function () {
+                                                var OrderId = getParam("OrderId");
+                                                if (OrderId == undefined || OrderId == "") {
+                                                    OrderId = document.location.href.substr(document.location.href.lastIndexOf("/") + 1);
+                                                }
+                                                $('#spExpressData').expressInfo(OrderId, 'OrderId');
+
+                                            })
+                                        </script>
+
+                                        <%<asp:Panel ID="plExpress" runat="server" Visible="false" style="widht:730px;margin-bottom:10px;">
+                                            %>
+                                            订单暂未发货
+                                            <%
+                                        </asp:Panel>%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dingdan_box5">
+                            <div class="dingdan_box5_title">
+                                订单信息
+                            </div>
+                            <div class="dingdan_box5_con">
+                                <div class="shouhuoxx">
+                                    收货人信息
+                                </div>
+                                <div class="shouhuoxx_con">
+                                    <ul>
+                                        <li>
+                                            收货人姓名：<em><%<asp:Literal ID="litShipTo" runat="server" />%></em>
+                                            <em><a href="javascript:void(0)" class="shouhuoxx" onclick="return UserRealNameVerify(this)" runat="server" id="lkbtnUserRealNameVerify">实名验证信息</a>&nbsp;</em>
+                                        </li>
+                                        <li>详细地址：<em><%<asp:Literal ID="litRegion" runat="server" />%><%<asp:Literal ID="litAddress" runat="server" />%></em></li>
+                                        <li style="display:none;">邮政编码：<em><%<asp:Literal ID="litZipcode" runat="server" />%></em></li>
+                                        <li>电子邮箱：<em><%<asp:Literal ID="litEmail" runat="server" />%></em></li>
+                                        <li>电话号码：<em><%<asp:Literal ID="litTellPhone" runat="server" />%></em></li>
+                                        <li>手机号码：<em><%<asp:Literal ID="litPhone" runat="server" />%></em></li>
+                                        <li>送货上门时间：<em><%<asp:Literal ID="litShipToDate" runat="server" />%></em></li>
+                                        <li id="divPickUpRemark" runat="server">自提备注：<em><%<asp:Literal ID="litGetGoodsRemark" runat="server" />%></em></li>
+                                    </ul>
+                                </div>
+                                <div runat="server" visible="false" id="divstoreinfo">
+                                    <div class="shouhuoxx1">
+                                        提货信息
+                                    </div>
+
+                                    <div class="shouhuoxx_con">
+                                        <ul>
+                                            <li>
+                                                提货码：<em><%<asp:Literal ID="litTakeCode" runat="server" />%></em><a style=" margin-left:10px;" href="javascript:void(0)" id="showQrCode">
+                                                    查看二维码
+                                                </a>
+                                                <div id="productQrCode" class="sjorder">
+                                                    <h2><span>X</span>POS扫一扫</h2>
+                                                    <img id="imgQrCode" width="200px" />
+                                                </div>
+                                            </li>
+                                            <li>门店名称：<em><%<asp:Literal ID="litStoreName" runat="server" />%></em></li>
+                                            <li>门店地址：<em><%<asp:Literal ID="litStoreInfo" runat="server" />%></em></li>
+                                            <li>门店电话：<em><%<asp:Literal ID="litStoreTel" runat="server" />%></em></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="shouhuoxx1" runat="server" id="goodstitle">
+                                    商品清单
+                                </div>
+                                <div class="shouhuoxx1_con" runat="server" id="goodslst">
+                                    <%<hi:common_ordermanage_orderitems runat="server" />%>
+                                    <div class="d_spzl" style="display:none;">
+                                        货物总重量：<%<asp:Literal ID="litWeight" runat="server" />%>克
+                                    </div>
+                                </div>
+                                <% <asp:Panel ID="plOrderGift" runat="server" Visible="false">
+                                    <div class="shouhuoxx1">
+                                        礼品清单
+                                    </div>
+                                    <div class="shouhuoxx1_con">
+                                        <%<hi:common_ordermanage_ordergifts runat="server" />%>
+                                    </div>
+                                </asp:Panel>%>
+                            </div>
+                            <div class="d_jifen">
+                                可得积分：<%<asp:Literal ID="litPoints" runat="server" />%>
+                                <%<asp:HyperLink ID="litSentTimesPointPromotion" runat="server" /> %>
+                            </div>
+                            <div class="d_jine">
+                                订单实收款(元)：<em><%<Hi:FormatedMoneyLabel ID="litTotalPrice" runat="server" />%></em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function (e) {
+                var preSaleId = $("#hidPreSaleId").val();
+                if (preSaleId > 0) {
+                    $("#divDeposit").show();
+                    $("#divFinalPayment").show();
+                }
+                else {
+                    $("#divDeposit").hide();
+                    $("#divFinalPayment").hide();
+                }
+            });
+            $(function () {
+                var hiPOSTakeCode = $("#hidHiPOSTakeCode").val();
+                if (hiPOSTakeCode == "") {
+                    $("#showQrCode").hide();
+                } else {
+                    $("#imgQrCode").attr("src", "/API/VshopProcess.ashx?action=GenerateTwoDimensionalImage&url=" + hiPOSTakeCode);
+                    $("#showQrCode").click(function (e) {
+                        $("#productQrCode").show();
+                    });
+                    $("#productQrCode h2 span").click(function (e) {
+                        $("#productQrCode").hide();
+                    })
+                }
+
+            })
+            function displaycss(obj) {
+                var str = obj.split(",");
+                for (var i = 0; i < str.length; i++) {
+                    $("#time" + str[i]).css("display", "none");
+                    $("#item" + str[i]).css("display", "none");
+                    $("#title" + str[i]).css("display", "none");
+                }
+            }
+            function setem(obj, set) {
+                $("#em" + obj).text(set);
+            }
+            var result = $("#UserOrderDetails_lblOrderStatus").html();
+            switch (result) {
+                case "等待买家付款":
+                    $(".stop div:lt(1)").addClass("show1");
+                    displaycss("2,3,7,8,9,10");
+                    setem(4, 2);
+                    setem(5, 3);
+                    setem(6, 4);
+                    break;
+                case "已付款,等待发货":
+                    var preSaleId = $("#hidPreSaleId").val();
+                    if (preSaleId > 0) {
+                        $(".stop div:lt(3)").addClass("show1");
+                        displaycss("4,7,8,9,10");
+                        setem(5, 4);
+                        setem(6, 5);
+                    }
+                    else {
+                        $(".stop div:lt(4)").addClass("show1");
+                        displaycss("2,3,7,8,9,10");
+                        setem(4, 2);
+                        setem(5, 3);
+                        setem(6, 4);
+                    }
+                    break;
+                case "等待支付定金":
+                    $(".stop div:lt(1)").addClass("show1");
+                    displaycss("4,7,8,9,10");
+                    setem(5, 4);
+                    setem(6, 5);
+                    break;
+                case "等待尾款支付开始":
+                    $(".stop div:lt(2)").addClass("show1");
+                    displaycss("4,7,8,9,10");
+                    setem(5, 4);
+                    setem(6, 5);
+                    break;
+                case "等待支付尾款":
+                    $(".stop div:lt(2)").addClass("show1");
+                    displaycss("4,7,8,9,10");
+                    setem(5, 4);
+                    setem(6, 5);
+                    break;
+                case "等待发货":
+                    var preSaleId = $("#hidPreSaleId").val();
+                    if (preSaleId > 0) {
+                        $(".stop div:lt(4)").addClass("show1");
+                        displaycss("4,7,8,9,10");
+                        setem(5, 4);
+                        setem(6, 5);
+                    }
+                    else {
+                        $(".stop div:lt(4)").addClass("show1");
+                        displaycss("2,3,4,7,8,9,10");
+                        setem(5, 2);
+                        setem(6, 3);
+                    }
+                    break;
+                case "已发货":
+                    var preSaleId = $("#hidPreSaleId").val();
+                    if (preSaleId > 0) {
+                        $(".stop div:lt(5)").addClass("show1");
+                        displaycss("4,7,8,9,10");
+                        setem(5, 4);
+                        setem(6, 5);
+                    }
+                    else {
+                        $(".stop div:lt(5)").addClass("show1");
+                        displaycss("2,3,7,8,9,10");
+                        setem(4, 2);
+                        setem(5, 3);
+                        setem(6, 4);
+                    }
+                    break;
+                case "申请退款":
+                    $(".stop div:lt(7)").addClass("show1");
+                    displaycss("2,3,5,6,9,10");
+                    setem(4, 2);
+                    setem(7, 3);
+                    setem(8, 4);
+                    break;
+                case "申请退货":
+                    $(".stop div:lt(9)").addClass("show1");
+                    displaycss("2,3,5,6,7,8");
+                    setem(4, 2);
+                    setem(9, 3);
+                    setem(10, 4);
+                    break;
+                case "退货中":
+                    $(".stop div:lt(9)").addClass("show1");
+                    displaycss("2,3,5,6,7,8");
+                    setem(4, 2);
+                    setem(9, 3);
+                    setem(10, 4);
+                    break;
+                case "申请换货":
+                case "门店配货中":
+                case "待上门自提":
+                    var hidIsPaymentStore = $("#hidIsPaymentStore").val();
+                    if (hidIsPaymentStore == "0") {
+                        $(".stop div:lt(5)").addClass("show1");
+                        displaycss("2,3,5,7,8,9,10");
+                        setem(4, 2);
+                        setem(6, 3);
+                    } else {
+                        $(".stop div:lt(1)").addClass("show1");
+                        displaycss("2,3,4,5,7,8,9,10");
+                        setem(6, 2);
+                    }
+
+                    break;
+                case "换货商家已发货":
+                case "换货用户已发货":
+                case "换货待用户发货":
+                case "":
+                    $(".stop div:lt(9)").addClass("show1");
+                    displaycss("2,3,5,6,7,8");
+                    setem(4, 2);
+                    setem(9, 3);
+                    setem(10, 4);
+                    break;
+                case "已退款":
+                    $(".stop div:lt(8)").addClass("show1");
+                    displaycss("2,3,5,6,9,10");
+                    setem(4, 2);
+                    setem(7, 3);
+                    setem(8, 4);
+                    break;
+                case "已退货":
+                    $(".stop div:lt(10)").addClass("show1");
+                    displaycss("2,3,7,8");
+                    setem(4, 2);
+                    setem(5, 3);
+                    setem(6, 4);
+                    setem(9, 5);
+                    setem(10, 6);
+                    break;
+                case "换货完成":
+                case "换货被拒绝":
+                case "退货被拒绝":
+
+                case "退货待用户发货":
+                    $(".stop div:lt(9)").addClass("show1");
+                    displaycss("2,3,7,8");
+                    setem(4, 2);
+                    setem(5, 3);
+                    setem(6, 4);
+                    setem(9, 5);
+                    setem(10, 6);
+                    break;
+                case "退货用户已发货":
+                    $(".stop div:lt(9)").addClass("show1");
+                    displaycss("2,3,7,8");
+                    setem(4, 2);
+                    setem(5, 3);
+                    setem(6, 4);
+                    setem(9, 5);
+                    setem(10, 6);
+                    break;
+                case "退货已确认收货":
+                    $(".stop div:lt(9)").addClass("show1");
+                    displaycss("2,3,7,8");
+                    setem(4, 2);
+                    setem(5, 3);
+                    setem(6, 4);
+                    setem(9, 5);
+                    setem(10, 6);
+                    break;
+                case "订单已完成":
+                    var preSaleId = $("#hidPreSaleId").val();
+                    if (preSaleId > 0) {
+                        $(".stop div:lt(6)").addClass("show1");
+                        displaycss("4,7,8,9,10");
+                        setem(5, 4);
+                        setem(6, 5);
+                    }
+                    else {
+                        $(".stop div:lt(6)").addClass("show1");
+                        displaycss("2,3,7,8,9,10");
+                        setem(4, 2);
+                        setem(5, 3);
+                        setem(6, 4);
+                    }
+                    break;
+                case "已关闭":
+                    var preSaleId = $("#hidPreSaleId").val();
+                    if (preSaleId > 0) {
+                        if ($("#hidIsPayDeposit").val() == "1") {
+                            $(".stop div:lt(2)").addClass("show1");
+                        }
+                        else {
+                            $(".stop div:lt(1)").addClass("show1");
+                        }
+                        displaycss("4,7,8,9,10");
+                        setem(5, 4);
+                        setem(6, 5);
+                    }
+                    else {
+                        $(".stop div:lt(1)").addClass("show1");
+                        displaycss("2,3,7,8,9,10");
+                        setem(4, 2);
+                        setem(5, 3);
+                        setem(6, 4);
+                    }
+                    break;
+
+            };
+
+            var type = "";
+            function validatorForm() {
+                if (type == "pay") {
+                    if ($("#UserOrderDetails_dropPayType").val() == "") {
+                        alert("请选择支付方式");
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function nTabs(thisObj, Num) {
+                if (thisObj.className == "active") return;
+                var tabObj = thisObj.parentNode.id;
+                var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+                for (i = 0; i < tabList.length; i++) {
+                    if (i == Num) {
+                        thisObj.className = "active";
+                        document.getElementById(tabObj + "_Content" + i).style.display = "block";
+                    } else {
+                        tabList[i].className = "normal";
+                        document.getElementById(tabObj + "_Content" + i).style.display = "none";
+                    }
+                }
+            }
+            function ViewMessage(obj) {
+                var content = $(obj).attr("content");
+                var title = $(obj).attr("title");
+                if (title == undefined || title == "") {
+                    title = $(obj).text();
+                }
+                $("#message_con").html(content);
+                DialogShow(title, "viewmessage", "viewmessage_div", "btnViewMessage");
+                return false;
+            }
+
+
+            //申请退款
+            function ApplyForRefund(obj) {
+                type = "refund";
+                var orderId = $(obj).attr("OrderId");
+                var SkuId = $(obj).attr("SkuId");
+                if (SkuId == undefined) SkuId = "";
+                window.location.href = "/User/RefundApply?OrderId=" + orderId;
+                //DialogFrame(RefundUrl, "申请退款", 400, 450, function () { });
+                return false;
+            }
+            //实名验证
+            function UserRealNameVerify(obj) {
+                var orderId = $(obj).attr("OrderId");
+                var vsendhref = "/user/SubmitIDInfo.aspx?OrderId=" + orderId;
+                DialogFrame(vsendhref, '实名认证（根据海关要求，购买跨境电商需要实名认证）', 850, 600, function () { location.reload(); });
+                return false;
+            }
+        </script>
+        <div class="hyzxfooter">
+        </div>
+
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

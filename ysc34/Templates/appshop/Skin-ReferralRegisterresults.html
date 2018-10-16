@@ -1,0 +1,25 @@
+﻿<hi:Common_AppHeader runat="server" />
+<div class="alert app-result" style="text-align:center;padding-top:70px;" runat="server" id="divWaitReview">
+    <img src="/images/jjtg_bg.png" />
+    <p style="color:#999;padding:1.5rem 0;"><asp:Literal ID="litReferralRegisterresults" runat="server" /></p>
+</div>
+
+<div id="RefuseReasonsCon">
+    <div class="alert" runat="server" id="divRefuseReasons" style="text-align:center;padding-top:1.5rem;">
+        <img src="/images/tgyjj_ly.png" style="width:7.5rem;">
+        <div style="color:#666;padding:0.7rem 0;" runat="server" id="divRefuseReasonsText"><%<asp:Literal ID="litRefuseReasons" runat="server" />%></div>
+    </div>
+</div>
+
+<div runat="server" id="divBtnToRegister" class="mt_30" style="padding:0 0.75rem; text-align:center;">
+    <button class="btn_red" id="btnToRegister">重新申请</button>
+</div>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function (e) {
+
+        $("#btnToRegister").click(function (e) {
+            location.href = "ReferralRegister.aspx?again=1";
+        });
+    });
+</script>
+<hi:Common_AppFooter runat="server" />

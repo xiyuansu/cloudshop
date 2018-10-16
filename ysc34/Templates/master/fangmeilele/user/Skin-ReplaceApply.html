@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <Hi:HeadContainer ID="HeadContainer1" runat="server" />
+    <Hi:Style ID="Stylee1" runat="server" Href="/style/user.css" />
+    <link href="/Utility/validate/pagevalidator.css" rel="stylesheet" type="text/css" />
+    <Hi:Script ID="Script2" runat="server" Src="/utility/jquery-1.6.4.min.js" />
+    <Hi:Script ID="Script1" runat="server" Src="/utility/globals.js" />
+    <link rel="stylesheet" href="/utility/skins/blue.css" />
+    <script src="/Utility/expressInfo.js" type="text/javascript"></script>
+    <script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+    <script src="/Utility/UploadHandler.js"></script>
+    <script src="/Utility/autoresizeimage.js"></script>
+    <Hi:Script ID="Script4" runat="server" Src="/utility/jquery.hishopUpload.user.js" />
+    <Hi:Script ID="Script3" runat="server" Src="/utility/jquery.form.js" />
+    <title>申请换货</title>
+</head>
+<body>
+    <form id="ApplyRefund" runat="server">
+        <div class="frame-content aftersale" style="width: 100%; overflow: hidden;">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tr class="hide">
+                    <th colspan="2">
+                        1.您需要选择我们如何将退款返回给您，如果选择预存款帐号，金额将退到预存款，如果选择银行转账，请在退款说明填写银行账号的相关信息。
+                    </th>
+                </tr>
+                <tr>
+                    <th><em>*</em>&nbsp;换货原因：</th>
+                    <td>
+                        <abbr class="formselect">
+                            <hi:AfterSalesReasonDropDownList id="ReplaceReasonDropDownList" ClientIDMode="static" runat="server"></hi:AfterSalesReasonDropDownList>
+                        </abbr>
+                    </td>
+                </tr>
+
+                <tr id="divQuantity" runat="server">
+                    <th><em>*</em>&nbsp;换货数量：</th>
+                    <td>
+                        <abbr class="formselect">
+                            <asp:TextBox id="txtQuantity" runat="server" ClientIDMode="static"></asp:TextBox>
+                        </abbr>
+                    </td>
+                </tr>
+                <tr id="divQuantityTag" runat="server"><th>&nbsp;</th><td class="memo">最多可换货数量<span id="replaceMaxQuantity"><asp:literal runat="server" id="litMaxQuantity"></asp:literal></span>件</td></tr>
+                <tr>
+                    <th><em>*</em>&nbsp;换货要求：</th>
+                    <td>
+                        <%<asp:TextBox ID="txtRemark" runat="server" ClientIDMode="static" TextMode="MultiLine" CssClass="forminput" Width="265px" Height="70px" runat="server"></asp:TextBox>%>
+                    </td>
+                </tr>
+                <tr>
+                    <th>上传凭证：</th>
+                    <td class="auto">
+                        <div id="logoContainer" style="margin:10px 0px;">
+                            <span name="siteLogo" class="imgbox"></span>
+                            <%<asp:hiddenfield id="fmSrc" runat="server" ClientIDMode="Static" value="" /> %>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td class="btn">
+                        <div class="aui_buttons"><button class="aui_state_highlight" type="button" id="btnSubmit">提交换货申请</button><button type="button" id="btnCancel">取 消</button></div>
+                        <%<asp:Button id="btnReplace" Text="提交换货申请" ClientIDMode="static" CssClass="hide" runat="server"></asp:Button>%>
+                        <%<asp:Button id="btnCancel" Text="取  消" CssClass="hide" runat="server"></asp:Button>%>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $("#btnSubmit").click(function (e) {
+                validatorForm();
+            });
+
+            $("#btnCancel").click(function (e) {
+                window.parent.window.CloseDialogFrame("", false);
+            });
+        });
+        var type = "";
+        function validatorForm() {
+            var RefundReason = $("#ReplaceReasonDropDownList").val().trim();
+            var ReplaceQuantity = parseInt($("#txtQuantity").val().trim());
+            var MaxReplaceQuantity = parseInt($("#replaceMaxQuantity").html().trim());
+            var Remark = $("#txtRemark").val().trim();
+            if (RefundReason == undefined || RefundReason == "") {
+                alert("请选择换货原因！")
+                return false;
+            }
+
+            if (isNaN(ReplaceQuantity) || isNaN(MaxReplaceQuantity) || ReplaceQuantity > MaxReplaceQuantity) {
+                alert("请填写换货数量,并且数量不能大于最多可换货数量！");
+                return false;
+            }
+            if (Remark == "") {
+                alert("请输入换货要求，说明想要换的货物规格!")
+                return false;
+            }
+            getUploadImages();
+            $("#btnReplace").trigger("click");
+        }
+
+        //获取上传成功后的图片路径
+        function getUploadImages() {
+            var srcLogo = $('#logoContainer span[name="siteLogo"]').hishopUpload("getImgSrc");
+            $("#fmSrc").val(srcLogo);
+            return PageIsValid();
+        }
+        $(document).ready(function () {
+            var imgSrc = $("#fmSrc").val();
+            $('#logoContainer span[name="siteLogo"]').hishopUpload(
+                        {
+                            title: '缩略图',
+                            url: "/admin/UploadHandler.ashx?action=newupload",
+                            imageDescript: '',
+                            imgFieldName: "siteLogo",
+                            pictureSize: '',
+                            imagesCount: 1,
+                            displayImgSrc: imgSrc,
+                        });
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/yueer/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/yueer/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+     <script>
+        $.ajaxSetup({
+            cache: false
+        });
+
+        $(function () {
+            setScrollLoading();
+        })
+
+        function setScrollLoading() {
+            $("img").scrollLoading();
+            $("iframe").each(function () {
+                if (!$(this).attr("src")) {
+                    $(this).attr("src", $(this).attr("data-url"));
+                }
+            });
+        }
+
+        $(window).scroll(function () {
+            setScrollLoading();
+        });
+    </script>
+<div id="main">
+
+	<style>
+		body {
+			background: #f6f6f6;
+		}
+		
+		.tab_img div {
+			height: 468px;
+		}
+	</style>
+ 
+<script type="text/javascript" src="/templates/master/yueer/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		slideshowSpeed:5000,
+		pauseOnAction: false
+	});
+});
+</script>
+
+	<div class="center">
+
+		<div class="banner">
+		<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="19" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_19").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+		</div>
+
+		<div class="y_main w1200 m0">
+			<div class="box clear">
+				<div class="title">
+					<div class="name">
+						<hi:common_subjecttitle runat="server" commentid="2"></hi:common_subjecttitle>
+					</div>
+				</div>
+				<div class="box_top">
+					<ul>
+						<li>
+							<hi:common_imagead runat="server" adid="2" isdelayedloading="true"></hi:common_imagead>
+						</li>
+						<li>
+							<hi:common_imagead runat="server" adid="3" isdelayedloading="true"></hi:common_imagead>
+						</li>
+						<li>
+							<hi:common_imagead runat="server" adid="4" isdelayedloading="true"></hi:common_imagead>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+				<div class="box_bot">
+					<div class="tab_l">
+						<div class="nTab">
+							<div class="TabTitle">
+								<ul id="myTab">
+									<li class="active" onmouseover="nTabs(this,0);">
+										<hi:common_subjecttitle runat="server" commentid="7"></hi:common_subjecttitle>
+									</li>
+									<li class="normal" onmouseover="nTabs(this,1);">
+										<hi:common_subjecttitle runat="server" commentid="8"></hi:common_subjecttitle>
+									</li>
+									<li class="normal" onmouseover="nTabs(this,2);">
+										<hi:common_subjecttitle runat="server" commentid="9"></hi:common_subjecttitle>
+									</li>
+									<li class="normal" onmouseover="nTabs(this,3);">
+										<hi:common_subjecttitle runat="server" commentid="10"></hi:common_subjecttitle>
+									</li>
+								</ul>
+							</div>
+							<div class="TabContent">
+								<div id="myTab_Content0">
+									<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="1"></hi:common_subjectproduct_simple>
+								</div>
+								<div id="myTab_Content1" class="none">
+									<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="2"></hi:common_subjectproduct_simple>
+								</div>
+								<div id="myTab_Content2" class="none">
+									<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="3"></hi:common_subjectproduct_simple>
+								</div>
+								<div id="myTab_Content3" class="none">
+									<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="4"></hi:common_subjectproduct_simple>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab_r">
+						<div class="nTab">
+							<div class="TabTitle">
+								<ul id="myTab1">
+									<li class="active" onmouseover="nTabs(this,0);">
+										<hi:common_subjecttitle runat="server" commentid="11"></hi:common_subjecttitle>
+									</li>
+									<li class="normal" onmouseover="nTabs(this,1);">
+										<hi:common_subjecttitle runat="server" commentid="12"></hi:common_subjecttitle>
+									</li>
+								</ul>
+							</div>
+							<div class="TabContent">
+								<div id="myTab1_Content0">
+									<ul>
+										<%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="10" />%>
+									</ul>
+								</div>
+								<div id="myTab1_Content1" class="none">
+									<hi:common_subjectarticle commentid="13" runat="server"></hi:common_subjectarticle>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<!-- 选项卡 -->
+				<script type="text/javascript">
+					function nTabs(thisObj, Num) {
+						if (thisObj.className == "active") return;
+						var tabObj = thisObj.parentNode.id;
+						var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+						for (i = 0; i < tabList.length; i++) {
+							if (i == Num) {
+								thisObj.className = "active";
+								document.getElementById(tabObj + "_Content" + i).style.display = "block";
+							} else {
+								tabList[i].className = "normal";
+								document.getElementById(tabObj + "_Content" + i).style.display = "none";
+							}
+						}
+					}
+				</script>
+
+			</div>
+
+			<div class="box clear">
+				<div class="title">
+					<div class="name">
+						<hi:common_subjecttitle runat="server" commentid="3"></hi:common_subjecttitle>
+					</div>
+					<div class="more">
+						<hi:common_subjectmorelink runat="server" commentid="14"></hi:common_subjectmorelink>
+					</div>
+				</div>
+				<div class="moudle">
+					<div class="moudle_left fl">
+						<div class="class">
+							<h2><hi:common_subjecttitle runat="server" commentid="19"></hi:common_subjecttitle></h2>
+							<div class="moudle_left_link">
+								<hi:common_subjectcategory runat="server" commentid="20"></hi:common_subjectcategory>
+							</div>
+						</div>
+						<div class="adv">
+							<hi:common_imagead runat="server" adid="8" isdelayedloading="true"></hi:common_imagead>
+						</div>
+						</div>
+						<div class="moudle_right fr">
+							<div class="adv">
+								<hi:common_imagead runat="server" adid="5" isdelayedloading="true"></hi:common_imagead>
+							</div>
+							<div class="prod">
+								<div>
+									<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="5"></hi:common_subjectproduct_simple>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+
+				<div class="box clear">
+					<div class="title">
+						<div class="name">
+							<hi:common_subjecttitle runat="server" commentid="4"></hi:common_subjecttitle>
+						</div>
+						<div class="more">
+							<hi:common_subjectmorelink runat="server" commentid="15"></hi:common_subjectmorelink>
+						</div>
+					</div>
+					<div class="moudle">
+						<div class="moudle_left fl">
+							<div class="class">
+								<h2><hi:common_subjecttitle runat="server" commentid="21"></hi:common_subjecttitle></h2>
+								<div class="moudle_left_link">
+									<hi:common_subjectcategory runat="server" commentid="22"></hi:common_subjectcategory>
+								</div>
+							</div>
+							<div class="adv">
+								<hi:common_imagead runat="server" adid="9" isdelayedloading="true"></hi:common_imagead>
+							</div>
+						</div>
+						<div class="moudle_right fr">
+							<div class="adv">
+								<hi:common_imagead runat="server" adid="6" isdelayedloading="true"></hi:common_imagead>
+							</div>
+							<div class="prod">
+								<div>
+									<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="6"></hi:common_subjectproduct_simple>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+
+				<div class="box clear">
+					<div class="title">
+						<div class="name">
+							<hi:common_subjecttitle runat="server" commentid="5"></hi:common_subjecttitle>
+						</div>
+						<div class="more">
+							<hi:common_subjectmorelink runat="server" commentid="16"></hi:common_subjectmorelink>
+						</div>
+					</div>
+					<div class="moudle">
+						<div class="moudle_left fl">
+							<div class="class">
+								<h2><hi:common_subjecttitle runat="server" commentid="23"></hi:common_subjecttitle></h2>
+								<div class="moudle_left_link">
+									<hi:common_subjectcategory runat="server" commentid="24"></hi:common_subjectcategory>
+								</div>
+							</div>
+							<div class="adv">
+								<hi:common_imagead runat="server" adid="10" isdelayedloading="true"></hi:common_imagead>
+							</div>
+						</div>
+						<div class="moudle_right fr">
+							<div class="adv">
+								<hi:common_imagead runat="server" adid="7" isdelayedloading="true"></hi:common_imagead>
+							</div>
+							<div class="prod">
+								<div>
+									<hi:common_subjectproduct_simple isdelayedloading="true" runat="server" subjectid="7"></hi:common_subjectproduct_simple>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+
+				<div class="main_adv clear">
+					<ul>
+						<li>
+							<hi:common_imagead runat="server" adid="11" isdelayedloading="true"></hi:common_imagead>
+						</li>
+						<li>
+							<hi:common_imagead runat="server" adid="12" isdelayedloading="true"></hi:common_imagead>
+						</li>
+						<li>
+							<hi:common_imagead runat="server" adid="13" isdelayedloading="true"></hi:common_imagead>
+						</li>
+						<li>
+							<hi:common_imagead runat="server" adid="14" isdelayedloading="true"></hi:common_imagead>
+						</li>
+					</ul>
+					<p class="clear"></p>
+				</div>
+
+				<div class="box clear">
+					<div class="title">
+						<div class="name">
+							<hi:common_subjecttitle runat="server" commentid="6"></hi:common_subjecttitle>
+						</div>
+						<div class="more">
+							<hi:common_subjectmorelink runat="server" commentid="17"></hi:common_subjectmorelink>
+						</div>
+					</div>
+
+					<div>
+						<hi:common_subjectbrand isdelayedloading="true" runat="server" commentid="18"></hi:common_subjectbrand>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

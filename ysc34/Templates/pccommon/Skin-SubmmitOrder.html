@@ -1,0 +1,1381 @@
+﻿<%<hi:common_header runat="server" skinname="ascx/tags/Skin-Common-Top.ascx" />%>
+<script src="/Utility/common.js?v=3.350" type="text/javascript"></script>
+<script type="text/javascript" src="utility/validate/pagevalidator.js"></script>
+<script type="text/javascript" src="utility/submmitorder.helper.js?v=3.350"></script>
+<script type="text/javascript" src="/utility/jquery.form.js"></script>
+<script type="text/javascript" src="/utility/jquery.hishopUpload.user.js?v=3.33"></script>
+<script language="javascript" type="text/javascript">
+    function SetUseBalance(checked) {
+        if (checked == undefined || checked == null) {
+            checked = $('#chkIsUseBalance').is(':checked');
+        }
+        var useBalance = CalculateUseBalance(checked);
+        if (useBalance <= 0) {
+            //如果不需要支付则关闭
+            $("#chkIsUseBalance").iCheck("uncheck");
+            $("#hidUseBalance").val("0");
+            $("#spanUseBalance").html("0.00");
+        }
+        else {
+            $("#hidUseBalance").val(useBalance);
+            $("#spanUseBalance").html(useBalance.toFixed(2));
+        }
+        CalculateTotalPrice();
+    }
+
+    function CalculateUseBalance(checked) {
+        if (!checked) {//如果未开启余额支付则返回0
+            return 0;
+        }
+
+        var balanceAmount = parseFloat($("#hidBalanceAmount").val());
+        var useBalance = 0;
+        if (isNaN(balanceAmount)) { balanceAmount = 0; }
+        $("#hidUseBalance").val(0);
+        CalculateTotalPrice();
+        isPreSale = getParam("from").toLowerCase() == "presale";
+        //如果是预售
+        if (isPreSale) {
+            var deposit = parseFloat($("#SubmmitOrder_lblDeposit").html());
+            if (isNaN(deposit)) { deposit = 0; }
+            if (balanceAmount > deposit) {
+                useBalance = deposit;
+            }
+            else {
+                useBalance = balanceAmount;
+            }
+        }
+        else {
+
+            var total = parseFloat($("#SubmmitOrder_lblOrderTotal").html());
+            if (!isNaN(total) && total > 0) {
+                if (balanceAmount < total) {
+                    useBalance = balanceAmount;
+                }
+                else {
+                    useBalance = total;
+                }
+            }
+            else {
+
+                useBalance = 0;
+            }
+        }
+        return useBalance;
+
+    }
+    function InitValidators() {
+        initValid(new InputValidator('SubmmitOrder_txtShipTo', 2, 20, false, '[\u4e00-\u9fa5a-zA-Z ]+[\u4e00-\u9fa5_a-zA-Z0-9]*', '名字不能为空，只能是汉字或字母开头，长度在2-20个字符之间'));
+        initValid(new InputValidator('SubmmitOrder_txtAddress', 3, 200, false, null, '详细地址不能为空,3-200个字符'));
+        initValid(new InputValidator('SubmmitOrder_txtTelPhone', 3, 20, true, '^[0-9-]*$', '电话号码长度限制在3-20个字符之间，只能输入数字和字符“-”'));
+        initValid(new InputValidator('SubmmitOrder_txtCellPhone', 3, 20, true, '^[0-9]*$', '收货人的手机号码,只能输入数字'));
+        initValid(new InputValidator('SubmmitOrder_txtBuilderNumber', 0, 50, true, null, '楼栋号只能输入50位'))
+
+    }
+    $(document).ready(function () {
+        var Pro_width = $('.suits .product').size() * $('.suits .product').width();
+        var Pro_plus = $('.suits .plus').size() * $('.suits .plus').outerWidth(true);
+        var suits_width = Pro_width + Pro_plus;
+        $('.suits .info').css('width', suits_width)
+        var bg = "<div class='modal_qt'></div>";
+        javascript: window.history.forward(1);
+        //开启余额支付
+        $("#chkIsUseBalance").on('ifClicked', function (event) {
+            if ($("#hidOpenBalancePay").val().toLowerCase() == "false") {//如果未开启余额支付则关闭
+                $("#hidUseBalance").val("0.0");
+                $("#spanUseBalance").html("0.00");
+                $("#chkIsUseBalance").prop("checked", false);
+            }
+            else {
+                SetUseBalance(true);
+                if ($("#hidHasTradePassword").val() == "0") {
+                    $("#divSetPassword").show();
+                    $('body').append(bg);
+                }
+                else {
+                    if ($("#hidIsValidTradePassword").val() != "true")//如果未验证密码则提示输入密码
+                    {
+                        $(".sub_dialog").show();
+                        $('body').append(bg);
+                    }
+                }
+            }
+        });
+        //取消了余额支付
+        $("#chkIsUseBalance").on('ifUnchecked', function (event) {
+            $("#hidUseBalance").val("0.0");
+            $("#spanUseBalance").html("0.00");
+            CalculateTotalPrice();
+        });
+
+        var balanceAmount = parseFloat($("#hidBalanceAmount").val());
+
+        if ($("#hidOpenBalancePay").val().toLowerCase() == "true" && (!isNaN(balanceAmount) && balanceAmount > 0)) {
+            $("#divUseBalancePay").show();
+        }
+        else {
+            $("#divUseBalancePay").hide();
+        }
+        $(".ap_content a").live("click", function (e) {
+            ChooiceRegion($(this).attr("id"), e);
+            var regionId = GetSelectedRegionId();
+            //ResetShipingModel(regionId);
+        });
+        $('.con em img').click(function () {
+            $('.mendian').css('display', 'none');
+            $('.zhezhao').css('display', 'none');
+        })
+
+        $('.addr-detail .name input').on('ifChecked', function (event) {
+            $('.addr-detail').removeClass('select');
+            $(this).parents('.addr-detail').addClass('select');
+        });
+        $('.skin-flat input').iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red'
+        });
+
+        InitValidators();
+        var isPreSale = $("#hidIsPreSale").val();
+        if (isPreSale == "1") {
+            $("#normalOrder").hide();
+            $("#preSaleOrder").show();
+        }
+        else {
+            $("#normalOrder").show();
+            $("#preSaleOrder").hide();
+        }
+
+        //填写地址时
+        if ($("#addresslist .list").length <= 0) {
+            OpenNameVerify(null);
+        }
+    });
+
+</script>
+<style>
+    .noused { color: #aaa; cursor: no-drop; background: #fff none repeat scroll 0 0; border: 1px solid #e5e5e5; float: left; height: 28px; line-height: 28px; padding: 1px 25px; position: relative; }
+
+    .id_card { width: 670px; height: 440px; text-align: center; }
+
+        .id_card div { width: 310px; height: 210px; float: left; }
+
+            .id_card div.example { margin-left: 5px; }
+
+        .id_card img { width: 300px !important; height: 180px !important; }
+
+    .setpassword { height: 240px; }
+
+    .sub_dialog { height: 180px; }
+
+    .dialog_btn { width: 150px; }
+
+    .txt { width: 100%; display: block; }
+</style>
+<div class="login_tan setpassword" id="divSetPassword" style="display: none;">
+    <div class="dialog_title">
+        <div class="dialog_title_l"><span>请您设置交易密码</span></div>
+        <div class="dialog_title_r" id="setTradePassword_close"></div>
+    </div>
+    <div class="dialog_cartitem">
+        <input type="password" placeholder="请输入交易密码" id="txtTradePassword" class="login_tan_input1" />
+        <input type="password" placeholder="确认交易密码" id="txtTradePasswordAgain" class="login_tan_input2" />
+        <div class="btnbar">
+            <input type="button" name="button" id="btnSetTradePassword" value="确 认 " class="login_tan_input3 dialog_btn sure-btn" />
+            <a href="javascript:void(0)" id="canclepay" class="cancle login_tan_input3 cancle-btn">取消</a>
+        </div>
+    </div>
+</div>
+<div class="login_tan sub_dialog" style="display: none;">
+    <div class="dialog_title">
+        <div class="dialog_title_l"><span>帐户余额支付开启</span></div>
+        <div class="dialog_title_r" id="tradePassword_close"></div>
+    </div>
+    <div class="dialog_cartitem">
+        <input type="password" placeholder="输入交易密码" id="textfieldpassword" class="login_tan_input1">
+        <div class="btnbar">
+            <input type="button" name="button" id="advancepay" value="确 认 " class="login_tan_input3 dialog_btn" />
+            <input type="button" name="button" id="canclepay1" value="取 消 " class="cancle-btn-input dialog_btn" />
+            <div class="txt" style="color:red;display:none" id="errormsg"></div>
+        </div>
+    </div>
+</div>
+<form runat="server" id="form1">
+    <div class="main">
+        <div class="cart_h">
+            <div id="logo">
+                <hi:common_logo runat="server" />
+            </div>
+            <div class="cart_step">
+                <ul class="cart_step2">
+                    <li class="step-1"><b></b>1.我的购物车</li>
+                    <li class="step-2"><b></b>2.填写核对订单信息</li>
+                    <li class="step-3">3.成功提交订单</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cart_content">
+
+            <div class="OrderSubmit">
+                <%<hi:smallstatusmessage id="Status" runat="server" visible="False" />%>
+                <div class="cart_Order_deliver">
+                    <h3>请选择收货地址</h3>
+                </div>
+                <%
+                <asp:panel id="pannel_noaddress" runat="server" clientidmode="Static">
+                    %>
+                    <div class="cart_Order_address" id="noaddressDiv" style="display:none;">
+                        <div class="address_have" id="addresslist">
+                            <div class="address_tab">
+
+                            </div>
+                            <div class="control">
+                                <a class="use_newAddr" id="btnaddaddress"><i>+</i>添加收货地址</a><a class="manageAddr" target="_blank"
+                                                                                               href="/user/UserShippingAddresses.aspx">管理收货地址</a>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                </asp:panel>
+                %>
+                <%
+                <asp:panel id="pannel_useraddress" runat="server" clientidmode="Static">
+                    %>
+                    <div class="cart_Order_address">
+
+                        <div class="address_have" id="addresslist">
+                            <% <hi:common_shippingaddress runat="server" /> %>
+                            <div class="control">
+                                <a class="use_newAddr" id="btnaddaddress"><i>+</i>添加收货地址</a><a class="manageAddr" target="_blank"
+                                                                                               href="/user/UserShippingAddresses.aspx">管理收货地址</a>
+                            </div>
+                        </div>
+                        <div class="comon_submmitorder_address">
+                            <% <hi:common_link_openid_address text="获取支付宝收货地址" imageurl="images/alipay_consignee.png" runat="server" />%>
+                        </div>
+                    </div>
+                    <%
+                </asp:panel>
+                %>
+                <div class="comon_submmitorder_address2">
+                    <input type="hidden" id="hdcopyshipping" value="SubmmitOrder_txtShipTo,SubmmitOrder_txtCellPhone,SubmmitOrder_txtTelPhone,SubmmitOrder_txtAddress" />
+                    <%<hi:common_copyshippingaddress runat="server" />%>
+                </div>
+                <div class="cart_Order_address" id="user_shippingaddress" style="display: none;">
+                    <div class="con">
+                        <div class="title">
+                            <h2 id="tr_addresstitle">填写收货地址</h2>
+                            <em>
+                                <img id="imgCloseLogin" class="imgCloseLogin" src="/images/new/close_btn.png" width="12" height="12" />
+                            </em>
+                        </div>
+
+                        <ul>
+                            <li>
+                                <h2><em>*</em>收货人：</h2>
+                                <%<asp:textbox id="txtShipTo" cssclass="textform form-control" runat="server" />%>
+                                <span id="txtShipToTip" runat="server"></span>
+                            </li>
+                            <li>
+                                <h2><em>*</em>收货地址：</h2>
+                                <%<hi:regionselector runat="server" id="dropRegions" customerjs="true" isshift="false" />%>
+                                <script src="/Utility/SubmitOrderRegion.Helper.js" type="text/javascript"></script>
+                            </li>
+                            <li>
+                                <h2><em>*</em>详细地址：</h2>
+                                <%<asp:textbox id="txtAddress" cssclass="textform form-control" width="400" runat="server" />%><span id="txtAddressTip" runat="server"></span>
+                            </li>
+                            <li>
+                                <h2><em>*</em>门栋号：</h2>
+                                <%<asp:textbox id="txtBuilderNumber" cssclass="textform form-control" width="400" runat="server" />%><span id="txtBuilderNumberTip" runat="server"></span>
+                            </li>
+                            <li style="display: none;">
+                                <h2>邮政编码：</h2>
+                                <%<asp:textbox id="txtZipcode" cssclass="textform form-control" runat="server" />
+                                %>
+                            </li>
+                            <li>
+                                <h2>电话号码：</h2>
+                                <%<asp:textbox id="txtTelPhone" cssclass="textform form-control" runat="server" />
+                                %>
+                                <span id="txtTelPhoneTip" runat="server"></span>
+                            </li>
+                            <li>
+                                <h2><em>*</em>手机号码：</h2>
+                                <%<asp:textbox id="txtCellPhone" cssclass="textform form-control" runat="server" />
+                                %>
+                                <span id="txtCellPhoneTip" runat="server"></span>
+                            </li>
+                            <li id="setDefaultRow">
+                                <h2>&nbsp;</h2>
+                                <input type="checkbox" id="chkIsDefault" style="-webkit-appearance: checkbox; width: 16px; height: 16px;" runat="server" clientidmode="Static" />设为默认
+                            </li>
+                            <li id="btnaddr">
+                                <a class="save" onclick="return AddShippAddress()">保存</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cart_Order_address" id="OpenCertification" style="display: none">
+                    <div class="con">
+                        <div>
+                            <h3>实名验证</h3>
+                        </div>
+                        <ul>
+                            <li id="trShipTo">
+                                <h2>真实姓名：</h2>
+                                <%<asp:label id="lblShipTo" runat="server" text="" style="height: 28px; line-height: 28px; display: block"></asp:label>%>
+                            </li>
+                            <li>
+                                <h2><em>*</em>身份证号：</h2>
+                                <%<asp:textbox id="txtIDNumber" cssclass="textform form-control" value="" runat="server" />%>
+                                <span id="text20" runat="server"></span>
+                            </li>
+                            <li class="id_card" style="display: none;">
+                                <div id="IDJust">
+                                    <span name="siteLogo" class="imgbox"></span>
+                                    <%<asp:hiddenfield id="fieldIDCardJust" runat="server" clientidmode="Static" value="/images/users/upload_ID_Just.jpg" />
+                                    %>
+                                    <%<asp:image id="idCardJustImg" runat="server" imageurl="" clientidmode="Static" style="display: none;" />
+                                    %>
+                                </div>
+                                <div id="IDAnti">
+                                    <span name="siteLogo" class="imgbox"></span>
+                                    <%<asp:hiddenfield id="fieldIDCardAnti" runat="server" clientidmode="Static" value="/images/users/upload_ID_Anti.jpg" />
+                                    %>
+                                    <%<asp:image id="idCardAntiImg" runat="server" imageurl="" clientidmode="Static" style="display: none;" />
+                                    %>
+                                </div>
+                                <div class="example">
+                                    <lable>示例</lable>
+                                    <img src="../images/users/ID_card_Just.jpg" alt="示例正面" />
+                                </div>
+                                <div class="example">
+                                    <lable>示例</lable>
+                                    <img src="../images/users/ID_card_Anti.jpg" alt="示例反面" />
+                                </div>
+                            </li>
+                            <li class="Certification2" style="display: none;">
+                                <em>
+                                    <samp style="color: red"></samp>
+                                    注：
+                                </em>
+                                <span>1、需上传正反面2张身份证照片</span><br />
+                                <span style="margin-left: 36px;">2、每张照片不能超过5M，图片格式为JPG，JPEG，PNG</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 配送方式/送货时间-->
+                <div class="cart_Order_deliver">
+                    <div class="title">
+                        <h3>配送方式/送货时间</h3>
+                    </div>
+                    <div class="step">
+                        <div class="deliver_way">
+                            <h2>配送方式 :</h2>
+                            <ul>
+                                <li>
+                                    <div class="item"><b></b>快递配送</div>
+                                </li>
+                                <li style="margin-right: 0px; display: none">
+                                    <div class="ziti"><b></b>上门自提</div>
+                                    <div class="ziti_con"></div>
+                                    <div class="ziti_btn"><a href="javascript:;">&nbsp;选择自提门店</a></div>
+                                </li>
+                            </ul>
+
+                            <div id="divGetGoodsRemark" style="width: 100%; height: 24px; clear: both;">
+                            </div>
+
+
+                            <!-- 自提弹窗静态-->
+                            <div class="mendian cart_Order_address2">
+                                <div class="con">
+                                    <div class="title">
+                                        <h2 id="tr_addresstitle">修改自提门店</h2>
+                                        <em>
+                                            <img id="imgCloseLogin" src="/images/new/close_btn.png" width="12" height="12" />
+                                        </em>
+                                    </div>
+                                    <div class="info">
+                                        <div class="info1">
+                                            <h2>区域：</h2>
+                                            <span>
+                                                <select>
+                                                    <option value="">全部区域</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Order_deliver_time">
+                            <h2>送货时间 :</h2>
+                            <select runat="server" id="drpShipToDate">
+                                <option>时间不限</option>
+                                <option>周一至周五</option>
+                                <option>周六日及公众假期</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+            </div>
+        </div>
+        <style type="text/css">
+            .combo-clear { background-color: #E0ECFF; width: 18px; height: 20px; overflow: hidden; float: right; display: inline-block; vertical-align: top; cursor: pointer; opacity: 0.6; filter: alpha(opacity=60); background: url('/images/iconfont-shanchu.png') no-repeat center center; position: absolute; right: 20px; }
+            .combo-clear-hover { opacity: 1.0; filter: alpha(opacity=100); background-color: #eaf2ff; }
+        </style>
+        <script type="text/javascript">
+            var InvoiceInfo = {
+                Id: 0, InvoiceType: 0, InvoiceTitle: "", InvoiceTaxpayerNumber: "", OpenBank: "", BankAccount: "", ReceiveAddress: "", ReceiveEmail: "", ReceiveName: "", ReceivePhone: "", ReceiveRegionName: "", RegionId: 0, RegisterAddress: "", RegisterTel: ""
+            }
+            var InvoiceJsonData = [];
+            ///获取个人电子发票信息
+            function GetPersoanlEInvoice() {
+                var personalInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 2) {
+                        personalInvoice.push(item);
+                    }
+                });
+                return personalInvoice;
+            }
+            ///获取企业电子发票信息
+            function GetEnterpriseEInvoice() {
+                var enterpriseInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 3) {
+                        enterpriseInvoice.push(item);
+                    }
+
+                });
+                return enterpriseInvoice;
+            }
+            ///获取个人的发票信息
+            function GetPersoanlInvoice() {
+                var personalInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 0 || item.InvoiceType == 2) {
+                        personalInvoice.push(item);
+                    }
+
+                });
+                return personalInvoice;
+            }
+            ///获取企业的发票信息
+            function GetEnterpriseInvoice() {
+                var enterpriseInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 1 || item.InvoiceType == 3) {
+                        enterpriseInvoice.push(item);
+                    }
+
+                });
+                return enterpriseInvoice;
+            }
+
+            ///获取专票的发票信息
+            function GetVATInvoice() {
+                var VATInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 4) {
+                        VATInvoice.push(item);
+                    }
+                });
+                return VATInvoice;
+            }
+            //根据ID获取发票信息
+            function GetInvoiceInfo(invoiceId) {
+                var ItemInvoiceInfo = null;
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.Id == invoiceId) {
+                        ItemInvoiceInfo = item;
+                    }
+                });
+                return ItemInvoiceInfo;
+            }
+            //初始化企业发票列表
+            function InitEnterpriseInvoiceOption() {
+                selectedInvoiceId = parseInt($("#hidInvoiceId").val());
+                if (isNaN(selectedInvoiceId)) { selectedInvoiceId = 0; }
+
+                var EnterpriseInvoice = GetEnterpriseInvoice();
+                $("#companytax").empty();
+                var eCount = 0;
+                //初始化发票数据
+                if (EnterpriseInvoice != null && EnterpriseInvoice.length > 0) {
+                    var json = [];
+                    $.each(EnterpriseInvoice, function (i, item) {
+                        if (item.Id > 0) {
+                            json.push({ "text": item.InvoiceTitle, "id": item.Id, "selected": item.Id == selectedInvoiceId || (selectedInvoiceId == 0 && eCount == 0) });
+                            eCount += 1;
+                        }
+
+                    });
+                    if (json.length > 0) {
+                        $("#companytax").combobox({
+                            valueField: 'id',
+                            textField: 'text', editable: true
+                        });
+                        $("#companytax").combobox("loadData", json);
+                    }
+
+                }
+                if (eCount == 0) {
+                    $(".addenttax").show();
+                    $(".enttax").hide();
+                }
+                else {
+                    $(".addenttax").show();
+                    $(".enttax").show();
+                }
+            }
+
+            $(document).ready(function (e) {
+                //初始化清除按钮
+                function initClear(target) {
+                    var jq = $(target);
+                    var opts = jq.data('combo').options;
+                    var combo = jq.data('combo').combo;
+                    var arrow = combo.find('span.combo-arrow');
+
+                    var clear = arrow.siblings("span.combo-clear");
+                    if (clear.size() == 0) {
+                        //创建清除按钮。
+                        clear = $('<span class="combo-clear" style="height: 20px;"></span>');
+
+                        //清除按钮添加悬停效果。
+                        clear.unbind("mouseenter.combo mouseleave.combo").bind("mouseenter.combo mouseleave.combo",
+                            function (event) {
+                                var isEnter = event.type == "mouseenter";
+                                clear[isEnter ? 'addClass' : 'removeClass']("combo-clear-hover");
+                            }
+                        );
+                        //清除按钮添加点击事件，清除当前选中值及隐藏选择面板。
+                        clear.unbind("click.combo").bind("click.combo", function () {
+                            jq.combo("setValue", "").combo("setText", "");
+                            jq.combo('hidePanel');
+                        });
+                        arrow.before(clear);
+                    };
+                    var input = combo.find("input.combo-text");
+                    input.outerWidth(input.outerWidth() - clear.outerWidth());
+
+                    opts.initClear = true;//已进行清除按钮初始化。
+                }
+
+                //扩展easyui combo添加清除当前值。
+                var oldResize = $.fn.combo.methods.resize;
+                $.extend($.fn.combo.methods, {
+                    initClear: function (jq) {
+                        return jq.each(function () {
+                            initClear(this);
+                        });
+                    },
+                    resize: function (jq) {
+                        //调用默认combo resize方法。
+                        var returnValue = oldResize.apply(this, arguments);
+                        var opts = jq.data("combo").options;
+                        if (opts.initClear) {
+                            jq.combo("initClear", jq);
+                        }
+                        return returnValue;
+                    }
+                });
+                $.fn.combobox.defaults.icons = [{
+                    iconCls: 'icon-clear',
+                    handler: function (e) {
+                        //alert($(e.handleObj.data.target).combobox('getValue'));
+                        $(e.handleObj.data.target).combobox('clear');
+                    }
+                }];
+                $('#companytax').combobox({
+                    required: true,
+                    editable: false
+                }).combobox("initClear");
+                $("#companytax").combobox({
+                    valueField: 'id',
+                    textField: 'text', editable: true,
+                    onChange: function (n, o) {
+                        var invoiceId = parseInt(n);
+                        if (!isNaN(invoiceId) && invoiceId > 0) {
+                            var checkedInvoiceInfo = GetInvoiceInfo(invoiceId);
+                            if (checkedInvoiceInfo != null) {
+                                if (checkedInvoiceInfo.InvoiceType == 3) {//如果是电子发票
+                                    $("#txtReceivePhone").val(checkedInvoiceInfo.ReceivePhone);
+                                    $("#txtReceiveEmail").val(checkedInvoiceInfo.ReceiveEmail);
+                                }
+                                $("#invoiceTaxpayerNumber").val(checkedInvoiceInfo.InvoiceTaxpayerNumber);
+                                if ($("#hidInvoiceType").val() == "1" || $("#hidInvoiceType").val() == "3") {
+                                    $("#hidInvoiceId").val(checkedInvoiceInfo.Id);
+                                }//如果当前选中的是企业发票则初始化发票ID
+                            }
+                        }
+                    }
+                });
+
+                $(".addcompanytax").click(function (e) {
+                    $(".addenttax").show();
+                    $(".enttax").show();
+                    $("#companytax").val("");
+                    $("#companytax").combobox('clear');
+                    $("#invoiceTaxpayerNumber").val("");
+                    $("#hidInvoiceId").val("0");
+                })
+                //$(".enttax").hide();
+                //$(".addenttax").show();
+                InvoiceJsonData = JSON.parse($("#hidInvoiceJson").val());
+                //初始化接收人信息
+                if (InvoiceJsonData != undefined && InvoiceJsonData.List != undefined && InvoiceJsonData.List.length > 0) {
+                    InitEnterpriseInvoiceOption();
+                    var zCount = 0;
+                    $.each(InvoiceJsonData.List, function (i, item) {
+                        if (item.InvoiceType == 1 || item.InvoiceType == 3) {
+                            if (item.ReceiveEmail != null && item.ReceiveEmail != "" && $("#txtReceiveEmail").val() == "") {
+                                $("#txtReceiveEmail").val(item.ReceiveEmail);
+                            }
+                            if (item.ReceivePhone != null && item.ReceivePhone != "" && $("#txtReceivePhone").val() == "") {
+                                $("#txtReceivePhone").val(item.ReceivePhone);
+                            }
+                        }
+                        //初始化专票信息
+                        if (item.InvoiceType == 4) {
+                            zCount += 1;
+                            if (zCount == 1) {
+                                $("#txtZCompanyName").val(item.InvoiceTitle);
+                                $("#txtZInvoiceTaxpayerNumber").val(item.InvoiceTaxpayerNumber);
+                                $("#txtRegisterAddress").val(item.RegisterAddress);
+                                $("#txtRegisterTel").val(item.RegisterTel);
+                                $("#txtOpenBank").val(item.OpenBank);
+                                $("#txtOpenBank").val(item.OpenBank);
+                                $("#txtBankAccount").val(item.BankAccount);
+                                $("#txtReceiveName").val(item.ReceiveName);
+                                $("#txtZReceivePhone").val(item.ReceivePhone);
+                                $("#txtReceiveRegionName").val(item.ReceiveRegionName);
+                                $("#txtReceiveAddress").val(item.ReceiveAddress);
+                            }
+                        }
+
+                    });
+                }
+                var enableTax = $("#hidEnableTax").val();
+                var enableETax = $("#hidEnableETax").val();
+                var enableVATTax = $("#hidEnableVATTax").val();
+
+                if (enableTax == "false") {
+                    $(".taxtype a").eq(0).hide();
+                    var isPersonal = $("#hidIsPersonal").val() == "true";
+                    if (enableETax == "true") {
+                        $(".taxtype a").removeClass("checked");
+                        $(".taxtype a").eq(1).addClass("checked");
+                        $("#p_invoice").show();
+                        $("#e_invoice").show();
+                        $("#vat_invoice").hide();
+                        if (isPersonal) {
+                            $("#hidInvoiceType").val(2);
+                            $("#hidoldInvoiceType").val(2);
+                        }
+                        else {
+                            $("#hidInvoiceType").val(3);
+                            $("#hidoldInvoiceType").val(3);
+                        }
+                        $("#SubmmitOrder_litTaxRate").html($("#hidTaxRate").val());
+                        ///初始化电子发票接收人信息
+                        var invoiceInfos = null;
+                        if (isPersonal) {
+                            invoiceInfos = GetPersoanlEInvoice();
+                        }
+                        else {
+                            invoiceInfos = GetEnterpriseEInvoice();
+                        }
+                        if (invoiceInfos != null && invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                            $("#hidInvoiceId").val(tempInvoiceInfo.Id);
+                            $("#invoiceTitle").text(tempInvoiceInfo.InvoiceTitle);
+                        }
+                        else {
+                            $("#invoiceTitle").text("请填写发票信息");
+                        }
+                    }
+                    else {
+                        $("#hidIsPersonal").val("false");
+                        $(".taxtype a").removeClass("checked");
+                        $(".taxtype a").eq(2).addClass("checked");
+                        $("#p_invoice").hide();
+                        $("#e_invoice").hide();
+                        $("#vat_invoice").show();
+                        $("#hidInvoiceType").val(4);
+                        $("#hidoldInvoiceType").val(4);
+                        $("#SubmmitOrder_litTaxRate").html($("#hidVATTaxRate").val());
+                        var invoiceInfos = GetVATInvoice();
+                        if (invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            $("#invoiceTitle").text(tempInvoiceInfo.InvoiceTitle);
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                            $("#hidInvoiceId").val(tempInvoiceInfo.Id);
+                        }
+                        else {
+                            $("#invoiceTitle").text("请填写发票信息");
+                        }
+                    }
+                }
+                var checkedInvoiceType = parseInt($("#hidInvoiceType").val());
+                $("#invoiceType").html(checkedInvoiceType == 4 ? "增值税发票" : ((checkedInvoiceType == 0 || checkedInvoiceType == 1) ? "普通发票" : "电子发票"));
+                if (enableETax == "false") {
+                    $(".taxtype a").eq(1).hide();
+                }
+                if (enableVATTax == "false") {
+                    $(".taxtype a").eq(2).hide();
+                }
+
+
+
+                $("#btnTaxCancel").click(function (e) {
+                    $(".order_tax").hide();
+                    $(".modal_qt").remove();
+                    if ($("#div_fapiao").is(":hidden")) {
+                        $("#SubmmitOrder_chkTax").iCheck('uncheck');
+                    }
+                    $("#hidInvoiceType").val($("#hidoldInvoiceType").val());//还原原来选择的发票类型
+                });
+                $("#invoiceClose").click(function (e) {
+                    $(".order_tax").hide();
+                    $(".modal_qt").remove();
+                    if ($("#div_fapiao").is(":hidden")) {
+                        $("#SubmmitOrder_chkTax").iCheck('uncheck');
+                    }
+                    $("#hidInvoiceType").val($("#hidoldInvoiceType").val());//还原原来选择的发票类型
+                });
+                //保存发票信息
+                $("#btnTaxSave").click(function (e) {
+                    var saveInvoiceInfo = InvoiceInfo;
+                    var isPersonal = $("#hidIsPersonal").val() == "true";
+                    var checkedInvoiceType = parseInt($("#hidInvoiceType").val());
+                    $("#hidoldInvoiceType").val(checkedInvoiceType);//点击保存时，覆盖选择的发票类型
+                    if (isNaN(checkedInvoiceType) || (checkedInvoiceType != 0 && checkedInvoiceType != 1 && checkedInvoiceType != 2 && checkedInvoiceType != 3 && checkedInvoiceType != 4)) {
+                        alert("请选择发票类型");
+                        return;
+                    }
+                    //专票
+                    if (checkedInvoiceType == 4) {
+                        $("#SubmmitOrder_litTaxRate").html($("#hidVATTaxRate").val());
+                        var VATInvoices = GetVATInvoice();
+                        if (VATInvoices != null && VATInvoices.length > 0) {
+                            saveInvoiceInfo = VATInvoices[0];
+                        }
+
+                        saveInvoiceInfo.InvoiceType = checkedInvoiceType;
+                        saveInvoiceInfo.InvoiceTitle = $("#txtZCompanyName").val().trim();
+                        if (saveInvoiceInfo.InvoiceTitle == "" || saveInvoiceInfo.InvoiceTitle.length > 200) {
+                            alert("请填写单位名称，长度在200个字符以内");
+                            return false;
+                        }
+
+                        saveInvoiceInfo.InvoiceTaxpayerNumber = $("#txtZInvoiceTaxpayerNumber").val().trim();
+                        if (saveInvoiceInfo.InvoiceTaxpayerNumber == "" || saveInvoiceInfo.InvoiceTaxpayerNumber.length > 100) {
+                            alert("请填写纳税人识别号，长度在100个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.RegisterAddress = $("#txtRegisterAddress").val().trim();
+                        if (saveInvoiceInfo.RegisterAddress == "" || saveInvoiceInfo.RegisterAddress.length > 200) {
+                            alert("请填写注册地址，长度在200个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.RegisterTel = $("#txtRegisterTel").val().trim();
+                        if (saveInvoiceInfo.RegisterTel == "" || saveInvoiceInfo.RegisterTel.length > 50) {
+                            alert("请填写注册电话，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.OpenBank = $("#txtOpenBank").val().trim();
+                        if (saveInvoiceInfo.OpenBank == "" || saveInvoiceInfo.OpenBank.length > 50) {
+                            alert("请填写开户银行，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.BankAccount = $("#txtBankAccount").val().trim();
+                        if (saveInvoiceInfo.BankAccount == "" || saveInvoiceInfo.BankAccount.length > 50) {
+                            alert("请填写银行帐户，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.ReceiveName = $("#txtReceiveName").val().trim();
+                        if (saveInvoiceInfo.ReceiveName == "" || saveInvoiceInfo.ReceiveName.length > 50) {
+                            alert("请填写收票人姓名，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.ReceivePhone = $("#txtZReceivePhone").val().trim();
+                        if (saveInvoiceInfo.ReceivePhone == "" || saveInvoiceInfo.ReceivePhone.length > 50) {
+                            alert("请填写收票人电话，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.ReceiveRegionName = $("#txtReceiveRegionName").val().trim();
+                        if (saveInvoiceInfo.ReceiveRegionName == "" || saveInvoiceInfo.ReceiveRegionName.length > 50) {
+                            alert("请填写收票人所在地区，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.ReceiveAddress = $("#txtReceiveAddress").val().trim();
+                        if (saveInvoiceInfo.ReceiveName == "" || saveInvoiceInfo.ReceiveName.length > 100) {
+                            alert("请填写收票人详细地址，长度在100个字符以内");
+                            return false;
+                        }
+                    }
+                    else {
+                        $("#SubmmitOrder_litTaxRate").html($("#hidTaxRate").val());
+
+                        //电子发票验证收票人电话号码和邮箱
+                        if (checkedInvoiceType == 2 || checkedInvoiceType == 3) {
+                            saveInvoiceInfo.ReceivePhone = $("#txtReceivePhone").val().trim();
+                            if (saveInvoiceInfo.ReceivePhone == "" || saveInvoiceInfo.ReceivePhone.length > 50) {
+                                alert("请填写收票人电话号码，长度在50个字符以内");
+                                return false;
+                            }
+                            saveInvoiceInfo.ReceiveEmail = $("#txtReceiveEmail").val().trim();
+                            if (saveInvoiceInfo.ReceiveEmail == "" || saveInvoiceInfo.ReceiveEmail.length > 200) {
+                                alert("请填写收票人邮箱，长度在200个字符以内");
+                                return false;
+                            }
+                        }
+                        //如果是企业发票验证抬头和税号
+                        if (!isPersonal) {
+                            var invoiceId = parseInt($("#hidInvoiceId").val());
+                            if (isNaN(invoiceId)) { invoiceId = 0; }
+                            saveInvoiceInfo.InvoiceTitle = $("#companytax").combobox('getText');
+                            if (invoiceId > 0) {
+                                var tempInvoiceInfo = GetInvoiceInfo(invoiceId);
+                                if (tempInvoiceInfo != null) {
+                                    saveInvoiceInfo.Id = tempInvoiceInfo.Id;
+                                }
+                            }
+                            if (saveInvoiceInfo.InvoiceTitle == "" || saveInvoiceInfo.InvoiceTitle.length > 50) {
+                                alert("请填写发票抬头，长度在50个字符以内");
+                                return false;
+                            }
+                            saveInvoiceInfo.InvoiceTaxpayerNumber = $("#invoiceTaxpayerNumber").val().trim();
+                            if (saveInvoiceInfo.InvoiceTaxpayerNumber == "" || saveInvoiceInfo.InvoiceTaxpayerNumber.length > 100) {
+                                alert("请填写纳税人识别号，长度在100个字符以内");
+                                return false;
+                            }
+                        }
+                        else {
+                            var tempPInvoiceInfo = GetPersoanlInvoice();
+                            if (tempPInvoiceInfo != null && tempPInvoiceInfo.length > 0) {
+                                saveInvoiceInfo.Id = tempPInvoiceInfo[0].Id;
+                            }
+                            saveInvoiceInfo.InvoiceTitle = "个人";
+                        }
+                        saveInvoiceInfo.InvoiceType = checkedInvoiceType;
+                    }
+                    //如果是个人普通发票则不保存到数据库，否则保存
+                    if (!(saveInvoiceInfo.InvoiceTitle == "个人" && checkedInvoiceType == 0)) {
+                        $.ajax({
+                            url: "/Handler/SubmmitOrderHandler.ashx",
+                            type: 'post', dataType: 'json', timeout: 10000,
+                            data: { Action: "UpdateUserInvoice", Data: JSON.stringify(saveInvoiceInfo) },
+                            cache: false,
+                            success: function (resultData) {
+                                if (resultData.Status == "OK") {
+                                    InvoiceJsonData = resultData;
+                                    $("#hidInvoiceId").val(resultData.NewInvoiceId);
+                                    InitEnterpriseInvoiceOption();
+                                    CalculationTax();
+                                    SetUseBalance();
+                                }
+                                else {
+                                    $("#hidInvoiceId").val("0");
+                                    alert("发票信息保存失败," + resultData.error_response.sub_msg);
+                                    return false;
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        $("#hidInvoiceId").val("0");
+                    }
+                    $("#invoiceType").html(checkedInvoiceType == 4 ? "增值税发票" : ((checkedInvoiceType == 0 || checkedInvoiceType == 1) ? "普通发票" : "电子发票"));
+                    $("#invoiceTitle").html(saveInvoiceInfo.InvoiceTitle);
+                    $(".order_tax").hide();
+                    $(".modal_qt").remove();
+                    $("#div_fapiao").show();
+                });
+                //$("#companytax").
+                $(".taxhead1 a").click(function (e) {
+                    $("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    $(".taxhead1 a").removeClass("checked");
+                    $(this).addClass("checked");
+                    $(".enttax samp").removeClass("checked");
+                    var index = $(".taxtype a").index($(".taxtype a.checked").eq(0));
+                    //如果是普通发票
+                    if (index == 0) {
+                        $("#hidInvoiceType").val(0);
+                    }
+                    else {
+                        $("#hidInvoiceType").val(2);
+                        invoiceInfos = GetPersoanlEInvoice();
+                        if (invoiceInfos != null && invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                        }
+                    }
+                    $("#hidIsPersonal").val("true");
+                });
+                $(".enttax samp").click(function (e) {
+                    $("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    $(".enttax samp").removeClass("checked");
+                    $(this).addClass("checked");
+                    $(".taxhead1 a").removeClass("checked");
+                    var index = $(".taxtype a").index($(".taxtype a.checked").eq(0));
+                    $("#hidIsPersonal").val("false");
+
+                    //如果是普通发票
+                    if (index == 0) {
+                        $("#hidInvoiceType").val(1);
+                    }
+                    else {
+                        $("#hidInvoiceType").val(3);
+                        invoiceInfos = GetEnterpriseEInvoice();
+                        if (invoiceInfos != null && invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                        }
+                    }
+                });
+
+                $(".taxtype a").click(function (e) {
+                    $("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    var isPersonal = $("#hidIsPersonal").val() == "true";
+                    $(".taxtype a").removeClass("checked");
+                    $(this).addClass("checked");
+                    var index = $(".taxtype a").index($(this));
+                    if (index == 0) {
+                        $("#p_invoice").show();
+                        $("#e_invoice").hide();
+                        $("#vat_invoice").hide();
+                        if (isPersonal)
+                            $("#hidInvoiceType").val(0);
+                        else
+                            $("#hidInvoiceType").val(1);
+                        // $("#SubmmitOrder_litTaxRate").html($("#hidTaxRate").val());
+                    }
+                    else if (index == 1) {
+                        $("#p_invoice").show();
+                        $("#e_invoice").show();
+                        $("#vat_invoice").hide();
+                        if (isPersonal)
+                            $("#hidInvoiceType").val(2);
+                        else
+                            $("#hidInvoiceType").val(3);
+                        //$("#SubmmitOrder_litTaxRate").html($("#hidTaxRate").val());
+                        ///初始化电子发票接收人信息
+                        var invoiceInfos = null;
+                        if (isPersonal) {
+                            invoiceInfos = GetPersoanlEInvoice();
+                        }
+                        else {
+                            invoiceInfos = GetEnterpriseEInvoice();
+                        }
+                        if (invoiceInfos != null && invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                        }
+                    }
+                    else {
+                        $("#p_invoice").hide();
+                        $("#e_invoice").hide();
+                        $("#vat_invoice").show();
+                        $("#hidInvoiceType").val(4);
+                        //$("#SubmmitOrder_litTaxRate").html($("#hidVATTaxRate").val());
+                        var invoiceInfos = GetVATInvoice();
+                        if (invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                        }
+                    }
+                });
+                $("#modifyInvoice").click(function (e) {
+                    $(".order_tax").show();
+                    $("body").append(bg);
+                });
+            });
+
+        </script>
+        <div class="order_tax">
+            <input type="hidden" id="hidInvoiceJson" value="" runat="server" clientidmode="static" />
+            <input type="hidden" id="hidInvoiceType" value="0" runat="server" clientidmode="static" />
+            <input type="hidden" id="hidInvoiceId" value="0" runat="server" clientidmode="static" />
+            <input type="hidden" id="hidIsPersonal" value="true" runat="server" clientidmode="static" />
+            <input type="hidden" id="hidEnableTax" runat="server" clientidmode="static" value="false" />
+            <input type="hidden" id="hidEnableETax" runat="server" clientidmode="static" value="false" />
+            <input type="hidden" id="hidEnableVATTax" runat="server" clientidmode="static" value="false" />
+            <input type="hidden" id="hidTaxRate" runat="server" clientidmode="static" value="0" />
+            <input type="hidden" id="hidVATTaxRate" runat="server" clientidmode="static" value="0" />
+            <input type="hidden" id="hidVATInvoiceDays" runat="server" clientidmode="static" value="0" />
+
+            <div class="title">
+                <h2>发票信息</h2>
+                <em>
+                    <img id="invoiceClose" class="imgCloseLogin" src="/images/new/close_btn.png" width="12" height="12" />
+                </em>
+            </div>
+            <div class="taxbox">
+                <ul>
+                    <li class="taxtitle">发票类型：</li>
+                    <li class="taxtype">
+                        <a href="javascript:void(0)" class="checked"><b></b>普通发票</a>
+                        <a href="javascript:void(0)"><b></b>电子发票</a>
+                        <a href="javascript:void(0)"><b></b>增值税发票</a>
+                    </li>
+                </ul>
+                <ul id="p_invoice">
+                    <li class="taxtitle">发票抬头：</li>
+                    <li class="taxhead taxhead1">
+                        <a href="javascript:void(0)" class="checked"><b></b>个人</a>
+                    </li>
+                    <li class="taxtitle enttax">&nbsp;</li>
+                    <li class="taxhead enttax">
+                        <samp>
+                            <b></b>
+                            <select class="companytax easyui-combobox" id="companytax" style="width:368px">
+                                <option value=""></option>
+                            </select>
+                        </samp>
+                    </li>
+                    <li class="taxtitle enttax">纳税人识别号：</li>
+                    <li class="taxpayernumber enttax">
+                        <input type="text" id="invoiceTaxpayerNumber" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle addenttax">&nbsp;</li>
+                    <li class="taxhead addenttax">
+                        <a href="javascript:void(0)" class="addcompanytax">新增单位发票</a>
+                    </li>
+                    <li class="taxtitle">发票内容：</li>
+                    <li>
+                        <a href="javascript:void(0)" class="checked"><b></b>明细</a>
+                    </li>
+                </ul>
+                <ul id="e_invoice" style="display:none;">
+                    <li class="taxtitle"><em>*</em>收票人手机：</li>
+                    <li>
+                        <input type="text" id="txtReceivePhone" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>收票人邮箱：</li>
+                    <li>
+                        <input type="text" id="txtReceiveEmail" class="input-text form-control" value="" />
+                    </li>
+                </ul>
+                <ul id="vat_invoice" style="display:none;">
+                    <li class="fullwidth"><h5><img src="/images/ring.png" alt="提醒" />&nbsp;&nbsp;发票将在订单完成之后<asp:Literal id="litAfterSaleDays" runat="server">7</asp:Literal>-<asp:Literal id="litInvoiceSendDays" runat="server">30</asp:Literal>个工作日后寄出。</h5></li>
+                    <li class="taxtitle">发票内容：</li>
+                    <li class="taxhead">
+                        <a href="javascript:void(0)" class="checked"><b></b>明细</a>
+                    </li>
+                    <li class="fullwidth line"><h2>增票资质</h2></li>
+                    <li class="taxtitle"><em>*</em>单位名称：</li>
+                    <li>
+                        <input type="text" id="txtZCompanyName" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>纳税人识别号：</li>
+                    <li>
+                        <input type="text" id="txtZInvoiceTaxpayerNumber" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>注册地址：</li>
+                    <li>
+                        <input type="text" id="txtRegisterAddress" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>注册电话：</li>
+                    <li>
+                        <input type="text" id="txtRegisterTel" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>开户银行：</li>
+                    <li>
+                        <input type="text" id="txtOpenBank" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>银行帐户：</li>
+                    <li>
+                        <input type="text" id="txtBankAccount" class="input-text form-control" value="" />
+                    </li>
+                    <li class="fullwidth line"><h2>收票人信息</h2></li>
+                    <li class="taxtitle"><em>*</em>收票人姓名：</li>
+                    <li>
+                        <input type="text" id="txtReceiveName" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>收票人手机：</li>
+                    <li>
+                        <input type="text" id="txtZReceivePhone" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>收票人地区：</li>
+                    <li>
+                        <input type="text" id="txtReceiveRegionName" class="input-text form-control" value="" />
+                    </li>
+                    <li class="taxtitle"><em>*</em>详细地址：</li>
+                    <li>
+                        <input type="text" id="txtReceiveAddress" class="input-text form-control" value="" />
+                    </li>
+                </ul>
+                <div class="taxbtns clearfix">
+                    <input type="button" id="btnTaxSave" class="btn-danger" value="保存" />
+                    <input type="button" id="btnTaxCancel" class="btn-default" value="取消" />
+                </div>
+            </div>
+        </div>
+        <!-- 支付方式静态-->
+        <div class="cart_Order_deliver payment_way clearFloat">
+            <div class="title">
+                <h3>支付方式</h3>
+            </div>
+            <div class="step">
+                <ul>
+                    <li style="display: none;">
+                        <div class="zhifu"><b></b>在线支付</div>
+                    </li>
+                    <li style="display: none;">
+                        <div class="zhifu"><b></b>货到付款</div>
+                    </li>
+                    <li style="display: none;">
+                        <div class="zhifu"><b></b>到店支付</div>
+                    </li>
+                    <li style="display: none;">
+                        <div class="zhifu"><b></b>线下付款</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cart_Order_info">
+            <div id="divProductList" runat="server" clientidmode="Static">
+                <h3>商品清单<a href="/ShoppingCart.aspx" class="return" id="backToShoppingCart">返回改购物车</a></h3>
+                <div class="cart_Order_info2">
+                    <%<hi:common_submmintorder_productlist runat="server" width="100%" />%>
+
+                    <div class="cart_Weight" style="display: none;">
+                        <strong>货物总重量（含礼品）：</strong><span style="color: Green; font-weight: 700;"><%<asp:label id="litAllWeight" runat="server" />%></span>
+                        克
+                    </div>
+                </div>
+            </div>
+            <%<hi:common_pointgiftlist runat="server" width="100%" />%>
+            <div class="h_1" style='text-align: right; display: <%# Hidistro.Context.HiContext.Current.SiteSettings.OpenSupplier?"inline":"none"%>'>
+                <asp:label runat="server" id="lblGiftFeright"></asp:label>
+            </div>
+            <div class="cart_Order_info3">
+                <div class="cart_Order_coupon3">
+                    <div class="fl">
+                        <%<hi:common_submmintorder_giftlist runat="server" width="100%" />%>
+                        <div class="list">
+                            <em>留言：</em>
+                            <span>
+                                <%<asp:textbox id="txtMessage" runat="server" width="300px" />%>
+                            </span>
+                        </div>
+                        <div class="cart_Order_coupon" id="divcopue" runat="server" clientidmode="static">
+                            <div class="info skin-flat">
+                                <input type="checkbox" runat="server" id="chkTax" name="chkTax" class="icheck" />
+                                <em>需要发票</em>&nbsp;(税率<em style="color: red;"><%<asp:label runat="server" id="litTaxRate" />%>%</em>)
+                            </div>
+                            <script>
+                                $(function () {
+
+
+                                    $('.save').click(function () {
+                                        $('.modal_qt').css('display', 'none')
+                                    })
+
+                                })
+                            </script>
+
+                            <script>
+                                $(function () {
+                                    $('.usepoint input').on('ifClicked', function (event) {
+                                        onPointCheck();
+
+                                    });
+                                })
+
+                            </script>
+                            <div id="div_fapiao" class="taxinfo" style="display: none">
+                                <div class="clearfix">
+                                    <h2>发票信息<span>开企业抬头发票须填写纳税人识别号,以免影响报销</span></h2>
+                                </div>
+                                <ul>
+                                    <li><span id="invoiceType">普通发票</span><samp id="invoiceTitle">个人</samp><a href="javascript:void(0)" id="modifyInvoice">修改</a></li>
+                                </ul>
+                            </div>
+                            <script>
+                                $(function () {
+                                    $('.invtypebox').on('click', function (event) {
+                                        var _v = $(this).find("input").val();
+                                        var _invTaxpayer = $("#invTaxpayer");
+                                        if (_v == 1) {
+                                            _invTaxpayer.show();
+                                        } else {
+                                            _invTaxpayer.hide();
+                                        }
+                                    });
+                                    var invtype = $('.invtypebox input[type="radio"]:checked');
+                                    if (invtype && invtype.val() == 1) {
+                                        $("#invTaxpayer").show();
+                                    }
+                                })
+
+                            </script>
+                        </div>
+                    </div>
+                    <div class="fr" id="selectCoupon">
+                        <div class="list">
+                            <em>优惠券：</em>
+                            <span>
+
+                                <link href="/style/easyui.css" rel="stylesheet" />
+                                <script type="text/javascript" src="/utility/jquery.easyui.min.js"></script>
+                                <select id="CmbCoupCode" name="CmbCoupCode" class="easyui-combobox" required
+                                        style="width: 240px;" runat="server"></select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="list fr">
+                        <em>商品合计：</em>
+                        <b>￥<%<hi:formatedmoneylabel id="lblTotalPrice" runat="server" />%>&nbsp;<%<asp:literal runat="server" id="litProductBundling" />%></b>
+
+                        <div style="display: none;">
+                            <%<asp:hyperlink id="hlkReducedPromotion" runat="server" target="_blank" />%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart_Order_total">
+
+                <div class="list" id="divCoupons"><em>-￥<%<hi:formatedmoneylabel id="litCouponAmout" runat="server" nulltodisplay="0.00" />%></em><b>优惠券：</b></div>
+                <div class="list" id="divPromtion"><em>-￥<%<hi:formatedmoneylabel id="lblDeductibleMoney" runat="server" nulltodisplay="0.00" />%></em><b>满减：</b> </div>
+                <div class="list" id="divTaxRate" style="display: none;">
+                    <em>
+                        <span id="spanTaxRate" runat="server">￥<%<hi:formatedmoneylabel id="lblTax" runat="server" nulltodisplay="0.00" />%></span>
+                    </em>
+                    <b>税费：</b>
+                </div>
+                <div class="list" id="divFreight">
+                    <em>
+                        ￥<%<hi:formatedmoneylabel id="lblShippModePrice" runat="server" nulltodisplay="0.00" />%>
+                        <%<asp:hyperlink id="hlkFeeFreight" runat="server" target="_blank" style="display: none;" />%>
+                    </em>
+                    <b>运费：</b>
+                </div>
+                <div class="list" id="divPoint">
+                    <div class="usepoint skin-flat">
+                        <input type="checkbox" id="chkIsUsePoints" runat="server" clientidmode="static" name="chkIsUsePoints" />
+                        使用商城积分(<%<asp:label runat="server" id="lblMaxPoints" />%>分可用)&nbsp;<%<asp:textbox id="txtUsePoints" runat="server" maxlength="8" cssclass="cart_invoice" onchange="onPointChange(this)" />%>
+                        <span class="pointamount">-￥<%<hi:formatedmoneylabel id="litPointAmount" runat="server" nulltodisplay="0.00" />%></span>
+                    </div>
+                </div>
+                <div class="item-list" id="divUseBalancePay">
+                    <div class="skin-flat">
+                        <input class="weui_switch" type="checkbox" id="chkIsUseBalance" />
+                        余额抵扣(可用余额￥<%<asp:Label runat="server" ID="lblBalance" ClientIdMode="static" />%>)&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="pointamount">-￥<span id="spanUseBalance">0</span></span>
+
+                    </div>
+                </div>
+                <div class="list" id="normalOrder">
+                    <div class="total"><em>￥<%<hi:formatedmoneylabel id="lblOrderTotal" runat="server" />%></em><b>订单实付：</b></div>
+                </div>
+                <div class="list" id="preSaleOrder" style="display:none;">
+                    <div><em>￥<%<hi:formatedmoneylabel id="lblDeposit" runat="server" />%></em><b>定金：</b></div>
+                    <div><em>￥<%<hi:formatedmoneylabel id="lblFinalPayment" runat="server" />%></em><b>尾款(含运费和优惠)：</b></div>
+                    <div><em>￥<%<hi:formatedmoneylabel id="lblPreSaleOrderTotal" runat="server" />%></em><b>订单总计：</b></div>
+                    <div class="total"><em>￥<%<hi:formatedmoneylabel id="lblDepositPay" runat="server" />%></em><b>定金实付：</b></div>
+                </div>
+                <div class="list" id="divGetPoints">
+                    <div class="pointtotal">
+                        可得积分
+                        <%<asp:label id="litPoint" clientidmode="static" runat="server" />%><br />
+                        <%<asp:hyperlink id="hlkSentTimesPoint" runat="server" style="display: none;" target="_blank" />%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="cart_Order_submit2">
+        <%<asp:button id="btnCreateOrder" runat="server" text="提交订单" />%>
+    </div>
+    </div>
+
+    <div class="zhezhao"></div>
+
+    <!--所有的隐藏域-->
+    <input runat="server" id="htmlCouponCode" type="hidden" />
+    <input runat="server" id="inputPaymentModeId" type="hidden" />
+    <input runat="server" id="inputShippingModeId" type="hidden" />
+    <input type="hidden" id="hdbuytype" name="hdbuytype" runat="server" />
+    <input type="hidden" id="hidStoreId" runat="server" />
+    <input type="hidden" id="hidStoreCount" runat="server" />
+    <input type="hidden" id="hidShipperId" runat="server" />
+    <input type="hidden" id="hidAllStores" />
+    <input type="hidden" id="hidIsAnonymous" runat="server" />
+    <input type="hidden" id="hidShoppingDeduction" runat="server" />
+    <input type="hidden" id="hidShoppingDeductionRatio" runat="server" />
+    <input type="hidden" id="hidCanPointUseWithCoupon" runat="server" />
+    <input type="hidden" id="hidMyPoints" runat="server" />
+
+    <input type="hidden" id="hidCanUsePoint" runat="server" value="false" clientidmode="static" /><!--是否可以使用积分-->
+    <input type="hidden" id="hidGetgoodsOnStores" runat="server" value="true" clientidmode="static" /><!--是否可以上门自提-->
+    <input type="hidden" id="hidPaymentId_Podrequest" runat="server" value="0" clientidmode="static" /><!--货到付款支付ID-->
+    <input type="hidden" id="hidPaymentId_Offline" runat="server" value="0" clientidmode="static" /><!--货到付款支付ID-->
+    <input type="hidden" id="hidTotalPrice" runat="server" value="0" clientidmode="static" /><!--商品总金额减去促销金额后的金额-->
+    <input type="hidden" id="hidIsPreSale" runat="server" value="0" clientidmode="static" />
+    <!--是否预售-->
+    <input type="hidden" id="hidOnlinePayCount" runat="server" value="0" clientidmode="static" /><!--在线支付方式总数，等于0时不显示在线支付方式-->
+    <input type="hidden" id="hidPointRate" runat="server" value="1" clientidmode="static" /><!--积分兑换率-->
+    <input type="hidden" id="hidHasSupplierProduct" runat="server" value="0" clientidmode="static" /><!--是否有供应商商品-->
+    <input type="hidden" id="hidTimePoint" runat="server" value="1" clientidmode="static" /><!--赠送积分倍数-->
+    <input type="hidden" id="hidIsGiftOrder" runat="server" value="0" clientidmode="static" /><!--是否礼品订单-->
+    <input type="hidden" id="hidIsCloseStoreButGetGoods" runat="server" value="0" clientidmode="static" /><!--是否关闭多门店但可自提-->
+    <input type="hidden" id="hidGetGoodsRemark" runat="server" value="0" clientidmode="static" /><!--自提备注-->
+
+    <input type="hidden" id="hidIsOpenCertification" runat="server" clientidmode="static" /><!--是否开启实名验证-->
+    <input type="hidden" id="hidIsGetIDInfo" runat="server" clientidmode="static" /><!--获取验证方式-->
+    <input type="hidden" id="hidCertificationModel" runat="server" clientidmode="static" /><!--实名验证模式-->
+    <input type="hidden" id="hididCardJustImg" runat="server" clientidmode="static" /><!--隐藏图片-->
+    <input type="hidden" id="hididCardAntiImg" runat="server" clientidmode="static" /><!--隐藏图片-->
+    <input type="hidden" id="hidBalanceAmount" runat="server" value="0.0" ClientIdMode="static" /><!-- 帐号余额 -->
+    <%<asp:textbox id="hidUseBalance" value="0" runat="server" clientidmode="static" style="display:none" />%><!--使用的余额-->
+    <%<asp:textbox id="hidTradePassword" value="" runat="server" clientidmode="static" style="display:none" />%><!--使用的余额-->
+    <input type="hidden" id="hidIsValidTradePassword" value="false" />
+    <input type="hidden" id="hidOpenBalancePay" value="false" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidHasTradePassword" runat="server" value="false" ClientIdMode="static" /><!-- 是否有交易密码 -->
+    <input type="hidden" id="hidoldInvoiceType" value="0" />
+    <!--结束-->
+</form>
+<%<hi:common_footer runat="server" skinname="ascx/tags/Skin-Common_Bottom.ascx" />%>
+

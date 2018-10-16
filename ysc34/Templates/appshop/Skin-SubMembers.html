@@ -1,0 +1,55 @@
+﻿<hi:common_appheader runat="server" />
+<div class="commission">
+    <div class="info1">
+        <b>  ¥<Hi:FormatedMoneyLabel ID="fmlNextMemberTotal" runat="server" /></b>
+        <em>直接下级会员成交额</em>
+        <!--<a onclick="SplittinRule()" class="btn-danger">我要分销</a>-->
+    </div>
+    <div class="info5">
+        <ul>
+            <li>
+                <span><asp:Literal id="litExpandMemberInMonth" runat="server"></asp:Literal>人</span><br />
+                <em>本月发展会员数</em>
+            </li>
+            <li>
+                <span><asp:Literal id="litExpandMemberAll" runat="server"></asp:Literal> 人</span><br />
+                <em>累计发展会员数</em>
+            </li>
+        </ul>
+    </div>
+
+    <%<input type="hidden" runat="server" clientidmode="static" value="20" id="pageTotal" />%>
+    <div class="info3">
+        <div class="submember">
+            <span>
+                会员名
+            </span>
+            <span>
+                累积消费
+            </span>
+            <span>
+                贡献奖励
+            </span>
+
+        </div>
+        <div class="submember_con">
+            <ul>
+                <%
+                <hi:AppshopTemplatedRepeater id="rptSubMembers" templatefile="/Tags/skin-Common_SubMembers.ascx" runat="server" />%>
+            </ul>
+        </div>
+        <div id="pager">
+        </div>
+    </div>
+</div>
+<script src="../../Utility/pager.js"></script>
+<script>
+    $(function () {
+        vshopPager('pager', $('#pageTotal').val(), 1, 10);
+    });
+
+    function SplittinRule() {
+        goToUrl("Extension");
+    }
+</script>
+<hi:common_appfooter runat="server" />

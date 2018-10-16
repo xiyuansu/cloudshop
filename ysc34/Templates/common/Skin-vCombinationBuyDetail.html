@@ -1,0 +1,56 @@
+﻿<hi:common_wapheader runat="server" />
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<input type="hidden" runat="server" id="hidproductid" />
+<input type="hidden" runat="server" id="hidmasterproducthassku" />
+<input type="hidden" runat="server" id="hidmasterselectsku" />
+<input type="hidden" runat="server" id="hidmasterstock" />
+<input type="hidden" runat="server" id="hidcombinaid" />
+<form>
+	<div id="cart">
+		<div class="item_content mt_15">
+			<div id="cartProducts">
+				<div class="master">
+					<div class="well goods-box goods-box-shopcart">
+						<div class="info_border">
+							<div class="info">
+                                <asp:literal runat="server" id="litMasterproductpic" />							
+								<div class="name font-xl bcolor">
+                                    <asp:literal runat="server" id="litMasterproductname" />							
+								</div>
+                                <div class="cart_sku" onclick="showsku(0)" id="selectmainsku" runat="server"><em>选择规格</em><i></i></div>
+								<div class="price text-danger">
+									¥<span id="masterprice"><asp:literal runat="server" id="litMasterprice" /></span>
+                                    <span id="mastersaleprice" style="display:none"><asp:literal runat="server" id="litMastersaleprice" /></span>
+								</div>
+								<span class="cart_num">x1</span>
+							</div>
+						</div>
+					</div>                                      
+				</div>                
+				<div class="suits">
+                    <Hi:WapTemplatedRepeater ID="rptcombinaproduct" TemplateFile="/Tags/skin-Common_CombinaProductList.ascx" runat="server" />
+				</div>
+			</div>
+		</div>
+
+		<div class="combe_footer">
+			<div class="info1">
+				<div class="total_pirce"><em>总价：</em><b>￥<span id="totalPrice">1413.00</span></b></div>
+				<div class="discount_price"><em>优惠合计：</em><b>￥<span id="discount_price">150.00</span></b></div>
+			</div>
+			<div class="info2">
+				<h2>套数</h2>
+				<div class="num">
+                    <span class="num_minus" t="cp" m="pminus" id="minusnum">-</span>
+                    <input class="cart_txtbuynum" style="ime-mode:disabled;" onpaste="return false;" id="buysetnum" type="text" value="1" onkeypress="keyPress()"     onchange="return valuechange()">
+                    <span class="num_add" t="cp" m="padd" id="addnum">+</span>
+				</div>
+				<div class="pay_btn" id="productbuy">
+                   <a id="aLink" href="javascript:void(0)">立即购买</a>                  
+                </div>              
+			</div>
+		</div>
+	</div>
+</form>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<script type="application/javascript" src="/utility/vskucombinaselect.js?v=3.0"></script>

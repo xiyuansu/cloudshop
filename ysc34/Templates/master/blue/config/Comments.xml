@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" /> 
+  <Comment Id="7" Type="attribute" CategoryId="309" MaxNum="5" />
+  <Comment Id="12" Type="keyword" CategoryId="223" MaxNum="10" />
+  <Comment Id="15" Type="keyword" CategoryId="273" MaxNum="10" /> 
+  <Comment Id="19" Type="title" Title="限量抢购" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="20" Type="title" Title="今日团" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="21" Type="title" Title="1F手机通讯/数码娱乐" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="22" Type="title" Title="1F手机通讯/数码娱乐" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="23" Type="title" Title="1F手机通讯/数码娱乐" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="24" Type="title" Title="1F手机通讯/数码娱乐" ImageTitle="" TitleImageSize="200*40" />
+  <Comment Id="25" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="26" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="27" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="28" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="29" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="45" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="31" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="32" Type="morelink" Title="查看全部" CategoryId="309" />
+  <Comment Id="33" Type="title" Title="DIY攒机" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="34" Type="title" Title="特价商品" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="35" Type="title" Title="笔记本" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="36" Type="title" Title="数码影音" ImageTitle="" TitleImageSize="189*33" />
+  <Comment Id="37" Type="category" CategoryId="1" MaxNum="10" />
+  <Comment Id="38" Type="category" CategoryId="9" MaxNum="10" />
+  <Comment Id="39" Type="category" CategoryId="26" MaxNum="10" />
+  <Comment Id="40" Type="category" CategoryId="23" MaxNum="10" />
+  <Comment Id="41" Type="title" Title="商城公告" ImageTitle="" TitleImageSize="189*29" />
+  <Comment Id="42" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="43" Type="title" Title="热门活动" ImageTitle="" TitleImageSize="189*40" />
+  <Comment Id="44" Type="title" Title="用户评价" ImageTitle="" TitleImageSize="189*40" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

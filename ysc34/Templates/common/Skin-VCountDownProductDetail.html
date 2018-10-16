@@ -1,0 +1,164 @@
+﻿<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<hi:common_wapheader runat="server" />
+<div id="slides">
+    <hi:WapTemplatedRepeater id="rptProductImages" templatefile="/Tags/skin-Common_Slide.ascx"
+                             runat="server" />
+</div>
+<div class="cd_xs">
+    <div class="item_content cd_info">
+        <div class="cd_title">
+            <asp:literal runat="server" id="litProdcutName" />
+        </div>
+        <div class="intro text-muted" id="divShortDescription" runat="server">
+            <asp:literal runat="server" id="litShortDescription" />
+        </div>
+        <div class="cd_price">
+            抢购价：¥<b><asp:literal runat="server" id="price" /></b>
+            <del id="delOldSalePrice">
+                原价：¥<asp:literal runat="server" id="salePrice" />
+            </del>
+
+        </div>
+        <div class="maxCount" id="maxCount">
+            每人限购<asp:literal runat="server"
+                             id="litMaxCount" /><asp:literal runat="server"
+             id="litUnit" />
+        </div>
+    </div>
+
+    <div class="cd_time">
+        <i class="icon_cdtime icon-icon_time"></i>
+        <span id="tuan_time"></span><span id="t_d"></span><span id="t_h"></span></span><span id="t_m"></span><span id="t_s"></span>
+    </div>
+</div>
+<div class="cd_single mt_30" id="divspecification">
+    选择规格
+    <i class="icon_angle_right"></i>
+</div>
+<div class="cd_single mt_30" onclick="javascript:location.href='ProductReview.aspx?ProductId='+$('#txtProductId').val();">
+    商品评价&nbsp;<i class="icon_badge1">(<asp:literal runat="server" id="litReviewsCount" />)</i>
+    <i class="icon_angle_right"></i>
+</div>
+<div class="mt_30 cd_pro_info">
+    <Hi:Common_ExpandAttributes id="ExpandAttributes" runat="server" />
+    <asp:literal runat="server" id="litDescription" />
+</div>
+<div class="cd_btn btn_1">
+    <a id="buyButtonNew">立即抢购</a>
+</div>
+<input type="hidden" runat="server" id="hidden_IsOver" clientidmode="Static" />
+<input type="text" style="display: none;" runat="server" id="txtProductId" clientidmode="Static" />
+<input type="hidden" runat="server" clientidmode="Static" id="litGroupbuyId" />
+<input type="hidden" runat="server" clientidmode="Static" id="hiddenIsLogin" />
+<input type="hidden" value="2014/04/23 9:27:46" id="startTime" runat="server" clientidmode="Static">
+<input type="hidden" value="2014/04/23 9:28:56" id="endTime" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuySoldCount" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuyMaxCount" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuyMinCount" runat="server" clientidmode="Static">
+<input type="hidden" id="nowTime" runat="server" clientidmode="Static">
+<input type="hidden" id="skuStock" value="0" runat="server" clientidmode="Static" />
+<input type="hidden" id="hdId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdCountDownId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTimestamp" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdNonceStr" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdSignature" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static" />
+<script src="/script/carousel.js"></script>
+<script src="/utility/vcountdown.helper.js?v=3.3" type="application/javascript"> </script>
+<script language="javascript" type="text/javascript" src="/Utility/wxShare.js?v=3.2"></script>
+<script type="text/javascript" src="/Utility/jquery.scrollLoading.min.js"></script>
+<script src="/script/swipe.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var slidesImg = $('#slides img');
+		slidesImg.css({"width":"100%"});
+        var width = 650, height = 650;
+        if (slidesImg.length > 1) {
+            $('#slides').slidesjs({
+                width: width,
+                height: height
+            });
+            $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+            $('#slides img').scrollLoading();
+        }
+        else {
+
+            $('#slides').css('display', 'block').html('<div style="width:100%;"><a href="javascript:;"></a></div>');
+            $('#slides div a').append(slidesImg);
+            $('#slides img').scrollLoading();
+        }
+    });
+
+
+    $(function () {
+        var soldCount = parseInt($('#groupBuySoldCount').val());
+        var minCount = parseInt($('#groupBuyMinCount').val());
+        if (soldCount < minCount)
+            $('#maxCount').hide();
+        else
+            $('#minCount').hide();
+
+        if (!$.trim($('#gbContent').html())) {
+            $('#gbContentContainer').hide();
+        }
+
+        $('#divspecification,#buyButtonNew').on('click', function (event) {
+            $(".att-popup").unbind("click");
+            event.preventDefault();
+            $('.att-popup').addClass('is-visible');
+            getDefaultCountDownPrice();
+            $('.att-popup').on('click', function (event) {
+                if ($(event.target).is('.att-popup-close,#addToCart') || $(event.target).is('.att-popup')) {
+                    event.preventDefault();
+                    $(this).removeClass('is-visible');
+                    $("#divMaxCount").hide();
+                }
+
+            });
+        });
+    });
+
+    $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+    vGroupBuyIntervalId = setInterval(GetRTime, 1000);
+    if ($("#attrtable tr").length <= 0) {
+        $("#attrtable").parent().hide();
+    }
+
+    $(window).scroll(function () {
+        setScrollLoading();
+    });
+    function setScrollLoading() {
+        $("img").scrollLoading();
+        $("iframe").each(function () {
+            if (!$(this).attr("src")) {
+                $(this).attr("src", $(this).attr("data-url"));
+            }
+        });
+    }
+</script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+<script>  
+$(function(){  
+    var imgsurl=[];  
+    var nowurl='';  
+    var imgObj=$(".cd_pro_info img");  
+    for(var i=0;i<imgObj.length;i++){  
+        imgsurl[i]=getFullPath(imgObj.eq(i).attr("data-url"));  
+        imgObj[i].onclick=function(){  
+            nowurl=this.src;  
+            wx.previewImage({  
+                current: nowurl,  
+                urls: imgsurl  
+            });               
+        }  
+    }  
+});  
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<hi:Common_SKUSubmitOrder id="skuSubmitOrder" runat="server" />
+
+

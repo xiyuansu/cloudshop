@@ -1,0 +1,153 @@
+﻿<%<hi:common_header runat="server" skinname="ascx/tags/Skin-Common-Top.ascx" />%>
+<style>
+    /*.windowsdialog {
+    height: 50px !important;
+    color: #444 !important;
+    line-height: 50px !important;
+    text-align: center !important;
+    border: none !important !important;
+    position: fixed !important;
+    z-index: 999 !important;
+    padding:0 100px !important;
+    top:50px !important;
+    left:40% !important;
+    min-width:360px !important;  
+}*/
+    #divfinish a{
+        color: #0094ff;
+    }
+    form{
+        width:1000px;
+        margin:0 auto;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        var isPreSale = $("#hidIsPreSale").val();
+        if (isPreSale == "1") {
+            $("#spanDeposit").show();
+        }
+        else {
+            $("#spanDeposit").hide();
+        }
+        $("#exitLink").on("click", function () {
+            $("#demodiv").css("top", "-50px");
+        });
+    });
+    
+</script>
+<form runat="server" >
+    <div class="demo" id="demodiv" runat="server" visible="false" clientidmode="static">
+        <img class="noImg" src="../images/icon_no.png"/>演示站点，请勿真实购买<a id="exitLink" class="exitLink"><img class="exitImg" src="../images/exit.png"/></a>
+    </div> 
+    <a id="atoPay" target="_blank"></a>
+    <asp:HiddenField ID="hidIspop" runat="server" ClientIDMode="static" />
+    <asp:HiddenField ID="hidIsPreSale" runat="server" ClientIDMode="static" />
+    <input type="hidden" id="hidHasTradePassword" runat="server" value="false" ClientIdMode="static" /><!-- 是否有交易密码 -->
+    <div class="cart_h">
+        <div id="logo"><Hi:Common_Logo ID="Common_Logo1" runat="server" /></div>
+        <div class="cart_step">
+            <ul class="cart_step3">
+                <li class="step-1"><b></b>1.我的购物车</li>
+                <li class="step-2"><b></b>2.填写核对订单信息</li>
+                <li class="step-3" style="color:#7abd54;">3.成功提交订单</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cart_content">
+        <div class="cart_payment">
+            <div class="con">
+                <%<Hi:SmallStatusMessage id="Status" runat="server" Width="200" Visible="False" />%>
+                <div class="title"><b> <img src="/images/cart/successico.png" id="imgPayResult" runat="server" /></b><em id="msgTitle" runat="server">订单提交成功，请您尽快付款！</em> </div>
+                <div class="info" id="divOrderPayInfo" runat="server">
+                    <span>订单号：<%<asp:Literal runat="server" ID="litOrderId" />%></span>
+                    <span id="spanDeposit">
+                        <%<asp:Literal runat="server" ID="litDeposittxt" />%>
+                        <em class="emcolor">
+                            ￥<%<Hi:FormatedMoneyLabel runat="server" ID="litDeposit" />%>
+                        </em>
+                    </span>
+                    <span id="spanTotal">
+                        订单总金额：<em class="emcolor">
+                            ￥<%<Hi:FormatedMoneyLabel runat="server" ID="litOrderPrice" />%>
+                        </em>
+                    </span>
+                    
+                </div>
+
+                <div class="info1" id="promptMsg" runat="server">请您在提交订单后 <em> 1小时内</em> 完成支付，否则订单会自动取消。</div>
+            </div>           
+            <div id="onlinePayPanel" runat="server" class="pay_way skin-flat">
+                <h2>请选择支付方式</h2>
+                <input type="hidden" runat="server" ClientIdMode="static" id="paymentModeId" />
+                <input type="hidden" runat="server" ClientIdMode="static" id="AdvanceId" value="0" />
+                <input type="hidden" runat="server" ClientIdMode="static" id="hidOrderid" value="0" />
+                <%<hi:common_paymentmodelist runat="server" />%>
+                <div class="submit1">                                
+                    <a class="core_order_pay_sub" id="aOrderPay" target="_blank" onclick="return checkPayment();">
+                        立即支付
+                    </a>                           
+                </div>
+            </div>
+            <div id="offlinePayPanel" runat="server" class="pay_way skin-flat">
+                <h2>线下支付帮助</h2>
+                <div class="info">
+                    <asp:Literal id="litOfflinePayContent" runat="server"></asp:Literal>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center;" id="divfinish" runat="server" visible="false">
+            <a href="/" id="defaultLink" runat="server">返回首页</a> | <a href="#" id="userLink" runat="server">会员中心</a> | <a href="#" id="orderLink" runat="server">查看订单</a>
+        </div>
+    </div>
+
+    <div class="login_tan hide" id="loginForBuy" style="height:200px">
+        <div class="dialog_title">
+            <div class="dialog_title_l"><span>交易密码</span></div>
+            <div class="dialog_title_r" id="imgCloseLogin"></div>
+        </div>
+        <div class="dialog_cartitem">
+            <input type="text" name="textfield2" id="textfieldpassword" placeholder="输入交易密码" class="login_tan_input2" />
+            <div class="btnbar">
+                <input type="button" name="button" id="btnLoginAndBuy" value="支 付 " class="login_tan_input3" />
+            </div>
+            <div class="notice_text" id="pwderrnotice" style="display:none;"><a href="/User/ForgotTradePassword" target="_blank">忘记交易密码了，点击重置交易密码。</a></div>
+        </div>
+    </div>
+    <div class="login_tan hide" id="loginToPay" style="height:200px">
+        <div class="dialog_title">
+            <div class="dialog_title_l"><span>网上支付提示</span></div>
+            <div class="dialog_title_r" id="imgCloseLogin"></div>
+        </div>
+        <div class="dialog_cartitem">
+            <div class="text">银行支付系统可能会出现延时，请耐心等待，支付完成后请根据支付情况点击下面按钮。</div>
+
+            <div class="btnbar">
+                <input type="button" name="button" id="btnLoginAndBuy2" value="支付遇到问题 " class="btn1" onclick="closePayPop()" />
+                <input type="button" name="button" id="btnLoginAndBuy3" value="支付成功 " class="btn2" onclick="closePayPop()" />
+            </div>
+        </div>
+    </div>
+    <div class="user_order">
+        <div id="divshow" class="dialog">
+            <div class="dialog_title">
+                <div class="dialog_title_l"><span>付款失败</span></div>
+                <div class="dialog_title_r"> </div>
+            </div>
+            <div class="dialog_cartitem">
+                <p><span id="spcounttype">您来晚了，订单中有商品库存不足请联系卖家处理。</span></p>
+                <div class="btnbar">
+                    <p> <a class="btn-continue">确定</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal_qt" id="paymodel" style="display:none;"></div>
+
+
+    <script type="text/javascript" src="../../Utility/finishorder.js?v=3.0"></script>
+ 
+</form>
+ <%<hi:common_footer runat="server"  skinname="ascx/tags/Skin-Common_Bottom.ascx" />%>
+

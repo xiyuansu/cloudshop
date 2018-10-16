@@ -1,0 +1,145 @@
+﻿<hi:common_wapheader runat="server" />
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<style>
+    .text-center {
+        text-align: center;
+        padding: 2rem 0;
+        display: none;
+    }
+
+    .listtitle {
+        height: 1.5rem;
+        line-height: 1.5rem;
+        font-size: 0.7rem;
+    }
+
+
+    .main {
+        background: #F5F5F5;
+        padding: 0;
+    }
+
+</style>
+
+<p class="text-center" id="empty">
+    没有找到相关文章
+</p>
+<div class="main" id="articlelistContainer">
+    <div class="form-search" style="display:none;">
+        <input id="txtKeywords" type="text" class="form-control search-query">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-warning" data-type="last" onclick="searchs()">搜索</button>
+        </span>
+    </div>
+    <script src="/script/iscroll.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            var categoryId = parseInt(getParam("CategoryId"));
+            if (isNaN(categoryId) || categoryId <= 0) {
+                $("#wrapper ul li").eq(0).addClass("current");
+            }
+            //    if ($("#wrapper ul li.current").length > 0) {
+            //        var current_li = $("#wrapper ul li.current").prop("outerHTML");//将当前分类移动到第一个
+            //        $("#wrapper ul li.current").remove();
+            //        $("#wrapper ul").prepend(current_li);
+            //    }
+        })
+        var myscroll;
+        function loaded() {
+            myscroll = new iScroll("wrapper", {
+                hScrollbar: false
+            });
+            myscroll.scrollToElement('.current', 500);
+        }
+        window.addEventListener("DOMContentLoaded", loaded, false);
+    </script>
+    <div id="wrapper">
+
+        <ul><li><a href="Articles">全部</a></li><Hi:WapTemplatedRepeater id="rpt_ArticleCategory" runat="server" templatefile="/Tags/skin-Common_ArticleListCategory.ascx" /></ul>
+    </div>
+
+    <div id="category" style="display:none" class="listtitle">【<a href="ArticleCategory.aspx">文章分类</a>】&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a href="#" id="category_link">文章搜索</a></div>
+    <div class="articlelist clearfix" id="articlelist">
+        <ul>
+            <hi:WapTemplatedRepeater id="rptArticles" templatefile="/Tags/skin-Common_Articles.ascx"
+                                     runat="server" />
+        </ul>
+    </div>
+</div>
+<div id="pager">
+</div>
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static">
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtCategoryName" />
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtCategoryId" />
+<hi:common_wapfooter runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        var keyWord = getParam("keyword");
+        if (keyWord.length > 0) {
+            $("#txtKeywords").val(unescape(unescape(keyWord)));
+        }
+        var categoryId = parseInt($("#txtCategoryId").val());
+        if (isNaN(categoryId)) categoryId = 0;
+        var categoryName = $("#txtCategoryName").val();
+        if (categoryId == 0) categoryName = "文章搜索";
+        $("#category_link").html(categoryName);
+        $("#category_link").attr("href", "Articles.aspx?categoryId=" + categoryId);
+        if ($('#articlelist ul li').length == 0) {
+            $('#articlelistContainer').addClass('hide');
+            $('#empty').removeClass('hide');
+        }
+
+        var sort = getParam('sort');
+        var order = getParam('order');
+        if (sort && order) {
+            var selectedLink = $('.sort a[name="' + sort + '"]');
+            if (order == 'desc')
+                selectedLink.find('div').addClass('down');
+            else
+                selectedLink.find('div').addClass('up');
+        }
+
+        var sortLink = $('.sort a[href="#"]');
+        var categoryId = getParam('categoryId');
+
+
+
+
+        $.each(sortLink, function (i, link) {
+            link = $(link);
+            url = 'Articles.aspx?categoryId=' + categoryId + '&keyWord=' + escape(keyWords);
+            if (i > 0) {//第一个为默认面，不设置排序
+                url += '&sort=' + link.attr('name');
+                if (link.find('div.up').length > 0)
+                    url += '&order=desc';
+                else
+                    url += '&order=asc';
+            }
+            link.attr('href', url);
+        });
+
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+
+    });
+    function searchs() {
+
+        var key = $("#txtKeywords").val();
+        var categoryId = getParam('categoryId');
+        var url = "Articles?categoryId=" + categoryId + "&keyWord=" + escape(key);
+
+        window.location.href = url;
+    }
+    //隐藏底部菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+
+
+</script>
+<script type="text/javascript" src="/Utility/wxShare.js?v=3.0"></script>

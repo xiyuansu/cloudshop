@@ -1,0 +1,54 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form runat="server">
+    <div class="hyzxmain">
+        <div class="hyzxconty">当前位置><span><%<hi:siteurl urlname="home" runat="server">首页</hi:siteurl>%></span>><span><%<hi:siteurl urlname="user_UserDefault" runat="server">会员中心</hi:siteurl>%></span>><span><a href="#">推广有礼</a></span></div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <div class="dingdan_box1">分享赚奖励</div>
+                    <div class="tg_step">
+                        <img src="/images/tg_step.jpg" runat="server" id="imgDeduct" />
+                    </div>
+                    <div class="tg_lianjie">
+                       <span>推广链接：
+                           <span id="spanLitUserLink"><%<asp:Literal ID="litUserLink" runat="server"></asp:Literal>%></span>
+                           <input id="btnCopy" type="button" value="复制" onclick="success()" data-clipboard-target="spanLitUserLink" />
+                        </span>
+                        <span>推广二维码：<img id="imgQRCode" runat="server" width="175" height="175" /></span>
+                    </div>
+                    <div class="tg_youli_con">
+                        <div class="youli1">活动规则</div>
+                        <p>
+                            通过您分享的链接完成注册的会员，后续消费您都能获得消费金额的&nbsp;<asp:Literal Text="0" Id="litSubMemberDeduct" runat="server" />&nbsp;作为奖励<br />
+                         </p>
+                        <p id="MiltDeduct" runat="server">
+                            您所邀请的会员，后续再邀请了其他会员，您能获得这部分会员消费金额的&nbsp;<asp:Literal Text="0" Id="litSecondLevelDeduct" runat="server" />&nbsp;作为奖励<br />
+                            您的下级会员所发展的会员，后续邀请了其他会员，您能获得这部分会员消费金额的&nbsp;<asp:Literal Text="0" Id="litThreeLevelDeduct" runat="server" />&nbsp;作为奖励<br />
+                        </p>
+                        <p>    奖励自动结算，一键提现，自动转入您的微信零钱包或支付宝钱包<br />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/Utility/ZeroClipboard.min.js"></script>
+    <script type="text/javascript">
+        var copy = new ZeroClipboard($("#btnCopy"), {
+            moviePath: "/Utility/ZeroClipboard.swf"
+        });
+        function success() {
+            alert("复制成功，复制内容为：" + $("#spanLitUserLink").text());
+        }
+    </script>
+
+    <div class="hyzxfooter"></div>
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

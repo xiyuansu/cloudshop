@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AF59CC0E-5801-4DB4-BF5A-9FDA1659FA1D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hidistro.SaleSystem</RootNamespace>
+    <AssemblyName>Hidistro.SaleSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="cn.jpush.api">
+      <HintPath>..\dll\cn.jpush.api.dll</HintPath>
+    </Reference>
+    <Reference Include="GetuiServerApiSDK">
+      <HintPath>..\dll\GetuiServerApiSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\dll\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\dll\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin">
+      <HintPath>..\dll\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP">
+      <HintPath>..\dll\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Catalog\ProductBrowser.cs" />
+    <Compile Include="Comments\ArticleHelper.cs" />
+    <Compile Include="Comments\CommentBrowser.cs" />
+    <Compile Include="Comments\NoticeHelper.cs" />
+    <Compile Include="Comments\ProductCommentHelper.cs" />
+    <Compile Include="Commodities\CatalogHelper.cs" />
+    <Compile Include="Commodities\ProductHelper.cs" />
+    <Compile Include="Commodities\ProductTypeHelper.cs" />
+    <Compile Include="Depot\DepotHelper.cs" />
+    <Compile Include="Depot\HiPOSCheckAttribute.cs" />
+    <Compile Include="Depot\MarketingImagesHelper.cs" />
+    <Compile Include="Depot\StoreBalanceHelper.cs" />
+    <Compile Include="Depot\StoreListHelper.cs" />
+    <Compile Include="Depot\StoresHelper.cs" />
+    <Compile Include="Entities\Commodities\BrowsedProductQueue.cs" />
+    <Compile Include="MapHelper.cs" />
+    <Compile Include="Members\MemberHelper.cs" />
+    <Compile Include="Members\OpenIdHelper.cs" />
+    <Compile Include="Member\MemberProcessor.cs" />
+    <Compile Include="Member\MemberTagHelper.cs" />
+    <Compile Include="Member\TradeHelper.cs" />
+    <Compile Include="OutpayHelper.cs" />
+    <Compile Include="Promotions\ActivityHelper.cs" />
+    <Compile Include="Promotions\CombinationBuyHelper.cs" />
+    <Compile Include="Promotions\CouponHelper.cs" />
+    <Compile Include="Promotions\GiftHelper.cs" />
+    <Compile Include="Promotions\ProductPreSaleHelper.cs" />
+    <Compile Include="Promotions\PromoteHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\OrderHelper.cs" />
+    <Compile Include="Sales\SalesHelper.cs" />
+    <Compile Include="Shopping\ShoppingCartProcessor.cs" />
+    <Compile Include="Shopping\ShoppingProcessor.cs" />
+    <Compile Include="Statistics\ProductStatisticsHelper.cs" />
+    <Compile Include="Statistics\TrafficHelper.cs" />
+    <Compile Include="Statistics\TransactionAnalysisHelper.cs" />
+    <Compile Include="Statistics\WXFansHelper.cs" />
+    <Compile Include="StoreActivityHelper.cs" />
+    <Compile Include="StoreMarktingHelper.cs" />
+    <Compile Include="StoreTagHelper.cs" />
+    <Compile Include="Store\AdministerCheckAttribute.cs" />
+    <Compile Include="Store\AliOHHelper.cs" />
+    <Compile Include="Store\APPHelper.cs" />
+    <Compile Include="Store\APPProvider.cs" />
+    <Compile Include="Store\DadaHelper.cs" />
+    <Compile Include="Store\EventLogs.cs" />
+    <Compile Include="Store\GalleryHelper.cs" />
+    <Compile Include="Store\GalleryProvider.cs" />
+    <Compile Include="Store\HiPOSHelper.cs" />
+    <Compile Include="Store\JDHelper.cs" />
+    <Compile Include="Store\ManagerHelper.cs" />
+    <Compile Include="Store\OnlineServiceHelper.cs" />
+    <Compile Include="Store\PhotoListOrder.cs" />
+    <Compile Include="Store\PrivilegeCheckAttribute.cs" />
+    <Compile Include="Store\ReplyHelper.cs" />
+    <Compile Include="Store\ShopMenuHelper.cs" />
+    <Compile Include="Store\StoreHelper.cs" />
+    <Compile Include="Store\VShopHelper.cs" />
+    <Compile Include="Store\WeiXinCheckAttribute.cs" />
+    <Compile Include="Store\WXStoreHelper.cs" />
+    <Compile Include="Supplier\BalanceHelper.cs" />
+    <Compile Include="Supplier\BalanceOrderHelper.cs" />
+    <Compile Include="Supplier\SupplierHelper.cs" />
+    <Compile Include="Vshop\AddtemplateJsonResult.cs" />
+    <Compile Include="Vshop\GetIndustryJsonResult.cs" />
+    <Compile Include="Vshop\GetIndustry_Item.cs" />
+    <Compile Include="Vshop\GetPrivateTemplate_TemplateItem.cs" />
+    <Compile Include="Vshop\IndustryCode.cs" />
+    <Compile Include="Vshop\OperationResult.cs" />
+    <Compile Include="Vshop\OperationResultType.cs" />
+    <Compile Include="Vshop\PrivateTemplateJsonResult.cs" />
+    <Compile Include="Vshop\VshopBrowser.cs" />
+    <Compile Include="Vshop\WeiXinRedEnvelopeProcessor.cs" />
+    <Compile Include="Vshop\WeiXinTemplateProcessor.cs" />
+    <Compile Include="Vshop\WxTemplateHelp.cs" />
+    <Compile Include="Vshop\WxtemplateId.cs" />
+    <Compile Include="Vshop\WxTemplateMessageResult.cs" />
+    <Compile Include="WeChartApplet\WeChartAppletHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hidistro.Context\Hidistro.Context.csproj">
+      <Project>{fe796bf0-cefd-4d7b-87d4-768a72f42bfa}</Project>
+      <Name>Hidistro.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Core\Hidistro.Core.csproj">
+      <Project>{08764b0b-caa2-4f97-8b26-67b2ec14825d}</Project>
+      <Name>Hidistro.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Entities\Hidistro.Entities.csproj">
+      <Project>{0a26b413-4cb7-4218-bfe9-674e5d0d0713}</Project>
+      <Name>Hidistro.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Messages\Hidistro.Messages.csproj">
+      <Project>{e1d9828b-bcee-476e-9e30-6f3cbda55bef}</Project>
+      <Name>Hidistro.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.SqlDal\Hidistro.SqlDal.csproj">
+      <Project>{e749357f-f0c5-47a3-8e00-e23fc13cc1c7}</Project>
+      <Name>Hidistro.SqlDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hishop.API.HiPOS\Hishop.API.HiPOS.csproj">
+      <Project>{813defe5-8b6a-4b1d-8798-476bb94cb104}</Project>
+      <Name>Hishop.API.HiPOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HiShop.API.Setting\HiShop.API.Setting.csproj">
+      <Project>{01e0e2a7-45ee-4d24-b4e7-0c316292b118}</Project>
+      <Name>HiShop.API.Setting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hishop.Plugins\Hishop.Plugins.csproj">
+      <Project>{b3b87245-c163-4559-a16c-cb86d684f828}</Project>
+      <Name>Hishop.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hishop.Weixin.Pay\Hishop.Weixin.Pay.csproj">
+      <Project>{4174a5bd-f6ab-43ab-be45-ea194b02aa1f}</Project>
+      <Name>Hishop.Weixin.Pay</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

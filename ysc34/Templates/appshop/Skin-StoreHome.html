@@ -1,0 +1,290 @@
+﻿<hi:common_appheader runat="server" />
+<link rel="stylesheet" href="/style/css.css" type="text/css" />
+<style>
+    .map_popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+        -moz-transition: opacity .3s 0s, visibility 0s .3s;
+        transition: opacity .3s 0s, visibility 0s .3s;
+    }
+
+        .map_popup .map_popup_container {
+            padding: 0 0.375rem;
+        }
+
+        .map_popup.is-visible {
+            opacity: 1;
+            visibility: visible;
+            -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+            -moz-transition: opacity .3s 0s, visibility 0s 0s;
+            transition: opacity .3s 0s, visibility 0s 0s;
+        }
+
+    .pop_close {
+        font-size: 1.2rem;
+    }
+
+    .att-popup-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgb(255,255,255);
+        box-shadow: 0 0 20px rgba(0,0,0,.2);
+        -webkit-transform: translateY(110%);
+        -moz-transform: translateY(110%);
+        -ms-transform: translateY(110%);
+        -o-transform: translateY(110%);
+        transform: translateY(110%);
+        -webkit-backface-visibility: hidden;
+        -webkit-transition-property: -webkit-transform;
+        -moz-transition-property: -moz-transform;
+        transition-property: transform;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+    }
+
+    .map_title {
+        padding: 0.5rem 0.75rem;
+    }
+
+   .pop_close {
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+        background: url(/images/close.png);
+        background-size: 100% 100%;
+        margin-right: 0.75rem;
+    }
+
+    .map_title .pop_close {
+        float: right;
+    }
+
+    .opentime {
+        position: absolute;
+        display: block;
+        width: 100%;
+        text-align: right;
+        padding-right: 18px;
+        top: 0px;
+        padding-top: 2px;
+        color: #ffffff;
+        background: url(../images/bg_top.png) top no-repeat;
+        background-size: 100% 100%;
+    }
+</style>
+<!--<div class="mtop-n"><em><a href="#">返回</a></em><span>等一个人咖啡</span><i></i></div>-->
+<div class="widtht pb50">
+    <div class="storeH">
+        <div class="msearch plr11 ptb13">
+            <asp:literal runat="server" id="litStoreName2" />
+            <!--<input type="text" name="keyWord" id="" value="" placeholder="湖南文化大厦">-->
+            <span>
+                <em><a href="javascript:onMapClick()">查看地图</a></em>
+                <button type="button" value="" class="sbutton" onclick="onMapClick()"></button>
+            </span>
+        </div>
+
+        <div class="stores plr11 ptb13">
+            <div class="pic"><img id="storeLogo" runat="server" width="160" height="160" /></div>
+            <div class="intro">
+                <div class="info">
+                    <h3><asp:literal runat="server" id="litStoreName" /></h3>
+                    <div class="time">营业时间: <asp:literal runat="server" id="litOpenDate" /></div>
+                    <div class="price"><asp:literal runat="server" id="litStoreDelive" /></div>
+                    <div class="youhui">
+                        <span class="jian">满200减50（不与其他活动同时进行）</span>
+                    </div>
+                </div>
+                <div class="huod-b"><a href="#">5个活动></a></div>
+            </div>
+
+
+        </div>
+
+        <div class="members_nav2 plr11 ptb13 mb12">
+            <form onsubmit="searchs(escape(($(this).find(':text').eq(0).val()))); return false;">
+                <div class="memberss">
+                    <section class="members_search">
+                        <input type="text" name="keyWord" id="" value="" placeholder="请输入商品名称">
+                        <button type="button" value="" onclick="searchs(escape($($(this).prev()).val()))"></button>
+                    </section>
+                </div>
+            </form>
+            <ul>
+                <Hi:WapTemplatedRepeater ID="rp_markting" runat="server" TemplateFile="Tags/skin-Common_StoreMarkting.ascx" />
+            </ul>
+        </div>
+
+        <div id="floorList">
+        </div>
+
+    </div>
+    <div id="divProductMore" style="text-align:center; padding: 0.125rem 0.375rem 0.125rem 0.375rem;" onclick="loadFloorData()">
+        加载更多...
+    </div>
+</div>
+
+<div class="map_popup">
+    <div class="att-popup-container" style="height:100%;">
+        <div class="map_title">
+            查看地图
+            <a href="javascript:;" class="pop_close icon-icon_close_48"></a>
+        </div>
+        <div id="container" style="height: 100%;" class="map_popup_container"></div>
+    </div>
+</div>
+<input type="hidden" id="hidLatitude" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidLongitude" runat="server" ClientIDMode="Static" />
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<script type="text/javascript" charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<script>
+    var pageSize = 2;
+    var pageIndex = 1;
+    var totalCount = 0;
+    var refreshIndex = 1;
+    var storeId = "";
+
+    $(document).ready(function () {
+        storeId = GetUrlValue("storeId");
+        loadFloorData();
+        $('.mzbtjc li').each(function (index, item) {
+            var li = $(item);
+            if (index % 3 === 2) {
+                li.css('margin-right', 0);
+            }
+        });
+
+        $('.pop_close').on('click', function () {
+            closeMap();
+        });
+
+        $("#hdselect").click(function () {
+            if ($(".hdselectcc").css("display") == "none") {
+                $(".hdselectcc").show();
+                $("#hdselect").css({ "background": "url(images/main/more2.png) no-repeat right center", "background-size": "7px 4px" });
+            } else {
+                $(".hdselectcc").hide();
+                $("#hdselect").css({ "background": "url(images/main/more3.png) no-repeat right center", "background-size": "7px 4px" })
+
+            }
+        });
+    });
+
+    //加载门店楼层
+    function loadFloorData() {
+        if (storeId == "") return;
+        refreshIndex++;//避免刷新重复数据
+        if (refreshIndex - pageIndex>1) return;
+        $.post('../API/DepotHandler.ashx?action=GetStoreFloors&PageSize=' + pageSize + '&PageIndex=' + pageIndex + '&storeId=' + storeId, function (result) {
+            totalCount = result.Total;
+            if (result.Models.length > 0) {
+                for (var i = 0; i < result.Models.length; i++) {
+                    var n = result.Models[i];
+                    var userhtm = getProductHtml(n);
+                    $("#floorList").append(userhtm);
+                }
+                pageIndex = pageIndex + 1;
+                refreshIndex = pageIndex;
+            }
+            var listCount = $("#floorList .storediv").length;
+            if (totalCount == listCount) {
+                $("#divProductMore").html("没有更多商品了");
+            }
+        });
+    }
+
+    function getProductHtml(obj) {
+        var arr = new Array();
+        arr.push('<div class="storediv mb12">');
+        arr.push('<div class="ptb13 mzbtjh"><h2 class="mh2"><p><em>' + obj.FloorName + '</em></p></h2></div>');
+        if (obj.ImageId > 0 && obj.ImageUrl!=null) {
+            arr.push('<div class="sad plr11"><a href="StoreMarketing?StoreId=' + storeId + '&ImageId=' + obj.ImageId + '"><img src="' + obj.ImageUrl + '" width="700" height="200"></a></div>');
+        }
+        arr.push('<div class="ptb13 plr11 mzbtj">');
+        arr.push('<div class="mzbtjc">');
+        if (obj.Products.length > 0) {
+            arr.push('<ul>');
+            for (var i = 0; i < obj.Products.length; i++) {
+                arr.push('<li><div><a href="StoreProductDetails.aspx?StoreId=' + storeId + '&ProductId=' + obj.Products[i].ProductId + '"><img src="' + obj.Products[i].ProductImage + '" width="220" height="220"></a></div>');
+                arr.push('<div class="name"><a href="StoreProductDetails.aspx?StoreId=' + storeId + '&ProductId=' + obj.Products[i].ProductId + '">' + obj.Products[i].ProductName + '</a></div>');
+                arr.push('<div><strong><em>￥</em>' + obj.Products[i].Price + '</strong><i></i></div></li>');
+            }
+            arr.push('</ul>');
+        }
+        arr.push('</div></div></div>');
+        return arr.join("");
+    }
+
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    function scrollLoadData() {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            loadFloorData();
+        }
+    }
+    $(window).scroll(function () {
+        scrollLoadData();
+    });
+
+    //获取url参数的值
+    function GetUrlValue(name) {
+        url = window.document.location.href;
+        var re = new RegExp("(\\\?|&)" + name + "=([^&]+)(&|$)", "i");
+        var m = url.match(re);
+        if (m)
+            return m[2];
+        else
+            return '';
+    }
+
+    function closeMap() {
+        $('.map_popup').removeClass('is-visible');
+    }
+    function onMapClick() {
+        $('.map_popup').addClass('is-visible');
+        getMap();
+    }
+    function getMap() {
+        var longitude = parseFloat($("#hidLongitude").val());
+        var latitude = parseFloat($("#hidLatitude").val());
+        if (longitude == "" || latitude == "") return;
+        var center = new qq.maps.LatLng(latitude, longitude);
+        var map = new qq.maps.Map(document.getElementById('container'), {
+            center: center,
+            zoom: 18,
+            draggable: true,
+            scrollwheel: true
+        });
+        var marker = new qq.maps.Marker({
+            position: center,
+            map: map
+        });
+    }
+    function searchs(v) {
+        var type = GetAgentType();
+        // 设置标题
+        if (type == 2)
+            window.HiCmd.webShowProductList();
+        else if (type == 1)
+            loadIframeURL("hishop://webShowProductList/null/");
+        //var storeId = getParam('storeId');
+        //var url = "ProductList?storeId=" + storeId + "&keyWord=" + v; window.location.href = url;
+    }
+</script>
+<script src="../Utility/LocateAddress.js"></script>
+<script src="../Utility/qqmapapi.helper.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<hi:common_appfooter runat="server" />

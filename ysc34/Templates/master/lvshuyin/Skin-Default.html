@@ -1,0 +1,109 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/lvshuyin/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/lvshuyin/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+ 
+<div class="main" id="main">
+
+
+
+ 
+<div class="quanbufenlei">全<br>部<br>商<br>品<br>分<br>类</div>
+<div class="mainfenlei">
+<div class="mainfenleil"><div class="my_left_category"><hi:common_categorieswithwindow id="Common_CategoriesWithWindow1" maxcnum="11" runat="server"  SkinName="HomeTags/Skin-CategoriesWithWindow1.ascx"></hi:common_categorieswithwindow></div></div>
+<script>
+ //$(function(){
+						    $(".h2_cat").each(function(){
+					        $(this).hover(function(){
+					           if($(this).hasClass('active_cat')){
+					                $(this).removeClass("active_cat");
+					            }else{
+					                $(this).addClass('active_cat');
+					            }
+					        });
+					    });
+						//})
+</script>
+<script>
+$(function(){$(".my_left_cat_list:even").addClass("shenshe")})
+</script>
+<div class="mainfenleir"><script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+       <div> <hi:common_slidead runat="server" adid="3" isdelayedloading="true"></hi:common_slidead></div>
+        <div class="clear"> </div>
+        <div class="shangchenggg"><em>商城公告：</em> <ul>
+                      <marquee scrollamount="2" width="850" onmouseover="this.stop()" onmouseout="this.start()"> <%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="20" />%></marquee>
+                   </ul> </div>
+        </div>
+</div>
+<div class="clear"> </div>
+
+   <div class="w1200 o-hidden pt20">
+   <div class="goodstop">
+   <hi:common_subjecttitle runat="server" commentid="3"></hi:common_subjecttitle><hi:common_subjectkeyword runat="server" commentid="4"></hi:common_subjectkeyword>
+           <hi:common_subjectmorelink runat="server" commentid="5"></hi:common_subjectmorelink>
+           </div>
+  
+    <div>
+    
+    <hi:common_customad runat="server" adid="4"></hi:common_customad><hi:common_subjectproduct_simple runat="server" subjectid="2" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+   </div>
+
+
+
+
+
+
+
+ <div class="w1200 o-hidden pt20">
+    
+    <hi:common_customad runat="server" adid="5"></hi:common_customad>
+    
+ 
+</div>
+  
+
+
+
+
+
+  
+ 
+</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

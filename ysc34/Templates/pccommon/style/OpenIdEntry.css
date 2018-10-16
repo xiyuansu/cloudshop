@@ -1,0 +1,70 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, img, fieldset, legend, input, textarea, p, blockquote, th, td, a { margin: 0; padding: 0; text-decoration: none; list-style: none; font-family: Arial,Verdana,"微软雅黑"; }
+.wrapper { width: 1000px; margin: 0 auto; padding-top: 50px; color: #333; overflow: hidden; }
+    .wrapper .login01 { width: 500px; float: left; }
+    .wrapper .login02 { float: right; width: 450px; }
+    .wrapper .login01 h2 { font-size: 20px; }
+    .wrapper .login02 h4 { font-size: 14px; float: right; font-weight: normal; }
+    .wrapper .login01 ul { width: 100%; height: 460px; margin-top: 50px; padding: 20px; border-right: 1px solid #DDD; }
+        .wrapper .login01 ul li { width: 100%; float: left; }
+    .wrapper .login02 ul { width: 100%; height: 460px; margin-top: 78px; padding: 20px; }
+        .wrapper .login01 ul .title, .wrapper .login02 ul .title { font-size: 18px; }
+    .wrapper .login01 ul li { width: 100%; float: left; }
+    .wrapper .login02 ul li { height: 70px; line-height: 70px; }
+        .wrapper .login01 ul li span, .wrapper .login02 ul li span { display: inline-block; width: 110px; text-align: right; font-size: 14px; }
+
+        .wrapper .login01 ul li input, .wrapper .login02 ul li input { width: 200px; height: 35px; line-height: 35px; border: 1px solid #DDD; }
+    .wrapper .login01 ul .code input { width: 125px; margin-right: 20px; }
+    .wrapper .login01 ul .code img { position: relative; top: 4px; }
+    .wrapper .login01 ul .code i { width: 100px; font-size: 12px; float: right; }
+    .wrapper .login01 ul i, .wrapper .login01 ul .check { font-size: 12px; font-style: normal; padding-left: 10px; float: left; margin: 10px 0 0 0; }
+
+        .wrapper .login01 ul .check input { width: 10px; height: 10px; }
+
+    .wrapper ul .btn { height: 40px; border: none; background-color: #FF2D2E; margin-left: 100px; font-size: 14px; font-weight: bold; color: #fff; cursor: pointer; }
+    .wrapper .login02 ul .btn { width: 152px; height: 36px; }
+    .wrapper .login02 ul .tips { padding-left: 80px; font-size: 12px; position: relative; top: -20px; color: #8b8b8b; }
+    .wrapper .login01 .check a { color: #FF2D2E; }
+    .wrapper .login02 h4 a { color: #8b8b8b; text-decoration: underline; }
+    .wrapper .login02 i a { color: #333; font-size: 14px; font-style: normal; padding-left: 20px; }
+    .wrapper ul .tip_s { margin-top: 10px; width: 350px; padding-left: 110px; position: relative; }
+
+        .wrapper ul .tip_s .zc_tishi { display: none; }
+
+        .wrapper ul .tip_s span { display: inline-block; float: left; width: 350px !important; text-align: left !important; line-height: 30px !important; font-size: 12px !important; }
+        .wrapper ul .tip_s i { width: 10px; float: left; }
+
+
+.strengthA em { float: left !important; }
+
+.strengthB em { float: left !important; }
+
+.strengthC em { float: left !important; }
+
+.strengthA b { float: left !important; height: 18px !important; width: 104px !important; background: url(../images/pwdstrength.gif) no-repeat 0px 5px !important; }
+
+.strengthB b { float: left !important; height: 13px !important; margin-top: 5px !important; width: 104px !important; background: url(../images/pwdstrength.gif) no-repeat 0 -13px !important; }
+
+.strengthC b { float: left !important; height: 13px !important; width: 104px !important; margin-top: 5px !important; background: url(../images/pwdstrength.gif) no-repeat 0 -26px !important; }
+.code, #txtNumber, #txtPhoneCode, .yanzheng_input3, #normaldiv, .code span { float: left; }
+#openIdEntry_chkMan, #openIdEntry_chkWoman { width: auto; height: auto; }
+#openIdEntry_divSex label { position: relative; margin-top: -5px; }
+
+.phonebox { width: 98%; border: 1px solid #ccc; height: 600px; }
+    .phonebox ul.tab { width: 96%; border-bottom: 1px solid #ccc; margin: 0px; padding: 0px; height: 60px; margin: 20px 2%; }
+        .phonebox ul.tab li { width: 50%; float: left; display: block; margin: 0px; padding: 0px; line-height: 60px; }
+            .phonebox ul.tab li a { float: right; display: block; margin-right: 20px; width: auto; font-size: 20px; }
+                .phonebox ul.tab li a:hover, .phonebox ul.tab li a.hover { border-bottom: 1px solid #FF2D2E;color:#FF2D2E; }
+                .phonebox ul.tab li a.right { float: left; display: block; margin-left: 20px; }
+
+    .phonebox .bindbox { width: 90%; margin: 50px 5% 0 5%; border: 1px solid #ccc; height: 450px; }
+    .phonebox h2 { width: 100%; height: 50px; margin: 0 0 16px 0; padding: 0; line-height: 50px; display: block; background: #eee; border-bottom: 1px solid #ccc; font-size: 16px; text-indent: 30px; color: #666; font-weight: normal; }
+.notice { width: 100%; text-align: center; color: red; line-height: 24px; }
+
+.bindbox ul { width: 100%; margin: 0px; padding: 0px; }
+    .bindbox ul li { height: 30px; line-height: 30px; margin: 20px 0px; }
+        .bindbox ul li span { width: 42%; float: left; text-align: right; font-size: 18px; }
+        .bindbox ul li input { height: 24px; width: 180px; }
+            .bindbox ul li input.verifycode { text-align: center; background: #fe5722; color: #fff; cursor: pointer; border: none; font-size: 13px; width: 120px; height: 28px; }
+        .bindbox ul li.btnoper { width: 100%; text-align: center; }
+            .bindbox ul li.btnoper input { height: 40px; border: none;width:300px; background-color: #FF2D2E; /* margin-left: 100px; */ font-size: 14px; font-weight: bold; color: #fff; cursor: pointer; }
+             .bindbox ul li input.chkagree{width:40px;margin-left:32%;}

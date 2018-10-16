@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<companys app_key="b70c35fb915c4df180b35b09d37bd05b" appSecret="4fbb5641bbf299c80fcf6837df485062">
+  <company name="顺丰快递" Kuaidi100Code="SF" TaobaoCode="SF" JDCode="467" CloseStatus="1" />
+  <company name="EMS" Kuaidi100Code="EMS" TaobaoCode="EMS" JDCode="465" CloseStatus="1" />
+  <company name="联昊通物流" Kuaidi100Code="LHT" TaobaoCode="LHT" JDCode="" CloseStatus="1" />
+  <company name="全峰快递" Kuaidi100Code="QFKD" TaobaoCode="QFKD" JDCode="2016" CloseStatus="0" />
+  <company name="全一快递" Kuaidi100Code="UAPEX" TaobaoCode="UAPEX" JDCode="2100" CloseStatus="0" />
+  <company name="圆通速递" Kuaidi100Code="YTO" TaobaoCode="YTO" JDCode="463" CloseStatus="0" />
+  <company name="中通速递" Kuaidi100Code="ZTO" TaobaoCode="ZTO" JDCode="1499" CloseStatus="1" />
+  <company name="宅急送" Kuaidi100Code="ZJS" TaobaoCode="ZJS" JDCode="1409" CloseStatus="0" />
+  <company name="韵达快运" Kuaidi100Code="YD" TaobaoCode="YD" JDCode="1327" CloseStatus="0" />
+  <company name="海航天天快递" Kuaidi100Code="HHTT" TaobaoCode="HHTT" JDCode="2009" CloseStatus="0" />
+  <company name="联邦快递" Kuaidi100Code="FEDEX" TaobaoCode="FEDEX" JDCode="2096" CloseStatus="0" />
+  <company name="汇通快运" Kuaidi100Code="HTKY" TaobaoCode="HTKY" JDCode="1748" CloseStatus="0" />
+  <company name="德邦物流" Kuaidi100Code="DBL" TaobaoCode="DBL" JDCode="2130" CloseStatus="0" />
+  <company name="中铁快运" Kuaidi100Code="ZTKY" TaobaoCode="ZTKY" JDCode="5419" CloseStatus="0" />
+  <company name="CCES" Kuaidi100Code="CCES" TaobaoCode="CCES" JDCode="DSF" CloseStatus="0" />
+  <company name="申通物流" Kuaidi100Code="STO" TaobaoCode="STO" JDCode="470" CloseStatus="0" />
+  <company name="龙邦物流" Kuaidi100Code="LB" TaobaoCode="LB" JDCode="471" CloseStatus="0" />
+  <company name="新邦物流" Kuaidi100Code="XBWL" TaobaoCode="XBWL" JDCode="2461" CloseStatus="0" />
+  <company name="港中能达" Kuaidi100Code="NEDA" TaobaoCode="NEDA" JDCode="" CloseStatus="0" />
+  <company name="优速物流" Kuaidi100Code="UC" TaobaoCode="UC" JDCode="1747" CloseStatus="0" />
+  <company name="全日通快递" Kuaidi100Code="QRT" TaobaoCode="QRT" JDCode="" CloseStatus="0" />
+  <company name="邮政平邮" Kuaidi100Code="YZPY" TaobaoCode="YZPY" JDCode="2170" CloseStatus="0" />
+  <company name="亚风" Kuaidi100Code="YFSD" TaobaoCode="YFSD" JDCode="323141" CloseStatus="0" />
+  <company name="大田物流" Kuaidi100Code="DTWL" TaobaoCode="DTWL" JDCode="" CloseStatus="0" />
+  <company name="123" Kuaidi100Code="dfs" TaobaoCode="dw" JDCode="ds" CloseStatus="0" />
+  <company name="天天快递" Kuaidi100Code="002" TaobaoCode="001" JDCode="001" CloseStatus="0" />
+  <company name="日日快递" Kuaidi100Code="00230" TaobaoCode="00230" JDCode="000" CloseStatus="0" />
+  <company name="日日快递2" Kuaidi100Code="1" TaobaoCode="2" JDCode="3" CloseStatus="0" />
+  <company name="dsqd" Kuaidi100Code="dwsd" TaobaoCode="dsa" JDCode="dw" CloseStatus="0" />
+  <company name="ds" Kuaidi100Code="fds" TaobaoCode="ds" JDCode="ds" CloseStatus="0" />
+  <company name="456" Kuaidi100Code="566" TaobaoCode="666" JDCode="776" CloseStatus="0" />
+  <company name="sq" Kuaidi100Code="sw" TaobaoCode="sa" JDCode="ds" CloseStatus="0" />
+</companys>

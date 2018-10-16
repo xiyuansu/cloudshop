@@ -1,0 +1,189 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form id="form1" runat="server">
+    <script src="/utility/jquery.artDialog.js" type="text/javascript"></script>
+    <script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+    <script src="/utility/iframeTools.js" type="text/javascript"></script>
+    <script src="/utility/Window.js" type="text/javascript"></script>
+    <script src="/Utility/expressInfo.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/utility/skins/blue.css" />
+    <!--换货完成-->
+    <div id="finishreplace_div" style="display: none">
+        <div class="frame-content" style="width: 300px; overflow: hidden;">
+            <p>
+                1.进行此操作前，请确认您已收到商品。<br />
+                2.可以通过点击物流跟踪查看商品的物流信息。<br />
+                3.点击确认就表示已收到商品，并且确认完成换货流程。
+            </p>
+        </div>
+    </div>
+   
+    <!--换货用户发货-->
+    <div id="sendgoods_replace_div" style="display: none">
+        <div class="frame-content" style="width: 400px; overflow: hidden;">
+            <p>
+                1.请按管理员给的收货地址进行发货。
+            </p>
+            <p style="color: #fe5722">
+                <span class="frame-span frame-input100">卖家换货地址：</span> <span>
+                    <span id="spanAdminRemark1"></span>
+                </span>
+            </p>
+            <p style="color: #fe5722">
+                <span class="frame-span frame-input100"><em>*</em>&nbsp;物流公司：</span> <span>
+                    <abbr class="formselect">
+                        <Hi:ExpressDropDownList ClientIDMode="static" runat="server" RepeatColumns="5" RepeatDirection="Horizontal" ID="expressDropDownList1" />
+                    </abbr>
+                </span>
+            </p>
+            <p style="color: #fe5722">
+                <span class="frame-span frame-input100"><em>*</em>&nbsp;物流编号：</span> <span>
+                    <abbr class="formselect">
+                        <asp:TextBox ID="txtShipOrderNumber1" runat="server" ClientIDMode="static" CssClass="forminput" runat="server"></asp:TextBox>
+                    </abbr>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div style="display: none">
+        <input type="hidden" id="hdorderId" runat="server" />
+        <asp:Button ID="btnSendGoodsReplace" runat="server" Text="确 定" CssClass="submit_DAqueding" />
+        <asp:Button ID="btnFinishReplace" runat="server" Text="确 定" CssClass="submit_DAqueding" />
+    </div>
+    <%<asp:hiddenfield runat="server" id="OperSkuId" ClientIDMode="static"></asp:hiddenfield>%>
+    <%<asp:hiddenfield runat="server" id="hidReplaceId" ClientIDMode="static"></asp:hiddenfield>%>
+    <%<asp:hiddenfield runat="server" id="hidExpressCompanyName" ClientIDMode="static"></asp:hiddenfield>%>
+    <%<asp:hiddenfield runat="server" id="hidShipOrderNumber" ClientIDMode="static"></asp:hiddenfield>%>
+    <!--头部开始-->
+    <div class="hyzxmain">
+        <div class="hyzxconty">
+            当前位置：<span><%<hi:siteurl urlname="home" runat="server">首页</hi:siteurl>%></span>><span><%<hi:siteurl urlname="user_UserDefault" runat="server">会员中心</hi:siteurl>%></span>><span>
+                <a href="#">换货申请单</a>
+            </span>
+        </div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <div class="dingdan_box1">
+                        换货申请单
+                    </div>
+                    <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="false" />%>
+                    <div class="tuikuan_con">
+                        <span>
+                            订单号：
+                            <%<asp:TextBox ID="txtOrderId" runat="server" CssClass="input-text2" />%>
+                        </span><span>
+                            处理状态：
+                            
+                            <%<hi:replacestatusdropdownlist id="ddlHandleStatus" runat="server" class="select_text"></hi:replacestatusdropdownlist>%>
+                        </span> <span>
+                            <%<asp:Button Text="查询" class="btn_cx" ID="imgbtnSearch" runat="server" /> %>
+                        </span>
+                    </div>
+                    <div class="shouhuoxx1_con">
+                        <%<hi:common_ordermanage_replaceapply runat="server" />%>
+                    </div>
+                    <div class="page">
+                        <%<UI:Pager runat="server" ShowTotalPages="true" ID="pager" />%>
+                    </div>
+                    <!-- InstanceEndEditable -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+   
+    var type = "";
+    function validatorForm() {
+        if (type == "replace") {
+            if ($("#UserReplaceApply_txtReplaceRemark").val().replace(/\s/g, "") == "") {
+                alert("请输入换货备注");
+                return false;
+            }
+        }
+      
+        else if (type == "sendgoods_replace") {
+            var express1 = $('#expressDropDownList1').val();
+            var shipOrderNumber1 = $("#txtShipOrderNumber1").val();
+            if (express1 == undefined || express1 == "") {
+                alert("请选择发货快递公司");
+                return false;
+            }
+            if (shipOrderNumber1 == "" || shipOrderNumber1.length > 20) {
+                alert("请输入快递编号,长度为1到20位");
+                return false;
+            }
+            $("#hidExpressCompanyName").val(express1);
+            $("#hidShipOrderNumber").val(shipOrderNumber1);
+        }
+       
+
+        return true;
+    }
+    
+    ///换货用户发货
+    function SendGoodsForReplace(obj) {
+        type = "sendgoods_replace"
+        var orderId = $(obj).attr("OrderId");
+        var SkuId = $(obj).attr("SkuId");
+        var replaceId = $(obj).attr("ReplaceId");
+        $("#OperSkuId").val(SkuId);
+        $("#hidReplaceId").val(replaceId);
+        setArryText('UserReturnsApply_hdorderId', orderId);
+        setArryText('UserReturnsApply_txtReplaceRemark', '');
+        $("#hidExpressCompanyName").val("");
+        $("#hidShipOrderNumber").val("");
+        $.ajax({
+            url: "/API/AfterSales.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: {
+                action: "getreplace",
+                orderId: orderId,
+                skuId: SkuId
+            },
+            async: false,
+            success: function (resultData) {
+                if (resultData.success == "true") {
+                    var ShipAddress = resultData.Replace.AdminShipAddress;
+                    if (ShipAddress == undefined || ShipAddress == "") ShipAddress = resultData.Replace.AdminRemark;
+                    $("#spanAdminRemark1").html(ShipAddress);
+                    ExpressCompanyName = resultData.Replace.UserExpressCompanyName;
+                    ShipOrderNumber = resultData.Replace.UserShipOrderNumber;
+                    if (ShipOrderNumber != undefined && ShipOrderNumber != "") {
+                        $("#txtShipOrderNumber1").removeAttr("value");
+                        var ShipOrderNumberHTML = $("#txtShipOrderNumber1").prop("outerHTML");
+                        $("#txtShipOrderNumber1").prop("outerHTML", ShipOrderNumberHTML.replace(">", " value=\"" + ShipOrderNumber + "\">"));
+                    }
+                    if (ExpressCompanyName != undefined && ExpressCompanyName != "") {
+                        $("#expressDropDownList1").html($("#expressDropDownList1").html().replace("selected=\"selected\"", "").replace("value=\"" + ExpressCompanyName + "\"", "value=\"" + ExpressCompanyName + "\" selected=\"selected\""));
+                    }
+                }
+            }
+        });
+        DialogShow("用户发货", "sendgoodsforreplace", "sendgoods_replace_div", "UserReplaceApply_btnSendGoodsReplace");
+        return false;
+    }
+    ///完成换货操作
+    function FinishForReplace(obj) {
+        type = "finishreplace"
+
+        var orderId = $(obj).attr("OrderId");
+        var SkuId = $(obj).attr("SkuId");
+        var replaceId = $(obj).attr("replaceId");
+        $("#OperSkuId").val(SkuId);
+        $("#hidReplaceId").val(replaceId);
+        setArryText('UserReturnsApply_hdorderId', orderId);
+        setArryText('UserReturnsApply_txtReplaceRemark', '');
+        //$('#expressInfo1').ReturnOrReplaceExpressData(replaceId, "replace");
+        DialogShow("收货完成换货", "finishreplace", "finishreplace_div", "UserReplaceApply_btnFinishReplace");
+        return false;
+    }
+
+    </script>
+
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

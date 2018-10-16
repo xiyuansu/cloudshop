@@ -1,0 +1,158 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/jewelry/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/jewelry/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+<style type="text/css">
+	.main-content {width: auto;}
+	.main1 {width: 1180px; margin: 0 auto;}
+   .top .top-main,.top .top-search,.nav-wrap {width: 1180px;}
+</style>
+
+<div class="main-content" id="main">
+	<script src="/templates/master/jewelry/js/MogFocus.js" type="text/javascript"></script>
+	<div class="top-banner">
+        <hi:common_slidead runat="server" adid="1" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+	</div>
+
+	<div class="w1200 o-hidden m0">
+       <div class="ann pt20">
+               <div class="w317 fl  o-hidden"><Hi:Common_ImageAd runat="server" AdId="4" /></div>
+               <div class="w317 fl  o-hidden"><Hi:Common_ImageAd runat="server" AdId="5" /></div>
+               <div class="w317 fl  o-hidden"><Hi:Common_ImageAd runat="server" AdId="6" /></div>
+               <div class="w236 fr  o-hidden">
+                    <div class="hd yahei"><h2 class="fl bold font14">网站公告</h2> <a  class="fr" href="/Affiches.aspx">更多>></a></div>
+                    <div class="bd both o-hidden yahei">
+                        <ul>
+                           <%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="5" />%>
+                        </ul>
+                    </div>
+                 <div>   <Hi:Common_ImageAd runat="server" AdId="7" /></div>
+              </div>
+       </div>
+       <script src="../../../Utility/time.js" type="text/javascript"></script>
+       <div class="count-subject w1200 o-hidden pt20">
+           <div class="w240  fl o-hidden">
+              <div class="hd yahei" id="h32"><h2 class="fl bold font14">限时抢购</h2> <a class="fr" href="/CountDownProducts.aspx">更多>></a></div>
+              <div class="bd o-hidden both">
+                  <ul><Hi:Common_GoodsList_LatestCountDownBuy runat="server" MaxNum="1" /></ul>
+              </div>
+           </div>   
+           <div class="w950 fr o-hidden">
+			   <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+			   <hi:common_subjectproduct_tab isdelayedloading="true" runat="server" subjectid="2"></hi:common_subjectproduct_tab>
+           </div>
+        </div>
+         
+        <div class="combination w1200 o-hidden pt20 both">
+            <div class="hd yahei">
+               <Hi:Common_SubjectTitle runat="server" CommentId="3" />
+               <Hi:Common_SubjectMoreLink runat="server" CommentId="4" />
+            </div>
+            <div class="bd">
+                <div class="w1200 o-hidden">
+                   <div class="w953 fl"><Hi:Common_ImageAd runat="server" AdId="8" /></div>
+                   <div class="w239 fr"><Hi:Common_ImageAd runat="server" AdId="9" /></div>
+                </div>
+               <div> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="20" />  </div>     
+            </div>
+       </div> 
+       
+       <div class="combination w1200 o-hidden pt20 both">
+            <div class="hd yahei">
+               <Hi:Common_SubjectTitle runat="server" CommentId="5" />
+               <Hi:Common_SubjectMoreLink runat="server" CommentId="6" />
+            </div>
+            <div class="bd">
+                <div class="w1200 o-hidden">
+                   <div class="w953 fl"><Hi:Common_ImageAd runat="server" AdId="10" /></div>
+                   <div class="w239 fr"><Hi:Common_ImageAd runat="server" AdId="11" /></div>
+                </div>
+               <div> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="21" />  </div>     
+            </div>
+       </div>
+       
+       <div class="combination w1200 o-hidden pt20 both">
+            <div class="hd yahei">
+               <Hi:Common_SubjectTitle runat="server" CommentId="7" />
+               <Hi:Common_SubjectMoreLink runat="server" CommentId="8" />
+            </div>
+            <div class="bd">
+                <div class="w1200 o-hidden">
+                   <div class="w953 fl"><Hi:Common_ImageAd runat="server" AdId="12" /></div>
+                   <div class="w239 fr"><Hi:Common_ImageAd runat="server" AdId="13" /></div>
+                </div>
+               <div> <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="22" /></div>       
+            </div>
+       </div>
+       
+       <div class="combination w1200 o-hidden pt20 both">
+            <div class="hd yahei">
+               <Hi:Common_SubjectTitle runat="server" CommentId="9" />
+               <Hi:Common_SubjectMoreLink runat="server" CommentId="10" />
+            </div>
+            <div class="bd">
+                <div class="w1200 o-hidden">
+                   <div class="w953 fl"><Hi:Common_ImageAd runat="server" AdId="14" /></div>
+                   <div class="w239 fr"><Hi:Common_ImageAd runat="server" AdId="15" /></div>
+                </div>
+              <div>  <Hi:Common_SubjectProduct_Simple runat="server" SubjectId="23" />   </div>    
+            </div>
+       </div>
+           
+        
+       <div class="w1200 o-hidden pt20"><Hi:Common_ImageAd runat="server" AdId="16" /></div>   
+        
+        
+        <div class="bottom-info pt20 w1200 o-hidden">
+            <div class="w240 fl tit"><Hi:Common_SubjectArticle CommentId="11" runat="server" /></div>
+            <div class="w700 fl ml10"><h2>品牌专区</h2><Hi:Common_SubjectBrand runat="server" CommentId="12" /></div>
+            <div class="w240 fr tit"><h2>销售排行榜</h2><Hi:Common_SubjectProduct_Top runat="server" SubjectId="10" /></div>
+        </div> 
+    </div>
+
+	<script type="text/javascript">
+$(function(){
+var Width=$(window).width();
+	$("#ads_1").mogFocus({scrollWidth:Width});
+});
+</script>
+
+</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

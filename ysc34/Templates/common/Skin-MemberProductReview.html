@@ -1,0 +1,116 @@
+﻿<hi:common_wapheader runat="server" />
+<link href="/Utility/imgpreview/mobile-photo-preview.css" rel="stylesheet" />
+
+<div id="mainReview">
+
+</div>
+<div id="divMore" style="text-align:center; padding: 0.75rem 0.75rem 1.5rem 0.75rem;" onclick="loadCouponData()">
+    加载更多...
+</div>
+<script src="/Utility/imgpreview/dialog.js"></script>
+<script src="/Utility/imgpreview/mobile-photo-preview.js"></script>
+<script type="text/javascript">
+    var currentPage = 1;
+    var pageSize = 10;
+    var totalCount = -1;
+    $(function () {
+        loadCouponData();
+    });
+    //加载优惠券
+    function loadCouponData() {
+        if (totalCount == $("#mainReview li").length) return false;
+        $.post('../API/ReviewHandler.ashx?action=LoadProductReview&PageSize=' + pageSize + '&CurrentPage=' + currentPage + '&OrderId=' + getParam("OrderId"), function (result) {
+            var items = eval('(' + result + ')');
+            totalCount = items.totalCount;
+            if (items.data.length > 0) {
+                for (var i = 0; i < items.data.length; i++) {
+                    var n = items.data[i];
+                    var userhtm = getCouponHtml(n);
+                    $("#mainReview").append(userhtm);
+                }
+                $('.preview-list').MobilePhotoPreview({
+                    trigger: '.preview',
+                    show: function (c) {
+                        var del = $('<span class="icon-del"></span>');
+                        var close = $('<span class="ui-dialog-close js-dialog-close pop_close icon-icon_close_48"></span>')
+                        $('.imgViewTop', c).append(del);
+                        $('.imgViewTop', c).append(close);
+                        var _this = this;
+                        del.click(function () {
+                            _this.current.remove();
+                            _this.hide();
+                        });
+                    }
+                });
+                currentPage = currentPage + 1;
+            }
+            var listCount = $("#mainReview li").length;
+            if (totalCount == listCount) {
+                $("#divMore").html("");
+            }
+        });
+    }
+    function getCouponHtml(obj) {
+        var arr = new Array();
+        arr.push('<li>');
+        arr.push('<div class="mreview">');
+        arr.push('<img src="' + obj.ThumbnailUrl100 + '" />');
+        arr.push('<div class="mreview_r">评分：&nbsp;<span class="like">');
+        for (var i = 0; i < 5; i++) {
+            if (i < obj.Score)
+            {
+                arr.push('<i class="icon_like"></i>');
+            } else {
+                arr.push('<i class="icon_likeed"></i>');
+            }
+        }
+        arr.push('</span></div>');
+        arr.push('</div>');
+        arr.push('<div class="mreview pb_10">');
+        arr.push('<span style="float:left;width:100%;">'+obj.ReviewText+'</span>');
+        arr.push('<div class="preview-list" style="margin-left:0;">');
+        if (obj.ImageUrl1 != null && obj.ImageUrl1 != undefined && obj.ImageUrl1 != "") {
+            obj.ImageUrl1 = obj.ImageUrl1.substr(obj.ImageUrl1.indexOf("Storage")-1);
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl1 + '" class="preview"><img src="' + obj.ApplicationPath + "/Admin/PicRar.aspx?P=" + obj.ImageUrl1 + '&W=50&H=50"></a>');
+        }
+        if (obj.ImageUrl2 != null && obj.ImageUrl2 != undefined && obj.ImageUrl2 != "") {
+            obj.ImageUrl2 = obj.ImageUrl2.substr(obj.ImageUrl2.indexOf("Storage") - 1);
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl2 + '" class="preview"><img src="' + obj.ApplicationPath + "/Admin/PicRar.aspx?P=" + obj.ImageUrl2 + '&W=50&H=50"></a>');
+        }            
+        if (obj.ImageUrl3 != null && obj.ImageUrl3 != "" && obj.ImageUrl3 != undefined) {
+            obj.ImageUrl3 = obj.ImageUrl3.substr(obj.ImageUrl3.indexOf("Storage") - 1);
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl3 + '" class="preview"><img src="' + obj.ApplicationPath + "/Admin/PicRar.aspx?P=" + obj.ImageUrl3 + '&W=50&H=50"></a>');
+        }
+        if (obj.ImageUrl4 != null && obj.ImageUrl4 != "" && obj.ImageUrl4 != undefined) {
+            obj.ImageUrl4 = obj.ImageUrl4.substr(obj.ImageUrl4.indexOf("Storage") - 1);
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl4 + '" class="preview"><img src="' + obj.ApplicationPath + "/Admin/PicRar.aspx?P=" + obj.ImageUrl4 + '&W=50&H=50"></a>');
+        }
+        if (obj.ImageUrl5 != null && obj.ImageUrl5 != "" && obj.ImageUrl5 != undefined) {
+            obj.ImageUrl5 = obj.ImageUrl5.substr(obj.ImageUrl5.indexOf("Storage") - 1);
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl5 + '" class="preview"><img src="' + obj.ApplicationPath + "/Admin/PicRar.aspx?P=" + obj.ImageUrl5 + '&W=50&H=50"></a>');
+        }
+        arr.push('</div>');
+        arr.push('<div class="mreview_time">' + obj.ReviewDate + '</div>');
+        arr.push('</div>');
+        if (obj.ReplyDate != null && obj.ReplyDate != "") {
+            arr.push('<div class="mreview c-666">');
+            arr.push('<h3>商家回复：</h3>');
+            arr.push(obj.ReplyText);
+            arr.push('<div class="mreview_time">' + obj.ReplyDate + '</div>');
+        }
+        return arr.join("");
+    }
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    function scrollLoadData() {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度 
+        if ($(document).height()-10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            loadCouponData();
+        }
+    }
+    $(window).scroll(function () {
+        scrollLoadData();
+    });
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

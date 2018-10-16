@@ -1,0 +1,125 @@
+﻿<hi:common_wapheader runat="server" />
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" href="/style/redenvelope.css">
+<form runat="server">
+    <asp:hiddenfield id="hdAppId" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdTimestamp" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdNonceStr" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdSignature" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdTitle" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdDesc" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdImgUrl" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdLink" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdSendCode" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdRedEnvelopeId" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <asp:hiddenfield id="hdOrderId" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <div id="body" class="shoppingStepBar clearfix" style="margin-top:0;">
+    </div>
+    <hi:Common_ContextMenu id="ContextMenu" runat="server" />
+</form>
+<script type="text/javascript">
+
+    var appId = $("#hdAppId").val();
+    var timestamp = $("#hdTimestamp").val();
+    var nonceStr = $("#hdNonceStr").val();
+    var signature = $("#hdSignature").val();
+
+    var title = $("#hdTitle").val();
+    var desc = $("#hdDesc").val();
+    var imgUrl = $("#hdImgUrl").val();
+    var link = $("#hdLink").val();
+    var sendCode = $("#hdSendCode").val();
+    var redEnvelopeId = $("#hdRedEnvelopeId").val();
+    var orderId = $("#hdOrderId").val();
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: appId, // 必填，公众号的唯一标识
+        timestamp: timestamp, // 必填，生成签名的时间戳
+        nonceStr: nonceStr, // 必填，生成签名的随机串
+        signature: signature,// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function () {
+
+        wx.checkJsApi({
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
+            debug: true,
+            success: function (res) {
+
+                if (res.checkResult.onMenuShareTimeline)   //朋友圈
+                {
+
+                }
+                if (res.checkResult.onMenuShareAppMessage)  //朋友
+                {
+
+                }
+
+                LoadBody();
+            }
+        });
+
+        wx.onMenuShareTimeline({
+            title: title, // 分享标题
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                AddRedEnvelopeSendRecord(sendCode);
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                AddRedEnvelopeSendRecord(sendCode);
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+        function LoadBody() {
+            var body = [];
+            body.push("<a href=\"default\"><img src=\"/images/hb_fx.jpg\" width=\"100%\" style=\"float:left;\"/></a>");
+
+            $("#body").html(body.join(""));
+        }
+    });
+
+    wx.error(function (res) {
+        // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+    });
+
+    //禁用右上角菜单
+    //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    //    WeixinJSBridge.call('hideOptionMenu');
+    //});
+
+    function AddRedEnvelopeSendRecord(sendCode) {
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "AddRedEnvelopeSendRecord", SendCode: sendCode, RedEnvelopeId: redEnvelopeId, OrderId: orderId },
+            success: function (resultData) {
+                alert_h("分享成功", function (e) {
+                    location.href = "Default";
+                });
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status + "-" + XMLHttpRequest.readyState + "-" + textStatus);
+            }
+        });
+    }
+
+</script>
+

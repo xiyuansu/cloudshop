@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Subject SubjectId="1" Type="simple" CategoryId="223" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="4" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="2" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="4" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="3" Type="simple" CategoryId="309" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="4" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="4" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="4" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="5" Type="top" CategoryId="" MaxNum="7" ImageNum="7" IsShowPrice="true" IsShowSaleCounts="true" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="6" Type="tab" TabTitle1="美食城" TabTitle2="美食城" TabTitle3="美食城" TabTitle4="美食城" TabTitle5="美食城" TabTitle6="" TabTitle7="" TabTitle8="" Where1=",,54" Where2=",," Where3="273,," Where4="70,," Where5="177,," Where6=",," Where7=",," Where8=",," MaxNum="6" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="7" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="8" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="9" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="10" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="10" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="11" Type="floor" Title="玩具动漫" ImageTitle="" IsShowMoreLink="false" AdImage="/templates/master/yijiu/UploadImage/advertimg/20140622230138_4150.jpg" CategoryId="309" TagId="" BrandId="" MaxNum="10" SubCategoryNum="5" ImageSize="160" ImageSizeRange="160" AdImageSize="240*254" TitleImageSize="28*36" />
+  <Subject SubjectId="12" Type="floor" Title="玩具动漫" ImageTitle="" IsShowMoreLink="false" AdImage="/templates/master/yijiu/UploadImage/advertimg/20140622230138_4150.jpg" CategoryId="309" TagId="" BrandId="" MaxNum="10" SubCategoryNum="5" ImageSize="160" ImageSizeRange="160" AdImageSize="240*254" TitleImageSize="28*36" />
+  <Subject SubjectId="13" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="14" Type="floor" Title="玩具动漫" ImageTitle="" IsShowMoreLink="false" AdImage="/templates/master/yijiu/UploadImage/advertimg/20140622230138_4150.jpg" CategoryId="309" TagId="" BrandId="" MaxNum="10" SubCategoryNum="5" ImageSize="160" ImageSizeRange="160" AdImageSize="240*254" TitleImageSize="28*36" />
+  <Subject SubjectId="15" Type="floor" Title="玩具动漫" ImageTitle="" IsShowMoreLink="false" AdImage="/templates/master/yijiu/UploadImage/advertimg/20140622230138_4150.jpg" CategoryId="309" TagId="" BrandId="" MaxNum="10" SubCategoryNum="5" ImageSize="160" ImageSizeRange="160" AdImageSize="240*254" TitleImageSize="28*36" />
+  <Subject SubjectId="16" Type="floor" Title="玩具动漫" ImageTitle="" IsShowMoreLink="false" AdImage="/templates/master/yijiu/UploadImage/advertimg/20140622230138_4150.jpg" AdUrl="http://google9.com" TitelUrl="http://sian.com" CategoryId="309" TagId="" BrandId="" MaxNum="4" SubCategoryNum="5" ImageSize="100" ImageSizeRange="100" AdImageSize="240*254" TitleImageSize="28*36" />
+  <Subject SubjectId="17" Type="top" CategoryId="" MaxNum="7" ImageNum="7" IsShowPrice="true" IsShowSaleCounts="true" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="18" Type="top" CategoryId="" MaxNum="7" ImageNum="7" IsShowPrice="true" IsShowSaleCounts="true" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="19" Type="top" CategoryId="" MaxNum="7" ImageNum="7" IsShowPrice="true" IsShowSaleCounts="true" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+ 
+</root>

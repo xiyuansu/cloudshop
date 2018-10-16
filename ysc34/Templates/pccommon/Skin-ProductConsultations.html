@@ -1,0 +1,160 @@
+﻿<%<hi:common_header runat="server" />%>
+<form runat="server">
+    <style>
+        .pinginnon textarea {
+            border: 1px solid #dddddd;
+            padding-left: 5px;
+            outline: none;
+        }
+
+        .re_friend_tab input {
+            padding-left: 5px;
+        }
+
+        .re_productreviews_tabc {
+            line-height: 25px;
+        }
+
+            .re_productreviews_tabc .inpnt {
+                margin-bottom: 10px;
+            }
+
+        .re_friend_tab .input2 {
+            padding-left: 5px;
+        }
+    </style>
+    <div class="main">
+        <script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+        <div class="re_friend_tab">
+            <h2 class="re_productreviews_h2">商品咨询</h2>
+            <div class="re_blogit_pro_t"><strong>当前咨询商品</strong><span class="color_A30"> 【<%<Hi:ProductDetailsLink ID="ProductDetailsLink1" runat="server"></Hi:ProductDetailsLink> %>】</span></div>
+            <table width="100%" border="0" cellspacing="0" class="re_productreviews_tabc">
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">
+                        <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="12%" align="right" valign="top">手机/邮箱：</td>
+                    <td colspan="2">
+                        <%<asp:TextBox id="txtUserName" CssClass="inpnt" runat="Server" Width="200" ValidationGroup="default" ClientIDMode="Static"></asp:TextBox> %>
+                        <span id="txtUserNameTip" runat="server"></span>
+                    </td>
+                </tr>
+                <!--<tr>
+                    <td align="right" valign="top">电子邮箱：</td>
+                    <td colspan="2">
+                        <%<asp:TextBox id="txtEmail" CssClass="inpnt" runat="Server" Width="200" ValidationGroup="default"></asp:TextBox> %>
+                        <span id="txtEmailTip" runat="server"></span>
+                    </td>
+                </tr>-->
+                <tr>
+                    <td align="right" valign="top">内容：</td>
+                    <td colspan="2" class="pinginnon">
+                        <%<asp:TextBox id="txtContent" Height="100" Width="430" TextMode="MultiLine" runat="Server" ClientIDMode="Static" ValidationGroup="default"></asp:TextBox> %><span id="txtContentTip" runat="server"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td height="40" width="40" align="center">&nbsp;</td>
+                            <td valign="middle">
+                                <ul style="margin-top:10px; height:auto;overflow:hidden;">
+                                    <li style="margin-left:5px; overflow: hidden;">
+                                        <span>
+                                            <span style="  display:block; padding-top:4px; width:95px; text-align:right; float:left;">验证码：</span>
+                                            <input type=text id="txtConsultationCode" runat="server" style="width:50px; height: 25px; line-height: 25px; float:left;" class="input2" />&nbsp;<img id="img_txtNumber" src="" alt="" />
+                                            <a href="javascript:refreshReviewCode();"><img id="imgReviewVerifyCode" src='' style="border-style:none;" alt="" /></a>
+                                            <script language="javascript" type="text/javascript">
+                                                document.getElementById('imgReviewVerifyCode').src = "/VerifyCodeImage.aspx";
+
+                                                function refreshReviewCode() {
+                                                    var img = document.getElementById("imgReviewVerifyCode");
+                                                    if (img != null) {
+                                                        var currentDate = new Date();
+                                                        img.src = "/VerifyCodeImage.aspx?t=" + currentDate.getTime();
+                                                    }
+                                                }
+                                            </script>
+                                        </span>
+                                    </li>
+                                    <li style=" display: block; clear: both; overflow: hidden; margin-left: 100px; margin-top: 15px;">
+                                        <%<asp:Button runat="server" ID="btnRefer" CssClass="btn_shortsub" OnClientClick="return ValidateData();" Text="咨询" />%>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr></tr>
+            </table>
+        </div>
+        <script type="text/javascript" language="javascript">
+            function ValidateData() {
+                var userName = $("#txtUserName").val();
+                if (userName == "") {
+                    alert("必须填写手机或邮箱");
+                    return false;
+                }
+
+                if ($("#txtContent").val() == "") {
+                    alert("必须填写咨询内容");
+                    return false;
+                }
+
+                if ($("#txtContent").val().length > 200) {
+                    alert("咨询内容长度限制在200字以内");
+                    return false;
+                }
+
+                var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{1,4}$/;
+
+                var cellReg = /^0?(13|15|18|14|17)[0-9]{9}$/g;
+
+                if (!emailReg.test(userName) && !cellReg.test(userName)) {
+                    alert("只能填写手机或邮箱");
+                    return false;
+                }
+
+                return true;
+            }
+
+            $(document).ready(function () {
+                $("#img_txtNumber").hide();
+                $("#ProductConsultations_txtConsultationCode").keyup(function () {
+                    var value = $(this).val();
+                    if (value.length < 4) {
+                        $("#img_txtNumber").hide();
+                        temp = "";
+                    } else if (value.length == 4) {
+                        if (temp != value) {
+                            $("#img_txtNumber").show();
+                            $.ajax({
+                                url: "ProductConsultations.aspx",
+                                type: 'post',
+                                dataType: 'json',
+                                timeout: 10000,
+                                data: {
+                                    isCallback: "true",
+                                    code: $("#ProductConsultations_txtConsultationCode").val()
+                                },
+                                async: false,
+                                success: function (resultData) {
+                                    var flag = resultData.flag;
+                                    if (flag == "1") {
+                                        $("#img_txtNumber").attr("src", "/images/true.gif");
+                                    } else if (flag == "0") {
+                                        $("#img_txtNumber").attr("src", "/images/false.gif");
+                                    }
+                                }
+                            });
+                        }
+                        temp = value;
+                    }
+                });
+            });
+        </script>
+    </div>
+</form>
+<%<hi:common_footer runat="server" />%>

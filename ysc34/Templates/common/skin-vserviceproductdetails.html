@@ -1,0 +1,677 @@
+﻿<hi:common_wapheader runat="server" />
+<style type="text/css">
+    .add_cart1 {
+        height: 2.45rem;
+    }
+
+    .btns-fixed-left {
+        width: 5.75rem;
+    }
+
+    .pro_cart {
+        width: 50%;
+        padding-top: 0.43rem;
+    }
+
+    .btns-fixed-right {
+        width: 10.2rem;
+    }
+
+    .buy {
+        width: 8.0rem;
+        border-radius: 3px;
+        margin: 10px 20px 10px 0;
+        height: 2.1rem;
+    }
+</style>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<input type="hidden" runat="server" id="hidden_skus" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidden_skuItem" clientidmode="Static" />
+<input type="hidden" id="txCartQuantity" value="" clientidmode="Static" runat="server" />
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static">
+<input type="hidden" runat="server" id="hidden_productId" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidCouponCount" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidHasStores" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidCombinaid" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidUnOnSale" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidUnAudit" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidSupplier" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidCanTakeOnStore" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidStoreId" clientidmode="Static" />
+<input type="hidden" id="hidService_submit" value="1" />
+<div class="coupons_popup">
+    <div class="att-popup-container" style="height:17.5rem;">
+        <div class="coupons_title">
+            <span>领取优惠券</span>
+            <a href="javascript:;" class="pop_close icon-icon_close_48"></a>
+        </div>
+        <ul id="cul">
+            <hi:WapTemplatedRepeater id="rptCouponList" templatefile="/Tags/skin-Common_CouponList.ascx" runat="server" />
+        </ul>
+        <ul id="aul" class="list-block activitylist">
+            <li class="item-content" id="liOrderPromotions2" runat="server" visible="false">
+                <div class="item-inner ">
+                    <div class="item-title no_nowarp">
+                        <i class="tag tag_green">减</i>
+                        <span> <asp:literal id="ltlOrderPromotion2" runat="server"></asp:literal></span>
+                    </div>
+                </div>
+            </li>
+            <li class="item-content" id="liOrderPromotions_free" runat="server" visible="false">
+                <div class="item-inner ">
+                    <div class="item-title no_nowarp">
+                        <i class="tag tag_yellow">免</i>
+                        <span> <asp:literal id="ltlOrderPromotion_free" runat="server"></asp:literal></span>
+                    </div>
+                </div>
+            </li>
+            <li class="item-content" id="liProductSendGifts2" runat="server" visible="false">
+                <div class="item-inner">
+                    <div class="item-title">
+                        <i class="tag tag_blue">送</i>
+                        <span><asp:literal id="ltlProductSendGifts2" runat="server"></asp:literal></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div id="consult">
+            <span>手机/邮箱</span>
+            <input type="text" id="txtUserName" />
+            <span>咨询内容：</span>
+            <textarea id="txtConsultation"></textarea>
+            <a class="sub_consult" onclick="SubmitConsultation()">提交</a>
+        </div>
+    </div>
+</div>
+
+<div id="slides">
+    <hi:WapTemplatedRepeater id="rptProductImages" templatefile="/Tags/skin-Common_Slide.ascx" runat="server" />
+</div>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    $(function () {
+        var imgsurl = [];
+        var nowurl = '';
+        var imgObj = $(".pro_info img");
+        for (var i = 0; i < imgObj.length; i++) {
+            imgsurl[i] = getFullPath(imgObj.eq(i).attr("data-url"));
+            imgObj[i].onclick = function () {
+                nowurl = this.src;
+                wx.previewImage({
+                    current: nowurl,
+                    urls: imgsurl
+                });
+            }
+        }
+    });
+</script>
+
+<div class="item_content">
+    <h1 class="goods-info">
+        <asp:literal runat="server" id="litProdcutName" />
+    </h1>
+    <div class="intro text-muted" id="divShortDescription" runat="server">
+        <asp:literal runat="server" id="litShortDescription" />
+    </div>
+    <div class="intro text-muted" id="divCountDownUrl" runat="server" visible="false">
+        <%<asp:hyperlink id="aCountDownUrl" runat="server" />%>
+    </div>
+    <div class="pro_price">
+        <font>¥</font><span id="spSalaPrice"><asp:literal runat="server" id="litSalePrice" /></span>
+        <span id="spdiscount" runat="server" style="display:inline-block;font-size:0.6rem;color:#666;">
+            请<a style="color:#ff5722;" id="linklogin">登录</a>，确认是否享受优惠
+        </span>
+    </div>
+    <div class="clear"></div>
+    <div class="pro_marketprice">
+        <del id="delmarketprice">
+            ¥
+            <span id="spanMarketPrice"><asp:literal runat="server" id="litMarketPrice" /></span>
+        </del>
+    </div>
+    <div id="divPhonePrice" class="divPhonePrice" runat="server" visible="false">
+        <em></em> <span>比PC端省<asp:literal runat="server" id="litPhonePrice" />元</span>
+    </div>
+    <div class="pro_tag">
+        <div>已售:<asp:literal runat="server" id="litSoldCount" /></div>
+        <!--<div style="">运费:￥<label id="labProductFreight"><Hi:ProductFreightLiteral id="productFreight" runat="server"></Hi:ProductFreightLiteral></label></div>-->
+        <div id="divProductReferral" runat="server">预计佣金:￥<%<Hi:UserProductReferLabel ID="lbUserProductRefer" runat="server" />%></div>
+    </div>
+</div>
+
+
+<!--有效期内支持退款-->
+<div class="service-set">
+    <div class="service-set-one"><asp:literal runat="server" id="lit_IsRefund" /></div>
+    <div class="service-set-one"><asp:literal runat="server" id="lit_IsOverRefund" /></div>
+</div>
+
+<!--有效期-->
+<div class="service-time">
+    <div class="s-time">
+        有效期：<asp:literal runat="server" id="lit_RefundTime" />
+    </div>
+</div>
+
+<div class="row advantage" style="display:none;">
+    <div class="col-33" id="divGetBySelf"><i class="dot icon-icon_dot_24"></i>&nbsp;上门自提</div>
+    <div class="col-33" id="divPodrequest" runat="server" visible="false"><i class="dot icon-icon_dot_24"></i>&nbsp;货到付款</div>
+    <div class="col-33"><i class="dot icon-icon_dot_24"></i>&nbsp;售后保障</div>
+</div>
+
+<div class="list-block activitylist" id="divActivities" runat="server" visible="true">
+    <ul id="ulsupplier" runat="server" style="margin-bottom: 0.75rem;">
+        <li class="item-content" id="supplier">
+            <div class="item-inner">
+                <div class="item-title" id="divSupName">
+                    <span> <asp:literal id="litSupplierName" runat="server"></asp:literal></span>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul>
+        <li class="item-content" id="coupons">
+            <div class="item-inner">
+                <div class="item-title">
+                    <i class="tag tag_red">劵</i>
+                    <span>领取优惠券</span>
+                </div>
+                <i class="viewdetial"></i>
+            </div>
+        </li>
+        <li class="item-content coupons_activity" id="liOrderPromotions" runat="server" visible="false">
+            <div class="item-inner">
+                <div class="item-title ">
+                    <i class="tag tag_green">减</i>
+                    <span>
+                        <asp:literal id="ltlOrderPromotion" runat="server"></asp:literal>
+                    </span>
+                </div>
+                <i class="viewdetial"></i>
+            </div>
+        </li>
+        <li class="item-content coupons_activity" id="liOrderPromotions_free2" runat="server" visible="false">
+            <div class="item-inner">
+                <div class="item-title ">
+                    <i class="tag tag_yellow">免</i>
+                    <span>
+                        <asp:literal id="ltlOrderPromotion_free2" runat="server"></asp:literal>
+                    </span>
+                </div>
+                <i class="viewdetial"></i>
+            </div>
+        </li>
+        <li class="item-content coupons_activity" id="liProductSendGifts" runat="server" visible="false">
+            <div class="item-inner">
+                <div class="item-title">
+                    <i class="tag tag_blue">送</i>
+                    <span><asp:literal id="ltlProductSendGifts" runat="server"></asp:literal></span>
+                </div>
+                <i class="viewdetial"></i>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="single" id="divLookStores" onclick="javascript: goToStoreList() ">
+    查看门店信息
+    <i class="viewdetial"></i>
+</div>
+
+<div class="single" onclick="javascript:location.href='ProductReview'+location.search;">
+    商品评价&nbsp;<i class="icon_badge1">(<asp:literal runat="server" id="litReviewsCount" />)</i>
+    <i class="viewdetial"></i>
+</div>
+
+<div class="single" id="divspecification">
+    选择规格
+    <i class="fs_28"></i>
+    <i class="viewdetial"></i>
+</div>
+
+<div class="combination" runat="server" id="divcombina">
+    <div class="single" id="titleLink">
+        自由搭配
+        <i class="fs_28"></i>
+        <i class="viewdetial"></i>
+    </div>
+
+    <div class="comb_con">
+        <div class="con">
+            <div class="master">
+                <div class="product" runat="server">
+                    <asp:literal id="ltlcombinamaininfo" runat="server"></asp:literal>
+                </div>
+            </div>
+            <div class="suits">
+                <%
+                <Hi:WapTemplatedRepeater ID="rp_com" runat="server" TemplateFile="Tags/Skin-Common_CombinaBuyList.ascx" />%>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="item_content guest_like" id="divGuest" runat="server" visible="false">
+    <h1>猜你喜欢</h1>
+    <div style="height:7.5rem; overflow: hidden;">
+        <div class="guest_list">
+            <ul>
+                <%
+                <Hi:WapTemplatedRepeater ID="rp_guest" runat="server" TemplateFile="Tags/skin-Common_ProductDetailGuestProducts.ascx" />%>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="pro_tab" style="display:none;">
+    <div class="pro_tab_flex">
+        <a href="javascript:;" class="tab tab_active">商品详情</a>
+    </div>
+    <div class="pro_tab_flex">
+        <a href="javascript:;" class="tab">商品咨询&nbsp;</a><i class="icon_badge">
+            <asp:literal runat="server" id="litConsultationsCount" />
+        </i>
+    </div>
+</div>
+
+<div class="pro_tab">
+    <div class="pro-detail">详情描述</div>
+</div>
+
+<div class="pro_tab mt_0" style="padding:0 0.75rem">
+    <div class="pro_info" id="tab1">
+        <asp:literal runat="server" id="litDescription" />
+    </div>
+    <div class="pro_info" id="tab2" style="display:none;">
+        <div class="kong" id="divConsultationEmpty" runat="server" style="display:block;">
+            <img src="/images/comment_null.png" style="width:4.5rem !important;">
+            <p>暂时没有咨询哦~</p>
+        </div>
+        <ul class="consult" id="ulConsultations" runat="server">
+            <Hi:WapTemplatedRepeater ID="rptProductConsultations" TemplateFile="/Tags/skin-Common_ProductConsultation.ascx" runat="server" />
+        </ul>
+        <a href="javascript:;" class="FAB_consult"></a>
+    </div>
+</div>
+<div class="btns-fixed">
+    <div class="btns-fixed-left">
+        <div class="pro_cart" onclick="window.location.href = 'default.aspx';">
+            <i class="icon-icon_home" style="font-size:26px;"></i>
+            <a>首页</a>
+        </div>
+        <div class="pro_cart">
+            <i class="icon-icon_favorate" id="fav" onclick="AddFavorite()"></i>
+            <a class="fav_font">收藏</a>
+        </div>
+    </div>
+    <div class="btns-fixed-right">
+        <div class="goumai" runat="server" id="divGouMai">
+            <button class="buy" id="productDetailsBuy">
+                立即购买
+            </button>
+        </div>
+        <asp:literal id="ltlBottomStatus" runat="server"></asp:literal>
+    </div>
+</div>
+
+<div class="un_sale items" id="divUnSale">很抱歉，此商品已下架</div>
+<div class="un_sale items" id="divUnAudit" style="display:none;">很抱歉，此商品待审核</div>
+<div class="un_sale items" id="divUnService" style="display:none;">请到微信端或小程序购买</div>
+<a href="javascript:scroll(0,0)" class="go_top"></a>
+
+<hi:common_wapguanzhu runat="server"></hi:common_wapguanzhu>
+
+<input type="hidden" runat="server" clientidmode="Static" id="litHasCollected" />
+<input type="hidden" runat="server" clientidmode="Static" id="hidRegionId" />
+<script type="text/javascript" src="/script/jquery.slides.min.js"></script>
+<script type="text/javascript" src="/script/iscroll.js"></script>
+<script type="text/javascript" src="/Utility/wxShare.js?v=3.0"></script>
+<script type="text/javascript" src="/Utility/jquery.scrollLoading.min.js"></script>
+<!--<script type="text/javascript" src="/utility/vproduct.helper.js"></script>-->
+<!--<script type="text/javascript" src="/utility/vCalcProductFreight.js?v=3.3"></script>-->
+<script type="text/javascript" src="/script/swipe.js"></script>
+<script type="text/javascript">
+
+    //商品详情和咨询选项卡
+    $(function () {
+        $("input,textarea").focus(function () {
+            $('.att-popup-container').css('position', 'static');
+        }).blur(function () {
+            $('.att-popup-container').css('position', 'fixed');
+        });
+        //是否已下架
+        var isUnSale = $("#hidUnOnSale").val();
+        if (isUnSale == "1") {
+            $("#divspecification").hide();
+            $(".btns-fixed").hide();
+        }
+        else {
+            $("#divUnSale").hide();
+        }
+        if ($("#hidUnAudit").val() != "2" && $("#hidUnAudit").val() != "0") {
+            $("#divUnAudit").show();
+            $("#divspecification").hide();
+            $(".btns-fixed").hide();
+        }
+        var url = document.location.href.toLowerCase();
+        if (url.indexOf("/wapshop/") > -1 || url.indexOf("/alioh/") > -1) {
+            $("#divspecification").hide();
+            $(".btns-fixed").hide();
+            $("#divUnSale").hide();
+            $("#divUnAudit").hide();
+            $("#divUnService").show();
+        }
+
+        if ($('.btns-fixed-right').html().indexOf("xieye") > 0) {
+            $("#divspecification").hide();
+        }
+
+        //判断是否显示上门自提
+        var hasStores = $("#hidHasStores").val();
+        if (hasStores != "1") {
+            $("#divLookStores").hide();
+        }
+        if ($("#hidCanTakeOnStore").val() == "1") {
+            $("#divGetBySelf").show();
+        }
+        else {
+            $("#divGetBySelf").hide();
+        }
+        var ulw = $(".guest_list ul li").length;
+        var liw = $(".guest_list ul li").width();
+        $(".guest_list ul").width(ulw * (liw + 15));
+
+
+        var Pro_width = $('.comb_con .product').size() * $('.comb_con .product').width();
+        var Pro_plus = $('.comb_con .plus').size() * $('.comb_con .plus').outerWidth(true);
+        var suits_width = Pro_width + Pro_plus;
+        $('.comb_con .con').css('width', suits_width)
+
+        //$("#divspecification").on('click', function (event) {
+        //event.preventDefault();
+        //$(".operbtns").hide();
+        //$(".operbtns").eq(1).show();
+        //$('.att-popup').addClass('is-visible');
+        //});
+        $('#productDetailsBuy,#addcartButton,#divspecification').on('click', function (event) {
+            event.preventDefault();
+            if ($(this).attr("id") == "addcartButton") {
+                $("#buyButton").attr("signbuy", "false");
+            }
+            else {
+                $("#buyButton").attr("signbuy", "true");
+            }
+            $(".operbtns").hide();
+            $(".operbtns").eq(0).show();
+            $('.att-popup').addClass('is-visible');
+
+
+
+
+
+        });
+
+        $("#btnSignBuy").click(function (e) {
+            BuyProduct();
+        });
+
+        $("#titleLink").click(function (e) {
+            GotoCombinadetail();
+        });
+        $("#btnAddCart").click(function (e) {
+            BuyProductToCart();
+        });
+        $(".tab").click(function () {
+            if (!$(this).hasClass("tab_active")) {
+                $(this).addClass("tab_active");
+                $(this).parent().siblings().children(".tab").removeClass("tab_active");
+                $(".pro_info").toggle();
+            }
+        });
+
+        //优惠券
+        var couponCount = $("#hidCouponCount").val();
+        if (couponCount <= 0) {
+            $("#coupons").hide();
+        }
+        var smp = $("#spanMarketPrice").html();
+        if (smp == "0" || smp == "0.00" || smp == "" || smp == null) {
+            $("#spanMarketPrice").parent().css({ "visibility": "hidden" });
+        }
+
+        if ($("#spanMarketPrice").text() == '') {
+            $("#delmarketprice").css({ "visibility": "hidden" });
+        }
+
+        //活动div隐藏 divActivities
+        //$("#vProductDetails_divActivities").hide();
+    })
+    $(window).scroll(function () {
+        setScrollLoading();
+    });
+    function setScrollLoading() {
+        $("img").scrollLoading();
+        $("iframe").each(function () {
+            if (!$(this).attr("src")) {
+                $(this).attr("src", $(this).attr("data-url"));
+            }
+        });
+    }
+
+    function AddFavorite() {
+        var data = {};
+        data.ProductId = getQueryString("productId");
+        data.StoreId = getQueryString("StoreId");
+        $.post("/api/VshopProcess.ashx?action=AddFavorite", data, function (json) {
+            if (json.success === true) {
+                if (json.status == 2) {
+                    $('.icon_fav').hide();
+                    $('.icon_faved').show();
+                    $('.fav_font').css("color", "#ff5722");
+                    $('#fav').css("color", "#ff5722");
+                    ShowMsg('收藏成功！', true);
+                } else if (json.status == 1) {
+                    $('.icon_fav').show();
+                    $('.icon_faved').hide();
+                    $('.fav_font').css("color", "none");
+                    $('#fav').css("color", "none");
+                    ShowMsg('取消收藏成功！', true);
+                } else
+                    ShowMsg('操作失败！', true);
+            } else {
+                alert_h('您当前还没有登录！', function () {
+                    location.replace('MyFavorites.aspx?returnUrl=ProductDetails.aspx?productId=' + getParam('productId'));
+                });
+            }
+        });
+    }
+    $(function () {
+        var h = $('p img');
+        h.css("height", "auto");
+
+        var slidesImg = $('#slides img');
+        var width = 650,
+            height = 650;
+        if (slidesImg.length > 1) {
+            $('#slides').slidesjs({
+                width: width,
+                height: height
+                //play: {
+                //    active: true,
+                //    auto: true,
+                //    interval: 6000,
+                //    swap: true
+                //}
+            });
+            $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+            $(slidesImg[0]).scrollLoading();
+        } else {
+            $('#slides').css('display', 'block').html('<div style="width:100%;"><a href="javascript:;"></a></div>');
+            $('#slides div a').append(slidesImg);
+            $('#slides img').scrollLoading();
+        }
+
+    });
+
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    function GotoCombinadetail() {
+        var cid = $("#hidCombinaid").val();
+        location.href = 'CombinationBuyDetail?combinaId=' + cid;
+    }
+
+    function AddFavorite() {
+        var data = {};
+        data.ProductId = getQueryString("productId");
+        $.post("/api/VshopProcess.ashx?action=AddFavorite", data, function (json) {
+            if (json.success === true) {
+                if (json.status == 2) {
+                    $('.icon_fav').hide();
+                    $('.icon_faved').show();
+                    $('.fav_font').css("color", "#ff5722");
+                    $('#fav').css("color", "#ff5722");
+                    ShowMsg('收藏成功！', true);
+                } else if (json.status == 1) {
+                    $('.icon_fav').show();
+                    $('.icon_faved').hide();
+                    $('.fav_font').css("color", "none");
+                    $('#fav').css("color", "none");
+                    ShowMsg('取消收藏成功！', true);
+                } else
+                    ShowMsg('操作失败！', true);
+            } else {
+                alert_h('您当前还没有登录！', function () {
+                    location.replace('MyFavorites?returnUrl=ProductDetails?productId=' + getParam('productId'));
+                });
+            }
+        });
+    }
+    function goToStoreList() {
+        location.href = 'StoreListSearch?Key=' + escape($.trim($(".goods-info").text()));
+    }
+
+    function SubmitConsultation() {
+        if ($("#txtConsultation").val() == "") {
+            alert_h("必须填写咨询内容");
+            return;
+        }
+
+        var userName = $("#txtUserName").val();
+        if (userName == "") {
+            alert_h("必须填写手机或邮箱");
+            return;
+        }
+
+        var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{1,4}$/;
+
+        var cellReg = /^0?(13|15|18|14|17)[0-9]{9}$/g;
+
+
+        if (!emailReg.test(userName) && !cellReg.test(userName)) {
+            alert_h("只能填写手机或邮箱");
+            return;
+        }
+
+        if ($("#txtConsultation").val().length > 200) {
+            alert_h("咨询内容长度限制在200字以内");
+            return;
+        }
+
+        var id = getParam("productId");
+        var data = {};
+        data.ProductId = id;
+        data.ConsultationText = $("#txtConsultation").val();
+        data.userName = userName;
+
+        $.post("/API/VshopProcess.ashx?action=AddProductConsultations", data, function (json) {
+            if (json.success === true) {
+                alert_h("提交成功", function () {
+                    location.reload();
+                });
+
+            }
+            else {
+                alert_h(json.msg);
+            }
+        });
+    }
+
+    $(function () {
+
+
+        if ($('#litHasCollected').val() == "1") {
+            $('.icon_fav').hide();
+            $('.icon_faved').show();
+            $('#fav').css("color", "#ff5722");
+            $('.fav_font').css("color", "#ff5722");
+        }
+        $("#linklogin").attr("href", 'MemberCenter?returnUrl=ServiceProductDetails?ProductId=' + getParam("ProductId") + "&StoreId=" + getParam("StoreId"));
+
+        //包含多个规格时，首先禁用购买和加入购物车按钮
+        //if ($(".SKUValueClass").length > 0)
+        //    disableShoppingBtn(true);
+    })
+    if ($("#attrtable tr").length <= 0) {
+        $("#attrtable").parent().hide();
+    }
+
+    var lastSubmitTime = new Date();
+    var submitTimes = 0;
+    function onGetCouponClick(cid) {
+        //两秒内重复点击直接返回false
+        var tempDate = new Date();
+        if ((tempDate.getTime() - lastSubmitTime.getTime()) < 2000 && submitTimes > 0) {
+            lastSubmitTime = new Date();
+            submitTimes += 1;
+            return false;
+        }
+        lastSubmitTime = new Date();
+        submitTimes += 1;
+        $.ajax({
+            url: '/API/CouponHandler.ashx',
+            type: 'POST',
+            dataType: 'text',
+            data: { action: "UserGetCoupon", couponId: cid },
+            timeout: 5000,
+            error: function () {
+                alert('操作错误,请与系统管理员联系!');
+            },
+            success: function (result) {
+                if (result == "请登录") {
+                    alert_h("您还没有登录，请先登录后再领取优惠券！", function () {
+                        location.href = "MemberCenter?returnUrl=" + document.location.href;
+                    });
+                }
+                else if (result == "领取成功") {
+                    //  alert_h("领取成功！");
+                    alert_h("领取成功");
+                }
+                else {
+                    alert_h(result);
+                }
+            }
+        });
+    }
+    $(window).resize(function () {
+        $('.att-popup-container').css('position', 'fixed');
+        //$("span").text(x += 1);
+    });
+</script>
+
+
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<hi:Common_SKUSubmitOrder id="skuSubmitOrder" runat="server" />
+<hi:Common_SKUSubmitStoreOrder id="skuStoreSubmitOrder" runat="server" />
+

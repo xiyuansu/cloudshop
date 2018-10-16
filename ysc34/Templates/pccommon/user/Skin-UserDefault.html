@@ -1,0 +1,246 @@
+﻿  <%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<style>
+    .hyzxconterr {
+        background: none;
+        padding: 0px;
+        width: 1005px;
+    }
+
+    .hyzxmain {
+    }
+</style>
+
+<div class="user_header">
+    <div class="user_header_c">
+
+        <div class="fl">
+            <div class="man"><%<asp:Image ID="userPicture" runat="server" ImageUrl="/images/users/new/touxiang.png" ClientIDMode="Static" Width="135" Height="135" /> %></div>
+
+            <div class="info">
+                <div class="name"><b><%<asp:Literal ID="litUserName" runat="server"></asp:Literal>%></b></div>
+                <div class="sign"> <a href="javascript:onUserSignIn()">签到</a></div>
+            </div>
+
+
+        </div>
+        <div class="fr">
+            <div class="info1">
+                <ul>
+                    <li class="li1">
+
+                        <div class="huiyuan">
+                            <div class="level"> <%<asp:Literal ID="litUserRank" runat="server"></asp:Literal>%> </div>
+                            <div class="xiaoxi">
+                                <em>
+                                    <%<asp:HyperLink ID="hpMes" runat="server" Target="_self"></asp:HyperLink>%>
+                                </em>
+                            </div>
+                        </div>
+
+                        <div class="panquandu">
+                            <div> 安全级别：</div>
+                            <div class="panquandu1">
+                                <%<Hi:MemberSafeGradeLiteral ID="litSafeGrade" runat="server" /> %>
+                            </div>
+                            <div class="tisheng"><a href="/user/MyAccount.aspx">提升</a></div>
+                        </div>
+
+                        <div class="contant_way">
+                            <a href="UserCellPhoneVerification.aspx"><img src="../images/users/new/user_icon_10.jpg"></a>
+                            <a href="UserEmailVerification.aspx"><img src="../images/users/new/user_icon_12.jpg"></a>
+                        </div>
+
+
+
+                        <div class="shoujiyanzheng" style="display:none;">
+                            <div class="shoujiyanzhengl">
+                                <%<asp:Literal ID="litcellphoneverfice" runat="server" /> %>
+                            </div>
+                            <div class="shoujiyanzhengr">
+                                <%<asp:Literal ID="litemmailverfice" runat="server" /> %>
+                            </div>
+
+                        </div>
+                    </li>
+                    <li>
+                        <b>
+                            <span class="lvse" id="currentPoints">
+                                <%<asp:Literal ID="litUserPoint" runat="server"></asp:Literal>%>
+                            </span>
+                        </b> <em>积分</em>
+                    </li>
+
+                    <li><b><%<asp:Literal ID="litUserCouponCount" runat="server"></asp:Literal>%></b> <em>优惠券</em></li>
+                    <li><b><%<asp:Literal ID="litUserRedCount" runat="server"></asp:Literal>%></b> <em>红包</em></li>
+                    <li style=" width: 170px;"><b><%<Hi:FormatedMoneyLabel ID="litAccountAmount" runat="server" />%></b> <em>预存款</em></li>
+                </ul>
+            </div>
+            <div class="info2">
+                <ul>
+                    <li>待付款<em><%<asp:Literal ID="litNoPayOrderNum" runat="server"></asp:Literal>%></em></li>
+                    <li>待发货<em><%<asp:Literal ID="litWaitSendOrderNum" runat="server"></asp:Literal>%></em></li>
+                    <li>待收货<em><%<asp:Literal ID="litPayOrderNum" runat="server"></asp:Literal>%></em></li>
+                    <li>待评价<em><a href="/User/UserOrders.aspx?orderStatus=21"><%<asp:Literal ID="litWaitReviewNum" runat="server"></asp:Literal>%></a></em></li>
+                    <li>退款<em><a href="/user/UserRefundApply.aspx"><%<asp:Literal ID="litRefundNum" runat="server"></asp:Literal>%></a></em></li>
+                    <li>退货<em><a href="/user/UserReturnsApply.aspx"><%<asp:Literal ID="litReturnNum" runat="server"></asp:Literal>%></a></em></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置><a href="/">首页</a>>会员中心
+    </div>
+    <div class="hyzxconter">
+        <%<hi:common_user_menu runat="server" />%>
+        <div class="hyzxconterr">
+            <div class="hyzxconterr1" style=" display:none;">
+                <div class="hyzxconterr11">
+                    <div class="hyzxconterr11l">
+
+                    </div>
+                    <div class="hyzxconterr11r">
+
+                    </div>
+                </div>
+                <div class="hyzxconterr12">
+                    <ul>
+                        <li>
+                            <div class="hyzxconterrcont">
+                                您目前账户积分：
+                            </div>
+                            <div class="hyzxconterrcontr">
+
+                                <a href="/OnlineGifts.aspx">兑换优惠券</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="hyzxconterrcont">
+                                您的未读消息： <span class="lvse">
+
+                                </span>
+                            </div>
+                            <div class="hyzxconterrcontr">
+                                <a href="/user/UserReceivedMessages.aspx">查看</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="hyzxconterrcont">
+                                预存款余额：<em style="color: Red">￥</em>
+                            </div>
+                            <div class="hyzxconterrcontr">
+                                可用余额(<em>￥<%<Hi:FormatedMoneyLabel ID="litUseableBalance" runat="server" />%></em>)
+                                冻结金额(<em>￥<%<Hi:FormatedMoneyLabel ID="litRequestBalance" runat="server" />%></em>)
+                                <a href="/User/RechargeRequest">充值</a>
+                                <a href="/User/RequestBalanceDraw">我要提现</a>
+                                <a href="/User/MyAccountSummary">查看</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="hyzxconterrcont">
+                                订单消息提醒：
+                            </div>
+                            <div class="hyzxconterrcontr">
+                                待付款订单(<em></em>)
+                                待确认收货订单(<em></em>)
+                                待评价商品(<em></em>)
+                            </div>
+                        </li>
+                        <li>
+                            <div class="hyzxconterrcont">
+                                商品咨询
+                            </div>
+                            <div class="hyzxconterrcontr">
+                                已回复咨询(<em><a href=/user/UserConsultations.aspx"><%<asp:Literal ID="litNoReplyLeaveWordNum" runat="server"></asp:Literal>%></a></em>)
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div style=" display:none;"></div>
+            <div class="info">
+
+                <div class="new">
+                    <div class="title">新品推荐</div>
+                    <div class="con">
+                        <ul class="hot-pro">
+                            <%
+                            <hi:common_userdefault_productlist runat="server" maxnum="4" id="rp_new" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_UserDefault_ProductList.ascx" />%>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="new">
+                    <div class="title">商城热卖</div>
+                    <div class="con">
+
+                        <ul class="hot-pro">
+                            <%
+                            <hi:common_userdefault_productlist runat="server" maxnum="4" id="rp_hot" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_UserDefault_ProductList2.ascx" />%>
+                           
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="browse">
+                <div class="title"><h2>最近浏览</h2></div>
+                <div class="con">
+                    <%<hi:common_goodslist_browsed maxnum="4" runat="server" />%>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+  <%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>
+<script type="text/javascript">
+    function onUserSignIn() {
+        $.ajax({
+            url: "/Handler/MemberHandler.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "memberSignIn", SignInSource: 1 },
+            success: function (resultData) {
+                if (resultData.result.status == "1") {
+                    var settingConDays = resultData.result.settingDays;
+                    var currentPoints = resultData.result.integral;
+                    $("#currentPoints").html(currentPoints);
+                    var pointDay = resultData.result.points;
+                    if (pointDay > 0) {
+                        if (settingConDays > 0) {
+                            if (resultData.result.continuDays == "0") {
+                                alert("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~,连续签到了 " + settingConDays + " 天，额外获得了 " + resultData.result.continuPoints + " 分");
+                            }
+                            else if (resultData.result.continuDays < settingConDays) {
+                                var days = settingConDays - resultData.result.continuDays;
+                                alert("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~,您已连续签到了 " + resultData.result.continuDays + " 天，再签到 " + days + " 天，将额外获得 " + resultData.result.continuPoints + " 分哦~");
+                            }
+                            else {
+                                alert("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~");
+                            }
+                        }
+                        else {
+                            alert("恭喜您，签到成功，获得了 " + resultData.result.points + " 分~");
+                        }
+                    }
+                    else {
+                        alert("恭喜您，签到成功！");
+                    }
+                }
+                else {
+                    alert("您今天已经签到过了");
+                }
+            }
+        });
+    }
+
+</script>

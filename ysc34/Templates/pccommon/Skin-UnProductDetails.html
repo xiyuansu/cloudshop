@@ -1,0 +1,835 @@
+﻿  <%<hi:common_header runat="server" />%>
+  <%<hi:common_rightlink runat="server" />%>
+
+<style>
+    .login_tan #btnAmoBuy {
+        display: none;
+    }
+
+    .category_l {
+        border: 1px solid #eeeeee;
+    }
+
+    .product_Brief b {
+        display: none;
+    }
+</style>
+<input type="hidden" runat="server" id="hidden_skus" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidden_skuItem" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidden_productId" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidSubMemberDeduct" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidShowCombinationBuy" clientidmode="Static" />
+<input type="hidden" runat="server" id="hidCombinationId" clientidmode="Static" />
+<div class="main" id="main1">
+    <script src="/utility/cloud-zoom.1.0.2.js" type="text/javascript"></script>
+
+    <span style="display:none;"> <%<Hi:SkuLabel runat="server" id="lblSku" />%></span>
+    <link href="/utility/cloud-zoom.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <div id="divshow" class="dialog">
+        <div class="dialog_title">
+            <div class="dialog_title_l"><span>成功添加到购物车</span></div>
+            <div class="dialog_title_r"> </div>
+        </div>
+        <div class="dialog_cartitem">
+            <p>目前选购商品共<span id="spcounttype">0</span>件　合计：<span><span id="sptotal">0.00</span></span>元</p>
+            <div class="btnbar">
+                <a class="btn-viewcart" href="#" target="_self">进入购物车</a>
+                <a class="btn-continue">继续购物</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="divbefore" class="dialog">
+        <div class="dialog_title">
+            <div class="dialog_title_l"> <span>添加到购物车</span></div>
+        </div>
+        <div class="dialog_cartitem">正在添加到购物车……</div>
+    </div>
+    <%<input id="hiddenpid" clientidmode="Static" runat="server" type="hidden" /> %>
+    <%<input type="hidden" id="txCartQuantity" value="" clientidmode="Static" runat="server" /> %>
+    <div id="divAlready" class="dialog">
+        <div class="dialog_title">
+            <div class="dialog_title_l">
+                <span>你已经收藏过该商品</span>
+            </div>
+            <div class="Favorite_title_r">
+            </div>
+        </div>
+        <div class="dialog_cartitem">
+            <a href="/user/favorites.aspx">查看我的收藏>></a>
+        </div>
+    </div>
+    <div id="divFavorite" class="dialogFavorite">
+        <div class="Favorite_title">
+            <div class="Favorite_title_l">
+                <span>成功加入收藏</span>
+            </div>
+            <div class="Favorite_title_r">
+            </div>
+        </div>
+        <div id="reset" class="tips">
+            <h2>
+                收藏成功！
+            </h2>
+            <p>
+                <em>
+                    您已收藏了<span id="favoriteCount">1</span>个商品， <a target="_blank" href="/User/Favorites">
+                        <font>查看我的收藏&gt;&gt;</font>
+                    </a>
+                </em>
+            </p>
+        </div>
+        <div id="attention-tags">
+            <div class="mt">
+                <h4>
+                    加标签<em>（最多可选3个）</em>
+                </h4>
+            </div>
+            <div class="mc" id="tagDiv">
+                <ul class="att-tag-list" id="tag_num"></ul>
+                <ul class="att-tag-list att-tag-list-save" id="tag_num2">
+                    <li class="att-tag-new">
+                        <input id="txttags" maxlength="10" type="text" onkeydown="javascript:if(event.keyCode==13) AppendTags();"
+                               onkeyup="return checkLength(this)" placeholder="自定义" onfocus="if (this.value==this.defaultValue){this.value=''};this.style.color='#333333'"
+                               onblur="if (this.value==''){this.value=this.defaultValue;};this.style.color='#9C9A9C'"
+                               value="自定义" class="text" style="height: 25; color: rgb(156, 154, 156);" /><span onclick="javascript:return AppendTags();">添加</span>
+                    </li>
+                </ul>
+                <div id="tishi" class="att-tag-btn">
+                    <a onclick="return SaveTags();" href="javascript:void(0);" class="att-btn-ok">确定</a>
+                    <a class="att-btn-cancal" href="javascript:void(0);" onclick="CloseFavorite();">取消</a>
+                    <span class="hl_red fl hide">最多可选不超过三个标签</span>
+                    <span class="hl_red fl hide">请至少选择1个标签</span>
+                    <span class="hl_green fl hide">设置成功</span>
+                    <span class="hl_red fl hide">请输入自定义标签名称！</span>
+                    <span class="hl_red fl hide">标签由数字、字母、汉字组成</span>
+                    <span class="hl_red fl hide">存在该标签的收藏商品，无法删除</span>
+                    <span class="hl_red fl hide">请选择要删除的收藏标签</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login_tan" id="loginForBuy" style="display: none;">
+        <div class="dialog_title">
+            <div class="dialog_title_l"><span>您尚未登录，请登录</span></div>
+            <div class="dialog_title_r" id="imgCloseLogin"></div>
+        </div>
+        <div class="dialog_cartitem">
+            <input type="text" name="textfield" id="textfieldusername" placeholder="邮箱/手机号" class="login_tan_input1" />
+            <input type="password" name="textfield2" id="textfieldpassword" placeholder="密码" class="login_tan_input2" />
+            <div class="info">
+                <a href="/register.aspx" class="register">我要注册</a>
+                <a href="/ForgotPassword.aspx">忘记密码?</a>
+                <input id="btnAmoBuy" class="btnAmoBuy" type="button" value="匿名购买" />
+            </div>
+            <div class="btnbar">
+                <input type="button" name="button" id="btnLoginAndBuy" value="登 录 " class="login_tan_input3" />
+            </div>
+        </div>
+    </div>
+
+
+
+    <a name="top_name" id="top1"></a>
+    <div class="nav_info"><%<hi:common_location runat="server" />%></div>
+    <div class="product_intro">
+        <div class="product_preview">
+            <%<Hi:Common_ProductImages ID="images" Is410Image="true" Is60Image="true" runat="server" />%>
+        </div>
+        <div class="product_parameter">
+            <table cellpadding="0" cellspacing="0" border="0" width="530">
+                <tr>
+                    <td><div id="bfdProductTitle"><%<asp:Literal id="litProductName" runat="server" />%></div></td>
+                </tr>
+                <tr>
+                    <td class="introduce"> <asp:Literal runat="server" ID="litShortDescription" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="un_sales">此商品已下架</span>
+                    </td>
+                </tr>
+                <tr class="product_para_name">
+                    <td><%<asp:hyperlink id="aCountDownUrl" runat="server" />%></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="product_para2">
+                            <div id="divmarket"><em>市场价：</em><del>￥<%<Hi:FormatedMoneyLabel ID="lblMarkerPrice" runat="server" />%></del></div>
+                            <div class="tm-promo-price">
+                                <div class="price">
+                                    <em style="margin-top:13px;">售&nbsp;&nbsp;&nbsp;价：</em><b>￥<span><%<asp:Label ID="lblBuyPrice" runat="server" />%></span></b>
+                                </div>
+
+                                <div class="money" id="divProductReferral" runat="server">
+                                    预计分销奖励：<em><%<Hi:UserProductReferLabel ID="lbUserProductRefer" runat="server" />%></em>
+                                </div>
+                            </div>
+                            <div class="cuxiao" id="divCuxiao" runat="server">
+                                <em>促&nbsp;&nbsp;&nbsp;销：</em>
+                                <span>
+                                    <div class="divPhonePrice" id="divPhonePrice" runat="server" visible="false">
+                                        <i class="tag1" style=" background:#ff5353;">享</i>
+                                        <b class="full" id="full">
+                                            <div class="full_con">
+                                                <div>
+                                                    <em>手机专享价<strong>￥<asp:literal id="litPhonePrice" runat="server"></asp:literal></strong>，到手机端购买</em>
+                                                    <i class="icon_tel_03" id="icon_tel_03">1</i>
+                                                    <i class="icon" id="zhankaiQrCode"><img src="../images/new/zhankai.png"></i>
+                                                </div>
+                                                <div id="phonePriceQrCode" class="sjorder_img" style="display:none">
+                                                    <%<asp:Image ID="phonePriceQrCode" runat="server" ImageUrl="/Utility/pics/201510221157407226600.jpg" width="150px" />%>
+                                                    <span class="date">
+                                                        优惠截止日期：
+                                                        <strong><asp:literal id="litPhonePriceEndDate" runat="server"></asp:literal></strong>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </b>
+                                    </div>
+                                    <div id="divOrderPromotions" class="divOrderPromotions" runat="server" visible="false">
+                                        <i class="tag1">满</i>
+                                        <b class="full">
+                                            <div class="full_con">
+                                                <em><asp:literal id="ltlOrderPromotion" runat="server"></asp:literal></em>
+                                                <i class="icon" id="zhankai"><img src="../images/new/zhankai.png"></i>
+                                            </div>
+                                        </b>
+
+                                    </div>
+                                    <asp:literal id="ltlProductSendGifts" runat="server"></asp:literal>
+                                </span>
+
+                            </div>
+                            <div style=" height: 1px;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="product_para3"><td><%<Hi:Common_SetDeliveryRegion ID="setDeliverRegion" runat="server"></Hi:Common_SetDeliveryRegion>%></td></tr>
+
+                <tr class="product_sale"><td><span class="num">销量：<em><%<asp:Literal ID="litSaleCounts" runat="server" />%></em> <asp:literal id="ltlUnit" runat="server" /></span> <span>评价：<em id="spanReviewCount1"><asp:Literal ID="litReviewCount" runat="server" /></em> 条</span></td></tr>
+
+                <tr class="product_para_select" style="display:none">
+                    <td>
+                        <%<hi:skuselector runat="server" cssclass="Product_WareFun_bg" />%>
+                        <div class="product_para_num" style="display:none">
+
+                            <div class="title">数量：</div>
+                            <div class="tb-text"><%<Hi:BuyAmountBox id="txtBuyAmount" CssClass="Product_input" runat="server"></Hi:BuyAmountBox>%></div>
+                            <div class="mui-amount-btn">
+                                <div name="spAdd" class="shopcart-minus shopcart1"> </div>
+                                <div name="spSub" class="shopcart-add shopcart1"></div>
+
+                            </div>
+
+                            <div class="amount-unit">
+                                <span style=" display:none;">￥<span><%<Hi:TotalLabel ID="lblTotalPrice" runat="server" /> %></span></span>库存：<%<Hi:StockLabel ID="lblStock" runat="server" />%><%<asp:Literal ID="litUnit" runat="server" />%>
+                            </div>
+                            <%<input id="hidIsOpenMultiStore" clientidmode="Static" runat="server" type="hidden" /> %>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="product_btns_append">
+                    <td style="position:relative">
+                        <table cellpadding="0" cellspacing="0" border="0" width="530">
+                            <tr>
+                                <td colspan="3">
+                                    <ul class="Product_tg_ul" style="display:none">
+                                        <li class="product_btns_buy">
+                                            <%<Hi:BuyButton runat="server" id="btnBuy">立即购买</Hi:BuyButton>%>
+                                        </li>
+                                        <li class="product_btns_shop">
+                                            <%<Hi:AddCartButton runat="server" id="btnaddgouwu">加入购物车 </Hi:AddCartButton>%>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="ald-inner">
+            <div class="brand_logo">
+                <a id="aBrand" runat="server">
+                    <Hi:HiImage runat="server" runat="server" id="imgBrand"></Hi:HiImage>
+                </a>
+            </div>
+            <div class="qq" id="divqq" runat="server">
+                <em>客服：</em>
+                <span>
+                    <%<Hi:ThemedTemplatedRepeater ID="rptOnlineService" runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_ProductOnlineService.ascx" />%>
+                </span>
+            </div>
+            <div class="sever">
+                <em>服务支持：</em>
+                <span>
+                    <img id="imgpdorequest" runat="server" src="/Utility/pics/pdorequest.jpg" visible="false" />
+                    <img id="imgTakeonstore" runat="server" src="/Utility/pics/takeonstore.jpg" visible="false" />
+                    <img id="imgCustomerService" src="/Utility/pics/customerservice.jpg" />
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div style="height:40px; overflow:hidden; clear:both;"></div>
+
+    <script type="text/javascript" src="/script/jquery.masonry.min.js"></script>
+
+
+
+    <div class="product_frame w1200 o-hidden">
+        <div class="category_l">
+            <div class="paihangtop ma10">热销推荐</div>
+            <div class="sale_pro"><hi:common_subjectproduct_top runat="server" subjectid="17"></hi:common_subjectproduct_top></div>
+        </div>
+        <div class="category_r">
+
+            <div class="product_detail">
+                <ul class="product_nav_wrap">
+                    <li class="curr"><a>商品详情</a></li>
+                    <li><a>商品评价<em id="spanReviewCount2"><asp:Literal id="ltlReviewCount" runat="server" /></em></a></li>
+                    <li><a>成交记录<em><asp:Literal id="ltlSaleCount" runat="server"></asp:Literal></em></a></li>
+                    <li><a>商品咨询<em><asp:Literal id="ltlConsultation" runat="server"></asp:Literal></em></a></li>
+                </ul>
+
+                <div class="product_mc">
+                    <div class="detail-content-item">
+                        <ul>
+                            <%
+                            <Hi:ThemedTemplatedRepeater ID="rptExpandAttributes" runat="server" TemplateFile="/ascx/tags/Common_ViewProduct/Skin-ExpandAttributes.ascx" />%>
+                        </ul>
+                    </div>
+                    <div style="height:auto;overflow:hidden;"><%<asp:Literal ID="litDescription" runat="server" />%></div>
+                </div>
+
+                <div class="product_mc" style="display:none">
+
+                    <div class="i-Review">
+                        <div class="rate"><strong>0<em>%</em></strong><span>好评度</span></div>
+                        <div class="percent">
+                            <dl>
+                                <dt>好评<span>(0%)</span></dt>
+                                <dd><div style="width: 0px;"></div></dd>
+                            </dl>
+                            <dl>
+                                <dt>中评<span>(0%)</span></dt>
+                                <dd><div style="width: 0px;"></div></dd>
+                            </dl>
+                            <dl>
+                                <dt>差评<span>(0%)</span></dt>
+                                <dd><div style="width:0px;"></div></dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="Review-con">
+                        <div class="wrap">
+                            <div class="tab">
+                                <ul class="tab-hd">
+                                    <li class="active">全部评价<em>（0）</em></li>
+                                    <li>好评<em>（0）</em></li>
+                                    <li>中评<em>（0）</em></li>
+                                    <li>差评<em>（0）</em></li>
+                                    <li>有图<em>（0）</em></li>
+                                </ul>
+                                <div class="tab-bd">
+                                    <div class="thisclass review0">
+                                    </div>
+                                    <div class="normal review1"></div>
+                                    <div class="normal review2"></div>
+                                    <div class="normal review3"></div>
+                                    <div class="normal review4"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product_mc" id="productSaleCountContainer" style="display:none">
+                    <div class="tab_sales">
+                        <div class="tr_head title">
+                            <div class="name">买家</div><div class="num">数量</div>
+                            <div class="size">款式和型号</div><div class="time">付款时间</div>
+                        </div>
+                        <div class="details_plzx" id="divlineItems">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product_mc" style="display:none">
+                    <!--商品咨询-->
+                    <div class="Consultations">
+                        <%<hi:common_productconsultations runat="server" templatefile="/ascx/tags/Common_ViewProduct/Skin-Common_ProductConsultations.ascx" maxnum="5" />%>
+                        <div class="details_plzx">
+                            <span class="colorF"><%<asp:HyperLink ID="hpkProductConsultations" runat="server" CssClass="Product_b" />%></span>
+                            <%<hi:common_viewproduct_consultation runat="server" cssclass="Product_a" />%>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        var productConsultationsDataLoaded = false;
+        var productReviewType1Loead = false;
+        var productReviewType2Loead = false;
+        var productReviewType3Loead = false;
+        var productReviewType4Loead = false;
+        var productReviewType5Loead = false;
+
+        //加载成交记录
+        function loadProductSaleCountData(pageSize, currentPage, productId) {
+            $.post('../API/ReviewHandler.ashx?action=LoadLineItems&PageSize=' + pageSize + '&CurrentPage=' + currentPage + '&ProductId=' + productId, function (result) {
+                var items = JSON.parse(result);
+                var totalCount = items.totalCount;
+                if (items.data.length > 0) {
+                    $("#divlineItems").html("");
+                    var userhtm = "";
+                    for (var i = 0; i < items.data.length; i++) {
+                        var n = items.data[i];
+                        userhtm += getLineItemHtml(n);
+                    }
+                    $("#divlineItems").html(userhtm);
+                    //分页
+                    var pageNum = totalCount / pageSize;
+                    if ((pageSize * parseInt(pageNum)) < totalCount) {
+                        pageNum++;
+                    }
+                    if (pageNum > 1) {
+                        var pageHtml = getLineItemPage(totalCount, parseInt(pageNum), currentPage);
+                        $("#divlineItems").append(pageHtml);
+                    }
+                }
+            });
+        }
+        var reviewPageSize = 5;
+        var lineItemPageSize = 5;
+        $(function () {
+            function tabs(tabTit, on, tabCon) {
+                $(tabTit).children().click(function () {
+                    $(this).addClass(on).siblings().removeClass(on);
+                    var index = $(tabTit).children().index(this);
+                    $(tabCon).children().eq(index).show().siblings().hide();
+                    loadReviewData(reviewPageSize, 1, $("#hidden_productId").val(), index);
+                });
+            };
+            tabs(".tab-hd", "active", ".tab-bd");
+            /*
+                        loadStatisticsData($("#hidden_productId").val());
+                        loadReviewData(reviewPageSize, 1, $("#hidden_productId").val(), 0);
+                        loadReviewData(reviewPageSize, 1, $("#hidden_productId").val(), 1);
+                        loadReviewData(reviewPageSize, 1, $("#hidden_productId").val(), 2);
+                        loadReviewData(reviewPageSize, 1, $("#hidden_productId").val(), 3);
+                        loadReviewData(reviewPageSize, 1, $("#hidden_productId").val(), 4);
+            */
+            if ($("#hidSubMemberDeduct").val() == "" || $("#hidSubMemberDeduct").val() == undefined) {
+                $("#referralMoney").hide();
+            }
+        });
+        //加载评论
+        function loadReviewData(pageSize, currentPage, productId, type) {
+            switch (type) {
+                case 0:
+                    if (productReviewType1Loead) return;
+                    break;
+                case 1:
+                    if (productReviewType2Loead) return;
+                    break;
+                case 2:
+                    if (productReviewType3Loead) return;
+                    break;
+                case 3:
+                    if (productReviewType4Loead) return;
+                    break;
+                case 4:
+                    if (productReviewType5Loead) return;
+                    break;
+            }
+            $.post('../API/ReviewHandler.ashx?action=LoadReview&PageSize=' + pageSize + '&CurrentPage=' + currentPage + '&ProductId=' + productId + '&type=' + type, function (result) {
+                switch (type) {
+                    case 0:
+                        productReviewType1Loead = true;
+                        break;
+                    case 1:
+                        productReviewType2Loead = true;
+                        break;
+                    case 2:
+                        productReviewType3Loead = true;
+                        break;
+                    case 3:
+                        productReviewType4Loead = true;
+                        break;
+                    case 4:
+                        productReviewType5Loead = true;
+                        break;
+                }
+
+                var items = JSON.parse(result);
+                var totalCount = items.totalCount;
+                if (type == 0) {
+                    $("#spanReviewCount1").text(totalCount);
+                    $("#spanReviewCount2").text(totalCount);
+                }
+
+                if (items.data.length > 0) {
+                    $(".review" + type).html("");
+                    var userhtm = "";
+                    for (var i = 0; i < items.data.length; i++) {
+                        var n = items.data[i];
+                        userhtm += getReviewHtml(n);
+                    }
+                    $(".review" + type).html(userhtm);
+
+                    $('input.rating').rating();
+                    //分页
+                    var pageNum = totalCount / pageSize;
+                    if ((pageSize * parseInt(pageNum)) < totalCount) {
+                        pageNum++;
+                    }
+                    if (pageNum > 1) {
+                        $(".review" + type).append(getPage(totalCount, parseInt(pageNum), currentPage, type));
+                    }
+                }
+                $('.after-service-img img').click(function () {
+                    var bigsrc = $(this).attr('src');
+                    $(this).addClass("active");
+                    $(this).siblings().removeClass("active");
+                    $(this).parents().siblings(".preview-img").children().attr("src", bigsrc);
+                    $(this).parents().siblings(".preview-img").show(300);
+                })
+                $(".preview-img").click(function () {
+                    $(this).hide(300);
+                })
+            });
+        }
+        //加载评论统计
+        function loadStatisticsData(productId) {
+
+            $.post('../API/ReviewHandler.ashx?action=StatisticsReview&ProductId=' + productId, function (result) {
+                var items = JSON.parse(result);
+                var reviewNum = parseInt(items.reviewNum);
+                var reviewNum1 = parseInt(items.reviewNum1);
+                var reviewNum2 = parseInt(items.reviewNum2);
+                var reviewNum3 = parseInt(items.reviewNum3);
+                var reviewNumImg = parseInt(items.reviewNumImg);
+
+                var reviewRate1 = 0;
+                var reviewRate2 = 0;
+                var reviewRate3 = 0;
+                if (reviewNum != 0) {
+                    reviewRate1 = ((reviewNum1 * 100) / (reviewNum)).toFixed(0);
+                    reviewRate2 = ((reviewNum2 * 100) / (reviewNum)).toFixed(0);
+                    reviewRate3 = ((reviewNum3 * 100) / (reviewNum)).toFixed(0);
+                }
+
+                $(".i-Review .rate strong").html(reviewRate1 + "<em>%</em>");
+                $(".i-Review .percent dl").eq(0).html("<dt>好评<span>(" + reviewRate1 + "%)</span></dt><dd><div style=\"width: " + reviewRate1 + "px;\"></div></dd>");
+                $(".i-Review .percent dl").eq(1).html("<dt>中评<span>(" + reviewRate2 + "%)</span></dt><dd><div style=\"width: " + reviewRate2 + "px;\"></div></dd>");
+                $(".i-Review .percent dl").eq(2).html("<dt>差评<span>(" + reviewRate3 + "%)</span></dt><dd><div style=\"width: " + reviewRate3 + "px;\"></div></dd>");
+
+                $(".tab-hd li").eq(0).find("em").html("(" + reviewNum + ")");
+                $(".tab-hd li").eq(1).find("em").html("(" + reviewNum1 + ")");
+                $(".tab-hd li").eq(2).find("em").html("(" + reviewNum2 + ")");
+                $(".tab-hd li").eq(3).find("em").html("(" + reviewNum3 + ")");
+                $(".tab-hd li").eq(4).find("em").html("(" + reviewNumImg + ")");
+
+                $(".product_nav_wrap li").eq(1).find("em").html(reviewNum);
+            });
+        }
+        function getReviewHtml(obj) {
+            var arr = new Array();
+            arr.push('<div class="reviewNew">');
+            arr.push('<div class="reviewNew_tx">');
+            arr.push('<img src="' + obj.Picture + '" />');
+            arr.push('<span>' + obj.UserName + '</span>');
+            arr.push('</div>');
+            arr.push('<div class="reviewNew_t">');
+            arr.push('<span><input id="input-2ba" type="number" class="rating" min="0" max="5" step="1" data-size="xs" data-stars="5" value="' + obj.Score + '" data-symbol="&#xe005;" readonly="readonly"></span>');
+            arr.push('<span>' + obj.SKUContent + '</span>');
+            arr.push('<i>发表于：' + obj.ReviewDate + '</i>');
+            arr.push('</div>');
+            arr.push('<p class="reviewInfo">' + obj.ReviewText + '</p>');
+            arr.push('<span class="after-service-img">');
+            if (obj.ImageUrl1 != null && obj.ImageUrl1 != "")
+                arr.push('<img src="' + obj.ImageUrl1 + '" style="max-height:60px;" class="" />');
+            if (obj.ImageUrl2 != null && obj.ImageUrl2 != "")
+                arr.push('<img src="' + obj.ImageUrl2 + '" style="max-height:60px;" class="" />');
+            if (obj.ImageUrl3 != null && obj.ImageUrl3 != "")
+                arr.push('<img src="' + obj.ImageUrl3 + '" style="max-height:60px;" class="" />');
+            if (obj.ImageUrl4 != null && obj.ImageUrl4 != "")
+                arr.push('<img src="' + obj.ImageUrl4 + '" style="max-height:60px;" class="" />');
+            if (obj.ImageUrl5 != null && obj.ImageUrl5 != "")
+                arr.push('<img src="' + obj.ImageUrl5 + '" style="max-height:60px;" class="" />');
+            arr.push('</span>');
+            arr.push('<div class="preview-img" style="overflow: hidden; display: none;">');
+            arr.push('<img src="">');
+            arr.push('</div>');
+            if (obj.ReplyDate != null && obj.ReplyDate != "") {
+                arr.push('<p class="Preply"><span>商家回复：</span>' + obj.ReplyText + '</p>');
+            }
+            arr.push('</div>');
+            return arr.join("");
+        }
+
+        function getLineItemHtml(obj) {
+            var arr = new Array();
+            arr.push('<div class="tr_head">');
+            arr.push('<div class="name"><img style="width:40px;border-radius:100%;" src="' + obj.Picture + '" />' + obj.UserName + '</div>');
+            arr.push('<div class="num">' + obj.Quantity + '</div>');
+            arr.push('<div class="size">' + obj.SKUContent + '&nbsp;</div>');
+            arr.push('<div class="time">' + obj.PayDate + '</div>');
+            arr.push('</div>');
+            return arr.join("");
+        }
+
+        function getPage(totalCount, pageNum, currentPage, type) {
+            var arr = new Array();
+            arr.push('<div class="page">');
+            if (currentPage > 1)
+                arr.push('<a href="javascript:loadReviewData(' + reviewPageSize + ',' + (currentPage - 1) + ',' + $("#hidden_productId").val() + ',' + type + ');" class="page-prev">上一页</a>');
+            var finallyPage = 0;
+            for (var i = 1; i <= pageNum; i++) {
+                if (i > (currentPage - 3 + ((pageNum - currentPage - 3) > 0 ? 0 : (pageNum - currentPage - 3))) && i < (currentPage + 3 - ((currentPage - 3) > 0 ? 0 : (currentPage - 3)))) {
+                    finallyPage = i;
+                    if (i == currentPage)
+                        arr.push('<a class="page-cur">' + i + '</a>');
+                    else
+                        arr.push('<a href="javascript:loadReviewData(' + reviewPageSize + ',' + i + ',' + $("#hidden_productId").val() + ',' + type + ');" >' + i + '</a>');
+                }
+            }
+            if (finallyPage < pageNum) {
+                arr.push('<a class="page-break">...</a>');
+            }
+            if (currentPage < pageNum)
+                arr.push('<a href="javascript:loadReviewData(' + reviewPageSize + ',' + (currentPage + 1) + ',' + $("#hidden_productId").val() + ',' + type + ');"  class="page-next">下一页</a>');
+
+            arr.push('<span class="page-skip">');
+            arr.push('第' + currentPage + '/' + pageNum + '页 共' + totalCount + '记录');
+            arr.push('<input type="text" id="txtGoto' + type + '" size="3" value="" class="text">页');
+            arr.push('<input type="button" onclick="javascript:btnfanye(' + type + ',' + pageNum + ');"  value="确定" class="button">');
+            arr.push('</span>');
+            arr.push('</div>');
+            return arr.join("");
+        }
+
+        function getLineItemPage(totalCount, pageNum, currentPage) {
+            var arr = new Array();
+            arr.push('<div class="page">');
+            if (currentPage > 1)
+                arr.push('<a href="javascript:loadProductSaleCountData(' + lineItemPageSize + ',' + (currentPage - 1) + ',' + $("#hidden_productId").val() + ');" class="page-prev">上一页</a>');
+            var finallyPage = 0;
+            for (var i = 1; i <= pageNum; i++) {
+                if (i > (currentPage - 3 + ((pageNum - currentPage - 3) > 0 ? 0 : (pageNum - currentPage - 3))) && i < (currentPage + 3 - ((currentPage - 3) > 0 ? 0 : (currentPage - 3)))) {
+                    finallyPage = i;
+                    if (i == currentPage)
+                        arr.push('<a class="page-cur">' + i + '</a>');
+                    else
+                        arr.push('<a href="javascript:loadProductSaleCountData(' + lineItemPageSize + ',' + i + ',' + $("#hidden_productId").val() + ');" >' + i + '</a>');
+                }
+            }
+            if (finallyPage < pageNum) {
+                arr.push('<a class="page-break">...</a>');
+            }
+            if (currentPage < pageNum)
+                arr.push('<a href="javascript:loadProductSaleCountData(' + lineItemPageSize + ',' + (currentPage + 1) + ',' + $("#hidden_productId").val() + ');"  class="page-next">下一页</a>');
+            arr.push('<span class="page-skip">');
+            arr.push('第' + currentPage + '/' + pageNum + '页 共' + totalCount + '记录');
+            arr.push('<input type="text" id="txtLineItemGoto" size="3" value="" class="text">页');
+            arr.push('<input type="button" onclick="javascript:btnLineItemfanye(' + pageNum + ');"  value="确定" class="button">');
+            arr.push('</span>');
+            arr.push('</div>');
+            return arr.join("");
+        }
+
+        function btnfanye(type, pageNum) {
+            if ($("#txtGoto" + type).val() == "")
+                alert("请输入翻页数");
+            if (isNaN($("#txtGoto" + type).val()))
+                alert("翻页数只能输入数字");
+            if (parseInt($("#txtGoto" + type).val()) > pageNum)
+                alert("翻页数不可以大于最大页数");
+
+            loadReviewData(reviewPageSize, parseInt($("#txtGoto" + type).val()), $("#hidden_productId").val(), type)
+        }
+
+        function btnLineItemfanye(pageNum) {
+            if ($("#txtLineItemGoto").val() == "")
+                alert("请输入翻页数");
+            if (isNaN($("#txtLineItemGoto").val()))
+                alert("翻页数只能输入数字");
+            if (parseInt($("#txtLineItemGoto").val()) > pageNum)
+                alert("翻页数不可以大于最大页数");
+
+            loadProductSaleCountData(lineItemPageSize, parseInt($("#txtLineItemGoto").val()), $("#hidden_productId").val())
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($("#UnProductDetails_lblMarkerPrice").text() == "-") {
+                $("#divmarket").hide();
+            }
+        });
+        var number = $("#buyAmount");
+        $('div[name="spAdd"]').bind("click", function () {
+            if ($("#hidIsOpenMultiStore").val() == "0") {
+                var stock = parseInt($("#productDetails_Stock").text());
+                var num = parseInt(number.val()) + 1;
+                if (num <= stock) {
+                    number.val(num);
+                    ChangeBuyAmount();
+                }
+            } else if ($("#hidIsOpenMultiStore").val() == "1") {
+                var num = parseInt(number.val()) + 1;
+                number.val(num);
+                ChangeBuyAmount();
+            }
+        });
+        $('div[name="spSub"]').bind("click", function () {
+            var num = parseInt(number.val()) - 1;
+            if (num > 0) {
+                number.val(num);
+                ChangeBuyAmount();
+            }
+        });
+        $(".product_nav_wrap li").bind("click", function () {
+            var li_index = $(".product_nav_wrap li").index(this);
+            $(".product_mc").hide().eq(li_index).show();
+            $(this).addClass("curr").siblings().removeClass("curr");
+            switch (li_index) {
+                case 1://评论
+                    loadStatisticsData($("#hidden_productId").val());
+                    loadReviewData(reviewPageSize, 1, $("#hidden_productId").val(), 0);
+                    break;
+                case 2://成交记录
+                    loadProductSaleCountData(lineItemPageSize, 1, $("#hidden_productId").val());
+                    break;
+            }
+        });
+        $(function () {
+            if ($("div.qq span").children().length == 0)
+                $("div.qq").hide();
+        })
+    </script>
+
+    <!--评论大小图切换-->
+    <script>
+        $(function () {
+            var global_img_src = '';
+            $(document).on('click', '.after-service-img img', function () {
+                var new_src = $(this).attr("bigsrc");
+                var is_img = $(this).parents('.column2').find('.preview-img img').attr('src');
+
+                if (new_src != global_img_src || is_img == '') {
+                    global_img_src = new_src;
+
+                    $(this).addClass('active').siblings().removeClass('active');
+                    $(this).parents('.column2').children('.preview-img').show(400);
+                    var new_src = $(this).attr("bigsrc")
+                    $(this).parents('.column2').find('.preview-img img').attr('src', new_src);
+                } else {
+
+                    $(this).parents('.column2').children('.preview-img').hide(10);
+                    $(this).parents('.column2').find('.preview-img img').attr('src', '');
+                }
+            })
+        })
+
+    </script>
+
+    <script src="/utility/product.helper.js" type="text/javascript"></script>
+    <div class="clearboth"></div>
+    <!-- 相关商品-->
+    <div class="product_related">
+        <h2><b>相关商品</b></h2>
+        <ul>
+            <!--相关商品-->
+            <%
+            <hi:common_goodslist_correlative templatefile="/ascx/tags/Common_GoodsList/Skin-Common_GoodsList_Correlative.ascx" maxnum="6" runat="server" />%>
+        </ul>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="/Utility/star/star-rating.css" rev="stylesheet" type="text/css">
+<script src="/Utility/star/star-rating.js"></script>
+<script src="/Utility/star/es5-shim.js"></script>
+<link href="/Utility/hishopUpload/hishopUpload.css" rel="stylesheet" />
+<script src="/Utility/jquery.scrollLoading.min.js"></script>
+
+<script language="javascript">
+    var min_num = $('.cuxiao em').html();
+    if (!min_num) {
+        $('.cuxiao').hide();
+    }
+
+    $("#showQrCode").click(function (e) {
+        $("#productQrCode").show();
+    });
+
+    $("#productQrCode h2 span").click(function (e) {
+        $("#productQrCode").hide();
+    })
+    $('#zhankai').click(function () {
+        if ($(this).parents('.full').hasClass('hover')) {
+            $(this).parents('.full').removeClass('hover');
+        }
+        else {
+            $(this).parents('.full').addClass('hover');
+        }
+
+
+    })
+    $('#zhankaiQrCode,#icon_tel_03').mouseover(function () {
+        $("#full").addClass("hover");
+        $("#phonePriceQrCode").show();
+    })
+    $('#full').mouseleave(function () {
+        $("#full").removeClass("hover");
+        $("#phonePriceQrCode").hide();
+    })
+
+    $(window).scroll(function () {
+        setScrollLoading();
+    });
+    function setScrollLoading() {
+        $("img").scrollLoading();
+        $("iframe").each(function () {
+            if (!$(this).attr("src")) {
+                $(this).attr("src", $(this).attr("data-url"));
+            }
+        });
+    }
+
+    $(function () {
+        var product_nav_wrap = $('.product_nav_wrap').offset().top - 40;
+        $(window).scroll(function () {
+            if ($(document).scrollTop() >= product_nav_wrap) {
+                $('.product_nav_wrap').css({
+                    position: 'fixed',
+                    top: '0',
+                    borderBottom: '1px solid #ccc',
+                    boxShadow: '0 1px 3px #ccc',
+                    width: '978px',
+                    background: '#fff',
+                    "z-index": '9',
+                })
+            }
+            if ($(document).scrollTop() + $('.product_nav_wrap').height() + 40 <= product_nav_wrap) {
+                $('.product_nav_wrap').removeAttr('style');
+            }
+        });
+    })
+</script>
+<%<hi:common_footer runat="server" />%>

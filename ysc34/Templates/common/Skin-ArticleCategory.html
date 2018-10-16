@@ -1,0 +1,112 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .main {
+        padding: 0.75rem;
+    }
+
+    .form-search {
+        height: auto;
+    }
+
+    .list-group {
+        float: left;
+        width: 100%;
+        margin-top: 0.75rem;
+    }
+
+        .list-group a {
+            float: left;
+            width: 100%;
+            height: 1.5rem;
+            line-height: 1.5rem;
+            border-bottom: 1px solid #e7e5ea;
+        }
+
+    .input-group-btn {
+        border-radius: 0 0.2rem 0.2rem 0;
+        overflow: hidden;
+    }
+</style>
+<div class="main">
+    <div class="form-search" style="display:none;">
+        <input id="txtKeywords" type="text" class="form-control search-query">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-warning" data-type="last" onclick="searchs()">搜索</button>
+        </span>
+    </div>
+    <div class="pbox">
+        <div class="list-group">
+            <Hi:WapTemplatedRepeater id="rpt_ArticleCategory" runat="server" templatefile="/Tags/skin-Common_ArticleCategory.ascx" />
+        </div>
+    </div>
+</div>
+
+<hi:common_wapfooter runat="server" />
+<script type="text/javascript">
+    function searchs() {
+        var key = $("#txtKeywords").val();
+        var str = window.location.search;
+
+        var categoryId;
+        if (-1 == str.indexOf("&keyWord=")) {
+            categoryId = str.substring(str.indexOf("categoryId=") + 11);
+        } else {
+            categoryId = str.substring(str.indexOf("categoryId=") + 11, str.indexOf("&keyWord="));
+        }
+
+        var url = "Articles?categoryId=" + categoryId + "&keyWord=" + escape(key);
+
+        window.location.href = url;
+    }
+
+    $(document).ready(function () {
+
+        var keyWord = getParam("keyword");
+        if (keyWord.length > 0) {
+            $("#txtKeywords").val(unescape(unescape(keyWord)));
+        }
+    });
+
+
+    $(".hfooter .glyphicon-refresh").click(function () {
+        location.reload();
+    })
+
+    $(".hfooter .glyphicon-arrow-left").click(function () {
+        history.go(-1);
+    })
+
+    //隐藏右上角菜单
+    //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    //    WeixinJSBridge.call('hideOptionMenu');
+    //});
+
+    //隐藏底部菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+
+
+    function goUrl(url) {
+        //        alert(url);
+        //location.replace(url);
+        location.href = url;
+
+    }
+
+    $(function () {
+        var categoryItems = $('a.categoryItem');
+        var cateogryId, url;
+        $.each(categoryItems, function (i, item) {
+            cateogryId = $(item).attr('value');
+            if ($(item).attr('name') == "True")
+                url = '?categoryId=' + cateogryId;
+            else
+                url = 'Articles.aspx?categoryId=' + cateogryId;
+            $(item).attr('onclick', 'goUrl("' + url + '")').attr('href', 'javascript:;');
+
+        });
+
+    });
+
+</script>

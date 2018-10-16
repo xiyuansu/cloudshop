@@ -1,0 +1,39 @@
+﻿<%<hi:common_header runat="server" />%>
+<style>
+    body {
+        background: #f3f3f3;
+    }
+
+    .main {
+        margin-top: 20px;
+        overflow: hidden;
+    }
+</style>
+
+<div id="main1" class="main">
+    <div class="tqj"></div>
+    <div class="container articleshelp">
+        <div class="cssleft">
+            <h6>帮助中心</h6>
+            <div class="csslist">
+                <%<hi:common_helpcategory templatefile="/ascx/tags/Common_Comment/Skin-Common_HelpCenter_Category.ascx" runat="server" />%>
+            </div>
+            <div class="left_ad"><hi:common_customad runat="server" adid="33" isdelayedloading="true"></hi:common_customad></div>
+        </div>
+        <div class="cssright">
+            <div class="cssright_h1"><a href="/">首页</a> > 帮助中心 </div>
+            <ul class="cssborder">
+                <%
+                <Hi:ThemedTemplatedRepeater ID="rptHelps" runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_HelpCenter_Help.ascx" />%>
+            </ul>
+            <div class="csspage">
+                <div class="page">
+                    <%<Hi:Pager runat="server" ShowTotalPages="true" ID="pager"  />%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%<hi:common_footer runat="server" />%>
+

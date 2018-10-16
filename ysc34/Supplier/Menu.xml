@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+  <Module Title="商品" Link="Product/ProductList.aspx">
+    <Item Title="商品管理" icon="icon_gmgr" >
+      <PageLink  Title="发布商品" Link="Product/SelectCategory.aspx"/>
+      <PageLink  Title="待审核商品" Link="Product/AuditProductList.aspx"/>
+      <PageLink  Title="商品列表" Link="Product/ProductList.aspx"/>
+    </Item>
+  </Module>
+
+  <Module Title="订单" Link="sales/manageorder.aspx">
+    <Item Title="订单管理"  icon="icon_ordermanage">
+      <PageLink  Title="订单列表" Link="sales/manageorder.aspx"/>
+    </Item>
+    <Item Title="退换货(款)"  icon="icon_exchange">
+      <PageLink  Title="退货申请单" Link="sales/returnsapply.aspx"/>
+      <PageLink  Title="换货申请单" Link="sales/replaceapply.aspx"/>
+    </Item>
+  </Module>
+
+  <Module Title="结算" Link="Balance/Default.aspx">
+    <Item Title="结算管理" icon="icon_settlement">
+      <PageLink  Title="提现管理" Link="Balance/Default.aspx"/>
+      <PageLink  Title="订单结算" Link="Balance/BalanceOrder.aspx"/>
+      <PageLink  Title="收支明细" Link="Balance/Balancedetail.aspx"/>
+    </Item>
+  </Module>
+
+  <Module Title="系统" Link="system/editsupplier.aspx">
+    <Item Title="基本设置"  icon="icon_setting">
+      <PageLink  Title="基本资料" Link="system/editsupplier.aspx"/>
+      <PageLink  Title="密码管理" Link="system/passwordmanage.aspx"/>
+    </Item>
+    <Item Title="物流配送"  icon="icon_PandT">
+      <PageLink  Title="运费模板" Link="system/manageshippingtemplates.aspx"/>
+      <PageLink  Title="发/退货地址" Link="system/shippers.aspx"/>
+    </Item>
+  </Module>
+</Menu>

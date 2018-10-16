@@ -1,0 +1,654 @@
+﻿<%@ Control Language="C#" %><%@ Register TagPrefix="Hi" Namespace="Hidistro.UI.Common.Controls" Assembly="Hidistro.UI.Common.Controls" %><title>微信首页</title><Hi:WapHeadContainer ID="WapHeadContainer1" runat="server" /><script type="text/javascript">function searchs(v) {var url = "ProductList?keyWord="+v;window.location.href = url;}</script><input type="hidden" id="hdTitle" value="微信首页" /><input type="hidden" id="hdDesc" value="商城描述啊啊啊啊" /><input type="hidden" id="hdImgUrl" value="http://upgrade1.ysctest.huz.cn/Storage/master/topic/201702061543555918480.jpg" /><Hi:WapAppDownloadInfo runat="server" id="appdownloadinfo" />
+          <form onsubmit="searchs(escape(($(this).find(':text').eq(0).val()))); return false;">
+        <div class="members_con">
+            <section class="members_search">
+                <input type="text" name="keyWord" id="" value="" placeholder="请输入商品关键字">
+                   <button type="button" value="" onclick="searchs(escape($($(this).prev()).val()))"></button>
+            </section>
+        </div>
+        </form>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=6" title="男鞋">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164742723513353229.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=59" title="休闲零食">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164742723513353229.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=52" title="中老年服装">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170306/6362439232906933388503484.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                    
+                    <span class="cur" ></span>
+                    
+                    <span  ></span>
+                    
+                    <span  ></span>
+                    
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul style="background:#fff;">
+                    
+                    
+                     
+                    <li class="lisw3">
+                        <span><a href="/VShop/FightGroupActivities.aspx"><img data-url="/Storage/template/20170307/6362449164747728228339137.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/VShop/FightGroupActivities.aspx">柑橘类</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw3">
+                        <span><a href="/vshop/couponslist.aspx"><img data-url="/Storage/template/20170307/6362449164755711356081707.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/couponslist.aspx">瓜果类</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw3">
+                        <span><a href="/vshop/CountDownProducts.aspx"><img data-url="/Storage/template/20170307/6362449164759565217838370.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/CountDownProducts.aspx">仁果类</a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul style="background:#fff;">
+                    
+                    
+                     
+                    <li class="lisw3">
+                        <span><a href="#"><img data-url="/Storage/template/20170307/6362449164764620077053523.jpg" ></a></span>
+                        <a class="members_nav1_name" href="#">浆果类</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw3">
+                        <span><a href="#"><img data-url="/Storage/template/20170307/6362449164772500244796094.jpg" ></a></span>
+                        <a class="members_nav1_name" href="#">核果类</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw3">
+                        <span><a href="#"><img data-url="/Storage/template/20170307/6362449164776562036552757.jpg" ></a></span>
+                        <a class="members_nav1_name" href="#">其他</a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164781767001066082.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con" style="margin:10px auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164788819709281235.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164793424255267143.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con" style="margin:10px auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164798278901253051.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164805833447995621.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        <Hi:GoodsListModule runat="server" IsApp="False" Type="goodGroup" Layout="1" ShowName="True" ShowIco="True" ShowPrice="True" DataUrl="/api/Hi_Ajax_GoodsListGroup.ashx" ID="list_1f6ccf02e85643a7960fc379229cf2d9" TemplateFile="/Admin/shop/Modules/GoodGroup1.cshtml"  GoodListSize="6" FirstPriority="1"  SecondPriority="3"  ThirdPriority="5"   />
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170307/6362449164814187295738192.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        <Hi:GoodsListModule runat="server" IsApp="False" Type="goodGroup" Layout="1" ShowName="True" ShowIco="True" ShowPrice="True" DataUrl="/api/Hi_Ajax_GoodsListGroup.ashx" ID="list_efdbbfc64e1048578bfa784a7de0bf4f" TemplateFile="/Admin/shop/Modules/GoodGroup1.cshtml"  GoodListSize="6" FirstPriority="1"  SecondPriority="3"  ThirdPriority="5"   />
+        <div class="members_con">
+            <div class="fulltext"><p><br/></p><style>.members_con{margin:0 auto;}.members_goodspic,.members_flash{margin:0;}.members_goodspic{background:#fff;}.members_nav1 ul li.lisw3 img{max-width:100%;width:auto;height:auto;display:inline}
+  .members_nav1 ul li.lisw3 img{width:60px}</style></div>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_3_1.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_3_2.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_3_3.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_3_4.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_3_5.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_3_6.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_1.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_2.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_3.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_4.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_5.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_6.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_7.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_4_8.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board3 big_board">
+                        <span>
+                            <a href="#">
+                                
+                                <img data-url="/Admin/shop/Public/images/diy/group_1.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board3 small_board">
+                        <span>
+                            <a href="#">
+                                
+                                <img data-url="/Admin/shop/Public/images/diy/group_2.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board3 small_board">
+                        <span>
+                            <a href="#">
+                                
+                                <img data-url="/Admin/shop/Public/images/diy/group_3.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board6 mid1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_2_1.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_2_2.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_2_3.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 mid1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_2_4.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_2_5.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_2_6.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board4 big_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_1_1.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 mid_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_1_2.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 small_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_1_3.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 small_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Admin/images/wap/group_1_4.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        

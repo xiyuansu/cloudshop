@@ -1,0 +1,81 @@
+﻿<div class="group_hd">
+    <div>
+        <span class="icon">
+            <img src="$ImageTitle$"></span><span class="title">$Title$</span></div>
+    <em><a href="$MoreLink$">更多&gt;&gt;</a></em>
+</div>
+<div class="group_bd">
+    <div class="bd_left">
+        <ul>
+            <foreach Data="HotKey">
+            <li><a href="$HotUrl$">$KeyWords$</a></li>
+         </foreach>
+        </ul>
+        <div class="bd_left_ad">
+            <a href="$LeftUrl$" target="_blank">
+                <img data-url="$AdImageLeft$"></a></div>
+    </div>
+    <div class="bd_middle">
+        <div class="bd_right_ad">
+            <a href="$RightUrl$" target="_blank">
+                <img data-url="$AdImageRight$"></a></div>
+        <ul>
+            <foreach Data="Products">
+            <li>
+                <div class="pic">
+                    <a href="$Url$" target="_blank">
+                        <img alt="$ProductName$" data-url="$ThumbnailUrl$"></a></div>
+                <div class="name">
+                    <a href="$Url$" target="_blank">$ProductName$</a></div>
+                <div class="price">
+                    <b><em>￥</em>$RankPrice$</b><span><em>￥</em>$MarketPrice$</span></div>
+                <a class="productview" href="$Url$" target="_blank">查看详细</a>
+            </li>
+          </foreach>
+        </ul>
+    </div>
+    <div class="bd_right">
+        <div class="bd_brand">
+            <ul>
+                <foreach Data="Brand">
+                <li><a href="$BrandUrl$">
+                        <img data-url="$BrandImage$">$BrandName$</a></li>
+              </foreach>
+            </ul>
+        </div>
+        <div class="bd_saletop">
+            <ul>
+                <foreach Data="Images">
+                <li class="sale_top$Number$">
+                    <div class="pic">
+                        <a href="$Url$" target="_blank">
+                            <img data-url="$ThumbnailUrl$"></a></div>
+                    <div class="info">
+                     <div class="price">
+            <display Type="Price"><b><em>￥</em>$SalePrice$</b>
+            <span><em>￥</em>$MarketPrice$</span></display>
+           
+        </div>
+                        <div class="name">
+                            <a href="$Url$" target="_blank">$ProductName$</a></div>
+                            <display Type="SaleCount"><div class="sale">已售出<b>$SaleCount$</b>件</div></display>
+                    </div>
+                </li>
+                </foreach>
+                <foreach Data="Text">
+                <li class="sale_top$Number$">
+                    <div class="info">
+                        <div class="name">
+                            <a href="$Url$" target="_blank">$ProductName$</a></div>
+                        <div class="price">
+                           <display Type="Price"><b><em>￥</em>$SalePrice$</b>
+            <span><em>￥</em>$MarketPrice$</span></display>
+                       <display Type="SaleCount"><div class="sale">已售出<b>$SaleCount$</b>件</div></display>
+                    </div>
+                    </div>
+                </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+</div>

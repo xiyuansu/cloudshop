@@ -1,0 +1,65 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form runat="server" id="form1">
+    <link rel="stylesheet" type="text/css" href="../style/user.css" />
+    <script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+    <div class="hyzxmain">
+        <div class="hyzxconty">
+            当前位置：<span><a href="url:home">首页</a></span>><span><a href="url:user_UserDefault">会员中心</a></span>><span>
+                <a href="#">我的积分</a>
+            </span>
+        </div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <div class="dingdan_box1">
+                        积分
+                    </div>
+                    <div class="dingdan_box3">
+                        <div class="dingdanhao line_bottom">
+                            <span class="d_span1">您当前的有效积分为<%<asp:Literal Text="0" Id="litUserPoint" runat="server" />%></span>
+                            <span class="d_span2">我的优惠券：<%<asp:Literal Text="0" Id="litMyCoupons" runat="server" />%></span>
+                            <span class="d_span2">
+                                <a href="/OnlineGifts.aspx" target="_blank">
+                                                                                               积分兑换优惠券
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="shouhuoxx1_con m_top">
+                        <%<Hi:Common_Point_PointList ID="Common_Point_PointList1" runat="server"></Hi:Common_Point_PointList>%>
+                    </div>
+                    <div class="page">
+                        <%<UI:Pager runat="server" ShowTotalPages="true" ID="pager" />%>
+                    </div>
+                    <div class="jf_wenti">
+                        <span>1. 购物是获取积分的途径。</span> <span>2. 当积分已达到会员等级设置的积分点数要求时，您的会员等级会自动升级。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function nTabs(thisObj, Num) {
+            if (thisObj.className == "active") return;
+            var tabObj = thisObj.parentNode.id;
+            var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+            for (i = 0; i < tabList.length; i++) {
+                if (i == Num) {
+                    thisObj.className = "active";
+                    document.getElementById(tabObj + "_Content" + i).style.display = "block";
+                } else {
+                    tabList[i].className = "normal";
+                    document.getElementById(tabObj + "_Content" + i).style.display = "none";
+                }
+            }
+        }
+    </script>
+    <div class="hyzxfooter">
+    </div>
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

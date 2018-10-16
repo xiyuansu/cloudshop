@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4174A5BD-F6AB-43AB-BE45-EA194B02AA1F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hishop.Weixin.Pay</RootNamespace>
+    <AssemblyName>Hishop.Weixin.Pay</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LitJSON">
+      <HintPath>..\dll\LitJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\DeliverInfo.cs" />
+    <Compile Include="Domain\LogType.cs" />
+    <Compile Include="Domain\PackageInfo.cs" />
+    <Compile Include="Domain\PayConfig.cs" />
+    <Compile Include="Domain\PayInfo.cs" />
+    <Compile Include="Domain\PayRequestInfo.cs" />
+    <Compile Include="Domain\ProviderModes.cs" />
+    <Compile Include="Domain\RefundInfo.cs" />
+    <Compile Include="Domain\WxPayLog.cs" />
+    <Compile Include="DownloadBill.cs" />
+    <Compile Include="Lib\HttpService.cs" />
+    <Compile Include="Lib\JsApiPay.cs" />
+    <Compile Include="Lib\WxPayApi.cs" />
+    <Compile Include="Lib\WxPayData.cs" />
+    <Compile Include="Lib\WxPayException.cs" />
+    <Compile Include="MicroPay.cs" />
+    <Compile Include="NativeNotify.cs" />
+    <Compile Include="NativePay.cs" />
+    <Compile Include="NotifyClient.cs" />
+    <Compile Include="Notify\AlarmErrorType.cs" />
+    <Compile Include="Notify\AlarmNotify.cs" />
+    <Compile Include="Notify\FeedBackNotify.cs" />
+    <Compile Include="Notify\FeedBackType.cs" />
+    <Compile Include="Notify\Notify.cs" />
+    <Compile Include="Notify\NotifyObject.cs" />
+    <Compile Include="Notify\PayNotify.cs" />
+    <Compile Include="PayAccount.cs" />
+    <Compile Include="PayClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryClient.cs" />
+    <Compile Include="Refund.cs" />
+    <Compile Include="RefundQuery.cs" />
+    <Compile Include="ResultNotify.cs" />
+    <Compile Include="Util\PayDictionary.cs" />
+    <Compile Include="Util\SignHelper.cs" />
+    <Compile Include="Util\UrlHelper.cs" />
+    <Compile Include="Util\Utils.cs" />
+    <Compile Include="Util\WebUtils.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

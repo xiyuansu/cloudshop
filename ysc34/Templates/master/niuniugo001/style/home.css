@@ -1,0 +1,2362 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+/* 全局 2013.8.18*/
+
+body { margin: 0px; padding: 0px; font-size: 12px; color: #585858; overflow-y: auto; line-height: 1.8; font-family: microsoft yahei; overflow-x: hidden; background: #FFF;}
+form, ul, li, ol, li, dl, dt, dd, img, p, h1, h2, h3, h4, h5, h6, input { margin: 0px; padding: 0px; }
+h1, h2, h3, h4, h5, h6 { font-size: 12px; font-weight: normal; padding: 0px; margin: 0px; }
+input, select { font-size: 12px; outline: none; }
+img { border: 0px; vertical-align: middle; }
+ul, li { list-style-type: none; }
+strong, b { font-weight: bold; }
+em { font-style: normal; }
+/* Link 全局链接样式 2013.8.18 */
+.dorpdown-layer a{ float: left;padding-left: 15px; color: #333;}
+.fl { float: left; }
+.fr { float: right; }
+a { color: #686868; text-decoration: none; cursor: pointer; outline: none !important; }
+button { outline: none !important; }
+input[type=button] { outline: none !important; }
+a:hover { color: #fe5722; text-decoration: none; }
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+ -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+.display_no { display: none; }
+.display_yes { display: block; }
+.productview { display: none; }
+.top_nav_bg { background: #f0f0f0; height: 27px; line-height: 27px; }
+.top_nav { width: 1000px; height: 27px; margin: 0 auto; }
+.attention { float: left; color: #656565; }
+.attention span { margin-right: 15px; }
+.attention a { color: #656565; }
+.favorite_icon { background: url(/templates/master/botany/images/common/icon1.jpg) no-repeat 0px 2px; padding-left: 20px; }
+.attent_icon { background: url(/templates/master/botany/images/common/icon2.jpg) no-repeat 0px 0px; padding-left: 20px; }
+.cssEdite { min-width: 2px; min-height: 10px; }
+.bigbox { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; background: #CCC; }
+.top { background: #FFF; }
+.top_link { float: right; vertical-align: middle; }
+.top_link .login_re { float: left; margin-right: 20px; }
+.top_link .link_list { float: left; color: #010000; }
+.top_link .link_list a { color: #010000; }
+.top_link .link_list span { margin-right: 5px; }
+.header_p1 { clear: both; margin: 0 auto; width: 1200px; margin-top: 20px; overflow: hidden; }
+.header_p1 .logo, .header_p1 .search_tab { float: left; }
+.header_p1 .logo { width: 285px; margin-right: 10px; }
+.header_p1 .search { margin-top: 15px; width: 440px; overflow: hidden; }
+.header_p1 .search_input { border: 3px solid #E3393C; padding: 0px 10px; line-height: 30px; border-right: 0px; height: 30px; width: 337px; color: #666; float: left; }
+.header_p1 .search_btn { width: 80px; height: 36px; overflow: hidden; text-align: center; line-height: 36px; background: #E43A3D; font-size: 14px; font-weight: bold; color: #fff; border: 0px; cursor: pointer; float: left; }
+.search_tab .hot_key { color: #999; margin-top: 2px; width: 440px; overflow: hidden; }
+.hot_key a { color: #999; }
+.hot_key a:hover { color: #FF2D2E; }
+.hot_key em { float: left; margin-right: 5px; }
+.hot_key ul { float: left; margin-right: 5px; width: 355px; height: 25px; overflow: hidden; }
+.hot_key ul li { display: inline; margin-right: 5px; }
+.search_tab { width: 440px; margin-right: 10px; overflow: hidden; }
+.top_buycart { background: url(/templates/master/botany/images/common/buycart_icon.jpg) no-repeat left top; padding-left: 70px; padding-top: 5px; height: 60px; width: 160px; margin-top: 15px; float: right; }
+.top_buycart b { color: #F00; margin: 0 3px; }
+.top_buycart img { vertical-align: middle; }
+.nav_bg { clear: both; margin-top: 20px; background: #DE3032; height: 40px; }
+.nav { width: 1200px; margin: 0 auto; }
+.side_nav { float: left; width: 210px; position: relative; z-index: 100; height: 40px; }
+.side_nav h3.title { background: #e1ba03; line-height: 40px; font-family: "microsoft yahei"; font-size: 15px; height: 40px; color: #fff; padding-left: 15px; position: relative; z-index: 2; font-weight: bold; }
+.side_nav h3.title a { color: #FFF; display: block; text-decoration: none; }
+.main_nav { float: left; line-height: 40px; padding-left: 20px; width: 750px; overflow: hidden; height: 40px; }
+.main_nav li { float: left; font-size: 15px; font-family: "microsoft yahei"; }
+.main_nav li a, .main_nav li a:hover { color: #fff; }
+.main_nav li { margin-right: 15px; }
+.nav_c { width: 980px; background: url(/templates/master/botany/images/common/navc_bg.jpg) no-repeat; margin: 0 auto; height: 40px; line-height: 40px; color: #FFFFFF; font-size: 14px; font-weight: 700; }
+.zoom-section{ display: block; clear: both;} 
+.zoom-desc{ clear: both;}
+
+.divOrderInfo{border-radius: 5px; width: 310px; height: 110px; font-size: 12px; z-index: 101; color: #535353; display: none; 
+background-color: #ffffff; border: 1px solid #c9c9c9; box-shadow:0 0 10px 5px rgba(0,0,0,.2); overflow: hidden; padding: 25px;}
+#divOrderInfo .divapp{ width:15px; height:15px; font-size: 14px; text-align:center; line-height:15px; color:#cfcfcf; float:right;cursor:pointer;}
+ 
+.dialog_title { height: 35px; line-height: 35px; padding: 0px 5px; background-color: #f3f3f3; }
+            
+       
+/*头部导航样式及选中弹出*/
+
+#ty_menu_title { position: relative; z-index: 9; }
+#ty_menu_title ul { }
+#ty_menu_title ul li { float: left; }
+#ty_menu_title ul li a { color: #fff; float: left; }
+#ty_menu_title ul li a span { display: block; float: left; font-weight: bold; padding: 0 10px; }
+#ty_menu_title ul li a.ty_menu_select { color: #fff; background-color: #D30B18; }
+#ty_menu_title ul li a.ty_menu_select span { background-color: #D30B18; }
+#ty_menu_title ul li b { display: block; float: left; padding: 0px; margin: 0px; }
+#ty_menu_title ul li a:hover { text-decoration: none; }
+#ty_menu_title ul li a:hover span { background: #FF2D2E; }
+#ty_menu_title ul li { position: relative; }
+#ty_menu_title ul li ul { display: none; margin: 0; padding: 0; position: absolute; left: 0px; top: 40px; border: 1px solid #cb160f; border-top: 0px; width: 300px; background: #fff; }
+#ty_menu_title ul li ul li { width: 100%; clear: both; background: url(/templates/master/botany/images/process/dotted_dashed1.jpg) repeat-x bottom; overflow: hidden; line-height: 25px; padding: 3px 0px; }
+#ty_menu_title ul li ul li a, #ty_menu_title ul li ul li a:hover { background: none; padding-left: 10px; }
+#ty_menu_title ul li:hover ul, #ty_menu_title li.over ul { display: block; }
+#ty_menu_title ul li ul li h3 { color: #a10000; font-weight: 700; width: 80px; float: left; }
+#ty_menu_title ul li ul li h3 a { color: #a10000; }
+#ty_menu_title ul li ul li div { float: left; font-size: 12px; width: 215px; }
+#ty_menu_title ul li ul li div a { color: #333; font-weight: normal; white-space: nowrap; margin-right: 5px; }
+.main { width: 1200px; margin: 0 auto; margin-top: 8px; overflow:hidden; }
+.main_p1 { padding-left: 218px; overflow: hidden; }
+.main_p1_m { width: 564px; overflow: hidden; float: left; }
+.main_p1_r { float: right; width: 210px; }
+.notice_tab { }
+.notice_tab_hd { height: 30px; line-height: 30px; }
+.notice_tab_hd em { font-size: 14px; font-weight: bold; float: left; color: #666561; font-family: "microsoft yahei"; }
+.notice_tab_hd span { font-size: 12px; float: right; color: #666561; }
+.notice_tab_hd span a { color: #0061AA; font-family: "新宋体"; }
+.notice_tab .bd { border: 1px solid #f1f1f1; border-top: 3px solid #aaaaaa; height: 104px; padding-top: 3px; }
+.notice_tab .bd li { width: 188px; margin: 0 auto; line-height: 26px; }
+.group_buy { margin-top: 3px; }
+.group_buy .bd { border: 1px solid #f1f1f1; border-top: 3px solid #aaaaaa; height: 120px; padding-top: 3px; }
+.group_buy .bd ul { margin-top: 10px; margin-left: 10px; }
+.group_buy .bd .pic { float: left; margin-right: 10px; width: 100px; height: 102px; overflow: hidden; border: 1px solid #ddd; }
+.group_buy .bd .info { float: left; width: 82px; overflow: hidden; }
+.group_buy .bd .info .name { margin-top: 8px; height: 36px; line-height: 18px; overflow: hidden; }
+.group_buy .bd .info .price { font-family: "microsoft yahei"; font-size: 16px; color: #DA0000; font-weight: bold; height: 21px; line-height: 21px; ; overflow: hidden; }
+.group_buy .bd .info .price span { font-family: Arial, Helvetica, sans-serif; }
+.group_buy .bd .info .btn { margin-top: 5px; height: 21px; line-height: 21px; overflow: hidden; }
+.main_p2 { clear: both; width: 1200px; margin-top: 20px; overflow: hidden; }
+.main_p2_l { width: 782px; float: left; }
+.main_p2_r { width: 210px; float: right; }
+.panic_buy { width: 782px; }
+.panic_buy .hd, .brand_tab .hd { line-height: 30px; font-size: 14px; font-weight: bold; color: #666561; font-family: "microsoft yahei"; }
+.panic_buy .bd { border-top: 2px solid #aaaaaa; width: 782px; overflow: hidden; border-bottom: 1px solid #f1f1f1; padding-bottom: 15px; }
+.panic_buy ul { margin-top: 10px; padding-left: 5px; width: 810px; }
+.panic_buy li { width: 180px; float: left; margin-right: 19px; }
+.panic_buy .time { color: #989898; height: 30px; line-height: 30px; overflow: hidden; }
+.panic_buy .time span b { font-size: 16px; margin: 0px 2px; }
+.panic_buy .pic { width: 180px; height: 180px; text-align: center; }
+.panic_buy .name { width: 180px; height: 40px; line-height: 20px; overflow: hidden; }
+.panic_buy .name a { color: #676767; }
+.panic_buy .price { color: #E4393C; font-weight: bold; font-size: 16px; height: 26px; line-height: 26px; }
+.brand_tab { width: 210px; }
+.brand_tab .brand { border: 1px solid #f1f1f1; border-top: 2px solid #aaaaaa; width: 208px; height: 301px; overflow: hidden; }
+.brand_tab .brand ul { margin-top: 3px; margin-left: 8px; }
+.brand_tab .brand li { float: left; margin-right: 6px; margin-top: 8px; border: 1px solid #ddd; }
+.brand_tab .brand li .pic { width: 92px; height: 39px; overflow: hidden; }
+.main_p2_tab { width: 782px; overflow: hidden; margin-top: 8px; border-bottom: 1px solid #f1f1f1; padding-bottom: 8px; }
+.pro_tab180 .tab_hd ul, .pro_tab160 .tab_hd ul, .pro_tab220 .tab_hd ul { width: 100%;
+}
+.pro_tab180 .tab_hd li, .pro_tab160 .tab_hd li, .pro_tab220 .tab_hd li { display: inline-block; padding: 0px 70px; line-height: 40px; font-size: 18px; font-weight: bold; color: #333; font-weight: bold; font-family: "microsoft yahei"; cursor: pointer; }
+.pro_tab180 .tab_hd li.select, .pro_tab160 .tab_hd li.select, .pro_tab220 .tab_hd li.select { color: #FF2D2E; border-bottom: 1px solid #FF2D2E; position: relative; top: 1px; }
+/*  .pro_tab180 .tab_hd li:hover, .pro_tab160 .tab_hd li:hover, .pro_tab220 .tab_hd li:hover { background: url(/templates/master/botany/images/common/xxk_icon1.jpg) center bottom no-repeat; color: #df1b1d; border-bottom: 2px solid #df1b1d; }*/
+
+.pro_tab180 .tab_item, .pro_tab160 .tab_item, .pro_tab220 .tab_item { width: 100%; height: 273px; border: 1px solid #DDD; overflow: hidden; clear: both; }
+.pro_tab180 .tab_item ul, .pro_tab160 .tab_item ul { width: 1200px; }
+.pro_tab180 .tab_item li { float: left; width: 180px; margin-top: 10px; margin-right: 20px; }
+.pro_tab180 .tab_item .pic { width: 180px; height: 180px; }
+.pro_tab180 .tab_item .name, .pro_tab160 .tab_item .name { width: 150px; height: 40px; line-height: 35px; padding-left: 20px; text-align: center; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.pro_tab180 .tab_item .name a, .pro_tab160 .tab_item .name a, .pro_tab220 .tab_item .name a { color: #656565; font-size: 14px; }
+.pro_tab180 .tab_item .price b, .pro_tab160 .tab_item .price b, .pro_tab220 .tab_item .price b { color: #ff2d2e; font-weight:normal; font-size: 14px; }
+.pro_tab180 .tab_item .price span, .pro_tab160 .tab_item .price span, .pro_tab220 .tab_item .price span {color: #b5b5b5; padding-left: 10px; text-decoration: line-through; }
+.pro_tab160 .tab_item li { float: left; width: 160px; margin-left: 25px; margin-right: 10px; overflow: hidden; }
+.pro_tab160 .tab_item .pic { height: 178px; width: 200px; padding: 10px; display: table-cell; vertical-align: middle; text-align: center; overflow: hidden; }
+.pro_tab160 .tab_item .pic img { vertical-align: middle; max-width: 160px; max-height: 160px; }
+.pro_tab220 .tab_item ul { width: 810px; margin-left: 25px; }
+.pro_tab220 .tab_item li { float: left; width: 220px; margin-top: 5px; margin-right: 40px; }
+.pro_tab220 .tab_item .pic { width: 220px; height: 220px; }
+.pro_tab220 .tab_item .name { height: 21px; line-height: 21px; margin-top: 4px; overflow: hidden; }
+.pro_tab220 .tab_item .price { height: 20px; line-height: 20px; overflow: hidden; }
+.vote_tab { margin-top: 8px; width: 208px; border: 1px solid #ECECEC; height: 222px; }
+.vote_tab .hd { border-bottom: 1px solid #ECECEC; height: 36px; font-size: 16px; font-weight: bold; color: #C60404; font-family: "microsoft yahei"; padding-left: 15px; }
+.vote_tab .bd { padding: 10px; }
+.vote_tab .bd #btnOK { background: url(/templates/master/botany/images/common/vote_btn.jpg) no-repeat; width: 82px; height: 25px; color: #fff; }
+.floor160, .group160, .pro_floor2, .pro_floor3 { margin-top: 15px; clear: both; width: 1200px; overflow: hidden; }
+.floor_hd, .group_hd { border-bottom: 2px solid #AAAAAA; width: 1200px; overflow: hidden; height: 40px; line-height: 40px; }
+.floor_hd ul, .floor_hd em, .group_hd ul, .group_hd em { line-height: 50px; }
+.floor_hd div, .floor_hd ul, .floor_hd div span { float: left; }
+.floor_hd em { float: right; }
+.floor_hd em a { color: #3A3A3A; font-family: "新宋体"; }
+.floor_hd ul li { color: #666; margin-right: 10px; display: inline; }
+.floor_hd ul li a { color: #666; }
+.floor_hd div .icon { width: 40px; }
+.floor_hd div .title { font-size: 22px; font-weight: bold; color: #676767; width: 150px; font-family: "microsoft yahei"; margin-right: 20px; }
+.floor_hd .keyword, .floor_hd .morelink { min-width: 100px; }
+.floor160 .floor_bd, .floor180 .floor_bd { width: 1200px; overflow: hidden; }
+.floor160 .floor_ad, .floor180 .floor_ad { float: left; width: 240px; overflow: hidden; }
+.floor160 .floor_pro { float: left; width: 734px; padding-left: 26px; border-bottom: 1px solid #f1f1f1; padding-bottom: 14px; overflow: hidden; }
+.floor160 .floor_pro ul { width: 750px; }
+.floor160 .floor_pro li { width: 160px; float: left; margin-top: 9px; margin-right: 25px; }
+.floor160 .floor_pro .pic { width: 160px; height: 160px; text-align: center; overflow: hidden; }
+.floor160 .floor_pro .name { margin-top: 5px; width: 160px; word-break: break-all; height: 40px; overflow: hidden; line-height: 20px; }
+.floor160 .floor_pro .price b, .floor180 .floor_pro .price b { color: #E4393C; font-weight: bold; font-size: 16px; height: 25px; line-height: 25px; }
+.floor_pro .price span { display: none; }
+.floor180 .floor_pro { float: left; width: 750px; padding-left: 10px; border-bottom: 1px solid #f1f1f1; overflow: hidden; }
+.floor180 .floor_pro ul { width: 780px; }
+.floor180 .floor_pro li { width: 180px; float: left; margin-top: 9px; margin-right: 9px; }
+.floor180 .floor_pro .pic { width: 180px; height: 180px; text-align: center; overflow: hidden; }
+.floor180 .floor_pro .name { margin-top: 5px; width: 180px; word-break: break-all; height: 34px; overflow: hidden; line-height: 17px; }
+/***新增样式（郭蓉）2013-9-6***/
+
+.group_hd div, .group_hd ul, .group_hd div span { float: left; }
+.group_hd em { float: right; }
+.group_hd em a { color: #3A3A3A; font-family: "新宋体"; }
+.group_hd ul li { color: #666; margin-right: 10px; display: inline; }
+.group_hd ul li a { color: #666; }
+.group_hd div .icon { width: 40px; }
+.group_hd div .title { font-size: 22px; font-weight: bold; color: #676767; width: 150px; font-family: "microsoft yahei"; margin-right: 20px; }
+.group_bd { width: 1200px; overflow: hidden; border-bottom: 1px solid #DDDDDD; }
+.group_bd .bd_left { float: left; width: 200px; overflow: hidden; margin-right: 12px; }
+.group_bd .bd_left ul { margin-top: 12px; line-height: 26px; }
+.group_bd .bd_left li { float: left; width: 100px; height: 26px; color: #666666; }
+.group_bd .bd_left li a { color: #666666; }
+.group_bd .bd_middle { float: left; width: 630px; }
+.group_bd .bd_middle ul { background: url(/templates/master/botany/images/common/linepro_bg.jpg) repeat-y center; border: 1px solid #f3f3f3; width: 628px; overflow: hidden; border-top: none; border-bottom: none; }
+.group_bd .bd_middle li { float: left; width: 208px; margin-right: 1px; text-align: left; }
+.group160 .bd_middle .pic { width: 160px; height: 160px; margin: 0 auto; margin-top: 7px; }
+.group160 .bd_middle .name { width: 160px; margin: 0 auto; height: 38px; line-height: 19px; margin-top: 5px; overflow: hidden; }
+.group160 .bd_middle .name a, .group180 .bd_middle .name a { color: #666; }
+.group160 .bd_middle .price { width: 160px; margin: 0 auto; }
+.group160 .bd_middle .price b, .group180 .bd_middle .price b { color: #E4393C; font-weight: bold; font-size: 16px; }
+.group180 .bd_middle .pic { width: 180px; height: 180px; margin: 0 auto; margin-top: 7px; }
+.group180 .bd_middle .name { width: 180px; margin: 0 auto; height: 36px; line-height: 18px; margin-top: 3px; overflow: hidden; }
+.group180 .bd_middle .price { width: 180px; margin: 0 auto; height: 20px; line-height: 20px; }
+.group160 .bd_middle .price span, .group180 .bd_middle .price span { display: none; }
+/*****
+			修改品牌样式名称
+			brand_tab替换为bd_brand
+		*****/
+
+.group_bd .bd_right { float: left; width: 158px; }
+.group_bd .bd_brand { margin-top: 4px; margin-left: 4px; width: 154px; overflow: hidden; }
+.group_bd .bd_brand li { float: left; margin-top: 3px; margin-right: 4px; width: 73px; height: 33px; overflow: hidden; }
+.group_bd .bd_brand li img { width: 73px; height: 37px; }
+.group_bd .bd_saletop li { clear: both; border-top: 1px solid #F6F6F6; width: 131px; padding-bottom: 6px; overflow: hidden; }
+.group_bd .bd_saletop li a { color: #656565; }
+.group_bd .bd_saletop li em { display: none; }
+.group_bd .bd_saletop .sale_top1 { background: url(/templates/master/botany/images/common/sale_icon1.jpg) no-repeat 10px 13px; padding-top: 9px; padding-left: 27px; }
+.group_bd .bd_saletop .sale_top2 { background: url(/templates/master/botany/images/common/sale_icon2.jpg) no-repeat 10px 10px; padding-top: 5px; padding-left: 27px; word-break: break-all; }
+.group_bd .bd_saletop .sale_top3 { background: url(/templates/master/botany/images/common/sale_icon3.jpg) no-repeat 10px 10px; padding-top: 5px; padding-left: 27px; word-break: break-all; }
+.group_bd .bd_saletop .sale_top4 { background: url(/templates/master/botany/images/common/sale_icon4.jpg) no-repeat 10px 10px; padding-top: 5px; padding-left: 27px; word-break: break-all; }
+.group_bd .bd_saletop .sale_top5 { background: url(/templates/master/botany/images/common/sale_icon5.jpg) no-repeat 10px 10px; padding-top: 5px; padding-left: 27px; word-break: break-all; }
+.group_bd .bd_saletop .sale_top6 { background: url(/templates/master/botany/images/common/sale_icon5.jpg) no-repeat 10px 10px; padding-top: 5px; padding-left: 27px; word-break: break-all; }
+.group_bd .bd_saletop .sale_top1 .pic, .group_bd .bd_saletop .sale_top2 .pic, .group_bd .bd_saletop .sale_top3 .pic, .group_bd .bd_saletop .sale_top4 .pic, .group_bd .bd_saletop .sale_top5 .pic { margin-right: 5px; float: left; margin-top: 5px; }
+.group_bd .bd_saletop .sale_top1 .info, .group_bd .bd_saletop .sale_top2 .info, .group_bd .bd_saletop .sale_top3 .info, .group_bd .bd_saletop .sale_top4 .info, .group_bd .bd_saletop .sale_top5 .info { float: left; }
+.group_bd .bd_saletop .sale_top1 .name, .group_bd .bd_saletop .sale_top2 .name, .group_bd .bd_saletop .sale_top3 .name, .group_bd .bd_saletop .sale_top4 .name, .group_bd .bd_saletop .sale_top5 .name { height: 20px; line-height: 20px; overflow: hidden; }
+.group_bd .bd_saletop .sale_top1 .price b, .group_bd .bd_saletop .sale_top2 .price b, .group_bd .bd_saletop .sale_top3 .price b, .group_bd .bd_saletop .sale_top4 .price b, .group_bd .bd_saletop .sale_top5 .price b { color: #E4393C; font-weight: bold; font-size: 16px; }
+.group_bd .bd_saletop .price span { display: none; }
+.sale_top60 li { clear: both; border-top: 1px dotted #8B8B8B; overflow: hidden; vertical-align: bottom; }
+.sale_top60 li:first-child { border: none; }
+.sale_top60 .sale_top1 em, .sale_top60 .sale_top2 em, .sale_top60 .sale_top3 em { border: 1px solid #FF2D2E; color: #FF2D2E; }
+.sale_top60 li a { color: #656565;float:left; }
+.sale_top60 li em { border-radius: 20px; border: 1px solid #8B8B8B; display: inline-block; font-style: normal; height: 16px;
+ text-align: center; width: 16px; line-height: 16px; float: left; margin-top: 12px; }
+ .sale_top60 li .price em{ border-radius: 0px; border: none; float: none; display: inline;}
+ .sale_top60 li .price b{ font-weight: normal; margin-top: 0px;}
+/*.sale_top60 .sale_top1, .sale_top60 .sale_top2, .sale_top60 .sale_top3, .sale_top60 .sale_top4, .sale_top60 .sale_top5 { background: url(/templates/master/botany/images/common/sale_icon1.jpg) no-repeat 10px 13px; padding-left: 23px; }*/
+
+.sale_top1 { width: 166px;overflow: hidden; }
+.sale_top60 .sale_top1 .pic, .sale_top60 .sale_top2 .pic, .sale_top60 .sale_top3 .pic, .sale_top60 .sale_top4 .pic, .sale_top60 .sale_top5 .pic { margin-right: 5px; margin-left: 5px; float: left; width: 60px; height: 60px; }
+.sale_top60 .sale_top1 .info, .sale_top60 .sale_top2 .info, .sale_top60 .sale_top3 .info, .sale_top60 .sale_top4 .info, .sale_top60 .sale_top5 .info { float: left; width: 75px; }
+.sale_top60 .sale_top1 .name, .sale_top60 .sale_top2 .name, .sale_top60 .sale_top3 .name, .sale_top60 .sale_top4 .name, .sale_top60 .sale_top5 .name { line-height: 20px; height: 40px; overflow: hidden; margin-top: 4px; margin-bottom: 5px; }
+.sale_top60 .sale_top1 .price, .sale_top60 .sale_top2 .price, .sale_top60 .sale_top3 .price, .sale_top60 .sale_top4 .price, .sale_top60 .sale_top5 .price { height: 22px; line-height: 22px; overflow: hidden; }
+.sale_top60 .sale_top1 .sale, .sale_top60 .sale_top2 .sale, .sale_top60 .sale_top3 .sale, .sale_top60 .sale_top4 .sale, .sale_top60 .sale_top5 .sale { height: 21px; line-height: 21px; overflow: hidden; }
+.sale_top60 .sale_top1 .price b, .sale_top60 .sale_top2 .price b, .sale_top60 .sale_top3 .price b, .sale_top60 .sale_top4 .price b, .sale_top60 .sale_top5 .price b { color: #ff2d2e; font-weight:normal; font-size: 16px; }
+.sale_top60 .price span { display:block; }
+/*
+		.sale_top60 .sale_top2 { background: url(/templates/master/botany/images/common/sale_icon2.jpg) no-repeat 10px 10px; padding-top: 4px; padding-left: 27px; word-break: break-all; }
+		.sale_top60 .sale_top3 { background: url(/templates/master/botany/images/common/sale_icon3.jpg) no-repeat 10px 10px; padding-top: 4px; padding-left: 27px; word-break: break-all; }
+		.sale_top60 .sale_top4 { background: url(/templates/master/botany/images/common/sale_icon4.jpg) no-repeat 10px 10px; padding-top: 4px; padding-left: 27px; word-break: break-all; }
+		.sale_top60 .sale_top5 { background: url(/templates/master/botany/images/common/sale_icon5.jpg) no-repeat 10px 10px; padding-top: 4px; padding-left: 27px; word-break: break-all; }
+		.sale_top60 .sale_top6 { background: url(/templates/master/botany/images/common/sale_icon5.jpg) no-repeat 10px 10px; padding-top: 4px; padding-left: 27px; word-break: break-all; }
+		*/
+
+
+/********组合栏目********/
+
+.pro_combination { margin-top: 15px; clear: both; width: 1200px; }
+.combination_l { width: 212px; float: left; overflow: hidden; }
+.combination_l div { width: 212px; clear: both; overflow: hidden; }
+.combination_l div.title { height: 40px; overflow: hidden; }
+.combination_l div span { float: left; }
+.combination_l div .icon { width: 40px; }
+.combination_l div .title { font-size: 22px; font-weight: bold; color: #676767; width: 140px; font-family: "microsoft yahei"; }
+.combination_l .category { width: 212px; clear: both; border-top: 2px solid #AAAAAA; margin-top: 0px; mine-height: 26px; }
+.combination_l ul { margin-top: 12px; line-height: 26px; }
+.combination_l li { float: left; width: 100px; height: 26px; color: #666666; }
+.combination_l li a { color: #666666; }
+.combination_l .adv_image { margin-top: 10px; width: 212px; }
+.combination_tab { width: 630px; overflow: hidden; float: left; }
+.combination_tab .tab_hd ul { width: 640px; }
+.combination_tab .tab_hd li { width: 158px; float: left; border-bottom: 2px solid #9D9D9D; height: 40px; line-height: 36px; text-align: center; font-size: 14px; font-weight: bold; color: #666561; font-family: "microsoft yahei"; cursor: pointer; overflow: hidden; }
+.combination_tab .tab_hd li.select { background: url(/templates/master/botany/images/common/xxk_icon1.jpg) center bottom no-repeat; color: #df1b1d; border-bottom: 2px solid #df1b1d; }
+.combination_tab .tab_hd li:hover { background: url(/templates/master/botany/images/common/xxk_icon1.jpg) center bottom no-repeat; color: #df1b1d; border-bottom: 2px solid #df1b1d; }
+.combination_tab .tab_item { width: 630px; overflow: hidden; clear: both; }
+.combination_tab .tab_item ul { width: 650px; }
+.combination_tab .pro_tab100 .tab_item li { float: left; width: 155px; border-bottom: 1px solid #f1f1f1; border-left: 1px solid #f1f1f1; padding-bottom: 9px; height: 184px; }
+.combination_tab .pro_tab100 .tab_item .pic { width: 100px; height: 100px; margin: 0px auto; overflow: hidden; margin-top: 8px; }
+.combination_tab .pro_tab100 .tab_item .name { width: 140px; margin: 0px auto; height: 42px; line-height: 21px; margin-top: 10px; overflow: hidden; }
+.combination_tab .pro_tab100 .tab_item .name a, .combination_tab .pro_tab160 .tab_item .name a { color: #656565; }
+.combination_tab .pro_tab100 .tab_item .price { width: 140px; margin: 0px auto; height: 18px; }
+.combination_tab .pro_tab100 .tab_item .price b, .combination_tab .pro_tab160 .tab_item .price b { color: #E4393C; font-weight: bold; font-size: 16px; }
+.combination_tab .pro_tab100 .tab_item .price span, .combination_tab .pro_tab160 .tab_item .price span { display: none; }
+.combination_tab .pro_tab160 .tab_item li { float: left; width: 155px; border-bottom: 1px solid #f1f1f1; border-left: 1px solid #f1f1f1; height: 184px; margin-top: 0px; margin-right: 0px; padding: 4px 0px 5px 0px; }
+.combination_tab .pro_tab160 .tab_item .pic { width: 140px; height: 140px; margin: 0px auto; overflow: hidden; }
+.combination_tab .pro_tab160 .tab_item .name { width: 140px; margin: 0px auto; height: 21px; line-height: 21px; margin-top: 5px; overflow: hidden; }
+.main-content .mid-nav .pro_tab160 .tab_item .price { width: 140px; margin: 0px auto; height: 18px; line-height: 18px; overflow: hidden; text-align: center; }
+.combination_r { float: left; width: 158px; }
+.combination_r .hd { color: #E3393A; font-size: 14px; font-weight: bold; font-family: "microsoft yahei"; height: 40px; line-height: 40px; border-bottom: 2px solid #E3393A; }
+/***/
+
+.pro_combination .brand, .floor_bd .brand { clear: both; width: 1200px; overflow: hidden; border-top: 1px solid #DDDDDD; border-bottom: 1px solid #f1f1f1; padding-top: 3px; padding-bottom: 3px; }
+.pro_combination .brand ul, .floor_bd .brand ul { width: 1020px; }
+.pro_combination .brand li, .floor_bd .brand li { float: left; width: 88px; overflow: hidden; min-height: 30px; border-right: 1px solid #ede9e9; padding: 0px 6px; }
+.pro_combination .brand li img, .floor_bd .brand li img { height: 30px; }
+/********
+		floor_r改为pro_simple100
+		**********/
+
+.pro_floor3 .floor_bd { width: 1200px; overflow: hidden; border-bottom: 1px solid #DDDDDD; }
+.pro_floor3 .floor_l { float: left; width: 200px; overflow: hidden; margin-right: 12px; }
+.pro_floor3 .floor_l .category { width: 200px; overflow: hidden; min-height: 26px; }
+.pro_floor3 .floor_l ul { margin-top: 12px; line-height: 26px; }
+.pro_floor3 .floor_l li { float: left; width: 100px; height: 26px; color: #666666; }
+.pro_floor3 .floor_l li a { color: #666666; }
+.pro_floor3 .pro_simple160, .pro_floor3 .pro_simple100 { min-height: 200px; }
+.pro_floor3 .pro_simple100, .pro_floor3 .pro_simple160 { width: 786px; overflow: hidden; float: left; border-right: 1px solid #f1f1f1; }
+.pro_floor3 .pro_simple100 ul, .pro_floor3 .pro_simple160 ul { width: 800px; }
+.pro_floor3 .pro_simple100 li { float: left; width: 156px; border-bottom: 1px solid #f1f1f1; border-left: 1px solid #f1f1f1; padding: 14px 0px; }
+.pro_floor3 .pro_simple100 .pic { width: 100px; height: 100px; margin: 0px auto; overflow: hidden; }
+.pro_floor3 .pro_simple100 .name { width: 140px; margin: 0px auto; height: 42px; line-height: 21px; margin-top: 10px; overflow: hidden; }
+.pro_floor3 .pro_simple100 .name a, .pro_floor3 .pro_simple160 .name a { color: #656565; }
+.pro_floor3 .pro_simple100 .price, .pro_floor3 .pro_simple160 .price { width: 140px; margin: 0px auto; height: 18px; }
+.pro_floor3 .pro_simple100 .price b, .pro_floor3 .pro_simple160 .price b { color: #E4393C; font-weight: bold; font-size: 16px; }
+.pro_floor3 .pro_simple100 .price span, .pro_floor3 .pro_simple160 .price span { display: none; }
+.pro_floor3 .pro_simple160 li { float: left; width: 156px; border-bottom: 1px solid #f1f1f1; border-left: 1px solid #f1f1f1; padding-bottom: 9px; }
+.pro_floor3 .pro_simple160 .pic { width: 140px; height: 140px; margin: 0px auto; overflow: hidden; margin-top: 8px; }
+.pro_floor3 .pro_simple160 .name { width: 140px; margin: 0px auto; height: 21px; line-height: 21px; margin-top: 2px; overflow: hidden; }
+.floor_hd .morelink { float: right; }
+.floor_hd .morelink em a { color: #3A3A3A; font-family: "新宋体"; }
+.main_p3 { width: 1200px; overflow: hidden; clear: both; margin-top: 10px; z-index: -1; }
+.on_sale { width: 616px; float: left; border: 1px solid #f1f1f1; border-top: 2px solid #aaa; overflow: hidden; }
+.on_sale .hd { height: 32px; line-height: 32px; border-bottom: 1px solid #f1f1f1; }
+.on_sale .hd b { font-size: 16px; font-weight: bold; font-family: "microsoft yahei"; margin-left: 15px; color: #B42237; margin-right: 10px; }
+.on_sale .hd span { color: #999; font-weight: bold; }
+.on_sale .bd { height: 349px; }
+.on_sale .pro_simple100 { min-height: 180px; }
+.on_sale .pro_simple160 { min-height: 176px; }
+.on_sale .pro_simple100 ul { margin-left: 30px; width: 620px; padding-bottom: 12px; overflow: hidden; }
+.on_sale .pro_simple100 li { float: left; width: 120px; margin-top: 15px; margin-right: 25px; }
+.on_sale .pro_simple100 .pic { width: 120px; height: 100px; text-align: center; }
+.on_sale .pro_simple100 .name { width: 120px; text-align: center; height: 27px; line-height: 27px; word-break: break-all; overflow: hidden; }
+.on_sale .pro_simple100 .name a, .on_sale .pro_simple160 .name a { color: #393939; }
+.on_sale .pro_simple100 .price { width: 120px; text-align: center; height: 27px; line-height: 27px; }
+.on_sale .pro_simple100 .price b, .on_sale .pro_simple160 .price b { color: #c10000; margin-right: 10px; }
+.on_sale .pro_simple100 .price span, .on_sale .pro_simple160 .price span { color: #666; }
+.on_sale .pro_simple160 ul { margin-left: 10px; width: 620px; overflow: hidden; }
+.on_sale .pro_simple160 li { float: left; width: 140px; overflow: hidden; margin-top: 5px; margin-right: 11px; }
+.on_sale .pro_simple160 .pic { width: 140px; height: 130px; overflow: hidden; text-align: center; }
+.on_sale .pro_simple160 .name { width: 140px; text-align: center; height: 21px; line-height: 21px; word-break: break-all; overflow: hidden; }
+.on_sale .pro_simple160 .price { width: 120px; text-align: center; height: 20px; line-height: 20px; }
+.main_p3_r { width: 379px; float: right; overflow: hidden; }
+.order_news { width: 377px; border: 1px solid #f1f1f1; border-top: 2px solid #aaa; height: auto; overflow: hidden; z-index: -1; }
+.order_news .article_hd { height: 32px; line-height: 32px; border-bottom: 1px solid #f1f1f1; overflow: hidden; }
+.order_news .article_hd h2 { font-size: 14px; color: #666; font-weight: bold; font-family: "microsoft yahei"; margin-left: 15px; margin-right: 10px; }
+.order_news .article_hd span { color: #999; font-weight: bold; }
+.order_news .article_bd { margin-top: 9px; margin-left: 9px; width: 369px; border-bottom: 2px solid #dedede; padding-bottom: 10px; overflow: hidden; }
+.order_news .article_bd .article_ad { width: 150px; display: none; margin-right: 12px; float: left; }
+.order_news .article_bd .article_list { width: 195px; float: left; border: none; padding: 0px; line-height: 25px; overflow: hidden; }
+.order_news .article_bd .article_list a { display: block; line-height: 25px; height: 25px; word-break: break-all; background: url(/templates/master/botany/images/common/newsicon2.jpg) no-repeat 0px 10px; padding-left: 12px; color: #393939; }
+.order_notice { clear: both;  height: 39px; background: #F6F6F6 url(/templates/master/botany/images/common/icon_laba.png) no-repeat 20px 10px; margin-top: 9px; }
+.article_ad{ display: none;}
+.order_notice .notice_bd { margin-left: 50px; line-height: 38px; margin-top: 3px; height: 39px; overflow: hidden; }
+.order_notice .notice_bd span { color: #666; margin-right: 15px; }
+.order_notice .notice_bd b { color: #c10000; }
+.order_select { margin-top: 15px; margin-left: 9px; z-index: 0; position: relative; }
+.order_select span { color: #ff2d2e; margin-right: 15px; display: block; height: 24px; line-height: 24px; float: left; }
+.order_select .Default_Input { border: 1px solid #ccc; width: 128px; height: 22px; float: left; margin-right: 12px; line-height: 22px; color: #666; padding: 0px 5px; }
+.order_select .Default_OrderSearchBtn { background:#ff2d2e; font-size: 12px; border-radius: 3px; color: #fff; width: 59px; height: 20px; cursor: pointer; border: 0px; float: left; }
+.order_reviews { width: 377px; border: 1px solid #f1f1f1; border-top: 2px solid #aaa; height: 117px; margin-top: 5px; overflow: hidden; z-index: -1; }
+.order_reviews .hd { height: 32px; line-height: 32px; border-bottom: 1px solid #f1f1f1; }
+.order_reviews .hd b { font-size: 14px; color: #666; font-weight: bold; font-family: "microsoft yahei"; margin-left: 15px; margin-right: 10px; }
+.order_reviews .hd span { color: #999; font-weight: bold; }
+.order_reviews .bd { padding: 10px 15px; }
+.order_reviews .bd li { height: 68px; overflow: hidden; }
+.order_reviews .bd .pic { float: left; width: 60px; height: 60px; overflow: hidden; margin-right: 15px; }
+.order_reviews .bd .info { float: left; width: 266px; }
+.order_reviews .bd .info .name { line-height: 25px; height: 25px; word-break: break-all; overflow: hidden; }
+.order_reviews .bd .info .name a { color: #3366cc; }
+.order_reviews .bd .info .reviews { color: #989898; height: 40px; line-height: 20px; overflow: hidden; word-break: break-all; }
+ 
+/*footer*/
+.footer { clear: both; margin-top:20px; }
+.footer-bg { padding-top: 50px; background-color: #8d9562; }
+.footer-help { margin: 0 auto 30px!important; overflow: hidden; }
+.footer-help ul { float: left; width: 800px; margin-left: -1px; }
+.footer-help li i,
+.footer-phone i { float: left; width: 3px; height: 14px; margin-top: 13px; margin-right: 8px; overflow: hidden; background-color: #fff; }
+.footer-help li { width: 235px; padding-left: 30px; margin-bottom: 20px; border-left: 1px solid #94A27B; }
+.footer-help li h2,
+.footer-phone h2 { line-height: 40px; height: 40px; font-size: 16px; color: #fff; margin-bottom: 5px; }
+.footer-help li p { line-height: 26px; font-size: 14px; }
+.footer-help li a { color: #fff; }
+.footer-custom { padding: 20px 0; line-height: 25px; color: #F7F7F7; border-top: 1px solid #94A27B; }
+.footer-custom a { color: #82cebf; }
+.footer-phone { float: left; width: 220px; overflow: hidden; font-size: 22px; color: #fff; }
+.footer-phone i { text-indent: -9999em; }
+.footer-weixin { float: right; width: 180px; overflow: hidden; font-size: 16px; color: #fff; text-align: center; }
+.footer_link { line-height: 35px; text-align: center; color: #666; }
+.footer_link a { margin: 0px 10px; color: #8d8d8d; }
+.footer_link{color: #8d8d8d;}
+/******广告位****/
+
+.m_ggw1 { border: 1px solid #ededed; border-top: none; height: auto; overflow: hidden; background: url(/templates/master/botany/images/common/linead_bg.jpg) repeat-y 186px; }
+.m_ggw1 img { margin-right: 1px; float: left; }
+.r_ggw2 { margin-top: 5px; width: 210px; }
+.r_ggw3 { margin-top: 5px; width: 210px; }
+.l_ggw4 { margin-top: 20px; width: 200px; overflow: hidden; }
+.m_ggw5 { width: 630px; overflow: hidden; }
+.l_ggw6 { margin-top: 20px; width: 212px; }
+.r_ggw7 { width: 158px; }
+.m_ggw1 .adv_image { overflow: hidden; }
+.l_ggw4 .adv_image { overflow: hidden; min-height: 200px; }
+/**********左侧弹出样式***********/
+
+.left_popup { border: 2px solid #ffb22a; width: 206px; height: 408px; border-top: none; position: absolute; top: 43px; z-index: 1; zoom: 1; }
+.left_popup_li { width: 206px; }
+.left_popup_li .h2_cat { width: 206px; height: 31px; background: #FAFAFA url(/templates/master/botany/images/common/icon4.gif) no-repeat 196px 8px; line-height: 32px; font-weight: normal; color: #333333; z-index: 4; }
+.left_popup_li .h2_cat h3 { background: url(/templates/master/botany/images/common/icon3.jpg) no-repeat 10px 12px; padding-left: 20px; }
+.left_popup_li .popup_tab { display: none; }
+#warpper, #warpper2, #warpper3, warpper4 { width: 100%; height: 320px; position: relative; }
+#focus, #focus2, #focus3, #focus4 { width: 800px; height: 320px; position: relative; margin: 0 auto; overflow: hidden; position: relative; display: none; background: #c1c1c1; }
+
+/**********加入购物车***********/
+
+.cart_h { width: 1000px; margin: 0 auto; overflow: hidden; padding: 20px 0 10px; margin-bottom: 10px; }
+.cart_h #logo { float: left; padding-left: 5px; }
+.cart_step { width: 491px; overflow: hidden; float: right; padding-top: 6px; }
+.cart_step .cart_step1, .cart_step .cart_step2, .cart_step .cart_step3 { height: 23px; overflow: hidden; padding-top: 23px; width: 488px; }
+.cart_step .cart_step1 { background: url(/templates/master/botany/images/cart/step1.png) no-repeat; width: 491px; }
+.cart_step .cart_step2 { background: url(/templates/master/botany/images/cart/step2.png) no-repeat; }
+.cart_step .cart_step3 { background: url(/templates/master/botany/images/cart/step3.png) no-repeat; }
+.cart_step li.step-1, .cart_step .cart_step2 li.step-2, .cart_step .cart_step3 li.step-3 { color: #ff561a; }
+.cart_step li.step-2 { color: #AAAAAA; width: 161px; }
+.cart_step li.step-3, .cart_step .cart_step2 li.step-1, .cart_step .cart_step3 li.step-1 { color: #AAAAAA; }
+.cart_step li { color: #BCE8A3; float: left; height: 28px; line-height: 28px; text-align: center; width: 163px; }
+.cart_content { margin: 0 auot; width: 1000px; margin-top: 25px; overflow: hidden; }
+.cart_content, .cart_commodit_settle { width: 1200px; margin: 0 auto; overflow: hidden; }
+.cart_content { width: 1000px; }
+.cart_commodit_settle { height: 50px; line-height: 50px; background: #fafafa; border: 1px solid #dcdcdc; width: 1198px; margin-top: 25px; }
+.cart_commodit_settle .select_num { float: right; overflow: hidden; }
+.cart_commodit_settle .select_num em { color: #fe8160; }
+.cart_content .cart-hd { height: 35px; }
+.cart_content .cart-hd h2 { background: url(/templates/master/botany/images/cart/my_cart_title.png) no-repeat scroll left top transparent; height: 20px; width: 100px; overflow: hidden; float: left; line-height: 100px; margin-bottom: 15px; overflow: hidden; }
+.cart_content .cart-hd table { width: 700px; overflow: hidden; float: right; }
+.cart_prompt { height: 22px; line-height: 22px; overflow: hidden; background: #fefecc; border: 1px solid #ccc; border-right: 0px; padding: 0 10px; }
+.cart_text_input { width: 250px; height: 22px; line-height: 22px; overflow: hidden; background: #fff; border: 1px solid #e8e8e8; margin-left: 20px; }
+.cart_submit_input { width: 85px; overflow: hidden; background: url(/templates/master/botany/images/cart/Add_shop.jpg) no-repeat; height: 24px; line-height: 24px; border: 0px; cursor: pointer; color: #595858; }
+.cart_submit_input:hover { color: #000; }
+.cart_commodit { width: 1200px; }
+.cart_commodit { width: 1200px; overflow: hidden; clear: both; margin-top: 20px; }
+.cart_commodit .title .select .icheckbox_flat-red { margin-top: 10px; }
+.cart_commodit .title { overflow: hidden; color: #9f9f9f; clear: both; height: 40px; border-bottom: 3px solid #ffd1c0; padding-bottom: 5px; line-height: 40px; }
+.cart_commodit .title div { float: left; text-align: center; }
+.cart_commodit .title .select { width: 5%; text-align: left; }
+.cart_commodit .title .select em { margin-left: 10px; color: #585552; }
+.cart_commodit .title .name { width: 48%; text-align: left; }
+.cart_commodit .title .name em { padding-left: 115px; }
+.cart_commodit .title .price { width: 14%; }
+.cart_commodit .title .num { width: 18%; }
+.cart_commodit .title .total { width: 10%; text-align: right; }
+.cart_commodit .list { border: 1px solid #dcdcdc; border-top: none; }
+.cart_commodit .list .con { width: 1198px; color: #9f9f9f; overflow: hidden; clear: both; padding-bottom: 28px; padding-top: 28px; }
+.cart_commodit .list .con:last-child { border-bottom: none; }
+.cart_commodit .list .con:hover { background: #fff9f0; }
+.cart_commodit .list .con div { float: left; text-align: center; }
+.cart_commodit .list .floor .line { margin: 0 auto; width: 1100px; height: 2px; border-bottom: 1px solid #eeeeee; overflow: hidden; }
+.cart_commodit .list .floor:last-child .line { border: none; }
+.cart_commodit .list .con .select { margin-left: 15px; margin-right: 15px; width: 30px; }
+.cart_commodit .list .con .name { width: 48%; overflow: hidden; }
+.cart_commodit .list .con .name .pic { margin-left: 30px; border: 1px solid #dddddd; overflow: hidden; float: left; width: 60px; height: 60px; }
+.cart_commodit .list .con .name .item-msg { float: left; margin-left: 15px; width: 250px; overflow: hidden; }
+.cart_commodit .list .con .name .item-msg a { height: 25px; text-align: left; overflow: hidden; margin-top: 10px; line-height: 25px; }
+.cart_commodit .list .con .name .item-msg .p-extend { height: 25px; line-height: 25px; overflow: hidden; }
+.cart_commodit .list .con .price { width: 14%; overflow: hidden; line-height: 80px; }
+.cart_commodit .list .con .num { width: 18%; overflow: hidden; padding-top: 30px; }
+.cart_commodit .list .con .num .info1 { margin: 0 auto; width: 100px; float: none; }
+.cart_commodit .list .con .total { width: 10%; overflow: hidden; color: #ff5417; line-height: 80px; font-weight: bold; text-align: right; }
+.cart_commodit .list .con .info { text-align: left; margin-left: 15px; float: left; width: 460px; }
+.cart_commodit .list .con .info .step3 { float: none; overflow: hidden; clear: both; margin-top: 10px; }
+.cart_commodit .list .con .info .ziti { background: #ffe8e0 url(/templates/master/botany/images/new/ziti_03.jpg) no-repeat; height: 21px; line-height: 21px; color: #e96b1f; padding-left: 25px; width: 60px; display: block; float: left; margin-right: 20px; margin-top: 5px; }
+.cart_commodit .list .con .info .gift { float: left; display: block; }
+.cart_commodit .list .con .info .gift b { float: left; font-weight: normal; color: #8c8c8c; margin-right: 10px; line-height: 30px; }
+.cart_commodit .list .con .info .gift em { float: left; color: #8c8c8c; border: 1px solid #dddddd; margin-right: 5px; }
+.cart_commodit .list .con .info .gift em img { width: 30px; height: 30px; }
+.cart_commodit .list .con .cart_commodit_name { display: block; overflow: hidden; float: none; text-align: left; }
+.cart_commodit .list .con .cart_commodit_para { display: block; overflow: hidden; float: none; text-align: left; }
+.cart_commodit .notes { height: 30px; line-height: 30px; border: 1px solid #dcdcdc; border-top: none; color: #959595; padding-left: 15px; }
+.cart_commodit .notes em { color: #ff561a; }
+.cart_commodit_th th { background: #f7f7f7; height: 40px; overflow: hidden; border-bottom: 1px solid #cccccc; color: #666; font-weight: normal; }
+.cart_commodit_con { padding: 10px 0px; background: #fdfcf7; border-bottom: 1px solid #eeecec; }
+.li_promgift { width: 120px; overflow: hidden; float: left; padding: 10px; text-align: center; }
+.li_promgift .cart_commodit_span { border: 1px solid #ddd; width: 100px; height: 100px; overflow: hidden; margin: 0 auto; }
+.li_promgift .cart_commodit_name a { display: block; height: 36px; line-height: 18px; overflow: hidden; color: #666; margin-top: 5px; }
+.li_promgift .xuanze { margin: 0 auto; margin-top: 5px; }
+.cart_commodit_span { border: 1px solid #ddd; display: block; width: 80px; height: 80px; }
+.cart_commodit_span a img { width: 80px; height: 80px; }
+.cart_commodit_name a { color: #585552; }
+.cart_commodit_para { color: #999; }
+.cart_commodit_price { font-family: "microsoft yahei"; color: #585552; }
+.cart_commodit_price2 { }
+.cart_txtbuynum { width: 55px; text-align: center; background: #fff; color: #000; border: 1px solid #dcdcdc; height: 20px; line-height: 20px; float: left; }
+.cart_update { background: none; border: 0px; cursor: pointer; color: #999; }
+.cart_update:hover { color: #000; }
+.cart_commodit_del { background: none; font-weight: normal; border: 0px; color: #585552; cursor: pointer; padding-left: 12px; }
+.cart_commodit_price3 { display: block; float: right; margin: 0px 40px; }
+.cart_commodit_price3 em { float: left; margin-right: 10px; }
+.cart_commodit_price3 span { float: left; font-family: "microsoft yahei"; font-size: 20px; font-weight: bold; color: #e60012; }
+.cart_commodit_price3 span span { font-size: 24px; font-family: Arial, Helvetica, sans-serif; }
+.cart_commodit_settle { padding: 0px; }
+.clear_buycart, .cart_buy_cartsub { height: 50px; overflow: hidden; line-height: 50px; text-align: center; }
+.clear_buycart { width: 120px; padding-left: 15px; float: left; background: url(/templates/master/botany/images/cart/amptyback.jpg) no-repeat; }
+.clear_buycart a { display: block; color: #999; }
+.cart_buy_cartsub { width: 120px; float: right; padding-left: 0px; }
+.cart_buy_cartsub input { display: block; font-family: "microsoft yahei"; font-size: 16px; text-align: center; background: #ff561a; border: 0px; color: #FFF; cursor: pointer; font-weight: bold; width: 120px; height: 50px; }
+
+.clear_buycart, .cart_buy_cartnosub { height: 50px; overflow: hidden; line-height: 50px; text-align: center;/*  padding-left: 10px;*/
+}
+.cart_buy_cartnosub { width: 120px; float: right; padding-left: 0px; background: #9c9c9c; font-size: 16px; }
+.cart_buy_cartnosub input { display: block; font-family: "microsoft yahei"; font-size: 20px; background: none; border: 0px; color: #FFF; cursor: pointer; font-weight: bold; width: 135px; height: 36px; }
+.giftbanner { height: 17px; line-height: 17px; margin: 15px 0px 5px 0px; overflow: hidden; font-weight: bold; color: #015697; padding-left: 22px; }
+.promogift { width: 1200px; overflow: hidden; margin: 10px 0px 10px 0px; }
+.divpromgift { border: 1px solid #ddd; background: #FDFCF7; padding: 10px 0; overflow: hidden; margin-top: 5px; }
+.divpromgift .xuanze { background: url(/templates/master/botany/images/sub/pageDete.jpg) no-repeat; width: 53px; height: 25px; line-height: 25px; text-align: center; }
+.promogift .down { background: url(/templates/master/botany/images/cart/xuanze.jpg) no-repeat center; height: 26px; padding: 10px; color: #015697; text-decoration: none; }
+.num_minus { display: inline-block; width: 20px; height: 20px; line-height: 20px; border: 1px solid #dcdcdc; border-right: none; cursor: pointer; font-size: 14px; color: #000; background: #fff; float: left; }
+.num_add { display: inline-block; width: 20px; height: 20px; line-height: 20px; border: 1px solid #dcdcdc; border-left: none; cursor: pointer; font-size: 14px; color: #000; background: #fff; float: left; }
+/**********订单信息***********/
+
+.OrderSubmit { width: 1000px; overflow: hidden; }
+.OrderSubmit_switch { height: 40px; overflow: hidden; line-height: 40px; background: #f7f7f7; border-top: 2px solid #999999; border-bottom: 1px solid #ddd; display: none; }
+.OrderSubmit_switch h2 { float: left; margin-left: 10px; font-family: "microsoft yahei"; font-size: 18px; font-weight: bold; color: #333; }
+.OrderSubmit_switch p { float: right; margin-right: 10px; }
+.OrderSubmit_switch p a { color: #015697; font-size: 12px; }
+.cart_Order_address, .cart_Order_info { }
+.cart_Order_address, .cart_Order_info { width: 998px; }
+#pannel_useraddress .cart_Order_address { background: none; padding: 0px; }
+.cart_Order_address { background: #fafafa; padding: 20px; }
+.cart_Order_address h3, .cart_Order_deliver h3, .cart_Order_info h3 { color: #000; font-family: "microsoft yahei"; height: 60px; overflow: hidden; line-height: 60px; font-size: 15px; font-weight: bold; }
+.cart_Order_info h3 .return { color: #268bf3; font-weight: normal; font-size: 12px; margin-left: 815px; padding-top: 15px; padding-right: 10px; float: right; }
+.cart_Order_address em, .Order_deliver_time em { margin: 0 4px; color: #ff5417; }
+.cart_Order_address ul { }
+.cart_Order_address span { font-size: 12px; }
+.cart_Order_address span .dropdown_button { float: right; }
+.cart_Order_deliver .step { background: #fafafa; padding:10px 20px;  overflow: hidden;  }
+.cart_Order_deliver .step ul li { float: left; margin-right: 20px; }
+.cart_Order_deliver .step ul li > div { float: left; }
+.cart_Order_deliver .step ul li .ziti_con {  color: #999999; margin-left: 15px; }
+.cart_Order_deliver .step ul li .ziti_btn { color: #268bf3; margin-left: 15px; }
+.cart_Order_deliver .step ul li .ziti_btn a { color: #268bf3; }
+.cart_Order_deliver .step ul li .ziti, .cart_Order_deliver .step ul li .item, .cart_Order_deliver .step ul li .zhifu { float: left; padding: 1px 25px; border: 1px solid #e5e5e5; height: 28px; line-height: 28px; cursor: pointer; position: relative; background: #fff; }
+.cart_Order_deliver .step ul .select .ziti, .cart_Order_deliver .step ul .select .item, .cart_Order_deliver .step ul .select .zhifu { 
+	border: 2px solid #ff5417; }
+.cart_Order_deliver .step ul .select .ziti b, .cart_Order_deliver .step ul .select .item b, .cart_Order_deliver .step ul .select .zhifu b { position: absolute; right: 0px; bottom: 0px; background: url(/templates/master/botany/images/new/selected-icon.png) no-repeat; width: 15px; height: 15px; }
+.deliver_way { position: relative; }
+.deliver_way .cart_Order_address2 { display: none; }
+.deliver_way .cart_Order_address2 .con { }
+.deliver_way .cart_Order_address2 .con .info { padding: 25px; overflow-x: hidden; width: 600px; height: 295px; background: #FFF; }
+.deliver_way .cart_Order_address2 .con .info h2 { color: #000; width: 50px; }
+.zhezhao { position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background: #000; opacity: 0.15; display: none;  filter: progid: DXImageTransform.Microsoft.Alpha(opacity=15);
+}
+.addr-detail { overflow: hidden; }
+.addr-detail span { display: block; line-height: 20px; margin-top: 5px; padding-left: 30px; }
+.addr-detail .name { font-weight: bold; font-size: 13px; margin-bottom: 5px; padding-left: 0px; }
+.addr-detail .name b { margin-left: 10px; margin-right: 10px; }
+.addr-detail .name em { font-weight: normal; font-size: 12px; color: #434343; background: #ffeee7; padding: 5px 10px; height: 20px; line-height: 20px; }
+.addr-detail .name em a { text-decoration: underline; }
+.addr-detail .name em i { color: #ff5417; font-weight: bold; font-size: 12px; font-style: normal; margin-right: 5px; }
+.deliver_way .cart_Order_address2 .con .info1 { margin-bottom: 10px; overflow: hidden; }
+.deliver_way .cart_Order_address2 .con .info1 .select .name b { color: #ff5417; }
+.deliver_way .cart_Order_address2 .con .info1 select { height: 30px; width: 170px; text-align: center; border: 1px solid #e5e5e5; }
+.deliver_way .cart_Order_address2 .con .info1 .disabled span { color: #d7d7d7; }
+.deliver_way h2 { float: left; width: 90px; height: 30px; line-height: 30px; padding: 10px 0px; }
+.deliver_way ul { float: left; line-height: 30px; width: 870px; overflow: hidden; }
+.deliver_way ul li{ padding: 10px 0px;}
+.msgError { margin-left: 10px; color:#ff0200; }
+.dp_address .dropdown_box { border-radius: 0px; margin-right: 5px; }
+.dp_address .dropdown_button { background: #fff url("/templates/master/botany/images/new/pro_icon_19.png") no-repeat scroll right 5px; }
+.address_wap .dp_address a:hover .dropdown_button { background: #fff url("/templates/master/botany/images/new/pro_icon_19.png") no-repeat scroll right 5px; }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.cart_Order_address span .dropdown_button { top: 0 !important; }
+}
+.cart_Order_address li { padding: 6px 0px; position: static; }
+.cart_Order_address li h2 { width: 80px; height: 30px; line-height: 30px; overflow: hidden; text-align: right; float: left; color: #585858; margin-right: 10px; }
+.cart_Order_address li .textform { height: 28px; line-height: 28px; width: 170px; border: 1px solid #e5e5e5; overflow: hidden; font-size: 14px;  border-radius: 0px; padding: 0px; padding-left: 10px; display: inline-block; }
+.cart_Order_address li .textform2 { height: 30px; line-height: 30px; padding: 6px 0px; width: 180px; border: 1px solid #ddd; border-top: 1px solid #ccc; border-left: 1px solid #ccc; overflow: hidden; color: #999; font-size: 14px; }
+.address_wap a { background: #fff; }
+.Order_deliver_time { padding: 10px 0px; width: 900px; overflow: hidden; }
+.Order_deliver_time h2 { height: 30px; width: 80px; line-height: 30px; overflow: hidden; float: left; margin-right: 10px; }
+.Order_deliver_time select { height: 28px; border: 1px solid #e5e5e5; text-align: center; color: #585858; width: 250px; overflow: hidden; }
+.comon_submmitorder_address2 { padding-left: 10px; }
+.cart_Order_address .title { display: none; }
+.cart_Order_address2 { border: 5px solid rgba(0, 0, 0, 0.15); border: 5px solid #ccc\9; border-radius: 5px; display: none; width: 650px; 
+ line-height: 30px; padding: 0px; background: none; position: fixed; margin: -190px 0 0 -325px; top: 50%; left: 50%; z-index: 99999; }
+.cart_Order_address2 .con { background: #FFF; overflow: hidden; }
+.cart_Order_address2 .con .title { background: #f3f3f3; display: block; overflow: hidden; height: 35px; line-height: 35px; }
+.cart_Order_address2 .con ul { margin-top: 12px; margin-left: 10px; }
+.cart_Order_address2 .con .title h2 { margin: 0px; line-height: 35px; padding: 0px; padding-left: 15px; font-size: 14px; float: left; }
+.cart_Order_address2 .con .title em { float: right; margin-right: 10px; margin-top: 10px; width: 12px; height: 12px; display: block; }
+#btnaddr { margin-top: 15px; margin-bottom: 20px; overflow: hidden; }
+#btnaddr .save { display: block; height: 35px; line-height: 35px; background: #ff5417; width: 100px; text-align: center; color: #fff; font-size: 16px; margin-left: 110px; }
+.cart_Order_address2 li { }
+.cart_Order_coupon em { margin-top: 2px; }
+.cart_Order_address2 li h2 { width: 100px; height: 32px; line-height: 32px; overflow: hidden; text-align: right; float: left; }
+.cart_Order_address.cart_Order_address2 li .textform { height: 28px; line-height: 28px; width: 170px; border: 1px solid #e5e5e5; overflow: hidden; font-size: 12px; color: #585858; display: block; }
+.cart_Order_address2 li .textform2, .cart_Order_info3 .cart_Order_coupon select { height: 30px; line-height: 30px; padding: 6px 0px; width: 180px; border: 1px solid #ddd; border-top: 1px solid #ccc; border-left: 1px solid #ccc; overflow: hidden; color: #999; font-size: 14px; }
+.cart_Order_deliver, .cart_Order_info2 { width: 1000px; padding-bottom: 0px; }
+.cart_Order_deliver table { width: 100%; }
+.cart_Order_coupon { line-height: 20px; overflow: hidden; }
+.cart_Order_coupon .info { float: left; margin-right: 20px; color: #585452; }
+.cart_Order_coupon .info .focus{}
+#div_fapiao { float: left; color: #a39b99; }
+#div_fapiao input { border: 1px solid #dddddd; width: 180px; padding-left: 10px; height: 20px; line-height: 20px; color: #ff5417; }
+.cart_Order_deliver table th, .cart_Order_info2 table th { font-weight: normal; border-left: 0px; padding: 6px 0px; color: #c81623; border-top: 0px; }
+.cart_Order_deliver table td, .cart_Order_info2 table td { padding: 6px 0px; }
+.cart_Order_price span { font-family: "microsoft yahei"; font-size: 16px; }
+.cart_Order_price span span { font-family: Arial, Helvetica, sans-serif; }
+.cart_Order_info2 table td { color: #333; }
+.cart_Order_info .name a { display: block; overflow: hidden; line-height: 40px; }
+.cart_Weight { text-align: right; height: 30px; line-height: 30px; overflow: hidden; }
+.cart_Order_info3 .cart_Order_coupon3 { background: #fff4f0; overflow: hidden; border-top: 1px solid #ff5417; padding: 15px 25px; }
+.cart_Order_info3 .cart_Order_coupon3 .fl { width: 600px; }
+.cart_Order_info3 .cart_Order_coupon3 .fl .list { overflow: hidden; line-height: 25px; margin-bottom: 10px; margin-left: 5px; position: relative; }
+.cart_Order_info3 .cart_Order_coupon3 .fl .list ul { margin: 0px; padding: 0px; width: 555px; float: left; display: inline-block; }
+.cart_Order_info3 .cart_Order_coupon3 .fl .list ul li { margin: 0px; padding: 0px; float: left; height: 35px; margin-right: 5px; }
+.cart_Order_info3 .cart_Order_coupon3 .fl .list em { float: left; width: 40px; display: inline-block; }
+.cart_Order_info3 .cart_Order_coupon3 .fl .list b { height: 30px; width: 30px; float: left; display: block; border: 1px solid #dddddd; margin-right: 5px; }
+.cart_Order_info3 .cart_Order_coupon3 .fl .list span { margin-right: 10px; line-height: 30px; color: #8c8987; overflow: hidden; text-overflow: ellipsis; }
+.cart_Order_info3 .cart_Order_coupon3 .fl input { border: 1px solid #dddddd; line-height: 22px; padding-left: 5px; height: 20px; }
+.cart_Order_info3 .cart_Order_coupon3 .fr { }
+.cart_Order_info3 .cart_Order_coupon3 .fr .list { overflow: hidden; line-height: 25px; margin-bottom: 10px; }
+.cart_Order_info3 .cart_Order_coupon3 .fr .list em { float: left; margin-right: 10px; }
+.cart_Order_info3 .cart_Order_coupon3 .fr .list b { height: 25px; width: 25px; float: left; display: block; border: 1px solid #dddddd; margin-right: 10px; }
+.cart_Order_info3 .cart_Order_coupon3 .fr .prototal span { color: #ff7d5b; font-weight: bold; }
+.cart_Order_info3 .cart_Order_coupon3 .fr .list #tbCoupon { float: left; }
+.cart_Order_info3 .cart_Order_coupon3 .prototal { float: left; }
+.cart_Order_info3 .cart_Order_coupon table { padding-bottom: 10px; }
+.cart_Order_info3 .cart_Order_coupon select { width: 90px; }
+.cart_Order_info3 .cart_Order_coupon #btnCoupon { background: url(/templates/master/botany/images/cart/btnCoupon.jpg) repeat-x; color: #fff; height: 21px; width: 127px; overflow: hidden; line-height: 21px; border: 1px solid #c2c4ac; cursor: pointer; color: #736816; }
+.cart_Order_info3 .cart_Order_coupon .cart_Order_coupon2 { height: 35px; line-height: 35px; overflow: hidden; }
+.cart_Order_total { text-align: right; overflow: hidden; float: right; margin-top: 20px; width: 100%; }
+.cart_Order_total .coupon { color: #b8b8b8; }
+.cart_Order_total .coupon em { float: right; margin-left: 5px; }
+.cart_Order_total .total b { color: #585858; }
+.cart_Order_total .total em { color: #e60012; font-size: 18px; font-weight: bold; }
+.cart_Order_total .total em span { font-size: 20px; }
+.cart_Order_total .list { width: 100%; }
+.cart_Order_total .list b { float: right; font-weight: normal; text-align: right; margin-right: 15px; }
+.cart_Order_total .list em { float: right; text-align: right; }
+.cart_Order_total div { line-height: 32px; overflow: hidden; }
+.cart_Order_total .coupon h2 { float: right; line-height: 32px; }
+.cart_Order_total div span { font-family: "microsoft yahei"; font-size: 12px; }
+.cart_Order_total div span span { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+.cart_Order_total div .cart_invoice { height: 20px; border: 1px solid #dddddd; margin: 0px 5px; line-height: 20px; }
+.cart_Order_total .usepoint { text-align: right; height: 32px; }
+.cart_Order_total .pointtotal { text-align: right; color: #999; }
+.cart_Order_total .total { float: right; display: inline-block; }
+.cart_Order_total .usepoint .pointamount { margin: 0px 5px; }
+.cart_Order_total .usepoint .cart_invoice { width: 60px; text-align: center; }
+.cart_Order_total .list .total b { float: left; font-weight: normal; margin-right: 10px; text-align: right; }
+.cart_Order_total .list .total em { float: right; text-align: right; width: auto; }
+.cart_Order_submit2 { margin: 0 auto; width: 1000px; margin-top: 15px; overflow: hidden; }
+.cart_Order_submit2 input { background: #ff5317; float: right; width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 16px; border: none; color: #fff; cursor: pointer; }
+.cart_Order_submit2 .total { display: inline-block; float: right; font-size: 14px; font-weight: 700; line-height: 52px; padding: 0px; padding-right: 18px; margin: 0px; }
+.cart_Order_submit2 .total span { font-family: "microsoft yahei"; color: #E4393C; font-size: 20px; font-weight: normal; margin: 0px; padding: 0px; }
+.cart_Order_submit2 .total span span { font-family: Arial, Helvetica, sans-serif; font-size: 22px; margin: 0px; padding: 0px; }
+.cart_Order_address li .form-control:focus { border: 1px solid #66afe9; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6); outline: 0 none; }
+/**********支付***********/
+
+.cart_payment { width: 1000px; overflow: hidden; }
+.cart_payment .con { width: 938px; overflow: hidden; background: #f9fef6; border-top: 2px solid #56bd54; padding: 20px 30px; margin-top: 10px; padding-bottom: 0px; }
+.cart_payment .title { margin-bottom: 8px; overflow: hidden; clear: both; }
+.cart_payment .title b { margin-right: 15px; }
+.cart_payment .title em { font-family: "microsoft yahei"; font-size: 18px; line-height: 50px; overflow: hidden; color: #7abd54; }
+.cart_payment .info { font-size: 13px; color: #000; }
+.cart_payment .info > span { margin-right: 25px; }
+.cart_payment .info1 { color: #7d7d7d; font-size: 13px; margin-bottom: 30px; overflow: hidden; }
+.cart_payment .info1 em { color: #ea565d; }
+.emcolor { color: #ea575c; font-weight: bold; font-family: "microsoft yahei"; font-size: 20px; }
+.submit1 input { width: 200px; height: 40px; text-align: center; line-height: 40px; color: #FFF; font-size: 16px; background: #fe5722; border: none; float: right; margin-top: 50px; }
+.pay_way { overflow: hidden; clear: both; overflow: hidden; margin-top: 35px; }
+.pay_way ul li { float: left; margin-top: 20px; margin-right: 30px; }
+.pay_way ul .select .name em { color: #56bd54; }
+.pay_way h2 { font-weight: bold; color: #000; font-size: 15px; }
+.pay_way ul li .checkbox { float: left; }
+.pay_way ul li .name { float: left; margin-top: 5px; line-height: 40px; overflow: hidden; margin-left: 10px; }
+.pay_way ul li .name em { font-size: 17px; margin-right: 10px; }
+.pay_way ul li .name b { color: #a3a3a3; font-weight: normal; }
+.pay_way ul li .name span a { color: #ea565d; }
+.pay_way ul li .pic { margin-left: 10px; float: left; width: 150px; border: 1px solid #eeeeee; text-align: center; height: 40px; line-height: 40px; }
+.pay_way ul li .pic b { font-weight: normal; font-size: 18px; height: 40px; line-height: 40px; overflow: hidden; }
+.pay_way ul .select .pic b { color: #56bd54; font-weight: normal; font-size: 18px; }
+.pay_way ul li .pic span { display: none; }
+.pay_way ul .select .pic { border: 1px solid #56bd54; overflow: hidden; display: block; }
+.pay_way ul .select .pic span { display: none; text-align: center; height: 18px; line-height: 18px; background: #56bd54; color: #fff; }
+.cart_payment_td div .core_order_pay_sub { background: url(/templates/master/botany/images/cart/amptyback2.jpg) no-repeat; }
+/*--------- 登录 --------*/
+
+.login_ad { background: #fe3f37; }
+.YaHei { font-family: "Microsoft YaHei"; }
+.logindiv { width: 1000px; margin: 0px auto; height: 430px; margin-top: -400px; }
+.loginimg { width: 628px; height: 380px; float: left; }
+.logingbj { width: 355px; height: 380px; float: right; position: relative; }
+.logingfome { width: 305px; height: 350px; background: #FFF; position: absolute; top: 0px; right: 0px; padding: 15px 25px; padding-left: 28px; }
+.logingfome .info1 { overflow: hidden; clear: both; margin-bottom: 5px; padding-top: 15px; }
+.logingfome .info1 h1 { float: left; font-weight: normal; font-family: "Microsoft YaHei"; color: #313131; font-size: 18px; padding-bottom: 18px; }
+.logingfome .info1 a { float: right; color: #268bf3; font-size: 14px; }
+.logingfome .info2 { overflow: hidden; margin-bottom: 17px; overflow: hidden; }
+.logingfome .info2 .form-control { border-radius: 0px; }
+.logingfome .info2 .form-control:focus { border: 1px solid #268bf3; box-shadow: none; }
+.logingfome .info3 { overflow: hidden; color: #6d6d6d; }
+.logingfome .info3 span { float: left; }
+.logingfome .info3 span input { float: left; margin-right: 5px; }
+.logingfome .info3 span label { float: left; font-weight: normal; }
+.logingfome .info3 em a { float: right; color: #6d6d6d; padding-right: 10px; }
+.logingfome .inputbj, .fomeinput .inputbj { border: 1px solid #d9dbde; line-height: 28px; height: 28px; }
+.logingfome .btncss, .fomeinput .btncss { background: #ff5500; width: 300px; font-size: 18px; height: 40px; line-height: 40px; color: #fff; border: 0; text-align: center; cursor: pointer; }
+.logingfome .btncss { margin-top: 25px; overflow: hidden; }
+.logingfome table { border-bottom: 1px #ddd dotted; font-size: 14px; color: #666; }
+.logingfome table a { font-size: 12px; line-height: 33px; color: #666; }
+.logingfome table a:hover { color: #FF2D2E; }
+.regis { padding: 18px 0; color: #777; }
+.regis a { color: #FF2D2E; }
+.regis span { display: block; line-height: 24px; font-size: 24px; padding-bottom: 5px; }
+.qqalipay { }
+.qqalipay span { display: block; font-size: 12px; margin-top: 15px; color: #acacac; }
+.qqalipay a { display: block; float: left; height: 30px; margin-top: 5px; overflow: hidden; text-align: center; margin-right: 5px; }
+/*--------- 注册 --------*/
+
+.trationbj { background: #f2f2f2; position: relative; width: 980px; margin: 20px auto; height: 490px; }
+.tration { width: 932px; height: 490px; padding: 0 20px; border: 1px #e1e1e1 solid; position: absolute; top: -6px; right: 4px; background: #fff; }
+.tration h1 { font-weight: normal; border-bottom: 1px #efefef solid; padding: 18px 0; font-size: 24px; }
+.fomeinput { padding-top: 6px; font-size: 14px; }
+.fomeinput table td { height: 50px;  *height: 44px;
+_height: 44px; }
+.fomeinput table a { font-size: 12px; color: #ee0000; }
+.fomeinput table li { font-size: 12px; display: block; line-height: 30px; }
+.fomeinput .dotted { border-bottom: 1px #ddd dotted; padding-bottom: 10px; }
+.register_btn { width: 180px; text-align: center; }
+.register_btn2 { width: 80px; text-align: center; }
+.register_save_ts { height: 24px; line-height: 24px; color: #666; padding-top: 8px; }
+.register_save_ts a { color: #cc0000; }
+li.safelogin a { width: 50%; display: block; height: 25px; margin: 5px 0px; text-align: center; float: left; }
+.trationbj2 { background: #f2f2f2; position: relative; width: 980px; margin: 20px auto; height: 760px; }
+.tration2 { width: 932px; height: 760px; padding: 0 20px; border: 1px #e1e1e1 solid; position: absolute; top: -6px; right: 4px; background: #fff; }
+/*---会员注册---*/
+
+.header_logo { border-bottom: 2px solid #fd5723; background: #fff; padding-top: 35px; overflow: hidden; padding-bottom: 20px; }
+.header_logo .top1, .header_logo .top2 { margin: 0 auto; width: 1100px; overflow: hidden; }
+.header_logo .top1 .logo1 { border-right: 1px solid #e5e5e5; float: left; padding-right: 25px; }
+.xyonghu { font-weight: normal; font-size: 24px; padding-left: 25px;  overflow: hidden; font-family: "microsoft yahei"; color: #585858; }
+.header_logo .top2 { font-size: 16px; text-align: right; color: #707070; }
+.header_logo .top2 a { color: #fe5722; }
+.xy_xuanze { float: left; margin-right: 10px; margin-top: 2px; }
+.zhuce_con_r a { color: #dc0606; }
+.zc_tishi { display: none; line-height: 40px; }
+.zhuce_success { margin: 0 auto; overflow: hidden; margin-top: 20px; margin-bottom: 30px; width: 840px; padding: 50px; background: #f7f7f7; border: 1px solid #e8e8e8; text-align: center; }
+zhuce_success span { display: block; margin-bottom: 15px; height: 35px; line-height: 35px; }
+.zcchg { background: url(/templates/master/botany/images/users/zhuce11.jpg) no-repeat 280px 0px; padding-left: 45px; font-weight: bold; font-size: 18px; color: #1dba0e; }
+.lijigouwu { background: url(/templates/master/botany/images/users/zhuce_03.jpg) no-repeat; cursor: pointer; width: 105px; height: 36px; overflow: hidden; margin: 0 auto; }
+.zhuce { margin: 0 auto; margin-top: 40px; margin-bottom: 30px; padding: 40px; overflow: hidden; width: 800px; box-shadow: 0 3px 30px rgba(251, 172, 143, 0.25); background: #FFF; }
+.zhuce_con { overflow: hidden; }
+.zhuce_con_l { float: left; overflow: hidden; padding-top: 10px; padding-left: 100px; }
+.zhuce_con_r { float: left; overflow: hidden; padding-left: 40px; }
+.zc_name { overflow: hidden; margin-bottom: 15px; line-height: 35px; padding-left: 10px; float: left; width: 100%; }
+.zc_name span { float: left; overflow: hidden; margin-right: 10px; }
+.zhuce_con #pwdstrength em { float: left; padding-left: 40px; margin-right: 5px; line-height: 25px; }
+.zc_name .error2 { border-radius: 0px; border: 1px solid #ff0000; }
+.zc_name em { float: left; font-size: 16px; color: #a4a4a4; overflow: hidden; min-width: 85px; text-align: right; }
+.zhuce_input1 { width:270px; padding-left: 10px; height: 40px; display: block; border: 1px solid #dcdcdc; }
+.zc_name .form-control:focus {}
+.succeed { padding-left: 30px; overflow: hidden; background: url(/templates/master/botany/images/users/zhuce_1_03.jpg) no-repeat 10px; display: block; color: #268bf3; }
+.error { padding-left: 30px; color: #fe5722; overflow: hidden; background: url(/templates/master/botany/images/zcselect.jpg) no-repeat 10px; }
+.zc_name span.focus { padding-left: 30px; color: #ccc; overflow: hidden; background: url(/templates/master/botany/images/new/field.jpg) no-repeat 10px; }
+.zc_anquan { padding-left: 80px; overflow: hidden; margin-top: -10px; margin-bottom: 15px; display: none; line-height: 22px; }
+.zhuce_input2 { width: 150px; padding-left: 10px; height: 40px;border: 1px solid #dcdcdc; display: block; }
+.zc_name a { color: #0658b4; }
+.zc_xieyi { margin-top: 15px; width: 550px; margin-bottom: 20px; padding-left: 115px; overflow: hidden; clear: both; }
+.zc_xieyi a { color: #fe5722; }
+.zc_xieyi em { float: left; overflow: hidden; line-height: 25px; color: #626262; }
+.xieyi_btn { margin: 0 auto; margin-left: 100px; width: 300px; height: 40px; margin-bottom: 15px; cursor: pointer; border: 0px; line-height: 40px; color: #fff; font-size: 18px; margin-top: 15px; background: url(/templates/master/botany/images/new/zhuce_btn.jpg) no-repeat; }
+.xieyi_submit_btn { margin-left: 115px; background: url(/templates/master/botany/images/users/zhuce_submit.jpg) no-repeat; width: 240px; height: 40px; margin-bottom: 15px; cursor: pointer; border: 0px; }
+.yanzheng_input3 { height: 42px; width: 110px; text-align: center; background: #fe5722; color: #fff; cursor: pointer; border: none; font-size: 13px; }
+.tisheng { color: #47b556; font-size: 12px; }
+.tisheng a { color: #47b556; }
+.yanzheng_input3:hover { }
+#imgVerifyCode { height: 37px; }
+.yanzheng_input4 { margin-top: 5px; }
+#pwdstrength { padding-left: 80px; height: 37px; float: left; }
+.zhuce_con .zc_name em { float: left; overflow: hidden; margin-right: 20px; line-height: 40px; }
+.zhuce_con .strengthA b { float: left; height: 18px; width: 104px; background: url(/templates/master/botany/images/pwdstrength.gif) no-repeat 0px 5px; }
+.zhuce_con .strengthB b { float: left; height: 13px; margin-top: 5px; width: 104px; background: url(/templates/master/botany/images/pwdstrength.gif) no-repeat 0 -13px; }
+.zhuce_con .strengthC b { float: left; height: 13px; width: 104px; margin-top: 5px; background: url(/templates/master/botany/images/pwdstrength.gif) no-repeat 0 -26px; }
+.disabled { cursor: default !important; }
+.register_btn2 { width: 80px; text-align: center; }
+.register_tab_left { width: 150px; height: 40px; border-top: 1px solid #d7d7d7; border-left: 1px solid #d7d7d7; border-right: none; text-align: center; line-height: 40px; position: relative; float: left; cursor: pointer; }
+.register_tab_right { width: 150px; height: 40px; border-top: 1px solid #d7d7d7; border-left: 1px solid #d7d7d7; border-right: 1px solid #d7d7d7; text-align: center; line-height: 40px; position: relative; float: left; cursor: pointer; }
+.register_tab_left_select { width: 150px; height: 40px; border-top: 1px solid #d7d7d7; border-left: 1px solid #d7d7d7; border-right: none; text-align: center; line-height: 40px; position: relative; float: left; cursor: pointer; border-bottom: 1px solid #fff; margin-bottom: -1px; }
+.register_tab_right_select { width: 150px; height: 40px; border-top: 1px solid #d7d7d7; border-left: 1px solid #d7d7d7; border-right: 1px solid #d7d7d7; text-align: center; line-height: 40px; position: relative; float: left; cursor: pointer; border-bottom: 1px solid #fff; margin-bottom: -1px; }
+.phonecode { display: inline-block; border-radius: 10%; border: 1px solid #ccc; width: 90px; text-align: center; height: 30px; line-height: 30px; background-color: #f4f4f4; cursor: pointer; }
+/*--------- 注册协议 --------*/
+
+.registeragreement { width: 930px; margin: 0 auto; overflow: hidden; border: 1px solid #cccccc; }
+.registeragreement_c { width: 890px; margin: 0 auto; overflow: hidden; padding: 20px; color: #666; line-height: 30px; }
+.RegisterAgreement_tit { background: #f5f5f5; border-bottom: 1px solid #e4e4e4; line-height: 40px; height: 40px; text-align: center; color: #666; font-size: 14px; font-weight: bold; }
+.registeragreement_back { text-align: right; }
+.registeragreement_back a { color: #cc1100; }
+/* 找回密码 */
+
+.input2 { border: 1px solid #ddd; border-top: 1px solid #ccc; border-left: 1px solid #ccc; height: 35px; line-height: 35px; padding-left: 6px; }
+.input3 { border: 1px solid #ddd; border-top: 1px solid #ccc; border-left: 1px solid #ccc; padding: 6px 0px; padding-left: 6px; }
+.ForgotPW_pad { }
+.ForgotPW_icon { font-size: 14px; border-bottom: 1px solid #e6e6e6; }
+/* 客户留言 */
+
+.message_nav { color: #606060; border-bottom: 1px solid #dad6d7; height: 30px; line-height: 30px; padding-left: 8px; }
+.message_nav a { color: #666; }
+.message_tishiwrong { width: 760px; margin: 3px auto; overflow: hidden; }
+.message_list { width: 1200px; overflow: hidden; }
+.message_list_tab { width: 880px; margin: 0 auto; overflow: hidden; float: left; background: #fafafa; }
+.message_list_c { width: 660px; overflow: hidden; margin-left: 10px; }
+.message_list_c1 { width: 660px; margin: 0 auto; overflow: hidden; line-height: 25px; padding-bottom: 20px; }
+.message_list_ask { background: url(/templates/master/botany/images/process/messages_dashline1.jpg) repeat-x bottom; margin-top: 10px; color: #494949; padding: 0px 8px; }
+.message_list_ask b { color: #e10b0b; margin-right: 5px; }
+.message_list_answer1 { background: url(/templates/master/botany/images/sub/repeat_bg.jpg) no-repeat; height: 10px; overflow: hidden; margin-top: 5px; }
+.message_list_answer2 { background: url(/templates/master/botany/images/sub/repeat_bg2.jpg) no-repeat; height: 4px; overflow: hidden; }
+.message_list_answer { padding: 10px 8px; background: #f2f2f2; border: 1px solid #d9d9d9; border-bottom: 0px; border-top: 0px; }
+.message_list_answer b { color: #3a9100; margin-right: 5px; }
+.message_list_time { text-align: right; color: #0A8CD2; line-height: 20px; font-size: 10px; }
+.message_add_tab { float: right; background: url(/templates/master/botany/images/sub/messagexie.jpg) repeat-y center; width: 300px; font-size: 14px; color: #333; padding-bottom: 205px; }
+.btn_sub { background: url(/templates/master/botany/images/sub/login-img2.png) no-repeat 0px 0px; width: 250px; font: 18px "Microsoft YaHei"; height: 36px; line-height: 36px; color: #FFFFFF; font-weight: bold; border: 0px; cursor: pointer; }
+.btn_sub:hover { background: url(/templates/master/botany/images/sub/login-img2.png) no-repeat 0px -36px; }
+.btn_sub:hover { color: #FFFFFF; text-decoration: none; }
+.message_page { padding: 0 30px 20px 0; overflow: hidden; }
+.message_add_tab .input2 { border: 1px solid #ccc; height: 30px; line-height: 30px; margin-bottom: 5px; color: #999; }
+.message_btnRefer { padding-top: 10px; color: #0A8CD2; font-size: 12px; float: right; }
+.message_btnRefer a { color: #0661dd; }
+.btn_shortsub { background:#fe5722; width: 140px; font: 18px "Microsoft YaHei";
+ height: 36px; line-height: 36px; color: #FFFFFF; font-weight:normal; border: 0px; cursor: pointer; }
+/* 分销商注册 */
+
+.registeragreement_fx { width: 860px; border: 1px solid #e1e1e1; margin: 0 auto; padding: 20px; margin-top: 15px; }
+.registeragreement_fx h4.martb { font-size: 14px; font-weight: bold; margin-top: 10px; }
+.agreement_bd { width: 820px; margin: 10px auto; overflow: hidden; word-break: break-all; }
+.Skin_RegisterInfo_w { width: 100%; margin-top: 10px; }
+.Skin_RegisterInfo_row { font-size: 14px; line-height: 30px; color: #666; }
+.Skin_RegisterInfo_row li { float: left; }
+.Skin_RegisterInfo_row .title { width: 120px; padding-left: 20px; }
+.Skin_RegisterInfo_row input { border: 1px #ddd solid; background: url(/templates/master/botany/images/process/inputbj.gif) no-repeat; padding-left: 5px; line-height: 25px; height: 25px; width: 240px; }
+#registerAgreement_div_Common_Register_Clause { width: 700px; margin: 0 auto; }
+.regstepalert { color: #f30; margin-top: 15px; padding-left: 20px; }
+.regimgDiv, .registerAgreement_step3 { float: left; font-size: 14px; padding-left: 30px; }
+.regimgDiv, .registerAgreement_step3 div { font-weight: 700; font-size: 16px; color: #ff3300; margin-bottom: 20px; }
+.color_f30, .color_f30 a { color: #f30; }
+.btncss_next { display: block; background: #ff5500; height: 35px; line-height: 35px; color: #fff; border: 0; text-align: center; cursor: pointer; width: 150px; display: block; font: bold 18px/36px "Microsoft YaHei"; margin-top: 20px; font-size:14px; }
+.btncss_next:hover { color: #fff; }
+/* 推荐好友 推荐到博客 */
+
+.re_blogit_tab { border: 5px solid #f5f5ed; padding: 15px; width: 910px; margin: 0 auto; }
+.re_blogit_pro_t, .re_blogit_pro_t a { color: #2c2c2c; font: bold 20px 'Microsoft YaHei'; height: 30px; padding-bottom: 10px; }
+.re_blogit_pro_area1 { background: #f8f5f0; border: 1px solid #eee0d3; padding: 10px; }
+.re_blogit_pro_area2 { background: #f8f8f8; border: 1px solid #e7e7e7; padding: 10px; }
+.re_blogit_pro_pict { padding-bottom: 10px; color: #626262; }
+.re_blogit_pro_pict img { margin-right: 10px; }
+.blogit_subbg { background: url(/templates/master/botany/images/process/blogit_subbg.jpg) repeat-x; border: 1px solid #c4c5a6; text-align: center; line-height: 20px; color: #646716; cursor: pointer; width: 50px; }
+.blogit_bottom_line1 { border-bottom: 1px solid #e7e7e7; line-height: 30px; color: #656565; }
+.re_friend_tab, .Forgot_out, .vote_con { border: 5px solid #f5f5ed; padding: 15px; width: 1160px; margin: 0 auto; overflow: hidden; }
+/* 评论 与咨询 */
+
+.i-Review { border: 1px solid #eeeeee; padding: 20px; padding-bottom: 30px; overflow: hidden; border-top: none; }
+.i-Review .rate { float: left; width: 130px; padding-left: 15px;  }
+.i-Review .rate strong { font-size: 35px; clear: both; display: block; color: #ff5722; font-weight: normal; }
+.i-Review .rate span { clear: both; display: block; margin-top: -10px; }
+.i-Review .percent { float: left; margin-top: 10px; }
+.i-Review .percent dl { padding: 2px 0px; overflow: hidden; }
+.i-Review .percent dl dt { float: left; width: 70px; font-weight: normal; color: #909090; }
+.i-Review .percent dl dd { background: #efefef; float: left; height: 10px; margin-top: 6px; overflow: hidden; width: 100px; }
+.i-Review .percent dl dd div { background: #ff5722; height: 10px; overflow: hidden; }
+/* 评论选项卡 */
+
+.Review-con .go-back { text-align: center; border-top: 1px dashed #ccc; padding: 10px; margin-top: 20px; font-size: 40px; }
+.Review-con .wrap { margin-top: 20px; }
+.Review-con .tab { width: 980px; margin: 0 auto 50px; }
+.Review-con .tab-hd { overflow: hidden; zoom: 1; border: 1px solid #eeeeee; }
+.Review-con .tab-hd li { float: left; width: 150px; color: #313131; height: 30px; line-height: 30px; text-align: center; cursor: pointer; }
+.Review-con .tab-hd li em { color: #959595; }
+.Review-con .tab-hd li.active { color: #ff5722; }
+.Review-con .tab-hd li.active em { color: #ff5722; }
+.Review-con .tab-bd > div { display: none; padding: 0px 20px; }
+.Review-con .tab-bd > div.thisclass { display: block; border-bottom: none; }
+.product_reviews_list .column { float: left; }
+.product_reviews_list .column1 { width: 165px; }
+.product_reviews_list .column2 { width: 340px; margin-right: 50px; }
+.product_reviews_list .column2 .con { margin-bottom: 10px; overflow: hidden; }
+.product_reviews_list .column2 .after-service-img { overflow: hidden; display: block; }
+.product_reviews_list .column2 .after-service-img img { position: relative; width: 50px; height: 50px; display: block; float: left; margin-right: 12px; border: 3px solid #ececec; margin-bottom: 10px; }
+.preview-img { width: 305px; clear: both; overflow: hidden; padding: 10px; border: 1px solid #ddd; position: relative; left: 0; display: none; margin-bottom: 20px; }
+.preview-img img { width: 100%; }
+.after-service-img .active::after { content: ""; position: absolute; border: 6px solid; border-color: #f43a3e #fff #fff #fff; bottom: -14px; left: 18px; }
+.after-service-img .active { border: 2px solid #f43a3e !important; position: relative; cursor: zoom-out; }
+.after-service-img img { cursor: zoom-in; }
+.product_reviews_list .column2 .reply { position: relative; background: #fff1ed; line-height: 20px; padding: 5px 10px; color: #ff5722; }
+.product_reviews_list .column2 .reply::after { border-color: transparent transparent #fff1ed; border-style: solid; border-width: 5px; content: " "; display: block; height: 0; left: 30px; margin-left: 0px; position: absolute; top: -10px; width: 0; }
+.product_reviews_list .column3 { width: 190px; margin-right: 50px; color: #959595; }
+.product_reviews_list .column3 .size { height: 25px; line-height: 25px; }
+.product_reviews_list .column4 { width: 120px; float: right; text-align: right; }
+.column1 .grade-star { background: url(/templates/master/botany/images/new/grade-star.png) no-repeat; width: 85px; height: 22px; }
+.column4 .product_reviews_time { padding-left: 0px; }
+.product_mc .detail-content-item { padding: 20px; overflow: hidden; }
+.re_productreviews_h2 { font-size: 14px; font-weight: bold; line-height: 30px; height: 30px; border-bottom: 1px solid #e7e7e7; margin-bottom: 10px; }
+.re_productreviews_tabc { line-height: 30px; }
+.re_productreviews_tabc .inpnt { border: 1px solid #dddddd; height: 22px; line-height: 22px; }
+.product_reviews_list { border-bottom: 1px solid #f2f2f2; padding-bottom: 20px; overflow: hidden; margin-top: 8px; }
+.product_reviews_time { color: #bebebe; margin-left: 10px; white-space: nowrap; float: right; }
+.product_reviews_pages { margin-top: 18px; }
+.product_reviews_list_ask { background: #ffffff; padding: 10px; padding-bottom: 20px; }
+.product_reviews_list_re { padding: 10px; }
+.product_reviews_list_re .touxiang { float: left; margin-right: 20px; }
+.product_reviews_list_re .list_con { float: left; width: auto; max-width: 810px; line-height: 20px; background: #eef6fd; border-radius: 5px; padding: 5px 15px; position: relative; }
+.product_reviews_list_re .list_con::after { border-color: transparent #eef6fd transparent transparent; border-style: solid; border-width: 8px; content: " "; display: block; height: 0; left: -8px; margin-left: -8px; position: absolute; top: 20px; width: 0; }
+.product_reviews_list_re .list_con .product_reviews_time { display: block; float: none; margin-left: 0px; }
+.product_reviews_list b { font-weight: normal; }
+.product_reviews_list_re div p img { width: 100%; }
+.color_re_red { color: #e10b0b; }
+.color_re_green { color: #3a9100; }
+.product_attri_tab { background: #f5f5f5; padding: 1px 5px; float: left; width: 300px; margin-right: 2px; }
+/*成交量*/
+
+.tab_sales { border: 1px #e0dcce solid; color: #333; border-bottom: none; width: 100%; }
+.tab_sales td { border-bottom: 1px #e0dcce solid; padding: 6px; }
+.tr_head { color: #8e8e8e; line-height: 30px; height: 30px; }
+.re_productreviews_h2 { font-size: 14px; font-weight: bold; line-height: 30px; height: 30px; border-bottom: 1px solid #e7e7e7; margin-bottom: 10px; }
+/* 错误页提示 */
+
+.buy_qq_notice { font-size: 14px; color: #FF0000; line-height: 40px; text-align: center; }
+.buy_qq_notice b { color: #ff3300; }
+/*--------- 公告 --------*/
+
+.notice_w .notice_w_bs h2 { background: #e9f4fe; height: 30px; line-height: 30px; color: #333; text-align: center; padding-left: 25px; font-size: 14px; font-weight: bold; }
+.notice_w .notice_w_bs h3 { border-top: 1px solid #ccdff2; margin-top: 2px; line-height: 30px; height: 30px; text-align: center; padding-left: 25px; color: #666; }
+.notice_w .notice_w_bs h4 { line-height: 25px; height: 25px; padding-left: 25px; font-weight: bold; }
+.notice_w .notice_w_bs h4 a { color: #cc0000; font-weight: normal; }
+.notice_dh { height: 25px; line-height: 25px; color: #666; }
+.notice_dh a { color: #cc0000; }
+.notice_c { padding: 10px 0px; }
+.affiches_t { background: #e9f4fe; height: 30px; line-height: 30px; color: #333; text-align: center; padding-left: 25px; font-size: 14px; font-weight: bold; }
+/*--------- 帮助 文章 --------*/
+
+/*全部分类*/
+
+.allcategorylist_c { overflow: hidden; width: 1200px; }
+.allcategorylist_c ul { }
+.allcategorylist_c a:hover { color: #FF2D2E; }
+.allcategorylist_c ul li { width: 1198px; overflow: hidden; border: 1px solid #ededed; margin-bottom: 15px; }
+.allcategorylist_c ul li h2 { background: url(/templates/master/botany/images/sub/classbg.jpg) repeat-x; height: 39px; overflow: hidden; padding-left: 20px; line-height: 39px; }
+.allcategorylist_c ul li h2 a { font-family: "microsoft yahei"; font-size: 18px; color: #cc0000; }
+.allcategorylist_c ul li ul { width: 1010px; margin-top: 15px; }
+.allcategorylist_c ul li ul li { width: 449px; overflow: hidden; border: 0px; float: left; margin-left: 20px; _margin-left: 10px; margin-right: 25px; margin-bottom: 0px; padding-bottom: 15px; }
+.allcategorylist_c ul li ul li b { width: 100px; font-family: "microsoft yahei"; font-size: 14px; font-weight: bold; float: left; text-align: right; }
+.allcategorylist_c ul li ul li div { width: 349px; float: right; line-height: 27px; }
+.allcategorylist_c ul li ul li div a { color: #666; }
+.allcategorylist_c ul li ul li div span { color: #ccc; margin-left: 5px; margin-right: 5px; }
+/********商品绑定促销页面*********/
+
+.clearboth { clear: both; }
+.bundlitem { width: 975px; overflow: hidden; margin-bottom: 20px; border: 1px solid #ddd; }
+.bundlitem h3 { font-size: 18px; border-bottom: 1px solid #eae9e9; background: #f8f8f8; line-height: 35px; font-weight: bolder; font-family: "microsoft yahei"; padding-left: 10px; }
+.bundlitem h3 em { color: #fe5722; }
+.bundlitem .desc, .bundlitem .bunditem_r { width: 838px; overflow: hidden; margin: 0 auto; }
+.bundlitem .desc { text-indent: 2em; color: #999; padding: 15px 0px 0px 0px; }
+.bundlitem h4 { margin-top: 5px; margin-bottom: 5px; color: #fe5722; font-family: "microsoft yahei"; font-size: 15px; }
+.bundlitem .bunditem_r table { border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 99.9%; }
+.bundlitem .bunditem_r table td, .bundlitem .bunditem_r table th { border: 1px solid #ededed; border-bottom: 0px; ; border-right: 0px; height: 35px; line-height: 35px; text-align: center; }
+.bundlitem .bunditem_r table .bunditem_td { padding-left: 15px; }
+.bundlitem .bunditem_r table td b { font-family: Verdana, Geneva, sans-serif; color: #fe5722; margin-left: 5px; }
+.bundlitem .bunditem_l { width: 975px; overflow: hidden; background: #fafafa; border-top: 1px solid #ededed; margin-top: 20px; }
+.bundlitem .bunditem_l ul li { float: right; border-left: 1px solid #e2e2e2; height: 50px; overflow: hidden; padding: 10px 15px; }
+.bundlitem .bunditem_l ul li em { display: block; }
+.bundlitem .bunditem_l ul li strong { height: 24px; overflow: hidden; line-height: 24px; font-family: "microsoft yahei"; }
+.bundlitem .bunditem_l ul li strong span { font-weight: normal; }
+.bundlitem .markprice { text-decoration: line-through; color: #ccc; }
+.bundlitem .bundlprice { font-size: 20px; color: #F60; }
+.bundlitem .bundlprice span { font-family: Arial, Helvetica, sans-serif; font-size: 24px; }
+.Product_btn_gm, .Product_btn_add { background:#fe5722; width: 120px; color: #fff; font-size: 14px; display: block; height: 37px; line-height: 16px; margin-top: 12px; cursor: pointer; line-height: 37px; text-align: center; border-radius: 5px; }
+.Product_btn_gm:hover, .Product_btn_add:hover{ color: #fff;}
+/**********分类页***********/
+
+.nav_info { line-height: 22px; color: #666666; overflow: hidden;  }
+.nav_info h2 { float: left; line-height: 22px; color: #666666; font-family: "microsoft yahei"; font-size: 18px; font-weight: bold; }
+.nav_info a { color: #666666; }
+/*.category { width: 1200px; overflow: hidden; margin: 0 auto; margin-top: 8px; }*/
+
+.paihangtop { font-size: 16px; line-height: 40px; padding-left: 15px; height: 40px; color: #4c4c4c; }
+.category_l { width: 208px; overflow: hidden; float: left;   }
+.category_list { border: 1px solid #ddd; border-top: 2px solid #8d9562; }
+.category_list h2 {  height: 30px; line-height: 30px; color: #666666; font-family: "microsoft yahei"; font-size: 15px; border-bottom: 1px solid #ddd; padding-left: 15px; border-top: 1px solid #ddd; }
+.category_list div { width: 180px; margin: 0 auto; overflow: hidden; padding: 5px 0px; }
+.category_list div a { background: url(/templates/master/botany/images/sub/listico.jpg) no-repeat center left; padding-left: 10px; display: block; height: 24px; float: left; line-height: 24px; width: 80px; overflow: hidden; color: #535353; }
+.category_list div a:hover { color: #fe5722; text-decoration: none; }
+.category_browse, .sale_top { margin-top: 15px; }
+.category_l .cate_ad { margin-bottom: 10px; }
+.category_browse h2, .sale_top h2 { color: #666666; font-family: "microsoft yahei"; font-size: 15px; background: #f7f7f7; padding-left: 15px; }
+.category_l .sale_top ul li .img a img { width: 60px; }
+.category_browse ul { }
+.category_browse ul li { width: 208px; overflow: hidden; margin-top: 10px; margin-bottom: 20px; }
+.browse_pic { width: 150px; overflow: hidden; overflow: hidden; text-align: center; margin: 0 auto; margin-bottom: 10px; }
+.browse_name { width: 150px; font-size: 12px; overflow: hidden; margin: 0 auto; text-align: center; height: 25px; line-height: 25px; }
+.browse_name a { color: #686868; }
+.browse_price { text-align: center; color: #ff5417; }
+.browse_price strong { font-weight: normal; }
+.browse_price em { text-decoration: line-through; margin-left: 10px; color: #c0c0c0; }
+.view_clear {}
+.category_browse{ border: 1px solid #e4e4e4; border-top: 2px solid #8d9562;}
+.category_browse h2{ background: none; border-bottom: 1px solid #e4e4e4; height: 35px; line-height: 35px; font-weight: bold; font-size: 14px;}
+.category_browse .view_clear { text-align: center; width: 190px; margin: 0 auto; line-height: 30px; border-top: 1px dashed #ccc; }
+.sale_top ul li { position: relative; margin:0px 10px;width: 188px; padding: 10px 0px; overflow: hidden;  vertical-align: bottom; 
+border-bottom: 1px dashed #f3f3f3; }
+.sale_top ul li:last-child{ border-bottom: none;}
+.sale_top ul li .img { width: 0px; overflow: hidden; float: left; height: 0px; margin-right: 8px; }
+.sale_top ul li em { float: left; margin-right: 10px; display: block; background: #fff; color: #9f9f9f;; width: 16px;  height: 16px; overflow: hidden; line-height: 16px; text-align: center; border-radius: 50%; border: 1px solid #9f9f9f; }
+.sale_top ul li.saleitem1 em,.sale_top ul li.saleitem2 em,.sale_top ul li.saleitem3 em{ background:none; border: 1px solid #ff2e2e; color: #ff2e2e; }
+.sale_top ul li .info { width: 150px;  overflow: hidden; float: left; }
+.sale_top ul li.saleitem1 em{}
+.sale_top ul li.saleitem1 .img{ width: 60px; height: 60px;}
+.sale_top ul li.saleitem1 .info{ width:80px;}
+.sale_top ul li.saleitem1 .price{ display: block;}
+.sale_top ul li.saleitem1 .price b{ display: block;}
+.sale_top ul li.saleitem1 .price span{ display: none;}
+.sale_top ul li.saleitem1 .sale{ display:none;}
+.sale_tops .sale_top{ margin-top: 0px;}
+.sale_top ul li.saleitem1 .info .name{ width: 80px; height: 40px; line-height: 20px; overflow: hidden;}
+.sale_top ul li.saleitem1 .info .name a{ width: 80px; text-overflow: clip; white-space: normal;}
+.sale_top ul li .info .name{ text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 150px; height: 20px; line-height: 20px;}
+.sale_top ul li .name, .sale_top ul li .price, .sale_top ul li .sale { height: 20px; line-height: 20px; overflow: hidden; }
+.sale_top ul li .name a { color: #666; font-size:13px;text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 150px; height: 20px; line-height: 20px; }
+.sale_top ul li .price{ display: none;}
+.sale_top ul li .price b { display: none; float: left; font-family: Verdana, Geneva, sans-serif; color: #fe5722; font-weight: normal; }
+.sale_top ul li .price span { text-decoration: line-through; margin-left: 5px; color: #c0c0c0; }
+.sale_top ul li .sale { display: none; width: 114px; }
+.sale_top ul li .sale b { color: #FF2D2E; font-weight: normal; }
+.cate_ad img { margin-top: 10px; }
+.category_r { width: 980px; overflow: hidden; float: right; }
+.sub_category, .sub_property { border: 1px solid #ddd; padding: 0px 10px; }
+.sub_category h2, .sub_property h2 { font-family: "microsoft yahei"; font-size: 14px; font-weight: bold; color: #333333; height: 30px; line-height: 30px; border-bottom: 1px solid #f7f7f7; }
+.sub_category ul, .sub_property ul { width: 980px; overflow: hidden; padding: 10px 0px; }
+.sub_category ul li { float: left; margin-right: 20px; height: 25px; line-height: 25px; }
+.sub_category ul li a { color: #535353; white-space: normal; }
+.sub_category ul li a:hover,.sub_property dl dd a:hover { color: #fe5722; text-decoration:none; }
+.sub_category .brand { min-height: 50px; overflow: hidden; }
+.sub_shrink { background: #fff; width: 100px; overflow: hidden; text-align: center; height: 25px; line-height: 25px; border: 1px solid #e8e8e8; border-top: 0px; margin: 0 auto; cursor: pointer; position: relative; top: -1px; color: #898989; }
+.sub_shrink span { background: #fff url(/templates/master/botany/images/sub/shrinkico.jpg) no-repeat right; padding-right: 15px; }
+.sub_property dl { width: 958px; overflow: hidden; /*border-bottom: 1px dotted #cccccc;*/
+padding: 5px 0px; line-height: 30px; padding-top: 12px;}
+.sub_property dl dt { width: 60px; text-align: right; overflow: hidden; float: left; }
+.sub_property dl dd { width: 895px; overflow: hidden; float: right; }
+.sub_property dl dd a { color: #535353; line-height: 20px; display: block; float: left; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; white-space: nowrap; }
+.sub_property dl dd a.select { padding: 0px 5px; background: #8d9562; color: #fff; }
+.sub_property .brand { min-height: 35px; overflow: hidden; }
+.category_search { border: 1px solid #dbdbdb; border-top: 2px solid #8d9562; margin-top: 30px; }
+.category_search2 { line-height: 20px; overflow: hidden; padding: 10px 18px; }
+.category_search2 input { vertical-align: middle; margin: 0px; }
+.category_search2 span input { margin-right: 5px; }
+.category_search2 label{ font-weight: normal; margin-right: 10px; vertical-align:top; line-height: 15px;}
+.catesearch_key, .catesearch_range { background: #fff; border: 1px solid #cccccc; padding: 2px 0px; }
+.catesearch_range { width: 30px; overflow: hidden; font-family: "microsoft yahei"; font-size: 10px; color: #999999; }
+.cut_down_button { background:#8d9562; width: 50px; height: 21px; border: 0px; cursor: pointer; color:#fff; border-radius:4px; -moz-border-radius:4px; -ms-border-radius:4px; -o-border-radius:4px; -webkit-border-radius:4px; }
+.category_sequence { height: 30px; line-height: 30px; overflow: hidden; border-top: 1px solid #dbdbdb; }
+.category_sequence ul { width: 284px; overflow: hidden; float: left; }
+.category_sequence ul li { width: 66px; height: 30px; overflow: hidden; float: left; border-right: 1px solid #dbdbdb; text-align: center; }
+.category_sequence ul li span { background: url(/templates/master/botany/images/sub/SequenceUpStop.jpg) no-repeat right center; padding-right: 10px; }
+.category_sequence ul .c_sel { background: #fff; color: #FF2D2E; font-weight: bold; }
+.category_sequence ul .c_sel span { background: #fff url(/templates/master/botany/images/sub/SequenceDown.jpg) no-repeat right center; }
+.category_sequence p { text-align: right; margin-right: 10px; color: #999999; }
+.category_sequence p span { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #FF2D2E; margin-left: 2px; margin-right: 2px; }
+.category_pro_list { width: 980px; overflow: hidden; }
+.category_pro_list ul { width: 980px; overflow: hidden; }
+.category_pro_list ul li { width: 220px; overflow: hidden;  padding: 12px; float: left; }
+/* .category_pro_list ul li.listhover {
+						border: 4px solid #f4f2f2;
+					}*/
+
+.category_pro_pic { height: 220px; width: 220px; border:1px solid #eeeeee; overflow: hidden; display: table-cell; 
+text-align: center; vertical-align: middle; }
+.category_pro_name { width: 220px; height: 40px; line-height: 20px; overflow: hidden; margin-top: 10px; }
+}
+.category_pro_price { height: 25px; width: 207px; line-height: 25px; overflow: hidden; }
+.category_pro_price p { float: left; color: #ff2d2e; padding-right:10px; font-size: 14px; }
+.category_pro_price p strong  { color: #FF2D2E; font-weight:normal; }
+.category_pro_price p span { color: #FF2D2E; text-decoration: none; }
+.category_pro_price em { float: left; text-decoration: line-through;  margin-top: 2px; color: #999; }
+/**********详细页***********/
+.brand_logo { overflow: hidden; }
+.brand_logo img { height: 50px; }
+.tm-action { margin-top: 8px; }
+.tm-action ul li { float: left; padding-left: 20px; margin-right: 25px; }
+.tm-action ul .iShare { background: url(/templates/master/botany/images/new/share_03.png) no-repeat 0px 3px; width: 100px; }
+.tm-action ul .iShare h2 { line-height: 20px; }
+.tm-action ul .iShare div a { float: left; }
+.product_para2 .cuxiao { }
+#divGift em { height: 30px; width: 30px; line-height: 30px; }
+#divGift em img { margin-left: 0px; height: 30px; width: 30px; }
+#divGift b { line-height: 25px; }
+#divGift .tag2 { margin-right: 15px; }
+.cuxiao span #divGift b { padding-left: 0px; padding-right: 10px; }
+.cuxiao { position: relative;  }
+.cuxiao em { float: left; width: 66px; }
+.cuxiao span { float: left; width: 430px; overflow: hidden; }
+.cuxiao span div { display: block; font-size: 12px; margin-left: 0px; margin-bottom:0px; color: #888888; }
+.cuxiao span div b { font-weight: normal; float: left; line-height: 20px; padding-left: 10px; }
+.cuxiao span div b.full { width: 272px; position: absolute; top: 0px; left: 90px; }
+.cuxiao span div b.full.hover { background: #fff; padding: 8px; box-shadow: 2px 2px 2px #e0e0e2; z-index: 10; margin-left: 5px; }
+.cuxiao span div b.full .full_con em { margin-bottom: 0px; letter-spacing:0px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; 
+max-width: 250px; }
+.cuxiao span div b.full.hover .full_con em { max-width: 260px; float:left; margin-bottom: 0px; text-overflow: inherit; white-space: normal; }
+.cuxiao span div b.full.hover .icon { transform: rotate(180deg); float: right; }
+.cuxiao span div b.full .icon { cursor: pointer; float: left; display: block; margin-top: 5px; margin-left: 10px; transition: transform 0.01s ease-in 0s; }
+.cuxiao span div em { float: left; width: auto; }
+.cuxiao span div em img { margin-left: 10px; }
+.cuxiao span div i { font-style: normal; }
+.cuxiao span div .tag1 { color: #fff; background: #ff5722; width: 20px; height: 20px; text-align: center; line-height: 20px; border-radius: 5px; display: block; float: left; margin-bottom: 10px; }
+.cuxiao span div .tag2 { color: #fff; background: #00c853; width: 20px; height: 20px; text-align: center; line-height: 20px; border-radius: 5px; display: block; float: left; }
+.cuxiao span div .tag3 { color: #fff; background: #0091ea; width: 20px; height: 20px; text-align: center; line-height: 20px; border-radius: 5px; display: block; float: left; }
+.product_frame { }
+.product_para2 .product_btns_qrcode { position:relative; background: url(/templates/master/botany/images/new/pro_icon_11.png) no-repeat right 5px; right: 20px; bottom: 20px; padding-right: 15px; float: right; text-align: right; width: 200px;}
+
+.product_btns_qrcode a { color: #ed0000; }
+#bfdProductTitle { font-size: 18px; color: #000; height: 40px; line-height: 40px; width: 530px; overflow: hidden; }
+.ald-inner { float: right; width: 180px; padding-left: 25px; }
+.ald-inner .qq { border-bottom: 1px solid #eeeeee; padding-bottom: 25px; padding-top: 15px; }
+.ald-inner .brand_logo { width: 180px; overflow: hidden; }
+.ald-inner .brand_logo img{ max-width:180px; height:auto;}
+.ald-inner .qq em, .ald-inner .qq span { display: block; }
+.ald-inner .sever { padding-top: 10px; }
+.ald-inner .sever em, .ald-inner .sever span { display: block; }
+.ald-inner .sever span img { margin-bottom: 10px; overflow: hidden; display: block; }
+.ald-inner .sever span, .ald-inner .qq span { padding-top: 10px; }
+.ald-inner .qq span .list { margin-bottom: 5px; overflow: hidden; line-height: 25px; }
+.ald-inner .qq span .list img, .ald-inner .qq span .list em { float: left; margin-right: 5px; line-height: 25px; }
+.introduce { color: #bfbfbf; }
+.product_intro { width: 1200px; margin-top: 8px; }
+.product_preview { width: 412px; float: left; position: relative; z-index: 11; }
+.product_preview2 { width: 410px; border: 1px solid #d9d9d9; }
+.product_preview3, .buy_product_thumbnail { }
+.product_preview3 ul, .buy_product_thumbnail ul { padding-left: 20px; }
+.product_preview3 li, .buy_product_thumbnail ul li { padding: 11px 0px; float: left; margin-right: 15px; }
+.product_preview3 li a, .buy_product_thumbnail li a { display: block; width: 60px; overflow: hidden; height: 60px; background: #fff; border: 1px solid #d9d9d9; }
+.product_preview3 li a.Product_WareSmall, .buy_product_thumbnail li a.Product_WareSmall { border: 2px solid #FF2D2E; }
+.product_para2 { position: relative; }
+.product_para2 div em { width: 66px;  float: left; display: block; letter-spacing: 1px; }
+.product_para2 div del { float: left; margin-top: -2px;}
+.product_para2 div del span { font-size: 14px; color: #616162; }
+.product_share { border: 1px solid #f0eced; padding: 5px 10px; color: #5e5e5e; }
+.product_parameter { width: 530px; border-right: 1px solid #eeeeee; padding-right: 25px; float: left; margin-left: 25px; position: relative; }
+.product_para_name td { font-family: "microsoft yahei"; font-size: 16px;  line-height: 22px; padding-bottom: 8px; }
+.product_para2 { background: url(/templates/master/botany/images/new/pro_bg_03.png) no-repeat; width: 530px; padding: 15px 0px;  }
+.product_para2 td { padding: 5px 0px; }
+.product_para2 div { color: #515152; clear: both; margin-left: 20px;  }
+.cuxiao span div b.full .full_con { line-height: 20px; }
+.cuxiao span div b.full.hover .full_con { overflow: auto; margin-bottom: 0px; }
+.tm-promo-price{ overflow: hidden;}
+.tm-promo-price b { font-family: "microsoft yahei"; float: left; margin-top: -7px; margin-left: -5px; font-weight: normal; font-size: 30px; 
+color: #ff5417; }
+.product_para2 .tm-promo-price div { float: left; margin: 0px; padding: 0px; clear: none; }
+.product_para2 .tm-promo-price .money { line-height: 40px; margin-left: 20px; }
+.product_para2 .tm-promo-price .money b { }
+.product_para2 .tm-promo-price .money em { float: none; font-size: 14px; width: auto; display: inline; color: #ff5417; }
+.product_para2 div b span { font-family: Arial, Helvetica, sans-serif; color: #ff5417; font-size: 30px; }
+.product_para2 div span { color: #404042; }
+.product_para_select .Product_WareFun_bg { padding-top: 15px; padding-left: 15px; color: #515152; width: 515px; }
+.product_para_select .SKURowClass {clear: both; width: 515px; overflow: hidden; }
+.product_para_select .SKURowClass span { line-height: 36px; display: block; float: left; width: 66px; color: #515152; }
+.product_para_select .SKURowClass dl, .product_para_select .SKURowClass dl dd { float: left; margin-bottom: 10px; }
+.product_para_select .SKURowClass dl dd { height: 38px; overflow:hidden;}
+.product_para_select .SKURowClass dl dd input, .SKUValueClass { border: 1px solid #e1e1e1; background: #fff; padding: 1px 10px; line-height: 32px; 
+height: 32x; color: #585858; margin-right: 10px; cursor: pointer; }
+.product_para_select .SKURowClass dl{ float: left; width: 445px; overflow: hidden;}
+.product_para_select .SKURowClass dl dd .SKUSelectValueClass, .buy_product_size dl dd .SKUSelectValueClass { padding: 0px 9px; border: 2px solid #ff5722; /*background: url(/templates/master/botany/images/sub/Details_06.jpg) no-repeat right bottom;*/
+	
+margin-right: 10px; }
+#productSkuSelector .SKURowClass dl dd img { display: block; padding: 1px; width: 32px; height: 32px; margin-right: 10px; }
+.product_para_select .SKUShowSelectClass { margin-bottom: 10px; color: #FF2D2E; line-height: 18px; }
+.shopcart-add, .shopcart-minus { cursor: pointer; }
+.mui-amount-btn { position: relative; }
+.shopcart-add { background: url(/templates/master/botany/images/new/pro_icon_29.png) no-repeat; width: 18px; height: 18px; position: absolute; top: 22px; left: 0px; }
+.shopcart-minus { background: url(/templates/master/botany/images/new/pro_icon_26.png) no-repeat; width: 18px; height: 18px; position: absolute; top: 0px; left: 0px; }
+.amount-unit { margin-left: 35px; color: #adadad; font-size: 12px; }
+.product_para_promote .promotiontype { background-color: #FF2D2E; color: #ffffff; padding: 2px; margin-left: 10px; }
+.product_para_promote .promotionname a { margin-left: 10px; color: #FF2D2E; }
+.product_para_num div { float: left; line-height: 40px; }
+.product_para_num .title { width: 66px; letter-spacing: 1px; }
+.product_para_num .shopcart1 span { padding: 0px 8px; border: 1px solid #ddd; font-size: 16px; }
+.product_para_num { padding-left: 20px; margin-top: 15px; overflow: hidden; }
+.product_para_num input { border: 1px solid #e1e1e1; padding: 5px 22px; background: none; width: 60px; text-align: center; height: 28px; line-height: 28px; }
+.product_para_num em { }
+.product_para_num span { font-family: "microsoft yahei"; font-size: 14px; margin-right: 5px; }
+.product_para_num span span { font-family: Arial; }
+.product_btns_append table { height: 40px; overflow: hidden; line-height: 40px; margin-top: 10px; }
+.product_btns_append table li span { display: block; }
+.product_btns_append table li { float: left; }
+.product_btns_shop, .product_btns_buy { font-family: "microsoft yahei"; cursor: pointer; margin-top: 15px; }
+.product_btns_shop { width: 200px; background:#429d71; height: 40px; line-height: 40px; overflow: hidden; font-size: 16px; color: #fff; margin-left: 15px; }
+.product_btns_shop span { background: url(/templates/master/botany/images/new/pro_icon_32.jpg) no-repeat 40px 10px; padding-left: 70px; }
+.product_btns_buy { margin-left: 20px; font-size: 15px; color: #5f5d5e; width: 196px; height: 36px; line-height: 36px; border: 2px solid #429d71; }
+.product_btns_buy span { color:#429d71; font-size: 16px; font-weight: normal; text-align: center; width: 200px; }
+.sjorder { display: none; width: 230px; height: 260px; z-index: 10000; left: 0px; background: #fff; border: 1px solid #f3f3f3; top: 10px; position: absolute; text-align: center; border-radius: 3px; overflow: hidden; 
+box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1); }
+
+.sjorder h2 { line-height: 35px; height: 35px; display: block; background: #f3f3f3; color: #000; text-align: left; padding: 0px 0px 0px 10px; margin: 0px; }
+.sjorder h2 span { float: right; margin-right: 10px; cursor: pointer; }
+.sjorder img { margin-top: 13px; }
+product_btns_qrcode { margin-left: 10px; width: 105px; }
+.product_btns_coll { background: url(/templates/master/botany/images/new/share_05.png) no-repeat 0px; line-height: 20px; }
+.product_recommend table { padding-top: 15px; }
+.product_recommend td { color: #0159a0; }
+.product_recommend td a { color: #0159a0; }
+.product_re_blog { background: url(/templates/master/botany/images/sub/Details_14.jpg) no-repeat center left; padding-left: 18px; }
+.product_re_friend { background: url(/templates/master/botany/images/sub/Details_16.jpg) no-repeat center left; padding-left: 18px; }
+.product_Brief b { display: block; border-top: 1px dotted #dcdcdc; margin-top: 8px; padding-top: 5px; }
+.product_Brief p { color: #999999; text-indent: 2em; }
+.product_detail { width: 980px; }
+.product_nav_wrap { height: 40px; line-height: 40px; border: 1px solid #eeeeee; }
+.product_nav_wrap li { width: 130px; float: left; font-family: "microsoft yahei"; font-size: 14px; color: #4c4c4c; text-align: center; background: url(/templates/master/botany/images/new/line_07.png) no-repeat right 15px; }
+.product_nav_wrap li a { color: #5b595c; display: block; height: 39px; }
+.product_nav_wrap li a em { padding-left: 8px; color: #ff5722; }
+.product_nav_wrap li.curr { background: #FFF; height: 38px; border-top: 2px solid #8d9562; border-bottom: 1px solid #fff; position: relative; top: -1px; left: -1px; border-left: 1px solid #8d9562; border-right: 1px solid #8d9562; }
+.product_nav_wrap .curra { display: block; border-right: 1px solid #e0e0e0; color: #FF2D2E; }
+.product_nav_wrap li:first-of-type { }
+.product_nav_wrap li.curr a { background: url(/templates/master/botany/images/new/line_03.png) no-repeat center 0px; color: #8d9562; }
+.product_detail .product_mc, .buy_product_detail .product_mc { overflow: hidden; clear: both; }
+.product_mc p img { max-width: 100%; }
+.product_mc .tab_sales { border: 1px solid #eeeeee; width: 978px; margin-top: 12px; overflow: hidden; }
+.product_mc .tab_sales .title { border-bottom: 1px solid #eeeeee; padding: 0px; overflow: hidden; line-height: 30px; height: 30px; }
+.tab_sales .tr_head { padding-top: 10px; }
+.tab_sales .tr_head .name { float: left; width: 25%; text-align: left; padding-left: 5%; }
+.tab_sales .tr_head .num { float: left; width: 15%; text-align: center; }
+.tab_sales .tr_head .size { float: left; width: 30%; text-align: center; }
+.tab_sales .tr_head .time { float: left; width: 25%; text-align: center; }
+.product_mc .Consultations { border: 1px solid #eeeeee; border-top: none; padding: 0px 20px; padding-bottom: 20px; overflow: hidden; }
+.product_related { width: 1198px; border: 1px solid #eeeeee; margin-top: 20px; }
+.product_related h2 { height: 40px; line-height: 40px; font-size: 16px; font-weight: normal; color: #4c4c4c; }
+.product_related h2 b { display: block; font-weight: normal; padding-left: 15px; color: #4c4c4c; height: 40px; font-size: 16px; }
+.product_related ul { width: 1198px; overflow: hidden; margin: 10px 0px; }
+.product_related ul li { width: 160px; overflow: hidden; float: left; text-align: center; margin-left: 26px; margin-right: 10px; }
+.related_pic { height: 160px; overflow: hidden; }
+.related_name { height: 36px; line-height: 18px; overflow: hidden; margin-top: 10px; }
+.related_price { font-family: Verdana, Geneva, sans-serif; color: #ff5417; }
+.details_plzx { margin-top: 5px; overflow: hidden; padding-top: 10px; }
+.details_plzx .Product_a { background: url(/templates/master/botany/images/sub/pd_10.gif) no-repeat scroll 0 0 rgba(0, 0, 0, 0); color: #0246A1; display: block; float: right; height: 28px; line-height: 28px; margin-left: 20px; padding-left: 35px; text-decoration: none; width: 65px; }
+.details_plzx .Product_b { float: right; color: #0091ea; display: block; line-height: 28px; margin-left: 20px; }
+/**********翻页***********/
+.page { float: right; color: #999; margin-top: 15px; margin-bottom: 15px; }
+.page a.page-prev, .page a.page-next, .page a, .page .page-cur { display: block; }
+.page a, .page .page-skip .button { border: 1px solid #cccccc; line-height: 28px; border-radius: 3px; }
+.page-skip .button { background: #f7f7f7; }
+.page .page-cur, .page .page-skip .text, .page a { margin-left: 5px; margin-right: 5px; }
+.page a, .page .page-cur, .page .page-skip .text, .page .page-skip .button, .page a.page-prev, .page a.page-next { width: 30px; height: 28px; }
+.page .page-skip .text { line-height: 28px; border: 1px solid #cccccc; border-radius: 3px; }
+.page a.page-prev, .page a.page-next, .page .page-cur, .page a, .page .page-skip .text { text-align: center; }
+.page .page-cur, .page .page-skip .button { font-size: 14px; }
+.page .page-skip .button { width: 50px; margin-left: 10px; }
+.page a.page-prev, .page a.page-next { width: 64px; }
+.page a.page-prev { }
+.page a { float: left; overflow: hidden; color: #999; }
+.page .page-cur { border: 1px solid #ffab8f; float: left; color: #ffab8f; }
+ 
+/**********团购  抢购  积分***********/
+.gift_box1 { margin-top: 18px; overflow: hidden; }
+.gift_box1 .Info { height: 250px; width: 220px; text-align: center; padding: 20px; background: #f7f7f7; border: 1px solid #e6e6e6; }
+.gift_box1 .Info span { display: block; font-size: 14px; width: 220px; text-align: center; }
+.gift_box1 .Info span img{ border-radius: 50%;}
+.gift_box1 .Info span .form-control { padding: 0px 12px; width: 196px; background-color: #fff; }
+.gift_box1 .Info span .form-group input { background-color: #fff; }
+.gift_box1 .Info span em { color: #fe5722; font-size: 18px; }
+.gift_box1 .Info .btn { height: 40px; margin-top: 10px; line-height: 40px; width: 210px; background: #fe5721; color: #FFF; font-size: 16px; padding: 0px; }
+.gift_box1 .Info .btn a { color: #fff; height: 40px; display: block; line-height: 40px; width: 210px; }
+.Default_Login_bg a { width: 250px; height: 40px; border-radius: 5px; background: #fe5721; float:left; display: block; line-height: 40px; color: #fff; font-size: 14px; text-align:center; margin-left:14px;}
+.Default_Login_pad5 li { display: block; overflow: hidden; clear: both;}
+.Default_Login_fwbg { float: right; padding-top: 10px; }
+.buy_list .coupon { width: 1200px; margin-bottom: 30px; }
+.buy_list .coupon ul { width: 1250px; margin-top: 0px; }
+ 
+.buy_list .coupon ul li span { width: 283px; height: 113px; display: block; color: #FFF; }
+.buy_list .coupon ul li .info1, .buy_list .coupon ul li .info2 { overflow: hidden; clear: both; font-size: 13px; height: 110px; display: block; }
+.buy_list .coupon ul li .info1 .point { float: left; position: relative; font-weight: bold; margin-left: 10px; margin-top: 15px; }
+.buy_list .coupon ul li .info1 .point .money { font-size: 32px; width: 210px; display: block; overflow: hidden; position: absolute; left: 0px; top: 0px; }
+.buy_list .coupon ul li .info1 .point .coupon1 { display: block; overflow: hidden; font-family: "microsoft yahei"; color: #FFF; font-size: 18px; font-weight: bold; position: absolute; left: 10px; top: 50px; width: 200px; }
+.buy_list .coupon ul li .info1 .point .coupon1 em { font-size: 18px; float: none; }
+.buy_list .coupon ul li .info1 .point em { float: left; font-size: 28px; color: #fff; margin-top: -5px; }
+.buy_list .coupon ul li .info1 .point b { color: #fff; float: left; font-size: 38px; color: #fff; width: auto; margin-top: -15px; }
+.buy_list .coupon ul li span .Info { float: right; margin-right: 10px; margin-top: 15px; }
+.buy_list .coupon ul li span .Info em { display: block; text-align: right; }
+.buy_list_product .title { font-size: 18px; color: #010101; height: 35px; line-height: 35px; border-bottom: 3px solid #c0c0c0; overflow: hidden; }
+.buy_list { margin-top: 10px; width: 1200px; overflow: hidden; margin-bottom: 15px; }
+ 
+.buy_list .coupon ul li .info1 .Info { float: right; width: 40px; padding-right: 10px; color: #fff; }
+.buy_list .coupon ul li .info1 .Info em { font-size: 18px; padding-top: 20px; display: block; }
+.buy_list .coupon ul li .info1 .Info b { font-size: 18px; line-height: 25px; padding-top: 5px; width: 45px; display: block; text-align: center; }
+.buy_list .coupon ul li .info2 { color: #fe9638; margin-top: 5px; }
+.buy_list .coupon ul li .info2 em { padding-left: 15px; }
+.buy_list .buy_list_tit h2 { float: left; width: 170px; overflow: hidden; text-align: center; font-size: 16px; }
+.buy_list .buy_list_tit .buyhover { background: #fff; height: 39px; border-left: 1px solid #e5e5e5; border-right: 1px solid #e5e5e5; font-weight: bold; }
+.buy_list .buy_list_product { width: 1200px; overflow: hidden; background: #fff; }
+.buy_list.gift ul li { float: left; width: 220px; margin-right: 22px; height: 330px; overflow: hidden; }
+.buy_list.gift ul li .buy_pic { height: 220px; width: 220px; }
+.buy_list.gift ul li .buy_pic img { width: 220px; }
+.buy_list.gift ul li .buy_name { padding: 5px 15px; padding-bottom: 0px; width: 190px; overflow: hidden; font-size: 12px; }
+.buy_list.gift ul li .buy_price { margin-top: 0px; }
+.buy_list.gift ul li .buy_name a { color: #313131; }
+.buy_list.gift ul li .buy_price p { width: 65px; text-align: center; padding: 0px; height: 28px; line-height: 28px; float: none; display: block; margin-left: 15px; }
+.buy_list.gift ul li .buy_price em { font-size: 12px; line-height: 25px; float: none; display: block; clear: both; color: #b8b8b8; margin-left: 15px; }
+.buy_list.gift ul li .buy_price em span { font-size: 14px; }
+.buy_list ul { width: 1300px; margin-top: 20px; overflow: hidden; clear: both; }
+.buy_list.gift ul li .buy_price p a { width: 65px; text-align: center; padding: 0; }
+.buy_list ul li { width: 380px; margin-bottom: 27px; margin-right: 27px; overflow: hidden; float: left; border: 1px solid #eeeeee; padding-bottom: 0px; }
+.buy_list ul li .buy_product { }
+.buy_list ul li .buy_product .buy_info { background: #fbfbfb; overflow: hidden; padding: 10px; }
+.buy_list ul li .buy_time { height: 30px; line-height: 30px; overflow: hidden; background: url(/templates/master/botany/images/sub/buy/grouptimeico.jpg) no-repeat 0px 2px; border-bottom: 1px dotted #e8e8e8; padding-left: 30px; color: #666; display: none; }
+.buy_list ul li .buy_time strong { font-size: 14px; font-weight: normal; color: #333; margin-left: 3px; margin-right: 3px; }
+.buy_list ul li .buy_pic { height: 380px; overflow: hidden; width: 380px; overflow: hidden; }
+.buy_list ul li .buy_pic img { width: 380px; }
+.buy_list ul li .buy_name { height: 25px; line-height: 25px; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; width: 360px; overflow: hidden; font-family: "microsoft yahei"; }
+.buy_list ul li .buy_price { margin-top: 5px; margin-bottom: 10px; }
+.buy_list ul li .buy_price em { font-size: 18px; color: #ff5722; }
+.buy_list ul li .buy_price em span { color: #ff5722; font-size: 30px; }
+.buy_list ul li .buy_price p a { color: #FFF; text-decoration: none; display: block; width: 80px; text-align: center; }
+.buy_list ul li .buy_price em, .buy_list ul li .buy_price p, .buy_list ul li .buy_price del { float: left; margin-right: 15px; line-height: 30px; }
+.buy_list ul li .buy_price del { color: #aaaaaa; font-size: 18px; margin-top: 5px; }
+.buy_list ul li .buy_price p { background: #fe5721; border-radius: 5px; width: 80px; overflow: hidden; text-align: center; font-size: 14px; height: 30px; line-height: 30px; margin-top: 8px; float: right; margin-right: 5px; }
+.buy_list ul li .buy_price p a:hover { }
+.buy_list ul li .buy_andere { }
+.buy_list ul li .buy_andere p { float: left; }
+.buy_list ul li .buy_andere p del { color: #ab9997; }
+.buy_list ul li .buy_andere em { float: right; }
+.buy_list ul li .buy_andere em span { color: #fd0100; }
+/**********团购  抢购  积分详细页***********/
+.qg_introduce { background: #fffde7; border: 1px dotted #ffdda5; width: 658px; overflow: hidden; font-size: 14px; padding: 15px; margin-bottom: 20px; margin-top: 10px; color: #666666; }
+.buy_intro { width: 1198px; border: 1px solid #eeeeee; margin: 10px 0px 0px 0px; padding-bottom: 8px; padding-top: 20px; }
+.buy_intro .buy_intro_table { width: 1140px; margin: 10px auto; }
+.buy_product_name { font-family: "microsoft yahei"; font-size: 24px; color: #333; width: 680px; margin-bottom: 10px; }
+.qg_btn { clear: both; display: block; overflow: hidden; margin-top: 25px; }
+.qg_btn #buyButton { background: #ff5722; cursor: pointer; font-size: 28px; border-radius: 5px; text-align: center; color: #fff; padding: 0px 45px; line-height: 50px; height: 50px; display: block; width: 90px; }
+.qg_btn #buyButton.begin { background: #7cb342; cursor: pointer; font-size: 28px; border-radius: 5px; text-align: center; color: #fff; padding: 0px 45px; height: 50px; line-height: 50px; width: 140px; display: block; }
+.qg_btn #buyButton.over { background: #bababa; }
+.buy_product_name span { color: #fe5721; }
+.buy_product_time { height: 25px; line-height: 25px; display: none; overflow: hidden; margin-top: 10px; text-align: right; color: #035ba3; }
+.buy_product_time label { margin-right: 20px; }
+.buy_product_time a { color: #035ba3; }
+.buy_product_price { background: url(/templates/master/botany/images/sub/buy/buydetails_03.jpg) no-repeat; width: 690px; height: 84px; padding-bottom: 15px; overflow: hidden; line-height: 84px; }
+.buy_product_price.begin { background: url(/templates/master/botany/images/sub/buy/buydetails_05.jpg) no-repeat; width: 690px; height: 84px; padding-bottom: 15px; overflow: hidden; }
+.tuangou_details_info_sytime { font-size: 14px; line-height: 84px; color: #41423d; font-weight: normal; background: url(/templates/master/botany/images/sub/buy/time_03.png) no-repeat; padding-left: 20px; }
+.tuangou_details_info_sytime label { font-weight: normal; margin: 0px 3px; color: #41423d; }
+.tuangou_details_info_sytime strong { font-weight: normal; }
+.buy_product_price .price { float: left; width: 414px; overflow: hidden; margin-left: 15px; }
+.buy_product_price.over { background: url(/templates/master/botany/images/sub/buy/copy2.jpg) no-repeat; }
+.buy_product_price .time { float: left; margin-left: 40px; color: #424242; font-weight: normal; width: 210px; }
+.buy_product_price #buycurrent, .buy_product_price #buyoriginal del { font-family: "microsoft yahei"; font-size: 14px; color: #FFF; }
+.buy_product_price #buycurrent { font-size: 38px; }
+.buy_product_price #buycurrent span, .buy_product_price #buyoriginal del span { font-size: 30px; }
+.buy_product_price #buycurrent span { font-size: 38px; }
+.buy_product_price #buyoriginal del { font-size: 24px; }
+.buy_product_price #buyoriginal del span { font-size: 24px; }
+.buy_product_price #buyoriginal { color: #FFF; margin-left: 20px; }
+.buy_product_price #buyButton { display: block; float: right; background: url(/templates/master/botany/images/sub/buy/buydetails_01.jpg) no-repeat; width: 107px; height: 44px; overflow: hidden; margin-right: 45px; margin-top: 9px; font-family: "microsoft yahei"; font-size: 26px; color: #000; text-align: center; line-height: 40px; cursor: pointer; }
+.buy_product_parameter { overflow: hidden; }
+.buy_product_table { margin: 10px 20px; color: #999; display: none; }
+.buy_product_table td span { color: #333; }
+.buy_product_next, .buy_product_num, .buy_product_time2 { padding: 10px 0px; }
+.buy_product_size div, .buy_product_spread .spread1, .buy_product_spread .spread2 { overflow: hidden; color: #434444; padding: 2px 0px; }
+.buy_product_size span, .buy_product_size dl dd, .buy_product_size dl { float: left; line-height:32px; max-width: 630px; }
+.buy_product_size dl dd{ margin-bottom: 10px; height: 38px;}
+.buy_product_size dl dd input { padding: 1px 10px; background: #FFF; border: 1px solid #eeeeee; margin-right: 10px; }
+.buy_product_size .SKUShowSelectClass { color: #ff5252; }
+.buy_product_size .SKURowClass { padding-bottom: 15px; overflow: hidden; }
+.buy_product_size .SKURowClass span { width: 66px; text-align: left; line-height: 36px; }
+.buy_product_next .quantity { font-size: 14px; height: 40px; line-height: 40px; overflow: hidden; margin-top: 10px; }
+.quantity .product_para_num { margin: 0px; padding: 0px; width: 110px; }
+.quantity .product_para_num span { margin-right: 0px; }
+.product_para_num .amount-unit span{ font-size: 12px;}
+.quantity .product_para_num .tb-text { width: 80px; overflow: hidden; }
+.buy_product_next .quantity li { float: left; }
+.buy_product_next .quantity li span { height: 40px; }
+.buy_product_next .quantity li input { background: #FFF; text-align: center; border: 1px solid #EEEEEE; width: 30px; padding: 5px 22px; color: #666; margin-right: 20px; }
+.buy_product_next .quantity .total span { font-family: "microsoft yahei"; }
+.buy_product_num { color: #ff5252; }
+.buy_product_num em { color: #ff5252; }
+.buy_product_num p, .buy_product_num em { line-height: 20px; color: #666; }
+.buy_product_num p span, .buy_product_num em span { font-family: "microsoft yahei"; font-size: 18px; color: #fe7501; margin-left: 5px; margin-right: 5px; }
+.buy_product_num em span { font-size: 12px; color: #ff5252; }
+.buy_product_num em { color: #ff5252; }
+.buy_product_time2 label { padding: 5px 0px; display: block; height: 36px; line-height: 36px; overflow: hidden; background: url(/templates/master/botany/images/sub/buy/buydetails_11.jpg) no-repeat center left; padding-left: 35px; color: #b4b4b4; }
+.buy_product_time2 label strong { font-size: 34px; font-family: Arial, Helvetica, sans-serif; font-weight: normal; color: #333; margin-left: 10px; margin-right: 5px; }
+.buy_product_bigpic { background: #fff; border: 1px solid #e1e1e1; border-left: 0px; height: 410px; }
+.buy_product_spread { padding: 12px 20px; border-bottom: 1px solid #e1e1e1; }
+.buy_product_spread .spread1 { padding-bottom: 6px; border-bottom: 1px dotted #d7d9d8; }
+.buy_product_spread .spread1 li, .buy_product_spread .spread2 li { color: #025aa2; float: left; margin-right: 35px; }
+.buy_product_spread .spread1 li a { color: #055a9d; }
+.buy_product_spread .spread1 li.w { background: url(/templates/master/botany/images/sub/buydetails_15.jpg) no-repeat center left; padding-left: 18px; }
+.buy_product_spread .spread2 li { color: #666666; margin-top: 5px; }
+.buy_product_spread .spread2 li a { color: #666; }
+.buy_product_spread .spread2 li.s { background: url(/templates/master/botany/images/sub/buydetails_19.jpg) no-repeat center left; padding-left: 18px; }
+.buy_product_explain { border: 1px solid #d5d1d2; border-top: 0px; background: #fff; width: 1134px; padding: 0px 32px; }
+.buy_product_explain h2 { font-family: "microsoft yahei"; font-size: 16px; color: #cb0003; height: 30px; line-height: 30px; padding-top: 10px; }
+.buy_product_explain p { text-indent: 2em; padding-bottom: 18px; color: #999999; }
+.buy_product_detail { width: 1198px; border: 1px solid #cccccc; border-top: 0px; }
+.buy_product_wrap { height: 41px; line-height: 41px; background: #f6f6f6 url(/templates/master/botany/images/sub/buy/detailsback.jpg) repeat-x; }
+.buy_product_wrap li { width: 210px; float: left; font-size: 14px; color: #333333; text-align: center; background: url(/templates/master/botany/images/sub/buy/detailslink.jpg) no-repeat center right; cursor: pointer; }
+.buy_product_wrap li a { color: #333333; display: block; }
+.buy_product_wrap li.curr { font-weight: bold; background: #fe5722; width: 250px; color: #fff; }
+.buy_product_wrap li.curr a { color: #fff; }
+.buy_intro.over { position: relative; }
+.buy_intro.over .over-icon { display: block; }
+.over-icon { display: none; position: absolute; top: 10px; right: 30px; background: url(/templates/master/botany/images/sub/buy/over_03.png) no-repeat; width: 120px; height: 120px; }
+.buy_intro2 { width: 1198px; border: 1px solid #d5d1d2; margin: 10px 0px 0px 0px; padding-bottom: 8px; }
+.buy_intro2 .buy_intro_table { width: 934px; margin: 10px auto; }
+.buy_product_frame { width: 914px; padding: 10px; background: #f3f3f3; overflow: hidden; }
+.buy_product_bigpic2 { background: #fff; border: 1px solid #e1e1e1; width: 410px; height: 410px; text-align: center; float: left; }
+.buy_product_price2 { width: 480px; overflow: hidden; float: right; }
+.buy_product_price3 { width: 480px;  margin-top: 15px; }
+.buy_product_price3 #buycurrent2, .buy_product_price3 #buyoriginal2, .buy_product_price3 #buypoint2 { display: block; min-width: 120px; float: left; border-right: 1px dotted #e1dfdf; padding: 0px 15px; height: 70px; }
+.buy_product_price3 #buycurrent2 { padding-left: 0px; }
+.buy_product_price3 #buycurrent2 span, .buy_product_price3 #buyoriginal2 del, .buy_product_price3 #buypoint2 span { display: block; height: 50px; line-height: 50px; overflow: hidden; }
+.buy_product_price3 #buyoriginal2 del { color: #999; }
+.buy_product_price3 #buycurrent2 span { font-size: 30px; font-family: Arial, Helvetica, sans-serif; color: #fe5722; }
+.buy_product_price3 #buypoint2 span, .buy_product_price3 #buypoint2 span a { color: #fe5722 }
+.buy_product_explain2 { background: url(/templates/master/botany/images/sub/buy/buydetails_07.jpg) repeat-x center top; margin-top: 20px; padding-top: 20px; }
+.buy_product_explain2 h2 { font-family: "microsoft yahei"; font-size: 15px; color: #000; font-weight: bold; }
+.buy_product_explain2 p { text-indent: 2em; color: #333; }
+.add_jifen_submit2 { background:#fe5722; width: 165px; height: 50px; font-family: "microsoft yahei"; font-size: 18px; line-height: 30px; margin-top: 30px; border: 0px; color: #fff; font-weight: bold; }
+/*前台收藏*/
+.dialogFavorite { width: 480px; height: auto; overflow: hidden; font-size: 12px; position: absolute; z-index: 9999; color: #999999; display: none; background-color: #ffffff; border-radius: 5px; overflow: hidden; box-shadow:0 0 10px 5px rgba(0,0,0,.2);}
+.Favorite_title { height: 35px; line-height: 35px; padding: 0px 5px; background-color: #f3f3f3; }
+.Favorite_title_l, .loginForBuytit h2 { font-family: "microsoft yahei"; font-size: 14px; padding-left: 10px; float: left; color: #333; }
+.Favorite_title_l img { margin-top: 0px; }
+.Favorite_title_r { font-weight: 700; float: right; background: url(/templates/master/botany/images/new/close_btn.png) no-repeat; cursor: pointer; width: 15px; height: 15px; margin-top: 10px; }
+.tips { margin: 20px 0px; position: relative; overflow: hidden; line-height: 40px; }
+.tips h2 { float: left; height: 40px; padding-left: 55px; background: url(/templates/master/botany/images/icon_correct.jpg) no-repeat 10px 0; line-height: 40px; color: #fe5722; margin-left: 70px; font-size: 16px; margin-right: 20px; }
+.tips p { float: left; }
+.tips em { color: #999; }
+.tips p a { color: #0091ea; }
+#attention-tags { background: #fff9f1; border: 1px solid #ffd1c1; padding: 10px; margin: 0 15px 20px 15px; }
+.mt, .mc { cursor: pointer; overflow: hidden; zoom: 1; }
+.att-tag-btn { padding-left: 160px; overflow: hidden; }
+.att-tag-btn a { float: left; margin-right: 10px; width: 70px; height: 30px; line-height: 30px; font-size: 14px; text-align: center; }
+.att-tag-btn .att-btn-cancal { background: #f8f5f0; color: #616264; line-height: 28px; height: 28px; border: 1px solid #d1cdca; }
+.att-tag-btn .att-btn-ok { background: #fe5722; color: #fff; }
+.att-tag-btn span { white-space: nowrap; }
+.att-tag-list { overflow: hidden; padding-bottom: 5px; height: auto !important; height: 58px; max-height: 58px; margin-bottom: 1px; clear: both; _height: 32px; }
+.att-tag-list li { float: left; padding: 5px 0 0; position: relative; }
+.att-tag-list li i { position: absolute; right: 8px; top: 3px; background: url(/templates/master/botany/images/iconfont-shanchu.png); width: 10px; height: 10px; display: block; }
+.att-tag-list li a { float: left; height: 20px; padding: 1px 10px; border: 1px solid #eed289; margin-right: 10px; overflow: hidden; }
+.att-tag-list .current { border: 1px solid #c00; padding: 0 9px; text-decoration: none; }
+.att-tag-new span { display: inline-block; height: 20px; line-height: 20px; padding: 3px 10px; color: #fe5722; cursor: pointer; _vertical-align: top; }
+.att-tag-new input { width: 100px; height: 14px; line-height: 14px; padding: 4px 6px; border: 1px solid #fdd2bf; cursor: text; _vertical-align: top; }
+.hl_red, a.hl_red, .hl_red:hover, .hl_red:visited, #summary .hl_red { color: #e4393c; }
+.hl_green, a.hl_green, .hl_green:hover, .hl_green:visited, #summary .hl_green { color: #090; }
+.fl { float: left; }
+.hide { display: none; }
+/*快捷登录*/
+.dialog { border-radius: 5px; width: 360px; height: 160px; font-size: 12px; position: fixed; z-index: 100; color: #535353; display: none; 
+background-color: #ffffff; border: 1px solid #c9c9c9; box-shadow:0 0 10px 5px rgba(0,0,0,.2); overflow: hidden;}
+.dialog_title { height: 35px; line-height: 35px; padding: 0px 5px; background-color: #f3f3f3; }
+.dialog_title_l, .loginForBuytit h2 { font-family: "microsoft yahei"; font-weight: normal; font-size: 14px; padding-left: 10px; line-height: 35px; float: left; }
+.dialog_title_l img { margin-top: 0px; }
+.dialog_title_r { font-weight: 700; float: right; background: url(/templates/master/botany/images/new/close_btn.png) no-repeat; cursor: pointer; width: 15px; height: 15px; margin-top: 12px; margin-right: 2px; }
+.dialog_cartitem { line-height: 15px; margin: 25px; height: 70px; text-align: center; padding-left: 0px; }
+.dialog_cartitem a { color: #268bf3; }
+.dialog_cartitem span { font-weight: bold; margin-left: 2px; margin-right: 2px; color: #fe5722; }
+.btnbar { width: 275px; margin: 15px 10px 0px 10px; }
+.dialog_cartitem a.btn-viewcart { font-size: 14px; height: 28px; line-height: 28px; margin-left: 45px; margin-right: 10px; width: 100px; float: left; background: #fff5f3; color: #fe5722; text-align: center; border: 1px solid #ffb49d; }
+.dialog_cartitem a.btn-continue { font-size: 14px; height: 30px; line-height: 30px; width: 100px; float: left; background: #fe5722; color: #fff; text-align: center; }
+.btn-continue:hover { color: #fff; }
+.btn-send { background: url("/templates/master/botany/images/process/btn_ginfo_links.gif") no-repeat scroll 0 0 transparent; margin: 0; padding: 3px 0 0 18px; }
+/*弹出框login*/
+.login_tan { width: 400px; height: 310px; background: #fff; position:fixed; top:50%; margin-top: -155px; margin-left: -200px; left: 50%; z-index: 99999;
+ border-radius: 5px; overflow: hidden;box-shadow:0 0 10px 5px rgba(0,0,0,.2);  }
+.login_tan .info { margin: 0 auto; width: 300px; margin: 15px 0px; margin-left: 25px; text-align: left; }
+.login_tan .btnbar { width: auto; margin: 0px; }
+.login_tan table { width: 439px; font-size: 14px; line-height: 30px; }
+.login_tan a { color: #424242; font-size: 12px; }
+.login_tan a.register { color: #fe5722; margin-right: 15px; }
+.login_tan .btnAmoBuy { float: right; background-color: none; border: none; color: #a1a1a1; }
+.login_tan_input1 { width: 285px; height: 34px; line-height: 34px; font-size: 14px; border: 1px solid #dadbdf; margin-bottom: 15px; padding-left: 15px; }
+.login_tan_input2 { width: 285px; height: 34px; line-height: 34px; font-size: 14px; border: 1px solid #dadbdf; padding-left: 15px; }
+.login_tan_input3 { margin-top: 10px; width: 300px; height: 40px; color: #fff; font-size: 16px; background: #fe5722; border: 0px; cursor: pointer; }
+#imgCloseLogin { cursor: pointer; }
+.loginForBuytit { background: #f3f3f3; height: 40px; border-bottom: 1px solid #c4c4c4; }
+.loginForBuytit h2 { margin-left: 15px; }
+.login_tan #btnAmoBuy { background: url(/templates/master/botany/images/new/niming_icon.jpg) no-repeat center left; padding-left: 18px; border: 0px; display:none; cursor: pointer; }
+
+/*调查问卷*/
+.vote_con .vote_cont_title { font-family: "microsoft yahei"; font-weight: 700; font-size: 18px; margin-top: 5px; }
+.vote_con .votefacebg { padding-left: 20px; }
+.vote_con .vote_table { border-bottom: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; }
+.vote_con .vote_table td { height: 40px; overflow: hidden; border-top: 1px solid #f0f0f0; border-left: 1px solid #f0f0f0; }
+/**********选择收货地址2013-10-15***********/
+.address_have { width: 1000px; margin: 20px 0px; margin-top: 0px; overflow: hidden; }
+.address_tab { width: 1100px; }
+.address_tab .list { cursor: pointer; float: left; height: 106px; margin: 0 13px 14px 0; position: relative; font-size: 12px; vertical-align: top; width: 240px; }
+.address_tab .list .inner { background: url(/templates/master/botany/images/cart/bg_address2.png) no-repeat; padding: 11px 15px; z-index: 2; }
+.address_tab .addr-hd { border-bottom: 1px solid #F2F2F2; height: 18px; line-height: 18px; margin-bottom: 5px; overflow: hidden; padding: 0 0 5px; text-overflow: ellipsis; white-space: nowrap; }
+.address_tab .addr-hd .name { font-weight: bold; color: #585858; }
+.address_tab .addr-bd { color: #8d8d8d; height: 55px; overflow: hidden; word-break: break-all; word-wrap: break-word; }
+.address_tab .addr-bd .phone { display: block; }
+.address_tab .addr-bd .street{ max-height: 40px; line-height: 20px; display: block; overflow: hidden;}
+.address_tab .select .inner, .address_tab .list .inner:hover { background: url(/templates/master/botany/images/cart/select_address_bg.png) no-repeat; }
+.address_tab .list .curmarker { background: url(/templates/master/botany/images/cart/select_address.png) no-repeat; height: 30px; position: absolute; right: -5px; bottom: 1px; display: none; width: 30px; }
+.address_tab .select .curmarker { display: block; }
+.address_have .control { font-size: 12px; clear: both; margin-top: 20px; }
+.use_newAddr { font-size: 12px; border: 1px solid #e5e5e5; float: left; width: 125px; text-align: center; height: 25px; line-height: 25px; padding: 0px; cursor: pointer; }
+.use_newAddr:hover { text-decoration: none; }
+.use_newAddr i { font-weight: bold; font-style: normal; margin-right: 5px; font-size: 14px; }
+.manageAddr { display: block; float: right; text-decoration: none; height: 22px; line-height: 22px; color: #268bf3; }
+/* 在线客服*/
+
+/* .a {
+			width: 146px;
+			height: auto;
+			margin: 0px;
+			padding: 0px;
+			float: left;
+			position: relative;
+		}
+		*/
+.a div { float: left; position: relative; }
+.b { width: 50px; height: 160px; }
+.b span { width: 60px; height: 200px; display: block; background: url(/templates/master/botany/images/kf.gif) no-repeat; }
+.b span:hover .cc { display: block; }
+.cc { width: 120px; background: url(/templates/master/botany/images/open-head.gif) top right; background-repeat: no-repeat; list-style-type: none; display: none; position: relative; height: auto; }
+.cc .close { display: block; height: 30px; width: 30px; left: 106px; top: -10px; position: relative; background-image: url(/templates/master/botany/images/btn-close.gif); background-repeat: no-repeat; float: none; opacity: 1; }
+.cc .c { margin-top: 100px; padding-top: 20px; width: 120px; background: url(/templates/master/botany/images/open-body-bg.gif) repeat-y; min-height: 100px; }
+.cc .c div { width: 100%; text-align: center; }
+.d { width: 120px; height: 6px; background: url(/templates/master/botany/images/open-fot.gif) no-repeat bottom right; _background: url(/templates/master/botany/images/open-fot.gif) no-repeat bottom right; }
+.e { width: 26px; height: 161px; background: url(/templates/master/botany/images/kf.gif) no-repeat 0px -215px; float: left; margin-top: 0px; }
+.b_r span { width: 50px; height: 160px; background: url(/templates/master/botany/images/kf_r.gif) no-repeat; }
+.d_r { width: 120px; height: 6px; background: url(/templates/master/botany/images/open-fot.gif) no-repeat bottom right; _background: url(/templates/master/botany/images/open-fot.gif) no-repeat bottom right; }
+.e_r { width: 26px; height: 161px; background: url(/templates/master/botany/images/kf_r.gif) no-repeat 0px -215px; float: right; margin-top: 0px; }
+.closekf { clear: both; padding-left: 8px; width: 118px; text-align: center; margin-top: 7px; cursor: pointer; }
+.qqrightbot { position: fixed; z-index: 1070; left: 0px; bottom: 0px; width: 120px; }
+.qqrighttop { /*width:300px;*/
+	
+top: 120px; left: 0px; width: 120px; position: absolute; z-index: 10008; display: none; }
+/* 信任登录弹出 */
+.topnav span#xinren_Frame { font-size: 12px; }
+#xinren_Frame { position: relative; margin-left: 10px; z-index: 20; color: #cc0000; }
+#xinren_Frame em { font-style: normal; cursor: pointer; background: url(/templates/master/botany/images/thridparty1.gif) no-repeat left center; padding-left: 20px; padding-top: 2px; }
+#xinren_tab { position: absolute; top: 15px; left: -30px; width: 130px; background: white; border: 2px solid #e5e5e5; padding: 10px 15px; z-index: 100; display: none; text-align: left; }
+#xinren_tab img { margin-top: 3px; }
+.xinren_tab_tishi { padding-bottom: 5px; line-height: 22px; color: #888; }
+.clear_both { clear: both; }
+/* 购物车没有商品时的提示 */
+.cart-empty { height: 98px; border: 1px solid #ddd; }
+.cart-empty .message { height: 98px; padding-left: 341px; background: #F3F3F2 url(/templates/master/botany/images/cart-empty-bg.png) no-repeat 250px 22px; }
+.cart-empty .message p { line-height: 98px; }
+.cart-empty a, .cart-empty a:visited, .cart-empty a:hover { color: #005ea7; }
+/*新增图片大小控制*/
+.group_buy .bd .pic img { max-width: 100px; max-height: 102px; }
+.panic_buy .pic img { max-width: 180px; max-height: 180px; }
+.brand_tab .brand li .pic img { max-width: 92px; max-height: 39px; }
+.pro_tab180 .tab_item .pic img { max-width: 180px; max-height: 180px; }
+.pro_tab160 .tab_item .pic img { max-width: 160px; max-height: 160px; }
+.pro_tab220 .tab_item .pic img { max-width: 220px; max-height: 220px; }
+.combination_tab .pro_tab100 .tab_item .pic img { max-width: 100px; max-height: 100px; }
+.combination_tab .pro_tab160 .tab_item .pic img { max-width: 140px; max-height: 140px; }
+.pro_floor3 .pro_simple100 .pic img { max-width: 100px; max-height: 100px; }
+.pro_floor3 .pro_simple160 .pic img { max-width: 140px; max-height: 140px; }
+.on_sale .pro_simple160 .pic img { max-width: 140px; max-height: 130px; }
+.on_sale .pro_simple100 .pic img { max-width: 120px; max-height: 100px; }
+.group180 .bd_middle .pic img { max-width: 180px; max-height: 180px; }
+.group160 .bd_middle .pic img { max-width: 160px; max-height: 160px; }
+.floor180 .floor_pro .pic img { max-width: 180px; max-height: 180px; }
+.floor160 .floor_pro .pic img { max-width: 160px; max-height: 160px; }
+.sale_top60 .sale_top1 .pic img, .sale_top60 .sale_top2 .pic img, .sale_top60 .sale_top3 .pic img, .sale_top60 .sale_top4 .pic img, .sale_top60 .sale_top5 .pic img { max-width: 60px; max-height: 60px; }
+/*配送区域范围样式*/
+.setregion { width: 530px; margin-bottom: 5px; float: left; line-height: 25px; position: relative; margin-top: 10px; margin-left: 5px;}
+.setregion span { color: #515152; letter-spacing: 1px; }
+.regionbox { width: 470px; height: auto; }
+.showRegion { width: auto; position: absolute; line-height: 23px; top: 0px; left: 81px; padding: 0px 25px 0px 10px; cursor: pointer; height: 23px;
+ float: left;
+ border: 1px solid #eee; background: #fff url(/templates/master/botany/images/new/pro_icon_19.png) no-repeat right 5px; }
+.yunfei { position: absolute; top: 0px; right: 20px; }
+.yunfei label { font-weight: normal; }
+.showRegion_hover { }
+.regionbox .regions { position: absolute; left: 81px; top: 20px; width: 438px; padding: 10px 15px; height: 200px; border: 1px solid #EEEEEE; border-top: none; display: none; background: #fff; z-index: 1000000; border-radius: 2px; -moz-border-radius: 2px; }
+.topborder { border-top: 1px solid #eeeeee; height: 0px; width: auto; display: none; position: absolute; top: 20px; z-index: 1000002; border-radius: 2px; -moz-border-radius: 2px; }
+.product_para3 { }
+.product_sale span { float: left; width: 265px; text-align: center; line-height: 40px; }
+.product_sale span em { color: #ff5722; }
+.product_sale .num { background: url(/templates/master/botany/images/new/line_07.png) no-repeat right 15px; }
+.product_sale { border-top: 1px dotted #e2e2e2; border-bottom: 1px dotted #e2e2e2; margin-bottom: 10px; }
+.product_para3 td { padding: 10px 0px; padding-top: 0px; }
+/*新首页样式*/
+.top1_r { }
+.top1_r ul .fore3 { padding: 0px 1px; margin-right: 5px; }
+.top1_r ul li dt { float: left; padding: 0px 8px; width: 49px; padding-right: 25px; }
+.top1_r ul li { float: left; position: relative; z-index: 99; margin-right: 15px; }
+.top1_r ul li a { height: 30px; line-height: 30px; overflow: hidden; }
+.top1_r ul li a:hover { }
+.top1_r ul .fore3:hover { background: #FFF; border: 1px solid #ebebeb; border-bottom: none; border-top: none; padding: 0px; }
+.top1_r ul li .cw-icon { }
+.top1_r ul li .cw-icon:hover { background: #fff; }
+.top1_r ul li .cw-icon a { margin-right: 5px; }
+.top1_r ul li:hover .cw-icon a { }
+.top1_r ul li .cw-icon i { transition: transform 0.1s ease-in 0s; float: left; margin-top: 15px; margin-right: 10px; }
+.top1_r ul li:hover .cw-icon i { transform: rotate(180deg); }
+.top1_r ul li:hover .dorpdown-layer { display: block; border-top: none; }
+.dorpdown-layer { display: none; background: #FFF; border: 1px solid #ebebeb; border-top: none; position: absolute; top: 30px; left: 0px; width: 87px; left: -1px; text-align: center; padding: 10px 0px; }
+.dorpdown-layer img { width: 60px; height: 60px; }
+.top .top-main ul .dorpdown-layer a { height: 25px; line-height: 25px; }
+.header_top1 .fr a { color: #959595; padding-left: 15px; float: left; padding-right: 2px; }
+.clearfix:after { display: table; line-height: 0; content: ""; }
+.top-w { width: 100%; height: 30px; border-bottom: 1px solid #ebebeb; background-color: #f8f8f8; }
+.top .top-main { width: 1200px; height: 100%; margin: 0 auto; font-size: 12px; color: #959595; line-height: 30px; }
+.top .top-main span { float: left; display: inline-block; line-height: 25px; color: #959595; }
+.top .top-main span a { color: #FF2F2F; }
+.top .top-main ul { float: right; color: #959595; }
+.top .top-main ul a { color: #959595; height: 30px; display: block; clear: both; }
+.top .top-main ul a:hover { color: #FF2E2F; }
+.top .top-main ul li span { padding-left: 20px; }
+.top .top-search { width: 1200px; height: 93px; margin: 0 auto; box-sizing: border-box; overflow: hidden; }
+.top .top-search .logo { float: left; margin-top: 15px; width: 200px; height: 60px; overflow: hidden; }
+.top-search .search-box { float: left; width: 483px; height: 35px; margin: 0 auto; margin-left: 165px; padding-top: 30px; }
+.search1 { clear: both; overflow: hidden; }
+.hot-key { clear: both; margin-top: 5px; overflow: hidden; color: #bcbcbc; }
+.hot-key a { color: #bcbcbc; }
+#logo_1 img { }
+#ads_23 { margin-left: -1px; }
+.top-search .search-box .search { float: left; width: 351px; height: 31px; border: 2px solid #fe5722; color: #D1D1D1; background-image: url("/templates/master/botany/images/common/iconArray.png"); background-repeat: no-repeat; background-position: 10px -80px; padding-left: 35px; }
+.top-search .search-box .btn1 { float: left; width: 93px; height: 35px; background-color: #fe5722; color: #fff; text-align: center; line-height: 35px; font-size: 16px; cursor: pointer; border: none; }
+.top-search .cart-box { float: right; width: 110px; height: 35px; display: inline; margin-top: 30px; background: #ff5722 url(/templates/master/botany/images/new/shopcart_03.png) no-repeat 25px 8px; padding-left: 55px; color: #FFF; line-height: 35px; font-size: 14px; }
+.top-search .cart-box h6 { font-size: 14px; font-weight: normal; padding-left: 60px; line-height: 42px; position: relative; top: -20px; color: #5F5F5F; }
+.top-search .cart-box span { }
+.top-search .cart-box span em { padding: 0px 5px; }
+.top-search .cart-box a { color: #fff; display: block; width: 100px; background: url(/templates/master/botany/images/new/shopcart_06.png) no-repeat right 12px; }
+.top-search .cart-box i { width: 0; height: 0; border-width: 4px 4px 0; border-style: solid; border-color: #5F5F5F transparent transparent; /*灰 透明 透明 */
+	
+position: relative; float: right; top: -40px; margin-right: 15px; }
+/*导航开始*/
+.nav-wrap { width: 1200px; margin: 0 auto; height: auto; }
+.top .top-nav { width: 100%; height: 35px; border-bottom: 2px solid #fe5722; margin-top: 10px; }
+.top-nav .side-nav { display: block; margin: 0px auto; overflow: hidden; top: -19px\9; }
+.top-nav .nav-wrap { margin: 0 auto; width: 1200px; }
+.top-nav .side-nav ul { overflow: hidden; width: 1200px; height: 35px; }
+.side-nav01 { position: relative; }
+.top-nav ul a { color: #616161; }
+.top-nav .side-nav .title { position: relative; float: left; width: 210px; height: 35px; line-height: 35px; text-align: center; background-color: #fe5722; font-size: 16px; font-weight: normal; z-index: 99; }
+.top-nav .side-nav .title a { padding: 0px; }
+.top-nav h3 a { color: #fff; }
+.top-nav h3 a:hover { color: #fff !important; }
+.top-nav .side-nav ul li { float: left; }
+.top-nav .side-nav ul li a { display: inline-block; padding-left: 50px; text-align: center; line-height: 35px; font-size: 16px; }
+.top-nav .side-nav li a:hover { color: #FF2D2E; }
+#ads_20 { margin-left: 50px; float: right; position: relative; top: -20px; }
+.top .left-nav { float: left; width: 210px; margin-top: 2px; height: 449px; }
+.left-nav01 { z-index: 999; background-color: #fff; top: -2px; position: relative; }
+.top .left-nav .pro-menu { width: 208px; height: 448px; border-right: 1px solid #ECECEC; border-left: 1px solid #ECECEC; border-bottom: 1px solid #ECECEC; }
+.left-nav .pro-menu .menu-inner { position: relative; }
+/*二级页面开始*/
+.left-nav .T-menu01 .brand { display: inline-block; float: right; width: 427px; height: 408px; padding: 20px; border-left: 1px solid #ECECEC; }
+.left-nav .T-menu01 .brand img { width: 100px; height: 50px; padding: 10px; border: 1px solid #ECECEC; overflow: hidden; border-radius: 20px; margin-right: 10px; margin-top: 10px; }
+.left-nav .T-menu01 .brand h5 { font-size: 16px; line-height: 30px; margin-bottom: 20px; }
+.left-nav .T-menu01 .brand h5 b { float: right; font-size: 12px; color: #C4C4C4; line-height: 30px; }
+.left-nav .nav-hover { position: absolute; display: none; width: 976px; height: 448px; top: -1px; left: 208px; /*left*/
+	
+border: 1px solid #FF2D2E; overflow: hidden; background-color: #fff; z-index: 10000; }
+.left-nav .nav-hover00 { top: -1px; }
+.left-nav .cat-01:hover .nav-hover { display: block; }
+.left-nav .T-menu01 { position: absolute; width: 976px; height: 449px; }
+.left-nav .T-menu01 .L-menu { position: relative; float: left; width: 468px; height: 100%; padding: 20px 20px; font-size: 12px; }
+.left-nav .T-menu01 .L-menu div { width: 100%; overflow: hidden; line-height: 30px; }
+.left-nav .T-menu01 .L-menu div h4 { display: inline-block; float: left; padding-right: 10px; white-space: nowrap; width: 150px; overflow: hidden; }
+.left-nav .T-menu01 .L-menu div h4 a { color: #333333; }
+.left-nav .T-menu01 .L-menu div span { border-top: 1px solid #eeeeee; display: block; float: left; height: 100%; overflow: hidden; /*white-space: nowrap;*/
+	
+width: 279px; }
+.left-nav .T-menu01 .L-menu div:first-of-type span { border: none; }
+.left-nav .T-menu01 .L-menu div span a { padding-right: 10px; float: left; color: #7F7F7F; }
+.left-nav .T-menu01 .L-menu div span a:hover { color: #FF2D2E; }
+.left-nav .T-menu01 .L-menu div i { padding: 8px 5px; color: #A1A1A1; font-size: 12px; font-weight: normal; display: block; float: left; }
+.left-nav .pro-menu dl:hover { position: relative; border-top: 1px solid #FF2D2E; border-left: 1px solid #FF2D2E; border-bottom: 1px solid #FF2D2E; border-right: 1px solid #fff; top: -1px; left: -1px; z-index: 10001; }
+.left-nav .pro-menu dl { position: relative; width: 188px; padding-left: 20px; padding-top: 10px; height: 46px;}
+.left-nav .pro-menu dl dt { height: 25px; line-height: 25px; }
+.left-nav .pro-menu dl dt span { display: inline-block; width: 24px; height: 24px; overflow: hidden; vertical-align: middle; }
+.left-nav .pro-menu dd a:hover { color: #FF2D2E; }
+.left-nav .pro-menu dl dt a { font-size: 15px; color: #545454; line-height: 15px; display: inline-block; padding-left: 5px; position: relative; 
+font-weight: normal; }
+.left-nav .pro-menu dl dt .icon02 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -360px; padding-left: 30px; }
+.left-nav .pro-menu dl dt .icon03 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -387px; padding-left: 30px; }
+.left-nav .pro-menu dl dt .icon04 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -418px; padding-left: 30px; }
+.left-nav .pro-menu dl dt .icon05 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -447px; padding-left: 30px; }
+.left-nav .pro-menu dl dt .icon06 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -479px; padding-left: 30px; }
+.left-nav .pro-menu dl dt .icon07 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -508px; padding-left: 30px; }
+.left-nav .pro-menu dl dt .icon08 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -540px; padding-left: 30px; }
+.left-nav .pro-menu dl dt .icon09 { background-image: url(/templates/master/botany/images/common/iconArray.png); background-repeat: no-repeat; background-position: 0px -568px; padding-left: 30px; }
+.left-nav .pro-menu dl dd { padding-left: 30px; line-height: 17px; white-space: nowrap; margin-right: 12px; overflow: hidden; height: 18px; display: block; }
+.left-nav .pro-menu dl dd a { font-size: 12px; color: #C4C4C4; padding-right: 5px; display: block; float: left; }
+/*导航结束*/
+
+/*banner开始*/
+.top-banner { float: left; width: 755px; height: 449px; overflow: hidden; position: relative; left: 210px;
+}
+.bn-right { float: right; width: 233px; height: 447px; border: 1px solid #ECECEC; }
+.bn-right .bn-top { width: 194px; height: 185px; padding: 20px 20px; overflow: hidden; }
+.bn-right .bn-top span { display: inline-block; width: 100%; height: 40px; line-height: 40px; }
+.bn-right .bn-top span h4 { float: left; color: #3F3F3F; font-size: 16px; font-weight: bold; }
+.bn-right .bn-top span a { display: inline-block; float: right; color: #C4C4C4; font-size: 12px; line-height: 20px;}
+.bn-right .bn-top span a:hover, .bn-right .bn-top ul li a:hover { color: #FF2D2E; }
+/*.bn-right .bn-top ul li,.mall-news .news .news-list li{
+			list-style-type: disc;
+			list-style-position: inside;
+			color:#777777
+		}*/
+.mall-news .news-list .article_hd { display: none; }
+.bn-right .bn-top ul li a  { color: #545454; background: url(/templates/master/botany/images/process/help_center_icon.jpg) no-repeat left center; line-height: 25px; padding-left: 10px; }
+.bn-right .bn-top ul li a:hover { background: url(/templates/master/botany/images/process/help_center_icon2.jpg) no-repeat left center; color: #ff6600; }
+
+.bn-right .bn-btm { border-top:1px solid #dddddd;overflow: hidden; width: 233px;}
+	
+.bn-right .bn-btm .btn01 { display: inline-block; float: left; position: relative; width: 27px; height: 30px; top: 90px; background-image: url("/templates/master/botany/images/common/iconArray.png"); background-repeat: no-repeat; background-position: 0 -330px; }
+.bn-right .bn-btm .btn02 { display: inline-block; float: right; position: relative; width: 27px; height: 30px; top: 90px; background-image: url("/templates/master/botany/images/common/iconArray.png"); background-repeat: no-repeat; background-position: 0 -300px; }
+.bn-right .bn-btm .bn-img { width: 180px; height: 205px; padding: 2px 7px; display: block; float: left; }
+.bn-right .bn-btm .bn-img h4 a { color: #333; font-weight: normal; font-size: 14px; }
+.bn-right .bn-btm .bn-img p i { font-size: 12px; color: #333; font-style: normal; }
+.bn-right .bn-btm .bn-img p { font-size: 16px; font-weight: bold; color: #333; padding-left: 50px; }
+/*banner结束*/
+.main-content { width: 1200px; margin: 0 auto; }
+.main-content .top-ad a { float: left; margin-top: 10px; margin-left: 1px; overflow: hidden; }
+.main-content .top-ad { width: 100%; height: 160px; }
+.main-content .top-ad img { max-width: 239px; max-height: 160px; }
+.top-ad div { float: left;   }
+.top-ad { clear: both; }
+/*限时抢购开始*/
+.discount-sp .dis-limited { float: left; width: 958px; height: 393px; margin-top: 20px; }
+.discount-sp .dis-limited h4 { width: 100%; height: 50px; color: #333; line-height: 45px; background-image: url("/templates/master/botany/images/common/iconArray.png"); background-repeat: no-repeat; background-position: 0px -120px; padding-left: 40px; font-size: 18px; font-weight: bold; }
+.discount-sp .dis-limited h4 img { vertical-align: middle; margin-left: 10px; }
+.discount-sp .dis-limited ul { float: left; width: 958px; height: 343px; border: 1px solid #DDDDDD; }
+.discount-sp .dis-limited ul img { -webkit-transition: -webkit-transform .2s linear; -moz-transition: -moz-transform .2s linear; -o-transition: -o-transform .2s linear; transition: transform .2s linear; }
+.discount-sp .dis-limited ul img:hover { -webkit-transform: translateX(-5px); -moz-transform: translateX(-5px); -ms-transform: translateX(-5px); -o-transform: translateX(-5px); transform: translateX(-5px); }
+.discount-sp .dis-limited ul li { float: left; width: 220px; margin-left: 15px; height: 100%; padding-top: 5px; }
+.dis-limited ul li .time { width: 100%; height: 35px; font-size: 12px; color: #B5B5B5; text-align: center; line-height: 35px; background-image: url("/templates/master/botany/images/common/iconArray.png"); background-repeat: no-repeat; background-position: 0px -179px; padding-left: 25px; margin-left: 25px; }
+.dis-limited ul li .pro-img { display: table-cell; height: 199px; width: 199px; padding: 10px 8px; text-align: center; vertical-align: middle; overflow: hidden; }
+.dis-limited ul li .pro-img img { max-height: 220px; max-width: 220px; }
+.dis-limited ul li .pro-info { width: 100%; height: 90px; }
+.dis-limited ul li .pro-name, .group-pro .pro-name, .mid-pro li .pro-info .pro-name { width: 200px; height: 40px; line-height: 35px; text-align: center; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; padding-left: 10px; }
+.dis-limited ul li .pro-name a, .group-pro .pro-name a, .mid-pro li .pro-info .pro-name a, .hot-pro li .pro-info .pro-name a { font-size: 14px; color: #333; }
+.dis-limited ul li .pro-name a:hover, .group-pro .pro-name a:hover, .mid-pro li .pro-info .pro-name a:hover, .hot-pro li .pro-info .pro-name a:hover { color: #FF2D2E; }
+.dis-limited ul li .pro-price, .group-pro .pro-price, .mid-pro li .pro-price { height: 50px; }
+.dis-limited ul li .pro-price span, .group-pro .pro-price span, .mid-pro li .pro-price span, .hot-pro li .pro-info .pro-price span { color: #FF2D2E; font-size: 14px; }
+.pro-info .pro-price span i.rmb{ text-decoration: none;}
+.dis-limited ul li .pro-price i, .group-pro .pro-price i, .mid-pro li .pro-price i, .hot-pro li .pro-info .pro-price i { color: #B5B5B5; text-decoration: line-through; font-size: 12px; font-style: normal; padding-left: 10px; }
+.dis-limited ul li .pro-price i span { color: #B5B5B5; font-weight: normal; font-size: 12px; }
+.dis-limited ul li .pro-price .rmb, .group-pro .pro-price .rmb, .mid-pro li .pro-price .rmb, .hot-pro li .pro-info .pro-price .rmb { font-size: 14px; 
+color: #FF2D2E; padding-right: 3px; text-decoration: none; }
+.discount-sp .dis-group { float: right; position: relative; width: 234px; height: 393px; margin-top: 20px; }
+.discount-sp .dis-group h4 { width: 100%; height: 50px; color: #333; font-size: 16px; font-weight: bold; line-height: 60px; }
+.discount-sp .dis-group .group-pro { width: 212px; height: 323px; border: 1px solid #DDDDDD; padding: 10px;/* background-image:url("./images/common/dis-pic.gif");*/
+}
+.discount-sp .dis-group .group-pro .bg-pic { position: absolute; top: 43px; left: 160px; }
+.discount-sp .group-pro .group-img { width: 214px; height: 198px; overflow: hidden; }
+.discount-sp .group-pro .pro-info { height: 80px; width: 214px; }
+.discount-sp .group-pro input { width: 201px; height: 38px; background-color: #FF2D2E; color: #fff; font-size: 20px; line-height: 30px; text-align: center; margin-left: 6px; border: none; }
+/*限时抢购结束*/
+
+/*中间导航开始*/
+.main-content .mid-nav { width: 100%; height: 315px; margin-top: 10px; }
+.main-content .mid-nav .tab_item ul img { -webkit-transition: -webkit-transform .2s linear; -moz-transition: -moz-transform .2s linear; -o-transition: -o-transform .2s linear; transition: transform .2s linear; }
+.main-content .mid-nav .tab_item ul img:hover { -webkit-transform: translateX(-5px); -moz-transform: translateX(-5px); -ms-transform: translateX(-5px); -o-transform: translateX(-5px); transform: translateX(-5px); }
+.main-content .mid-nav .mid-menu { width: 100%; height: 42px; }
+.main-content .mid-nav .mid-menu li { float: left; }
+.main-content .mid-nav .mid-menu li a { display: inline-block; padding: 0 70px; line-height: 40px; font-size: 18px; font-weight: bold; color: #333; }
+.main-content .mid-nav .mid-menu li a:hover, .mid-nav .mid-menu .active { color: #FF2D2E; border-bottom: 2px solid #FF2D2E; }
+.main-content .mid-nav .mid-menu .nav-more { float: right; }
+.main-content .mid-nav .mid-menu .nav-more a { color: #C4C4C4; font-size: 12px; padding: 0; font-weight: normal; }
+.main-content .mid-nav .mid-menu .nav-more a:hover { border: none; }
+.main-content .mid-pro { width: 1202px; height: 273px; border: 1px solid #DDDDDD; }
+.main-content .mid-pro li { float: left; width: 200px; }
+.main-content .mid-pro li .pro-img { display: block; height: 178px; width: 200px; padding: 10px; }
+.mid-pro li .pro-info { height: 80px; }
+/*中间导航结束*/
+.main-content .horizontal-ad { width: 1200px; margin-bottom: 10px; display: block; margin-top: 10px; }
+.main-content .category01 { width: 1200px; height: 492px; margin-top: 20px; }
+.category01 .hot-pro li img { -webkit-transition: -webkit-transform .2s linear; -moz-transition: -moz-transform .2s linear; -o-transition: -o-transform .2s linear; transition: transform .2s linear; }
+.category01 .hot-pro li img:hover { -webkit-transform: translateX(-5px); -moz-transform: translateX(-5px); -ms-transform: translateX(-5px); -o-transform: translateX(-5px); transform: translateX(-5px); }
+.category01 .title-T { display: inline-block; width: 100%; height:25px; line-height: 40px; }
+.category01 .title-T h4 { float: left; font-size: 18px; color: #333; font-weight: bold; }
+.category01 .title-T .icon { padding-right: 20px; }
+.category01 .title-T a { display: inline-block; float: right; color: #C4C4C4; line-height: 30px; font-size: 12px; }
+.category01 .title-T a:hover { color: #FF2D2E; }
+.category01 .cate-wrap { width: 1198px; height: 445px; margin-top: 10px; overflow: hidden; border: 1px solid #DDDDDD; }
+.category01 .cate-wrap .brand-btm a:hover, .category01 .sal-charts a:hover { color: #FF2D2E; }
+.category01 .cate-wrap .brand-B { float: left; width: 191px; height: 425px; padding: 10px 16px; }
+.category01 .cate-wrap .brand-top { height: 262px; width: 191px; border-bottom: 1px solid #DDDDDD; }
+.category01 .cate-wrap .brand-top li { float: left; }
+.category01 .cate-wrap .brand-top a { display: inline-block; float: left; width: 75px; height: 34px; padding: 9px 10px; }
+.category01 .cate-wrap .brand-top a img { width: 75px; height: 34px; overflow: hidden; }
+.category01 .cate-wrap .brand-btm { width: 191px; height: 162px; padding: 5px 0; }
+.category01 .cate-wrap .brand-btm a { display: inline-block; float: left; height: 40px; width: 95px; font-size: 14px; text-align: center; line-height: 40px; border-bottom: 1px dotted #DDDDDD; }
+.category01 .cate-wrap .post-pic { float: left; display: inline-block; height: 445px; width: 360px; overflow: hidden; }
+.category01 .cate-wrap .hot-pro { float: left; width: 369px; height: 445px; padding: 0px 20px; border-right: 1px solid #DDDDDD; }
+.category01 .cate-wrap .hot-proext { float: left; width: 615px; height: 445px; border: none; padding: 0; }
+.category01 .cate-wrap .hot-pro li { float: left; width: 160px; margin-right: 24px; height: 210px; margin-top: 10px; }
+.category01 .cate-wrap .hot-pro.hot-proext li{ margin-right: 5px; margin-left: 30px;}
+.cate-wrap .hot-pro li .pro-img { display: block; width: 160px; height: 160px; display: table-cell; vertical-align: middle; text-align: center; 
+overflow: hidden; }
+.cate-wrap .hot-pro li .pro-img img { max-width: 160px; max-height: 160px; }
+.cate-wrap .hot-pro li .pro-info { width: 160px; height: 50px;  }
+.hot-pro li .pro-info .pro-name { width: 100%; height: 22px; line-height: 22px; text-align: center; white-space: nowrap; text-overflow: ellipsis;
+ overflow: hidden; margin-top: 4px; }
+.category01 .sal-charts { float: right; height: 425px; width: 185px; padding: 10px 10px; }
+.category01 .sal-charts h4 { line-height: 35px; margin-bottom: 5px; overflow: hidden; font-size: 18px; color: #333; font-weight: normal; }
+.category01 .sal-charts i { border: 1px solid #8b8b8b; border-radius: 20px; color: #8b8b8b; display: inline-block; font-style: normal; height: 20px; text-align: center; width: 20px; line-height: 20px; float: left; margin-right: 10px; }
+.category01 .sal-charts .i-01 { border: 1px solid #FF2D2E; color: #FF2D2E; }
+.category01 .sal-charts .txt { display: inline-block; height: 30px; line-height: 30px; font-size: 13px; color: #333; white-space: nowrap; 
+text-overflow: ellipsis; overflow: hidden; padding: 7px 0px; width: 156px; float: left; padding-left: 5px; }
+.category01 .sal-charts span { font-size: 14px; color: #FF2D2E; }
+.category01 .sal-charts .act01 { width: 186px; height: 85px; padding: 10px 0; border-bottom: 1px dotted #8b8b8b; white-space: normal; text-overflow: clip; overflow: auto; }
+.category01 .sal-charts .act01 img { display: block; padding: 5px; float: left; }
+/*商品咨询和评论部分开始*/
+.main-content .mall-news { width: 1198px; height: 390px; border: 1px solid #dddddd; margin-top: 30px; }
+.main-content .mall-news .news { float: left; width: 595px; height: 100%; border-right: 1px solid #dddddd; }
+.mall-news .news .td-bd { float: left; width: 320px; border-right: 1px solid #DDD; height: 390px;  overflow: hidden; }
+.mall-news .news .td-bd span { display: inline-block; margin: 5px 12px 0 12px; }
+.mall-news .news .td-bd .bd-dic { margin: 5px 36px 0 36px; }
+.mall-news .news .news-list { float: left; width: 204px; height: 360px; padding: 10px 35px; }
+.mall-news .news .news-list h4 { line-height: 50px; font-size: 18px; font-weight: normal; color: #333; }
+.mall-news .news .news-list a { font-size: 14px; color: #777777; line-height: 33px; }
+.mall-news .news .news-list a:hover, .review ul li .ueser-txt p a:hover { color: #FF2D2E; }
+.main-content .mall-news .review { float: left; width: 582px; padding:10px; }
+.mall-news .review .rspan { display: inline-block; width: 100%; height: 40px; line-height: 40px; }
+.mall-news .review span h4 { float: left; font-size: 18px; line-height: 50px; font-weight: normal; color: #333; }
+.mall-news .review span a { display: inline-block; float: right; color: #c4c4c4; font-size: 12px; }
+.mall-news .review span a:hover { color: #FF2D2E; }
+.mall-news .review ul { width:620px; height: 224px; }
+.mall-news .review ul li { float: left; width: 291px; margin-left: 3px; height: 100px; overflow: hidden; margin-bottom: 10px; }
+.mall-news .review ul li .user-img { display: inline-block; float: left; width: 110px; height: 100px; padding: 5px 5px; }
+.mall-news .review ul li .ueser-txt { float: left; height: 100%; width: 191px; font-size: 12px; margin-left: 20px; }
+.mall-news .review ul li .ueser-txt span { display: inline-block; width: 100%; height: 32px; line-height: 32px; padding-top: 5px; color: #666; }
+.review ul li .ueser-txt span a { display: inline-block; float: left; width: 28px; height: 28px; border-radius: 28px; margin-right: 10px; overflow: hidden; }
+.review ul li .ueser-txt b { width:160px; padding:10px; display: block; color: #666; font-weight: normal; background-color: #F8F8F8;  position: relative; }
+.review ul li .ueser-txt b em{ height: 40px; line-height: 20px; display: block; overflow: hidden;}
+.review ul li .ueser-txt b::after{ border-color: transparent #f8f8f8 transparent transparent; border-style: solid; border-width: 8px; content: " "; display: block; height: 0; left: -8px; margin-left: -8px; position: absolute; top: 20px; width: 0;  }
+
+/*底部开始*/
+
+#description { display: table-cell; vertical-align: middle; text-align: center; }
+#description .content { width: 1158px !important; }
+.cart_Order_info2 { background: #fafafa; }
+.cart_Order_info2 .list { width: 1000px; overflow: hidden; clear: both; }
+.cart_Order_info2 .list .title { overflow: hidden; color: #9f9f9f; clear: both; height: 40px; line-height: 40px; }
+.cart_Order_info2 .list .title div { float: left; text-align: center; border-top: 3px solid #ffd1c0; margin-right: 3px; }
+.cart_Order_info2 .list .title .name { width: 53%; text-align: left; }
+.cart_Order_info2 .list .title .name em { padding-left: 115px; }
+.cart_Order_info2 .list .title .price { width: 14%; }
+.cart_Order_info2 .list .title .num { width: 14%; }
+.cart_Order_info2 .list .title .total { width: 17.8%; }
+.cart_Order_info2 .list .con { width: 1000px; color: #9f9f9f; padding-bottom: 20px; overflow: hidden; clear: both; }
+.cart_Order_info2 .list .con .gift_list { float: none; display: block; clear: both; overflow: hidden; }
+.cart_Order_info2 .list .con .gift { margin-top: 2px; }
+.cart_Order_info2 .list .con .gift em img { width: 30px; height: 30px; }
+.cart_Order_info2 .list .con .gift b { font-weight: normal; line-height: 30px; margin-left: 5px; margin-right: 10px; }
+.cart_Order_info2 .list .con div { float: left; text-align: center; margin-right: 3px; }
+.cart_Order_info2 .list .con .name { width: 53%; overflow: hidden; }
+.cart_Order_info2 .list .con .name .pic { margin-left: 30px; border: 1px solid #dddddd; overflow: hidden; float: left; width: 80px; height: 80px; }
+.cart_Order_info2 .list .con .name .pic img{ width: 80px; height: 80px;}
+.cart_Order_info2 .list .con .name .item-msg { float: left; margin-left: 15px; width: 350px; overflow: hidden; }
+.cart_Order_info2 .list .con .name .item-msg a { height: 25px; text-align: left; overflow: hidden; line-height: 25px; }
+.cart_Order_info2 .list .con .name .item-msg .p-extend { height: 25px; line-height: 25px; overflow: hidden; }
+.cart_Order_info2 .list .con .price { width: 14%; overflow: hidden; line-height: 60px; }
+.cart_Order_info2 .list .con .num { width: 14%; overflow: hidden; line-height: 60px; }
+.cart_Order_info2 .list .con .total { width: 17.5%; overflow: hidden; color: #ff5417; line-height: 60px; font-weight: bold; }
+.cart_Order_info2 table { width: 1200px; }
+#J_AttrUL { display: table-cell; vertical-align: middle; text-align: center; }
+#J_AttrUL img { vertical-align: middle; }
+.main-content .mall-news .review ul li img { float: left; position: relative; top: 20px; width: 80px; }
+.side-nav ul li ul { display: none; margin: 0; padding: 0; position: absolute; left: 0px; top: 40px; border: 1px solid #cb160f; border-top: 0px; width: 300px; background: #fff; }
+.size { }
+.hot-key ul li { display: inline; margin-right: 5px; }
+#ProductDetails_common_ProductImages___imgBig { position: absolute; left: 0; top: 0; }
+/* 2016-3-14 */
+#floatDivBoxs { background: #fff none repeat scroll 0 0; position: fixed; right: -170px; top: 0; height: 100%; width: 170px; z-index: 999; display: none; }
+#floatDivBoxs .floatDtt { background: #f08326 none repeat scroll 0 0; color: #fff; font-size: 18px; height: 45px; line-height: 45px; position: relative; text-indent: 22px; width: 100%; }
+#floatDivBoxs .floatDqq { padding: 0 14px; }
+#floatDivBoxs .floatDqq li { border-bottom: 1px solid #e3e3e3; font-size: 15px; height: 45px; line-height: 45px; padding: 0 0 0 50px; }
+#floatDivBoxs .floatDtxt { color: #333; font-size: 18px; padding: 12px 14px; }
+#floatDivBoxs .floatDtel { padding: 0 0 15px 10px; }
+#floatDivBoxs .floatDtel img { display: block; }
+#floatDivBoxs .floatDbg {
+    background: rgba(0, 0, 0, 0) url("/templates/master/botany/images/online_botbg.jpg") no-repeat;
+    box-shadow: -2px 0 3px rgba(0, 0, 0, 0.25);
+    height: 20px;
+    width: 100%;
+}
+.floatShadow {
+    background: #fff;
+    box-shadow: -2px 0 3px rgba(0, 0, 0, 0.25);
+}
+.rightArrow { position: fixed; right: 0px; top: 180px; height: 100%; width: 50px; z-index: 999; }
+.rightArrow a { display: block; height: 45px; width: 50px; background: #fff; margin-bottom: 1px; }
+.sid-right { position: fixed; top: 0px; right: 0px; z-index: 999; background: #CCC; width: 250px; height: 100%; }
+.sale_pro { width: 208px; overflow: hidden; }
+.sale_pro ul li { padding: 10px 19px; }
+.sale_pro ul li .pic { height: 160px; line-height: 160px; }
+.sale_pro ul li .name { height: 40px; line-height: 20px; overflow: hidden; }
+.sale_pro ul li .price b { color: #ff5417; font-size: 12px; }
+.sale_pro ul li .price span { display: none; }
+/*送优惠券 轮播*/
+.friend { height: 152px; margin: 0 auto; margin-top: 20px; overflow: hidden; width: 980px; }
+.mr_frbox { height: 152px; }
+.mr_frBtnL { background: url(/templates/master/botany/images/new/left_btn_03.png) no-repeat;  display: inline; float: left; height: 46px; margin: 50px 10px 0 0; width: 24px; }
+.mr_frUl { float:left; height: 152px; width: 900px; margin: 0 auto;  }
+.mr_frBtnR { background: url(/templates/master/botany/images/new/left_btn_05.png) no-repeat; float: right; margin-top: 50px;  width: 24px; height: 46px; }
+.mr_frbox ul li { border: 1px dashed #bdbdbd; float: left; font-size: 14px; margin-right: 24px; overflow: hidden; padding: 0; width: 283px; height: 145px; position: relative; background: url(/templates/master/botany/images/new/juan_bg.jpg) no-repeat; }
+.mr_frbox ul .end { background: url(/templates/master/botany/images/new/juan_end.jpg) no-repeat; }
+.mr_frbox ul .end b { color: #c9c9c9; }
+.mr_frbox ul li span { width: 283px; height: 113px; display: block; color: #FFF; clear: both; overflow: hidden; }
+.mr_frbox ul li b { text-align: center; font-size: 18px; width: 283px; display: block; color: #f64218; font-weight: normal; }
+.mr_frbox ul li span .point { font-size: 32px; float: left; font-weight: bold; margin-left: 30px; margin-top: 15px; font-family: "microsoft yahei"; }
+.mr_frbox ul li span .point em { float: left; font-size: 32px; }
+.mr_frbox ul li span .point b { float: left; font-size: 50px; margin-top: -20px; width: auto; color: #FFF; }
+.mr_frbox ul li span .Info { position: absolute; top: 75px; right: 15px; }
+.mr_frbox ul li span .Info em { float: right; display: block; }
+.mr_frbox ul li b { text-align: center; font-size: 18px; width: 283px; display: block; color: #f64218; font-weight: normal; }
+.mr_frbox ul li span i { font-style: normal; }
+.mr_frbox ul li span .end { display: none; }
+.sendcoupons { background: url(/templates/master/botany/images/new/active_bg_02.jpg) no-repeat center top; height: 500px; }
+.sendcoupons .main { width: 980px; margin: 0 auto; }
+.sendcoupons .main .title { font-size: 36px; border-bottom: 1px solid #e1e0e1; text-align: center; padding-bottom: 30px; padding-top: 80px; color: #606060; margin: 0 auto; width: 900px; }
+.sendcoupons .main .title em { color: #fe5722; font-size: 42px; font-weight: bold; }
+.sendcoupons .main .btn1 { margin: 0 auto; background: #ff561a; border-radius: 5px; width: 220px; height: 50px; line-height: 50px; color: #FFF; margin-top: 25px; }
+.sendcoupons .main .btn1 a { color: #FFF; font-size: 24px; text-align: center; width: 220px; height: 50px; display: block; }
+.active_info { }
+.active_info .title { font-size: 12px; margin: 0 auto; margin-top: 25px; margin-bottom: 25px; overflow: hidden; width: 900px; color: #959595; }
+.active_info .title h2 { float: left; font-size: 14px; font-weight: bold; margin-top: 2px; }
+.active_info .title h2 span { float: left; margin-right: 50px; }
+.modal_qt { position: fixed; width: 100%; height: 100%; top: 0; background: #000; display: inline-block; left: 0; opacity: .15; z-index: 99;
+filter: progid: DXImageTransform.Microsoft.Alpha(opacity=15); }
+
+
+
+
+
+
+
+
+/*public*/
+.pt20,#products_6,#ads_7{ padding-top:20px;}
+.w1200,#products_6,.pro_tab160 .tab_hd{ width:1200px;margin:0 auto;}
+.font-yh,.nav,.price em,.pro_tab160 .tab_hd li,.combination .hd .title div,.review-order .review .hd,.review-order .order-list .hd,.footer-help li h2{font-family:"microsoft yahei"; }
+.buycart em,.top-left{background-image:url(/templates/master/botany/images/process/icons.gif);}
+.o-hidden,.search,.search_btn,.hot_key ul,.ad_slide,.focusWarp,.btnWarp,.nTab .TabContent,.nTab .TabContent .pic,.time-buy .bd li .pic,.nTab .TabContent .info,.brand-con .brand,.hot-comm .section #ads_4,.hot-comm .section li .pic,.sale_top60,.sale_top60 li,#products_6,.pro_tab160 .tab_item,.pro_tab160 .tab_item,.nTab .TabContent .name,.time-buy .bd li .name,.hot-comm .section li .name,.sale_top60 li .info .name,.pro_tab160 .tab_item li .name,.combination .bd .pro_simple160 li .name,.combination .bd .pro_simple160 li,.combination .bd .ad_custom,.combination .bd .pro_simple160,.combination .bd .pro_simple160 li .price,.review-order .review .bd li .info .name,.review-order .review .bd li .info .reviews,.review-order .review .bd,.review-order .review .bd li,.review-order .review .bd li .pic,#ads_16,#comments_3,#comments_7,#comments_11,#comments_15,.footer{ overflow:hidden;}
+.search_btn,.hot-key em,.hot-key em,.hot_key ul,.nav-l,.nav-l li,.ad_slide,.imgList li,.imgList_two li,.nTab .TabTitle li,.hot-comm .section li,.time-buy .bd li,.brand-con .brand li,.sale_top60 li .info,.sale_top60 li .pic,.pro_tab160 .tab_hd li,.pro_tab160 .tab_item li,.combination .hd .title div,.combination .hd .keyword,.combination .bd .cate,.combination .bd .cate li,.combination .bd .pro_simple160 li,.combination .bd .pro_simple160,.combination .bd .ad_custom,.review-order .review,.review-order .review .bd li,.review-order .review .bd li .pic,.review-order .review .bd li .info,.order-list .ordersearch input,.footer-help li,#comments_3,#comments_7,#comments_11,#comments_15{float:left;}
+.align-b,.combination .hd .title div img{ vertical-align:bottom;}
+.sale_top60 li .info,.combination .hd .keyword li,.combination .hd .morelink,.review-order .order-list{ float:right;}
+.search_btn,.imgList li,.imgList_two li,.nTab .TabTitle li,.nTab .TabTitle .normal,.nTab .TabContent .btn,.hot-comm .section li,.sale_top60 li em,.pro_tab160 .tab_hd li,.pro_tab160 .tab_item li .pic,.combination .bd .pro_simple160 li .pic,.footer-custom{text-align:center;}
+.min20,#logo_1,#products_1,.combination .hd .title div,#products_2,#products_3,#products_4,#products_6,#comments_2,#products_5,#ads_1,#ads_2,#ads_4,#ads_5,#ads_6,#ads_7,.combination .hd .keyword,.combination .bd .cate .category,.combination .bd .cate .adv_image,.combination .bd .pro_simple160,.combination .bd .ad_custom,#ads_16,#ads_50,#ads_499,#comments_3,#comments_5,#comments_7,#comments_9,#comments_11,#comments_13,#comments_15,#comments_17{ min-height:20px;}
+.c-both,.nav,#ads_1,#ads_2,#ads_4,#ads_5,#ads_6,.nTab .TabContent{ clear:both;}
+.nTab .TabContent .name,.hot-comm .section li .name,.sale_top60 li .info .name,.pro_tab160 .tab_item li .name,.combination .bd .pro_simple160 li .name{ height:36px; line-height:18px;}
+.nTab .TabContent .price b,.time-buy .bd li .price em,.time-buy .bd li .price span,.hot-comm .section li .price b,.pro_tab160 .tab_item .price,.combination .bd .pro_simple160 li .price b{color:#e60012;}
+.price em{font-weight:normal; font-size:12px;}
+.nTab .TabContent .price b,.time-buy .bd li .price span,.hot-comm .section li .price b,.sale_top60 li b,.pro_tab160 .tab_item .price b,.combination .bd .pro_simple160 li .price b{font-size:18px; font-family:Arial; margin-right:5px; font-weight:normal}
+.nTab .TabContent .price span,.pro_tab160 .tab_item .price span,.combination .bd .pro_simple160 li .price span{color:#9a9a9a; text-decoration:line-through;}
+.nTab .TabContent .name,.time-buy .bd li .name,.hot-comm .section li .name{margin-top:10px;}
+.nTab .TabTitle li,.time-buy .hd,.brand-con .hd,.time-buy .bd li .time{ height:30px; line-height:30px;}
+.brand-con .hd,.hot-comm .hd,.ran-con .hd{ border-bottom:2px solid #a1a1a1; }
+.time-buy .bd,.brand-con .brand,.hot-comm .bd,.pro_tab160 .tab_item{ border:1px solid #e4e4e4; border-top:0px;}
+.hot-comm .section li .price span,.sale_top60 li span{ display:none;}
+.sale_top60 li b{ margin-left:5px;}
+
+/* Botany */
+.Copyright{ text-align:center;}
+.pull-left { float: left!important; }
+.pull-right { float: right!important; }
+.container { width: 1200px; margin: 0 auto; }
+.clearfix::after,
+.clearfix::before,
+.container-fluid::after,
+.container-fluid::before,
+.container::after,
+.container::before { display: table; content: ""; clear: both;  }
+.arrow { width: 0; height: 0; overflow: hidden; border-style: solid; }
+.img-responsive,
+.img-responsive img { max-width: 100%; height: auto; }
+body { font-family: "微软雅黑"; }
+.container a { text-decoration: none; }
+
+.toolbar1 { height: 30px; background-color: #f7f7f7; border-bottom: 1px solid #f2f2f2; }
+.toolbar1 ul li .cw-icon{ width:87px;}
+.toolbar1 ul li .cw-icon a{ float:left;}
+.toolbar1 ul .fore3 a{ padding-left:15px;float:left;}
+.toolbar1 ul .fore3{margin-left:0;}
+.toolbar1 ul li .dorpdown-layer a{ height:25px; line-height:25px;}
+.toolbar1 ul > li { float: left; line-height: 30px;}
+.toolbar1 li > a {}
+.toolbar1 .active a { color: #ff2e2f; }
+.toolbar-left li { margin-right: 20px; }
+.toolbar-right li { margin-left: 20px; }
+
+.header { height: 70px; padding: 10px 0; background-color: #fff; }
+.header-logo { float: left; width: 224px; height: 75px; overflow: hidden; text-align: center; }
+.header-search { position: relative; display: inline; float: left; width: 417px; padding-left: 10px; margin: 17px 0 0 320px; background: #fff url(/templates/master/botany/images/search-24-24.jpg) no-repeat 14px center; border: 1px solid #8d9562; }
+.header-search .search-txt { float: left; width: 319px; height: 24px; padding: 5px 0; margin-right: 10px; line-height: 24px; color: #999; background: none; border: 0 none; outline: 0; }
+.header-search .search-btn { float: left; width: 88px; height: 34px; font-family: "微软雅黑"; font-size: 14px; color: #fff; cursor: pointer; background-color: #8d9562; border:none; outline: 0; }
+.header-search .search-btn:hover { background:#DACB10; }
+.header-cart { position: relative; float: right; width: 140px; height: 34px; margin-top: 17px; line-height: 34px; background: #f9f9f9 url(/templates/master/botany/images/cart-140-34.jpg) no-repeat center; border: 1px solid #dfdfdf; }
+.header-cart a { display: block; }
+.header-cart .cart-num { position: absolute; top: -10px; right: 24px; z-index: 1; width: 15px; height: 18px; padding-bottom: 4px; line-height: 18px; color: #fff; text-align: center; background: url(/templates/master/botany/images/num-15-22.png) no-repeat center; }
+.header-cart span { margin-left: 44px; font-size: 14px; color: #666; }
+
+.navbar { height: 42px; background-color: #fff; margin-bottom:0px; min-height:42px; border:none;background: url(/templates/master/niuniugo001/images/dhbg1.jpg);background-repeat:repeat-x;}
+.navbar-nav,
+.navbar-nav > li { float: left; }
+.main-nav { position: relative; z-index: 1000; width: 786px;}
+.main-nav > li > a { display: inline-block; padding: 0 20px; font-size: 16px; line-height: 42px; color: #FFF; }
+.main-nav li a:hover,.main-nav li ul li h3 a { color: #e0c64d;  }
+.main-nav li { position: relative; }
+.main-nav li ul { position: absolute; top: 42px; left: 0; z-index: 10000; display: none; width: 300px; border: 1px solid #8d9562; border-top: 0 none; background-color: #fff; }
+.main-nav li:hover ul { display: block; }
+.main-nav li ul li { width: 100%; overflow: hidden; padding: 4px 0; line-height: 24px; border-bottom: 1px solid #eee; }
+.main-nav li ul li:last-of-type { background: none; }
+.main-nav li ul li h3 { float: left; width: 80px; padding: 0 5px; font-weight: bold; color: #a10000; text-align: center; }
+.main-nav li ul li h3 a{ line-height:25px;}
+.main-nav li ul li div { float: left; width: 205px; }
+.main-nav li ul li div a { float: left; margin: 0 5px; color: #585858; white-space: nowrap; }
+.navbar-all { position: relative; z-index:1000; }
+.navbar-all > a { display: block; width: 224px; height: 42px; font-size: 16px; line-height: 42px; color: #fff; text-align: center; background-color: #8d9562; }
+.all-arrow { position: absolute; top: 50%; right: 15px; margin-top: -3px; border-width: 6px 5px; border-color: #fff transparent transparent transparent; }
+.navbar-custom { max-width: 190px; max-height: 42px; overflow: hidden; }
+.navbar-right { float: right!important; }
+.banner { width: 100%; height: 600px; }
+#lunhuanJS .lunhuan_content { height: 600px; width: 100%; overflow: hidden; position: relative; }
+.lunhuan_content .tab_1 { }
+.lunhuan_content .tab_1 .tab_img { HEIGHT: 600px; width: 100%; display: block; OVERFLOW: hidden; text-align: center; }
+.lunhuan_content .tab_1 .tab_img div { HEIGHT: 600px; width: 100%; display: block; OVERFLOW: hidden; text-align: center; }
+.lunhuan_content .tab_1 .tab_img img { }
+.lunhuan_content .tab_1 .tab_menu { position: absolute; right: 50%; width:1200px; height:10px; margin-right:-1200px; top: 566px; text-align: center; }
+.lunhuan_content .tab_1 .tab_menu ul { height: 19px; }
+.lunhuan_content .tab_1 .tab_menu li { display: inline-block; width: 19px; height: 19px; color: #010000; font-size: 10px; text-align: center; line-height: 18px; font-family: Verdana; margin-left:15px; cursor: pointer; text-indent: -9999em; font-size: 12px; font-weight: bold; background:url(/templates/master/botany/images/banner-list.png) no-repeat; }
+.lunhuan_content .tab_1 .tab_menu .active { background-position: -21px 0; }
+.lunhuan_content .tab_1 .tab_menu .active a { color: #FFFFFF; }
+.lunhuan_content .tab_1 .tab_menu .normal { background-position: 0 0; }
+.lunhuan_content .tab_1 .tab_menu .normal a { color: #010000; }
+.lunhuan_content .tab_1 .tab_img  div a{width:100%; height:100%; display:block;}
+#ads_18,
+#products_15,
+#ads_29 { margin: 0 1px; }
+.ads-banner { margin: 50px 0; overflow: hidden; }
+.footer-scroll { padding-top: 20px; overflow: hidden; background-color: #fff; }
+.back-to-top { width: 150px; padding: 30px 0; margin: 0 auto; overflow: hidden; font-size: 24px; line-height: 24px; color: #000; text-align: center; cursor: pointer; background-color: #fff; }
+.back-to-top p { padding-top: 10px; }
+
+.mod { overflow: hidden; }
+.mod2 { margin: 40px 0; }
+.mod2 .hd { height: 42px; overflow: hidden; font-size: 16px; font-weight: bold; line-height: 42px; color: #585858; }
+.mod2 .bd { height: 346px; border: 1px solid #ececec; }
+.mod2 .bd .name { margin-top: 10px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.mod2 .bd .name a { font-size: 14px; color: #585858; }
+.mod2 .bd .price { height: 24px; padding-bottom: 10px; font-family: Arial; line-height: 24px; color: #8d8d8d; }
+
+.ljfl { float: left; }
+.ljfr { float: right; }
+.lj01{float: left;}
+.ljw976{width:100%;}
+.ljw287{width:287px;}
+.ljw910{width:910px;}
+.ljw910 .pro_simple220{width:912px; overflow: hidden; float:left; border-right:1px solid #f1f1f1; min-height:200px;}
+.ljw910 .pro_simple220 ul {width:900px;}
+.ljw910 .pro_simple220 li { float: left; width:296px; border:1px solid #f1f1f1; padding: 14px 0px; margin:2px;}
+.ljw910 .pro_simple220 .pic {float: left; width: 130px; height: 130px; margin: 0px auto; overflow: hidden; border:1px solid #FCFCFC; margin-left:1px;}
+.ljw910 .pro_simple220 .pic img{width: 130px; height: 130px;}
+.ljw910 .pro_simple220 .name { width: 140px; margin: 0px auto; height: 42px; line-height: 21px; margin-top: 10px; overflow: hidden; font-size:14px; font-weight:bold;}
+.ljw910 .pro_simple220 .name a, .pro_floor3 .pro_simple160 .name a { color: #656565; }
+.ljw910 .pro_simple220 .price {float:left; width:140px; text-align: left; height: 27px; line-height: 27px; }
+.ljw910 .pro_simple220 .price b, .on_sale .pro_simple160 .price b { color: #c10000; margin-right: 10px; }
+.ljw910 .pro_simple220 .price span, .on_sale .pro_simple160 .price span { display: none; }
+
+
+.time-buy { float: left; width: 960px; }
+.time-buy .hd { padding-left: 45px; background:url(/templates/master/botany/images/time-bu-300-42y.jpg) no-repeat left center; }
+.time-buy .bd { width: 956px; padding: 0 2px; }
+.time-buy .bd li { width: 180px; margin: 0 30px 0 29px; text-align: center; }
+.time-buy .bd li .price { color: #585858; }
+.time-buy .bd li .time { margin-top: 10px; }
+.time-buy .bd li .time span { padding-left: 22px; color: #b4b4b4; background: url(/templates/master/botany/images/clock-16-16.jpg) no-repeat left center; }
+.time-buy .bd li .time strong { font-weight: normal; }
+.time-buy .bd li .pic { height: 180px; margin-top: 20px; overflow: hidden; }
+.time-buy .bd li .name { margin-top: 30px; }
+.time-buy .bd li .price { font-family: "微软雅黑"; }
+.time-buy .bd li .price,
+.time-buy .bd li .price em { font-size: 14px; }
+.time-buy .bd li .price span { font-size: 16px; }
+
+.group-buy { float: right; width: 234px; }
+.group-buy .bd li { width: 220px; height: 340px; margin: 6px auto 0; overflow: hidden; text-align: center; }
+.group-buy .bd .info { overflow: hidden; }
+.group-buy .bd .price { width: 100%; text-align: center; }
+.group-buy .bd .price b { margin-right: 3px; font-size: 16px; font-weight: normal; color: #ff2a53; }
+.group-buy .bd .price > span { margin-left: 3px; text-decoration: line-through; }
+.group-buy .bd .btn { width: 200px; height: 38px; margin: 0 auto; overflow: hidden; background-color: #8d9562; border-radius: 5px; border:none; padding:0px; }
+.group-buy .bd .btn a { display: block; width: 100%; font-size: 18px; line-height: 38px; color: #fff; }
+
+.mod1-l { float: left; width:275px; height: 300px; overflow: hidden; border:6px solid #8d9562;}
+.mod1-l span{ width:100%;display:block;line-height:25px; margin:10px;}
+.mod1-r { float: right; width:906px; padding: 0 1px; }
+.mod1-r li { position: relative; float: left; width:290px; height:300px; overflow: hidden; margin-left:10px; margin-bottom: 20px; }
+.mod1-r li a { position: absolute; top: 50%; left: 50%; z-index: 2; width: 112px; height: 34px; margin: -17px 0 0 -56px; line-height: 34px; overflow: hidden; text-align: center; font-size: 16px; color: #fff; border: 1px solid #fff; -webkit-transform: translateY(-200px); -moz-transform: translateY(-200px); }
+.mod1-r li:hover::before { position: absolute; left: 0; top: 0; z-index: 1; width: 288px; height: 300px; overflow: hidden; background-color: #000; opacity: .5; content: ''; }
+
+.floor { overflow: hidden; margin-bottom:15px; }
+.floor .hd { overflow: hidden; height: 46px; line-height: 46px; border-bottom: 1px solid #ccc; }
+.floor .hd .title { font: bold 24px/46px "微软雅黑"; color: #585858; }
+.floor .hd .icon { margin-right: 10px; }
+.floor .hd .morelink a { font-size: 14px; color: #585858; }
+.floor .bd { padding: 20px 0 0 0; overflow: hidden; }
+.floor .bd-l { float: left; width: 288px; height: 600px; overflow: hidden; }
+.floor .bd-r { float: right; width: 912px; }
+.floor .bd-r li { float: left; width: 220px; margin-left: 8px; text-align: center; }
+.floor .bd-r li .pic { width: 220px; height: 220px; overflow: hidden; }
+.floor .bd-r li .name { height: 28px; margin-top: 9px; overflow: hidden; font-size: 14px; line-height: 28px; white-space: nowrap; text-overflow: ellipsis; }
+.floor .bd-r li .name a { color: #585858; }
+.floor .bd-r li .price { height: 26px; padding-bottom: 10px; font-family: "微软雅黑"; line-height: 26px; }
+.floor .bd-r li .price b { margin-right: 3px; font-size: 16px; font-weight: normal; color: #ff2a53; }
+.floor .bd-r li .price span { margin-left: 3px; color: #8d8d8d; text-decoration: line-through; }
+
+.carousel { position: relative; width:100%; margin:0 auto;}
+.carousel .b-prev , 
+.carousel .b-next { position: absolute; top: 78.5px; z-index: 99; height:23px;width:23px;overflow:hidden;display:block; text-decoration:none;cursor:pointer;}
+.carousel .b-prev { left: 2%; background:url(/templates/master/botany/images/homelife/imageNavLeft.gif) no-repeat;}
+.carousel .b-next { right: 2%; background:url(/templates/master/botany/images/homelife/imageNavRight.gif) no-repeat;}
+.carousel #prev-03.disabled{background:url(/templates/master/botany/images/homelife/imageNavLeft-disabled.gif) no-repeat;cursor:default;}
+.carousel #next-03.disabled{background:url(/templates/master/botany/images/homelife/imageNavRight-disabled.gif) no-repeat;cursor:default;}
+.jCarouselLite {float:left;width:100%;height:180px;overflow:hidden;/*必要元素*/}
+.jCarouselLite ul { height: 180px; }
+.jCarouselLite li{ float: left; height:180px;width:180px;text-align:center; overflow: hidden;}
+.carousel-01 {width:152px;margin:30px auto;}
+.jCarouselLite li img {  max-width: 100%; height: auto; }
+.carousel-01 .b-prev ,
+.carousel-01 .b-next {height:23px;width:23px;overflow:hidden;display:block;margin-left:60px;text-decoration:none;cursor:pointer;}
+.carousel-01 .b-prev {background:url(/templates/master/botany/images/homelife/imageNavLeft.gif) no-repeat;}
+.carousel-01 .b-next {background:url(/templates/master/botany/images/homelife/imageNavRight.gif) no-repeat;}
+.jCarouselLite-01 {height:385px;width:152px;overflow:hidden;/*必要元素*/}
+.jCarouselLite-01 li{height:152px;width:152px;text-align:center;padding:5px 0;}
+.jCarouselLite li .name,
+.jCarouselLite li .price { display: none; }
+
+/* Aniamtion */
+.img-scale div[type="simple"] img {
+	-webkit-transform: scale(1);
+	   -moz-transform: scale(1);
+	     -o-transform: scale(1);
+	    -ms-transform: scale(1);
+	        transform: scale(1);
+	-webkit-transition: transform .5s ease 0s;
+	   -moz-transition: transform .5s ease 0s;
+	     -o-transition: transform .5s ease 0s;
+	    -ms-transition: transform .5s ease 0s;
+	        transition: transform .5s ease 0s;
+}
+.img-scale div[type="simple"] img:hover {
+	-webkit-transform: scale(1.1);
+	   -moz-transform: scale(1.1);
+	     -o-transform: scale(1.1);
+	    -ms-transform: scale(1.1);
+	        transform: scale(1.1);
+	-webkit-transition: transform .5s ease 0s;
+	   -moz-transition: transform .5s ease 0s;
+	     -o-transition: transform .5s ease 0s;
+	    -ms-transition: transform .5s ease 0s;
+	        transition: transform .5s ease 0s;
+}
+.img-bounce img:hover {
+	-webkit-animation: bounce 1s .2s ease both;
+	   -moz-animation: bounce 1s .2s ease both;
+}
+.mod1-r li:hover::before,
+.mod1-r li:hover a {
+	-webkit-animation: bounceInDown 1s .2s ease both;
+	   -moz-animation: bounceInDown 1s .2s ease both;
+}
+@-webkit-keyframes bounce {
+	0%,20%,50%,80%,100% { -webkit-transform: translateY(0); }
+									40% { -webkit-transform: translateY(-30px); }
+									60% { -webkit-transform: translateY(-15px); }
+}
+@-moz-keyframes bounce {
+	0%,20%,50%,80%,100% { -moz-transform: translateY(0); }
+									40% { -moz-transform: translateY(-30px); }
+									60% { -moz-transform: translateY(-15px); }
+}
+@-webkit-keyframes bounceInDown{
+	0%   { -webkit-transform: translateY(-1000px); }
+	60%  { -webkit-transform: translateY(30px); }
+	80%  { -webkit-transform: translateY(-10px); }
+	100% { -webkit-transform: translateY(0); }
+}
+@-moz-keyframes bounceInDown{
+	0%   { -moz-transform: translateY(-1000px); }
+	60%  { -moz-transform: translateY(30px); }
+	80%  { -moz-transform: translateY(-10px); }
+	100% { -moz-transform: translateY(0); }
+}
+
+
+
+/*2.0升级增加*/
+.cart_commodit_span a img{
+    width:62px;
+    height:62px;
+}
+.cart_Order_address li {
+    padding: 6px 0px;
+    width: 900px;
+    color: #999;
+    position: static;
+}
+.category_l .cate_ad {
+    margin-bottom: 10px;
+}
+#logo_1 img{
+    width:210px;
+    height:75px;
+}
+.top-nav .side-nav .title {
+    position: relative;
+    float: left;
+    width: 224px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background-color: #FF2D2E;
+    font-size: 16px;
+    font-weight: normal;
+    z-index: 99;
+}
+.left-nav .pro-menu dl dt {
+    height: 25px;
+    line-height: 25px;}
+
+.side-nav ul li ul {
+    display: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0px;
+    top: 40px;
+    border: 1px solid #cb160f;
+    border-top: 0px;
+    width: 300px;
+    background: #fff;
+}
+.size {
+    width: 24px;
+    height: 24px;
+}
+
+.hot-key ul li{ display:inline; margin-right:5px;}
+.product_reviews_list_re div p img{
+    width:100%;
+}
+.category_l .sale_top ul li .img a img{
+    width:60px;
+}
+
+    product_btns_qrcode{
+        margin-left:10px;width:105px;
+    }
+.product_mc p img{
+    max-width:100%;
+}
+#ProductDetails_common_ProductImages___imgBig{
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.Forgot_out2,.Forgot_out,.Forgot_out1,.Forgot_out3 { border: 5px solid #f5f5ed; padding: 15px; width: 1160px; margin: 0 auto; overflow: hidden; }
+.Forgot_out2 #ForgotPassword_txtEmailValid{ border:1px solid #ddd; margin-right:15px;}
+ .pro-price span {
+        color: #ff5722;
+        font-size: 14px;
+    }
+ .left_ad,.ad_custom cssEdite{
+     width:210px;
+     height:112px;
+ }
+
+
+ .cssEdite li {
+    margin-right: 0 !important;
+}
+
+.dorpdown-layer {
+    top: 29px !important;
+    width: 87px !important;
+}
+
+.top1_r ul li .cw-icon i {
+    transition: transform 0.1s ease-in 0s;
+    float: left;
+
+    margin-right: 10px !important;
+}
+.o-hidden li .icon{
+    display:none !important;
+}
+/* focusWarp */
+
+.ad_slide {
+    height: 600px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.focusWarp {
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+}
+
+.imgList {
+    position: absolute;
+}
+
+    .imgList li {
+        float: left;
+        text-align: center;
+        height:600px;
+    }
+
+        .imgList li div {
+            height: 600px;
+        }
+.imgBtn {
+    position: absolute;
+    bottom: 10px;
+    z-index: 10;
+    background: rgba(0,0,0,0.25);
+    padding: 0px 15px;
+    line-height: 25px;
+    height: 25px;
+    border-radius: 15px;
+    margin-right: -60px;
+}
+/* 默认圆点样式 */
+
+.imgBtn li {
+    width: 10px;
+    height: 10px;
+    margin-top: 7px;
+    float: left;
+    font-size: 14px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+}

@@ -1,0 +1,74 @@
+﻿<%<hi:common_header runat="server" />%>
+<form runat="server" clientidmode="Static" id="aspnetForm">
+    <script type="text/javascript" src="/script/jquery.SuperSlide2.js"></script>
+    <div class="sendcoupons">
+        <div class="main">
+            <%<asp:HiddenField runat="server" ID="hidIsOpenGiftCoupons" ClientIDMode="Static" />%>
+
+            <div class="title">注册为会员，即可获得<em><%<asp:Literal runat="server" ID="lblTotalPrice"></asp:Literal>%></em>元大礼包</div>
+
+            <div class="friend">
+                <div class="mr_frbox">
+                    <a href="javascript:void(0);" class="mr_frBtnL prev"></a>
+                    <div class="mr_frUl">
+                        <ul>
+<%<Hi:ThemedTemplatedRepeater ID="rptRegisterCoupons" runat="server" TemplateFile="/ascx/Tags/Skin-Common_RegisterCouponList.ascx" />%>
+                           
+                        </ul>
+                    </div>
+                    
+                    <a href="javascript:void(0);" class="mr_frBtnR next"></a>
+                </div>
+            </div>
+
+            <div class="btn1"><%<asp:HyperLink runat="server" ID="btnToGo"></asp:HyperLink>%></div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    /* 图片滚动效果 */
+                    $(".mr_frbox").slide({
+                        titCell: "",
+                        mainCell: ".mr_frUl ul",
+						autoPage: false,
+                        effect: "left",
+                        autoPlay: false,
+                        vis: 3,
+                        pnLoop:false,
+                        
+                    });
+                    var num=$('.mr_frbox ul li').length;
+                   if(num<=3){
+                   	$('.mr_frBtnL').css('background','none');
+                   $('.mr_frBtnR').css('background','none');
+                   }
+                    
+                    if ($("#hidIsOpenGiftCoupons").val() != "1")//活动开启
+                    {
+                        if ($("#hidIsOpenGiftCoupons").val() == "2")//活动开启
+                        {
+                            $(".sendcoupons .main .title").html("您已是我们的老用户");
+                            $(".sendcoupons .main .friend").hide();
+                        } else {
+                            $(".sendcoupons .main .title").html("抱歉，活动已结束！");
+                            $(".sendcoupons .main .friend").hide();
+                        }
+                    }
+
+                });
+            </script>
+
+        </div>
+    </div>
+
+    <div class="active_info">
+        <div class="title">
+            <h2>活动规则：<p style="line-height:30px;font-weight:normal;">
+    1、活动期间，优惠券数量有限，发完为止； <br />
+    2、本活动为不定时开启；活动开启阶段，所有新注册的会员均能参加活动；
+</p></h2>
+            
+        </div>
+
+    </div>
+
+</form>
+<%<hi:common_footer runat="server" />%>

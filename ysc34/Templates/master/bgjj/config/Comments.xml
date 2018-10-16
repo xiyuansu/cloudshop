@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="20" ImageSize="102*40" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="5" Type="morelink" Title="更多" CategoryId="309" />
+  <Comment Id="6" Type="category" CategoryId="26" MaxNum="18" />
+  <Comment Id="7" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="8" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="9" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="10" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="11" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="13" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="14" Type="category" CategoryId="23" MaxNum="18" />
+  <Comment Id="15" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172055_5624.jpg" TitleImageSize="28*36" />
+  <Comment Id="16" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="17" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="18" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="19" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="135*44" />
+  <Comment Id="20" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="21" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="22" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="23" Type="category" CategoryId="26" MaxNum="18" />
+  <Comment Id="24" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="8" ImageSize="135*44" />
+  <Comment Id="25" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="26" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="27" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="28" Type="category" CategoryId="26" MaxNum="18" />
+  <Comment Id="29" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="8" ImageSize="135*44" />
+  <Comment Id="31" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="" MaxNum="6" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

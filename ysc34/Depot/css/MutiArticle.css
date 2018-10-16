@@ -1,0 +1,283 @@
+﻿.tw_box
+{
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-right: 20px;
+}
+#smallpic img
+{
+    height: 100px;
+	max-width: 400px;
+}
+
+.tw_box .body
+{
+    margin: 10px 20px;
+    width: 320px;
+}
+.tw_box .body span
+{
+    font-size: 18px;
+    width: 300px;
+    word-break: break-all;
+}
+
+.gy_bg
+{
+    background-color: rgb(236,236,236);
+    font-size: 20px;
+    color: #c0c0c0;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    width: 320px;
+}
+.tw_box .gy_bg
+{
+    height: 100%;
+    line-height: 160px;
+}
+
+.box_right
+{
+    float: right;
+}
+
+.box_left
+{
+    float: left;
+}
+
+.arrow_in
+{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 12px;
+    border-style: dashed;
+    border-color: transparent;
+    border-left-width: 0;
+    border-right-color: #f8f8f8;
+    border-right-style: solid;
+    top: 44px;
+    left: 1px;
+    position: absolute;
+    left: -11px;
+}
+
+.arrow_out
+{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 12px;
+    border-style: dashed;
+    border-color: transparent;
+    border-left-width: 0;
+    border-right-color: #d3d3d3;
+    border-right-style: solid;
+    top: 44px;
+    left: 0;
+    position: absolute;
+    left: -13px;
+}
+
+.box_body
+{
+    position: absolute;
+	left:430px;
+}
+
+.box_body span
+{
+    font-size: 14px;
+}
+
+.box_body textarea
+{
+    vertical-align: middle;
+    width: 300px;
+}
+
+.box_body input[type="text"]
+{
+    border: 1px solid #ccc;
+    height: 28px;
+    width: 364px;
+}
+
+.box_body textarea
+{
+    border: 1px solid #ccc;
+    width: 362px;
+    height: 80px;
+}
+
+.box_body select
+{
+    height: 30px;
+    width: 361px;
+}
+
+.cont_body
+{
+    margin: 10px 20px;
+}
+
+.img_fm
+{
+    height: 178px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.title
+{
+    max-height: 40px;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.abstractVal
+{
+    width: 100%;
+    max-height: 20px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.6) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#99000000',endcolorstr = '#99000000');
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: #ccc;
+    padding: 5px 0px;
+    font-size: 14px;
+    margin: 0;
+}
+
+.baseBorder
+{
+    border-top: 1px solid #ccc;
+}
+
+.twSBox
+{
+    width: 360px;
+}
+
+.twSBox .body
+{
+    margin: 10px 20px;
+}
+
+.twSBox .body .info
+{
+    max-height: 40px;
+    word-break: break-all;
+    overflow: hidden;
+    float: left;
+    width: 200px;
+    position: relative;
+    top: 10px;
+}
+
+.twSBox .body .img
+{
+    float: right;
+}
+.clearfix
+{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.boxAdd
+{
+    height: 111px;
+    text-align: center;
+    line-height: 111px;
+}
+
+.boxAdd a
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+    text-decoration: none;
+}
+
+.boxAdd a:hover
+{
+    color: #666;
+}
+.zzc
+{
+    background-color: #ccc;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(229,229,229,0.85) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#d9e5e5e5',endcolorstr = '#d9e5e5e5');
+    font-size: 18px;
+    text-align: center;
+    display: none;
+}
+
+.zzc a
+{
+    text-decoration: none;
+    color: #666;
+}
+
+.simg
+{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    float: right;
+}
+
+.fmImg
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.fgroup {
+    margin-bottom: 20px;
+}
+
+.fgroup span {
+    width: 100px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+
+.fgroup input[type="text"] {
+    height: 24px;
+    width: 240px;
+}
+
+.fgroup select {
+    height: 28px;
+    width: 242px;
+}
+
+#delpic {
+	margin-left: 10px;
+}

@@ -1,0 +1,49 @@
+﻿
+/**地区选样式**/
+.dp_address { z-index:99; left: 0; white-space: nowrap; position: absolute; background-color: #fff;  }
+.address_wap a { white-space: nowrap; text-decoration:none; }
+.areacolumn .columnright .formitem li .dp_address_list a:hover { color: #000; text-decoration: none; }
+.dropdown_box { border: 1px solid #eeeeee; cursor: pointer; display: inline-block; height: 19px; margin: 5px 0 0px 2px; }
+   
+.dropdown_selected { color: #404040; height: 20px; line-height: 20px!important; padding: 0 5px;  vertical-align: top; width: auto; float: none; }
+.dropdown_button {background:url(../images/new/pro_icon_19.png) no-repeat right 5px; overflow: hidden;  border-left: 1px solid #eeeeee; height: 19px; width: 18px; padding: 0; margin: 0; vertical-align: top; float: none; display: inline-block; }
+.dp_address .disabled { border-color: #c9c9c9; color: #9c9c9c; cursor: default; }
+a.disabled:hover, .disabled, .disabled:hover { background-position: 0 -329px; cursor: default; }
+.address_wap { position: relative; }
+    .address_wap .ap_content { position: absolute; top:24px; z-index: 999; left:2px; }
+
+.dp_address_list { border-top: 1px solid #eeeeee; background: #fff; padding: 10px; color: #666; width: 410px; }
+    .dp_address_list ul { width: 430px; overflow: hidden; }
+    .dp_address_list li { width: auto; margin-right: 10px; float: left; line-height: 28px; }
+
+#ctl00_contentHolder_dropRegions { float: left; }
+.areacolumn .columnright .formitem li .dp_address_list.province li a,
+.areacolumn .columnright .formitem li .dp_address_list.city li a,
+.areacolumn .columnright .formitem li .dp_address_list.area li a,
+.dataarea .areaform .dp_address_list li a { display: block; padding: 2px 5px; }
+    .areacolumn .columnright .formitem li .dp_address_list.province li a:hover,
+    .areacolumn .columnright .formitem li .dp_address_list.city li a:hover,
+    .areacolumn .columnright .formitem li .dp_address_list.area li a:hover,
+    .dataarea .areaform .dp_address_list.province li a:hover,
+    .dataarea .areaform .dp_address_list.city li a:hover,
+    .dataarea .areaform .dp_address_list.area li a:hover { background: #0278B6; color: #fff; text-decoration: none; }
+.areacolumn .columnright .formitem li .dp_address_list ul li, .dataarea .areaform .dp_address_list li { clear: inherit; display: block; float: left; height: 18px; line-height: 18px; padding-bottom: 7px; padding-left: 0; text-align: left; white-space: normal; }
+    .areacolumn .columnright .formitem li .dp_address_list ul li a { white-space: nowrap; color: #666; padding: 2px 5px; font-size: 12px; }
+    .dataarea .areaform .dp_address_list li a { color: #666; }
+.ap_content { display: none; }
+.clearfix:after { clear: both; content: " "; display: block; font-size: 0; height: 0; visibility: hidden; }
+
+#SubmmitOrder_dropRegions .dp_address .disabled .dropdown_selected { border-color: #c9c9c9; color: #9c9c9c; cursor: default; }
+.areacolumn .columnright .formitem li .dp_address_list ul li a:hover .dropdown_button { text-decoration: none; }
+
+
+.areacolumn .columnright .formitem li .dp_address_list ul li { clear: none; display: block; float: left; height: 18px; line-height: 18px; padding-bottom: 7px; padding-left: 0; text-align: left; white-space: normal; }
+
+.dataarea .datalist table .spanclear { display: inline; }
+.dp_address a:hover .dropdown_button{background:url(../images/new/pro_icon_19.png) no-repeat right 5px; }
+
+.dropdownhover { border:1px solid #eeeeee; border-bottom:1px solid #fff; }
+
+.nobotborder { border-bottom:none; }
+
+.dp_border {  position:absolute; top:24px; display:none; height:1px; border:none; background:#fff; font-size:0px;z-index:10000; }

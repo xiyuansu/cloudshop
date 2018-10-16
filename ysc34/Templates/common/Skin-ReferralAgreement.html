@@ -1,0 +1,53 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    p{
+        padding-bottom: 2rem;
+        width:100%;
+        display:inline-block;
+        text-align:center;
+        font-size:0.7rem;
+    }
+</style>
+<p>
+    <%<asp:Literal ID="litReferralRegisterAgreement" runat="server" />%>
+    </p>
+    <div class="btn_tk">
+        <button class="btn_login" id="btnToRegister">立即成为分销员</button>
+    </div>
+<script language="javascript" type="text/javascript">
+    ReferralUserId = getParam("ReferralUserId");
+    if (ReferralUserId != null && ReferralUserId != "" && document.domain.toLocaleLowerCase() != "localhost") {
+        var pageurl = document.location.href.toLowerCase();
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+        if (!bIsIpad && !bIsIphoneOs && !bIsMidp && !bIsUc7 && !bIsUc && !bIsAndroid && !bIsCE && !bIsWM) {
+            DirectUrl = "/ReferralAgreement?ReferralUserId=" + ReferralUserId;
+            location.href = DirectUrl;
+        }
+    }
+    $(document).ready(function (e) {
+        var again = getParam("again");
+        if (again != null && again == "1") {
+            $("#btnToRegister").val("重新填写申请表单");
+        }
+        $("#btnToRegister").click(function (e) {
+            var again = getParam("again");
+            if (again != null && again == "1") {
+                location.href = "ReferralRegister?again=1";
+            }
+            else {
+                location.href = "MemberCenter?action=register&toReferral=true&ReferralUserId=" + ReferralUserId;
+            }
+        });
+    });
+</script>
+
+<hi:common_wapfooter runat="server" />

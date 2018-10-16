@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+    <style>
+        body{
+            background:#f7f7f7;
+        }
+        * {
+            font-family: 'Microsoft YaHei';
+        }
+
+        .wrap {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: "微软雅黑";
+        }
+
+        .top {
+            width: 100%;
+            height: 100px;
+            background-color: #de463b;
+            font-size: 20px;
+        }
+
+            .top p {
+                width: 100%;
+                text-align: center;
+                position: relative;
+                font-size: 10vw;
+                font-family: 'Microsoft YaHei';
+                margin: 0;
+                padding: 0;
+                font-weight: bold;
+                color: #fff;
+            }
+
+                .top p span {
+                    font-weight: normal;
+                    color: #fff;
+                    font-size: 6vw;
+                }
+
+                .top p i {
+                    font-style: normal;
+                    font-size: 8vw;
+                    padding-right: 2vw;
+                }
+
+            .top .img {
+                width: 20%;
+                height: 30%;
+                position: relative;
+                top: 35%;
+                left: 10%;
+                background-image: url("/images/dic_bg.png");
+                background-size: 100%;
+            }
+
+            .top span {
+                font-size: 16px;
+                margin: 0;
+                padding: 0;
+            }
+
+        .add {
+            float: left;
+            width: 100%;
+            background-color: #fff;
+            position: relative;
+            margin-top: 10px;
+        }
+
+            .add span {
+                font-size: 4vw;
+                line-height: 25px;
+                float: left;
+                padding-left: 5%;
+                box-sizing: border-box;
+                color: #3C3C3C;
+                width: 100%;
+            }
+
+                .add span i {
+                    font-style: normal;
+                    color: #AE0000;
+                }
+
+        input {
+            width: 80%;
+            height: 10%;
+            border: 0.5vw solid #AE0000;
+            color: #AE0000;
+            font-size: 5vw;
+            font-weight: bold;
+            position: relative;
+            left: 10%;
+            top: 5%;
+            border-radius: 3vw;
+            ;
+        }
+
+        .foot {
+            float: left;
+            width: 100%;
+            height: 10%;
+            font-size: 4vw;
+            position: relative;
+            top: 10%;
+            color: #3C3C3C;
+            text-align: center;
+            line-height: 15vw;
+        }
+
+        .button1 {
+            width: 100%;
+            background: none;
+            border: 1px solid #ff5353;
+            border-radius: 5px;
+            height: 40px;
+            left: 0 !important;
+            font-size: 18px;
+            font-family: 'Microsoft YaHei';
+            color: #ff5353;
+        }
+
+        .button {
+            float: left;
+            width: 100%;
+            margin-top: 60px;
+            padding: 0 5px;
+            box-sizing: border-box;
+        }
+        #vWAPShakeCouponsForAttention_notCoupon{
+            background:#fff;
+            padding-bottom:10px;
+            border-radius:3px;
+            overflow:hidden;
+        }
+    </style>
+</head>
+<body>
+    <form runat="server">
+        <div class="wrap" style="padding:5px;box-sizing:border-box;">
+            <div runat="server" id="shakeCoupon" visible="false">
+                <div class="top">
+                    <p style="color:#fff;height:100px;line-height:100px;background-size:100% 100%;background-position:center"><i>￥</i><asp:label runat="server" ID="lblDiscountValue" style="color:#fff;font-size:12vw;font-family:'Microsoft YaHei';"></asp:label></p>
+                </div>
+                <div style="background:url(/images/bg_curve.png) repeat-x; height:18px;width:100%; "></div>
+                <div class="add">
+                    <span>有效日期：<i style="color:#333"><asp:Literal ID="startTime" runat="server"></asp:Literal></i>至<i style="color:#333"><asp:Literal ID="closingTime" runat="server"></asp:Literal></i></span>
+                    <span>使用限制：订单满<i><asp:label runat="server" ID="lblAmount" style="float:none;"></asp:label>元</i>可使用 <i>（不含运费）</i></span>
+                </div>
+            </div>
+            <div runat="server" id="notCoupon" visible="false">
+                <div class="top">
+                    <!--<div class="img"></div>-->
+                    <p style="color:#fff; font-size:18px;line-height:100px;">您好，感谢关注！</p>
+                </div>
+                <div style="background:url(/images/bg_curve.png) repeat-x; height:6px;width:100%; background-size:100%;"></div>
+            </div>
+            <div class="button">
+                <a runat="server" id="aToGet" class="button1" style="display:inline-block; text-align:center; line-height:40px;text-decoration:none; ">立即领取</a>
+            </div>
+            <div class="foot">
+                Copyright © Hishop版权所有
+            </div>
+        </div>
+    </form>
+</body>
+</html>

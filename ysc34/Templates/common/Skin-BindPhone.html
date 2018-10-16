@@ -1,0 +1,347 @@
+﻿<hi:common_wapheader runat="server" />
+<script src="/Utility/gt.js"></script>
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidErrorMsg" />
+<input type="hidden" id="action" runat="server" value="set" ClientIDMode="Static" />
+<input type="hidden" id="hidIsOpenGeetest" runat="server" value="0" ClientIDMode="Static" />
+
+<form id="form" role="form" class="pbox clearfix form-horizontal" runat="server" clientidmode="static">
+    <div class="tk_main">
+        <div id="first" class="hide">
+            <div class="tk_group">
+                <label>已绑手机:</label>
+                <div class="input-group ">
+                    <input type="text" id="txtFirstPhone" runat="server" ClientIDMode="Static" placeholder="请输入要修改绑定的手机">
+                </div>
+            </div>
+            <div class="tk_group">
+                <label>验证码:</label>
+                <div class="input-group ">
+                    <input type="text" id="txtFirstNumber" style="width:5rem" placeholder="请输入验证码">
+                    <input id="phoneVerifyCode" type="button" value="获取手机验证码" class="yanzhengma_btn" style="width:5rem;" />
+                </div>
+
+            </div>
+        </div>
+        <div id="next" class="hide">
+            <div class="tk_group">
+                <label>手机号:</label>
+                <div class="input-group ">
+                    <input type="text" id="txtPhone" placeholder="请输入要绑定的手机号码">
+                </div>
+            </div>
+            <div class="input-group username" ac="1" style="border-top:0; border-radius:0; display:none;" id="divimgcode">
+                <span class="input-group-addon" id="sizing-addon1">图形验证</span>
+                <input id="txtNumber" type="number" style="width:6rem" placeholder="输入图形验证码">
+                <span class="yanzheng_input2"><img id="imgVerifyCode" onclick="refreshCode()" src='' style="vertical-align: middle; border-style: none;" alt="" /><!--<a href="javascript:refreshCode();">&nbsp;&nbsp;换一张</a>--></span>
+            </div>
+            <div class="input-group username" ac="1" style="border-top:0; border-radius:0; display:none;" id="divGeetest">
+                <span class="yanzheng_captcha" id="captcha"></span>
+            </div>
+            <div class="tk_group" style="border-bottom:1px solid #e7e5ea;">
+                <label>验证码:</label>
+                <div class="input-group ">
+                    <input type="text" id="txtPhoneCode" style="width:5rem" placeholder="请输入验证码">
+                    <input id="phoneVerifyCode1" type="button" style="width:5rem;" value="获取验证码" class="yanzhengma_btn" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn_tk">
+        <input type="button" id="btnNext" value="下一步" class="btn_login hide" />
+        <input type="button" id="btnVerify" value="验证手机" class="btn_login hide" />
+        <input type="button" id="btnSubmit" value="立即绑定" class="btn_login hide" />
+        <input type="button" id="btnSetpwd" value="设置密码" class="btn_login hide" />
+        <input type="button" id="btnCancel" onclick="window.history.go(-1);" value="取消" class="btn_qx" />
+    </div>
+
+</form>
+<script language="javascript" type="text/javascript">
+    function refreshCode() {
+        var img = document.getElementById("imgVerifyCode");
+
+        if (img != null) {
+            var currentDate = new Date();
+            img.src = "/VerifyCodeImage.aspx?t=" + currentDate.getTime();
+        }
+    }
+    var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{1,4}$/;
+    $(document).ready(function (e) {
+        if ($("#hidIsOpenGeetest").val() == "1") {//如果开启了极验验证才初始化
+            var handler = function (obj) {
+                // 将验证码加到id为captcha的元素里
+                captchaObj = obj;
+                obj.appendTo("#captcha");
+            };
+            $.ajax({
+                // 获取id，challenge，success（是否启用failback）
+                url: "/getcaptcha.aspx",
+                type: "get",
+                dataType: "json", // 使用jsonp格式
+                success: function (data) {
+                    // 使用initGeetest接口
+                    // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+                    // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+                    initGeetest({
+                        gt: data.gt,
+                        challenge: data.challenge,
+                        product: "float", // 产品形式
+                        offline: !data.success
+                    }, handler);
+                }
+            });
+        }
+        if ($("#hidIsOpenGeetest").val() == "0") {
+            $("#divimgcode").css("display", "");
+        } else {
+            $("#divGeetest").css("display", "");
+        }
+        refreshCode();
+        if ($("#hidErrorMsg").val() != "") {
+            alert_h($("#hidErrorMsg").val(), function (e) {
+                document.location.href = "AccountManagement.aspx";
+            });
+
+        }
+        var action = $("#action").val();
+        if (action == "modify")//修改绑定
+        {
+            $("#first").removeClass("hide").show();
+            $("#next").hide();
+            $("#btnNext").removeClass("hide").show();
+            $("#btnSubmit").hide();
+            $("#btnVerify").hide();
+        }
+        else if (action == "verify") {//验证邮箱
+            $("#first").removeClass("hide").show();
+            $("#next").hide();
+            $("#btnNext").removeClass("hide").hide();
+            $("#btnSubmit").hide();
+            $("#btnVerify").removeClass("hide").show();
+        }
+        else {//绑定手机
+            $("#first").hide();
+            $("#next").removeClass("hide").show();
+            $("#btnNext").hide();
+            $("#btnSubmit").removeClass("hide").show();
+            $("#btnVerify").hide();
+        }
+        $("#btnNext").click(function (e) {
+            var verifyCode = $("#txtFirstNumber").val().trim();
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "CheckPhoneCode", verifyCode: verifyCode },
+                success: function (resultData) {
+
+                    if (resultData.Status == "ok") {
+                        var msg = "验证成功,下一步进行新手机绑定！"
+                        alert_h(msg, function () {
+                            $("#btnNext").hide();
+                            $("#first").hide();
+                            $("#btnSubmit").removeClass("hide").show();
+                            $("#next").removeClass("hide").show();
+
+                        });
+                    }
+                    else if (resultData.Status == "nologined") {
+                        alert_h("请您先登录！");
+                        document.location.href = "MemberCenter.aspx";
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+
+                }
+            });
+        });
+        $("#btnVerify").click(function (e) {
+            var verifyCode = $("#txtFirstNumber").val().trim();
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "CheckPhoneCode", verifyCode: verifyCode, UpdateStatus: true },
+                success: function (resultData) {
+
+                    if (resultData.Status == "ok") {
+                        var msg = "手机验证成功！"
+                        alert_h(msg, function () {
+
+                            document.location.href = "AccountManagement.aspx"
+                        });
+                    }
+                    else if (resultData.Status == "nologined") {
+                        alert_h("请您先登录！");
+                        document.location.href = "MemberCenter.aspx";
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+
+                }
+            });
+        });
+        $("#btnSetpwd").click(function (e) {
+            var password = $.trim($("#text_password").val());
+            var password1 = $.trim($("#text_password1").val());
+            if (!password || password.length < 6 || password.length > 20) {
+                alert_h('密码不能为空，长度不少于6个字符且不超过20字符');
+                return;
+            }
+
+            if (password != password1) {
+                alert_h("两次输入不一致.");
+                return;
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "SetPassword", password: password },
+                success: function (resultData) {
+
+                    if (resultData.Status == "ok") {
+
+                        alert_h("密码设置成功,请记住您的密码！", function () {
+                            document.location.href = "AccountManagement.aspx"
+
+                        });
+                    }
+                    else if (resultData.Status == "nologined") {
+                        alert_h("请您先登录！");
+                        document.location.href = "MemberCenter.aspx";
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+
+                }
+            });
+        })
+        $("#btnSubmit").click(function (e) {
+            var phone = $("#txtPhone").val();
+            var verifyCode = $("#txtPhoneCode").val();
+            if (phone == "" || !Reg_mobbile.test(phone)) {
+                alert_h("请输入正确的手机号码");
+                return false;
+            }
+            else {
+                $.ajax({
+                    url: "/API/VshopProcess.ashx",
+                    type: 'post', dataType: 'json', timeout: 10000,
+                    data: { action: "BindPhone", phone: phone, verifyCode: verifyCode },
+                    success: function (resultData) {
+
+                        if (resultData.Status == "ok") {
+                            var msg = "手机绑定成功！"
+                            if (resultData.SetPwd == "true") {
+                                msg = "手机绑定成功,请输入新的登录密码!";
+                            }
+                            alert_h(msg, function () {
+                                if (resultData.SetPwd == "true") {
+                                    $("#btnSubmit").hide();
+                                    $("#phonepanel").hide();
+                                    $("#phonespan").hide();
+                                    $("#setpwdPanel").removeClass("hidden");
+                                    $("#btnSetpwd").removeClass("hidden");
+                                    $("#btnCancel").hide();
+                                }
+                                else {
+                                    document.location.href = "AccountManagement.aspx"
+                                }
+
+                            });
+                        }
+                        else if (resultData.Status == "nologined") {
+                            alert_h("请您先登录！");
+                            document.location.href = "MemberCenter.aspx";
+                        }
+                        else {
+                            alert_h(resultData.msg);
+                        }
+
+                    }
+                });
+            }
+        });
+        $("#phoneVerifyCode").click(function () {
+
+            //var phone = document.getElementById("txtPhone").value;
+            var phone = "";
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx?action=SendVerifyCode&needValidate=0&imgCode=0",
+                data: { Phone: phone },
+                success: function (result) {
+
+                    if (result.success == "true") {
+
+                        var time = 1000;
+                        var interval;
+                        var count = 0;
+
+                        function fun() {
+
+                            count++;
+
+                            if (count >= 60) {
+                                $("#phoneVerifyCode").attr("disabled", false);
+                                $("#phoneVerifyCode").attr("value", "重新发送");
+
+                                clearInterval(interval);
+                            }
+                            else {
+                                $("#phoneVerifyCode").attr("value", "发送成功（" + (60 - count) + ")");
+                            }
+                        }
+
+                        $("#phoneVerifyCode").attr("disabled", "true");
+                        interval = setInterval(fun, time);
+                    }
+                    else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        $("#phoneVerifyCode1").click(function (e) {
+            var phone = $("#txtPhone").val();
+            var imgCode = $("#txtNumber").val();
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx",
+                data: $("#form").serialize() + "&Phone=" + phone + "&imgCode=" + imgCode + "&action=SendVerifyCode&needValidate=2",
+                success: function (result) {
+
+                    if (result.success == "true") {
+
+                        var time = 1000;
+                        var interval;
+                        var count = 0;
+
+                        function fun() {
+
+                            count++;
+
+                            if (count >= 60) {
+                                $("#phoneVerifyCode1").attr("disabled", false);
+                                $("#phoneVerifyCode1").attr("value", "重新发送");
+
+                                clearInterval(interval);
+                            }
+                            else {
+                                $("#phoneVerifyCode1").attr("value", "发送成功（" + (60 - count) + ")");
+                            }
+                        }
+
+                        $("#phoneVerifyCode1").attr("disabled", "true");
+                        interval = setInterval(fun, time);
+                    }
+                    else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+    });
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

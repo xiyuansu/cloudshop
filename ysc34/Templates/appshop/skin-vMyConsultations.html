@@ -1,0 +1,39 @@
+﻿<hi:common_appheader runat="server"  />
+<style>
+    .pbox {
+        display: inline-block;
+        background: #fff;
+    }
+</style>
+<div class="kong">
+    <img src="/images/comment_null.png" >
+    <p>暂时还没有咨询哦~</p>
+</div>
+<div class="pbox">
+    <div id="consulationsList">
+        <hi:AppshopTemplatedRepeater id="rptProducts" templatefile="/Tags/skin-Common_MyConsultations.ascx"
+                                 runat="server" />
+    </div>
+</div>
+<div id="pager">
+</div>
+<input type="hidden" clientidmode="Static" value="" runat="server" id="txtTotal" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    vshopPager('pager', $('#txtTotal').val(), 1, 10);
+    $(function () {
+        if ($.trim($('#consulationsList').html()) != "") {
+            $('.kong').hide();
+        } else {
+            $(".kong").show();
+        }
+        var answerDetails = $('.answerDetail');
+        $.each(answerDetails, function (i, answerDetail) {
+            if (!$.trim($(answerDetail).html()))
+                $(answerDetail).parent().hide();
+        });
+    });
+
+</script>
+<hi:common_appfooter runat="server" />

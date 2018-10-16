@@ -1,0 +1,62 @@
+﻿<hi:common_appheader runat="server" />
+
+<style>
+    .orderlist_tab ul li {
+        min-width: 50%;
+    }
+</style>
+<header class="orderlist_tab">
+    <ul id="head_tab">
+        <li><a class="tab_active" href="UserRefunds.aspx">退款记录</a></li>
+        <li><a href="UserReturns.aspx">退货记录</a></li>
+    </ul>
+</header>
+<div class="refundlist">
+    <hi:AppshopTemplatedRepeater id="rptUserRefunds" templatefile="/Tags/skin-Common_UserRefunds.ascx" runat="server" />
+</div>
+<div id="pager">
+</div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+        var status = parseInt(getParam("Status"));
+        if (status == 0 || status == 1 || status == 2) {
+            $(".s_top a").removeClass("bgcolor");
+            switch (status) {
+                case 0:
+                    $(".s_top a").eq(1).addClass("bgcolor");
+                    break;
+                case 1:
+                    $(".s_top a").eq(2).addClass("bgcolor");
+                    break;
+                case 2:
+                    $(".s_top a").eq(3).addClass("bgcolor");
+                    break;
+            }
+        }
+
+        //状态改变颜色
+        $("[name$=hfHandleStatus]").each(function (index, domEle) {
+            var status = parseInt($(this).val());
+            var color = "";
+            switch (status) {
+                case 0:
+                    color = "#fbbb8b";
+                    break;
+                case 1:
+                    color = "green";
+                    break;
+                case 2:
+                    color = "red";
+                    break;
+                case 3:
+                    color = "#fbbb8b";
+                    break;
+            }
+
+            $("div.re:eq(" + index + ") [id$=lblHandleStatus]").css("color", color);
+        });
+    });
+</script>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Ad Id="1" Type="slide" Image1="/templates/master/lingshi/UploadImage/advertimg/20160721090227_0515.jpg" Image2="/templates/master/lingshi/UploadImage/advertimg/20160721090227_0515.jpg" Image3="/templates/master/lingshi/UploadImage/advertimg/20160721090227_0515.jpg" Image4="" Image5="" Image6="" Image7="" Image8="" Image9="" Image10="" Url1="" Url2="" Url3="" Url4="" Url5="" Url6="" Url7="" Url8="" Url9="" Url10="" AdImageSize="730*400" />
+  <Ad Id="2" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160720104915_8382.jpg" Url="" AdImageSize="200*115" />
+  <Ad Id="3" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160720152145_5527.jpg" Url="" AdImageSize="288*268" />
+  <Ad Id="4" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160720154053_4103.jpg" Url="" AdImageSize="1190*100" />
+  <Ad Id="5" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160720164726_9810.jpg" Url="" AdImageSize="200*460" />
+  <Ad Id="6" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721092742_1885.jpg" Url="" AdImageSize="239*160" />
+  <Ad Id="7" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721091839_2146.jpg" Url="" AdImageSize="390*490" />
+  <Ad Id="8" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721092804_6152.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="9" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160720155425_4643.jpg" Url="" AdImageSize="390*490" />
+  <Ad Id="10" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160720161402_1686.jpg" Url="" AdImageSize="390*490" />
+  <Ad Id="11" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160720164453_8368.jpg" Url="" AdImageSize="200*460" />
+  <Ad Id="12" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721095643_4351.jpg" Url="" AdImageSize="390*240" />
+  <Ad Id="13" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721100057_9697.jpg" Url="" AdImageSize="390*240" />
+  <Ad Id="14" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721092035_8457.jpg" Url="" AdImageSize="390*490" />
+  <Ad Id="15" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721091929_6577.jpg" Url="" AdImageSize="390*490" />
+  <Ad Id="16" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721095808_6365.jpg" Url="" AdImageSize="390*490" />
+  <Ad Id="17" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094708_7186.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="18" Type="image" Image="/templates/master/lingshi/UploadImage/advertimg/20160721103154_3085.jpg" Url="" AdImageSize="390*260" />
+  <Ad Id="19" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094307_6263.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="20" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712095826_4764.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="21" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712095829_6315.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="22" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094223_7750.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="23" Type="custom" Html="&amp;lt;div style=&amp;quot;background:#fe3f37;text-align:center;&amp;quot;&amp;gt;&#xA;	&amp;lt;img src=&amp;quot;/templates/master/default/UploadImage/AdvertImg/20160331145919_8098.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt; &#xA;&amp;lt;/div&amp;gt;" />
+  <Ad Id="24" Type="image" Image="/templates/master/shengxuan/UploadImage/advertimg/20160718110510_1692.jpg" Url="" AdImageSize="200*460" />
+  <Ad Id="25" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094307_6263.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="26" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712095826_4764.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="27" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712095829_6315.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="28" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094223_7750.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="29" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094708_7186.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="30" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094708_7186.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="31" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712095405_0920.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="32" Type="custom" Html="&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot; target=&amp;quot;_self&amp;quot; _href=&amp;quot;#&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;/Storage/template/20160713/6360400440920290511595028.jpg&amp;quot;/&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;br/&amp;gt;&amp;lt;/p&amp;gt;" />
+  <Ad Id="33" Type="custom" Html="&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot; target=&amp;quot;_self&amp;quot; _href=&amp;quot;#&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;/Storage/template/20160713/6360400440920290511595028.jpg&amp;quot;/&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;br/&amp;gt;&amp;lt;/p&amp;gt;" />
+</root>

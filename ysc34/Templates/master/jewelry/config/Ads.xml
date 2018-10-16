@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Ad Id="1" Type="slide" Image1="/templates/master/jewelry/UploadImage/advertimg/20160810103008_8824.jpg" Image2="/templates/master/jewelry/UploadImage/advertimg/20160810103008_1792.jpg" Image3="/templates/master/jewelry/UploadImage/advertimg/20160810103007_5699.jpg" Image4="/templates/master/jewelry/UploadImage/advertimg/20160810103006_6792.jpg" Image5="/templates/master/jewelry/UploadImage/advertimg/20160713151254_4978.jpg" Image6="" Image7="" Image8="" Image9="" Image10="" Url1="" Url2="" Url3="" Url4="" Url5="" Url6="" Url7="" Url8="" Url9="" Url10="" AdImageSize="1920*400" />
+  <Ad Id="2" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160624170611_8374.jpg" Url="" AdImageSize="200*180" />
+  <Ad Id="3" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160623171012_3321.jpg" Url="" AdImageSize="280*180" />
+  <Ad Id="4" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626181825_9458.png" Url="" AdImageSize="280*180" />
+  <Ad Id="5" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626181825_9458.png" Url="" AdImageSize="280*180" />
+  <Ad Id="6" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626181825_9458.png" Url="" AdImageSize="239*160" />
+  <Ad Id="7" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626183339_2221.png" Url="" AdImageSize="280*180" />
+  <Ad Id="8" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201633_3012.png" Url="" AdImageSize="1180*90" />
+  <Ad Id="9" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201641_8457.png" Url="" AdImageSize="220*600" />
+  <Ad Id="10" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201633_3012.png" Url="" AdImageSize="220*600" />
+  <Ad Id="11" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201641_8457.png" Url="" AdImageSize="220*290" />
+  <Ad Id="12" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201633_3012.png" Url="" AdImageSize="220*290" />
+  <Ad Id="13" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201641_8457.png" Url="" AdImageSize="220*600" />
+  <Ad Id="14" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201633_3012.png" Url="" AdImageSize="220*600" />
+  <Ad Id="15" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626201641_8457.png" Url="" AdImageSize="220*290" />
+  <Ad Id="16" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626203742_9338.png" Url="" AdImageSize="1180*90" />
+  <Ad Id="17" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810115302_7709.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="18" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712105248_9318.jpg" Url="" AdImageSize="440*340" />
+  <Ad Id="19" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810135213_7046.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="20" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810145726_7424.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="21" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810145726_4143.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="22" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810151040_4388.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="23" Type="custom" Html="&amp;lt;div style=&amp;quot;background:#fe3f37;text-align:center;&amp;quot;&amp;gt;&#xA;	&amp;lt;img src=&amp;quot;/templates/master/default/UploadImage/AdvertImg/20160331145919_8098.jpg&amp;quot; alt=&amp;quot;&amp;quot; /&amp;gt; &#xA;&amp;lt;/div&amp;gt;" />
+  <Ad Id="24" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810150944_7822.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="25" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094307_6263.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="26" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712095826_4764.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="27" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712095829_6315.jpg" Url="" AdImageSize="220*135" />
+  <Ad Id="28" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810150832_4223.jpg" Url="" AdImageSize="220*290" />
+  <Ad Id="29" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160712094708_7186.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="30" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810115302_5053.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="31" Type="image" Image="/templates/master/default/UploadImage/advertimg/20160810115303_0522.jpg" Url="" AdImageSize="1180*90" />
+  <Ad Id="32" Type="custom" Html="&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot; target=&amp;quot;_self&amp;quot; _href=&amp;quot;#&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;/Storage/template/20160713/6360400440920290511595028.jpg&amp;quot;/&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;br/&amp;gt;&amp;lt;/p&amp;gt;" />
+  <Ad Id="33" Type="custom" Html="&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot; target=&amp;quot;_self&amp;quot; _href=&amp;quot;#&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;/Storage/template/20160713/6360400440920290511595028.jpg&amp;quot;/&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;br/&amp;gt;&amp;lt;/p&amp;gt;" />
+  <!--jewelry-->
+  <Ad Id="34" Type="custom" Html="&amp;lt;a class=&amp;quot;jiathis_button_qzone&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;                             &amp;lt;a class=&amp;quot;jiathis_button_tsina&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;                             &amp;lt;a class=&amp;quot;jiathis_button_tqq&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;" />
+  <Ad Id="35" Type="image" Image="/templates/master/jewelry/UploadImage/advertimg/20140626161040_8074.png" Url="" AdImageSize="350*33" />
+</root>

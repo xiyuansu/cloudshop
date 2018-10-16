@@ -1,0 +1,33 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .goods-list-grid .goods-list-pic img{
+        width:100% !important;
+    }
+</style>
+<p class="text-center list-empty hide" id="empty">
+    没有找到相关商品
+</p>
+<div class="pbox" id="productListContainer">
+    <div class="goods-list-grid clearfix" id="goodslist">
+        <hi:WapTemplatedRepeater id="rptProducts" templatefile="/Tags/skin-Common_Prodcts.ascx"   runat="server" />
+    </div>
+    <div id="pager">
+    </div>
+</div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<hi:common_wapfooter runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+        if (parseInt($("#txtTotal").val()) <= 0) {
+            $("#empty").removeClass("hide");
+        }
+    });
+
+
+    $(function () {
+        var w = $(".goods-list-grid .goods-list-pic img").width();
+        $(".goods-list-grid .goods-list-pic img").height(w);
+    });
+</script>

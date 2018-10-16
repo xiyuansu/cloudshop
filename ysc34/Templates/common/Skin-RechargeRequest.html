@@ -1,0 +1,131 @@
+﻿<%<hi:common_wapheader runat="server" role="form" class="pbox clearfix apply" />%>
+
+<form ruant="server" id="myform">
+    <div class="att-popup">
+        <div class="att-popup-container payment">
+            <div class="pay_title">选择付款方式</div>
+            <Hi:Common_WAPPaymentTypeSelect runat="server" ShowBalancePay="false" id="paymenttypeselect" CssClass="pay_list" />
+            <a class="btn_submiit" id="btn_goPay">确定</a>
+            <a href="#" class="att-popup-close pop_close icon-icon_close_48"></a>
+        </div>
+    </div>
+    <div class="tk_main">
+        <div class="tk_group" style="padding-left:0rem;">
+            <!--<label for="username">充值金额：</label>-->
+            <div class="input-group selectReason">
+                <!--   <input id="txtReChargeBalance" class="form-control" style="border:0;" placeholder="请输入充值金额" type="text">-->
+                <div id="divReCharge" runat="server" ClientidMode="Static">
+                    <input id="txtReChargeBalance" runat="server" ClientidMode="Static" class="form-control" style="border:0;" placeholder="请输入充值金额" type="text">
+                </div>
+                <div id="divReChargeGift" runat="server" ClientidMode="Static">
+                    <ul>
+                        <Hi:WapTemplatedRepeater ID="rptReChargeGift" runat="server" TemplateFile="/tags/Skin-Common_ReChargeGift.ascx" />
+                    </ul>
+                </div>
+            </div>
+
+        </div>       
+    </div>
+    
+
+    <input id="selectPaymentType" type="hidden" clientidmode="Static" runat="server" value="" />
+
+    <div class="btn_tk">
+        <a id="chongzhi" class="btn_login">立即充值</a>
+    </div>
+      <div class="chongzhiT"  id="spadvancetip" runat="server"><!--充值到预存款的金额将不能提现-->参与充值及赠送的金额仅用于商城消费不能提现</div>
+</form>
+<script>
+
+    $(document).ready(function (e) {
+        //商品规格选择弹出层
+        $('#chongzhi').on('click', function (event) {
+            if ($("#divReCharge").length > 0) {
+                var money = parseFloat($("#txtReChargeBalance").val());
+                if (isNaN(money) || money < 0 || money >= 10000000) {
+                    alert_h("请输入正确的充值金额,金额必须大于0且小于10000000")
+                    return false;
+                }
+            } else {
+                if ($("#divReChargeGift .selected").length == 0) {
+                    alert_h("请选择充值金额");
+                    return false;
+                }
+            }
+            event.preventDefault();
+            $('.att-popup').addClass('is-visible');
+        });
+
+        if ($("#divReChargeGift").length > 0) {
+            $('#divReChargeGift ul li').click(function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+            })
+        }
+
+        if ($('#choose').length == 0) {
+            $('#choose-result').css('display', 'none');
+        }
+
+        $("input[name='chk_paymentlist']").eq(0).attr('checked', 'true');;
+        var paymentTypeId = $("input[name='chk_paymentlist']:checked").val();
+
+
+        $("#btn_goPay").click(function (e) {
+            $("input[name=chk_paymentlist]:eq(0)").attr("checked", 'checked');
+            var money =0;
+            if ($("#divReCharge").length > 0) {
+                money = parseFloat($("#txtReChargeBalance").val());
+                if (isNaN(money) || money < 0 || money >= 10000000) {
+                    alert_h("请输入正确的充值金额,金额必须大于0且小于10000000")
+                    return false;
+                }
+            } else {
+                money = parseFloat($("#divReChargeGift .selected").attr("name"));
+                if ($("#divReChargeGift .selected").length == 0) {
+                    alert_h("请选择充值金额");
+                    return false;
+                }
+            }
+            if ($("input[name='chk_paymentlist']:checked").length == 0) {
+                alert_h("请选择支付方式");
+                return false;
+            }
+            var paymentTypeId = $("input[name='chk_paymentlist']:checked").val();
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "AddInpourBlance", paymentType: paymentTypeId, ReChargeBalance: money },
+                success: function (resultData) {
+                    if (resultData.Status == "OK") {
+                        location.replace("RechargeRequest.aspx?action=toPay&InpourBlanceId=" + resultData.InpourBlanceId);
+                    }
+                    else if (resultData.Status == "NoLogined") {
+                        alert_h(resultData.Message, function (e) {
+                            location.replace("Login.aspx");
+                        });
+                    }
+                    else if (resultData.Status == "NoOpenBalance") {
+                        alert(resultData.Message, function (e) {
+                            location.replace("MyAccountSummary.aspx");
+                        });
+                    }
+                    else {
+                        alert_h(resultData.Message, function (e) {
+                            $(".att-popup-close").trigger("click");
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+
+
+
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

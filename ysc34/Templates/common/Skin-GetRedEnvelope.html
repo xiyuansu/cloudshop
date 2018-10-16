@@ -1,0 +1,20 @@
+﻿<hi:common_wapheader runat="server" />
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" href="/style/redenvelope.css">
+<form runat="server">
+    <img src="/images/hb_s_1.jpg" width="100%" />
+    <div style="position:relative;float:left;width:100%;">
+        <img  src="/images/hb_s_2.jpg" width="100%" style="float:left" />
+        <span style="position:absolute;left:0; width:100%;text-align:center;color:#ef595a;font-size:20px;margin-top:-10px; font-family:'Microsoft YaHei';">￥<asp:Literal ID="RedEnvelopeAmount" runat="server"></asp:Literal></span>   
+    </div>
+    <img src="/images/hb_s_3.jpg" width="100%" />
+    <a href="/Vshop/" runat="server" id="toBuy"><img src="/images/hb_sb.jpg" width="100%" /></a>
+    <button type="button" id="toLogin" class="btn_login" style="width:94%;margin-left:3%;" runat="server" onclick="javascript:document.location.href='MemberCenter'">去&nbsp;登 &nbsp;录</button>
+    <div id="divGetList" runat="server">
+        <div class="get_r">
+            <i></i>
+            <span>看朋友们的手气如何</span>
+        </div>
+        <%<hi:WapTemplatedRepeater id="rptRedEnvelopeGetRecord" templatefile="/Tags/skin-Common_RedEnvelopeGetRecord.ascx" runat="server" />%>
+    </div>
+</form>

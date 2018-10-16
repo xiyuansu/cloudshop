@@ -1,0 +1,417 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    body {
+        padding-bottom: 0;
+        overflow: hidden;
+        position: relative;
+        float: left;
+    }
+
+    .s_1 {
+        width: 100%;
+        height: 2.2rem;
+        padding: 0.35rem 0.5rem;
+        background: #efeff4;
+        display: inline-block;
+        z-index: 9;
+    }
+
+    .container {
+        max-width: 640px;
+        margin: auto;
+        height: auto;
+        padding-bottom: 50px;
+    }
+
+    .category-box {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .category1 {
+        height: 100%;
+        float: left;
+        width: 25%;
+        background-color: #f3f3f3;
+        position: relative;
+    }
+
+        .category1 ul {
+            position: absolute;
+            left: 0;
+            width: 100%;
+        }
+
+        .category1 li {
+            width: 100%;
+            float: left;
+            height: 1.9rem;
+            line-height: 1.9rem;
+            font-size: 0.6rem;
+            text-align: center;
+            background-color: #f8f8f8;
+            border-top: 1px solid #eaeaea;
+            border-right: 1px solid #eaeaea;
+            position: relative;
+            color: #494e52;
+        }
+
+            .category1 li:first-child {
+                border-top: none;
+            }
+
+            .category1 li:last-child {
+                border-bottom: 1px solid #eaeaea;
+            }
+
+                .category1 li:last-child.cur {
+                    border-bottom: none;
+                }
+
+            .category1 li.cur {
+                color: #ff5722;
+                border-left: 2px solid #ff5722;
+                border-right: none;
+                background-color: #fff;
+            }
+
+    .category2 {
+        height: 100%;
+        float: right;
+        width: 75%;
+        background-color: #fff;
+        overflow-y: auto;
+        position: relative;
+        z-index: 1;
+    }
+
+        .category2 dl {
+            padding: 0 0.5rem 0.25rem;
+            margin: 0;
+            display: none;
+            position: relative;
+            z-index: 2;
+            float: left;
+            width: 100%;
+        }
+
+        .category2 dt {
+            height: auto;
+            font-size: .11rem;
+            color: #bbbbbb;
+            line-height: 1.25rem;
+            margin-top: 0.4rem;
+            font-weight: normal;
+            float: left;
+            width: 100%;
+        }
+
+            .category2 dt img {
+                width: 100%;
+                height: 100%;
+                border: 1px solid #e7e5ea;
+                padding: 1px;
+            }
+
+        .category2 dd img {
+            float: left;
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .category2 dd a {
+            float: left;
+            width: 100%;
+            color: #6b6c6e;
+            min-height: 3rem;
+            font-size: .1rem;
+            padding: 0.25rem 0 0 0.25rem;
+            margin: 0.25rem 0 0 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+            .category2 dd a:nth-child(3n) {
+                margin-right: -10px;
+            }
+
+        .category2 dd span {
+            color: #6b6c6e;
+            text-align: left;
+            padding: 0 10px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            font-size: 0.6rem;
+        }
+
+            .category2 dd span font {
+                color: #A5ADB2;
+                text-decoration: line-through;
+                margin-left: 5px;
+                font-size: 0.4rem;
+            }
+
+    .att-popup-cart .att-popup-container {
+        bottom: 0;
+    }
+</style>
+<div class="container" style="padding:0;">
+    <div class="s_1">
+        <label for="txtKeywords" id="search"><i class="icon_search icon-icon_search_32"></i>搜索</label>
+        <input id="txtKeywords" type="search" />
+    </div>
+    <div class="category-box">
+        <div class="category1" id="category1" tabindex="5000" style="overflow: hidden; outline: none;">
+            <ul class="clearfix" id="cUl">
+                <script id="cList" type="text/html">
+                    {{each Result as value i}}
+                    <li pid="{{Result[i].cid}}">{{Result[i].name}}</li>
+                    {{/each}}
+                </script>
+            </ul>
+        </div>
+        <div class="category2" id="category2">
+            <script id="dlList" type="text/html">
+                {{each Result.List as value i}}
+                <dl style="display: block;">
+                    <dd class="clearfix">
+                        <a class="curl" href="{{value.url}}">
+                            <img src="{{value.pic}}" width="50" height="50" onerror="javascript: this.src = '/utility/pics/none.gif'">
+                            <span>{{value.name}}</span>
+                        </a>
+                        <span style="color:#ff5722;">￥{{value.price}}
+                        {{if value.marketPrice!=0}}
+                            <font>￥{{value.marketPrice}}</font>
+                        {{/if}}
+                        <i class="btnAddToCart" ProductId="{{value.pid}}" onclick="AddToCart(this)"></i></span>
+                        
+                    </dd>
+                </dl>
+                {{/each}}
+                <a id="load" style="line-height:2rem; z-index:10; float:left; text-align:center;bottom:0;left:0;background:#fff;color:#999;width:100%;">加载更多商品...</a>
+	            </script>
+        </div>
+        <div id="emptypanel" class="category2" style="display:none;">
+            <a id="load1" style="line-height:2rem; z-index:10; float:left; text-align:center;bottom:0;left:0;background:#fff;color:#999;width:100%;">此分类下暂无商品</a>
+            <div style="width: 100%; text-align: center"><img width="80%" src='/images/pro_null.png'> </div>
+        </div>
+    </div>
+</div>
+<hi:common_wapguanzhu runat="server"></hi:common_wapguanzhu>
+<script src="/Utility/nicescroll/jquery.nicescroll.js"></script>
+<script src="/Utility/artTemplate.js" type="text/javascript"></script>
+<script src="/Utility/listPageAddToCart.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var pageindex = 1;
+    var pagesize = 10;
+    $("#cUl li").eq(0).addClass("cur");
+    var storeId = getParam("storeId");
+    $.ajax({
+        url: "/API/VshopProcess.ashx?action=getCategories",
+        type: 'post',
+        dataType: 'json',
+        data: { pid: 0 },
+        timeout: 10000,
+        success: function (resultData) {
+            var html = template('cList', resultData);
+            document.getElementById('cUl').innerHTML = html;
+            $("#cUl li").eq(0).addClass("cur");
+            //改变各个端的地址
+            var aurl = window.location.pathname;
+            var arr = aurl.split('/');
+            var burl = arr[1];
+            $(".curl").each(function () {
+                var cid = $(this).attr("href");
+                var cidA = cid.split('/');
+                $(this).attr('href', '/' + burl + '/' + cidA[1] + '&storeId=' + storeId);
+            })
+            InitialData();
+        }
+    });
+
+    function InitialData() {
+        var pid = $("#cUl li").eq(0).attr('pid');
+        var storeId = getParam("storeId");
+        $.ajax({
+            url: "/API/VshopProcess.ashx?action=getProducts",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'pageindex': pageindex,
+                'pagesize': pagesize,
+                cid: pid,
+                storeId: storeId
+            },
+            timeout: 10000,
+            success: function (resultData) {
+                var html = template('dlList', resultData);
+                if (resultData.Result.RecordCount > 0) {
+                    document.getElementById('category2').innerHTML = html;
+                    bindData();
+                    if (resultData.Result.RecordCount <= pagesize) {
+                        $("#load").html("没有更多商品了...");
+                    }
+                    else {
+                        $("#load").html("加载更多商品...");
+                        $("#load").click(function () {
+                            bindData1();
+                        })
+                    }
+                    $("#category2").show();
+                    $("#emptypanel").hide();
+                }
+                else {
+                    bindData();
+                    document.getElementById('category2').innerHTML = "";
+                    $("#category2").hide();
+                    $("#emptypanel").show();
+                }
+            }
+        })
+    }
+
+    function bindData1() {
+        pagesize = pagesize + 10;
+        var pid = $(".cur").attr('pid');
+        var storeId = getParam("storeId");
+        $.ajax({
+            url: "/API/VshopProcess.ashx?action=getProducts",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "pageindex": pageindex,
+                "pagesize": pagesize,
+                "cid": pid,
+                storeId: storeId
+            },
+            timeout: 10000,
+            success: function (resultData) {
+                if (resultData.Result.List.length > 0) {
+                    var html = template('dlList', resultData);
+                    document.getElementById('category2').innerHTML = html;
+                    var RecordCount = resultData.Result.RecordCount;
+                    if (RecordCount <= pagesize) {
+                        $("#load").text("没有更多的商品了...")
+                    }
+                    else {
+                        $("#load").html("加载更多商品...");
+                        $("#load").click(function () {
+                            bindData1();
+                        })
+                    }
+                    $("#category2").show();
+                    $("#emptypanel").hide();
+                }
+                else {
+                    document.getElementById('category2').innerHTML = "";
+                    $("#category2").hide();
+                    $("#emptypanel").show();
+                }
+
+            }
+        });
+    }
+
+    function bindData() {
+        var storeId = getParam("storeId");
+        $("#cUl li").click(function () {
+            var array = new Array();
+            $('.category1 li').each(function () {
+                array.push($(this).position().top - 56);
+            });
+            var pid = $(this).attr('pid');
+            var index = $(this).index();
+            $('.category1').delay(200).animate({ scrollTop: array[index] }, 300);
+            $(this).addClass('cur').siblings().removeClass();
+            $('.category2').scrollTop(0);
+            $.ajax({
+                url: "/API/VshopProcess.ashx?action=getProducts",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    "pageindex": 1,
+                    "pagesize": 10,
+                    "cid": pid,
+                    storeId: storeId
+                },
+                timeout: 10000,
+                success: function (resultData) {
+                    if (resultData.Result.RecordCount > 0) {
+                        var html = template('dlList', resultData);
+                        document.getElementById('category2').innerHTML = html;
+                        var RecordCount = resultData.Result.RecordCount;
+                        //点击分类重置每页显示记录
+                        pagesize = 10;
+                        if (RecordCount <= pagesize) {
+                            $("#load").text("没有更多的商品了...")
+                        }
+                        else {
+                            $("#load").html("加载更多商品...");
+                            $("#load").click(function () {
+                                bindData1();
+                            })
+                        }
+                        
+                        $("#category2").show();
+                        $("#emptypanel").hide();
+                    }
+                    else {
+                        document.getElementById('category2').innerHTML = "";
+                        $("#category2").hide();
+                        $("#emptypanel").show();
+                    }
+                }
+            });
+        })
+    }
+
+    $(function () {
+        $("#txtKeywords").focus(function () {
+            $("#search").hide();
+        });
+        $("#txtKeywords").blur(function () {
+            $("#search").show();
+        });
+    })
+
+    $(document).keydown(function (event) {
+        if (event.keyCode == 13) {
+            if ($("#txtKeywords").val() == "") {
+                $("#search").show();
+            }
+            searchs();
+        }
+    });
+
+
+    function searchs() {
+        var key = $("#txtKeywords").val();
+        var str = window.location.search;
+
+        var categoryId;
+        categoryId = getParam("categoryId");
+        var storeId = getParam("storeId");
+        var url = "ProductList?storeId=" + storeId + "&keyWord=" + escape(key);
+        window.location.href = url;
+    }
+
+    var cate;
+    $(function () {
+        //滚动
+        $(".category1").niceScroll({ cursorwidth: 0, cursorborder: 0 });
+
+        //图片延迟加载
+        //$(".lazyload").scrollLoading({ container: $(".category2") });
+        var a = $(".category-box").offset().top;
+        $('.category-box').height($(window).height() - a);
+    });
+
+    $("#load").click(function () {
+        bindData1();
+    })
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+ 
+  <Subject SubjectId="1" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="220" ImageSizeRange="220" SkinName="HomeTags/SubjectProduct/SubjectSimp2.html" />
+  <Subject SubjectId="2" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="220" ImageSizeRange="220" SkinName="HomeTags/SubjectProduct/SubjectSimp3.html" />
+  <Subject SubjectId="3" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="220" ImageSizeRange="220" SkinName="HomeTags/SubjectProduct/SubjectSimp3.html" />
+  <Subject SubjectId="4" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="220" ImageSizeRange="220" SkinName="HomeTags/SubjectProduct/SubjectSimp3.html" />
+  <Subject SubjectId="5" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="220" ImageSizeRange="220" SkinName="HomeTags/SubjectProduct/SubjectSimp3.html" />
+  <Subject SubjectId="6" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="100" ImageSizeRange="100" SkinName="HomeTags/SubjectProduct/SubjectSimp4.html" />
+  <Subject SubjectId="7" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="220" ImageSizeRange="220" SkinName="HomeTags/SubjectProduct/SubjectSimp3.html" />
+  <Subject SubjectId="8" Type="simple" CategoryId="" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="220" ImageSizeRange="220" SkinName="HomeTags/SubjectProduct/SubjectSimp3.html" />
+  
+   <Subject SubjectId="17" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="false" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="160" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top2.html" />
+   
+</root>

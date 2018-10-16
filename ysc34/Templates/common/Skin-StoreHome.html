@@ -1,0 +1,566 @@
+﻿<Hi:WapAppDownloadInfo runat="server" id="appdownloadinfo" />
+<hi:common_wapheader runat="server" />
+<script src="/Utility/jquery.scrollLoading.min.js"></script>
+<style>
+    .map_popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+        -moz-transition: opacity .3s 0s, visibility 0s .3s;
+        transition: opacity .3s 0s, visibility 0s .3s;
+    }
+
+        .map_popup .map_popup_container {
+            padding: 0 0.375rem;
+        }
+
+        .map_popup.is-visible {
+            opacity: 1;
+            visibility: visible;
+            -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+            -moz-transition: opacity .3s 0s, visibility 0s 0s;
+            transition: opacity .3s 0s, visibility 0s 0s;
+        }
+
+    .pop_close {
+        font-size: 1.2rem;
+    }
+
+    .att-popup-container {
+        position: absolute;
+        bottom: 48px;
+        left: 0;
+        width: 100%;
+        background-color: rgb(255,255,255);
+        box-shadow: 0 0 20px rgba(0,0,0,.2);
+        -webkit-transform: translateY(110%);
+        -moz-transform: translateY(110%);
+        -ms-transform: translateY(110%);
+        -o-transform: translateY(110%);
+        transform: translateY(110%);
+        -webkit-backface-visibility: hidden;
+        -webkit-transition-property: -webkit-transform;
+        -moz-transition-property: -moz-transform;
+        transition-property: transform;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+    }
+
+    .map_title {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .pop_close {
+        margin-right: 0;
+    }
+
+    .map_title .pop_close {
+        float: right;
+    }
+
+    .opentime {
+        position: absolute;
+        display: block;
+        width: 100%;
+        text-align: right;
+        padding-right: 18px;
+        top: 0px;
+        padding-top: 2px;
+        color: #ffffff;
+        background: url(../images/bg_top.png) top no-repeat;
+        background-size: 100% 100%;
+    }
+
+    #noTip2, #noTip3 {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 103;
+        display: none;
+    }
+
+        #noTip2 .black, #noTip3 .black {
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            padding-top: 220px;
+        }
+
+        #noTip2 .content, #noTip3 .content {
+            width: 165px;
+            background: #212121;
+            padding: 15px;
+            color: #fff;
+            margin: 0 auto;
+            border-radius: 4px;
+            font-size: 0.60rem;
+        }
+
+        #noTip3 .content {
+            width: 222px;
+        }
+
+        #noTip3 .content {
+            background: #fff;
+            color: #353535;
+            padding: 0px;
+        }
+
+            #noTip3 .content div {
+                padding: 0px 15px;
+                overflow: hidden;
+            }
+
+                #noTip3 .content div:first-child {
+                    border-bottom: 1px solid #d5d5d5;
+                    padding-top: 15px;
+                    padding-bottom: 15px;
+                }
+
+            #noTip3 .content em {
+                width: 50%;
+                display: inline-block;
+                float: left;
+                text-align: center;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+
+                #noTip3 .content em:first-child {
+                    background: url(/Templates/common/images/main/tip-shuline.png) repeat-y right top;
+                }
+
+            #noTip3 .content i, #noTip3 .content i a {
+                color: #ff5720;
+            }
+            fieldset legend{ padding:2px; max-width:90%;  background: #fff; }
+</style>
+<div class="widtht pb50">
+    <div class="storeH">
+        <div class="msearch plr11 ptb13">
+            <div class="StoreName">
+                <a href="ChangePosition.aspx"><asp:literal runat="server" id="litAddress" /></a>
+            </div>
+            <span class="sbutton" onclick="onMapClick()">
+                <a href="javascript:onMapClick()">查看地图</a>
+            </span>
+        </div>
+
+        <div class="dingwei">
+            <div class="filter-bg"></div>
+            <div class="beijing"></div>
+            <div class="plr11 ptb13 storeinfo" id="stores">
+
+
+                <script>
+
+                    $(function () {
+                        if ($(".appcouponinfo").text() != "") {
+                            $("body").css("padding-top", "50px");
+                            $(".appcouponinfo em").click(function(){
+										$(this).parent().hide();
+									$("body").css("padding-top", "0px");
+									});
+                        }
+                        $("#stores .pic").height($("#stores .pic").width());
+                        restartPosition();
+                        var touxiangimg = $('#stores .pic img').attr('src');
+
+                        var beijingBG = 'url(' + touxiangimg + ') no-repeat center center';
+
+                        //var touxiangimgW = $('.widtht img').width();
+
+                        $('.beijing').css({ 'background': beijingBG, 'background-size': '105% 105%' });
+                        //$('.widtht img').height(touxiangimgW);
+
+                    })
+
+                    function restartPosition() {
+                        var storesource = getParam("storeSource");
+                        var isReloadPosition = $("#hidIsReloadPosition").val();
+                        var mapkey = $("#hdQQMapKey").val();
+                        //if (storesource != "1") {
+                        if (isReloadPosition == "1") {
+                            var geolocation = new qq.maps.Geolocation(mapkey, "myapp");
+                            if (geolocation) {
+                                geolocation.getLocation(getPositionSuccess, ShowError)
+                            }
+                            else {
+                                window.location.href = "NoPositionTip.aspx";
+                            }
+                        }
+                    }
+                    function getPositionSuccess(position) {
+                        var lat = position.lat;
+                        var lng = position.lng;
+                        seachNearStore(lat + "," + lng, "");
+                    }
+
+                </script>
+
+
+
+                <div class="pic"><img id="storeLogo" runat="server"  /></div>
+                <div class="intro">
+                    <div class="info">
+                        <h3><asp:literal runat="server" id="litStoreName" /> &nbsp;&nbsp;<a href="" id="aTel" runat="server" class="telphone"><img src="/images/phone.png" alt="" width="20"/><asp:literal runat="server" id="litStoreTel" visible="false" /></a></h3>
+                        <div class="time">营业时间: <asp:literal runat="server" id="litOpenDate" /></div>
+                        <div class="price"><asp:literal runat="server" id="litStoreDelive" /></div>
+                        <div class="youhui" id="SHyouhui">
+                            <div class="left">
+                                <asp:literal runat="server" id="litActivityList" />
+                            </div>
+                            <asp:literal runat="server" id="litActivityCount" />
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="members_nav2 plr11 ptb13 mb12">
+            <form onsubmit="searchs(escape(($(this).find(':text').eq(0).val()))); return false;">
+                <div class="memberss">
+                    <section class="members_search">
+                        <input type="text" name="keyWord" id="" value="" placeholder="请输入商品名称">
+                        <button type="button" value="" onclick="searchs(escape($($(this).prev()).val()))"></button>
+                    </section>
+                </div>
+            </form>
+            <ul>
+                <Hi:WapTemplatedRepeater ID="rp_markting" runat="server" TemplateFile="Tags/skin-Common_StoreMarkting.ascx" />
+            </ul>
+        </div>
+
+        <div id="floorList">
+        </div>
+        <div id="productList">
+        </div>
+    </div>
+    <div id="divProductMore" style="text-align:center; padding: 0.125rem 0.375rem 0.125rem 0.375rem;" onclick="loadFloorData()">
+        加载更多...
+    </div>
+    <div id="divProductMore_2" style="text-align:center; display:none; padding: 0.125rem 0.375rem 0.125rem 0.375rem;" onclick="loadProductData();">
+        加载更多...
+    </div>
+</div>
+
+<!--<div class="map_popup">
+    <div class="att-popup-container" style="height:100%;">
+        <div class="map_title">
+            查看地图
+            <a href="javascript:;" class="pop_close icon-icon_close_48"></a>
+        </div>
+    </div>
+</div>-->
+
+<!--提示-->
+<div id="noTip"><div class="black"><div class="content">很抱歉，现在是非营业时间，门店暂不提供服务！</div></div></div>
+<div id="noTip2">
+    <div class="black">
+        <div class="content">您当前位置周边没有可提供服务的门店，系统已为您推荐到“平台店”</div>
+    </div>
+</div>
+
+<div id="noTip3">
+    <div class="black">
+        <div class="content">
+            <div>您当前位置为【<i id="iAdrCity"></i>】，是否切换位置？</div>
+            <div><em><a href="#" class="quxiao" id="aQuit">取消</a></em><em><i><a href="#" id="aTosee">去看看</a></i></em></div>
+        </div>
+    </div>
+</div>
+<hi:common_wapguanzhu runat="server"></hi:common_wapguanzhu>
+<input type="hidden" id="hidStoreName" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidLatitude" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidLongitude" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidIsOpenData" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdQQMapKey" runat="server" clientidmode="Static" />
+<input type="hidden" id="hidIsReloadPosition" value="0" runat="server" clientidmode="Static" />
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static">
+<script type="text/javascript" src="/Utility/wxShare.js?v=3.0"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<script type="text/javascript" charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script src="../../Utility/vPosition.js"></script>
+<script>
+    var pageSize = 2;
+    var pageIndex = 1;
+    var totalCount = 0;
+    var refreshIndex = 1;
+    var storeId = "";
+    var isHaveFloorData = true;//是否有门店楼层数据
+    var p_PageIndex = 1;//商品楼层当前页
+    var p_PageSize = 9;//商品楼层每页数据量
+    var p_ProductAllCount = 21;//商品楼层商品总显示量
+    var isHaveNextProductData = true;//商品楼层是否有下一页数据
+
+    $(document).ready(function () {
+        storeId = GetUrlValue("storeId");
+        loadFloorData();
+        if (!isHaveFloorData)
+            loadProductData();
+
+        $('.mzbtjc li').each(function (index, item) {
+            var li = $(item);
+            if (index % 3 === 2) {
+                li.css('margin-right', 0);
+            }
+        });
+
+        $('.pop_close').on('click', function () {
+            closeMap();
+        });
+
+        if ($("#hidIsOpenData").val() == "false") {
+            $('#noTip').show().delay(3000).fadeOut();
+        }
+
+
+        //<!-- 优惠活动收缩2 -->
+
+        var oneAll = $('#SHyouhui .left div');
+        oneAll.hide();
+        $('#SHyouhui .left').find("div:first").show();
+        $(document).on('click', '#huod-b', function () {
+            var thishdw = $(this).parent().find('.left div:gt(0)');
+            if (thishdw.is(':visible')) {
+                thishdw.hide();
+                $(this).find('i').css({ "background": "url(/images/main/more4.png) no-repeat right center", "background-size": "7px 4px" });
+
+            } else {
+                thishdw.show();
+                $(this).find('i').css({ "background": "url(/images/main/more5.png) no-repeat right center", "background-size": "7px 4px" });
+
+            }
+        })
+    });
+
+    
+    ///加载门店商品
+    function loadProductData() {
+        if (!isHaveNextProductData)
+            return;
+        $.ajax({
+            type: "Post",
+            url: "../API/DepotHandler.ashx",
+            data: {
+                action: "GetStoreProducts",
+                PageSize: p_PageSize,
+                CurrentPage: p_PageIndex,
+                storeId: storeId
+            },
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                var totalCount = result.totalCount;
+                var listCount = result.data.length;
+                var isBreak = false;
+                if (p_PageIndex == 3 && result.data.length > 3)
+                {
+                    isBreak = true;
+                    totalCount = p_ProductAllCount;
+                    listCount = 3;
+                }
+                if (result.data.length > 0) {
+                    var p_html = " <div class=\"mzbtjc plr11\"><ul>";
+                    for (var i = 0; i < result.data.length; i++) {
+                        if (isBreak && i >= 3)
+                            break;
+                        var n = result.data[i];
+                        var href = "";
+                        var addToCartClick = "";
+                        if (n.ProductType == 1) {
+                            href = "ServiceProductDetails.aspx?StoreId=" + storeId + "&ProductId=" + n.ProductId;
+                            addToCartClick = "serviceProductHref(this);";
+                        } else {
+                            href = "StoreProductDetails.aspx?StoreId=" + storeId + "&ProductId=" + n.ProductId;
+                            addToCartClick = "AddToCart(this);";
+                        }
+                        p_html += "<li>";
+                        p_html += "<a href=\"" + href + "\" class=\"p-img\">";
+                        p_html += "<img src=\"" + n.ThumbnailUrl220 + "\" style=\"width:100%\">";
+                        p_html += "</a>";
+                        p_html += "<div class=\"name\"><a href=\"" + href + "\">" + n.ProductName + "</a></div><div><strong><em>￥</em>" + n.SalePrice + "</strong>";
+                        p_html += "<i class=\"btnAddToCart\" ProductId=\"" + n.ProductId + "\"  onclick=\"" + addToCartClick + "\" StoreId=\"" + storeId + "\"></i></div>";
+                        p_html += "</li>";
+                    }
+                    p_html += "</ul></div>";
+                    $("#productList").append(p_html);
+                }
+                var isNextPage = (p_PageSize * p_PageIndex) < totalCount;
+                //判断是否有下一页数据
+                if (isNextPage) {
+                    p_PageIndex += 1;
+		    		shezhigaodu();
+                    $("#divProductMore_2").show();
+                    
+                } else {
+                    isHaveNextProductData = false;
+                    $("#divProductMore_2").unbind("click");
+                    $("#divProductMore_2").html("没有更多商品了");
+                }
+                
+            }
+        });
+
+    }
+
+    //加载门店楼层
+    function loadFloorData() {
+        if (storeId == "") return;
+        refreshIndex++;//避免刷新重复数据
+        if (refreshIndex - pageIndex > 1) return;
+        $.ajax({
+            type: "Post",
+            url: "../API/DepotHandler.ashx",
+            data: {
+                action: "GetStoreFloors",
+                pageSize: pageSize,
+                pageIndex: pageIndex,
+                storeId: storeId
+            },
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                totalCount = result.Total;
+                if (result.Models.length > 0) {
+                    for (var i = 0; i < result.Models.length; i++) {
+                        var n = result.Models[i];
+                        var userhtm = getProductHtml(n);
+                        $("#floorList").append(userhtm);
+                    }
+                    pageIndex = pageIndex + 1;
+                    refreshIndex = pageIndex;
+                }
+                var listCount = $("#floorList .storediv").length;
+                if (totalCount == listCount) {
+                    $("#divProductMore").html("没有更多商品了");
+                }
+                if (totalCount == 0) {
+                    $("#divProductMore").hide();
+                    isHaveFloorData = false;
+                }
+
+                shezhigaodu();
+            }
+        });
+
+    }
+
+    function getProductHtml(obj) {
+        var arr = new Array();
+        arr.push('<div class="storediv mb12">');
+        arr.push('<div class="ptb13 mzbtjh"><fieldset><legend><em>' + obj.FloorName + '</em></legend></fieldset></div>');
+        if (obj.ImageId > 0 && obj.ImageUrl != null) {
+            arr.push('<div class="sad plr11"><a href="StoreMarketing?StoreId=' + storeId + '&ImageId=' + obj.ImageId + '"><img src="' + obj.ImageUrl + '" style="width:100%; height:200"></a></div>');
+        }
+        arr.push('<div class="ptb13 plr11 mzbtj">');
+        arr.push('<div class="mzbtjc">');
+        if (obj.Products.length > 0) {
+            arr.push('<ul>');
+            for (var i = 0; i < obj.Products.length; i++) {
+                var href = "";
+                var addToCartClick = "";
+                if (obj.Products[i].ProductType == 1) {
+                    href = "ServiceProductDetails.aspx?StoreId=" + storeId + "&ProductId=" + obj.Products[i].ProductId;
+                    addToCartClick = "serviceProductHref(this);";
+                } else {
+                    href = "StoreProductDetails.aspx?StoreId=" + storeId + "&ProductId=" + obj.Products[i].ProductId;
+                    addToCartClick = "AddToCart(this);";
+                }
+                arr.push('<li><div><a href="' + href + '" class="p-img"><img src="' + obj.Products[i].ProductImage + '" width="220" height="220"></a></div>');
+                arr.push('<div class="name"><a href="' + href + '">' + obj.Products[i].ProductName + '</a></div>');
+                arr.push('<div><strong><em>￥</em>' + obj.Products[i].Price.toFixed(2) + '</strong><i class="btnAddToCart" ProductId="' + obj.Products[i].ProductId + '" onclick="' + addToCartClick + '" StoreId="' + storeId + '"></i></div></li>');
+            }
+            arr.push('</ul>');
+        }
+        arr.push('</div></div></div>');
+        return arr.join("");
+    }
+
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    function scrollLoadData() {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            if (isHaveFloorData) {
+                loadFloorData();
+            } else {
+                loadProductData();
+            }
+        }
+    }
+    $(window).scroll(function () {
+        scrollLoadData();
+    });
+
+    //获取url参数的值
+    function GetUrlValue(name) {
+        url = window.document.location.href;
+        var re = new RegExp("(\\\?|&)" + name + "=([^&]+)(&|$)", "i");
+        var m = url.match(re);
+        if (m)
+            return m[2];
+        else
+            return '';
+    }
+
+    function closeMap() {
+        $('.map_popup').removeClass('is-visible');
+    }
+    function onMapClick() {
+        var longitude = parseFloat($("#hidLongitude").val());
+        var latitude = parseFloat($("#hidLatitude").val());
+        var storeName = $("#hidStoreName").val();
+        var mapkey = $("#hdQQMapKey").val();
+        if (longitude == "" || latitude == "" || mapkey == "" || storeName == "") return;
+        var mapUrl = "http://apis.map.qq.com/tools/routeplan/eword=" + encodeURI(storeName) + "&epointx=" + longitude + "&epointy=" + latitude + "?referer=hishop&key=" + mapkey + "";
+        window.location.href = mapUrl;
+    }
+    function searchs(v) {
+        var storeId = getParam('storeId');
+        var url = "ProductList?storeId=" + storeId + "&keyWord=" + v; window.location.href = url;
+    }
+    setTimeout("shezhigaodu()", 2000);
+    function shezhigaodu() {
+			$(".mzbtjc").each(function(){
+				$(this).find(".p-img").height($(this).find("li").width());
+			});
+
+			$(".members_nav2 .p-img").height($(".members_nav2 ul li").width());
+			
+		$(".datalist .p-img").height($("#datashow .mzbtjc ul li img").width());
+		$(".members_nav1 .p-img").height($(".members_nav1 ul li").width());
+    }
+ 
+$(function(){	
+    var imgw = $(".mzbtjc li img").width();
+    $(".mzbtjc li img").height(imgw);
+	//$(".mzbtjc li").height(imgw+60);
+
+	
+	})
+</script>
+
+
+<script src="/Utility/listPageAddToCart.js" type="text/javascript"></script>
+<hi:Common_WapStoreFooter runat="server" />

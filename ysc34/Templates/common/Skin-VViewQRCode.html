@@ -1,0 +1,87 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .step1_left {
+        width: 120px;
+        height: 120px;
+        top: 20%;
+        border: 1px solid #ebebeb;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .step1_left img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .step1_left span {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            background: #ff5722;
+            opacity: .8;
+            left:0;
+        }
+
+    .QRCode {
+        display: inline-block;
+        margin-top: 30px;
+        width: 100%;
+        background: #fff;
+        text-align: center;
+        padding: 40px 0 0 0;
+    }
+
+        .QRCode span {
+            display: inline-block;
+            margin-top: 40px;
+        }
+</style>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+    $(function () {
+        $("#btnBack").click(function (e) {
+            window.history.go(-1);
+        });
+        ShowShareLink();
+    });
+    function ShowShareLink() {
+        var url = $("#hfTakeCode").val();
+        $("#imgQRCode").attr("src", "/api/VshopProcess.ashx?action=GenerateTwoDimensionalImage&url=" + encodeURIComponent(url));
+    }
+</script>
+
+<div class="step1" style="padding:30px 30px 30px 180px;border-bottom:1px solid #e7e5ea;">
+    <div class="step1_left">
+       <img id="imgProduct" runat="server" />
+        <span>共<asp:literal id="litItemCount" runat="server"></asp:literal> 件</span>
+    </div>
+    <div class="m step1-in ">
+        <a href="javascript:void(0)">
+            <div class="s1-name">
+                <span >请到&nbsp;<font style="color:#0091ea"><asp:literal id="litStoreName" runat="server" /></font>&nbsp;自提</span>
+            </div>
+            <div class=" color_6">
+                <asp:literal id="litStoreAddress" runat="server" />
+            </div>
+            <span >联系电话：<asp:literal id="litTel" runat="server"></asp:literal></span>
+        </a>
+    </div>
+
+</div>
+
+<div class="QRCode">
+    <img id="imgQRCode" />
+    <span class="color_9" style="width:100%;">提货时，请出示该二维码给门店收银员</span>
+    <span style="width:100%;height:70px;line-height:70px;background:#f9f9f9;border-bottom:1px solid #e7e5ea;">提货码：<asp:literal id="litTakeCode" runat="server"></asp:literal></span>
+</div>
+
+
+<input type="hidden" id="hfTakeCode" runat="server" clientidmode="Static" />
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

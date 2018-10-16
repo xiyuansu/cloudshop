@@ -1,0 +1,116 @@
+﻿<hi:common_wapheader runat="server" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidErrorMsg" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtRefundId" />
+<input type="hidden" id="hidUploadImages" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidOldImages" value="\Templates\common\images\nophoto.jpg" runat="server" ClientIDMode="Static" />
+<div class="panel panel-default order-list">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            售后编号：
+            <span><asp:Literal id="litAfterSaleId" runat="server"></asp:Literal></span>
+        </h3>
+        <span class="order_shipping">
+            <span><asp:Literal id="litStatus" runat="server"></asp:Literal></span>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div class="panel-body_1 step2 mt_0">
+            <hi:common_orderitem_aftersales runat="server"></hi:common_orderitem_aftersales>
+        </div>
+        <div class="panel-body_2">
+            <ul class="return_list">
+                <li>
+                    <span>订单编号：</span><font><asp:Literal id="txtOrderId" runat="server"></asp:Literal></font>
+                </li>
+                <li id="liRefundPassword" runat="server">
+                    <span>退款密码：</span><font><asp:Literal id="txtRefundPassword" runat="server"></asp:Literal></font>
+                </li>
+                <li>
+                    <span>退款原因：</span>
+                    <font><asp:Literal id="txtReturnReason" runat="server"></asp:Literal></font>
+                </li>
+
+                <li>
+                    <span>退款金额：</span>
+                    <font><asp:Literal id="txtRefundMoney" runat="server"></asp:Literal></font>
+                </li>
+                <li>
+                    <span>退款方式：</span>
+                    <font><asp:Literal id="txtRefundType" runat="server"></asp:Literal></font>
+                </li>
+                <li id="bankRow1" runat="server" visible="false">
+                    <span>开户银行：</span><font><asp:Literal id="litBankName" runat="server"></asp:Literal></font>
+                </li>
+                <li id="bankRow2" runat="server" visible="false">
+                    <span>开户名字：</span><font><asp:Literal id="litBankAccountName" runat="server"></asp:Literal></font>
+                </li>
+                <li id="bankRow3" runat="server" visible="false">
+                    <span>银行账号：</span><font><asp:Literal id="litBankAccountNo" runat="server"></asp:Literal></font>
+                </li>
+                <li>
+                    <span>退款备注：</span>
+                    <font><asp:Literal id="txtMemo" runat="server"></asp:Literal></font>
+                </li>
+                <li id="AdminRemarkRow" runat="server">
+                    <span>商家留言：</span>
+                    <font><asp:Literal id="txtAdminRemark" runat="server"></asp:Literal></font>
+                </li>
+        </div>
+        </div>
+    </div>
+        <div class="logistics_2 returns_step" style="margin-top:0;">
+    <div class="returns_step_head">退款进度<i class="icon_up"></i><i class="icon_down" style="display:none;"></i></div>
+    <asp:Literal id="litStep" runat="server"></asp:Literal>
+</div>
+        <div class="btn_tk">
+            <input type="button" id="btnCancel" onclick="window.history.go(-1);" value="返回" class="btn_qx" />
+        </div>
+
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function (e) {
+                if ($("#hidErrorMsg").val() != "") {
+                    alert_h($("#hidErrorMsg").val(), function (e) {
+                        document.location.href = "AfterSaleOrders";
+                    });
+
+                }
+
+                $('#selectReason li a').click(function () {
+                    $('.selectReason button').html($(this).html());
+                    $("#txtRefundReason").val($(this).attr('name'));
+                });
+
+                $('#selectRefundType li a').click(function () {
+                    $('.selectRefundType button').html($(this).html());
+                    $("#txtRefundType").val($(this).attr('name'));
+                });
+            });
+
+            $(function () {
+                $(".returns_step_head").click(function () {
+                    $(".returns_step ul").toggle();
+                    $(".returns_step_head i").toggle();
+                })
+            })
+
+            $(function () {
+                var a = "<b class='a1'></b>";
+                $(".logistics_2 ul li:last-child .color_6").append(a);
+            })
+
+            $('.preview-list').MobilePhotoPreview({
+                trigger: '.preview',
+                show: function (c) {
+                    var del = $('<span class="icon-del"></span>');
+                    var close = $('<span class="ui-dialog-close js-dialog-close pop_close icon-icon_close_48"></span>')
+                    $('.imgViewTop', c).append(del);
+                    $('.imgViewTop', c).append(close);
+                    var _this = this;
+                    del.click(function () {
+                        _this.current.remove();
+                        _this.hide();
+                    });
+                }
+            })
+        </script>
+        <hi:Common_ContextMenu id="ContextMenu" runat="server" />

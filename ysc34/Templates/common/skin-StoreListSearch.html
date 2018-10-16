@@ -1,0 +1,231 @@
+﻿<hi:common_wapheader runat="server" />
+<script src="/Utility/artTemplate.js" type="text/javascript"></script>
+<script src="/Utility/Hidistro.List.Common.js" type="text/javascript"></script>
+<div id="hidNoMatchSwitch" style="display:none"><asp:literal runat="server" id="litNoMatchSwitch" /></div>
+
+
+<div class="widtht pb50">
+    <div class="mutisearch">
+        <form onsubmit="search(); return false;">
+            <div class="plr11 bgfff o-hidden mb12">
+                <div class="memberss">
+                    <input type="text" name="keyWord" id="txtKey" value="" placeholder="请输入商品名称">
+                    <button type="button" value="" class="sbutton" onclick="search();"></button>
+                </div>
+
+            </div>
+        </form>
+        <div>
+
+            <div class="mutisearchD" id="datashow"></div>
+            <div class="blank12 clearfix"></div>
+            <div id="divMore" class="no_more" onclick="ShowListData()">
+                
+            </div>
+
+
+
+            <script type="text/html" id="datatmpl">
+                {{each Models as item index}}
+                <div class="plr11 ptbt13 bgfff mb12 mdcplist">
+                    <div class="intro xinxi">
+        <a href="StoreHome?StoreId={{item.StoreId}}&storeSource=3">
+                            <h3>
+							<div class="fleft">{{item.StoreName}} </div>
+							<div class="fright"><em>{{item.OnSaleNum}}</em>&nbsp;件商品</div>
+							</h3>
+							<div>
+                            <ul class="fleft">
+                                {{each item.Delivery.DeliveryList as delivery index}}
+                                <li>{{delivery}}</li>
+                                {{/each}}
+                            </ul>
+							<div class="mile fright">{{item.Distance}}</div>
+							</div>
+  </a>
+
+                    </div>
+                    <ul class="list">
+                        {{each item.ProductList as pdItem index}}
+                        <li>
+                            <div class="ptb13 o-hidden">
+                                <div class="pic">
+                                    <a href="{{pdItem.ProductType == 1 ?'ServiceProductDetails.aspx':'StoreProductDetails.aspx'}}?StoreId={{pdItem.StoreId}}&ProductId={{pdItem.ProductId}}">
+                                        <img src="{{pdItem.ThumbnailUrl220}}">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <div class="name"><a href="{{pdItem.ProductType == 1 ?'ServiceProductDetails.aspx':'StoreProductDetails.aspx'}}?StoreId={{pdItem.StoreId}}&ProductId={{pdItem.ProductId}}">{{pdItem.ProductName}}</a></div>
+                                    <div><strong><em>￥</em>{{pdItem.SalePrice}}</strong>
+                                    <i class="btnAddToCart" ProductId="{{pdItem.ProductId}}" onclick="{{ pdItem.ProductType == 1 ? 'serviceProductHref(this)' : 'AddToCart(this)' }}" StoreId="{{pdItem.StoreId}}"></i></div>
+                                </div>
+                            </div>
+                        </li>
+                        {{/each}}
+
+                    </ul>
+                    {{if item.ProductList.length>2}}
+                    <div class="sshousuo ptb13">查看更多（<i>{{item.ProductList.length-2}}</i>件）</div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </script>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+<script src="/Utility/listPageAddToCart.js" type="text/javascript"></script>
+<script>
+    var curpagesize = 5, curpageindex = 1, total = -1, lodeEnd = false;
+    $(document).ready(function () {       
+        var key = getQueryString("Key");
+        var categoryId = getQueryString("categoryId");
+       // console.log(key);
+        if ((key == "" || key == null) && (categoryId == "" || categoryId == null)) {
+            $("#txtKey").focus();
+            return;
+        }
+        if (key != "" && key != null)
+        $("#txtKey").val(decodeURI(key));
+        ShowListData();
+    });
+    function search() {
+        $("#datashow").empty();
+        curpageindex = 1; lodeEnd = false; ShowListData();
+
+        var hdw = $('ul.list li');
+        hdw.hide();
+        $('ul.list').find("li:lt(2)").show();
+    }
+   
+    function ShowListData() {
+        var categoryId = getQueryString("categoryId");
+        if ($("#txtKey").val() == "" && (categoryId == "" || categoryId == null)) {
+            return ShowMsg("请输入关键字进行搜索", false);
+        }
+        if (lodeEnd)
+            return;
+        var queryData = {
+            pageIndex: curpageindex, pageSize: curpagesize, action: "SearchInStoreList", key: $("#txtKey").val(), categoryId: categoryId
+        };
+        var loadingobj;
+        try {
+        target.empty();
+        DataNullHelper.hide(datanullbox);
+        loadingobj = showLoading(target);
+    } catch (e) { }
+
+        $.ajax({
+            type: "GET",
+            url: "/API/DepotHandler.ashx",
+            data: queryData,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var databox = $("#datashow");
+                try {
+                    loadingobj.close();
+                } catch (e) { }
+                if (curpageindex == 1)
+                    databox.empty();
+                if (data) {
+                    total = data.Total; console.log(data.Models.length);
+                    if (data.Models && data.Models.length > 0) {
+                        databox.append(template('datatmpl', data));
+                        curpageindex += 1;
+                        if (total == data.Models.length)
+                            lodeEnd = true;
+                    } else {
+                        lodeEnd = true;
+                        if (curpageindex == 1) {
+                            //if ($("#hidNoMatchSwitch").html() == "Platform")//附件没有门店数据时跳转至平台
+                            //    location.href = "Default.aspx";
+                            //else {
+                            lodeEnd = true;
+                            if (categoryId > 0) {
+                                ShowMsg("附近没有匹配该分类的商品");
+                            } else {
+                                ShowMsg("附近没有匹配到商品");
+                            }
+                            //}
+                        }
+                    }
+                    loadEndProcess();
+                }
+
+            },
+            error: function () {
+                try {
+                    loadingobj.close();
+                } catch (e) { }
+                ShowMsg("系统内部异常", false);
+            }
+        });
+    }
+    function loadEndProcess() {
+        if (lodeEnd) {
+            $("#divMore").hide();
+            $("#divMore").html("没有更多数据了");
+        } else {
+            $("#divMore").show();
+        }
+    }
+
+    $(window).scroll(function () {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            ShowListData();
+            var hdw = $('ul.list li');
+            hdw.hide();
+            $('ul.list').find("li:lt(2)").show();
+            $(".list").each(function(){
+            var geshu = $(this).find("li").length-2;	
+            $(this).siblings(".sshousuo").html('查看更多（<i>' + geshu + '</i>件）').css("width","36%");	
+            });
+            
+
+        }
+    });
+
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        //<!--门店商品收缩-->
+
+
+        var hdw = $('ul.list li');
+        hdw.hide();
+        $('ul.list').find("li:lt(2)").show();
+        $(document).on('click', '.sshousuo', function () { 
+            var geshu = $(this).parent().find("ul.list li").length-2;
+            var thishdw = $(this).parent().find('ul.list li:gt(1)');
+            if (thishdw.is(':hidden')) {
+                thishdw.show();
+                $(this).css({ "background": "url(/images/main/more3.png) no-repeat right center", "background-size": "7px 4px", "width": "14%" })
+                $(this).html('收起');
+            } else {
+                thishdw.hide();
+                $(this).css({ "background": "url(/images/main/more2.png) no-repeat right center", "background-size": "7px 4px", "width": "36%" });
+                $(this).html('查看更多（<i>' + geshu + '</i>件）');
+            }
+        }
+    );
+
+
+    });
+
+</script>
+<style>
+.att-popup-container{bottom:48px;}
+</style>
+
+<hi:common_wapstorefooter runat="server" />

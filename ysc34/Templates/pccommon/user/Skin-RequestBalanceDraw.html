@@ -1,0 +1,201 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+<form runat="server" id="form1">
+    <div class="hyzxmain">
+        <div class="hyzxconty">
+            当前位置：<span><a href="/">首页</a></span>><span><a href="/user/UserDefault.aspx">会员中心</a></span>><span><a href="/user/MyAccountSummary.aspx">预付款账户</a></span>><span><a href="#">申请提现</a></span>
+        </div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <div class="dingdan_box1">申请提现</div>
+                    <div style="margin-top:10px;">
+                        <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+                    </div>
+                    <div class="bTop_BomPadding10">
+                        <div class="yzyouxiang_box1 m_top">
+                            <div class="yzyoux1">
+                                <em>用户名：</em><span><%<asp:Literal ID="litUserName" runat="server" />%></span>
+                            </div>
+                            <div class="yzyoux1">
+                                <em>可用余额：</em><span><%<Hi:FormatedMoneyLabel ID="lblBanlance" runat="server" />%>&nbsp&nbsp 元</span>
+                            </div>
+                            <div class="yzyoux1">
+                                <em><span style="font-weight:bold; color:red;">*</span>提现金额：</em><span><%<asp:TextBox ID="txtAmount" runat="server" Width="260" class="input-text" />%></span>
+                            </div>
+                            <div class="yzyoux1 notice">
+                                <em>&nbsp;</em><samp>注意：</samp>每次最少提现 <samp id="spanMindraws"><%<asp:Literal ID="lblminDraws" runat="server" />%></samp> 元,微信支付最小提现金额为<samp>1</samp>元
+                            </div>
+
+                            <div class="yzyoux1">
+                                <em>提现方式：</em>
+                                <span>
+                                    <%<asp:RadioButton runat="server" ID="IsDefault" GroupName="DrawRequestType" Text="银行卡转账" />%>
+                                    <%<asp:RadioButton runat="server" ID="IsWeixin" GroupName="DrawRequestType" Text="微信支付" />%>
+                                    <%<asp:RadioButton runat="server" ID="IsAlipay" GroupName="DrawRequestType" Text="支付宝支付" />%>
+                                </span>
+                            </div>
+
+                            <div class="yzyoux1 RInfo IsAlipay">
+                                <em><span style="font-weight:bold; color:red;">*</span>真实姓名：</em><span><%<asp:TextBox ID="txtAlipayRealName" runat="server" class="input-text" Width="260" />%></span>
+                            </div>
+                            <div class="yzyoux1 RInfo IsAlipay">
+                                <em><span style="font-weight:bold; color:red;">*</span>收款账号：</em><span><%<asp:TextBox ID="txtAlipayCode" runat="server" class="input-text" Width="260" />%></span>
+                            </div>
+                            <div class="yzyoux1 RInfo IsDefault">
+                                <em><span style="font-weight:bold; color:red;">*</span>开户银行：</em><span><%<asp:TextBox ID="txtBankName" runat="server" class="input-text" Width="260" />%></span>
+                            </div>
+                            <div class="yzyoux1 RInfo IsDefault">
+                                <em><span style="font-weight:bold; color:red;">*</span>银行开户名：</em><span><%<asp:TextBox ID="txtAccountName" runat="server" class="input-text" Width="260" />%></span>
+                            </div>
+                            <div class="yzyoux1 RInfo IsDefault">
+                                <em><span style="font-weight:bold; color:red;">*</span>提现账号：</em><span><%<asp:TextBox ID="txtMerchantCode" runat="server" Width="260" class="input-text" />%></span>
+                            </div>
+                            <div class="yzyoux1">
+                                <em>备注：</em><span><%<asp:TextBox ID="txtRemark" runat="server" Width="260" autocomplete="off" class="input-text" MaxLength="100" />%></span>
+                            </div>
+                            <div class="yzyoux1">
+                                <em><span style="font-weight:bold; color:red;">*</span>交易密码：</em><span><input style="display:none"><!--阻止谷歌浏览器自动填充密码--><%<asp:TextBox ID="txtTradePassword" runat="server" autocomplete="off" onfocus="this.setAttribute('autocomplete','new-password');this.setAttribute('type', 'password');"  Width="260" class="input-text" />%></span>
+                                &nbsp;&nbsp;<a href="/User/ForgotTradePassword" target="_blank">忘记交易密码,点击此处重置</a>
+                            </div>
+                            <div class="yzyoux1">
+                                <em>&nbsp;</em>
+                                <p><label class="labeldefault"></label><%<asp:Button ID="btnDrawNext" runat="server" Text="下一步" class="input_next" OnClientClick="return checkData()" />%></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dingdan_box1">申请记录</div>
+                <div class="shouhuoxx1_con">
+                    <%<hi:common_referral_requestbalancedraw runat="server" />%>
+                </div>
+                <div class="page">
+                    <%<Hi:Pager runat="server" ShowTotalPages="true" ID="pager" />%>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript">
+        var minDraws = 0;
+        function checkData() {
+            var Amount = $("#RequestBalanceDraw_txtAmount");
+            if (Amount.val() == "") {
+                alert("请输入提现金额"); Amount.focus(); return false;
+            }
+            else if (!(/^(([1-9]\d{0,6})|\d)(\.\d{1,2})?$/).test(Amount.val())) {
+                alert("提现金额格式错误，请输入最小提现金额至1000万以内的数字(仅可保留两位小数)"); Amount.focus(); Amount.select(); return false;
+            } else {
+                if (!isNaN(parseFloat($.trim($("#spanMindraws").html())))) {
+                    minDraws = parseFloat($.trim($("#spanMindraws").html()));
+                }
+                var drawRequest = parseFloat(Amount.val());
+                if (isNaN(drawRequest) || drawRequest < minDraws) {
+                    alert('请输入提现金额大于或者等于单次提现最小限额'); return false;
+                }
+            }
+
+            if ($("#RequestBalanceDraw_IsAlipay").is(':checked')) {
+                var AlipayRealName = $("#RequestBalanceDraw_txtAlipayRealName");
+                if (AlipayRealName.val() == "") {
+                    alert("请输入支付宝真实姓名"); AlipayRealName.focus(); return false;
+                }
+                var AlipayCode = $("#RequestBalanceDraw_txtAlipayCode");
+                if (AlipayCode.val() == "") {
+                    alert("请输入支付宝账号"); AlipayCode.focus(); return false;
+                }
+            }
+
+            if ($("#RequestBalanceDraw_IsDefault").is(':checked')) {
+                var BankName = $("#RequestBalanceDraw_txtBankName");
+                if (BankName.val() == "") {
+                    alert("请输入开户银行名称"); BankName.focus(); return false;
+                }
+                var AccountName = $("#RequestBalanceDraw_txtAccountName");
+                if (AccountName.val() == "") {
+                    alert("请输入银行开户名"); AccountName.focus(); return false;
+                }
+                var MerchantCode = $("#RequestBalanceDraw_txtMerchantCode");
+                if (MerchantCode.val() == "") {
+                    alert("请输入提现账号"); MerchantCode.focus(); return false;
+                }
+                else if (!(/^(\d{10,21})$/).test(MerchantCode.val())) {
+                    alert("提现账号只可以为10到21位的数字"); MerchantCode.focus(); MerchantCode.select(); return false;
+                }
+            }
+            var TradePassword = $("#RequestBalanceDraw_txtTradePassword");
+            if (TradePassword.val() == "") {
+                alert("请输入交易密码"); TradePassword.focus(); return false;
+            }
+            return true;
+        }
+        $(document).ready(function () {
+            $(".RInfo").hide();
+            $(".IsDefault").show();
+            if ($("#RequestBalanceDraw_btnDrawNext").val()) { } else { $(".yzyouxiang_box1").hide(); }
+
+            if ($("#RequestBalanceDraw_IsDefault").is(':checked')) { $(".RInfo").hide(); $(".IsDefault").show(); }
+            if ($("#RequestBalanceDraw_IsWeixin").is(':checked')) {
+                $(".RInfo").hide(); $(".IsWeixin").show();
+
+            }
+            if ($("#RequestBalanceDraw_IsAlipay").is(':checked')) { $(".RInfo").hide(); $(".IsAlipay").show(); }
+
+            $("#RequestBalanceDraw_IsDefault").click(function () {
+                $(".RInfo").each(function () {
+                    var Txt = $(this).find("input");
+                    if (Txt.val() == "") { Txt.val("0"); }
+                })
+                $(".IsDefault").each(function () {
+                    var Txt = $(this).find("input");
+                    if (Txt.val() == "0") { Txt.val(""); }
+                })
+                $(".RInfo").hide(); $(".IsDefault").show();
+                if (minDraws > 0) {
+                    $("#spanMindraws").html(minDraws);
+                }
+            })
+            $("#RequestBalanceDraw_IsWeixin").click(function () {
+                $(".RInfo").each(function () {
+                    var Txt = $(this).find("input");
+                    if (Txt.val() == "") { Txt.val("0"); }
+                })
+                $(".IsWeixin").each(function () {
+                    var Txt = $(this).find("input");
+                    if (Txt.val() == "0") { Txt.val(""); }
+                })
+
+                $(".RInfo").hide(); $(".IsWeixin").show();
+                var Amount = parseFloat($("#spanMindraws").html());
+                if (isNaN(Amount)) {
+                    Amount = 0;
+                }
+                minDraws = Amount;
+                $("#spanMindraws").html(Amount > 1 ? Amount.toFixed(2) : "1.00");
+            })
+            $("#RequestBalanceDraw_IsAlipay").click(function () {
+                $(".RInfo").each(function () {
+                    var Txt = $(this).find("input");
+                    if (Txt.val() == "") { Txt.val("0"); }
+                })
+                $(".IsAlipay").each(function () {
+                    var Txt = $(this).find("input");
+                    if (Txt.val() == "0") { Txt.val(""); }
+                })
+
+                $(".RInfo").hide(); $(".IsAlipay").show();
+                if (minDraws > 0) {
+                    $("#spanMindraws").html(minDraws);
+                }
+            })
+
+        });
+    </script>
+
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

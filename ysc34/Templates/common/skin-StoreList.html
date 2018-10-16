@@ -1,0 +1,428 @@
+﻿<Hi:WapAppDownloadInfo runat="server" id="appdownloadinfo" />
+<hi:common_wapheader runat="server" />
+<script src="/Utility/artTemplate.js" type="text/javascript"></script>
+<script src="/Utility/Hidistro.List.Common.js" type="text/javascript"></script>
+<div id="hidNoMatchSwitch" style="display:none"><asp:literal runat="server" id="litNoMatchSwitch" /></div>
+<input type="hidden" id="hidIsReloadPosition" value="0" runat="server" clientidmode="Static" />
+<input type="hidden" id="hdQQMapKey" runat="server" clientidmode="Static" />
+ <script src="/Utility/jquery.scrollLoading.min.js"></script>
+<style>
+    #noTip3 {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 103;
+        display: none;
+    }
+
+        #noTip3 .black {
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            padding-top: 220px;
+        }
+
+        #noTip3 .content {
+            width: 165px;
+            background: #212121;
+            padding: 15px;
+            color: #fff;
+            margin: 0 auto;
+            border-radius: 4px;
+            font-size: 0.60rem;
+        }
+
+        #noTip3 .content {
+            width: 222px;
+        }
+
+        #noTip3 .content {
+            background: #fff;
+            color: #353535;
+            padding: 0px;
+        }
+
+            #noTip3 .content div {
+                padding: 0px 15px;
+                overflow: hidden;
+            }
+
+                #noTip3 .content div:first-child {
+                    border-bottom: 1px solid #d5d5d5;
+                    padding-top: 15px;
+                    padding-bottom: 15px;
+                }
+
+            #noTip3 .content em {
+                width: 50%;
+                display: inline-block;
+                float: left;
+                text-align: center;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+
+                #noTip3 .content em:first-child {
+                    background: url(/Templates/common/images/main/tip-shuline.png) repeat-y right top;
+                }
+
+            #noTip3 .content i, #noTip3 .content i a {
+                color: #ff5720;
+            }
+            fieldset legend{ padding:2px; max-width:90%;  background: #f5f5f5; }
+</style>
+<div class="widtht">
+    <div class="multiI">
+        <div class="msearch plr11 ptb13">
+        <div class="StoreName" id="keyWord">
+            <a href="ChangePosition.aspx"><span id="spanAddr"><asp:literal runat="server" id="litAddr" /></span></a>
+        </div>
+            <a class="mbutton" href="StoreListSearch.aspx">
+            </a>
+        </div>
+
+        <div class="mbanner">
+            <div id="slides"><asp:literal runat="server" id="litBanner" /></div>
+        </div>
+
+        <div class="members_nav1 plr11 ptb13" id="divTag">
+            <ul>
+                <hi:WapTemplatedRepeater id="rptTags" templatefile="/Tags/skin-Common_VStoreTags.ascx" runat="server" />
+            </ul>
+        </div>
+</div>
+        <div class="mzbtjdiv">
+            <div class="ptb13 mzbtjh"><fieldset><legend><em>周边推荐</em></legend></fieldset></div>
+            <!--S DataShow-->
+            <div class="datalist">
+                <div id="datashow"></div>
+                <div class="blank12 clearfix"></div>
+                <div id="divMore" class="no_more" onclick="ShowListData()">
+                <img src="/images/icon/ani_loading.png" class="iconzhuan"/>
+                </div>
+            </div>
+        <br />
+ <script type="text/html" id="datatmpl"> 
+                {{each Models as item index}}
+                <div class="ptb13 plr11 mb12 mzbtj">
+                    <div class="mzbtjc">
+                        <!--pdInfo-->
+                        
+
+                        <!--storeInfo-->
+						
+
+                        <div class="intro xinxi">   
+								<div class="store-logo fleft"><a href="StoreHome?StoreId={{item.StoreId}}&storeSource=3"><img src="{{item.StoreImages}}"/></a></div>
+								<div class="store-content fright">
+									<h3>
+                                    <a href="StoreHome?StoreId={{item.StoreId}}&storeSource=3">
+										<div class="fleft">{{item.StoreName}}</div>
+										<div class="fright"><em>{{item.OnSaleNum}}</em>&nbsp;件商品</div>
+                                    </a>    
+									</h3>
+									<div class="locat">
+                                    	<div class="store-list-info">
+										<div class="fleft storelist-address"><em>{{item.AddressSimply}}</em><i>&nbsp;&nbsp;|&nbsp;&nbsp;{{item.Distance}}</i></div>
+										{{if item.Delivery.MinOrderPrice>0}}
+										<div class="fright storesong">满&nbsp;<i>{{item.Delivery.MinOrderPrice}}</i>&nbsp;起送</div>
+										{{/if}}
+										<ul>
+											{{each item.Delivery.DeliveryList as delivery index}}
+											<li>{{delivery}}</li>
+											{{/each}}
+										</ul>
+                                        <div class="youhui" id="SLyouhui">
+                                            <div class="fleft">
+                                            {{if item.Activity.ActivityCount>0}}
+                                            {{if item.Activity.FullAmountReduceList.length>0}}
+                                                <div class="jian"><i class="tag tag_green">减</i><span>
+                                                    {{each item.Activity.FullAmountReduceList as reduce index }}
+                                                    {{if index <= 2}}
+                                                    {{reduce.ActivityName}}{{if index<item.Activity.FullAmountReduceList.length-1&&index!=2}}；
+                                                    {{/if}}
+                                                    {{else if index == 3}}
+                                                    等
+                                                    {{/if}}
+                                                    {{/each}}
+                                                    </span>
+                                                </div>
+                                            {{/if}}
+                                            {{if item.Activity.FullAmountSentFreightList.length>0}}
+                                                <div class="mian"><i class="tag tag_yellow">免</i><span>
+                                                    {{each item.Activity.FullAmountSentFreightList as reduce index }}
+                                                    {{if index <= 2}}
+                                                    {{reduce.ActivityName}}{{if index<item.Activity.FullAmountSentFreightList.length-1&&index!=2}}；{{/if}}
+                                                    {{else if index == 3}}
+                                                    等
+                                                    {{/if}}
+                                                    {{/each}}
+                                                    </span>
+                                                </div>
+                                            {{/if}}
+                                            {{if item.Activity.FullAmountSentGiftList.length>0}}
+                                                <div class="song"><i class="tag tag_red">送</i><span>
+                                                    {{each item.Activity.FullAmountSentGiftList as reduce index }}
+                                                    {{if index <= 2}}
+                                                    {{reduce.ActivityName}}{{if index<item.Activity.FullAmountSentGiftList.length-1&&index!=2}}；{{/if}}
+                                                    {{else if index == 3}}
+                                                    等
+                                                    {{/if}}
+                                                    {{/each}}
+                                                    </span>
+                                                </div>
+                                            {{/if}}
+                                        {{/if}}
+                                        </div>
+                                        
+                                           <div class="hdselect">{{item.Activity.ActivityCount}}个活动</div>									
+                                        </div>
+                                    
+									</div>
+                                    </div>
+                                    
+                                    <ul class="store-products">
+                            {{each item.ProductList as pdItem index}}
+                            <li>
+                                <a href="{{pdItem.ProductType == 1 ?'ServiceProductDetails.aspx':'StoreProductDetails.aspx'}}?StoreId={{pdItem.StoreId}}&ProductId={{pdItem.ProductId}}" class="p-imga">
+                                    <img src="{{pdItem.ThumbnailUrl220}}" style="width:100%">
+                                </a>
+                                <div class="name display-none">
+                                    <a href="{{pdItem.ProductType == 1 ?'ServiceProductDetails.aspx':'StoreProductDetails.aspx'}}?StoreId={{pdItem.StoreId}}&ProductId={{pdItem.ProductId}}">{{pdItem.ProductName}}</a>
+                                </div>
+                                <div class="store-price">
+                                    <strong><em>￥</em>{{pdItem.SalePrice.toFixed(2)}}</strong>
+                                    <i class="position-Cart btnAddToCart  iconfont icon__plus" ProductId="{{pdItem.ProductId}}"  onclick="{{ pdItem.ProductType == 1 ? 'serviceProductHref(this)' : 'AddToCart(this)' }}" StoreId="{{pdItem.StoreId}}"></i>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                                    
+                               </div>   
+							
+	
+                        </div>
+                     
+
+                    </div>
+                </div>
+                </div>
+                {{/each}}
+ </script> 
+
+
+
+
+        </div>
+
+    </div>
+</div>
+<div id="noTip3">
+    <div class="black">
+        <div class="content">
+            <div>您当前位置为【<i id="iAdrCity"></i>】，是否切换位置？</div>
+            <div><em><a href="#" class="quxiao" id="aQuit">取消</a></em><em><i><a href="#" id="aTosee">去看看</a></i></em></div>
+        </div>
+    </div>
+</div>
+<hi:common_wapguanzhu runat="server"></hi:common_wapguanzhu>
+<script src="/Utility/listPageAddToCart.js" type="text/javascript"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script src="../../Utility/vPosition.js"></script>
+<script>
+    var curpagesize = 5, curpageindex = 1, total = -1, lodeEnd = false;
+    $(document).ready(function () {
+        restartPosition();
+    });
+    function restartPosition() {
+        var isReloadPosition = $("#hidIsReloadPosition").val();
+        var mapkey = $("#hdQQMapKey").val();
+
+        if (isReloadPosition == "1") {
+            var geolocation = new qq.maps.Geolocation(mapkey, "myapp");
+            if (geolocation) {
+                geolocation.getLocation(getPositionSuccess, ShowError)
+            }
+            else {
+                window.location.href = "NoPositionTip.aspx";
+            }
+        } else {
+            ShowListData();
+        }
+    }
+
+    function getPositionSuccess(position) {
+        var lat = position.lat;
+        var lng = position.lng;
+        seachNearStore(lat + "," + lng, "", true);
+    }
+    var isLoadData = false;
+    function ShowListData() {
+        if ($("#hidIsReloadPosition").val() == "1")
+            return;
+        if (lodeEnd || isLoadData)
+            return;
+        var isLoadData = true;
+        var queryData = {
+            pageIndex: curpageindex, pageSize: curpagesize, action: "GetStoreList"
+        }
+        var loadingobj;
+        try {
+        target.empty();
+        DataNullHelper.hide(datanullbox);
+        loadingobj = showLoading(target);
+    } catch (e) { }
+
+        $.ajax({
+            type: "GET",
+            url: "/API/DepotHandler.ashx",
+            data: queryData,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                var isLoadData = false;
+                var databox = $("#datashow");
+                try {
+                    loadingobj.close();
+                } catch (e) { }
+                if (curpageindex == 1)
+                    databox.empty();
+                if (data) {
+                    total = data.Total;
+                    if (data.Models && data.Models.length > 0) {
+                        databox.append(template('datatmpl', data));
+                        curpageindex += 1;
+                        if (total == data.Models.length)
+                            lodeEnd = true;
+                    } else {
+                        if (curpageindex == 1) {
+                            if ($("#hidNoMatchSwitch").html() == "Platform")//附件没有门店数据时跳转至平台
+                            {
+                                setTimeout(function () { location.href = "NoStoreTip?tipType=1"; }, 1000);
+                            }
+                            else {
+                                //lodeEnd = true;
+                                //ShowMsg("附近没有匹配门店，请手动定位");
+                                setTimeout(function () { location.href = "NoStoreTip?tipType=2"; }, 1000);
+                                //location.href = "NoStoreTip?tipType=2";
+                            }
+                        } else {
+                            lodeEnd = true;
+                        }
+                    }
+                    loadEndProcess();
+                }
+                shezhigaodu();
+            },
+            error: function () {
+                try {
+                    loadingobj.close();
+                } catch (e) { }
+                ShowMsg("系统繁忙，请刷新重试", false);
+            }
+        });
+    }
+
+    function loadEndProcess() {
+        if (lodeEnd) {
+            $("#divMore").hide();
+            $("#divMore").html("没有更多数据了");
+        } else {
+            $("#divMore").show();
+        }
+    }
+    $(window).scroll(function () {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+          setTimeout(ShowListData(),200);
+          var hdw = $('#SLyouhui .fleft div');
+	      hdw.hide();
+		  $('#SLyouhui .fleft').find("div:first").show();
+		  
+		  
+		
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+
+if($(".appcouponinfo").text()!=""){
+	$("body").css("padding-top", "50px");
+	$(".appcouponinfo em").click(function(){
+		$(this).parent().hide();
+	$("body").css("padding-top", "0px");
+	});
+	}
+
+  var slidesImg = $('#slides img');
+  slidesImg.css({ "width": "100%", "height": "auto" });
+    var width = 750, height = 360;
+    if (slidesImg.length > 1) {
+        //height=slidesImg[0].height();
+        $('#slides').slidesjs({
+            width: width,
+            height: height,
+
+            play: {
+                active: true,
+                auto: true,
+                interval: 4000,
+                swap: true
+            }
+        });
+        $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+    }
+    else if (slidesImg.length == 0) {
+        $('.mbanner').hide();
+    }
+    else {
+        var link = slidesImg.parent();
+        $('#slides').css('display', 'block').html('<div style="width:100%;"></div>');
+        $('#slides div').append(link);
+    };
+    if ($("#divTag img").length == 0)
+        $("#divTag").hide();
+        //<!-- 优惠活动收缩2 -->
+
+          var hdw = $('#SLyouhui .fleft div');
+		
+	      hdw.hide();
+		  $('#SLyouhui .fleft').find("div:first").show();
+       $(document).on('click', '.hdselect', function () {
+			var thishdw=$(this).parent().find('.fleft div:gt(0)');
+			if (thishdw.is(':visible')){
+			thishdw.hide();
+           $(this).css({ "background": "url(/images/main/more2.png) no-repeat right center", "background-size": "7px 4px" });
+
+            }else{
+            thishdw.show();
+			 $(this).css({ "background": "url(/images/main/more3.png) no-repeat right center", "background-size": "7px 4px" });
+		    
+            }
+       })
+
+    });
+	setTimeout("shezhigaodu()",1000);
+		function shezhigaodu(){ 
+			$(".mzbtjc").each(function(){
+				$(".store-products li").each(function(){
+					$(this).find(".p-imga img").height($(this).width());
+				});
+				$(this).find(".p-imga").height($(this).find("li").width());
+			});
+			$(".members_nav1 .p-imga").height($(".members_nav1 ul li").width());
+			
+		$(".datalist .p-img").height($("#datashow .mzbtjc ul li img").width());
+		$(".members_nav1 .p-img").height($(".members_nav1 ul li").width());
+		}
+ 	
+		
+		
+</script>
+<hi:common_wapstorefooter runat="server" />

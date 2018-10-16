@@ -1,0 +1,109 @@
+﻿<hi:common_appheader runat="server" />
+<div class="pb50">
+    <div class="store_head" style="height:auto;">
+        <img id="imgMarketing" src="/images/store_bg.jpg" runat="server" />
+    </div>
+    <div class="goods_list">
+        <ul id="ulProducts"></ul>
+
+    </div>
+    <div id="divProductMore" style="text-align:center; padding: 0.125rem 0.375rem 0.125rem 0.375rem;" onclick="loadMarketingData()">
+        加载更多...
+    </div>
+</div>
+<script>
+    var pageSize = 6;
+    var pageIndex = 1;
+    var totalCount = 0;
+    var refreshIndex = 1;
+    var storeId = "";
+    var imageId = "";
+
+    $(document).ready(function () {
+        storeId = GetUrlValue("storeId");
+        imageId = GetUrlValue("imageId");
+        loadMarketingData();
+           
+    });
+
+    //加载门店营销
+    function loadMarketingData() {
+        if (storeId == "") return;
+        refreshIndex++;//避免刷新重复数据
+        if (refreshIndex - pageIndex > 1) return;
+        $.post('../API/DepotHandler.ashx?action=GetStoreMarketing&PageSize=' + pageSize + '&PageIndex=' + pageIndex + '&storeId=' + storeId + '&imageId=' + imageId + '&isShowServiceProduct=1', function (result) {
+            if (result) {
+                totalCount = result.TotalRecords;
+                if (result.Data.length > 0) {
+                    for (var i = 0; i < result.Data.length; i++) {
+                        var n = result.Data[i];
+                        var userhtm = getProductHtml(n);
+                        $("#ulProducts").append(userhtm);
+                    }
+                    pageIndex = pageIndex + 1;
+                    refreshIndex = pageIndex;
+                }
+                $("#ulProducts li a").unbind("click");
+                $("#ulProducts li a").bind("click", function(){
+                    var proId = parseInt($(this).attr("ProductId"));
+                    if (!isNaN(proId) && proId > 0) {
+                        showProductDetail(proId, storeId);
+                    }
+                })
+            }
+            var listCount = $("#ulProducts li").length;
+
+            if (totalCount == listCount) {
+                $("#divProductMore").html("没有更多商品了");
+            }
+        });
+    }
+
+    function getProductHtml(obj) {
+        var arr = new Array();
+        arr.push('<li>');
+        arr.push('<a href="javascript:void(0)" ProductId="' + obj.ProductId + '">');
+        arr.push('<img src="' + obj.ThumbnailUrl220 + '" />');
+        arr.push('<span class="goods_title text-ellipsis">' + obj.ProductName + '</span>');
+        arr.push('</a>');
+        arr.push('<span class="goods_price"><em>¥</em>' + obj.SalePrice + '<i class="btnAddToCart" ProductId="' + obj.ProductId + '" onclick="AddToCart(this)" StoreId="' + storeId + '"></i></span>');
+        arr.push('</li>');
+        return arr.join("");
+    }
+
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    function scrollLoadData() {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            loadMarketingData();
+        }
+    }
+    $(window).scroll(function () {
+        scrollLoadData();
+    });
+
+    //获取url参数的值
+    function GetUrlValue(name) {
+        url = window.document.location.href;
+        var re = new RegExp("(\\\?|&)" + name + "=([^&]+)(&|$)", "i");
+        var m = url.match(re);
+        if (m)
+            return m[2];
+        else
+            return '';
+    }
+
+    function showProductDetail(id, storeId) {
+        var type = GetAgentType();
+        // 设置标题
+        if (type == 2)
+            window.HiCmd.webShowProduct(id, storeId);
+        else if (type == 1)
+            loadIframeURL("hishop://webShowStoreProduct/null/" + id + "/" + storeId);
+    }
+
+</script>
+<script src="/Utility/listPageAddToCart.js" type="text/javascript"></script>
+<hi:common_appfooter runat="server" />

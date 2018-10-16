@@ -1,0 +1,349 @@
+﻿<hi:common_wapheader runat="server" />
+
+<style>
+    .null_text {
+        text-align: center;
+    }
+
+        .null_text img {
+            width: 6.1rem;
+        }
+
+        .null_text p {
+            text-align: center;
+            padding: 2rem;
+        }
+</style>
+<div class="list-rank clearfix sort">
+    <a name="default" href="#" style="display:none">
+        <div>
+            默认&nbsp;&nbsp;<span></span>
+        </div>
+    </a><a name="saleprice" href="#">
+        <div>
+            价格&nbsp;&nbsp;<span></span>
+        </div>
+    </a><a name="addedDate" href="#">
+        <div>
+            上架&nbsp;&nbsp;<span></span>
+        </div>
+    </a><a name="VistiCounts" href="#">
+        <div>
+            浏览量&nbsp;&nbsp;<span></span>
+        </div>
+    </a><a name="showsaleCounts" href="#">
+        <div>
+            销量&nbsp;&nbsp;<span></span>
+        </div>
+    </a><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <div class="sort-action show">
+            <i class="icon_search_1"></i>
+        </div>
+    </a>
+</div>
+<div class="panel panel-default list-sort-panel" style="margin-bottom: 0; border-radius: 0;
+    position: relative;">
+    <div id="collapseOne" class="panel-collapse collapse">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        </a>
+        <div class="panel-body">
+            <hi:WapTemplatedRepeater id="rptCategories" templatefile="/Tags/skin-Common_VProductListCategory.ascx"
+                                     runat="server" />
+            <div class="clearfix" style="border-bottom: 1px dashed #e7e5ea; float:left;width:100%;">
+            </div>
+            <div class="goods-list-bar">
+                <div class=" form-search">
+                    <input type="text" class="form-control search-query" id="txtKeywords">
+                    <span class="input-group-btn">
+                        <button type="submit" onclick="searchs()" class="btn btn-warning btn-sm" data-type="last">
+                            搜索
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" hide null_text" id="empty">
+    <img src="/images/pro_null.png" />
+    <p>
+        没有搜索到相关商品…<strong>
+            <br>换个搜索词再试一下<br>多个关键字请搜索空格隔开再搜索
+        </strong>
+    </p>
+</div>
+<div class="pbox" id="productListContainer">
+    <div class="goods-list-grid clearfix" id="goodslist">
+        <ul>
+            <hi:WapTemplatedRepeater id="rptProducts" templatefile="/Tags/skin-Common_Prodcts.ascx"
+                                     runat="server" />
+        </ul>
+    </div>
+    <div id="pager">
+    </div>
+</div>
+
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script src="/Utility/listPageAddToCart.js" type="text/javascript"></script>
+<script type="text/javascript">
+    +function ($) {
+        'use strict';
+        var Collapse = function (element, options) {
+            this.$element = $(element)
+            this.options = $.extend({}, Collapse.DEFAULTS, options)
+            this.$trigger = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                                   '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+            this.transitioning = null
+
+            if (this.options.parent) {
+                this.$parent = this.getParent()
+            } else {
+                this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+            }
+
+            if (this.options.toggle) this.toggle()
+        }
+
+        Collapse.VERSION = '3.3.6'
+
+        Collapse.TRANSITION_DURATION = 350
+
+        Collapse.DEFAULTS = {
+            toggle: true
+        }
+
+        Collapse.prototype.dimension = function () {
+            var hasWidth = this.$element.hasClass('width')
+            return hasWidth ? 'width' : 'height'
+        }
+
+        Collapse.prototype.show = function () {
+            if (this.transitioning || this.$element.hasClass('in')) return
+
+            var activesData
+            var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+            if (actives && actives.length) {
+                activesData = actives.data('bs.collapse')
+                if (activesData && activesData.transitioning) return
+            }
+
+            var startEvent = $.Event('show.bs.collapse')
+            this.$element.trigger(startEvent)
+            if (startEvent.isDefaultPrevented()) return
+
+            if (actives && actives.length) {
+                Plugin.call(actives, 'hide')
+                activesData || actives.data('bs.collapse', null)
+            }
+
+            var dimension = this.dimension()
+
+            this.$element
+              .removeClass('collapse')
+              .addClass('collapsing')[dimension](0)
+              .attr('aria-expanded', true)
+
+            this.$trigger
+              .removeClass('collapsed')
+              .attr('aria-expanded', true)
+
+            this.transitioning = 1
+
+            var complete = function () {
+                this.$element
+                  .removeClass('collapsing')
+                  .addClass('collapse in')[dimension]('')
+                this.transitioning = 0
+                this.$element
+                  .trigger('shown.bs.collapse')
+            }
+
+            if (!$.support.transition) return complete.call(this)
+
+            var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+            this.$element
+              .one('bsTransitionEnd', $.proxy(complete, this))
+              .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+        }
+
+        Collapse.prototype.hide = function () {
+            if (this.transitioning || !this.$element.hasClass('in')) return
+
+            var startEvent = $.Event('hide.bs.collapse')
+            this.$element.trigger(startEvent)
+            if (startEvent.isDefaultPrevented()) return
+
+            var dimension = this.dimension()
+
+            this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+            this.$element
+              .addClass('collapsing')
+              .removeClass('collapse in')
+              .attr('aria-expanded', false)
+
+            this.$trigger
+              .addClass('collapsed')
+              .attr('aria-expanded', false)
+
+            this.transitioning = 1
+
+            var complete = function () {
+                this.transitioning = 0
+                this.$element
+                  .removeClass('collapsing')
+                  .addClass('collapse')
+                  .trigger('hidden.bs.collapse')
+            }
+
+            if (!$.support.transition) return complete.call(this)
+
+            this.$element
+              [dimension](0)
+              .one('bsTransitionEnd', $.proxy(complete, this))
+              .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+        }
+
+        Collapse.prototype.toggle = function () {
+            this[this.$element.hasClass('in') ? 'hide' : 'show']()
+        }
+
+        Collapse.prototype.getParent = function () {
+            return $(this.options.parent)
+              .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+              .each($.proxy(function (i, element) {
+                  var $element = $(element)
+                  this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+              }, this))
+              .end()
+        }
+
+        Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+            var isOpen = $element.hasClass('in')
+
+            $element.attr('aria-expanded', isOpen)
+            $trigger
+              .toggleClass('collapsed', !isOpen)
+              .attr('aria-expanded', isOpen)
+        }
+
+        function getTargetFromTrigger($trigger) {
+            var href
+            var target = $trigger.attr('data-target')
+              || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+            return $(target)
+        }
+
+        function Plugin(option) {
+            return this.each(function () {
+                var $this = $(this)
+                var data = $this.data('bs.collapse')
+                var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+                if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+                if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+                if (typeof option == 'string') data[option]()
+            })
+        }
+
+        var old = $.fn.collapse
+
+        $.fn.collapse = Plugin
+        $.fn.collapse.Constructor = Collapse
+
+        $.fn.collapse.noConflict = function () {
+            $.fn.collapse = old
+            return this
+        }
+
+        $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+            var $this = $(this)
+            if (!$this.attr('data-target')) e.preventDefault()
+
+            var $target = getTargetFromTrigger($this)
+            var data = $target.data('bs.collapse')
+            var option = data ? 'toggle' : $this.data()
+
+            Plugin.call($target, option)
+        })
+
+    }(jQuery);
+
+
+
+    $(document).ready(function () {
+        var w = $("#productListContainer li");
+        var h = $("#productListContainer .goods-list-pic");
+        $(h).height(w.width());
+
+    });
+
+
+    $(function () {
+
+        if ($.trim($('#goodslist ul').html()) == "") {
+            $('#productListContainer').addClass('hide');
+            $('#empty').removeClass('hide');
+        }
+
+        var sort = getParam('sort');
+        var order = getParam('order');
+        if (sort && order) {
+            var selectedLink = $('.sort a[name="' + sort + '"]');
+            if (order == 'desc')
+                selectedLink.find('div').addClass('down');
+            else
+                selectedLink.find('div').addClass('up');
+        }
+
+        var sortLink = $('.sort a[href="#"]');
+        var storeId = getParam('storeId');
+        var categoryId = getParam('categoryId');
+        var keyWords = getParam('keyWord');
+        var sort = getParam('sort');
+       
+       
+        if (keyWords) {
+            if (sort != "" && sort != undefined) {                
+                $("#txtKeywords").val(decodeURI(keyWords));//decodeURI(unescape(unescape(keyWords)))
+            } else {             
+                $("#txtKeywords").val(unescape(keyWords));
+            }
+        }
+        $.each(sortLink, function (i, link) {
+            link = $(link);
+            url = 'productList.aspx?storeId=' + storeId + '&categoryId=' + categoryId + '&keyWord=' + keyWords;
+            if (i > 0) {//第一个为默认面，不设置排序
+                url += '&sort=' + link.attr('name');
+                if (link.find('div.up').length > 0)
+                    url += '&order=desc';
+                else
+                    url += '&order=asc';
+            }
+            link.attr('href', url);
+        });
+
+        if (storeId > 0) {
+            $(".panel-body a").each(function () {
+                $(this).attr("href", $(this).attr("href") + "&storeId=" + storeId);
+            });
+        }
+
+
+        vshopPager('pager', $('#txtTotal').val(), 1, 20);
+    });
+    function searchs() {
+        var key = $("#txtKeywords").val();
+        var storeId = getParam('storeId');
+        var categoryId = getParam('categoryId');
+        var url = "ProductList?storeId=" + storeId + "&categoryId=" + categoryId + "&keyWord=" + escape(key);
+
+        window.location.href = url;
+    }
+
+</script>

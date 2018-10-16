@@ -1,0 +1,78 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    body{
+        background:#fff;
+    }
+</style>
+<div class="integralinfo_body">
+    <form runat="server">
+        <input id="hidGiftId" type="hidden" runat="server" ClientIDMode="Static" />
+        <input id="hidIsExemptionPostage" runat="server" type="hidden" ClientIDMode="Static" />
+        <input id="hidReturnUrl" runat="server" type="hidden" ClientIDMode="Static" />
+        <div class="integralinfo_top">
+            <Hi:HiImage ID="imgGift" runat="server" runat="server"/>        
+        </div>
+        <div style="padding:0.75rem;">
+            <h2><asp:literal runat="server" id="litName" /></h2>
+            <div class="parameter">
+                <em>市场价：￥<asp:literal runat="server" id="litMarketPrice" /></em>
+                <!--<em>剩余数量：<asp:literal runat="server" id="litLastAmount" /></em>-->
+                <span>兑换积分：<b><asp:literal runat="server" id="litNeedPoints" /></b>分</span>             
+                <i>可用积分：<asp:literal runat="server" id="litHasPoints" />分</i>              
+            </div>
+            <h4 class="point_info_title"><span>礼品详情</span></h4>
+            <asp:literal runat="server" id="litMeta_Description" />
+                <Hi:ImageLinkButton ID="btnClearCart" IsShow="false" Width="100%" CssClass="btn_fixe" runat="server" Text="立即兑换" onClientClick="exchangegifts(); return false;" />
+        </div>
+        <!--<a href="#" id="btnChage" runat="server" class="btn btn-danger" onclick="myConfirm1('提示', '您确定要兑换该礼品吗？')">立即兑换</a>-->
+    </form>
+</div>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<script type="text/javascript" src="/Utility/jquery.scrollLoading.min.js"></script>
+<script type="text/javascript">
+    function exchangegifts() {
+        var btnText = $("#WAPPointInfo_btnClearCart").text();
+        if (btnText == "无法兑换") {
+            alert_h("您的积分不足，无法兑换！");
+            return;
+        }
+        if (btnText == "礼品不允许兑换") {
+            alert_h("该礼品不允许积分兑换！");
+            return;
+        }
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "ExChangeGifts", giftId: $("#hidGiftId").val() },
+            success: function (resultData) {
+                if (resultData.Status == "success") {
+                    window.location.href = "ShoppingCart.aspx";
+                } else if (resultData.Status == "unlogin") {
+                    window.location.href = "MemberCenter.aspx?ReturnUrl=" + $("#hidReturnUrl").val();
+                } else if (resultData.Status == "hasexists") {
+                    alert_h("购物车中已存在该礼品，请删除购物车中已有的礼品或者下次兑换！");
+                } else if (resultData.Status == "notexists") {
+                    alert_h("该礼品不存在或已被删除！");
+                } else if (resultData.Status == "notexchange") {
+                    alert_h("该礼品不允许使用积分兑换!");
+                }
+                else{
+                    alert_h(resultData.msg);
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        setScrollLoading();
+    });
+
+    function setScrollLoading() {
+        $("img").scrollLoading();
+        $("iframe").each(function () {
+            if (!$(this).attr("src")) {
+                $(this).attr("src", $(this).attr("data-url"));
+            }
+        });
+    }
+</script>

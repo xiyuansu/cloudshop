@@ -1,0 +1,67 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+ <link rel="stylesheet" href="/Utility/star/star-rating.css" rev="stylesheet" type="text/css">
+ <script src="/Utility/star/star-rating.js"></script>  
+
+<form runat="server">
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置><span><a href="url:home">首页</a></span>><span><a href="url:user_UserDefault">会员中心</a></span>>
+        <span>商品评论</span></div>
+           
+    <div class="hyzxconter">
+        <%<Hi:Common_User_Menu runat="server" />%>
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1">
+                    <b>商品评论</b> <em>鼠标点击晒图即可放大查看</em></div>
+                    <div class="xgmima">
+                        <%<Hi:ThemedTemplatedRepeater ID="dlstPts" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_Comment_CommentList.ascx" runat="server" />%>
+                    </div>
+                    <div class="page">
+                        <%<UI:Pager runat="server" ShowTotalPages="true" ID="pager" />%>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+<!--评论大小图切换-->
+    <script>
+        $(function () {
+            var global_img_src = '';
+            $(document).on('click', '.after-service-img img', function () {
+                var new_src = $(this).attr("bigsrc");
+                var is_img = $(this).parents('.pic').find('.preview-img img').attr('src');
+
+                if (new_src != global_img_src || is_img == '') {
+                    global_img_src = new_src;
+
+                    $(this).addClass('active').siblings().removeClass('active');
+                    $(this).parents('.pic').children('.preview-img').show(400);
+                    var new_src = $(this).attr("bigsrc");
+                    $(this).parents('.pic').find('.preview-img img').attr('src', new_src);
+                } else {
+
+                    $(this).parents('.pic').children('.preview-img').hide(10);
+                    $(this).parents('.pic').find('.preview-img img').attr('src', '');
+                }
+            })
+        })
+
+    </script>
+    
+<script type="text/javascript">
+    $(function () {
+        if ($(".xgmima div").length == 0) {
+            $(".xgmima").html("您还未参加任何评价，快去评价吧~ ");
+            $(".dingdan_box1").find("em").eq(0).hide();
+        }
+        $(".column2 .pic").each(function () {
+            if ($(this).find("span img").length == 0)
+            {
+                $(this).hide();
+            }
+        });
+    })
+</script>

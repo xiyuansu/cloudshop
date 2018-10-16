@@ -1,0 +1,40 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form runat="server" id="form1">
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置：<span><%<Hi:SiteUrl UrlName="home" runat="server">首页</Hi:SiteUrl>%></span>><span><%<Hi:SiteUrl UrlName="user_UserDefault" runat="server">会员中心</Hi:SiteUrl>%></span>><span><a
+            href="#">订单付款</a></span></div>
+    <div class="hyzxconter">
+        <div class="hyzxconterl">
+            <%<Hi:Common_User_Menu runat="server" />%>
+            <div class="hyzxconterl1">
+            </div>
+        </div>
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1">
+                    订单线下支付</div>
+                <table style="width: 90%; margin: 0 auto; margin-top: 20px; margin-bottom: 20px;border-left:0px;border-right:0px"
+                    border="0"  cellpadding="0" cellspacing="0">
+                    <tr style="height: 30px;">
+                        <td align="left" width="50%">
+                            <%<asp:Label ID="lblPaymentName" runat="server"></asp:Label>%>
+                        </td>
+                    </tr>
+                    <tr style="height: 30px;">
+                        <td align="left">
+                            <%<asp:Label ID="lblDescription" runat="server"></asp:Label>%>
+                        </td>
+                    </tr>
+                    <tr style="height: 30px;">
+                        <td style="text-align: left; padding-left: 80px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

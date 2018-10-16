@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C041539-06D0-4BCF-823B-29F555527A23}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hishop.Alipay.OpenHome</RootNamespace>
+    <AssemblyName>Hishop.Alipay.OpenHome</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AopSdk">
+      <HintPath>..\dll\AopSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlipayOHClient.cs" />
+    <Compile Include="AlipayOHException\AlipayOpenHomeException.cs" />
+    <Compile Include="AlipayOHException\AliResponseException.cs" />
+    <Compile Include="AlipayOHException\RequestException.cs" />
+    <Compile Include="AlipayOHException\ResponseException.cs" />
+    <Compile Include="AlipayOHException\SignatureException.cs" />
+    <Compile Include="Handle\CommonHandle.cs" />
+    <Compile Include="Handle\IHandle.cs" />
+    <Compile Include="Handle\UserFollowHandle.cs" />
+    <Compile Include="Handle\VerifyGateWayHandle.cs" />
+    <Compile Include="Model\AliRequest.cs" />
+    <Compile Include="Model\AliRequstWhenFollow.cs" />
+    <Compile Include="Model\AliResponse.cs" />
+    <Compile Include="Model\AliResponseMessage.cs" />
+    <Compile Include="Model\AliUserTokenInfo.cs" />
+    <Compile Include="Model\Articles.cs" />
+    <Compile Include="Model\BasicResponse.cs" />
+    <Compile Include="Model\Button.cs" />
+    <Compile Include="Model\ErrorResponse.cs" />
+    <Compile Include="Model\IAliResponseStatus.cs" />
+    <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\Menu.cs" />
+    <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\ResponseMessage.cs" />
+    <Compile Include="Model\UserInfo.cs" />
+    <Compile Include="OnUserFollow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\AddMenuRequest.cs" />
+    <Compile Include="Request\GetMenuRequest.cs" />
+    <Compile Include="Request\IRequest.cs" />
+    <Compile Include="Request\MessagePushRequest.cs" />
+    <Compile Include="Request\OauthTokenRequest.cs" />
+    <Compile Include="Request\RequestBase.cs" />
+    <Compile Include="Request\UpdateMenuRequest.cs" />
+    <Compile Include="Response\MenuAddResponse.cs" />
+    <Compile Include="Response\MenuUpdateResponse.cs" />
+    <Compile Include="Response\MessagePushResponse.cs" />
+    <Compile Include="Response\OauthTokenResponse.cs" />
+    <Compile Include="Utility\CData.cs" />
+    <Compile Include="Utility\RsaFileHelper.cs" />
+    <Compile Include="Utility\TimeHelper.cs" />
+    <Compile Include="Utility\XmlSerialiseHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

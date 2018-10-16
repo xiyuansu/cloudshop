@@ -1,0 +1,75 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="bgc">
+    <ul id="myTab1" class="coupons-nav">
+        <li><a href="javascript:;" id="unUsed" >未使用</a> </li>
+        <li ><a href="javascript:;" id="used">已使用</a> </li>
+        <li ><a href="javascript:;" id="expired">已过期</a> </li>
+    </ul>
+    <div class="kong">
+        <img src="/images/coupon_null.png">
+        <p>暂无代金红包</p>
+    </div>
+    <div class="container">
+        <div id="myTabContent" class="coupons_list">
+            <ul id="ulCoupons">
+                <hi:WapTemplatedRepeater id="rptCoupons" templatefile="/Tags/skin-Common_Coupons.ascx"
+                                         runat="server" />
+            </ul>
+        </div>
+    </div>
+</div>
+<input type="hidden" runat="server" clientidmode="static" id="hidHasCoupon" />
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(".coupons_price em").hide();
+        var usedType = getParam('usedType');
+        if (!usedType || usedType == 1) {
+            $('#unUsed').addClass('border-blue');
+        }
+        else if (usedType == 2) {
+            $('#used').addClass('border-blue');
+            $('#ulCoupons').addClass('bg_curve_ed');
+            $('.discount').css("color", "#8e8e8e");
+        }
+        else {
+            $('#expired').addClass('border-blue');
+            $('#ulCoupons').addClass('bg_curve_ed');
+            $('.discount').css("color", "#8e8e8e");
+        }
+        $(".kong").hide();
+        if ($("#hidHasCoupon").val() == "0") {
+            $(".kong").show();
+            $(".container").hide();
+        }
+    });
+
+
+    $('#used').click(function () {
+        location.replace('memberWeiXinRedEnvelopeCoupons.aspx?usedType=2');
+    });
+
+
+    $('#unUsed').click(function () {
+        location.replace('memberWeiXinRedEnvelopeCoupons.aspx?usedType=1');
+    });
+
+    $('#expired').click(function () {
+        location.replace('memberWeiXinRedEnvelopeCoupons.aspx?usedType=3');
+    });
+
+    function goToUse(productIds) {
+        if (productIds == "") {
+            location.replace("Default.aspx");
+        }
+        else {
+            location.replace("ProductList.aspx?productIds=" + productIds);
+        }
+    }
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

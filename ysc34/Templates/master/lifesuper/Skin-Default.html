@@ -1,0 +1,149 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/lifesuper/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/lifesuper/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+
+<div class="main-content" id="main">
+    <div class="carousel-2014">
+       <div class="w1200 o-hidden m0">
+			<div class="banner fl o-hidden">
+               <script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+               <hi:common_slidead runat="server" adid="2" isdelayedloading="true"></hi:common_slidead>
+            </div>
+            <div class="group-buy fr o-hidden w224">
+				  <script src="../../../Utility/time.js" type="text/javascript"></script>
+                  <h2 class="font18 bold yahei center">我要团购</h2>
+                  <ul>
+                    <hi:common_goodslist_latestgroupbuy runat="server" maxnum="1"></hi:common_goodslist_latestgroupbuy>
+                  </ul>
+            </div>
+       </div>
+    </div>
+    
+    <div class="w1200 m0">
+      <div class="fl w976">
+        <div class="fl w210 commtit posr"><h2 class="posa font20 yahei">新品力荐</h2>
+          
+        <div><hi:common_imagead runat="server" adid="3" isdelayedloading="true"></hi:common_imagead></div></div>
+        <div class="commcol fr w766 o-hidden"><hi:common_subjectproduct_simple runat="server" subjectid="11" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+      </div>  
+      <div class="w224 fr o-hidden ">
+          <ul class="ann o-hidden">
+             <%<Hi:Common_AfficheList runat="server" TemplateFile="HomeTags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="2" />%>
+             <li class="fr yahei"><b><a href="/Affiches.aspx">查看更多&nbsp;</a><img src="/images/life/life_58.jpg"></b></li>
+         </ul>
+         <div><hi:common_imagead runat="server" adid="4" isdelayedloading="true"></hi:common_imagead></div>
+      </div>
+    </div>
+    
+    <div class="w1200 m0">
+       <div class="w976 fl count-down">
+          <div class="hd posr  yahei"><h2 class="posa font20 fl">限时抢购</h2><b class=" fl font14">更多精品秒杀，尽在限时抢购中！</b><b class="fr  font14"><a href="/CountDownProducts.aspx" class="pr10">更多抢购</a></b></div>
+          <ul class="bd o-hidden both"><hi:common_goodslist_latestcountdownbuy runat="server" maxnum="5"></hi:common_goodslist_latestcountdownbuy></ul>
+      </div>
+      <div class="w224 fr o-hidden">
+          <div class="art o-hidden posr">
+            <ul><hi:common_subjectarticle commentid="1" runat="server"></hi:common_subjectarticle></ul>
+            <p class="posa"><a href="/Articles.aspx">更多>></a></p>
+          </div>
+          <div class="guangju">
+            <h2><hi:common_customad runat="server" adid="14"></hi:common_customad></h2>
+            <div class="bd o-hidden">
+               <div class="gpic fl o-hidden"><hi:common_imagead runat="server" adid="5" isdelayedloading="true"></hi:common_imagead></div>
+               <div class="gname fr o-hidden"><hi:common_customad runat="server" adid="6"></hi:common_customad></div>
+            </div>
+          </div>
+      </div>
+      
+    </div>
+    
+    <div class="pro_combination w1200 m0 pt20 both  o-hidden">
+            <div class="combination_l fl w210 o-hidden">
+                <div> <hi:common_subjecttitle runat="server" commentid="2"></hi:common_subjecttitle></div>
+               <div> <hi:common_customad runat="server" adid="7"></hi:common_customad></div>
+                
+            </div>
+            <div class="combination_m w766 fl o-hidden">
+                <hi:common_subjectproduct_tab runat="server" subjectid="12" isdelayedloading="true"></hi:common_subjectproduct_tab>
+            </div>
+
+            <div class="combination_r w224 fr o-hidden">
+                <div class="hd">热销排行榜</div>
+              <div>
+                <hi:common_subjectproduct_top runat="server" subjectid="13"></hi:common_subjectproduct_top>
+                <hi:common_subjectbrand runat="server" commentid="3"></hi:common_subjectbrand>
+                </div>
+            </div>
+    </div>
+    
+    <div class="pro_combination w1200 m0 pt20 both  o-hidden">
+            <div class="combination_l fl w210 o-hidden">
+               <div> <hi:common_subjecttitle runat="server" commentid="4"></hi:common_subjecttitle></div>
+              <div><hi:common_customad runat="server" adid="8"></hi:common_customad></div>
+            </div>
+            <div class="combination_m w766 fl o-hidden">
+                <hi:common_subjectproduct_tab runat="server" subjectid="14" isdelayedloading="true"></hi:common_subjectproduct_tab>
+            </div>
+
+            <div class="combination_r w224 fr o-hidden">
+                <div class="hd">热销排行榜</div>
+                 <div>
+                
+                <hi:common_subjectproduct_top runat="server" subjectid="15"></hi:common_subjectproduct_top><hi:common_imagead runat="server" adid="9"></hi:common_imagead></div>
+            </div>
+    </div>
+    
+    <div class="pro_combination w1200 m0 pt20 both  o-hidden">
+            <div class="combination_l fl w210 o-hidden">
+                <div><hi:common_subjecttitle runat="server" commentid="5"></hi:common_subjecttitle></div>
+               <div><hi:common_customad runat="server" adid="10"></hi:common_customad></div>
+            </div>
+            <div class="combination_m w766 fl o-hidden">
+                <hi:common_subjectproduct_tab runat="server" subjectid="16" isdelayedloading="true"></hi:common_subjectproduct_tab>
+            </div>
+
+            <div class="combination_r w224 fr o-hidden">
+                <div class="hd">热销排行榜</div>
+                 <div>
+                <hi:common_subjectproduct_top runat="server" subjectid="22"></hi:common_subjectproduct_top>
+                <hi:common_subjectbrand runat="server" commentid="6"></hi:common_subjectbrand></div>
+            </div>
+    </div>
+    
+    <div class="pro_combination w1200 m0 pt20 both  o-hidden">
+            <div class="combination_l fl w210 o-hidden">
+              <div>  <hi:common_subjecttitle runat="server" commentid="7"></hi:common_subjecttitle></div>
+               <div> <hi:common_customad runat="server" adid="11"></hi:common_customad></div>
+            </div>
+            <div class="combination_m w766 fl o-hidden">
+                <hi:common_subjectproduct_tab runat="server" subjectid="18" isdelayedloading="true"></hi:common_subjectproduct_tab>
+            </div>
+
+            <div class="combination_r w224 fr o-hidden">
+                <div class="hd">热销排行榜</div>
+                 <div>
+                <hi:common_subjectproduct_top runat="server" subjectid="19"></hi:common_subjectproduct_top>
+                <hi:common_imagead runat="server" adid="12"></hi:common_imagead></div>
+            </div>
+    </div>
+    
+    <div class="pro_combination w1200 m0 pt20 both  o-hidden">
+            <div class="combination_l fl w210 o-hidden">
+                <div><hi:common_subjecttitle runat="server" commentid="8"></hi:common_subjecttitle></div>
+               <div> <hi:common_customad runat="server" adid="13"></hi:common_customad></div>
+            </div>
+            <div class="combination_m w766 fl o-hidden">
+                <hi:common_subjectproduct_tab runat="server" subjectid="20" isdelayedloading="true"></hi:common_subjectproduct_tab>
+            </div>
+
+            <div class="combination_r w224 fr o-hidden">
+                <div class="hd">热销排行榜</div>
+                 <div>
+                <hi:common_subjectproduct_top runat="server" subjectid="21"></hi:common_subjectproduct_top>
+                <hi:common_subjectbrand runat="server" commentid="9"></hi:common_subjectbrand> </div>
+            </div>
+    </div>
+    <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script> 
+</div>
+
+<%<hi:common_footer runat="server" />%>

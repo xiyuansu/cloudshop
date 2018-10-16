@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root CategoryNum="3">
+  <Menu Id="1" Title="商城资讯" DisplaySequence="2" Category="1" Url="/Articles" Where="" Visible="false" />
+  <Menu Id="2" Title="限时抢购" DisplaySequence="1" Category="1" Url="/CountDownProducts" Where="" Visible="false" />
+  <Menu Id="3" Title="精品团购" DisplaySequence="3" Category="1" Url="/GroupBuyProducts" Where="" Visible="true" />
+  <Menu Id="5" Title="品牌专卖" DisplaySequence="5" Category="1" Url="/brand" Where="" Visible="true" />
+  <Menu Id="6" Title="积分兑换" DisplaySequence="6" Category="1" Url="/OnlineGifts" Where="" Visible="true" />
+</root>

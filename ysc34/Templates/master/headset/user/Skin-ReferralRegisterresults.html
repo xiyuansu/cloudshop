@@ -1,0 +1,42 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form runat="server" id="form1">
+    <div class="hyzxmain">
+        <div class="hyzxconty">当前位置><span><a href="url:home">首页</a></span>><span><a href="url:user_UserDefault">会员中心</a></span>><span><a href="#">申请结果</a></span></div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div class="hyzxconterr referral">
+                <div class="dingdan_box1">申请成为推广员</div>
+                <div class="tuikuan_con">
+                    <%<asp:Literal ID="litReferralRegisterresults" runat="server" />%>
+                </div>
+                <div class="refuse" style="display: none;">
+                <i></i>
+                    <div class="title">您提交的申请被管理员拒绝</div>
+                <div class="con"><%<asp:Literal ID="litRefuseReason" runat="server" />%></div>
+                 <div class="grxx_btn"><a type="button" href="javascript:void(0)" id="btnToRegister" class="btn_form">重新申请</a></div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <input runat="server" type="hidden" id="hidIsTrueOrFalse" clientidmode="Static" />
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function (e) {
+            if ($("#hidIsTrueOrFalse").val() == "0") {
+                $(".refuse").show();
+                $(".tuikuan_con").hide();
+            }
+            $("#btnToRegister").click(function (e) {
+                if ($("#hidIsTrueOrFalse").val() == "0")
+                    location.href = "ReferralRegisterAgreement.aspx?again=1";
+                else
+                    location.href = "ReferralRegister.aspx?again=1";
+            });
+        });
+    </script>
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

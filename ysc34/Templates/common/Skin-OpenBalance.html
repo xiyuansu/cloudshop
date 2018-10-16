@@ -1,0 +1,72 @@
+﻿<%<hi:common_wapheader runat="server" />%>
+    <form runat="server" role="form" class="pbox clearfix apply form-horizontal ">
+        <div class="tk_main">
+            <%<asp:HiddenField id="IsOpen" clientidmode="Static" runat="server"></asp:HiddenField>%>
+            <div class="tk_group">
+                <label>交易密码</label>
+                <div class="input-group">
+                    <input id="txtPassword" type="password" class="form-control" placeholder="请输入交易密码" />
+                </div>
+            </div>
+            <div class="tk_group">
+                <label>确认密码</label>
+                <div class="input-group">
+                    <input id="txtConfirmPassword" type="password" class="form-control" placeholder="确认交易密码" />
+                </div>
+                </div>
+            </div>
+        <div class="btn_tk">
+            <input id="btnSave" type="button" class="btn_login" value="保存" />
+        </div>
+
+</form>
+<script>  
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+
+    $(document).ready(function (e) {
+
+        $("#btnSave").click(function (e) {
+
+            var password = $("#txtPassword").val().trim();
+            var confirmPassword = $("#txtConfirmPassword").val().trim();
+
+            if (password.length == 0)
+            {
+                alert_h("请输入交易密码！"); return false;
+            }
+
+            if (password.length < 6 || password.length > 20) {
+                alert_h("交易密码限制为6-20个字符！"); return false;
+            }
+
+            if (confirmPassword.length == 0) {
+                alert_h("请确认交易密码！"); return false;
+            }
+
+            if (password != confirmPassword) {
+                alert_h("两次输入的交易密码不一致！"); return false;
+            }
+
+            var data = {};
+            data.password = password;
+            data.confirmPassword = confirmPassword;
+
+            $.post("/api/VshopProcess.ashx?action=OpenBalance", data, function (json) {
+                if (json.success || json.success == "true") {
+                    alert_h(json.msg, function () {
+                        location.href = "MyAccountSummary.aspx";
+                    });
+                }
+                else
+                {
+                    alert_h(json.msg);
+                }
+            });
+        });
+    });
+</script>
+
+<%<hi:common_wapfooter runat="server" />%>

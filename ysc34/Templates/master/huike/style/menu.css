@@ -1,0 +1,139 @@
+﻿@charset "utf-8";
+/*==========================*/
+
+.my_left_category{
+	    position:absolute; 
+		top:38px; 
+		left:0px; 
+		width:215px;box-shadow: 0px 5px 2px #dadada ;
+		border-top:0px;
+		font-size:12px; 
+		font-family:"微软雅黑";
+		height:420px;
+		z-index:2;
+		display:none;
+		background:#fafafa;
+		
+}
+
+
+ 
+
+.my_left_category .my_left_cat_list{
+width:215px;
+line-height:13.5pt;
+position: relative;
+}
+
+
+.my_left_category .h2_cat{
+	width:215px;
+ 
+	line-height:30px;
+	font-weight:normal;
+	color:#333333;
+	z-index: 4;
+	
+}
+
+.my_left_category a{
+	font:12px;
+	text-decoration:none;
+	color:#333333;
+}
+.my_left_category a:hover{
+	color:#ff3333;
+}
+
+.my_left_category h3{
+margin:0px; 
+padding:0px;
+ 
+font-size:12px; 
+font-weight:normal;
+display:block; 
+padding-left:15px;
+ 
+clear:both; 
+overflow:hidden; line-height:28px;
+z-index:2;
+}
+
+.my_left_category h3 em{float:left;   width:0px; overflow:hidden; padding-top:8px; display:none;}
+.my_left_category h3 a{	line-height:28px;color:#323431; font-size:14px; font-weight:normal; float:left; display:block;  }
+.gouxiaos{ width:175px; overflow:hidden; font-weight:bold;}
+.gouxiaos a{ float:left; font-weight:bold;}
+.gunjianzi{font-family: "宋体"; width:175px; overflow:hidden; height:44px; line-height:22px;}
+.my_left_category h3 .gunjianzi a{ float:left; padding:0 5px;display:block; white-space:nowrap; line-height:22px; height:22px; font-weight:normal; overflow:hidden; color:#666; font-size:12px;}
+.gouxiaos span{ float:right; font-weight: 200; font-size: 12px;font-family: "新宋体";}
+.my_left_category .h3_cat{
+ display:none;
+ width:566px;
+ position:absolute; 
+ left:215px;
+ 
+ top:0px; 
+ cursor:auto;
+ z-index:3;
+}
+#ads_21{ clear:both;}
+.my_left_category .h3_cat a,.my_left_category .h3_cat{ color:#333333;}
+
+.my_left_category .shadow{
+position:inherit;
+/*background:url(/templates/master/huike/images/shadow_04.gif) left top;*/
+width:566px;
+ 
+}
+
+.my_left_category .shadow_border{
+position:inherit; 
+width:566px; 
+border:1px solid #ddd; 
+box-shadow:0 0 8px #ddd;
+background-color:#ffffff; 
+margin-bottom:3px;
+ z-index:5;
+}
+.my_left_category .shadow_border h4{ clear:both; }
+.my_left_category .shadow_border ul{margin:0; padding:0;}
+.my_left_category .shadow_border ul li {
+list-style:none;
+padding-left:10px;
+background-image:url(/templates/master/huike/images/my_cat_sub_menu_dot.gif);
+background-repeat:no-repeat;
+background-position:0px 8px;
+float:left;
+width:95px;
+height:27px;
+overflow:hidden;
+letter-spacing:0px;
+} 
+
+.my_left_category .active_cat{ cursor:pointer;}
+.my_left_category .active_cat h3 {   background:#fff; z-index:4;width:200px;overflow:hidden; line-height:28px;  box-shadow:0 0 8px #ddd; border-right:0px; }
+.my_left_category .active_cat h3 span{ display:none;} 
+.my_left_category .shadow_border   .category h4 { font-weight:bold; font-size:12px; width:90px; overflow:hidden; float:left; margin-right:10px; vertical-align:top; }
+.my_left_category .shadow_border   .category h4 a{ color:#cc0000;}
+.my_left_category .shadow_border   .category ul{ float:left; width:400px;}
+.my_left_category .active_cat h4 span{ display:none;} 
+.my_left_category .active_cat div{display:block;} 
+.my_left_category .active_cat h3 a{  }
+.my_left_category .active_cat h3 a:hover{  }
+
+.my_left_category .shadow_border   .brand{float:right; width:190px; background:#fff9ef; padding:10px; overflow:hidden; margin:0px;  line-height:22px;}
+.my_left_category .shadow_border  .brand h5{ margin:0px; font-weight:bold; padding:0px; font-size:12px;height:30px; line-height:30px; border-bottom:1px solid #ccc; width:200px;overflow:hidden; }
+.my_left_category .shadow_border  .brand h5 b{ font-weight:normal; margin-left:50px;}
+
+.my_left_category .shadow_border   .brand a{  margin-right:1px; white-space:nowrap; word-break:break-all; float:left; width:85px; height:30px;line-height:30px; overflow:hidden;}
+.my_left_category .shadow_border   .category{float:left; width:330px; background:#ffffff; overflow:hidden;margin:0px; padding:0px; padding:10px;  line-height:22px;}
+
+.my_left_category .shadow_border   .brand h5 b a{ float:none; color:#0061AA; display:inline;}
+
+.allclassmenu {width:210px; height:27px;z-index:999;position:relative;}
+.classlist {left:1px;position:absolute;top:27px;z-index:1;display:none; width:210px; background:#FFFFFF;}
+.classcase{padding:16px 0;padding-top:5px;width:168px;background:url(/templates/master/huike/images/allclass_bg.gif) #f8eeda no-repeat -1px bottom;border:1px solid #d1c39a;border-top:none;border-bottom:none;}
+.fenlei_jianduan{padding:5px 0px; width:345px; border-bottom:1px solid #e4e4e4; overflow:hidden;}
+.fthree{width:240px;float:left;}
+.fthree span{margin:0px 5px;float:left;height:25px;line-height:25px;width:70px; overflow:hidden;}
+

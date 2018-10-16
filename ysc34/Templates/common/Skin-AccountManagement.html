@@ -1,0 +1,45 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="main">
+    <div class="account" id="icon">
+        <ul>
+            <li><a href="BindPhone.aspx"><strong><asp:literal runat="server" id="litPhoneTitle" Text="绑定手机" /><span><asp:literal runat="server" id="litPhone" Text="" /></span></strong><br /><asp:literal runat="server" id="litPhoneMsg" Text="为了您帐号安全，请即时绑定手机" /></a></li>
+            <li><a href="BindEmail.aspx"><strong><asp:literal runat="server" id="litEmailTitle" Text="绑定邮箱" /><span><asp:literal runat="server" id="litEmail" Text="" /></span></strong><br /><asp:literal runat="server" id="litEmailMsg" Text="若您验证邮箱停用，请及时更换绑定" /></a></li>
+            <li><a href="SetPassword.aspx"><strong><asp:literal runat="server" id="litSetPasswordTitle" Text="设置登录密码" /></strong><br />
+                <asp:literal runat="server" id="litSetPasswordMsg" Text="您的帐号是信任登录帐号,如果需要在其它端登录,请点击此处设置密码" /></a></li>
+            <!--<li><a href="logout.aspx"><strong>退出当前帐号</strong></a></li>-->
+            <li><asp:HyperLink runat="server" id="traderPasswordLink"><strong><asp:literal runat="server" id="litTraderPasswordTitle" Text="" /><span></span></strong><br /><asp:literal runat="server" id="litTraderPasswordMsg" Text="为了您的资金安全，请妥善保管" /></asp:HyperLink></li>
+            <li>
+                <a href="UserProfile.aspx">
+                    <strong>个人信息</strong><br />
+                    修改个人基本信息 
+                </a>
+            </li>
+         </ul>
+    </div>
+</div>
+<div class="btn_tk">
+    <a href="logout.aspx" class="btn_login  ">退出登录</a>
+</div>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+    $(function () {
+        $('#ico i').each(function (i) {
+            $(this).css('background-position', '0 ' + (-i * 20) + 'px');
+        })
+    });
+
+    //签到来源  定义数字与注册来源相同
+    function GetSignInSouce() {
+        var iSourceOrder = 1;
+        url = document.location.href.toLowerCase();
+        if (url.indexOf("/wapshop/") > -1) iSourceOrder = 2;
+        if (url.indexOf("/vshop/") > -1) iSourceOrder = 3;
+        if (url.indexOf("/alioh/") > -1) iSourceOrder = 4;
+        if (url.indexOf("/appshop/") > -1) iSourceOrder = 5;
+        return iSourceOrder;
+    }
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

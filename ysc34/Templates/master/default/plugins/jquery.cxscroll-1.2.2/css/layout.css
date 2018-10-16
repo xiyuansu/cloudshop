@@ -1,0 +1,44 @@
+body,h1,h2,h3,ul,li,p{margin:0;padding:0;}
+h1,h2,h3{font:bold 36px/2 "\5fae\8f6f\96c5\9ed1";}
+h1{padding:0 20px;background:#333;color:#fff;}
+h2{font-size:20px;}
+h3{font-size:16px;}
+ul{list-style-type:none;}
+
+.wrap{padding:0;}
+
+/**
+ * æ¨ªå‘æ»šåŠ¨
+ * ------------------------------ */
+.scroll_horizontal{position:relative;width: 400px;height: 260px;padding:10px;}
+.scroll_horizontal .box{overflow:hidden;position:relative;width: 380px;margin:0 auto;}
+.scroll_horizontal .list{overflow:hidden;width:9999px;}
+.scroll_horizontal .list li{float:left;width:200px;}
+
+.scroll_horizontal .next{position:absolute;top:50%;margin-top:-25px;width:10px;height:50px;background-image:url(../img/pr_jiantou.png);background-repeat:no-repeat;font:0/0 Arial;cursor:pointer;}
+.scroll_horizontal .prev{position:absolute;top:50%;margin-top:-25px;width:10px;height:50px;background-image:url(../img/pl_jiantou.png);background-repeat:no-repeat;font:0/0 Arial;cursor:pointer;}
+.scroll_horizontal .prev{left:0px;}
+.scroll_horizontal .next{right:0px;}
+.scroll_horizontal .prev:hover{background-image:url(../img/pl_icon2.png);}
+.scroll_horizontal .next:hover{background-image:url(../img/pl_icon1.png);}
+/**
+ * çºµå‘æ»šåŠ¨
+ * ------------------------------ */
+.scroll_vertical{position:relative;width: 220px;height: 290px;}
+.scroll_vertical .box{overflow:hidden;position:relative;top: 24px;height: 240px;}
+.scroll_vertical .list{position:absolute;top:0;left:0;}
+.scroll_vertical .list li{height: 60px;text-align:center;width: 220px;}
+.scroll_vertical .next{position:absolute;left:50%;width:120px;height:30px;margin-left:-25px;width:60px;height: 18px;background-image:url(../img/brand_jt_07.jpg);background-repeat:no-repeat;font:0/0 Arial;cursor:pointer;}
+.scroll_vertical .prev{position:absolute;left:50%;width:120px;height:30px;margin-left:-25px;width:60px;height: 16px;background-image:url(../img/brand_jt_03.jpg);background-repeat:no-repeat;font:0/0 Arial;cursor:pointer;}
+.scroll_vertical .next{bottom: 0;}
+.scroll_vertical .prev{top: 0;}
+.scroll_vertical .next:hover{background-image:url(../img/brand_icon_07.jpg);}
+.scroll_vertical .prev:hover{background-image:url(../img/brand_icon_03.jpg);}
+
+#acts{margin-top:20px;}
+
+/*
+ * ä½œè€…ï¼š834499378@qq.com
+ * æ—¶é—´ï¼š2016-08-09
+ * æè¿°ï¼šæ— ç¼æ»šåŠ¨æ•ˆæžœ
+ */

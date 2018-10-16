@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Subject SubjectId="1" Type="floor" Title="玩具动漫" ImageTitle="/templates/master/default/UploadImage/titleimg/20130911105735_6802.jpg" IsShowMoreLink="true" AdImage="/templates/master/default/UploadImage/advertimg/20130911162528_3767.jpg" AdUrl="http://google9.com" TitelUrl="http://sian.com" CategoryId="309" TagId="" BrandId="" MaxNum="3" SubCategoryNum="5" ImageSize="220" ImageSizeRange="220" AdImageSize="240*254" TitleImageSize="28*36" />
+  <Subject SubjectId="2" Type="simple" CategoryId="273" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="4" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="3" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="false" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="4" Type="simple" CategoryId="273" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="4" ImageSize="220" ImageSizeRange="220" />
+   <Subject SubjectId="5" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="false" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="60" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top.html" />   
+   <Subject SubjectId="17" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="false" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="160" ImageSizeRange="60" SkinName="HomeTags/SubjectProduct/Common_SubjectProduct_Top2.html" />
+</root>

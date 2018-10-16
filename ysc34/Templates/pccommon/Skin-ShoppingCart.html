@@ -1,0 +1,400 @@
+﻿<%<hi:common_header runat="server" skinname="ascx/tags/Skin-Common-Top.ascx" />%>
+
+
+<script language="javascript" type="text/javascript" src="/Utility/jquery.cookie.js"> </script>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        if ($("div.qqalipay em a").length == 0)
+            $("div.qqalipay").hide();
+    })
+    $(document).ready(function () {
+        $("#btnLoginAndBuy").bind("click", function () { LoginAndCheck(); });
+        $("#btnAmoBuy").bind("click", function () { window.location.href = "SubmmitOrder.aspx"; });
+        changeBuyProduct();
+        procucthasstore();
+    }); function CloseLogin() {
+        $("#loginForBuy").hide('hide');
+    }
+
+    function clearCart() {
+        if ($("#ShoppingCart_Common_ShoppingCart_ProductList___pnlShopProductCart").find(".list .floor").length == 0 && $("#ShoppingCart_Common_ShoppingCart_GiftList___pnlShopGiftCart").find(".list .floor").length == 0 && $("#div_InvalidText").find(".list .floor").length == 0) {
+            $("#ShoppingCart_pnlShopCart").html('<div class="cart_content"><div class="cart-empty"><div class="message"><p>购物车内暂时没有商品，您可以<a href="../../../Default.aspx">去首页</a>挑选喜欢的商品</p></div></div></div>');
+        }
+
+        if ($("#ShoppingCart_Common_ShoppingCart_ProductList___pnlShopProductCart").find(".list .floor").length == 0) {
+            $("#ShoppingCart_Common_ShoppingCart_ProductList___pnlShopProductCart").html("");
+        }
+        if ($("#ShoppingCart_Common_ShoppingCart_GiftList___pnlShopGiftCart").find(".list .floor").length == 0) {
+            $("#ShoppingCart_Common_ShoppingCart_GiftList___pnlShopGiftCart").html("");
+        }
+
+    }
+
+    function GoToCheck() {
+        var chk = $(":checkbox[name=ck_productId]:checked");
+        if (chk.length == 0 && ($("#ShoppingCart_hidPointGifts").val() == "" || $("#ShoppingCart_hidPointGifts").val() == "0")) {
+            ShowMsg("请勾选结算商品！", false);
+            return false;
+        }
+
+        var notstore = false; $(".con").each(function () {
+            var checked = $(this).find(".select input");
+            if (checked.attr("checked") == 'checked') {
+                var curproductziti = $(this).find(".ziti");
+                if (curproductziti.length == 0) {
+                    notstore = true;
+                }
+            }
+        });
+        if (notstore && $(".ziti").length > 0) {
+            return confirm("订单内存在不支持上门自提的商品，将无法上门自提，是否确认提交？");
+        }
+
+        if ($("#ShoppingCart_hfdIsLogin").val() != "logined") {
+            $("#loginForBuy").show('hide');
+            return false;
+        }
+
+        return true;
+    }
+
+    // 获取选中购买的产品
+    function getSelectProductckids() {
+        var chk = $(":checkbox[name=ck_productId]:checked,:checkbox[name=ck_gifId]:checked");
+        var ck_productId = "";
+        var productNum = 0;
+        $(chk).each(function () {
+            ck_productId += $(this).val() + ",";
+            var buynum = $(this).parents('.con').find('.num .cart_txtbuynum').val();
+            productNum = productNum + parseInt(buynum);
+        });
+        $('.select_num em').html(productNum);
+        ck_productId = ck_productId.substring(0, ck_productId.length - 1);
+        return ck_productId;
+    }
+
+    // 登录后再购买
+    function LoginAndCheck() {
+        var ck_productId = getSelectProductckids();
+        var username = $("#textfieldusername").val();
+        var password = $("#textfieldpassword").val();
+        var thisURL = document.URL;
+        if (username.length == 0 || password.length == 0) {
+            ShowMsg("请输入您的用户名和密码!", false);
+            return;
+        }
+
+        $.ajax({
+            url: "/User/Login",
+            type: "post",
+            dataType: "json",
+            timeout: 10000,
+            data: { username: username, password: password, ckids: ck_productId, action: "Common_UserLogin" },
+            async: false,
+            success: function (data) {
+                if (data.Status == "Succes") {
+                    $("#loginForBuy").hide('hide');
+                    $("#hiddenIsLogin").val('logined');
+                    window.location.href = "SubmmitOrder.aspx?productSku=" + ck_productId;
+                }
+                else {
+                    alert(data.Msg);
+                }
+            }
+        });
+    }
+
+    //初始化购物车
+    function changeBuyProduct() {
+        var ckids = getSelectProductckids();
+        $.cookie("ckids", ckids, { expires: 3 });
+        $.ajax({
+            url: "API/ShoppingCartHandler.ashx",
+            type: "post",
+            dataType: "json",
+            timeout: 10000,
+            data: { ckids: ckids, client: "pc" },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (parseFloat(data.StrTotalAmount) <= 0 && data.LineGifts.length == 0) {
+                        $("#ShoppingCart_btnUnCheckout").show();
+                        $("#ShoppingCart_btnCheckout").attr("disabled", "disabled");
+                        $("#divcartsub").removeClass("cart_buy_cartsub");
+                        $("#divcartsub").addClass("cart_buy_cartnosub");
+                    }
+                    else {
+                        $("#ShoppingCart_btnCheckout").show();
+                        $("#ShoppingCart_btnCheckout").removeAttr("disabled");
+                        $("#divcartsub").removeClass("cart_buy_cartnosub");
+                        $("#divcartsub").addClass("cart_buy_cartsub");
+                    }
+
+                    if (data.IsReduced) {
+                        $("#spanAmoutPrice").show();
+                        $("#ShoppingCart_hlkReducedPromotion").attr("href", "/Favourable/show-" + data.ReducedPromotionId + ".aspx");
+                        $("#ShoppingCart_hlkReducedPromotion").show();
+                        $("#ShoppingCart_hlkReducedPromotion").text(data.ReducedPromotionName + " 优惠：" + data.StrReducedPromotionAmount);
+                        $("#spanAmoutPrice").text("商品金额：" + data.StrAmount);
+                    } else {
+                        $("#spanAmoutPrice").hide();
+                        $("#ShoppingCart_hlkReducedPromotion").hide();
+                    }
+
+                    if (data.IsSendGift) {
+                        $("#ShoppingCart_Common_ShoppingCart_PromoGiftList___pnlPromoGift").show();
+                        if (data.SendGiftPromotionId > 0) {
+                            $("#ShoppingCart_Common_ShoppingCart_PromoGiftList___pnlPromoGift").hide();
+                        } else {
+                            $("#ShoppingCart_Common_ShoppingCart_PromoGiftList___pnlPromoGift").show("slow");
+                            $("#ul_promgift").show("slow");
+                        }
+                    } else {
+                        $("#ShoppingCart_Common_ShoppingCart_PromoGiftList___pnlPromoGift").hide();
+                        $("#ShoppingCart_Common_ShoppingCart_GiftList___pnlFreeShopGiftCart").hide();
+                    }
+                    if (ckids == "" && data.LineGifts.length == 0 && data.LineItems.length > 0) {
+                        $("#ShoppingCart_btnUnCheckout").show();
+                        $("#ShoppingCart_btnCheckout").attr("disabled", "disabled");
+                        $("#divcartsub").removeClass("cart_buy_cartsub");
+                        $("#divcartsub").addClass("cart_buy_cartnosub");
+                        $("#ShoppingCart_lblTotalPrice").text(0);
+                    }
+                    else {
+                        $("#ShoppingCart_lblTotalPrice").text(data.StrTotalAmount);
+                    }
+                }
+                else {
+                    $("#ShoppingCart_btnUnCheckout").show();
+                    $("#ShoppingCart_btnCheckout").attr("disabled", "disabled");
+                    $("#divcartsub").removeClass("cart_buy_cartsub");
+                    $("#divcartsub").addClass("cart_buy_cartnosub");
+                    $("#ShoppingCart_lblTotalPrice").text(0);
+                }
+            }
+        });
+    }
+
+    //验证数量
+    function validateNum(e) {
+        var buyNum = $($(e).parent().parent().find(".cart_txtbuynum").get(0)).val();
+        var stockNum = $($(e).parent().find(":input[type=hidden]").get(0)).val();
+        var reg = /^\d+$/;
+        if (!reg.test(buyNum)) {
+            ShowMsg("购买数量只能输入正整数", false);
+            return false;
+        }
+
+        if (parseInt(buyNum) > parseInt(stockNum)) {
+            ShowMsg("最多只能购买" + stockNum + "件", false);
+            return false;
+        }
+
+        return true;
+    }
+
+    function procucthasstore() {
+        if ($("#ShoppingCart_Common_ShoppingCart_ProductList___pnlShopProductCart .con").length == $(".ziti").length || $(".ziti").length == 0) {
+            $(".notes").hide();
+        }
+
+        else {
+            $(".notes").show();
+        }
+
+    }
+
+    function checkziti() {
+        $("#ShoppingCart_Common_ShoppingCart_ProductList___pnlShopProductCart .con").each(function () {
+            if ($(this).find(".ziti").length > 0) {
+                if (!$(this).find(".select").find('input').is(":checked"))
+                    $(this).find(".select").find('input').iCheck('check');
+            } else {
+                if ($(this).find(".select").find('input').is(":checked"))
+                    $(this).find(".select").find('input').iCheck('uncheck');
+            }
+        });
+        jiesuan();
+    }
+
+    function deleteall() {
+        if (confirm('确定删除选中商品？')) {
+            deleteSkuItem();
+            deleteGifItem();
+        }
+    }
+
+    //删除商品
+    function deleteSkuItem() {
+        var sskuidlist = "";
+        var chk = $(":checkbox[name=ck_productId]:checked");
+        $(chk).each(function () {
+            sskuidlist += $(this).parents('.con').find('#hidSkuId').val() + ",";
+            $(this).parents('.floor').remove();
+        });
+        $.ajax({
+            url: "API/ShoppingCartHandler.ashx",
+            type: "post",
+            dataType: "json",
+            timeout: 10000,
+            data: { action: 'deleteall', SkuIdList: sskuidlist, client: "pc" },
+            async: true,
+            success: function (data) {
+                if (data.status == 'true') {
+                    jiesuan();
+                    clearCart();
+                }
+            }
+        });
+    }
+
+    //删除积分商品
+    function deleteGifItem() {
+        var giflist = "";
+        var chk = $(":checkbox[name=ck_gifId]:checked");
+        $(chk).each(function () {
+            giflist += $(this).attr("value") + ",";
+            $(this).parents('.floor').remove();
+        });
+        $.ajax({
+            url: "API/ShoppingCartHandler.ashx",
+            type: "post",
+            dataType: "json",
+            timeout: 10000,
+            data: { action: 'deleteGift', giftId: giflist, client: "pc" },
+            async: true,
+            success: function (data) {
+                if (data.status == 'true') {
+                    clearCart();
+                }
+            }
+        });
+    }
+
+    $(function () {
+        var listInvalid = $('.cart_commodit div[name="listInvalid"]');//查找到失效的商品
+
+        if (listInvalid.length > 0 || $("#div_StoreText").length > 0) {
+            var divInvalidHTML = "";
+            divInvalidHTML += "<div class=\"title pc_carttitle\">&nbsp;</div>\n";//头部
+            divInvalidHTML += "<div class=\"list\">";
+            if ($("#div_StoreText").length > 0) {
+                divInvalidHTML += $("#div_StoreText").html();//门店
+            }
+            $('.cart_commodit div[name="listInvalid"]').each(function (i) {
+                divInvalidHTML += $(this).html();//内容
+                $(this).remove();//上面赋值完后，移除原内容，如不移除当前内容，它上面删除它需点击两次才可以；则这里移除原来位置失效商品
+            });
+            divInvalidHTML += "</div>";
+            $("#div_StoreText").remove();
+            $("#div_InvalidText").html(divInvalidHTML);//把失效的商品 排到最后面(既礼品里面的后面)
+        }
+    }); </script>
+<style>
+    .top .top-main {
+        width: 1200px;
+    }
+
+    .cart_h {
+        width: 1200px;
+    }
+
+    .cart_content {
+        width: 1200px;
+    }
+
+    .cart_Order_info2 {
+        width: 1200px;
+    }
+
+    .modal_qt {
+        display: none;
+    }
+</style>
+
+<form runat="server">
+    <div id="msgtip" style="width: 1200px; margin: 0 auto; color: red;">
+        <input type="hidden" runat="server" id="hidPointGifts" />
+        <div> <%<Hi:SmallStatusMessage id="Status" runat="server" Width="200" Visible="False" />%></div>
+    </div>
+    <div id="header" class="cart_h">
+        <div id="logo">
+            <hi:common_logo id="Common_Logo1" runat="server" />
+        </div>
+        <div class="cart_step">
+            <ul class="cart_step1">
+                <li class="step-1"><b></b>1.我的购物车</li>
+                <li class="step-2"><b></b>2.填写核对订单信息</li>
+                <li class="step-3">3.成功提交订单</li>
+            </ul>
+        </div>
+    </div>
+    <div id="main1">
+        <asp:panel id="pnlShopCart" runat="server">
+            <div class="cart_content">
+                <div class="cart-hd " style="display:none;">
+                    <%<asp:TextBox ID="txtSKU" runat="server" Cssclass="cart_text_input" width="200px" />%>
+                    <%<asp:Button ID="btnSKU" runat="server" Cssclass="cart_submit_input" UseSubmitBehavior="false" text="添加到购物车" />%>
+                </div>
+                <div class="cart_commodit">
+                    <%<hi:common_shoppingcart_productlist runat="server" width="100%" />%>
+                    <div class="notes" style="display:none;">购物车内有不支持上门自提的商品，将无法使用上门自提服务。您可  <em onclick="checkziti()" style="cursor:pointer;">仅提交支持上门自提的订单</em></div>
+                </div>
+                <div class="cart_commodit">
+                    <hi:common_shoppingcart_giftlist runat="server" width="100%" />
+                </div>
+                <div class="cart_commodit" id="div_StoreText">
+                    <hi:common_shoppingcart_storelist runat="server" width="100%" />
+                </div>
+                <div class="cart_commodit" id="div_InvalidText"><!--失效的产品显示位置--></div>
+
+                <div class="cart_commodit_settle">
+                    <a href="javascript:void(0);" style="margin-left:20px;" onclick="deleteall()">删除选中商品</a>
+                    <div class="cart_buy_cartsub" id="divcartsub">
+                        <%<asp:Button ID="btnCheckout" class="cart_chekout" Text="去结算" runat="server" OnClientClick="if (!GoToCheck()) { return false; }" UseSubmitBehavior="false" />%>
+                        <input type="button" disabled="disabled" id="btnUnCheckout" value="去结算" runat="server" style="background-color:#d5d5d5;display:none;" />
+                    </div>
+                    <span class="cart_commodit_price3"><em>合计(不含运费):</em> <span>￥</span><%<Hi:FormatedMoneyLabel ID="lblTotalPrice" runat="server" />%></span>
+                    <span class="select_num">已选择 <em>2</em> 件商品</span>
+                </div>
+            </div>
+        </asp:panel>
+        <asp:panel id="pnlNoProduct" runat="server">
+            <div class="cart_content">
+                <div class="cart-empty">
+                    <div class="message">
+                        <p>
+                            购物车内暂时没有商品，您可以<a href="../../../Default.aspx">去首页</a>挑选喜欢的商品
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </asp:panel>
+    </div>
+    <div class="login_tan" id="loginForBuy" style="display: none;">
+        <div class="dialog_title">
+            <div class="dialog_title_l"><span>您尚未登录，请登录</span></div>
+            <div class="dialog_title_r" id="imgCloseLogin"></div>
+        </div>
+        <div class="dialog_cartitem">
+            <input type="text" name="textfield" id="textfieldusername" placeholder="邮箱/手机号" class="login_tan_input1" />
+            <input type="password" name="textfield2" id="textfieldpassword" placeholder="密码" class="login_tan_input2" />
+            <div class="info">
+                <a href="/register.aspx" class="register">我要注册</a>
+                <a href="/ForgotPassword.aspx">忘记密码?</a>
+                <input id="btnAmoBuy" class="btnAmoBuy" type="button" value="匿名购买" style="display:none;" />
+            </div>
+            <div class="btnbar">
+                <input type="button" name="button" id="btnLoginAndBuy" value="登 录" class="login_tan_input3" />
+            </div>
+            <div class="qqalipay openlogin">
+                <span>使用合作网站账号登录商城：</span>
+                <em><%<hi:common_link_openid runat="server" /> %></em>
+            </div>
+        </div>
+    </div>
+    <div class="modal_qt"></div>
+    <%<asp:HiddenField runat="server" ID="hfdIsLogin" value="0" /> %>
+    <%<asp:HiddenField runat="server" ID="hidCurrentPoints" value="0" /> %>
+    <%<hi:common_footer runat="server" skinname="ascx/tags/Skin-Common_Bottom.ascx" />%>
+</form>

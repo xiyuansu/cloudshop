@@ -1,0 +1,69 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form runat="server">
+    <div class="hyzxmain">
+        <div class="hyzxconty">当前位置><a href="/">首页</a>>
+        
+            <span><a href="/user/UserDefault.aspx">会员中心</a>&gt;</span>
+        手机验证</div>
+        <div class="hyzxconter">
+            <%<hi:common_user_menu runat="server" />%>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+                    <div class="dingdan_box1">手机验证</div>
+                    <div class="yanzh_pic off">
+                        <span class="col">手机验证</span><span>完成</span>
+
+                    </div>
+                    <div class="yzyouxiang_box1">
+
+                        <div class="yzyoux">
+                            <em>我的手机号码:</em> <span>
+                                <input type="text" class="yanzheng_input1" id="txtcellphone" runat="server" /><input type="button"
+                                                                                                                     class="yanzheng_input3" value="点击获取验证码" id="btnVerfication" />
+                            </span>
+                        </div>
+                        <div class="yzyoux">
+                            <em>验证码:</em> <span>
+                                <input type="text" class="yanzheng_input1" id="txtcode" runat="server" />
+                            </span>
+                        </div>
+                        <div class="btn-password"><%<asp:Button ID="btnSubmit" CssClass="btn_style_bar mt20 ml90" Text="提交" runat="server" /> %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $("#btnVerfication").bind("click", function () {
+        var tempcellphone = $("#userCellPhoneVerification_txtcellphone").val();
+        var regPartton = /1[3-8]+\d{9}/;
+        if (tempcellphone.length != 11 || !tempcellphone.match(/^1[3|4|5|7|6|9|2|8][0-9]\d{4,8}$/)) {
+            alert('请输入正确的手机号码');
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            timeout: 2000,
+            url: "../Handler/MemberHandler.ashx?action=VerficationCellphone",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            dataType: "json",
+            data: { cellphone: tempcellphone },
+            success: function (result) {
+                if (result.success) {
+                    alert(result.msg);
+                } else {
+                    alert(result.msg);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //if (XMLHttpRequest.statusText=="OK") {
+                //    alert("验证码发送成功");
+                //}
+                alert(XMLHttpRequest + "-" + textStatus + "-" + errorThrown);
+            }
+        });
+    });
+</script>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

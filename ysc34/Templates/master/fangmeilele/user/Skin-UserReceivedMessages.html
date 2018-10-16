@@ -1,0 +1,42 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+<script src="/utility/globals.js" type="text/javascript"></script>
+<script src="/utility/Window.js" type="text/javascript"></script>
+<script src="/utility/jquery.artDialog.js" type="text/javascript"></script>
+<script src="/utility/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="/utility/skins/blue.css">
+<form runat="server">
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置：<span><a href="url:home">首页</a></span>><span><a href="url:user_UserDefault">会员中心</a></span>><span><a
+            href="#">收件箱信息</a></span></div>
+    <div class="hyzxconter">
+        <div class="hyzxconterl">
+            <%<Hi:Common_User_Menu runat="server" />%>
+            <div class="hyzxconterl1">
+            </div>
+        </div>
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1" style="margin-bottom: 10px;">
+                    收件箱</div>
+                <div style="margin-top: 10px;">
+                    <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%></div>
+                <div class="shuaixuan1">
+                    <div class="quanxuan">
+                        <span><a onclick="SelectAll()">全部选定</a></span> <span><a onclick="ReverseSelect()">反向选择</a></span>
+                        <span>
+                            <%<Hi:ImageLinkButton Id="btnDeleteSelect"  IsShow="true" runat="server"  Text="删除选定" />%></span></div>
+                </div>
+            </div>
+            <div class="shouhuoxx1_con">
+                <% <Hi:Common_Messages_UserReceivedMessageList runat="server" />%>
+            </div>
+            <div class="page">
+                <%<UI:Pager runat="server" ShowTotalPages="true" ID="pager" />%>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

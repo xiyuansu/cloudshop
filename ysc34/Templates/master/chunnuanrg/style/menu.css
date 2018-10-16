@@ -1,0 +1,18 @@
+﻿@charset "utf-8";
+/*==========================*/
+
+#denglu2{ z-index:90; position:relative; float:left; height:36px; padding:23px 0px; }
+#denglu2:hover .my_left_category{ display:block;background:#FFF; background:rgba(255,255,255,0.9) }
+.fenlei1{ height:36px; background:url(../images/main/index_14.png) no-repeat 35px 15px; }
+.my_left_category{ display: none; overflow:hidden; z-index:999;  border-top:1px solid #3e7c23;border-bottom:1px solid #3e7c23; position:absolute; top:82px;left:-415px;   background:#ffffff; width:970px; font-size:12px; padding-left:30px; }
+.my_left_category a{ color:#666666; border-right: none;}
+.my_left_category li div a{ font-size:12px; padding-left:19px; padding-right:19px; line-height:26px; color:#303030;}
+.my_left_category li{ width:282px; display:block; line-height:26px; float:left; border-right:none;}
+.my_left_category li div {  padding-top:10px;}
+.my_left_category li div span{ display:block; float:left; height:26px; line-height:26px; color:#d4d4d4; }
+.my_left_category li a{ float:left; overflow:hidden;}
+.my_left_category li h3 { width:263px; height:36px; line-height:36px; border-bottom:1px solid #59a437; padding:0px; padding-left:19px;overflow:hidden; text-align:left;}
+.my_left_category li h3 a{font-size:16px; overflow:hidden; padding:0px; color:#59a437; }
+
+
+

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataItems>
+  <Item>
+    <name>门店管理员</name>
+    <content>彭江雄</content>
+  </Item>
+  <Item>
+    <name>发货点</name>
+    <content>窑岭北</content>
+  </Item>
+  <Item>
+    <name>运费</name>
+    <content>15.0</content>
+  </Item>
+  <Item>
+    <name>BOSS</name>
+    <content>杨总</content>
+  </Item>
+  <Item>
+    <Name>测试</Name>
+    <Content>测试</Content>
+  </Item>
+</DataItems>

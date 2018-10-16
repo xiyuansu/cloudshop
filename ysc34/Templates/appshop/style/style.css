@@ -1,0 +1,161 @@
+﻿/*2018-03-06*/
+/*公用样式*/
+.pd24{padding: 0.32rem;}
+.pl24{padding-left: 0.32rem;}
+.pr24{padding-right: 0.32rem;}
+.pt24{padding-top: 0.32rem;}
+.pb24{padding-bottom: 0.32rem;}
+.mt24{ margin-top: 0.32rem;}
+.fl{float: left;}
+.fr{float: right;}
+.bg{ background: #f7f7f7;}
+em,i{ font-style: normal;}
+
+
+/*个人中心*/
+.header{ background: url(../images/userhome/headbg.png) left top no-repeat; background-size: 100% auto;}
+.sign_set{ overflow: hidden; color: #fff;}
+.sign span{ font-size:0.32rem; line-height:0.53rem;}
+.userInfoBox{ border-radius: 0.32rem; background: #fff; margin: 0 0.32rem; padding: 0.32rem; padding-right: 0; overflow: hidden;
+-moz-box-shadow:0px 16px 24px rgba(255,87,34,.1); -webkit-box-shadow:0px 16px 24px rgba(255,87,34,.1); box-shadow:0px 16px 24px rgba(255,87,34,.1);
+}
+.Info{ padding-bottom: 0.32rem; overflow: hidden;}
+.userImg{ float: left; width:1.7rem; margin-right: 0.32rem;}
+.userImg img{ border-radius: 100%; border: 2px solid rgba(255,255,255, 0.2); width: 100%;}
+.userInfo{ float: left; margin-top: 0.21rem;}
+.userInfo h2{ font-size: 0.42rem; color: #212121; margin-bottom: 0.1rem; line-height: 0.53rem;}
+.pointsBox{ overflow: hidden; margin-bottom: 0.21rem;}
+.pointsBox div{float:left; font-size: 0.32rem; line-height: 0.53rem; border-radius:0.21rem; height: 0.53rem; padding: 0.1rem 0.21rem; margin-right: 0.21rem;}
+.pointsBox .member{ background: #fff8e1; border:1px #ffc107 solid; color: #ffb300; height: 0.5rem;}
+.pointsBox .point{ color: #ff8f00;
+    background:#ffecb3; /* 一些不支持背景渐变的浏览器 */  
+    background:-moz-linear-gradient(top, #ffecb2, #ffd550);  
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#ffecb2), to(#ffd550));  
+    background:-o-linear-gradient(top, #ffd54f, #ffd550);
+    background:linear-gradient(to top, #ffd54f, #ffd550);  }
+.pointsBox .point span{ margin-right: 0.1rem;}
+.Distribution{ float: right; color: #fff; font-size: 0.32rem; line-height: 0.53rem; border-radius: 24px 0 0 24px; padding: 0.21rem 0.32rem;
+ 	background:#f57c00; /* 一些不支持背景渐变的浏览器 */  
+    background:-moz-linear-gradient(top, #f57c00, #ff9800);  
+    background:-webkit-gradient(left, 0 0, 0 bottom, from(#f57c00), to(#ff9800));  
+    background:-o-linear-gradient(right, #f57c00, #ff9800);
+    background: linear-gradient(to right, #f57c00, #ff9800); /* 标准的语法 */
+}
+.Distribution a{color: #fff;}
+.Collection_Consultation{padding: 0.32rem 1.28rem 0.32rem 1.28rem; margin-right: 0.32rem; border-top: 1px #f0f0f0 solid;}
+.Collection,.Consultation{width: 2.77rem;}
+.Consultation{ text-align: right;}
+.Collection span,.Consultation span{ width: 1.04rem; text-align: center; line-height: 0.64rem; font-size: 0.48rem; color: #212121; display:inherit;}
+.Collection em,.Consultation em{ width: 1.04rem; font-size: 0.29rem; color: #bdbdbd; line-height: 0.53rem;}
+.Consultation span{ width: 2.35rem; text-align: right;}
+
+/*我的订单*/
+.user_order{ padding:0 0.32rem; margin: 0.32rem 0; background: #fff;}
+.user_order .hd{ padding: 0.32rem 0; border-bottom: 1px #f7f7f7 solid; line-height: 0.53rem; overflow: hidden;}
+.user_order .hd span{ float: left; font-size: 0.4rem; color:#212121;}
+.user_order .hd a{ color: #747474; font-size: 0.37rem; float:right;}
+.user_order .hd a em{ margin-left: 0.1rem;}
+.order_num{ padding: 0.32rem 0; overflow: hidden; width: 100%;}
+.order_num li{ float: left; width: 20%; text-align: center; position: relative;}
+.order_num li em{ position: absolute; background: #ff5252; border-radius: 0.32rem; right: 0.32rem; top: 0; color: #fff; padding: 0.05rem 0.16rem;}
+.order_num li div{ display: inherit;}
+.order_num li span{ font-size: 0.32rem; color: #424242;}
+
+/*个人中心常用功能*/
+.commonBox{ padding: 0 0.32rem; background: #fff; overflow: hidden;}
+.commonBox .hd{ padding: 0.32rem 0; line-height: 0.53rem; font-size: 0.4rem; color: #212121;}
+.commonList{ overflow: hidden;}
+.commonList ul li{ float: left; width: 33.3%; display: block; text-align: center; border-top: 1px #f7f7f7 solid; padding: 0.32rem 0;}
+.commonList ul li a{ display: inline-block;}
+.commonList ul li a img{width:auto; height:0.42rem; text-align: center; vertical-align: middle; overflow: hidden; margin: 0.1rem auto;}
+.commonList ul li a img.height36{height:0.48rem;}
+.commonList ul li a img.height40{height:0.53rem;}
+.commonList ul li a span{ font-size: 0.32rem; color: #515151; line-height: 0.53rem; display: block;}
+.commonList ul li a em{ display: block; color: #515151; font-size: 0.29rem; line-height: 0.53rem; height: 0.53rem; }
+.commonList ul li a em.fontstyle{ color: #ff5252; font-size: 0.29rem; line-height: 0.53rem; display: block;
+background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#9c27b0), to(#e91e63));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+/*分销中心*/
+.fx_header{ background: url(../images/feixiao_header.png) left top no-repeat; background-size: 100% auto; padding-top: 0.32rem;}
+.fx_Info{ overflow: hidden;}
+.fxInfoBox{ border-radius: 0.32rem; background: #fff; margin: 0.32rem; margin-bottom: 0; padding: 0.32rem 0 0 0.32rem; overflow: hidden;
+-moz-box-shadow:0px 5px 20px rgba(156,39,176,.4); -webkit-box-shadow:0px 5px 20px rgba(156,39,176,.4); box-shadow:0px 5px 20px rgba(156,39,176,.4);
+}
+.fx_userInfo{ float: left;}
+.fx_hd{ overflow: hidden; margin-bottom: 0.1rem; line-height: 0.64rem;  }
+.fx_name{font-size: 0.42rem; font-weight:bold; color: #212121; margin-right: 0.21rem; float: left;}
+.btn{ background: #fff8e1; line-height: 0.53rem; color: #ffb300; font-size:0.26rem; padding: 0 0.21rem; float: left; border:1px #ffc107 solid; border-radius:0.21rem;}
+.name_desc{ color: #747474; font-size: 0.32rem; line-height: 0.53rem; margin-bottom: 0.32rem; font-weight: 500;}
+.name_desc b{ color: #212121; margin: 0 0.1rem;}
+.drawalsBox{border-top: 1px #f0f0f0 solid; overflow: hidden; padding: 0.32rem; padding-left: 0;}
+.drawals{ width:33.3%; float: left;}
+.drawals div{ font-size: 0.42rem; font-weight:550; color: #212121; display: block; line-height: 0.64rem; text-align: center;}
+.drawals div i{ font-size: 0.32rem; margin-right: 0.05rem;}
+.drawals em{ font-size: 0.29rem; line-height: 0.53rem; color: #bdbdbd; text-align: center; display: block;}
+.fx_common{padding: 0 0.32rem; background: #fff; overflow: hidden; margin-top: 0.42rem; }
+.fx_common ul li{ width: 100%; border-bottom:1px #f7f7f7 solid; padding: 0.32rem 0; font-size: 0.4rem; color: #212121; line-height: 0.64rem;}
+.fx_common ul li a{ color: #212121; line-height: 0.64rem; display: block;}
+.fx_common ul li a em{ float: left; margin-right: 0.1rem; width: 0.64rem; height: 0.64rem; font-size:0.64rem;}
+.fx_common ul li a i{ float: right; color: #c2c2c2; font-size: 0.42rem;}
+
+
+
+
+/*字体图标库*/
+@font-face {
+  font-family: 'iconfont';  /* project id 581552 */
+  src: url('https://at.alicdn.com/t/font_581552_ov9f5yuky9aiqkt9.eot');
+  src: url('https://at.alicdn.com/t/font_581552_ov9f5yuky9aiqkt9.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_581552_ov9f5yuky9aiqkt9.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_581552_ov9f5yuky9aiqkt9.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_581552_ov9f5yuky9aiqkt9.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:0.64rem;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon_5:before { content: "\e674"; }
+.icon-icon_2:before { content: "\e66f"; }
+.icon-angle-right:before { content: "\e66c"; }
+.icon-icon_:before { content: "\e66d"; }
+
+
+.nav-bar {
+	position: absolute;
+	right: 0; padding:0 8px; border-radius:4px;
+	background: #fff;
+	z-index: 999;
+	border: 1px #E0E0E0 solid;
+	display: none;
+	top:0;
+}
+
+.nav-bar ul li {
+	border-bottom: 1px #E0E0E0 solid; width:85px;
+	font-size:14px;
+	line-height: 22px; padding:8px 0px;
+	color: #212121;
+}
+
+.nav-bar ul li:last-child {
+	border-bottom: none;
+}
+
+.nav-bar ul li i { width:40px; height:40px; vertical-align:middle;
+	margin-right:8px; font-size:18px;
+}	
+
+.share_box{ position:fixed; bottom:0; background:#fff; width:100%; display:block;}
+.share_box ul{ overflow:hidden; border-bottom:5px #eee solid;  padding:10px 0; }
+.share_box ul li{ float:left; width:25%; text-align:center;}
+.share_box ul li img{ display:block; height:40px; overflow:hidden; margin:0 auto; margin-bottom:5px;}
+#cancel{ text-align:center; font-size:16px; padding:10px 0; display:block; }
+
+

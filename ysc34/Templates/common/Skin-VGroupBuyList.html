@@ -1,0 +1,43 @@
+﻿<hi:Common_WapHeader runat="server" />
+<style>
+   .goods-box {
+        border-bottom: 1px solid #ebebeb;
+        margin-bottom: 0.75rem;
+        background: #fff;
+        min-height: 3.25rem;
+    }
+
+    .left_img {
+        position: absolute;
+    }
+
+    .goods-box .info {
+        position: relative;
+        padding-right: 0px;
+        min-height: 1.25rem;
+    }
+
+    .price {
+        font-size: 0.7rem;
+        color: #ff5722;
+    }
+    .price del{
+        margin:0 0.5rem;
+    }
+    .btn {
+        font-size: 0.6rem;
+    }
+</style>
+<img src="/images/tuan.jpg" style="width:100%;" class="img-responsive">
+<div class="main pd_30">
+    <hi:WapTemplatedRepeater id="rptGroupBuyProducts" templatefile="/Tags/skin-Common_GroupBuyProducts.ascx"
+                             runat="server" />
+    <div id="pager">
+    </div>
+</div>
+<input type="hidden" id="txtTotal" runat="server" clientidmode="Static"/>
+<hi:Common_WapFooter runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    vshopPager('pager', $('#txtTotal').val(), 1, 10);
+</script>

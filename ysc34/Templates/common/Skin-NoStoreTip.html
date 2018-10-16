@@ -1,0 +1,52 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .widtht {
+        background: #fff;height: 100vh;
+    }
+    body{ padding-bottom: 0;}
+</style>
+<!--<div class="mtop-n"><em><a href="#">返回</a></em><span>首页</span><i></i></div>-->
+<div class="widtht pb50">
+    <div class="nostore">
+        <div class="icon"><img src="/images/main/nostore-tip.png" width="221" height="217"></div>
+        <div class="Prompt" id="noStoreTip1">您的地址周边不存在可提供服务的门店<br /><em><label id="lblSecond"></label>s</em>后将为您跳转至平台店</div>
+        <div class="Prompt" id="noStoreTip2">您的地址周边不存在可提供服务的门店<br /></div><div class="btn" id="noStoreTip2Btn" onclick="goToChangePosition()">切换位置</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function getParamValue(paramName) {
+        var reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+    $(function () {
+        if (getParamValue("tipType") == "1") {
+            timer(intDiff);
+            $("#noStoreTip1").show();
+            $("#noStoreTip2").hide();
+            $("#noStoreTip2Btn").hide();
+        }
+        else if (getParamValue("tipType") == "2") {
+            $("#noStoreTip1").hide();
+            $("#noStoreTip2").show();
+            $("#noStoreTip2Btn").show();
+        }
+    });
+    var intDiff = 5;
+    function timer(intDiff) {
+        window.setInterval(function () {
+            if (intDiff > 0) {
+                $("#lblSecond").text(intDiff);
+                intDiff--;
+            }
+            else {
+                window.location.href = "Default.aspx?fromSource=1";
+            }
+        }, 1000);
+    }
+    function goToChangePosition() {
+        window.location.href = "ChangePosition.aspx";
+    }
+
+</script>

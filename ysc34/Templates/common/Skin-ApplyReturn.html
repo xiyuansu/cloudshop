@@ -1,0 +1,395 @@
+﻿<link rel="stylesheet" href="/Admin/css/bootstrap.min.css" />
+<hi:common_wapheader runat="server" />
+<link rel="stylesheet" href="/Utility/hishopUpload/hishopUpload.css" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidErrorMsg" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtOrderId" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtRefundType" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtRefundReason" />
+<input type="hidden" ClientIDMode="Static" id="hidUploadImages" runat="server" />
+<input type="hidden" id="hidOldImages" ClientIDMode="Static" runat="server" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtSkuId" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtAfterSaleType" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtApplyReason" />
+<input type="hidden" runat="server" ClientIdMode="static" id="hidOneMaxRefundAmount" />
+<input type="hidden" runat="server" ClientIdMode="static" id="hidMaxRefundAmount" />
+<div class="att-popup aftersaletypelist">
+    <div class="att-popup-container">
+        <div class="pay_title">选择售后类型</div>
+        <ul class="pay_list">
+            <li><label class="label-checkbox item-content"><input type="radio" name="chk_aftersaletype" value="1"><div class="item-media"><i class="icon icon-form-checkbox"></i></div><div class="pay_name">退款退货</div></label></li>
+            <li><label class="label-checkbox item-content"><input type="radio" name="chk_aftersaletype" value="3"><div class="item-media"><i class="icon icon-form-checkbox"></i></div><div class="pay_name">仅退款</div></label></li>
+        </ul>
+        <a class="btn_submiit">确定</a>
+        <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="payment_close"></a>
+    </div>
+</div>
+
+<div class="att-popup refundtypelist">
+    <div class="att-popup-container">
+        <div class="pay_title">选择退款方式</div>
+        <Hi:WapRefundTypeDropDownList runat="server" id="dropRefundType" ClientIDMode="static" />
+        <a class="btn_submiit">确定</a>
+        <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="payment_close"></a>
+    </div>
+</div>
+
+<div class="att-popup applyreasonlist">
+    <div class="att-popup-container">
+        <div class="pay_title">选择申请原因</div>
+        <%<hi:WapAfterSalesReasonDropDownList id="RefundReasonDropDownList" ClientIDMode="static" runat="server"></hi:WapAfterSalesReasonDropDownList>%>
+        <a class="btn_submiit">确定</a>
+        <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="payment_close"></a>
+    </div>
+</div>
+
+<form id="form" role="form" runat="server">
+    <div class="tk_main">
+        <div class="tk_group">
+            <label> 退货订单</label>
+            <div class="input-group">
+                <asp:Literal id="litOrderIds" runat="server"></asp:Literal>
+            </div>
+        </div>
+        <div class="tk_group">
+            <label> 商品信息</label>
+            <div class="input-group text-ellipsis_1">
+                <asp:Literal runat="server" id="litProductName"></asp:Literal>
+            </div>
+        </div>
+        <div class="tk_group" id="open_aftersaletype">
+            <label> 售后类型</label>
+            <div class="input-group">
+                请选择售后类型
+            </div>
+            <span class="icon_viewdetial"></span>
+        </div>
+        <div class="tk_group" id="open_applyreason">
+            <label> 申请原因</label>
+            <div class="input-group  applyreason">
+                请选择申请原因
+            </div>
+            <span class="icon_viewdetial"></span>
+        </div>
+        <div class="tk_group">
+            <label>退款金额</label>
+            <div class="input-group ">
+                <%<asp:TextBox ID="txtRefundMoney" runat="server" ClientIDMode="Static" input-group placeholder=" 最多退款0元" />%>
+                <p class="color_9" style="display:none;">
+                    <span id="refundMaxAmount"><asp:literal runat="server" id="litMaxAmount" Text="0.00"></asp:literal></span>元<span style="color:#333" id="groupbuyPanel" runat="server"></span>
+                </p>
+            </div>
+        </div>
+        <div class="tk_group returnRow">
+            <label>退货数量</label>
+            <div class="input-group ">
+                <%<asp:TextBox ID="txtQuantity" runat="server" ClientIDMode="Static" input-group placeholder="请填写退货数量" />%>
+                <p class="color_9">
+                    最多退货数量<span id="returnMaxQuantity"><asp:literal runat="server" id="litMaxQuantity"></asp:literal></span>件
+                </p>
+            </div>
+        </div>
+
+
+        <div class="tk_group" id="open_refundtype">
+            <label>退款方式</label>
+            <div class="input-group">
+                请选择退款方式
+            </div>
+            <span class="icon_viewdetial"></span>
+        </div>
+        <div class="tk_group bankinfo"><label>开户银行</label><div class="input-group"><input type="text" placeholder="请输入开户银行" id="txtBankName" value="" maxlength="20" /></div></div>
+        <div class="tk_group bankinfo"><label>开户名字</label> <div class="input-group"><input type="text" placeholder="请输入银行开户名" id="txtBankAccountName" value="" maxlength="20"></div></div>
+        <div class="tk_group bankinfo"><label>银行账号</label> <div class="input-group"><input type="text" placeholder="请输入银行帐号" id="txtBankAccountNo" value="" maxlength="25"></div></div>
+
+        <div class="tk_group">
+            <label>买家备注</label>
+            <div class="input-group ">
+                <%<asp:TextBox ID="txtMemo" runat="server" ClientIDMode="Static" input-group placeholder="填写退款备注信息" />%>
+            </div>
+        </div>
+        <div class="tk_group">
+            <label>上传凭证</label>
+            <div class="input-group " style="border:0; padding-top:0.75rem;">
+                <div id="imageContainer">
+                    <span name="productImages" class="imgbox"></span>
+                </div>
+                <div class="shangctshi" style="clear:both; color:#999; line-height:35px;">(最多上传3张,每张不超过5M)</div>
+            </div>
+        </div>
+    </div>
+    <div class="btn_tk">
+        <input type="button" id="btnApplyReturn" value="提交申请" class="btn_login" />
+    </div>
+</form>
+<script type="text/javascript" src="/utility/jquery.hishopUpload.user.js?v=3.4"></script>
+<script type="text/javascript" src="/utility/jquery.form.js"></script>
+
+<script language="javascript" type="text/javascript">
+    var returnUrl = getParam("returnUrl");
+    if (returnUrl == undefined || returnUrl == "") {
+        returnUrl = document.referrer;
+    }
+    if (returnUrl == undefined || returnUrl == "") {
+        returnUrl = "MemberOrders.aspx";
+    }
+    $(document).ready(function (e) {
+        //可退款金额小于等于0时不允许进行仅退款操作
+        var maxRefundAmount = parseFloat($("#hidMaxRefundAmount").val());
+        if (isNaN(maxRefundAmount) || maxRefundAmount <= 0) {
+            $("input[name='chk_aftersaletype'][value='3']").parent().hide();
+        }
+        if ($("input[name='chk_refundtype']:checked").length > 0) {
+            var refundtype = parseInt($("input[name='chk_refundtype']:checked").val());
+            if (!isNaN(refundtype)) {
+                if (refundtype == 2) {
+                    $(".bankinfo").show();
+                }
+                else {
+                    $(".bankinfo").hide();
+                }
+                $("#txtRefundType").val(refundtype);
+                $("#open_refundtype .input-group").text($("input[name='chk_refundtype']:checked").next().next().html());
+            }
+        }
+        $("#txtQuantity").change(function (e) {
+            var quantity = parseInt($("#txtQuantity").val());
+            var maxQuantity = parseInt($("#returnMaxQuantity").text());
+            if (isNaN(maxQuantity)) maxQuantity = 1;
+            if (!Reg_int_positive.test($("#txtQuantity").val().trim()) || isNaN(quantity) || quantity > maxQuantity || quantity < 1) {
+                alert("请输入正确的数量,不能大于最大可售后数量");
+                quantity = maxQuantity;
+                $("#txtQuantity").val(maxQuantity);
+                return false;
+            }
+            var oneMaxRefundAmount = parseFloat($("#hidOneMaxRefundAmount").val());
+            if (isNaN(oneMaxRefundAmount) || oneMaxRefundAmount < 0) {
+                oneMaxRefundAmount = 0;
+            }
+            var maxRefundAmount = parseFloat($("#hidMaxRefundAmount").val());
+            var refundAmount = (oneMaxRefundAmount * quantity).toFixed(2);
+            if (!isNaN(maxRefundAmount) && refundAmount > maxRefundAmount) {
+                refundAmount = maxRefundAmount;
+            }
+            $("#refundMaxAmount").text(refundAmount);
+            $("#txtRefundMoney").val(refundAmount)
+            return true;
+        });
+
+        //验证数量和金额
+        function validQuantityAmount(isValidAmount) {
+            var quantity = parseInt($("#txtQuantity").val());
+            var maxQuantity = parseInt($("#returnMaxQuantity").text());
+            if (isNaN(maxQuantity)) maxQuantity = 1;
+            if (!Reg_int_positive.test($("#txtQuantity").val().trim()) || isNaN(quantity) || quantity > maxQuantity || quantity < 1) {
+                alert("请输入正确的数量,不能大于最大可售后数量");
+                quantity = maxQuantity;
+                $("#txtQuantity").val(maxQuantity);
+                return false;
+            }
+            if (isValidAmount) {
+                var oneMaxRefundAmount = parseFloat($("#hidOneMaxRefundAmount").val());
+                if (isNaN(oneMaxRefundAmount) || oneMaxRefundAmount < 0) {
+                    oneMaxRefundAmount = 0;
+                }
+                var intputRefundAmount = parseFloat($("#txtRefundMoney").val());
+                var maxRefundAmount = parseFloat($("#hidMaxRefundAmount").val());
+                var refundAmount = (oneMaxRefundAmount * quantity).SubDecimalDigits(2);
+                if (refundAmount > maxRefundAmount) {
+                    refundAmount = maxRefundAmount
+                }
+                if (!Reg_float_non_negative.test($("#txtRefundMoney").val().trim())) {
+                    alert("退款金额只能输入数字");
+                    return false;
+                }
+                if (isNaN(intputRefundAmount) || intputRefundAmount > refundAmount) {
+                    alert("退款金额不能大于最大可退款金额");
+                    $("#refundMaxAmount").text(refundAmount);
+                    $("#txtRefundMoney").val(refundAmount)
+                    return false;
+                }
+                return true;
+            }
+            else {
+                return true;
+            }
+        }
+
+        if ($("#hidErrorMsg").val() != "") {
+            alert_h($("#hidErrorMsg").val(), function (e) {
+                document.location.href = returnUrl;
+            });
+
+        }
+        $(".bankinfo").hide();
+
+        initImageUpload();
+
+        //#open_aftersaletype,#open_applyreason,#open_refundtype
+        $("#open_aftersaletype").click(function (e) {
+            $('.aftersaletypelist').addClass('is-visible');
+        });
+
+        $("#open_applyreason").click(function (e) {
+            $('.applyreasonlist').addClass('is-visible');
+            $(".is-visible .att-popup-container").css("top","0")
+        });
+
+        $("#open_refundtype").click(function (e) {
+            $('.refundtypelist').addClass('is-visible');
+        });
+        //确认售后类型选择按钮点击
+        $(".aftersaletypelist .btn_submiit").click(function (e) {
+            var aftersaletype = parseInt($("input[name='chk_aftersaletype']:checked").val());
+            if (isNaN(aftersaletype) || aftersaletype <= 0 || aftersaletype > 3) {
+                alert_h("请选择售后类型");
+                return false;
+            }
+            else {
+                if (aftersaletype == 3) {
+                    $(".returnRow").hide();
+                    $("#txtQuantity").val(parseInt($("#returnMaxQuantity").text()));
+                    $("#txtQuantity").trigger("change");
+                }
+                else {
+                    $(".returnRow").show();
+                }
+                $("#txtAfterSaleType").val(aftersaletype);
+                $("#open_aftersaletype .input-group").text($("input[name='chk_aftersaletype']:checked").next().next().html());
+            }
+            $(".aftersaletypelist").removeClass('is-visible');
+        });
+
+
+       
+        //确认退款方式选择按钮点击
+        $(".refundtypelist .btn_submiit").click(function (e) {
+            var refundtype = parseInt($("input[name='chk_refundtype']:checked").val());
+            if (isNaN(refundtype)) {
+                alert_h("请选择退款方式");
+                return false;
+            }
+            else {
+                if (refundtype == 2) {
+                    $(".bankinfo").show();
+                }
+                else {
+                    $(".bankinfo").hide();
+                }
+                $("#txtRefundType").val(refundtype);
+                $("#open_refundtype .input-group").text($("input[name='chk_refundtype']:checked").next().next().html());
+            }
+            $(".refundtypelist").removeClass('is-visible');
+        });
+
+        //确认申请原因按钮点击
+        $(".applyreasonlist .btn_submiit").click(function (e) {
+            var applyreason = $("input[name='chk_applyreason']:checked").val().Trim();
+            if (applyreason == "") {
+                alert_h("请选择申请原因");
+                return false;
+            }
+            else {
+                $("#txtApplyReason").val(applyreason);
+                $("#open_applyreason .input-group").text($("input[name='chk_applyreason']:checked").next().next().html());
+            }
+            $(".applyreasonlist").removeClass('is-visible');
+        });
+
+        $("#btnApplyReturn").click(function (e) {
+            getUploadImages();
+            var CredentialImages = $("#hidUploadImages").val().Trim();
+            var reason = $("#txtApplyReason").val().Trim();
+            var quantity = parseInt($("#txtQuantity").val());
+            var maxQuantity = parseInt($("#returnMaxQuantity").text());
+            var refundAmount = parseFloat($("#txtRefundMoney").val());
+            var refundMaxAmount = parseFloat($("#refundMaxAmount").text());
+            var refundType = parseInt($("#txtRefundType").val().Trim());
+            var memo = $("#txtMemo").val().Trim();
+            var orderId = $("#txtOrderId").val().Trim();
+            var aftersaleType = parseInt($("#txtAfterSaleType").val().Trim());
+            var bankName = $("#txtBankName").val().Trim();
+            var bankAccountName = $("#txtBankAccountName").val().Trim();
+            var bankAccountNo = $("#txtBankAccountNo").val().Trim();
+            var skuId = $("#txtSkuId").val().Trim();
+            if (reason == "") {
+                alert_h("请选择退货原因");
+                return false;
+            }
+            ///仅退款不判断退货数量
+            if (aftersaleType != 3) {
+                if (!Reg_int_positive.test($("#txtQuantity").val().trim()) || isNaN(quantity) || isNaN(maxQuantity) || quantity > maxQuantity || quantity <= 0) {
+                    alert_h("请输入正确退货数量");
+                    return false;
+                }
+            }
+            if (!Reg_float_non_negative.test($("#txtRefundMoney").val().trim())) {
+                alert("退款金额只能输入数字");
+                return false;
+            }
+            if (isNaN(refundAmount) || isNaN(refundMaxAmount) || refundAmount > refundMaxAmount || refundAmount < 0) {
+                alert_h("请输入正确的退款金额");
+                return false;
+            }
+            if (isNaN(refundType) && refundType != 1 && refundType != 2 && refundType != 3) {
+                alert_h("请选择退款方式");
+                return false;
+            }
+            if (refundType == 2 && (bankName == "" || bankAccountName == "" || bankAccountNo == "")) {
+                alert_h("您选择了退款到银行卡,请填写银行卡帐号信息");
+                return false;
+            }
+            if (isNaN(aftersaleType) || aftersaleType < 1 || aftersaleType > 3) {
+                alert_h("请选择售后类型");
+                return false;
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "ApplyReturn", orderId: orderId, skuId: skuId, Remark: memo, refundType: refundType, RefundAmount: refundAmount, Quantity: quantity, RefundReason: reason, UserCredentials: CredentialImages, BankName: bankName, BankAccountName: bankAccountName, BankAccountNo: bankAccountNo, AfterSaleType: aftersaleType },
+                success: function (resultData) {
+                    if (resultData.Status == "1") {
+                        alert_h("退货申请成功！", function () {
+                            location.href = returnUrl;
+                        });
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert(XMLHttpRequest.status + "-" + XMLHttpRequest.readyState + "-" + textStatus);
+                }
+            });
+        });
+    });
+    // 初始化图片上传控件
+    function initImageUpload() {
+        var url = ImageUploadPath;
+        $('#imageContainer span[name="productImages"]').hishopUpload(
+                       {
+                           title: '商品图片',
+                           url: url,
+                           imageDescript: '',
+                           displayImgSrc: '',
+                           imgFieldName: "productImages",
+                           defaultImg: '',
+                           pictureSize: '',
+                           imagesCount: 3,
+                           dataWidth: 9,
+                           showDelIcon: false,
+                           foldName: 'user/Credentials'
+                       });
+
+    }
+
+    //获取上传成功后的图片路径
+    function getUploadImages() {
+        var aryImgs = $('#imageContainer span[name="productImages"]').hishopUpload("getImgSrc");
+        //alert(aryImgs);
+        $("#hidUploadImages").val(aryImgs);
+        return true;
+    }
+
+
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

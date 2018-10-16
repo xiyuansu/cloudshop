@@ -1,0 +1,5 @@
+
+.msgError{background: url(zcselect.jpg) no-repeat 5px 5px;  padding-left:30px;
+ height: 28px; line-height: 28px; color:#fe5722;}
+.msgError a{color:#fe5722;}
+.msgAjaxing{background:#E9FFEB url(spinner.gif) no-repeat 3px 3px; padding-left:25px;padding-top:5px;padding-bottom:3px;} 

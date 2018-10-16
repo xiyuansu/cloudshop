@@ -1,0 +1,34 @@
+﻿<hi:common_wapheader runat="server" />
+<script src="/script/idangerous.swiper-1.9.1.min.js"></script>
+<script src="/script/idangerous.swiper.scrollbar-1.2.js"></script>
+<script src="/script/swiper-demos.js"></script>
+ 
+<div class="vcode-tips">共<span id="spanvcodecount" runat="server"></span>张，有效期：<span id="spanvcodetime" runat="server"></span></div>
+
+
+<!--轮播html开始-->
+    <div class="swiper-main">
+      <div class="swiper-container swiper1">
+        <div class="swiper-wrapper">        
+        	<asp:repeater id="rptVCodes" runat="server">
+            <itemtemplate>
+                <li class="swiper-slide vcode-item">
+                    <div class="vcode-qrcodebox" id="vqrcodebox" runat="server"><i></i><%<asp:Image id="codeqrcode" CssClass="qrcode_img" runat="server"></asp:Image>%></div>
+                    <div class="code-password">密码</div>
+                    <div class="vcode-code" id="vcodepassword" runat="server"></div>
+                </li>
+            </itemtemplate>
+        </asp:repeater>	
+         
+        </div>
+      </div>
+    </div>
+    <div class="lunbo-pagination pagination pagination1"></div>
+ 
+
+ 
+<!--轮播html结束-->
+
+
+
+<hi:common_contextmenu id="ContextMenu" runat="server" />

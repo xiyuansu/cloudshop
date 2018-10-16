@@ -1,0 +1,42 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<style>
+.xgmima .nTab1 .TabContent{ width: 958px;}
+</style>
+<form runat="server">
+    <div class="hyzxmain">
+        <div class="hyzxconty">
+            当前位置：<span><a href="url:home">首页</a></span>><span><a href="url:user_UserDefault">会员中心</a></span>><span>
+                <a href="#">咨询/回复</a>
+            </span>
+        </div>
+            <div class="hyzxconter">
+                <%<Hi:Common_User_Menu runat="server" />%>
+                    <div class="hyzxconterr">
+                        <div class="dingdanxx">
+                            <div class="dingdan_box1">
+                                咨询/回复</div>
+                            <div class="xgmima">
+                                <div class="nTab1">
+                                    <div class="TabTitle">
+                                        <ul id="myTab">
+                                            <li class="active"><a href="./UserConsultations.aspx">已回复（<%<asp:Literal ID="litreply" runat="server"></asp:Literal>%>）</a></li>
+                                            <li class="normal"><a href="./UserConsultationsNotReverted.aspx">未回复（<%<asp:Literal ID="litNotReverted" runat="server"></asp:Literal> %>）</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="TabContent">
+                                        <%<Hi:ThemedTemplatedRepeater ID="dlstPtConsultationReplyed" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_ReferAndRevert_Reverted.ascx" runat="server" /> %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="page">
+                                <div class="pagination">
+                                    <%<UI:Pager runat="server" ShowTotalPages="true" ID="pagerConsultationReplyed" />%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+    </form>
+    <%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

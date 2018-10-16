@@ -1,0 +1,175 @@
+﻿<hi:common_appheader runat="server" skinname="tags/skin-Common_NoLoginHeader.html"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<style>
+    body { background: #d84315; width:100%;  max-width:750px; overflow:hidden; }
+
+    .main { background: url(/images/reg_bg.png) left top no-repeat; margin:0 auto; border-bottom:none; overflow:hidden; background-size:100% auto; padding:0;}
+
+    .price { font-size: 32px; color: #dd2c00; margin:100px 0 0 0; display: inline-block; width: 100%; text-align: center; }
+
+        .price img { margin-top: -10px; }
+
+    .coupon { width:225px;  height: 120px;  margin-left:60px; background: url(/images/reg_coupon.png) left top no-repeat; position: relative; background-size:auto 100px; }
+
+    .couponed { background: url(/images/reg_couponed.png) no-repeat;background-size:auto 100px;  }
+
+    #slides { width: 420px; height: 410px; display: inline-block; /*border:1px solid red;*/ margin: 30px 0 0 110px; }
+
+    .coupon_list { float: left; width:410px; }
+
+        .coupon_list .coupon:first-child { margin-bottom: 15px; }
+
+    .coupon h1 { font-size: 16px; line-height:32px; width:225px; font-weight: normal; text-align: center; color: #fff; }
+
+    .coupon span { font-size:28px; width:225px; font-weight: normal; text-align: center; color: #fff; display: inherit; line-height: 0.8; }
+
+        .coupon span i { font-size: 40px; }
+
+    .coupon img { position: absolute; top: 0; left: 0; width:100% }
+
+    .slides_container { height: 275px; }
+
+    .k3_box { width: 420px; height: 275px; margin-top: 25px; position: relative; text-align: center; }
+
+        .k3_box li { float: left; }
+
+        .k3_box ul { border-bottom: 1px #ccc solid; }
+
+        .k3_box ol { border-radius: 20px; display: inline-block; margin-top: 20px; }
+
+            .k3_box ol li { display: inline-block; width: 14px !important; height: 14px; border-radius: 50%; background: #b0b0b0; margin: 4px; text-align: center; border: 2px #b0b0b0 solid; }
+
+                .k3_box ol li.h { background: #dd2c00; border: 2px #dd2c00 solid; }
+
+    #AppRegisteredCoupons_btnToGo { width: 245px; height: 88px; float: left; margin: 0px 0 0 100px; }
+</style>
+<form id="form" runat="server">
+    <div class="main">
+        <%<asp:HiddenField runat="server" ID="hidIsOpenGiftCoupons" ClientIDMode="Static" />%>
+        <span class="price">
+            <%<asp:Literal runat="server" ID="lblTotalPrice"></asp:Literal>%>元大礼包
+        </span>
+        <div class="k3_box" id="k3_box" style="overflow: hidden;">
+            <div class="slides_container k3_ul" id="k3_ul">
+                <%<hi:AppshopTemplatedRepeater id="rptRegisterCoupons" templatefile="/Tags/skin-Common_RegisteredCoupons.ascx" runat="server" />%>
+            </div>
+            <ol class="k3_ol">
+                <li class="h"></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </div>
+        <%<asp:HyperLink runat="server" ID="btnToGo"></asp:HyperLink>%>
+    </div>
+
+
+</form>
+<script>
+    function tabSlide(obj, ul, icon) {
+        var scrollPicView = document.getElementById(obj),
+            scrollPicViewDiv = document.getElementById(ul),
+            lis = scrollPicViewDiv.querySelectorAll("li"),
+            w = scrollPicView.offsetWidth,
+            len = lis.length;
+        for (var i = 0; i < len; i++) {
+            lis[i].style.width = w + "px";
+            if (i == len - 1) {
+                scrollPicViewDiv.style.width = w * len + "px";
+            }
+        }
+        var scroll_pic_view = new iScroll(obj, {
+            snap: true,
+            momentum: false,
+            hScrollbar: false,
+            useTransition: false,
+            onScrollEnd: function () {
+                $('.' + icon).removeClass("h").eq(this.currPageX).addClass("h");
+
+
+            }, onBeforeScrollStart: function (e) {
+                if (this.absDistX > (this.absDistY + 5)) {
+                    // 用户滚动x轴,所以防止浏览器的原生滚动
+                    e.preventDefault();
+                }
+            },
+            //解决第一次无法滑动的问题
+            onTouchEnd: function () {
+                var self = this;
+                if (self.touchEndTimeId) {
+                    clearTimeout(self.touchEndTimeId);
+                }
+
+                self.touchEndTimeId = setTimeout(function () {
+                    self.absDistX = 0;
+                    self.absDistX = 0;
+                }, 600);
+            }
+
+        });
+
+    }
+    $(function () {
+        $("#AppRegisteredCoupons_btnToGo").click(function (e) {
+            var userid = getCookie("Shop-Member");
+            if (userid != undefined && userid != "") {// 如果web端没登录
+                var siteinfostr = plus.storage.getItem('wapsiteinfo') || "{}";
+                var siteInfo = JSON.parse(siteinfostr);
+                var sessionid = null;
+                if (siteInfo.UserInfo) {
+                    sessionid = siteInfo.UserInfo.sessionid;
+                }
+                if (userid != undefined && userid != "" && sessionid == "") {// 如果web端登录而app没有登录，则清空web端的
+                    document.location.href = "/AppShop/AppLogin.aspx?sessionid=";
+                } else {
+                    location.href = "RegisteredCouponsOldUser.aspx";
+                }
+
+                  /*  var siteinfostr = plus.storage.getItem('siteinfo') || "{}";
+
+                    var siteInfo = JSON.parse(siteinfostr);
+                    var sessionid = null;
+                    if (siteInfo.UserInfo) {
+                        sessionid = siteInfo.UserInfo.sessionid;
+                    }
+                    if (sessionid != undefined && sessionid != "" && sessionid != null) {
+                       
+                    } else {
+                        ToAppRegister();
+                    }*/
+            }
+            else {
+                ToAppRegister();
+            }
+
+        });
+        var divCouponNum = $(".coupon_list").length;
+        var k3_olHtml = "<li class=\"h\"></li>";
+        for (var i = 1; i < divCouponNum; i++) {
+            k3_olHtml += "<li></li>";
+        }
+        $(".k3_ol").html(k3_olHtml);
+        var a = $(".coupon_list").width();
+        var b = $(".coupon_list").length;
+        $(".slides_container").width(a * b);
+        tabSlide('k3_box', 'k3_ul', 'k3_ol li');
+    });
+
+    function ToAppRegister(type) {
+        OpenUrl('register'); 
+		plus.webview.currentWebview().close(); 
+    }
+
+    function toNullWeb() {
+        var type = GetAgentType();
+        if (type == 2) {
+            var userid = getCookie("Shop-Member");
+            var sessionid = window.HiCmd.webGetSession();
+            if ((userid == undefined || userid == "") && sessionid != "") {
+                window.location.href = "/AppShop/AppLogin.aspx?sessionid=" + sessionid + "&returnUrl=" + window.location.href;
+            }
+        } else if (type == 1) {
+            window.location.reload();
+        }
+    }
+
+</script>

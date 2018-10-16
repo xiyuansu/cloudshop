@@ -1,0 +1,231 @@
+﻿<hi:common_appheader runat="server" />
+<link href="/Utility/imgpreview/mobile-photo-preview.css" rel="stylesheet" />
+<style>
+    body {
+        background: #fff;
+    }
+
+    header {
+        padding: 0.75rem;
+        border-bottom: 1px solid #ebebeb;
+        margin: 0;
+    }
+
+        header h3 {
+            font-weight: normal;
+            font-size: 0.7rem;
+        }
+
+            header h3 span {
+                font-size: 0.6rem;
+            }
+
+            header h3 em {
+                color: #666;
+                font-size: 0.5rem;
+            }
+
+            header h3 span {
+                float: right;
+            }
+
+        header ul {
+            display: inline-block;
+            margin-top: 0.25rem;
+        }
+
+            header ul li {
+                float: left;
+                padding: 0.25rem 0.5rem;
+                border: 1px solid #d7d7d7;
+                color: #333;
+                border-radius: 0.2rem;
+                font-size: 0.6rem;
+                margin-right: 0.75rem;
+                margin-top: 0.5rem;
+            }
+            .review_null{
+                text-align:center;
+                padding:2.5rem 0;
+            }
+</style>
+<header>
+    <h3>商品评价&nbsp;<em>(194)</em><span>好评率&nbsp;100%</span></h3>
+    <ul id="screen">
+        <li class="active">全部(194)</li>
+        <li>好评(194)</li>
+        <li>中评(0)</li>
+        <li>差评(0)</li>
+        <li>晒图(9)</li>
+    </ul>
+</header>
+<div class="review_content">
+    <ul class="review_list review0"></ul>
+    <ul class="review_list review1" style="display:none;"></ul>
+    <ul class="review_list review2" style="display:none;"></ul>
+    <ul class="review_list review3" style="display:none;"></ul>
+    <ul class="review_list review4" style="display:none;"></ul>
+</div>
+
+<div id="divMore" style="text-align:center; padding: 15px 15px 60px 15px;display:none;">
+    加载更多...
+</div>
+
+<input type="hidden" clientidmode="Static" value="" runat="server" id="txtTotal" />
+<input type="hidden" clientidmode="Static" value="" runat="server" id="hidden_productId" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script src="/Utility/imgpreview/dialog.js"></script>
+<script src="/Utility/imgpreview/mobile-photo-preview.js"></script>
+<script type="text/javascript">
+    var reviewtype = 0;
+    var mycurrentPages = new Array()
+    mycurrentPages[0] = 1;
+    mycurrentPages[1] = 1;
+    mycurrentPages[2] = 1;
+    mycurrentPages[3] = 1;
+    mycurrentPages[4] = 1;
+    var reviewPageSize = 5;
+    $(function () {
+
+        $('#screen li').click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            var index = $("#screen").children().index(this);
+            $(".review_content").children().eq(index).show().siblings().hide();
+            reviewtype = index;
+            loadReviewData(reviewPageSize, mycurrentPages[reviewtype], $("#hidden_productId").val(), reviewtype);
+
+        })
+        if (getParam("OrderId") == "" || getParam("SkuId") == "") {
+            $("#review").hide();
+            $("#btnsubmit").hide();
+        }
+        if (!$.trim($('#reviewsList').html()))
+            $('#reviews').hide();
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+        loadStatisticsData($("#hidden_productId").val());
+        loadReviewData(reviewPageSize, mycurrentPages[0], $("#hidden_productId").val(), 0);
+    });
+
+    //加载评论
+    function loadReviewData(pageSize, currentPage, productId, type) {
+        $.post('../API/ReviewHandler.ashx?action=LoadReview&PageSize=' + pageSize + '&CurrentPage=' + currentPage + '&ProductId=' + productId + '&type=' + type, function (result) {
+            var items = eval('(' + result + ')');
+            if (items.data) {
+                var totalCount = items.totalCount;
+                if (items.totalCount == 0) {
+                    $(".review" + type).html('<div class="review_null" id="reviewEmpty" style="display:block;"><img src="/images/review_w.png" style="width:5.075rem"></div>');
+                    return;
+                }
+
+                if (items.data.length > 0) {
+                    var ReviewHtml = "";
+                    for (var i = 0; i < items.data.length; i++) {
+                        var n = items.data[i];
+                        ReviewHtml += getReviewHtml(n);
+                    }
+                    $(".review" + type).append(ReviewHtml);
+
+                    if ($(".review" + type).find("li").length == totalCount)
+                        $("#divMore").html("");
+
+                    mycurrentPages[type] = currentPage + 1;
+                    $('.preview-list').MobilePhotoPreview({
+                        trigger: '.preview',
+                        show: function (c) {
+                            var del = $('<span class="icon-del"></span>');
+                            var close = $('<span class="ui-dialog-close js-dialog-close pop_close"></span>')
+                            $('.imgViewTop', c).append(del);
+                            $('.imgViewTop', c).append(close);
+                            var _this = this;
+                            del.click(function () {
+                                _this.current.remove();
+                                _this.hide();
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
+    //加载评论统计
+    function loadStatisticsData(productId) {
+
+        $.post('../API/ReviewHandler.ashx?action=StatisticsReview&ProductId=' + productId, function (result) {
+            var items = eval('(' + result + ')');
+            var reviewNum = parseInt(items.reviewNum);
+            var reviewNum1 = parseInt(items.reviewNum1);
+            var reviewNum2 = parseInt(items.reviewNum2);
+            var reviewNum3 = parseInt(items.reviewNum3);
+            var reviewNumImg = parseInt(items.reviewNumImg);
+
+            var reviewRate1 = 0;
+            var reviewRate2 = 0;
+            var reviewRate3 = 0;
+            if (reviewNum != 0) {
+                reviewRate1 = ((reviewNum1 * 100) / (reviewNum)).toFixed(0);
+                reviewRate2 = ((reviewNum2 * 100) / (reviewNum)).toFixed(0);
+                reviewRate3 = ((reviewNum3 * 100) / (reviewNum)).toFixed(0);
+            }
+
+            $("h3 em").html("(" + reviewNum + ")");
+            $("h3 span").html("好评率&nbsp;" + (reviewNum == 0 ? 100 : reviewRate1) + "%");
+            $("#screen li").eq(0).html('全部(' + reviewNum + ')');
+            $("#screen li").eq(1).html('好评(' + reviewNum1 + ')');
+            $("#screen li").eq(2).html('中评(' + reviewNum2 + ')');
+            $("#screen li").eq(3).html('差评(' + reviewNum3 + ')');
+            $("#screen li").eq(4).html('晒图(' + reviewNumImg + ')');
+
+        });
+    }
+    function getReviewHtml(obj) {
+        var arr = new Array();
+
+        arr.push('<li>');
+        arr.push('<h1>用户名：' + obj.UserName + '<span class="like">');
+
+        for (var i = 0; i < 5; i++) {
+            if (i < obj.Score) {
+                arr.push('<span class="icon_like"></span>');
+            } else {
+                arr.push('<span class="icon_likeed"></span>');
+            }
+        }
+        arr.push('</span></h1>');
+        arr.push('<div class="review_info">' + obj.ReviewText + '</div>');
+        arr.push('<div class="review_time">' + obj.ReviewDate + '<span class="badge-h">&nbsp;&nbsp;'+obj.SKUContent+'</span></div>');
+        arr.push('<div class="preview-list">');
+        if (obj.ImageUrl1 != null && obj.ImageUrl1 != "")
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl1 + '" class="preview" target="_blank"><img src="' + obj.ImageUrl1 + '"></a>');
+        if (obj.ImageUrl2 != null && obj.ImageUrl2 != "")
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl2 + '" class="preview" target="_blank"><img src="' + obj.ImageUrl2 + '"></a>');
+        if (obj.ImageUrl3 != null && obj.ImageUrl3 != "")
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl3 + '" class="preview" target="_blank"><img src="' + obj.ImageUrl3 + '"></a>');
+        if (obj.ImageUrl4 != null && obj.ImageUrl4 != "")
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl4 + '" class="preview" target="_blank"><img src="' + obj.ImageUrl4 + '"></a>');
+        if (obj.ImageUrl5 != null && obj.ImageUrl5 != "")
+            arr.push('<a href="' + obj.ApplicationPath + obj.ImageUrl5 + '" class="preview" target="_blank"><img src="' + obj.ImageUrl5 + '"></a>');
+
+        arr.push('</div>');
+        if (obj.ReplyDate != null && obj.ReplyDate != "") {
+            arr.push('<div class="reply">');
+            arr.push('<div class="reply">商家回复：  ' + obj.ReplyText + '</div>');
+            arr.push('<div class="reply_time">' + obj.ReplyDate + '</div>');
+            arr.push('<i class="icon_triangle"></i>');
+            arr.push('</div>');
+        }
+        arr.push('</li>');
+        return arr.join("");
+    }
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    function scrollLoadData() {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            loadReviewData(reviewPageSize, mycurrentPages[reviewtype], $("#hidden_productId").val(), reviewtype);
+        }
+    }
+    $(window).scroll(function () {
+        scrollLoadData();
+    });
+</script>

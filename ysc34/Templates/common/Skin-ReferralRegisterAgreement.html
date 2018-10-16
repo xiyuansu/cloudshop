@@ -1,0 +1,66 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="rra_pbox" style="padding:0.75rem;margin-top: 10px;">
+    <div>
+        <%<asp:Literal ID="litReferralRegisterAgreement" runat="server" />%>
+    </div>
+    <div style="padding:0.75rem 0;" runat="server" id="divRecruitmentAgreement" clientidmode="static">
+        <input type="checkbox" id="chkAgreement" name="chkAgreement" checked="checked" style="width:16px; height:16px; border:1px solid #ccc;-webkit-appearance:checkbox;" />
+        <em>我已经同意并阅读 <a href="RecruitmentAgreement" style="color:#ff6a00;">《分销员招募协议》</a></em>
+    </div>
+</div>
+<div class="btn_tk">
+    <button class="btn_login" id="btnToRegister">立即成为分销员</button>
+</div>
+<input type="hidden" id="hidApplyCondition" value="0" runat="server" clientidmode="static" />
+<input type="hidden" id="hidApplyReferralNeedAmount" value="0" runat="server" clientidmode="static" />
+<input type="hidden" id="hidExpenditure" value="0" runat="server" clientidmode="static" />
+<script language="javascript" type="text/javascript">
+    $(document).ready(function (e) {
+        var again = getParam("again");
+        if (again != null && again == "1") {
+            $("#btnToRegister").text("重新填写申请表单");
+        }
+
+        $("#chkAgreement").click(function (e) {
+            if ($(this).is(':checked')) {
+                $("#btnToRegister").show();
+            }
+            else {
+                $("#btnToRegister").hide();
+            }
+        })
+
+        $("#btnToRegister").click(function (e) {
+            if ($("#hidApplyCondition").val() == "1") {
+                var amount = parseFloat($("#hidApplyReferralNeedAmount").val());
+                var expenditure = parseFloat($("#hidExpenditure").val());
+                if (isNaN(amount)) {
+                    amount = 0;
+                }
+                if (isNaN(expenditure)) {
+                    expenditure = 0;
+                }
+                if (amount > expenditure) {
+                    alert_h("您的消费金额还没达到系统设置的金额(" + amount + "元)");
+                    return false;
+                }
+            }
+            if ($("#divRecruitmentAgreement").length > 0) {
+                if (!$("#chkAgreement").is(':checked')) {
+                    alert_h("请同意并且阅读分销员招募协议");
+                    return false;
+                }
+            }
+            var again = getParam("again");
+
+            if (again != null && again == "1") {
+                location.href = "ReferralRegister.aspx?again=1";
+            }
+            else {
+                location.href = "ReferralRegister.aspx";
+            }
+        });
+    });
+</script>
+
+<hi:common_wapfooter runat="server" />

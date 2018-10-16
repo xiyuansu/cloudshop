@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Subject SubjectId="1" Type="simple" CategoryId="223" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="1" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="2" Type="simple" CategoryId="223" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="3" Type="simple" CategoryId="309" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="2" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="4" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="2" ImageSize="100" ImageSizeRange="100" />
+  <Subject SubjectId="5" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="false" ImageSize="60" ImageSizeRange="60" SkinName="/hometags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="6" Type="tab" TabTitle1="美食城" TabTitle2="美食城" TabTitle3="美食城" TabTitle4="美食城" TabTitle5="美食城" TabTitle6="" TabTitle7="" TabTitle8="" Where1=",,54" Where2=",," Where3="273,," Where4="70,," Where5="177,," Where6=",," Where7=",," Where8=",," MaxNum="6" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="7" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="8" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="9" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="10" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="8" ImageSize="160" ImageSizeRange="160" />
+  <Subject SubjectId="11" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="/hometags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="12" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="13" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="/hometags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="14" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="15" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="/hometags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  <Subject SubjectId="16" Type="simple" CategoryId="303" TagId="" BrandId="" TypeId="" AttributeString="" MaxNum="6" ImageSize="220" ImageSizeRange="220" />
+  <Subject SubjectId="17" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="/hometags/SubjectProduct/Common_SubjectProduct_Top2.html" />
+  <Subject SubjectId="18" Type="top" CategoryId="" MaxNum="5" ImageNum="5" IsShowPrice="true" IsShowSaleCounts="false" IsImgShowPrice="true" IsImgShowSaleCounts="true" ImageSize="60" ImageSizeRange="60" SkinName="/hometags/SubjectProduct/Common_SubjectProduct_Top.html" />
+  </root>

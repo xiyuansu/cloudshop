@@ -1,0 +1,125 @@
+﻿<hi:common_appheader runat="server" />
+<style>
+    ul li label {
+        width: 100%;
+        border-bottom: 1px solid #e7e5ea;
+        position: relative;
+        padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    }
+
+    ul li {
+        float: left;
+        display: inline-block;
+        width: 100%;
+    }
+
+    h2, .tel {
+        line-height: 2;
+    }
+
+    label, h2, .address, .tel {
+        font-size: 0.6rem;
+        width: 100%;
+        display: inline-block;
+        font-weight: normal;
+        margin: 0;
+    }
+
+    .item-media {
+        float: left;
+        position: absolute;
+        left: 0.75rem;
+        top: 40%;
+    }
+
+    .address {
+        color: #666;
+    }
+
+    .not {
+        background: #fffde7;
+        display: inline-block;
+        color: #f43530;
+    }
+
+        .not span {
+            color: #00b0ff;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            width: 2.5rem;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .not em, .not span, .not i {
+            float: left;
+        }
+
+        .not i {
+            margin: 0.25rem 0.25rem 0 0;
+        }
+</style>
+<form id="form" role="form" runat="server">
+    <input type="hidden" id="hidDeliveryTime" runat="server" value="任意时间" ClientIdMode="static" />
+    <input type="hidden" id="hidGetgoodsOnStores" runat="server" value="true" ClientIdMode="static" /><!--是否可以上门自提-->
+    <input type="hidden" id="hidPaymentId_Podrequest" runat="server" value="0" ClientIdMode="static" /><!--货到付款支付ID-->
+    <input type="hidden" id="inputShippingModeId" runat="server" value="0" ClientIdMode="static" /><!--配送方式ID-->
+    <input type="hidden" id="hidStoreId" runat="server" value="0" ClientIdMode="static" /><!--门店ID-->
+    <input type="hidden" id="inputPaymentModeId" runat="server" value="0" clientidmode="static" /><!--支付方式-->
+    <input type="hidden" id="hidShipAddressId" runat="server" value="0" clientidmode="static" /><!--收货地址Id -->
+    <ul style="background:#fff;float:left;">
+        <hi:AppshopTemplatedRepeater id="rptStores" templatefile="/Tags/skin-Common_OrderStores.ascx" runat="server" />
+    </ul>
+    <div style="width:100%; position:fixed;bottom:0;left:0">
+        <input type="button" id="btnBack" value="返回" class="btn_fixe" clientidmode="static" onclick="ToSetShippingPayment()" />
+
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $(":radio[name='my-radio']").click(function () {
+                getSelectedStore();
+            });
+            var storeId = $("#hidStoreId").val();
+            if (storeId != undefined && storeId != null && storeId != "")
+                $("input[name='my-radio'][value=" + storeId + "]").prop("checked", true);
+
+            //var disabledCount = $(":disabled").length;
+            //var allCount = $('input:radio[name="my-radio"]').length;
+            //if (disabledCount == allCount) {
+            //    $("#btnBack").show();
+            //}
+            //else {
+            //    $("#btnBack").hide();
+            //}
+        });
+        function getSelectedStore() {
+            var val = $('input:radio[name="my-radio"]:checked').val();
+            if (val == null || val == undefined) {
+                return false;
+            }
+            else {
+                $("#hidStoreId").val(val);
+                ToSetShippingPayment();
+            }
+        }
+        function ToSetShippingPayment() {
+            var toUrl = "SubmmitOrder.aspx" + location.search;
+            toUrl = replaceParam(toUrl, "deliveryTime", $("#hidDeliveryTime").val());
+            toUrl = replaceParam(toUrl, "ShippingModeId", $("#inputShippingModeId").val());
+            //toUrl = replaceParam(toUrl, "StoreId", $("#hidStoreId").val());
+            toUrl = replaceParam(toUrl, "ChooseStoreId", $("#hidStoreId").val());
+            toUrl = replaceParam(toUrl, "PaymentModeId", $("#inputPaymentModeId").val());
+            toUrl = replaceParam(toUrl, "ShipAddressId", $("#hidShipAddressId").val());
+            location.replace(toUrl);
+        }
+
+        $(function () {
+            $(".not").siblings().css("color", "#ccc");
+            $(".not").parent().siblings().children("i").css("border-color", "#ccc")
+        })
+    </script>
+</form>
+
+<!--<hi:common_appfooter runat="server" />-->

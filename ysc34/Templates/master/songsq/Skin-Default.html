@@ -1,0 +1,328 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/songsq/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/songsq/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+ <script type="text/javascript" src="/templates/master/songsq/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.flexslider').flexslider({
+			directionNav: true,
+			slideshowSpeed: 5000,
+			pauseOnAction: false
+		});
+	});
+</script> <script>
+        $.ajaxSetup({
+            cache: false
+        });
+
+        $(function () {
+            setScrollLoading();
+        })
+
+        function setScrollLoading() {
+            $("img").scrollLoading();
+            $("iframe").each(function () {
+                if (!$(this).attr("src")) {
+                    $(this).attr("src", $(this).attr("data-url"));
+                }
+            });
+        }
+
+        $(window).scroll(function () {
+            setScrollLoading();
+        });
+    </script>
+<div class="main" id="main">
+
+<script type="text/javascript">
+	function nTabs(thisObj,Num){
+	if(thisObj.className == "active")return;
+	var tabObj = thisObj.parentNode.id;
+	var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+	for(i=0; i <tabList.length; i++)
+	{
+	  if (i == Num)
+	  {
+	   thisObj.className = "active"; 
+		  document.getElementById(tabObj+"_Content"+i).style.display = "block";
+	  }else{
+	   tabList[i].className = "normal"; 
+	   document.getElementById(tabObj+"_Content"+i).style.display = "none";
+	  }
+	} 
+	}
+</script>
+<style>
+.main{width:auto;margin-top:0;}
+</style>
+<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="1" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_1").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+
+	<div class="mtggw w1200">
+		<div class="mtggwleft">
+			<div class="mtggwl">
+				<hi:common_slidead runat="server" isdelayedloading="true" adid="28"></hi:common_slidead>
+			</div>
+			<div class="mtggc">
+				<div class="mtggctop"><b>	<hi:common_subjecttitle runat="server" commentid="20"></hi:common_subjecttitle></b> </div>
+				<div class="mtggccont">
+					<hi:common_customad runat="server" isdelayedloading="true" adid="29"></hi:common_customad>
+				</div>
+			</div>
+		</div>
+		<div class="mtggright">
+			<div class="mtggright1">
+				<hi:common_slidead runat="server" isdelayedloading="true" adid="30"></hi:common_slidead>
+			</div>
+		</div>
+	</div>
+
+	<div class="w1200 o-hidden mt10">
+
+		<script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+		<div class="fl">
+			<div class="qianggoutop">
+				<ul id="myTab1">
+					<li class="active" onmouseover="nTabs(this,0);">
+							<hi:common_subjecttitle runat="server" commentid="21"></hi:common_subjecttitle>
+					</li>
+					<li class="normal" onmouseover="nTabs(this,1);">
+						<hi:common_customad runat="server" adid="47"></hi:common_customad>
+					</li>
+					<li class="normal" onmouseover="nTabs(this,2);">
+						<hi:common_customad runat="server" adid="48"></hi:common_customad>
+					</li>
+					<li class="normal" onmouseover="nTabs(this,3);">
+						<hi:common_customad runat="server" adid="49"></hi:common_customad>
+					</li>
+				</ul>
+			</div>
+			<div class="TabContent">
+				<div id="myTab1_Content0" class="xuanzhong">
+					<script src="../../../Utility/time.js" type="text/javascript"></script>
+					<ul>
+						<hi:common_goodslist_latestcountdownbuy runat="server" isdelayedloading="true" maxnum="4"></hi:common_goodslist_latestcountdownbuy>
+					</ul>
+					<div class="biankuang"></div>
+
+				</div>
+				<div id="myTab1_Content1" class="none">
+					<hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="2"></hi:common_subjectproduct_simple>
+				</div>
+				<div id="myTab1_Content2" class="none">
+					<hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="3"></hi:common_subjectproduct_simple>
+				</div>
+				<div id="myTab1_Content3" class="none">
+					<hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="4"></hi:common_subjectproduct_simple>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="favor-right fr ">
+			<div class="nTab o-hidden ">
+				<div class="TabTitle o-hidden">
+					<ul id="myTab">
+						<li class="active" onmouseover="nTabs(this,0);">最新公告</li>
+						<li class="normal" onmouseover="nTabs(this,1);">商城资讯</li>
+					</ul>
+				</div>
+				<div class="TabContent1">
+					<div id="myTab_Content0">
+
+						<ul>
+							<%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="9" />%>
+						</ul>
+					</div>
+					<div id="myTab_Content1" class="none">
+						<hi:common_subjectarticle commentid="19" isdelayedloading="true" runat="server"></hi:common_subjectarticle>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<hi:common_imagead runat="server" isdelayedloading="true" adid="18"></hi:common_imagead>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="w1200 pt20 o-hidden">
+		<hi:common_customad runat="server" isdelayedloading="true" adid="20"></hi:common_customad>
+	</div>
+	<div class="w1200 pt20 o-hidden">
+		<div class="foolrleft float-l">
+			<div>
+				<hi:common_subjecttitle runat="server" commentid="3"></hi:common_subjecttitle>
+			</div>
+			<div>
+				<hi:common_imagead runat="server" isdelayedloading="true" adid="33"></hi:common_imagead>
+				<hi:common_slidead runat="server" isdelayedloading="true" adid="32"></hi:common_slidead>
+			</div>
+
+		</div>
+		<div class="foolrcont float-l">
+			<div class="spitop">
+				<div>
+					<hi:common_subjectmorelink runat="server" commentid="5"></hi:common_subjectmorelink>
+				</div>
+				<div>
+					<hi:common_subjectkeyword runat="server" commentid="4"></hi:common_subjectkeyword>
+				</div>
+			</div>
+			<div class="spancont">
+				<hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="7"></hi:common_subjectproduct_simple>
+			</div>
+		</div>
+		<div class="foolrright float-r">
+			<div class="bzphtop">销售排行榜</div>
+			<div>
+				<hi:common_subjectproduct_top runat="server" isdelayedloading="true" subjectid="5"></hi:common_subjectproduct_top>
+			</div>
+		</div>
+	</div>
+	<div class="w1200 pt20 o-hidden hongse">
+		<div class="foolrleft float-l">
+			<div>
+				<hi:common_subjecttitle runat="server" commentid="7"></hi:common_subjecttitle>
+			</div>
+			<div>
+				<hi:common_imagead runat="server" isdelayedloading="true" adid="35"></hi:common_imagead>
+				<hi:common_slidead runat="server" isdelayedloading="true" adid="34"></hi:common_slidead>
+			</div>
+
+		</div>
+		<div class="foolrcont float-l">
+			<div class="spitop">
+				<div>
+					<hi:common_subjectmorelink runat="server" commentid="9"></hi:common_subjectmorelink>
+				</div>
+				<div>
+					<hi:common_subjectkeyword runat="server" commentid="8"></hi:common_subjectkeyword>
+				</div>
+			</div>
+			<div class="spancont">
+				<hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="8"></hi:common_subjectproduct_simple>
+			</div>
+		</div>
+		<div class="foolrright float-r">
+			<div class="bzphtop">销售排行榜</div>
+			<div>
+				<hi:common_subjectproduct_top isdelayedloading="true" runat="server" subjectid="17"></hi:common_subjectproduct_top>
+			</div>
+		</div>
+	</div>
+	<div class="w1200 pt20 o-hidden hese">
+		<div class="foolrleft float-l">
+			<div>
+				<hi:common_subjecttitle runat="server" commentid="11"></hi:common_subjecttitle>
+			</div>
+			<div>
+				<hi:common_slidead runat="server" isdelayedloading="true" adid="36"></hi:common_slidead>
+				<hi:common_imagead runat="server" isdelayedloading="true" adid="37"></hi:common_imagead>
+			</div>
+
+		</div>
+		<div class="foolrcont float-l">
+			<div class="spitop">
+				<div>
+					<hi:common_subjectmorelink runat="server" commentid="13"></hi:common_subjectmorelink>
+				</div>
+				<div>
+					<hi:common_subjectkeyword runat="server" commentid="12"></hi:common_subjectkeyword>
+				</div>
+			</div>
+			<div class="spancont">
+				<hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="9"></hi:common_subjectproduct_simple>
+			</div>
+		</div>
+		<div class="foolrright float-r">
+			<div class="bzphtop">销售排行榜</div>
+			<div>
+				<hi:common_subjectproduct_top isdelayedloading="true" runat="server" subjectid="18"></hi:common_subjectproduct_top>
+			</div>
+		</div>
+	</div>
+	<div class="w1200 pt20 o-hidden huangse">
+
+		<div class="foolrcont float-l">
+			<div class="spitop">
+				<div class="foolrleft float-l">
+					<div>
+						<hi:common_subjecttitle runat="server" commentid="15"></hi:common_subjecttitle>
+					</div>
+				</div>
+				<div>
+					<hi:common_subjectmorelink runat="server" commentid="17"></hi:common_subjectmorelink>
+				</div>
+				<div>
+					<hi:common_subjectkeyword runat="server" commentid="16"></hi:common_subjectkeyword>
+				</div>
+			</div>
+			<div class="spancont">
+				<hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="10"></hi:common_subjectproduct_simple>
+			</div>
+		</div>
+		<div class="foolrright float-r">
+			<div class="bzphtop lvse">
+				<hi:common_subjecttitle runat="server" commentid="22"></hi:common_subjecttitle>
+			</div>
+			<div>
+				<hi:common_customad runat="server" isdelayedloading="true" adid="40"></hi:common_customad>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="w1200 pt20 o-hidden">
+		<hi:common_imagead runat="server" isdelayedloading="true"  adid="41"></hi:common_imagead>
+	</div>
+
+
+</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

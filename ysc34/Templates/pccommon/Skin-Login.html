@@ -1,0 +1,49 @@
+﻿<%<hi:common_header runat="server" skinname="ascx/tags/Skin-Common_Header_logo.ascx" />%>
+<form runat="server">
+    <style>
+        .main {
+            width: auto;
+        }
+    </style>
+    <div class="main" id="main1">
+
+        <hi:common_customad runat="server" adid="23"></hi:common_customad>
+
+        <div class="logindiv">
+
+            <div class="logingbj">
+                <div class="logingfome">
+                    <div class="info1"> <h1 class="YaHei">用户登录</h1> <a href="/Register.aspx">立即注册</a></div>
+                    <asp:HiddenField ID="hidReturnUrl" runat="server" ClientIDMode="Static" />
+                    <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+                    <div class="info2"> <%<asp:TextBox ID="txtUserName" runat="server" CssClass="inputbj form-control" tabindex="1" placeholder="邮箱/手机号" Width="276" />%></div>
+                    <div class="info2">
+                        <%<asp:TextBox Button="btnLogin" ID="txtPassword" runat="server" CssClass="inputbj form-control" tabindex="2" placeholder="密码" Width="276" TextMode="Password" />%>
+                    </div>
+                    <div class="info3">
+                        <span> <%<asp:CheckBox ID="chkSaveLoginInfo" runat="server" Text="自动登录" />%></span>
+                        <em>  <a href="/ForgotPassword">忘记密码?</a></em>
+                    </div>
+                    <div class="btn1"><%<asp:Button ID="btnLogin" CssClass="btncss" runat="server" Text="登  录" tabindex="3" />%></div>
+                    <div class="qqalipay">
+                        <span>使用合作网站账号登录商城：</span>
+                        <em><%<hi:common_link_openid runat="server" /> %></em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function (e) {
+            returnUrl = getParam("ReturnUrl");
+            $("#hidReturnUrl").val(returnUrl);
+            if ($("div.qqalipay em a").length == 0)
+                $("div.qqalipay").hide();
+        })
+
+    </script>
+    <%<hi:common_footer runat="server" skinname="ascx/tags/Skin-Common_Footer_logo.ascx" />%>
+</form>
+
+

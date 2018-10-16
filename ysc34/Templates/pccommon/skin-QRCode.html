@@ -1,0 +1,102 @@
+﻿<%<hi:common_header runat="server" skinname="ascx/tags/Skin-Common-Top.ascx" />%>
+<style type="text/css">
+    .msgtable td { text-align: center; font-size: 16px; line-height: 40px; }
+    .msgtable td a { color: #0094ff; }
+</style>
+<form runat="server">
+    <div class="cart_h">
+        <div id="logo"><Hi:Common_Logo ID="Common_Logo1" runat="server" /></div>
+        <div class="cart_step">
+            <ul class="cart_step3">
+                <li class="step-1"><b></b>1.我的购物车</li>
+                <li class="step-2"><b></b>2.填写核对订单信息</li>
+                <li class="step-3">3.成功提交订单</li>
+            </ul>
+        </div>
+    </div>
+    <div class="cart_content">
+
+        <div class="cart_payment">
+            <div id="divMessage" runat="server" ClientidMode="Static">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="msgtable">
+                    <tr>
+                        <td align="center">
+                            <img src="" runat="server" id="QRCodeImg" alt="" />
+                        </td>
+                    </tr>
+                    <tr><td align="center" style="line-height:40px; font-size:16px;">使用支付宝钱包扫码完成付款</td></tr>
+                    <tr><td align="center" style="line-height:40px; font-size:16px;"><a href="https://mobile.alipay.com/index.htm?cid=wap_dc" target="_blank">支付宝钱包下载</a> | <a href="https://mobile.alipay.com/index.htm?cid=wap_dc" target="_blank">如何使用？</a></td></tr>
+                    <tr><td align="center" style="line-height:80px; font-size:28px; color:#ff6a00"><span id="paymoney" runat="server"></span></td></tr>
+                </table>
+            </div>
+            <div id="divError" runat="server" ClientidMode="Static">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="msgtable">
+                    <tr><td align="center" style="line-height:40px; font-size:16px;"><div id="ErrorMsg" runat="server" ClientidMode="Static"></div></td></tr>
+                </table>
+            </div>
+            <div id="divSuccess" runat="server" ClientidMode="Static" style="display:none;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="msgtable">
+                    <tr><td align="center" style="line-height:40px; font-size:16px;">恭喜您支付成功,你可以进行以下操作。</td></tr>
+                    <tr><td align="center" style="line-height:40px; font-size:16px;"><a href="/" id="defaultLink" runat="server">返回首页</a> | <a href="#" id="userLink" runat="server">会员中心</a> | <a href="#" id="orderLink" runat="server">查看订单</a></td></tr>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" runat="server" id="txt_OrderId" ClientidMode="Static" />
+    </div>
+    <script language="javascript" type="text/javascript">
+
+
+        $(function () {
+            (function checkPayStuas() {
+                $.ajax({
+                    url: "/pay/QRCode.aspx",
+                    type: 'post', dataType: 'json', timeout: 20000,
+                    data: {
+                        Action: "getstatus",
+                        OrderId: $("#txt_OrderId").val()
+                    },
+                    success: function (resultData) {
+                        if (resultData.Status == "1") {
+                            if ($("#divMessage").length > 0) $("#divMessage").hide();
+                            if ($("#divError").length > 0) $("#divMessage").hide();
+                            if ($("#divSuccess").length > 0) $("#divSuccess").show();
+                        }
+                        else if (resultData.Status == "0") {
+                            setTimeout("checkPayStuas()", 5000);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        checkPayStuas();
+                    }
+                });
+            })();
+        });
+            
+        //function checkPayStuas() {
+        //    $.ajax({
+        //        url: "/pay/QRCode.aspx",
+        //        type: 'post', dataType: 'json', timeout: 20000,
+        //        data: {
+        //            Action: "getstatus",
+        //            OrderId: $("#txt_OrderId").val()
+        //        },
+        //        success: function (resultData) {
+        //            if (resultData.Status == "1") {
+        //                if ($("#divMessage").length > 0) $("#divMessage").hide();
+        //                if ($("#divError").length > 0) $("#divMessage").hide();
+        //                if ($("#divSuccess").length > 0) $("#divSuccess").show();
+        //            }
+        //            else if(resultData.Status == "0"){
+        //                setTimeout("checkPayStuas()", 5000);
+        //            }
+        //        },
+        //        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //            alert(XMLHttpRequest + "-" + textStatus + "-" + errorThrown);
+        //        }
+        //    });
+        //}
+
+    </script>
+</form>
+ <%<hi:common_footer runat="server" skinname="ascx/tags/Skin-Common_Bottom.ascx" />%>
+

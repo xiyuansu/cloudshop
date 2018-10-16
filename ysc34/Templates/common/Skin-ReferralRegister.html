@@ -1,0 +1,339 @@
+﻿<hi:common_wapheader runat="server" />
+<link rel="stylesheet" href="/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/Utility/hishopUpload/hishopUpload.css" />
+<style>
+    .tk_group .input-group input { width: 6rem; }
+
+    .dropdown-menu { position: fixed; top: 3rem; left: 10%; z-index: 1000; display: none; float: left; width: 80%; height: 80%; overflow: hidden; text-align: left; list-style: none; -webkit-background-clip: padding-box; background-clip: padding-box; border: 1px solid #ccc; border: 1px solid rgba(0,0,0,.15); border-radius: 0.1rem; -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175); box-shadow: 0 6px 12px rgba(0,0,0,.175); background-color: #fff; border: none; overflow-y: scroll; -webkit-overflow-scrolling: touch !important; }
+
+
+
+        .dropdown-menu li { text-align: left !important; border-bottom: 1px solid #ebebeb !important; margin: 0 !important; padding: 0 !important; line-height: inherit !important; width: 100% !important; }
+    .tk_main h5 { font-style: normal; font-weight: bold; font-size: 0.7rem; }
+    .shopbanner { width: 100%; height: 60px; overflow: hidden; }
+        .shopbanner #imageContainer { width: 90px; float: left; height: 100%; display: block; }
+        .shopbanner .bannerdesc { color: #999; }
+    .modal-dialog { position: fixed; top: 40%; z-index: 9; width: 74%; left: 10%; border-radius: 16px; padding: 3%; top: 30%; }
+    .input-group { position: static; }
+    .btn-group, .btn-group-vertical { position: static; }
+</style>
+<form id="form" role="form" runat="server">
+    <asp:hiddenfield id="hdLink" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <input type="hidden" runat="server" id="hdRegisterBecomePromoter" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidValidateRealName" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidValidatePhone" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidValidateEmail" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidValidateAddress" clientidmode="Static" />
+    <input type="hidden" runat="server" id="hidIsPromoterValidatePhone" clientidmode="Static" />
+    <input type="hidden" ClientIDMode="Static" id="hidUploadImages" runat="server" />
+    <div class="tk_main">
+        <h5>店铺Logo:</h5>
+        <div class="shopbanner">
+            <div id="imageContainer">
+                <span name="referralBanner" class="imgbox"></span>
+            </div>
+            <input type="hidden" clientidmode="Static" runat="server" id="hidOldBanner" />
+            <div class="bannerdesc">
+                点击左边的图片修改<br />建议尺寸：240*240像素 小于1MB，支持jpg、gif、png格式
+            </div>
+        </div>
+        <div class="tk_group">
+            <label for="username">店铺名称</label>
+            <div class="input-group ">
+                <%<asp:TextBox ID="txtShopName" runat="server" ClientIDMode="Static" placeholder="填写您的店铺名称" />%>
+            </div>
+        </div>
+        <div class="tk_group" id="divtxtRealName">
+            <label for="username">真实姓名</label>
+            <div class="input-group ">
+                <%<asp:TextBox ID="txtRealName" runat="server" ClientIDMode="Static" placeholder="填写你的姓名" />%>
+            </div>
+        </div>
+        <div class="tk_group" id="divtxtEmail">
+            <label>邮箱</label>
+            <div class="input-group">
+                <%<asp:TextBox ID="txtEmail" runat="server" ClientIDMode="Static" placeholder="填写你的邮箱" />%>
+            </div>
+        </div>
+        <div class="tk_group" id="divtxtPhone">
+            <label>手机号码</label>
+            <div class="input-group">
+                <%<asp:TextBox ID="txtPhone" runat="server" ClientIDMode="Static" placeholder="填写你的手机号码" />%>
+            </div>
+        </div>
+        <div class="tk_group" id="divimgcode">
+            <label>图形验证</label>
+            <div class="input-group ">
+                <input id="txtNumber" type="url" placeholder="请输入图形验证码">
+                <span class="yanzheng_input2"><img id="imgVerifyCode" onclick="refreshCode()" src='' style="vertical-align: middle; border-style: none;" alt="" /><a href="javascript:refreshCode();">&nbsp;&nbsp;</a></span>
+            </div>
+        </div>
+        <div class="tk_group" id="normaldiv">
+            <label>短信验证</label>
+            <div class="input-group ">
+                <input id="txtPhoneCode" type="url" placeholder="请输入短信验证码">
+                <input id="phoneVerifyCode" type="button" value="获取验证码" class="yanzheng_input3" style="width:5rem;float:right; height:1.5rem;margin-top:0.5rem;background: #fff;
+    border: 1px solid #999;border-radius: 0.2rem" />
+            </div>
+        </div>
+        <div class="tk_group" id="divvshopRegion">
+            <label>所在地</label>
+            <div class="input-group selectReason">
+                <div id="vshopRegion">
+                </div>
+                <input name="address" id="region" runat="server" clientidmode="Static" type="hidden" />
+                <input name="address" id="regionText" runat="server" clientidmode="Static" type="hidden" />
+            </div>
+        </div>
+        <div class="tk_group" id="divtxtAddress">
+            <label>详细地址</label>
+            <div class="input-group">
+                <%<asp:TextBox ID="txtAddress" runat="server" ClientIDMode="Static" placeholder="填写你的详细地址" />%>
+            </div>
+        </div>
+    </div>
+    <div class="btn_tk">
+        <input type="button" id="btnReferral" value="提交申请" class="btn_login" />
+    </div>
+
+</form>
+<script src="/Utility/regionSelector_FileData.js"></script>
+<script type="text/javascript" src="/utility/jquery.hishopUpload.user.js?v=3.4"></script>
+<script type="text/javascript" src="/utility/jquery.form.js"></script>
+<script type="text/javascript">
+    function refreshCode() {
+        var img = document.getElementById("imgVerifyCode");
+        if (img != null) {
+            var currentDate = new Date();
+            img.src = "/VerifyCodeImage.aspx?t=" + currentDate.getTime();
+        }
+    }
+    var regionSelector = new vShop_RegionSelector('vshopRegion', function (address, code) {
+        $("#address-check-btn").html(address);
+        $('#region').val(code);
+    }, $('#regionText').val());
+    // 初始化图片上传控件
+    function initImageUpload() {
+        var imgSrcs = $("#hidOldBanner").val();
+        var arySrcs = imgSrcs.split(',');
+        var url = ImageUploadPath;
+        $('#imageContainer span[name="referralBanner"]').hishopUpload(
+                       {
+                           title: '店铺Logo',
+                           url: url,
+                           imageDescript: '',
+                           displayImgSrc: arySrcs,
+                           imgFieldName: "referralBanner",
+                           defaultImg: '',
+                           pictureSize: '',
+                           imagesCount: 1,
+                           dataWidth: 9,
+                           showDelIcon: false,
+                           foldName: 'referral/banner'
+                       });
+
+    }
+
+    //获取上传成功后的图片路径
+    function getUploadImages() {
+        var aryImgs = $('#imageContainer span[name="referralBanner"]').hishopUpload("getImgSrc");
+        $("#hidUploadImages").val(aryImgs);
+        return true;
+    }
+
+    $(document).ready(function (e) {
+        initImageUpload();
+        if ($("#hdRegisterBecomePromoter").val().length > 0) {
+            alert_h("恭喜您成为分销员，现在去分享您的专属链接吧", function () {
+                location.href = $("#hdRegisterBecomePromoter").val();
+            });
+        }
+
+        refreshCode();
+        if ($("#hidIsPromoterValidatePhone").val() != "1") {
+            $("#divimgcode").hide();
+            $("#normaldiv").hide();
+        }
+
+        if ($("#hidValidateRealName").val() != "1") {
+            $("#divtxtRealName").hide();
+        }
+
+        if ($("#hidValidateEmail").val() != "1") {
+            $("#divtxtEmail").hide();
+        }
+        if ($("#hidValidatePhone").val() != "1") {
+            $("#divtxtPhone").hide();
+            $("#normaldiv").hide();
+            $("#divimgcode").hide();
+        }
+
+        if ($("#hidValidateAddress").val() != "1") {
+            $("#divtxtAddress").hide();
+            $("#divvshopRegion").hide();
+        }
+
+
+        $("#phoneVerifyCode").click(function () {
+            var phone = $("#txtPhone").val();
+            if (!Reg_mobbile.test(phone)) {
+                alert_h("请输入正确的手机号码");
+                return;
+            }
+            if ($("#txtNumber").val().length == 0) {
+                alert_h("请输入图形验证码");
+                return;
+            }
+            var imgCode = $("#txtNumber").val();
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx?action=SendVerifyCode&needValidate=0",
+                data: { Phone: phone, imgCode: imgCode },
+                success: function (result) {
+
+                    if (result.success == "true") {
+
+                        var time = 1000;
+                        var interval;
+                        var count = 0;
+
+                        function fun() {
+
+                            count++;
+
+                            if (count >= 60) {
+                                $("#phoneVerifyCode").attr("disabled", false);
+                                $("#phoneVerifyCode").attr("value", "重新发送");
+
+                                clearInterval(interval);
+                            }
+                            else {
+                                $("#phoneVerifyCode").attr("value", "发送成功（" + (60 - count) + ")");
+                            }
+                        }
+
+                        $("#phoneVerifyCode").attr("disabled", "true");
+                        interval = setInterval(fun, time);
+                    }
+                    else {
+                        refreshCode();
+                        alert_h(result.msg);
+                    }
+                }
+            });
+        });
+        $("#btnReferral").click(function (e) {
+            if (!validatorForm()) { return false; }
+            getUploadImages();
+            var data = {};
+            var realname = $("#txtRealName").val().trim();
+            var address = $("#txtAddress").val().trim();
+            var regionId = $("#region").val().trim();
+
+            var email = $("#txtEmail").val().trim();
+            var phone = $("#txtPhone").val().trim();
+            var numbercode = $("#txtNumber").val().trim();
+            var phoneCode = $("#txtPhoneCode").val().trim();
+            var shopName = $("#txtShopName").val().trim();
+
+            data.RealName = realname;
+            data.Address = address;
+            data.RegionId = regionId;
+
+            data.Email = email;
+            data.Phone = phone;
+            data.NumberCode = numbercode;
+            data.PhoneCode = phoneCode;
+            data.ShopName = shopName;
+            data.BannerUrl = $("#hidUploadImages").val();
+            $.post("/api/VshopProcess.ashx?action=ReferralRegister", data, function (json) {
+                try {
+                    var obj = JSON.parse(json);
+                } catch (ex) {
+                    obj = json;
+                }
+                if (obj.success == true || obj.success == "true") {
+                    alert_h("提交成功", function () {
+                        location.href = $("#hdLink").val();
+                    });
+                }
+                else {
+                    console.log(obj);
+                    alert_h(obj.msg, function (e) {
+                        if (obj.msg.indexOf("需要累计消费金额达到") > -1) {
+                            location.href = "MemberCenter"
+                        }
+                        else {
+                            refreshCode();
+                        }
+                    });
+                }
+
+            });
+        })
+    });
+    function validatorForm() {
+        if ($("#txtShopName").val().trim().length < 1 || $("#txtShopName").val().trim().length > 100) {
+            alert_h("请输入店铺名称,长度在1-10个字符之间");
+            refreshCode();
+            return false;
+        }
+        if ($("#hidValidateRealName").val() == "1" && $("#txtRealName").val().length <= 0) {
+            alert_h("真实姓名不能为空");
+            refreshCode();
+            return false;
+        }
+        if ($("#txtRealName").val().length > 10) {
+            alert_h("真实姓名长度不能超过10个字符");
+            refreshCode();
+            return false;
+        }
+        var tempemail = $("#txtEmail").val();
+        if ($("#hidValidateEmail").val() == "1" && tempemail.length <= 0) {
+            alert_h("邮箱地址不能为空");
+            refreshCode();
+            return false;
+        }
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*([a-zA-Z0-9])+\.([a-zA-Z]{1,4})$/;
+        if (tempemail.length > 0 && !myreg.test(tempemail)) {
+            alert_h('请输入正确的邮箱地址');
+            refreshCode();
+            return false;
+        }
+        if ($("#hidValidatePhone").val() == "1" && $("#txtPhone").val().length <= 0) {
+            alert_h("手机号码不能为空");
+            refreshCode();
+            return false;
+        }
+        if ($("#txtPhone").val().length > 0 && !Reg_mobbile.test($("#txtPhone").val())) {
+            alert_h("请输入正确的手机号码");
+            refreshCode();
+            return false;
+        }
+        if ($("#hidValidatePhone").val() == "1" && $("#hidIsPromoterValidatePhone").val() == "1" && $("#txtNumber").val().length <= 0) {
+            alert_h("请输入图形验证码");
+            refreshCode();
+            return false;
+        }
+        if ($("#hidValidatePhone").val() == "1" && $("#hidIsPromoterValidatePhone").val() == "1" && $("#txtPhoneCode").val().length <= 0) {
+            alert_h("请输入手机短信验证码");
+            refreshCode();
+            return false;
+        }
+
+        var RegionId = $("#region").val().trim();
+        if ($("#hidValidateAddress").val() == "1" && (RegionId == "" || RegionId == undefined || RegionId == "0")) {
+            alert_h("请选择所在地区");
+            refreshCode();
+            return false;
+        }
+        if ($("#hidValidateAddress").val() == "1" && ($("#txtAddress").val().length < 2 || $("#txtAddress").val().length > 50)) {
+            alert_h("请输入详细地址，长度为2-50个字符");
+            refreshCode();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<hi:common_wapfooter runat="server" />

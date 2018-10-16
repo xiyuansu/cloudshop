@@ -1,0 +1,71 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<form runat="server" id="form1">
+    <input type="hidden" id="hidApplyCondition" value="0" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidApplyReferralNeedAmount" value="0" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidExpenditure" value="0" runat="server" clientidmode="static" />
+    <div class="hyzxmain">
+        <div class="hyzxconty">当前位置><span><a href="/">首页</a></span>><span><a href="/user/UserDefault.aspx">会员中心</a></span>><span><a href="#">我要成为分销员</a></span></div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <%<hi:common_user_menu runat="server" />%>
+                <div class="hyzxconterl1">
+                </div>
+            </div>
+            <div class="hyzxconterr referral">
+                <div class="dingdan_box1">我要成为分销员</div>
+                <div class="yzyouxiang_box1 m_top"><%<asp:Literal ID="litReferralRegisterAgreement" runat="server" />%></div>
+                <div class="yzyouxiang_box1 m_top" style="border:none;" runat="server" id="divRecruitmentAgreement" clientidmode="static"><input type="checkbox" id="chkAgreement" name="chkAgreement" checked="checked" class="icheck" /> <em>我已经同意并阅读 <a href="RecruitmentAgreement" style="color:#ff6a00;">《分销员招募协议》</a></em></div>
+                <div class="grxx_btn">
+                    <a type="button" href="javascript:void(0)" id="btnToRegister" class="btn_form">立即成为分销员</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function (e) {
+            var again = getParam("again");
+            if (again != null && again == "1") {
+                $("#btnToRegister").text("立即成为分销员");
+            }
+            $("#chkAgreement").click(function (e) {
+                if ($(this).is(':checked')) {
+                    $("#btnToRegister").show();
+                }
+                else {
+                    $("#btnToRegister").hide();
+                }
+            })
+            $("#btnToRegister").click(function (e) {
+                if ($("#hidApplyCondition").val() == "1") {
+                    var amount = parseFloat($("#hidApplyReferralNeedAmount").val());
+                    var expenditure = parseFloat($("#hidExpenditure").val());
+                    if (isNaN(amount)) {
+                        amount = 0;
+                    }
+                    if (isNaN(expenditure)) {
+                        expenditure = 0;
+                    }
+                    if (amount > expenditure) {
+                        alert("您的消费金额还没达到系统设置的金额(" + amount + "元)");
+                        return false;
+                    }
+                }
+                if ($("#divRecruitmentAgreement").length > 0) {
+                    if (!$('#chkAgreement').is(':checked')) {
+                        alert("请同意并且阅读分销员招募协议！");
+                        return false;
+                    }
+                }
+                var again = getParam("again");
+
+                if (again != null && again == "1") {
+                    location.href = "ReferralRegister.aspx?again=1";
+                }
+                else {
+                    location.href = "ReferralRegister.aspx";
+                }
+            });
+        });
+    </script>
+</form>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

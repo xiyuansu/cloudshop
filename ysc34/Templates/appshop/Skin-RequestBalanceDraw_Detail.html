@@ -1,0 +1,53 @@
+﻿<hi:common_appheader runat="server" />
+<div class="tk_main">
+    <div class="tk_group">
+        <label for="username">申请时间</label>
+        <div class="input-group">
+            <asp:literal runat="server" id="litRequestDate" />
+        </div>
+    </div>
+    <div class="tk_group">
+        <label for="username">提现金额</label>
+        <div class="input-group">
+            ￥<%<Hi:FormatedMoneyLabel ID="litAmount" runat="server" />%>
+        </div>
+    </div>
+    <div class="tk_group">
+        <label for="username">提现帐号 </label>
+        <div class="input-group">
+            <asp:literal ID="litAccount" runat="server" />
+        </div>
+    </div>
+    <div class="tk_group">
+        <label for="username">审核状态</label>
+        <div class="input-group">
+            <span class="text-danger"><asp:literal runat="server" id="litStatus" /></span>
+        </div>
+    </div>
+    <div class="tk_group">
+        <label for="username">审核日期</label>
+        <div class="input-group">
+            <asp:literal runat="server" id="litAccountDate" />
+        </div>
+    </div>
+    <div class="tk_group">
+        <label for="username">备注</label>
+        <span class="text-danger"><asp:literal runat="server" id="litMark" /></span>
+    </div>
+    <div class="tk_group">
+        <label for="username">拒绝理由</label>
+        <span class="text-danger"><asp:literal runat="server" id="litManagerRemark" /></span>
+    </div>
+</div>
+<div class="btn_tk">
+    <input type="button" id="btngoback" value="返回提现记录" class="btn_login" />
+</div>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $("#btngoback").click(function (e) {
+            history.go(-1);
+        })
+    });
+</script>
+
+<%<hi:common_appfooter runat="server" />%>

@@ -1,0 +1,18 @@
+﻿<hi:common_appheader runat="server" />
+<div id="divdrawlist" class="drawbox">
+    <hi:AppshopTemplatedRepeater id="rptDrawList" templatefile="/Tags/skin-Common_AppLotteryDrawRecords.ascx"
+                                 runat="server" />
+</div>
+<div id="divEmpty" class="kong">
+    <img src="/images/coupon_null.png">
+    <p>暂无中奖记录</p>
+</div>
+<script type="text/javascript">
+    $(function () {
+        if (!$.trim($("#divdrawlist").html())) {
+            $("#divdrawlist").hide();
+            $("#divEmpty").show();
+        }
+    })
+</script>
+<hi:common_appfooter runat="server" />

@@ -1,0 +1,103 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="../Utility/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script src="../Utility/jquery.cookie.js"></script>
+    <script src="../Utility/jquery.artDialog.js"></script>
+    <script src="../Utility/iframeTools.js"></script>
+    <script src="js/Frame.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/frame.css" />
+    <link rel="stylesheet" type="text/css" href="../utility/skins/blue.css?v=3.0" />
+    <link href="/Utility/iconfont/iconfont.css" rel="Stylesheet" />
+
+    <title>云商城门店管理</title>
+    <script type="text/javascript">
+        //IFrame弹出
+        function DialogFrame(url, title_tip, w_width, h_height) {
+            var tmpwidth = 900;
+            var tmpheight = 520;
+            if (w_width != null) {
+                tmpwidth = w_width;
+            }
+            if (h_height != null) {
+                tmpheight = h_height;
+            }
+            var dialogdata = { title: title_tip };
+            if (tmpwidth != 0) {
+                dialogdata.width = tmpwidth;
+            }
+            if (tmpheight != 0) {
+                dialogdata.height = tmpheight;
+            }
+            if (dialogId && dialogId.length > 0)
+            {
+                dialogdata.id = dialogId;
+            }
+            art.dialog.open(url, dialogdata, true);
+        }
+        $(document).ready(function (e) {
+            ShowMenuLeft('店铺概况', null, null);
+        })
+    </script>
+</head>
+<style>
+    .hishop_menu_scroll { opacity: 1 !important; }
+</style>
+<body>
+
+    <div class="hishop_head">
+        <div class="hishop_logo"><a href="/Default.aspx" target="_blank">
+            <img src="images/storelogogo.png" class="pngFix" /></a></div>
+        <div class="hishop_banner">
+            <div class="hishop_con2">
+                <div class="hishop_menu">
+                    <a onclick="ShowMenuLeft('店铺概况', null, null)" class="hishop_curent">首页</a>
+                    <a onclick="ShowMenuLeft('订单', null, null)">订单</a>
+                    <a onclick="ShowMenuLeft('商品', null, null)">商品</a>
+                    <a onclick="ShowMenuLeft('设置', null, null)">设置</a>
+                </div>
+                <div class="hishop_banneritem ">
+                    <div class="dropdown">
+                        <a id="drop1" href="#" role="button" class="dropdown-toggle">
+                            <i class="glyphicon glyphicon-user"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                            <li href="#">
+                                <a>
+                                    <font color="#666">admin</font>
+                                </a>
+                            </li>
+                            <li href="#"><a href="LoginExit.aspx" title="退出登录">安全退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--  <div class="hishop_banneritem">
+                    <p>
+                        <img src="images/ren.png" /> <a>shop</a>,欢迎回来　<a><font color="#FBD711">admin</font></a>　<a href="LoginExit.aspx"><strong>[安全退出]</strong></a>
+                        <a target="_blank" href="../Default.aspx"><img src="images/font.png" />浏览前台</a><span><img src="images/split.jpg" /></span>
+                        <a href="Default.aspx"><img src="images/zm.png" />桌面</a><span><img src="images/split.jpg" /></span>
+                    </p>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+    <div class="hishop_content">
+        <div class="hishop_menu_scroll">
+            <div id="menu_left">
+            </div>
+        </div>
+        <div id="menu_arrow" class="close_arrow" onclick="javascript:ExpendMenuLeft()" style="display: none"></div>
+        <div class="hishop_content_r">
+            <iframe id="frammain" name="frammain" class="framecontent" runat="server" frameborder="no" border="0" scrolling="auto" src="home/TodaySaleStatistics"></iframe>
+        </div>
+    </div>
+
+</body>
+</html>

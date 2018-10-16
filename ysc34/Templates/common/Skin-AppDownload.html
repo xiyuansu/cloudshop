@@ -1,0 +1,62 @@
+﻿<hi:common_wapheader runat="server" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidCleintType" />
+<style>
+    body,html {
+        background: #fff;height: 100%;
+    }
+
+    .pbox {
+        margin-top: 0;
+        float: left;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding-top: 4.5rem;
+    }
+
+    .main {
+        background-color: #fff;
+        display: inline-block;
+        width: 100%;
+        border-bottom: 0px solid #ebebeb;
+        padding:0;
+    }
+
+    .pbox a {
+        width: 9.25rem;
+        height: 2.5rem;
+        display: inline-block;
+        border-radius: 2.5rem;
+        line-height: 2.5rem;
+        color: #fff;
+        padding-left: 1.75rem;
+        font-size: 0.9rem;
+    }
+
+    .Android {
+        background: url(../images/AndroidLogo.png) #7cb342 no-repeat;
+        background-size: 1.3rem 1.5rem;
+        background-position: 0.75rem 0.4rem;
+    }
+
+    .ios {
+        margin-top: 1rem;
+        background: url(../images/AppleLogo.png) #039be5 no-repeat;
+        background-size: 1.3rem 1.5rem;
+        background-position: 0.75rem 0.4rem;
+    }
+    .main{ background: #787878;height: 100vh;position: fixed;width: 100%; padding: 0;}
+</style>
+
+<form id="form" role="form"  runat="server">
+    <div class="pbox" id="loadPanel" runat="server"> 
+        <a id="androidlink" runat="server" class="Android">Android下载</a>
+        <a id="ioslink" runat="server" class="ios">Appstore下载</a>
+    </div>
+    <div class="main" id="sharePanel" runat="server"> 
+    	<img src="/images/shares.png" style="width:100%;" />
+        <div class="bg">
+        </div>
+        
+    </div>
+</form>

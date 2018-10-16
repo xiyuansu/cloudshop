@@ -1,0 +1,42 @@
+﻿<hi:common_appheader runat="server" />
+<div class="development-referral pbox">
+    <input type="hidden" runat="server" id="hidWebSiteTitle" />
+    <h4 class="text-center text-danger">发展下级分销员赚奖励！</h4>
+    <p class="text-center">
+        <a id="linDevelopReferrals" runat="server"><img id="imgQRCode" runat="server" /></a>
+    </p>
+    <p class="text-center text-muted">
+        <button id="btnShare" type="button" class="btn btn-success">
+            立即分享
+        </button>
+    </p>
+
+</div>
+<script type="text/javascript">
+    String.prototype.replaceAll = function (str, tostr) {
+        oStr = this;
+        while (oStr.indexOf(str) > -1) {
+            oStr = oStr.replace(str, tostr);
+        }
+        return oStr;
+    }
+
+    $("#btnShare").click(function (e) {
+        var shareJson = "";
+        var title = $("#WAPDevelopReferrals_hidWebSiteTitle").val();        
+        var shareUrl = $("#WAPDevelopReferrals_linDevelopReferrals").attr("href");
+        var imgUrl = $("#WAPDevelopReferrals_imgQRCode").attr("src");
+        var content = shareUrl;
+        if (content == "") { content = title; }
+        shareJson = ("{\"title\":\"" + title + "\",\"content\":\"" + content + "\",\"image\":\"" + imgUrl + "\",\"url\":\"" + shareUrl + "\"}").replaceAll("\\", "").replaceAll("\n\r", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll(" ", "");
+        shareJson = encodeURIComponent(shareJson);
+
+        var type = GetAgentType();
+        // 设置标题
+        if (type == 2)
+            window.HiCmd.webShare(shareJson);
+        else if (type == 1)
+            loadIframeURL("hishop://webShare/null/" + shareJson);
+    });
+</script>
+<hi:common_appfooter runat="server" />

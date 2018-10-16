@@ -1,0 +1,46 @@
+﻿<%<hi:common_header runat="server" />%>
+<style>
+body{ background: #f9f9f9;}
+</style>
+<form runat="server">
+   <div class="main">
+   <div class="pro_delete">
+   <b><img src="../images/new/xiajia_03.jpg"></b>
+   <em>很抱歉，你来晚了，你查看的商品已删除。</em>
+   </div>
+   
+   <div class="delete_hot">
+   <div class="hot_title"><h2>热门商品</h2></div>
+    <div class="hot_con">
+        <ul>
+            <Hi:ThemedTemplatedRepeater ID="rptHotProduct" runat="server" TemplateFile="/Ascx/tags/Common_ViewProduct/Skin-Common_HotProducts.ascx" />%>
+        </ul>
+    </div>
+   </div>
+   </div> 
+   
+   <script>
+   $(function(){
+   $('.items ul li').click(function(){
+   $(this).addClass('cur').siblings().removeClass('cur');
+   })
+   })
+   </script>
+    <script type="text/javascript">
+        function changeMainPic(obj) {
+            var sid = $(obj).attr("id");
+            var productid = sid.split('_')[1];
+            if (sid.split('_')[2] == "1") {
+                $("#mainPic_" + productid).attr("src", $("#mainPic_" + productid).attr("tempSrc"));
+            }
+            else {
+                var url = $(obj).attr("src");
+                url = url.replace("/storage/master/product/thumbs40/40_", "/storage/master/product/thumbs220/220_");
+                $("#mainPic_" + productid).attr("src", url);
+            }
+            //$("img[id^='detailPic_" + productid + "']").removeAttr("class");
+            //$(obj).attr("class", "cur");
+        }
+    </script>
+</form>
+<%<hi:common_footer runat="server" />%>

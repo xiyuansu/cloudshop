@@ -1,0 +1,37 @@
+.onShow
+{
+    background:url(validate_normal.gif) no-repeat; 
+    padding-left:25px; 
+	 
+	 padding-bottom:12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onFocus
+{
+    background:#E9F0FF url(validate_waring.gif) no-repeat; 
+    padding-left:25px; 
+	 
+	line-height:22px; 
+	 padding-bottom:12px;
+	vertical-align:middle;
+}
+.onError
+{
+    background:#FFF2E9 url(validate_error.gif) no-repeat;
+    padding-left:25px;
+	 
+	line-height:22px; 
+	 padding-bottom:12px;
+	vertical-align:middle;
+}
+.onCorrect
+{
+    background:#E9FFEB url(validate_success.gif) no-repeat;
+    padding-left:25px;
+	 
+	 padding-bottom:12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+ 

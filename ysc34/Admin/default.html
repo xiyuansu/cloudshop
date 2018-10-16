@@ -1,0 +1,239 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Content-Type" content="text/html;" />
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script src="../Utility/jquery.cookie.js"></script>
+    <script src="../Utility/jquery.artDialog.js"></script>
+    <script src="../Utility/iframeTools.js"></script>
+    <script src="./js/Frame.js?v=3.4"></script>
+    <script src="/Utility/nicescroll/jquery.nicescroll.js"></script>
+    <script src="/Utility/easydropdown/jquery.easydropdown.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/frame.css" />
+    <link rel="stylesheet" type="text/css" href="../utility/skins/blue.css?v=3.0" />
+    <link href="/Utility/iconfont/iconfont.css" rel="Stylesheet" />
+    <link href="/Utility/easydropdown/easydropdown.css" rel="stylesheet" />
+    <title>全网商城系统管理</title>
+    <script>
+        var OpenTaobao = 0, OpenMobbile = 0, OpenAliho = 0, OpenWap = 0, OpenVstore = 0, OpenReferral = 0;
+        var OpenMultiStore = 0, OpenSupplier = 0, OpenApplet = 0, OpenPcShop = 0;
+        var OpenWXO2OApplet = 0;
+        $(document).ready(function (e) {
+            $.ajax({
+                url: "/API/AuthValid.ashx",
+                type: 'post',
+                dataType: 'json',
+                timeout: 10000,
+                data: {
+                    action: "all"
+                },
+                async: false,
+                success: function (resultData) {
+                    var ServerStatus = resultData.status;
+                    if (ServerStatus != "") {
+
+                        var StatusArr = ServerStatus.split(',');
+
+                        OpenTaobao = parseInt(StatusArr[0]);
+                        if (StatusArr.length >= 2) OpenVstore = parseInt(StatusArr[1]);
+                        if (StatusArr.length >= 3) OpenMobbile = parseInt(StatusArr[2]);;
+                        if (StatusArr.length >= 4) OpenWap = parseInt(StatusArr[3]);
+                        if (StatusArr.length >= 5) OpenAliho = parseInt(StatusArr[4]);
+                        if (StatusArr.length >= 6) OpenReferral = parseInt(StatusArr[5]);
+                        if (StatusArr.length >= 7) OpenMultiStore = parseInt(StatusArr[6]);
+                        if (StatusArr.length >= 8) OpenSupplier = parseInt(StatusArr[7]);
+                        if (StatusArr.length >= 9) OpenApplet = parseInt(StatusArr[8]);
+                        if (StatusArr.length >= 10) OpenPcShop = parseInt(StatusArr[9]);
+                        if (StatusArr.length >= 11) OpenWXO2OApplet = parseInt(StatusArr[10]);
+                        if (OpenVstore == 1) $("#vshoplink").show();
+                        if (OpenMobbile == 1) $("#applink").show();
+                        //if (OpenWap == 1) $("#waplink").show();
+                        if (OpenAliho == 1) $("#aliohlink").show();
+                        if (OpenReferral == 1) $("#referrallink").show();
+                        if (OpenMultiStore == 1) $("#storelink").show();
+                        if (OpenSupplier == 1) $("#supplierlink").show();
+                        if (OpenApplet == 1 || OpenWXO2OApplet == 1) {
+                            if (OpenApplet != 0) {
+                                $("#appletlink").click(function (e) {
+                                    ShowMenuLeft('小程序', null, null)
+                                })
+                            }
+                            else {
+                                $("#appletlink").click(function (e) {
+                                    ShowMenuLeft('小程序', '/Admin/Applet/O2OXCXPaySetting', null)
+                                })
+                            }
+                            $("#appletlink").show();
+                        }
+                        if (OpenVstore == 0 && OpenPcShop == 0 && OpenMobbile == 0 && OpenAliho == 0 && OpenWap == 0) {
+                            $("#pagelink").hide();
+                        }
+                    }
+                }
+            });
+        });
+        //IFrame弹出
+        function DialogFrame(url, title_tip, w_width, h_height) {
+            var tmpwidth = 900;
+            var tmpheight = 520;
+            if (w_width != null) {
+                tmpwidth = w_width;
+            }
+            if (h_height != null) {
+                tmpheight = h_height;
+            }
+            if (tmpwidth != 0) {
+                if (tmpheight != 0) {
+                    art.dialog.open(url, {
+                        title: title_tip,
+                        width: tmpwidth,
+                        height: tmpheight
+                    }, true);
+                } else {
+                    art.dialog.open(url, {
+                        title: title_tip,
+                        width: tmpwidth
+                    }, true);
+                }
+            } else {
+                if (tmpheight != 0) {
+                    art.dialog.open(url, {
+                        title: title_tip,
+                        height: tmpheight
+                    }, true);
+                } else {
+                    art.dialog.open(url, {
+                        title: title_tip
+                    }, true);
+                }
+            }
+
+        }
+    </script>
+    <style>
+        .nicescroll-rails {
+            margin-left: -600px !important;
+            top: 75px !important;
+        }
+
+        .test {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ink {
+            display: block;
+            position: absolute;
+            background: hsl(180, 0%, 80%);
+            border-radius: 100%;
+            transform: scale(0);
+        }
+
+            .ink.animate {
+                animation: ripple 0.65s linear;
+            }
+
+        @keyframes ripple {
+            100% {
+                opacity: 0;
+                transform: scale(2.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hishop_head">
+        <div class="hishop_head_center">
+            <div class="hishop_logo"><a href="/Default.aspx" target="_blank"><img src="images/logo.png" class="pngFix" /></a></div>
+            <div class="hishop_menu">
+                <a onclick="ShowMenuLeft('商品',null,null)">商品</a>
+                <a onclick="ShowMenuLeft('订单',null,null)">订单</a>
+                <a onclick="ShowMenuLeft('会员',null,null)">会员</a>
+                <a onclick="ShowMenuLeft('分销员',null,null)" id="referrallink" style="display:none;">分销员</a>
+                <a onclick="ShowMenuLeft('营销',null,null)">营销</a>
+                <!--<a onclick="ShowMenuLeft('财务',null,null)">财务</a>-->
+                <a onclick="ShowMenuLeft('统计',null,null)">统计</a>
+                <a onclick="ShowMenuLeft('系统',null,null)">系统</a>
+                <a onclick="ShowMenuLeft('页面',null,null)" id="pagelink">页面</a>
+                <a onclick="ShowMenuLeft('供应商', null, null)" id="supplierlink" style="display:none;">供应商</a>
+                <a onclick="ShowMenuLeft('门店', null, null)" id="storelink" style="display:none;">门店</a>
+                <a onclick="ShowMenuLeft('微商城',null,null)" id="vshoplink" style="display:none;">微商城</a>
+                <a id="appletlink" style="display:none;">小程序</a>
+                <a onclick="ShowMenuLeft('生活号', null, null)" id="aliohlink" style="display:none;">生活号</a>
+                <a onclick="ShowMenuLeft('App',null,null)" id="applink" style="display:none;">App</a>
+            </div>
+            <div class="hishop_banneritem ">
+                <a href="Default.aspx" title="后台首页" class="icon_home" data-toggle="tooltip" data-placement="bottom">
+                </a>
+
+                <div class="dropdown">
+                    <div class="dropdown-toggle icon_user" data-toggle="dropdown">
+                        <b></b>
+                    </div>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="javascript:DialogFrame('help/index.html','新手向导',750,null)" title="新手向导">
+                                新手向导
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://download.92hi1.com/bangzhuzhongxin/caozuoshouce/云商城 系统入门指南.pdf" title="入门指南">入门指南</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://form.mikecrm.com/f.php?t=nd8AHV" title="意见反馈">意见反馈</a>
+                        </li>
+                        <li><a target="_blank" id="taobao_link" title="同步淘宝">同步淘宝</a></li>
+                        <li><a href="javascript:DialogFrame('help/about.html','关于全网商城',550,345)" title="关于全网商城">关于我们</a></li>
+                        <li><a href="tools/cnzzstatisticsset" target="frammain" title="友盟配置">友盟配置</a></li>
+                        <li><a href="javascript:ShowMenuLeft('统计',null,null)" target="frammain" title="友盟统计">友盟统计</a></li>
+                        <li><a href="LoginExit.aspx" title="退出登录">安全退出</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hishop_content">
+        <div class="hishop_content_r">
+            <div class="hishop_menu_scroll">
+                <div id="menu_left">
+                </div>
+            </div>
+            <iframe id="frammain" name="frammain" class="framecontent" runat="server" src="Default.aspx" frameborder="no" border="0" scrolling="no" onLoad="iFrameHeight()"></iframe>
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript">
+        function iFrameHeight() {
+            var ifm = document.getElementById("frammain");
+            var subWeb = document.frames ? document.frames["frammain"].document :
+            ifm.contentDocument;
+            if (ifm != null && subWeb != null) {
+                ifm.height = subWeb.body.scrollHeight;
+            }
+        }
+    </script>
+
+    <script>
+        $(".hishop_menu_scroll").niceScroll({
+            cursorcolor: "#404750",
+            cursoropacitymax: 0.7,
+            cursoropacitymin: 0,
+            touchbehavior: false,
+            cursorwidth: "5px",
+            cursorborder: "0",
+            cursorborderradius: "5px"
+        });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+</body>
+
+</html>

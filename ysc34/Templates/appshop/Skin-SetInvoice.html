@@ -1,0 +1,197 @@
+﻿<hi:common_appheader runat="server" />
+<div class='invoiceBox'>
+  <div class='invoice_div' id="tab_hd">
+    <label>发票类型</label>
+    <div class='invoice_tab'>
+      <a class="mui-control-item active" id="tab1" href="javascript:;">普通发票</a>
+      <a class="mui-control-item" id="tab2" href="javascript:;">电子发票</a>
+      <a class="mui-control-item" id="tab3" href="javascript:;">增值税发票</a>
+    </div>
+    <div class='invoice_tab tax-des' id="order-tax">发票将在订单完成之后7-30个工作日后寄出。</div>
+  </div>
+
+<div class="tab_content">
+  <!--普通发票-->
+  <div id="sel_ordinary" class="mui-slider-item mui-control-content">
+    <div class='invoice_div'>
+      <label>发票抬头</label>
+      <div class='invoice_style'>
+        <span class='checked' id="ordinary_person"></span>个人
+      </div>
+      <div class='invoice_style'>
+        <span class='check' id="ordinary_company"></span>单位
+      </div>
+    </div>
+    <div class='invoice_div' id="ordinary_name">
+      <label>单位名称</label>
+      <input type="text" placeholder='必填，请填写单位名称' class='input-name'></input>
+    </div>
+    <div class='invoice_div' id="ordinary_num">
+      <label>纳税人识别号</label>
+      <input type="text" placeholder='必填，请填写纳税人识别号' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>发票内容</label>
+      <div class='invoice_style'>
+        <em>明细</em>
+      </div>
+    </div>
+  </div>
+
+<!--电子发票-->
+  <div id="sel_electron" class="mui-slider-item mui-control-content">
+  	<div class='invoice_div'>
+      <label>发票抬头</label>
+      <div class='invoice_style'>
+        <span class='checked' id="electron_person"></span>个人
+      </div>
+      <div class='invoice_style'>
+        <span class='check' id="electron_company"></span>单位
+      </div>
+    </div>
+    <div class='invoice_div' id="electron_name">
+      <label>单位名称</label>
+      <input type="text" placeholder='必填，请填写单位名称' class='input-name'></input>
+    </div>
+    <div class='invoice_div' id="electron_num">
+      <label>纳税人识别</label>
+      <input type="text" placeholder='必填，请填写纳税人识别号' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>发票内容</label>
+      <div class='invoice_style'>
+        <em>明细</em>
+      </div>
+    </div>
+    <span class='message'>收票人信息</span>
+    <div class='invoice_div'>
+      <label>收票人手机</label>
+      <input type="text" placeholder='必填，通过手机号接收开票提醒' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>收票人邮箱</label>
+      <input type="text" placeholder='必填，用来接收电子发票' class='input-name'></input>
+    </div>
+  </div>
+
+<!--增值税发票-->
+<div id="sel_tax" class="mui-slider-item mui-control-content">
+    <div class='invoice_div'>
+      <label>发票内容</label>
+      <div class='invoice_style'>
+        <em>明细</em>
+      </div>
+    </div>
+
+    <div class='message fontweight'>增票资质<span class='small-name'>(以下各项均为必填项)</span></div>
+    <div class='invoice_div'>
+      <label>单位名称</label>
+      <input type="text" placeholder='必填，请填写单位名称' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>纳税人识别</label>
+      <input type="text" placeholder='必填，请填写纳税人识别号' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>注册地址</label>
+      <input type="text" placeholder='请填写单位注册地址' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>注册电话</label>
+      <input type="text" placeholder='请填写单位注册电话' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>开户银行</label>
+      <input type="text" placeholder='请填写单位开户银行' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>银行账户</label>
+      <input type="text" placeholder='请填写单位银行账户' class='input-name'></input>
+    </div>
+
+    <div class='message fontweight'>收票人信息<span class='small-name'>(以下各项均为必填项)</span></div>
+    <div class='invoice_div'>
+      <label>收票人姓名</label>
+      <input type="text" placeholder='请填写收票人姓名' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>收票人手机</label>
+      <input type="text" placeholder='请填写收票人手机号码 ' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>收票人地区</label>
+      <input type="text" placeholder='请选择省 / 市 / 区' class='input-name'></input>
+    </div>
+    <div class='invoice_div'>
+      <label>详细地址</label>
+      <input type="text" placeholder='请填写详细地址' class='input-name'></input>
+    </div>
+</div>
+</div>  
+  
+</div>
+<div class='sure-btn'>确认</div>
+
+<script>
+$(function(){ 
+	$("#sel_electron").css("display","none");
+	$("#sel_tax").css("display","none");
+	$("#order-tax").css("display","none");
+	$("#ordinary_name").css("display","none");
+	$("#ordinary_num").css("display","none");
+	$("#electron_name").css("display","none");
+	$("#electron_num").css("display","none");		
+	$("#tab1").click(function(){
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+		$("#sel_ordinary").show();
+		$("#sel_tax").hide();
+		$("#sel_electron").hide();
+		$("#order-tax").hide();		
+		})	
+	$("#tab2").click(function(){
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+		$("#sel_electron").show();
+		$("#sel_tax").hide();
+		$("#sel_ordinary").hide();
+		$("#order-tax").hide();			
+		})
+	$("#tab3").click(function(){
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+		$("#order-tax").show();
+		$("#sel_tax").show();
+		$("#sel_electron").hide();
+		$("#sel_ordinary").hide();		
+		})	
+	$("#ordinary_company").click(function(){
+		$(this).removeClass("check").addClass("checked");
+		$("#ordinary_person").removeClass("checked").addClass("check");
+		$("#ordinary_name").show();
+		$("#ordinary_num").show();
+		})	
+	$("#ordinary_person").click(function(){
+		$(this).removeClass("check").addClass("checked");
+		$("#ordinary_company").removeClass("checked").addClass("check");
+		$("#ordinary_name").hide();
+		$("#ordinary_num").hide();
+		})	
+	$("#electron_company").click(function(){
+		$(this).removeClass("check").addClass("checked");
+		$("#electron_person").removeClass("checked").addClass("check");
+		$("#electron_name").show();
+		$("#electron_num").show();
+		})	
+	$("#electron_person").click(function(){
+		$(this).removeClass("check").addClass("checked");
+		$("#electron_company").removeClass("checked").addClass("check");
+		$("#electron_name").hide();
+		$("#electron_num").hide();
+		})					
+	})
+</script>
+
+
+</body>
+</html>

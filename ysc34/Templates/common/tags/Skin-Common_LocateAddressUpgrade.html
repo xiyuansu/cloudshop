@@ -1,0 +1,44 @@
+﻿<div class="tk_group">
+    <label for="username">地区</label>
+    <div class="input-group selectReason">
+        <div id="shopRegion" onclick="onMapClick()">
+            <asp:Literal ID="regionLocation" runat="server">请选择地区</asp:Literal>
+        </div>
+    </div>
+</div>
+<div class="tk_group">
+    <label for="username">详细地址</label>
+    <div class="input-group selectReason">
+        <textarea id="address" name="address" runat="server" style="color: #616161;font-size: 0.7rem;" clientidmode="Static" rows="3" placeholder="如：1期12栋1905室"></textarea>
+        <input type="hidden" id="IsDeliveryScopeRegion" value="false" runat="server" clientidmode="Static" />
+    </div>
+</div>
+<div class="tk_group" id="divbuildernumber">
+    <label for="username">楼牌号</label>
+    <div class="input-group selectReason">
+        <textarea id="txtBuildingNumber" class="addtextarea" name="txtBuildingNumber" runat="server" clientidmode="Static" rows="3" placeholder="请填写楼牌号、门牌号"></textarea>
+    </div>
+</div>
+<input type="hidden" id="hidLatitude" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidLongitude" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="region" runat="server" clientidmode="Static" />
+<input type="hidden" id="hidShippingId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidChooseCity" runat="server" ClientIDMode="Static" />
+<script type="text/javascript">
+    function onMapClick() {
+        var url = "ShippingId=" + $("#hidShippingId").val() + "&shipTo=" + $("#shipTo").val() + "&cellphone=" + $("#cellphone").val() + "&chooseCity=" + $("#hidChooseCity").val() + "&latitude=" + $("#hidLatitude").val() + "&longitude=" + $("#hidLongitude").val();
+        var returnUrl = getParam("returnUrl");
+        if (returnUrl != null && returnUrl != "" && returnUrl != undefined) {
+            window.location.href = "ChangeMapPosition?" + url + "&returnUrl=" + returnUrl;
+        }else{
+            window.location.href = "ChangeMapPosition?" + url;
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        if (document.location.href.toLowerCase().indexOf("/userprofile") > -1) {
+            $("#divbuildernumber").hide();
+        }
+    })
+</script>

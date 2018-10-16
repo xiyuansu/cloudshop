@@ -1,0 +1,479 @@
+﻿<%@ Control Language="C#" %><%@ Register TagPrefix="Hi" Namespace="Hidistro.UI.Common.Controls" Assembly="Hidistro.UI.Common.Controls" %><title>微信首页</title><Hi:WapHeadContainer ID="WapHeadContainer1" runat="server" /><script type="text/javascript">function searchs(v) {var url = "ProductList?keyWord="+v;window.location.href = url;}</script><input type="hidden" id="hdTitle" value="微信首页" /><input type="hidden" id="hdDesc" value="商城描述啊啊啊啊" /><input type="hidden" id="hdImgUrl" value="http://yscssl.huz.cn/Storage/master/topic/201702061543555918480.jpg" /><Hi:WapAppDownloadInfo runat="server" id="appdownloadinfo" />
+          <form onsubmit="searchs(escape(($(this).find(':text').eq(0).val()))); return false;">
+        <div class="members_con">
+            <section class="members_search">
+                <input type="text" name="keyWord" id="" value="" placeholder="请输入商品关键字">
+                   <button type="button" value="" onclick="searchs(escape($($(this).prev()).val()))"></button>
+            </section>
+        </div>
+        </form>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=6" title="男鞋">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160523/6359962260703250968778327.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=59" title="休闲零食">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160524/6359968337999437598236297.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=52" title="中老年服装">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160524/6359968340571345511546198.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                    
+                    <span class="cur" ></span>
+                    
+                    <span  ></span>
+                    
+                    <span  ></span>
+                    
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con">
+            <section class="custom-space" style="height:10px;"></section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul style="background:#fff;">
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/VShop/FightGroupActivities.aspx"><img data-url="/Storage/template/20170303/6362413081073678773931516.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/VShop/FightGroupActivities.aspx">火拼团</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/couponslist.aspx"><img data-url="/Storage/template/20170303/6362413081070079336473026.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/couponslist.aspx">优惠券</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/CountDownProducts.aspx"><img data-url="/Storage/template/20170303/6362413081065274786188946.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/CountDownProducts.aspx">限时购</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/GroupBuyList.aspx"><img data-url="/Storage/template/20170303/6362413081059218816973793.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/GroupBuyList.aspx">团购</a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul style="background:#fff;">
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/RegisteredCoupons.aspx"><img data-url="/Storage/template/20170303/6362413081050218786001977.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/RegisteredCoupons.aspx">注册送券</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/ReferralAgreement.aspx"><img data-url="/Storage/template/20170303/6362413081041211878259406.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/ReferralAgreement.aspx">推广有礼</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/StoreList.aspx"><img data-url="/Storage/template/20170303/6362413081036715793273499.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/StoreList.aspx">周边门店</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/PointMall.aspx"><img data-url="/Storage/template/20170303/6362413081021469297788357.jpg" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/PointMall.aspx">积分商城</a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="custom-space" style="height:10px;"></section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board4 big_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413138194932061619601.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 mid_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413138198535468078091.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 small_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413138204440872591417.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 small_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413138213446053563232.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="/vshop/Scratch.aspx?activityid=229" title="刮刮卡">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170303/6362413179852457905354237.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/SmashEgg.aspx?activityid=230" title="砸金蛋">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170303/6362413179852457905354237.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                    
+                    <span class="cur" ></span>
+                    
+                    <span  ></span>
+                    
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board6 mid1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413202610532089927610.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413202621397299426843.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413202628095708641996.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 mid1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413202632799938926076.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413202637604514911984.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="#">
+             
+                                <img data-url="/Storage/template/20170303/6362413202644607362654555.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con" style="margin:10px auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170303/6362413310290730431026996.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        <Hi:GoodsMobule runat="server" IsApp="False" Layout="1" ShowName="1" IDs="164,163,162,161,151,150" ShowIco="True" ShowPrice="True" DataUrl="/api/Hi_Ajax_GoodsList.ashx" ID="goods_73dae3fd3fde4096bfb748239fa358a8" TemplateFile="/admin/shop/Modules/GoodGroup1.cshtml"    />
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board3 big_board">
+                        <span>
+                            <a href="#">
+                                
+                                <img data-url="/Storage/template/20170303/6362413440046617783146765.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board3 small_board">
+                        <span>
+                            <a href="#">
+                                
+                                <img data-url="/Storage/template/20170303/6362413441323021775680814.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board3 small_board">
+                        <span>
+                            <a href="#">
+                                
+                                <img data-url="/Storage/template/20170303/6362413441330328863423384.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170303/6362413495052617501667155.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        <Hi:GoodsListModule runat="server" IsApp="False" Type="goodGroup" Layout="1" ShowName="True" ShowIco="True" ShowPrice="True" DataUrl="/api/Hi_Ajax_GoodsListGroup.ashx" ID="list_f7279265b0f04ec085e59c22681ccaef" TemplateFile="/Admin/shop/Modules/GoodGroup1.cshtml"  GoodListSize="12" FirstPriority="1"  SecondPriority="3"  ThirdPriority="5"   />
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/Storage/template/20170303/6362413501720439127230255.jpg" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav2">
+                <ul>
+                    
+                    
+                    
+                    <li><a href="/wapshop/Default.aspx">店铺主页</a><b></b></li>
+                    
+                    
+                    
+                    <li><a href="/wapshop/ProductList.aspx?categoryId=69">洗护用品︱护肤护理</a><b></b></li>
+                    
+                    
+                    
+                    <li><a href="/wapshop/ShoppingCart.aspx">购物车</a><b></b></li>
+                    
+                    
+                    
+                    <li><a href="/wapshop/MemberCenter.aspx">会员主页</a><b></b></li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <div class="fulltext"><p><strong>    客服电话  400 888 888</strong></p><p><span style="font-size: 12px;">     Copyright@长沙互站网络科技有限公司</span></p></div>
+        </div>
+        

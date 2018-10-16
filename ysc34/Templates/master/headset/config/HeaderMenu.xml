@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root CategoryNum="3">
+  <Menu Id="1" Title="商城资讯" DisplaySequence="2" Category="1" Url="/Articles" Where="" Visible="false" />
+  <Menu Id="2" Title="限时抢购" DisplaySequence="1" Category="1" Url="/CountDownProducts" Where="" Visible="true" />
+  <Menu Id="3" Title="团购" DisplaySequence="3" Category="1" Url="/GroupBuyProducts" Where="" Visible="true" />
+</root>

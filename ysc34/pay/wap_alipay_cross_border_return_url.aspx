@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wap_alipay_cross_border_return_url.aspx.cs" Inherits="Hidistro.UI.Web.pay.wap_alipay_cross_border_return_url" %>

@@ -1,0 +1,160 @@
+﻿<%<Hi:Common_Header runat="server"  />%>
+<form runat="server" id="form1">
+<div class="main">
+    <script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+     <link href="/Utility/validate/validator.css" rel="stylesheet" type="text/css" />
+     
+    <script src="/Utility/validate/jquery_last.js" type="text/javascript"></script>
+    <script src="/Utility/validate/formValidatorRegex.js" type="text/javascript"></script>
+     <script src="/Utility/validate/formValidator.js" type="text/javascript"></script>
+	<%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+	
+<div class="trationbj2">
+<div class="tration tration2">
+<h1 class="YaHei">新用户注册</h1>
+<div class="register_save_ts">1.请补充下列信息，您也可以选择  <a href="/">以后再补充</a>      2.本商店将最大限度保护您的隐私</div>
+<div class="fomeinput">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="fomeinput">
+  <tr>
+    <td width="16%" align="right" valign="middle">预付款帐户是否开启：</td>
+    <td width="55%" valign="middle">
+<input type="checkbox" id="showInputTradePassword" value="开启我的预付款帐户" onclick="ShowInputTradePassword();" />开启我的预付款帐户</td>
+    <td width="29%" rowspan="14" valign="top">
+    <ul>
+    <li class="dotted">已有会员帐号？可以<a href="/User//Login.aspx"> 直接登录</a></li>
+    <li class="dotted">其它登录方式</li>
+    <li><%<Hi:Common_Link_OpenId runat="server"  /> %> </li>
+    </ul>
+    </td>
+  </tr>
+        <tr id="trInputTradePassword" style="display:none;">
+        <td align="right"> 交易密码：</td>
+         <td><%<asp:TextBox ID="txtTradeKey" width="240"  runat="server" TextMode="Password"   CssClass="inputbj"/>%>
+      
+        <span id="RegisterUserSave_txtTradeKeyTip" style="width:250px;"></span> 
+         </td>
+         
+        </tr>
+        
+        <tr id="trInputTradePassword2" style="display:none;">
+        <td align="right">确认密码：</td>
+        <td><%<asp:TextBox ID="txtTradeKey2" width="240" CssClass="inputbj" TextMode="Password"  runat="server" />%>
+      
+        <span id="RegisterUserSave_txtTradeKey2Tip" style="width:250px"></span>
+        </td>
+        
+        </tr>
+  <tr valign="middle">
+    <td align="right">密保问题： </td>
+    <td><%<asp:TextBox ID="txtQuestion"   width="240" CssClass="inputbj"   runat="server" />%>
+       
+           <span id="RegisterUserSave_txtQuestionTip" style="width:250px"></span>
+          </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">密保答案：</td>
+    <td><%<asp:TextBox ID="txtAnswer"  width="240" CssClass="inputbj"   runat="server" />%>
+         
+           <span id="RegisterUserSave_txtAnswerTip" style="width:250px"></span>
+          </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">姓名： </td>
+    <td><%<asp:TextBox ID="txtRealName"    width="240" CssClass="inputbj"  runat="server"   />%>
+      <span id="RegisterUserSave_txtRealNameTip" style="width:250px"></span>
+    
+    
+    </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">用户住址： </td>
+    <td><%<Hi:RegionSelector runat="server" id="dropRegions" />%></td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">详细地址： </td>
+    <td><%<asp:TextBox ID="txtAddress"    width="240" CssClass="inputbj"  runat="server" />%>
+    <span id="RegisterUserSave_txtAddressTip" style="width:250px"></span>
+    </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">QQ号码：</td>
+    <td><%<asp:TextBox ID="txtQQ"    width="240" CssClass="inputbj"  runat="server" />%>
+      <span id="RegisterUserSave_txtQQTip" style="width:250px"></span>
+    </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">旺旺：</td>
+    <td><%<asp:TextBox ID="txtWW"    width="240" CssClass="inputbj"  runat="server" />%>
+   
+      <span id="RegisterUserSave_txtWWTip" style="width:250px"></span>
+    </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">MSN：</td>
+    <td><%<asp:TextBox ID="txtMSN"    width="240" CssClass="inputbj"  runat="server"></asp:TextBox>%>
+      <span id="RegisterUserSave_txtMSNTip" style="width:250px"></span>
+    </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">电话号码：</td>
+    <td><%<asp:TextBox ID="txtTel"    width="240" CssClass="inputbj"  runat="server" />%>
+	         <span id="RegisterUserSave_txtTelTip" style="width:250px"></span>
+	     </td>
+    </tr>
+  <tr valign="middle">
+    <td align="right">手机号码：</td>
+    <td><%<asp:TextBox ID="txtHandSet"    width="240" CssClass="inputbj"  runat="server" />%> <span id="txtHandSetTip" runat="server"></span>
+      <span id="RegisterUserSave_txtHandSetTip" style="width:250px"></span>
+      </td>
+    </tr>
+	  
+ 
+
+  <tr>
+    <td align="right"></td>
+    <td valign="top">
+<%<asp:Button ID="btnSaveUser" CssClass="btncss register_btn2"  Text="确定"   runat="server" OnClientClick="return PageIsValid();" />%>
+</td>
+    </tr>
+
+</table>
+</div>
+</div>
+</div>
+	<div class="aClear"></div>
+ 
+	<script type="text/javascript" language="javascript">
+
+	    $(document).ready(function () {
+	        $.formValidator.initConfig({ formid: "aspnetForm"  });
+	        $("#RegisterUserSave_txtTradeKey").formValidator({ empty: true,onshow: "请输入密码", onfocus: "交易密码必须在6-20个字符之间", oncorrect: "密码合法" }).inputValidator({ min: 6,max:20, empty: { leftempty: false, rightempty: false, emptyerror: "密码两边不能有空符号" }, onerror: "密码必须在6-20个字符之间" });
+	        $("#RegisterUserSave_txtTradeKey2").formValidator({ empty: true,onshow: "请输入重复密码", onfocus: "两次密码必须一致", oncorrect: "密码一致" }).inputValidator({ min: 6, max: 20, empty: { leftempty: false, rightempty: false, emptyerror: "重复密码两边不能有空符号" }, onerror: "重复密码必须在6-20个字符之间" }).compareValidator({ desid: "RegisterUserSave_txtTradeKey", operateor: "=", onerror: "密码不一致" });
+	        $("#RegisterUserSave_txtQuestion").formValidator({ empty: true,onshow: "请输入密保问题", onfocus: "密保问题必须在3-20个字符之间", oncorrect: "输对了", onempty: "保密问题可以为空" }).inputValidator({ min: 3, max: 20, onerror: "密保问题必须在3-20个字符之间" });
+	        $("#RegisterUserSave_txtHandSet").formValidator({ empty: true, onshow: "输入你的手机号码，可以为空", onfocus: "你要是输入了，必须输入正确", oncorrect: "输对了", onempty: "手机号码可以为空" }).inputValidator({ min: 11, max: 11, onerror: "手机号码必须是11位" }).regexValidator({ regexp: "mobile", datatype: "enum", onerror: "手机号码格式不正确" }); 
+	        $("#RegisterUserSave_txtTel").formValidator({ empty: true, onshow: "输入你的联系电话，可以为空", onfocus: "格式例如：0731-88888888", oncorrect: "输对了", onempty: "电话号码可以为空" }).regexValidator({ regexp: "^[[0-9]{3}-|\[0-9]{4}-]?([0-9]{8}|[0-9]{7})?$", onerror: "你输入的电话格式不正确" });
+	        $("#RegisterUserSave_txtMSN").formValidator({ empty: true, onshow: "输入你的MSN，可以为空", onfocus: "长度在1-256个字符以内", oncorrect: "输对了", onempty: "MSN帐号可以为空" }).regexValidator({ regexp: "([a-zA-Z\\.0-9_-])+@([a-zA-Z0-9_-])+((\\.[a-zA-Z0-9_-]{2,3}){1,2})", onerror: "MSN帐号格式不正确" });
+	        $("#RegisterUserSave_txtWW").formValidator({ empty: true, onshow: "输入你的旺旺，可以为空", onfocus: "你要是输入了，必须输入正确", oncorrect: "输对了", onempty: "旺旺可以为空" }).inputValidator({ min: 1, max: 20, onerror: "必须在1-20个字符之间" });
+	        $("#RegisterUserSave_txtQQ").formValidator({ empty: true, onshow: "输入你的QQ，可以为空", onfocus: "长度在3-20个字符以内", oncorrect: "输对了", onempty: "QQ帐号可以为空" }).regexValidator({ regexp: "^[0-9]*$", onerror: "QQ帐号格式不正确" });
+	        $("#RegisterUserSave_txtAddress").formValidator({ empty: true, onshow: "输入你的地址，可以为空", onfocus: "你要是输入了，必须输入正确", oncorrect: "输对了", onempty: "地址可以为空" }).inputValidator({ min: 3, max: 100, onerror: "必须在3-100个字符之间" });
+	        $("#RegisterUserSave_txtRealName").formValidator({ empty: true, onshow: "输入你的名字，可以为空", onfocus: "你要是输入了，必须输入正确", oncorrect: "输对了", onempty: "名字可以为空" }).inputValidator({ min: 2, max: 20, onerror: "必须在2-20个字符之间" });
+	        $("#RegisterUserSave_txtAnswer").formValidator({ empty: true, onshow: "请输入密保答案", onfocus: "密保答案必须在3-20个字符之间", oncorrect: "输对了", onempty: "保密答案可以为空" }).inputValidator({ min: 3, max: 20, onerror: "密保答案必须在3-20个字符之间" });
+
+        });
+
+	    function ShowInputTradePassword() {
+	        var showInputTradePassword = document.getElementById("showInputTradePassword");
+	        var divInputTradePassword = document.getElementById("trInputTradePassword");
+	        var divInputTradePassword2 = document.getElementById("trInputTradePassword2");
+	        if (showInputTradePassword.checked) {
+	            divInputTradePassword.style.display = "";
+	            divInputTradePassword2.style.display = "";
+	        }
+	        else {
+	            divInputTradePassword.style.display = "none";
+	            divInputTradePassword2.style.display = "none";
+	        }
+	    }
+</script>
+	<!-- InstanceEndEditable --></div>
+</form>
+<%<Hi:Common_Footer runat="server"   />%>

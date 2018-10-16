@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="100*44" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="5" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="6" Type="category" CategoryId="309" MaxNum="18" />
+  <Comment Id="7" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323172016_5562.jpg" TitleImageSize="28*36" />
+  <Comment Id="8" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="9" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="10" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="11" Type="title" Title="生活用品" ImageTitle="/templates/master/kuanping/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="13" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="14" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="15" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="16" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="17" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="18" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="19" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="100*44" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

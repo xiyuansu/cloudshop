@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title></title>
+    <style>
+        body {
+            /*background-color: #bbb;*/
+        }
+
+        .wrap {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: flex;
+            align-items: center;
+        }
+
+        .suc_tips {
+            width: 100vw;
+            position: relative;
+        }
+
+
+
+            .suc_tips p {
+                text-align: center;
+                font-size: 7vw;
+                color: #AE0000;
+                width: 100%;
+                text-align: center;
+                font-family: 'Microsoft YaHei';
+            }
+
+        .button {
+            border: 1px solid #AE0000;
+            width: 100%;
+            color:#AE0000;
+            float:left;
+            height: 40px;
+            border-radius: 5px;
+            text-decoration:none;
+        }
+    </style>
+</head>
+<body>
+    <form runat="server">
+        <div class="wrap">
+            <div class="suc_tips">
+                <!--<p>优惠券领取成功</p>-->                
+                <p style="padding:0 5px;box-sizing: border-box;"><asp:Literal runat="server" ID="litPrompt" /><br><br><asp:HyperLink id="Buy" runat="server" CssClass="button">立即购买</asp:HyperLink></p>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

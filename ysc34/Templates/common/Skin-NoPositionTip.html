@@ -1,0 +1,21 @@
+﻿<hi:common_wapheader runat="server" />
+
+<style>
+    .widtht {
+     
+        background: #fff;height: 100vh;
+    }
+    body{ padding-bottom: 0;}
+</style>
+<!--<div class="mtop-n"><em><a href="#">返回</a></em><span>首页</span><i></i></div>-->
+<div class="widtht pb50">
+    <div class="noposi">
+        <div class="icon"><img src="/images/main/noposi-tip.png"></div>
+        <div class="Prompt" id="noPosition">无法获取您的位置信息 ，请您设置手机开启定位服务，否则可能影响到您的使用。</div><div class="btn" onclick="goToChooseCity()">手动搜索地址</div>
+    </div>
+</div>
+<script type="text/javascript">
+    function goToChooseCity() {
+        window.location.href = "ChooseCity.aspx";
+    }
+</script>

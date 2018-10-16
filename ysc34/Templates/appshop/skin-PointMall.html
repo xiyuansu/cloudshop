@@ -1,0 +1,240 @@
+﻿<hi:common_appheader runat="server" />
+
+<div class="pointmall_head">
+    <img src="../images/headerimg.png" id="imgUser" runat="server" />
+    <div class="point_user">
+        <span><asp:literal runat="server" id="litUserName" /></span>
+        <div class="available_point">可用积分：<span><asp:literal runat="server" id="litCurrentPoints" />分</span></div>
+    </div>
+</div>
+<div class="pro_tab" style="margin-top:0;">
+    <div class="pro_tab_flex">
+        <a href="javascript:;" class="tab1 tab_active">可兑换礼品</a>
+    </div>
+    <span class="v_line"></span>
+    <div class="pro_tab_flex">
+        <a href="javascript:;" class="tab2">可兑换优惠券</a>
+    </div>
+</div>
+
+<div class="pro_tab_content">
+    <div class="pro_info" id="tab1">
+        <div class="integralmall_list">
+            <ul id="ulGifts"></ul>
+            <div id="divGiftMore" class="no_more" onclick="loadGiftData()">
+                加载更多...
+            </div>
+        </div>
+    </div>
+    <div class="pro_info" id="tab2" style="display:none;">
+        <ul class="coupons_list_1" id="ulCoupons"></ul>
+        <div id="divMore" class="no_more" onclick="loadCouponData()">
+            加载更多...
+        </div>
+    </div>
+</div>
+
+<div id="pager">
+</div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script>
+    var currentPage = 1;
+    var pageSize = 10;
+    var totalCount = 0;
+    var tabIndex = 1;
+    $(function () {
+        tabIndex = parseInt(getParam("tabIndex"));
+        if (isNaN(tabIndex) || (tabIndex != 1 && tabIndex != 2)) {
+            tabIndex = 1;
+        }
+        if (tabIndex == 1) {
+            $(".tab1").addClass("tab_active");
+            $(".tab1").parent().siblings().children(".tab2").removeClass("tab_active");
+            $("#tab1").show();
+            $("#tab2").hide();
+        }
+        else {
+            $(".tab2").addClass("tab_active");
+            $(".tab2").parent().siblings().children(".tab1").removeClass("tab_active");
+            $("#tab1").hide();
+            $("#tab2").show();
+        }
+        loadGiftData();   //加载礼品
+        loadCouponData();   //加载优惠券
+    });
+
+    $(function () {
+        $(".tab2").click(function () {
+            $(this).addClass("tab_active");
+            $(this).parent().siblings().children(".tab1").removeClass("tab_active");
+            $("#tab1").hide();
+            $("#tab2").show();
+            tabIndex = 2;
+        })
+        $(".tab1").click(function () {
+            $(this).addClass("tab_active");
+            $(this).parent().siblings().children(".tab2").removeClass("tab_active");
+            $("#tab1").show();
+            $("#tab2").hide();
+            tabIndex = 1;
+        })
+    })
+
+
+    //加载可积分兑换的优惠券
+    function loadCouponData() {
+        isCouponLoading = true;
+        $.post('../API/CouponHandler.ashx?action=LoadCoupon&PageSize=' + pageSize + '&CurrentPage=' + currentPage + '&obtainWay=2', function (result) {
+            var items = eval('(' + result + ')');
+            totalCount = items.totalCount;
+            if (items.data.length > 0) {
+                for (var i = 0; i < items.data.length; i++) {
+                    var n = items.data[i];
+                    var userhtm = getCouponHtml(n);
+                    $("#ulCoupons").append(userhtm);
+                }
+            }
+            currentPage = currentPage + 1;
+            var listCount = $("#ulCoupons li").length;
+            if (totalCount == listCount) {
+                $("#divMore").html("没有更多优惠券了");
+            }
+            isCouponLoading = false;
+        });
+    }
+    function getCouponHtml(obj) {
+        var arr = new Array();
+        arr.push('<li>');
+        //arr.push('<div class="coupons_3">');
+        if (obj.CanUseProducts == "") {
+            arr.push('<span class="coupons_3"><i>￥</i>' + obj.Price + ' <em>全场商品可用</em></span>');
+        }
+        else {
+            arr.push('<span class="coupons_3"><i>￥</i>' + obj.Price + ' <em>部分商品可用</em></span>');
+        }
+        //arr.push('</div>');
+        arr.push('<div class="coupons_3a">');
+        arr.push('<span class="need_point">所需积分：<i>' + obj.NeedPoint + '分</i></span>');
+        arr.push('<div class="coupons_tips1">');
+        arr.push('<div class="coupons_tips_left">');
+        var orderUseMsg = "";
+        if (parseFloat(obj.OrderUseLimit) <= 0) {
+            orderUseMsg = "订单使用无限制";
+        }
+        else {
+            orderUseMsg = "订单满" + obj.OrderUseLimit + "元使用（不含运费）";
+        }
+        arr.push('<span><i class="icon_tips"></i>&nbsp;' + orderUseMsg + '</span>');
+        arr.push('<span><i class="icon_clock"></i>&nbsp;' + obj.StartTime + '-' + obj.ClosingTime + '</span>');
+        arr.push('</div>');
+        arr.push('</div>');
+        arr.push('</div>');
+        arr.push('<a class="btn_receive" onclick="onChangeCouponClick(' + obj.CouponId + ',' + obj.NeedPoint + ');">兑换</a>');
+        arr.push('</li>');
+        return arr.join("");
+    }
+
+    var lastSubmitTime = new Date();
+    var submitTimes = 0;
+    //积分兑换优惠券
+    function onChangeCouponClick(cid, points) {
+        //两秒内重复点击直接返回false
+        var tempDate = new Date();
+        if ((tempDate.getTime() - lastSubmitTime.getTime()) < 2000 && submitTimes > 0) {
+            lastSubmitTime = new Date();
+            submitTimes += 1;
+            return false;
+        }
+        lastSubmitTime = new Date();
+        submitTimes += 1;
+        //兑换
+        $.ajax({
+            url: '../API/CouponHandler.ashx',
+            type: 'POST',
+            dataType: 'text',
+            data: { action: "PointChangeCoupon", couponId: cid, needPoints: points },
+            timeout: 5000,
+            error: function () {
+                alert('操作错误,请与系统管理员联系!');
+            },
+            success: function (result) {
+                if (result == "") {
+                    return;
+                }
+                if (result == "请登录") {
+                    alert_h("您还没有登录，请先登录后再领取优惠券！", function () {
+                        ToLogin();
+                    });
+                }
+                else {
+                    alert_h(result, function () {
+                        var loadUrl = location.href;
+                        loadUrl = replaceParam(loadUrl, "tabIndex", tabIndex);
+                        location.href = loadUrl;
+                    });
+                }
+            },
+            complete: function () {
+                RefreshUpdateUser();
+            }
+        });
+    }
+
+    var giftCurrentPage = 1;
+    var giftPageSize = 10;
+    var giftTotalCount = 0;
+    var isGiftLoading = false;
+    var isCouponLoading = false;
+    //加载可积分兑换的礼品
+    function loadGiftData() {
+        isGiftLoading = true;
+        $.post('../API/CouponHandler.ashx?action=LoadGift&PageSize=' + giftPageSize + '&CurrentPage=' + giftCurrentPage, function (result) {
+            var items = eval('(' + result + ')');
+            giftTotalCount = items.totalCount;
+            if (items.data.length > 0) {
+                for (var i = 0; i < items.data.length; i++) {
+                    var n = items.data[i];
+                    var userhtm = getGiftHtml(n);
+                    $("#ulGifts").append(userhtm);
+                }
+            }
+            giftCurrentPage = giftCurrentPage + 1;
+            var listCount = $("#ulGifts li").length;
+            if (giftTotalCount == listCount) {
+                $("#divGiftMore").html("没有更多礼品了");
+            }
+            isGiftLoading = false;
+        });
+    }
+    function getGiftHtml(obj) {
+        var arr = new Array();
+        arr.push('<li onclick="window.location.href=\'PointInfo.aspx?GiftId=' + obj.GiftId + '\';">');
+        arr.push('<section class="integralmall_list_l"><img src="' + obj.ThumbnailUrl180 + '" /></section>');
+        arr.push('<section class="integralmall_list_r">');
+        arr.push('<span class="point_title">' + obj.Name + '</span>');
+        arr.push('<p>所需积分：<b>' + obj.NeedPoint + ' 分</b></p>');
+        arr.push('</section>');
+        arr.push('<a class="btn_receive">兑换</a>');
+        return arr.join("");
+    }
+
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    $(window).scroll(function () {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height()-10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            if ($("#tab1").is(":hidden")) {
+                if (!isCouponLoading) {
+                    loadCouponData();
+                }
+            }
+            else {
+                if (!isGiftLoading) {
+                    loadGiftData();
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <SMSLog>
+    <time>2018/7/8 20:19:23</time>
+    <code>isv.TEMPLATE_MISSING_PARAMETERS</code>
+    <msg>模板变量缺少对应参数值</msg>
+  </SMSLog>
+</DocumentElement>

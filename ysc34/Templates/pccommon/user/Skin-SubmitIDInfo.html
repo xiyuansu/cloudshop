@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script type="text/javascript" src="../script/jquery.js"></script>
+    <script type="text/javascript" src="/Utility/globals.js?v=3.0"></script>
+    <script type="text/javascript" src="/utility/jquery.hishopUpload.user.js?v=3.33"></script>
+    <script type="text/javascript" src="/utility/jquery.form.js"></script>
+    <script type="text/javascript" src="/utility/validate/pagevalidator.js"></script>
+    <script type="text/javascript" src="/Utility/Window.js?v=3.0"></script>
+    <script type="text/javascript" src="/Utility/windows.js?v=3.0"></script>
+    <script language="javascript" type="text/javascript">
+        var skinPath = "/templates/pccommon";
+        var HasWapRight = true;
+        var IsOpenStores = true;
+        var IsOpenReferral = 1;
+        var HasVshopRight = true;
+        var ImageServerUrl = "";
+        var ImageUploadPath = "/admin/UploadHandler.ashx?action=newupload";
+    </script>
+    <link href="../style/user.css?v=3.0" rel="stylesheet" />
+    <style>
+        body {
+            background: #f3f3f3;
+        }
+
+        * {
+            box-sizing: content-box;
+        }
+
+        .col-sm-12 {
+            width: auto;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .id_card {
+            width: 830px;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+            .id_card ul {
+                margin-left: 100px;
+                align-content: center;
+            }
+
+                .id_card ul li {
+                    width: 270px;
+                    height: 170px;
+                    float: left;
+                }
+
+                    .id_card ul li.example {
+                        margin-top: 10px;
+                        margin-left: 5px;
+                    }
+
+                        .id_card ul li.example div {
+                            text-align: center;
+                        }
+
+            .id_card img {
+                margin: 5px 10px;
+                width: 260px !important;
+                height: 160px !important;
+            }
+    </style>
+</head>
+<body>
+    <form runat="server" id="form2">
+        <input type="hidden" id="hidIsOpenCertification" value="0" runat="server" clientidmode="static" />
+        <input type="hidden" id="hidCertificationModel" value="0" runat="server" clientidmode="static" />
+        <input type="hidden" id="hidshippingId" value="0" runat="server" clientidmode="static" />
+        <input type="hidden" id="hidorderId" value="" runat="server" clientidmode="static" />
+        <div class="dingdanxx">
+            <!--<div class="dingdan_box1">
+                实名验证 <span>（根据海关要求，购买跨境电商需要实名认证）</span>
+            </div>-->
+            <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%>
+            <div class="yzyouxiang_box1 m_top">
+                <div class="yzyoux1">
+                    <em>
+                        <samp style="color: red">
+                        </samp>真实姓名：
+                    </em>
+                    <span>
+                        <%<asp:Label ID="lblShipTo" runat="server" Text=""></asp:Label>%>
+                    </span>
+                </div>
+
+                <div class="yzyoux1">
+                    <em>
+                        <samp style="color: red">
+                            *
+                        </samp>身份证号：
+                    </em>
+                    <span><%<asp:TextBox ID="txtIDNumber" runat="server" class="input-text" />%></span>
+                    <span id="SubmitIDInfo_txtIDNumber"></span>
+                </div>
+                <div id="OpenCertification2" style="display:none">
+                    <div class="yzyoux1">
+                        <em>
+                            <samp style="color: red">
+                                *
+                            </samp>身份证照：
+                        </em>
+                    </div>
+                    <div class="id_card">
+                        <ul>
+                            <li>
+                                <div id="IDJust">
+                                    <span name="siteLogo" class="imgbox"></span>
+                                    <%<asp:hiddenfield id="fieldIDCardJust" runat="server" ClientIDMode="Static" value="/images/users/upload_ID_Just.jpg" /> %>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="IDAnti">
+                                    <span name="siteLogo" class="imgbox"></span>
+                                    <%<asp:hiddenfield id="fieldIDCardAnti" runat="server" ClientIDMode="Static" value="/images/users/upload_ID_Anti.jpg" /> %>
+                                </div>
+                            </li>
+                            <li class="example">
+                                <div><span>示例</span></div>
+                                <img src="../images/users/ID_card_Just.jpg" alt="示例正面" />
+                            </li>
+                            <li class="example">
+                                <div><span>示例</span></div>
+                                <img src="../images/users/ID_card_Anti.jpg" alt="示例反面" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="yzyoux1">
+                        <em>
+                            <samp style="color: red"></samp>注：
+                        </em>
+                        <span>1、需上传正反面2张身份证照片</span><br />
+                        <span style="margin-left:90px;">2、每张照片不能超过5M，图片格式为JPG，JPEG，PNG</span>
+                    </div>
+                </div>
+                <div class="grxx_btn">
+                    <span><%<asp:Button ID="btnSaveID" class="btn_style_bar" runat="server" OnClientClick="javascript:return doSubmit();" Text="保存" />%></span>
+                    <span><input type="button" class="qingkong" value="跳过验证" onclick="resetAddress()" /></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+<script type="text/javascript" language="javascript">
+    function InitValidators() {
+        initValid(new InputValidator('SubmitIDInfo_txtIDNumber', 15, 18, false, '(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)', '身份证号不能为空，长度在15-18个字符之间'))
+        //id_card_Just_img 身份证不能为空
+    }
+    var hidIsOpenCertification;
+    var hidCertificationModel;
+    $(document).ready(function () {
+        InitValidators();
+        hidIsOpenCertification = parseInt($("#hidIsOpenCertification").val());
+        hidCertificationModel = parseInt($("#hidCertificationModel").val());
+
+        if (hidIsOpenCertification != 1) {
+            resetAddress();
+        }
+        //判断是否开启验证 是否开启图片上传
+        if (hidCertificationModel == 2) {
+            OpenCertification2();
+        }
+    });
+
+    //开启图片上传
+    function OpenCertification2() {
+        $("#OpenCertification2").show();
+        //证件上传
+        var url = ImageUploadPath;
+        var imgJustSrc = ImageServerUrl + $("#fieldIDCardJust").val();
+        $('#IDJust span[name="siteLogo"]').hishopUpload(
+                    {
+                        title: '缩略图',
+                        url: url,
+                        imageDescript: '',
+                        imgFieldName: "siteLogo",
+                        pictureSize: '',
+                        imagesCount: 1,
+                        displayImgSrc: imgJustSrc,
+                        foldName: 'user'
+                    });
+        var imgAntiSrc = ImageServerUrl + $("#fieldIDCardAnti").val();
+        $('#IDAnti span[name="siteLogo"]').hishopUpload(
+                    {
+                        title: '缩略图',
+                        url: url,
+                        imageDescript: '',
+                        imgFieldName: "siteLogo",
+                        pictureSize: '',
+                        imagesCount: 1,
+                        displayImgSrc: imgAntiSrc,
+                        foldName: 'user'
+                    });
+    }
+
+    //返回上一个页面
+    function resetAddress() {
+        window.parent.location.reload();//刷新父级
+    }
+
+    function doSubmit() {
+
+        if (hidIsOpenCertification != 1) {
+            resetAddress();//没开启默认跳转
+            return false;
+        }
+        var idNumber = $("#SubmitIDInfo_txtIDNumber").val();
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (reg.test(idNumber) === false) {
+            alert("身份证输入不合法");
+            return false;
+        }
+        //判定是否上传图片 开启图片验证
+        if (hidCertificationModel == 2) {
+            var idImage1 = $('#IDJust span[name="siteLogo"]').hishopUpload("getImgSrc");
+            if (idImage1 == "" || idImage1.indexOf('upload_ID_Just.jpg') >= 0) {
+                alert("请上传证件正面照");
+                return false;
+            }
+            var idImage2 = $('#IDAnti span[name="siteLogo"]').hishopUpload("getImgSrc");
+            if (idImage2 == "" || idImage2.indexOf('upload_ID_Anti.jpg') >= 0) {
+                alert("请上传证件号反面照");
+                return false;
+            }
+        }
+        var shippingId = parseInt($("#hidshippingId").val());
+        var hidorderId = $("#hidorderId").val();
+        var action = "UploadNameVerify";
+        if (shippingId > 0) {
+            action = "UploadNameVerify";
+        }
+        $.ajax({
+            url: "/Handler/SubmmitOrderHandler.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: {
+                Action: action,
+                IDNumber: idNumber,
+                IDImage1: idImage1,
+                IDImage2: idImage2,
+                ShippingId: shippingId,
+                OrderId: hidorderId
+            },
+            success: function (resultData) {
+                if (resultData.Status == "OK") {
+                    alert("保存成功");
+                    window.parent.location.reload();
+                }
+                else {
+                    alert(resultData.Result);
+                }
+            }
+        });
+        return false;
+    }
+</script>

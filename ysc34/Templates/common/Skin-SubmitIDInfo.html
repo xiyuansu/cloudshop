@@ -1,0 +1,260 @@
+﻿<hi:common_wapheader runat="server" />
+
+<style>
+    .sfza, .sfzb {
+        width: 50%;
+        float: left;
+        margin-top: 0.75rem;
+        padding-bottom: 5rem;
+    }
+
+        .sfza span, .sfzb span {
+            float: left;
+            width: 100%;
+            text-align: center;
+            padding-top: 0.75rem;
+        }
+
+        .sfza img, .sfzb img {
+            width: 100%;
+            float: left;
+        }
+
+    .sfza {
+        padding-right: 5px;
+    }
+
+    .sfzb {
+        padding-left: 5px;
+    }
+
+    .att-popup-container p {
+        line-height: 1.8;
+    }
+
+    .coupons_title {
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 0.75rem;
+    }
+    .btn{
+        height:2.2rem;
+        position:fixed;
+        bottom:1px;
+        width:100%;
+        z-index:1;
+    }
+        .btn a{
+            float:left;
+            width:50%;
+            line-height:2.2rem;
+            text-align:center;
+        }
+        .btn a:first-child{
+            background:#ff5722;
+            color:#fff;
+            border:1px solid #ff5722;
+        }
+        .btn a:last-child{
+            background:#fff;
+            border:1px solid #ff5722;
+        }
+</style>
+<form id="form1" runat="server">
+    <p class="idTitle">
+        根据海关要求，购买跨境商品需要实名认证！
+    </p>
+    <input type="hidden" id="hidIsOpenCertification" value="1" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidCertificationModel" value="2" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidshippingId" value="0" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidorderId" value="" runat="server" clientidmode="static" />
+    <ul class="idList">
+        <li>
+            <font>真实姓名：</font><%<asp:Label ID="lblShipTo" runat="server" Text=""></asp:Label>%>
+        </li>
+        <li>
+            <font>身份证号：</font>
+            <%<asp:TextBox ID="txtIDNumber" runat="server" ClientIDMode="Static" placeholder="必填，务必与证件照一致" />%>
+        </li>
+    </ul>
+    <div class="idInfo">
+        <h2>身份证照片：<i id="divspecification">查看示例</i></h2>
+        <div id="IDJust" class="a-upload">
+            <span name="siteLogo" class="imgbox"></span>
+            <%<asp:hiddenfield id="fieldIDCardJust" runat="server" ClientIDMode="Static" value="../images/upload_a.jpg" /> %>
+        </div>
+
+        <div id="IDAnti" class="a-upload">
+            <span name="siteLogo" class="imgbox"></span>
+            <%<asp:hiddenfield id="fieldIDCardAnti" runat="server" ClientIDMode="Static" value="../images/upload_b.jpg" /> %>
+        </div>
+    </div>
+    <div class="btn">
+        <a href="javascript:void()" onclick="doSubmit()">保存</a>
+        <a href="javascript:void()" onclick="resetAddress()">跳过此步骤</a>
+    </div>
+
+</form>
+
+<div class="att-popup">
+    <div class="att-popup-container" style="padding:0 0.75rem;">
+        <div class="coupons_title">
+            <span>身份证照示例</span>
+            <a href="javascript:;" class="pop_close icon-icon_close_48"></a>
+        </div>
+        <p>1、需上传正反面2张身份证照片</p>
+        <p>2、每张照片不超过5M，图片格式为jpg，jpeg，png。</p>
+        <div class="sfza">
+            <img src="../images/sfz_a.jpg" />
+            <span>（正面示例）</span>
+        </div>
+        <div class="sfzb">
+            <img src="../images/sfz_b.jpg" />
+            <span>（反面面示例）</span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/utility/jquery.hishopUpload.user.js?v=3.4"></script>
+<script type="text/javascript" src="/utility/jquery.form.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#divspecification").on('click', function (event) {
+            event.preventDefault();
+            $(".operbtns").hide();
+            $(".operbtns").eq(1).show();
+            $('.att-popup').addClass('is-visible');
+        });
+
+        $('.pop_close').on('click', function () {
+            $('.att-popup').removeClass('is-visible');
+        });
+    })
+
+    var shiftUrl;
+    var hidIsOpenCertification;
+    var hidCertificationModel;
+    var shippingId;
+    $(document).ready(function () {
+        shiftUrl = document.referrer;
+        hidIsOpenCertification = parseInt($("#hidIsOpenCertification").val());
+        hidCertificationModel = parseInt($("#hidCertificationModel").val());
+        shippingId = parseInt($("#hidshippingId").val());
+        if (hidIsOpenCertification != 1) {
+            resetAddress();
+        }
+        //判断是否开启验证 是否开启图片上传
+        if (hidCertificationModel == 2) {
+            OpenCertification2();
+        } else {
+            $("div[class='idInfo']").hide();
+        }
+    });
+
+    //开启图片上传
+    function OpenCertification2() {
+        //证件上传
+        var url = ImageUploadPath;
+        var imgJustSrc = ImageServerUrl + $("#fieldIDCardJust").val();
+        $('#IDJust span[name="siteLogo"]').hishopUpload(
+                    {
+                        title: '缩略图',
+                        url: url,
+                        imageDescript: '',
+                        imgFieldName: "siteLogo",
+                        pictureSize: '',
+                        imagesCount: 1,
+                        displayImgSrc: imgJustSrc,
+                        showDelIcon: false,
+                        foldName: 'user'
+                    });
+        var imgAntiSrc = ImageServerUrl + $("#fieldIDCardAnti").val();
+        $('#IDAnti span[name="siteLogo"]').hishopUpload(
+                    {
+                        title: '缩略图',
+                        url: url,
+                        imageDescript: '',
+                        imgFieldName: "siteLogo",
+                        pictureSize: '',
+                        imagesCount: 1,
+                        displayImgSrc: imgAntiSrc,
+                        showDelIcon: false,
+                        foldName: 'user'
+                    });
+    }
+
+    //返回上一个页面
+    function resetAddress() {
+        returnUrl = getParam("returnUrl");
+        if (returnUrl == null || returnUrl == undefined || returnUrl == "") {
+            returnUrl = shiftUrl;
+        } else if (getParam("Source") == "SubmmitOrder") {
+            returnUrl = replaceParam(returnUrl, "ShipAddressId", shippingId);
+            returnUrl = replaceParam(returnUrl, "shippingmodeid", 0);
+            returnUrl = replaceParam(returnUrl, "storeid", 0);
+            returnUrl = replaceParam(returnUrl, "paymentmodeid", 0);
+        }
+        document.location.replace(returnUrl);
+    }
+    function doSubmit() {
+        if (hidIsOpenCertification != 1) {
+            alert_h("实名验证已关闭");
+            resetAddress();//没开启默认跳转
+            return false;
+        }
+        var idNumber = $("#txtIDNumber").val();
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (reg.test(idNumber) === false) {
+            alert_h("身份证输入不合法");
+            return false;
+        }
+        //判定是否上传图片 开启图片验证
+        if (hidCertificationModel == 2) {
+            var idImage1 = $('#IDJust span[name="siteLogo"]').hishopUpload("getImgSrc");
+            if (idImage1 == "" || idImage1.indexOf('upload_a.jpg') >= 0) {
+                alert_h("请上传证件正面照");
+                return false;
+            }
+            var idImage2 = $('#IDAnti span[name="siteLogo"]').hishopUpload("getImgSrc");
+            if (idImage2 == "" || idImage2.indexOf('upload_b.jpg') >= 0) {
+                alert_h("请上传证件号反面照");
+                return false;
+            }
+        }
+        //var shippingId = parseInt($("#hidshippingId").val());
+        var hidorderId = $("#hidorderId").val();
+        var action = "UploadNameVerify";
+        if (shippingId > 0) {
+            action = "UploadNameVerify";
+        }
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: {
+                Action: action,
+                IDNumber: idNumber,
+                IDImage1: idImage1,
+                IDImage2: idImage2,
+                ShippingId: shippingId,
+                OrderId: hidorderId
+            },
+            success: function (resultData) {
+                if (resultData.Status == "OK") {
+                    alert_h("保存成功");
+                    returnUrl = getParam("returnUrl");
+                    if (returnUrl == null || returnUrl == undefined || returnUrl == "") {
+                        returnUrl = shiftUrl;
+                    } else if (getParam("Source") == "SubmmitOrder") {
+                        returnUrl = replaceParam(returnUrl, "ShipAddressId", shippingId);
+                        returnUrl = replaceParam(returnUrl, "shippingmodeid", 0);
+                        returnUrl = replaceParam(returnUrl, "storeid", 0);
+                        returnUrl = replaceParam(returnUrl, "paymentmodeid", 0);
+                    }
+                    document.location.replace(returnUrl);
+                }
+                else {
+                    alert_h(resultData.Result);
+                }
+            }
+        });
+        return false;
+    }
+</script>

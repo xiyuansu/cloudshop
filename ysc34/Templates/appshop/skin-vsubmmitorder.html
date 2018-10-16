@@ -1,0 +1,2128 @@
+﻿<hi:common_appheader runat="server" />
+<style>
+    body { background: #f5f5f5; }
+
+    .step3 .step3_c h3 { padding-top: 0.42rem; }
+
+    #litTaxRate { font-size: 0.5rem; }
+
+    #orderBeizhu { width: 20%; }
+
+    #ulSendTime { padding-top: 0.32rem; padding-bottom: 0.32rem; }
+
+    .invoice ul li .item-inner .item-title span.rate { font-size: 0.5rem; }
+
+    .smzitiC p { padding-top: 0.42rem; padding-bottom: 0.42rem; }
+
+    .list-block .item-inner:after { height: 0; }
+</style>
+<form ruant="server" id="myform">
+    <!-- 提示设置收货地址 -->
+    <div class="mdpeisongC" id="divSetAddressTip" style="display: none"><span>请先设置收货地址</span></div>
+
+    <div class="mdpeisongC" id="divUpdateAddressTip" style="display: none"><span>地址系统有更新，需要您先升级/添加收货地址。</span></div>
+
+    <div class="mdpeisongC" id="divPublicTip" style="display: none"><span></span></div>
+
+    <!-- 选择优惠券 -->
+    <div class="coupons_popup">
+        <div class="att-popup-container" id="divCouponList">
+            <div class="coupons_title">
+                优惠券
+                <a href="javascript:;" id="coupons_close" class="pop_close icon-icon_close_48"></a>
+            </div>
+            <ul>
+                <hi:appshoptemplatedrepeater id="rptOrderCoupon" templatefile="/Tags/skin-Common_SubmitCoupon.ascx" runat="server" />
+            </ul>
+        </div>
+    </div>
+
+    <!-- 提交订单后选择支付方式 -->
+    <div class="att-popup att-popup-submit-pay" id="divChoosePayType">
+        <div class="att-popup-container payment">
+            <div class="pay_title">选择付款方式</div>
+            <hi:common_apppaymenttypeselect runat="server" id="paymenttypeselect" cssclass="pay_list" />
+
+            <div class="pay_price">
+                订单实付：<span id="lblTotalPrice1" runat="server" clientidmode="static"></span>
+                <span style="color: red; margin-left: 30px;" id="spandemo" runat="server" visible="false">【演示站点，请勿真实购买】</span>
+            </div>
+            <a class="btn_submiit" id="btn_gotoPay">确定</a>
+            <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="payment_close"></a>
+        </div>
+    </div>
+
+    <div class="att-popup" id="divSetPassword">
+        <div class="att-popup-container payment">
+            <div class="pay_title" id="divSetPasswordTitle">您尚未设置交易密码，请先设置</div>
+            <div class="pay_price">
+                <div><em>交易密码：</em><input type="password" placeholder="请输入交易密码" id="txtTradePassword" /></div>
+                <div><em>确认密码：</em><input type="password" placeholder="确认交易密码" id="txtTradePasswordAgain" /></div>
+            </div>
+            <a class="btn_submiit" id="btnSetTradePassword">确定</a>
+            <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="tradePassword_close"></a>
+        </div>
+    </div>
+    <div id="orderbody">
+        <div class="step_bg">
+            <div class="step1">
+                <div class="location">
+                    <hi:appshoptemplatedrepeater id="rptAddress" templatefile="/Tags/skin-Common_SubmitShippingAddress.ascx" runat="server" />
+                </div>
+                <div class="noLocation" id="divNoAddress" style="display: none;" onclick="goChoiceAddress()"><em>请添加至少一个收货地址</em><b class="s1-borderB"></b></div>
+            </div>
+            <div id="divProducts" class="step2 mt_30">
+                <h3>
+                    订单清单
+                    <a id="gotoCart" class="xiugai" onclick="goToShoppingCart()"></a>
+                </h3>
+                <hi:appshop_submmitcartproducts runat="server" />
+                <div class="step2" id="divlinegifts" runat="server">
+                    <h1 class="gift_title" id="giftTitle">礼品清单</h1>
+                    <hi:appshoptemplatedrepeater id="rptCartGifts" templatefile="/Tags/skin-Common_OrderGift.ascx" runat="server" />
+                </div>
+            </div>
+
+            <div class="step2" id="divGifts" runat="server" visible="false">
+                <div class="step2_title">
+                    <h2>已兑换礼品</h2>
+                </div>
+                <ul>
+                    <hi:appshoptemplatedrepeater id="rptCartPointGifts" templatefile="/Tags/skin-Common_SubmmitCartPointGifts.ascx" runat="server" />
+                </ul>
+
+                <div style="text-align: right; float: left; width: 100%; padding: 0 0.75rem; line-height: 1.75rem; border-bottom: 1px solid #ebebeb;">
+                    <asp:label runat="server" id="lblGiftFeright"></asp:label>
+                </div>
+            </div>
+
+            <div class="step3">
+                <!--<a href="javascript:void(0)" onclick="ToSetShippingPayment()">
+                    <div class="step3_t">
+                        <h3>支付配送</h3>
+                        <span class="pay_name" id="paymentName">请选择支付方式</span>
+                        <span class="icon_viewdetial"></span>
+                    </div>
+                    <div class="shipping" id="shippingName">上门自提：四方坪店</div>
+                </a>-->
+                <div class="step3_c">
+                    <h3>配送方式</h3>
+                    <ul id="ulDistributionType">
+                        <li>快递配送</li>
+                        <li>门店配送</li>
+                        <li class="smziti">上门自提</li>
+                    </ul>
+                    <div class="smzitiC" id="divStore" onclick="goChoiceStore()">
+                        <em></em><i></i>
+                        <h4><span class="name" id="storeName" runat="server"></span><span class="tele" id="storeTel" runat="server"></span></h4>
+                        <p id="storeAddress" runat="server"></p>
+                        <div><b class="time" id="storeTime" runat="server"></b><span class="distance" id="storeDistance" runat="server"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="step3" id="divSendTime">
+                <div class="step3_c">
+                    <h3>送货时间</h3>
+                    <ul id="ulSendTime">
+                        <li>任意时间</li>
+                        <li>工作日</li>
+                        <li>节假日</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="step3">
+                <div class="step3_c">
+                    <h3>支付方式</h3>
+                    <ul id="ulPayType">
+                        <li>在线支付</li>
+                        <li>货到付款</li>
+                        <li>到店支付</li>
+                        <li>线下付款</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list-block invoice" id="divTax" runat="server" clientidmode="static">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                索取发票
+                                <span id="spanTaxRate" runat="server" class="rate">
+                                    (税率<asp:label runat="server" id="litTaxRate" text="0" clientidmode="static" />%)
+                                </span>
+                            </div>
+                            <div class="item-after">
+                                <input class="weui_switch" type="checkbox" id="chkIsNeedInvoice" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-invoice" id="div_fapiao" style="display: none;">
+                        <div class="item-inner" style="width: 100%; position: relative;">
+                            <div class="item-title invoice_name invoice_width">发票抬头类型</div>
+                            <div class="item-after invoice_con" id="person_company">
+                                <label class="label_margin select_value">普通发票</label>
+                                <div class="step1_right icon-icon_right2 goTo">
+                                    <span class="icon_viewdetial"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-inner" style="display: none;">
+                            <div class="item-title invoice_name">发票抬头</div>
+                            <div class="item-after invoice_con">
+                                <div id="invoiceTitle"></div>
+                            </div>
+                        </div>
+                        <!--<div class="item-inner display_none show_item" style="display: none;">
+                            <div class="item-title invoice_name">纳税人识别</div>
+                            <div class="item-after invoice_con">
+                                <input type="text" class="form-control" id="txtInvoiceTaxpayerNumber" placeholder="必填，请填写企业纳税人识别号" value="" />
+                            </div>
+                        </div>-->
+                    </li>
+                </ul>
+            </div>
+            <div class="step4" style="border-top: 0;">
+                <span class="step4_l" id="orderBeizhu">订单备注</span>
+                <span class="step4_r">
+                    <input type="text" id="remark" class="form-control" placeholder="选填，可填写您和卖家达成一致的要求" />
+                </span>
+            </div>
+        </div>
+        <div class="list-block invoice mt_15">
+            <ul class="sub_list">
+                <li class="item-content item-link" id="coupons">
+                    <div class="item-inner">
+                        <div class="item-title">优惠券</div>
+                        <div class="item-after" id="couponName" runat="server" clientidmode="static">满200减50</div>
+                    </div>
+                    <span class="icon_viewdetial"></span>
+
+                </li>
+                <li class="item-content lipoint" id="liCanUse">
+                    <div class="item-inner">
+                        <div class="item-title">积分抵扣</div>
+                        <div class="item-after point_r">
+                            <div class="point-txt-box">
+                                最多可用<%<asp:label runat="server" id="lblMaxPoints" clientidmode="static" />%>分抵扣<%<asp:label runat="server" id="lblMaxPointsToPrice" clientidmode="static" />%>元
+                            </div>
+                            <input class="weui_switch" type="checkbox" id="chkIsUsePoints" />
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content lipoint" id="divUsePoint">
+                    <div class="item-inner">
+                        <div class="item-title">使用积分</div>
+                        <div class="item-after point_r">
+                            <em>-￥<hi:formatedmoneylabel id="litPointAmount" clientidmode="static" runat="server" nulltodisplay="0.00" /></em>
+                            <input id="txtUsePoints" maxlength="8" placeholder="输入使用的积分" class="form-control" style="width: 60%" onchange="onPointChange(this)" />
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content" id="divUseBalancePay">
+                    <div class="item-inner">
+                        <div class="item-title">余额支付</div>
+                        <div class="item-after point_r">
+                            <div class="point-txt-box">
+                                可用余额&yen;<%<asp:Label runat="server" ID="lblBalance" ClientIdMode="static" />%>
+                                <em>-&yen;<span id="spanUseBalance">0</span></em>
+                            </div>
+                            <input class="weui_switch" type="checkbox" id="chkIsUseBalance" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div style="display: none;">
+            <%<asp:hyperlink id="hlkReducedPromotion" runat="server" target="_blank" />%>
+        </div>
+        <ul class="detailed">
+            <li><span>商品金额</span>￥<em id="lblTotalPrice" runat="server" clientidmode="static">0.00</em><%<asp:literal runat="server" id="litProductBundling" clientidmode="static" />%></li>
+            <li id="taxbox" style="display: none;"><span>税费</span>￥<em id="lblTax" runat="server" clientidmode="static">0.00</em></li>
+            <li id="divPromtion"><span>订单促销</span>-￥<em id="lblDeductibleMoney" clientidmode="static" runat="server">0.00</em></li>
+            <li id="divCoupons"><span>优惠券</span>-￥<em id="litCouponAmout" clientidmode="static" runat="server">0.00</em></li>
+            <li id="divPointAmount"><span>积分抵扣</span>-￥<em id="litPointAmount_1" clientidmode="static" runat="server">0.00</em></li>
+            <li id="divFreight"><span>运费</span>￥<em id="lblShippModePrice" runat="server" clientidmode="static">0.00</em><%<asp:hyperlink id="hlkFeeFreight" clientidmode="static" runat="server" target="_blank" style="display: none;" />%></li>
+        </ul>
+        <ul class="detailed" id="ulpresale" runat="server" visible="false">
+            <li id="divDeposit"><span>定金</span>￥<em id="lblDepositMoney" runat="server" clientidmode="static">0.00</em></li>
+            <li id="divRetainage"><span>尾款</span>￥<em id="lblRetainage" runat="server" clientidmode="static">0.00</em></li>
+            <li id="divFreight"><span>合计</span>￥<em id="lblAmount" runat="server" clientidmode="static">0.00</em></li>
+        </ul>
+
+        <div class="smtishi" style="display: none">
+            <span class="smtishiA">
+                <em>该门店暂时无法服务您所在地址，请返回首页重新选择门店</em>
+                <a onclick="goHomePage()">确认</a>
+            </span>
+            <span class="smtishiB">订单未满门店起送价将由快递配送</span>
+            <span class="smtishiC">当前收货地址不在门店配送范围内，已选择快递配送</span>
+            <span class="smtishiD">
+                <em>该门店未配置支付方式，请返回首页重新选择门店</em>
+                <a onclick="goHomePage()">确认</a>
+            </span>
+            <span class="smtishiE">
+                <em>订单未满足门店起送价，已选择快递配送</em>
+                <a onclick="goHomePage()">确认</a>
+            </span>
+            <span class="smtishiF">
+                <em>订单未满足门店起送价</em>
+                <a onclick="goHomePage()">确认</a>
+            </span>
+        </div>
+
+        <div class="end">
+            <span><span id="spordertxt">实付金额：</span><b id="total">￥<hi:formatedmoneylabel id="lblOrderTotal" runat="server" clientidmode="static" /></b></span>
+            <a id="aSubmmitorder">提交</a>
+            <a class="sub_order" id="aChoicePayment" href="javascript:void(0)" style="display: none;">去支付</a>
+        </div>
+    </div>
+    <div id="invoicebody" style="display:none">
+        <div class='invoiceBox'>
+            <div class='invoice_div' id="tab_hd">
+                <label>发票类型</label>
+                <div class='invoice_tab'>
+                    <a class="mui-control-item active" id="tab1" href="javascript:;">普通发票</a>
+                    <a class="mui-control-item" id="tab2" href="javascript:;">电子发票</a>
+                    <a class="mui-control-item" id="tab3" href="javascript:;">增值税发票</a>
+                </div>
+                <div class='invoice_tab tax-des' id="order-tax">发票将在订单完成之后<asp:Literal id="litAfterSaleDays" runat="server">7</asp:Literal>-<asp:Literal id="litInvoiceSendDays" runat="server">30</asp:Literal>个工作日后寄出。</div>
+            </div>
+
+            <div class="tab_content">
+                <!--普通发票-->
+                <div id="sel_ordinary" class="mui-slider-item mui-control-content">
+                    <div class='invoice_div'>
+                        <label>发票抬头</label>
+                        <div class='invoice_style'>
+                            <span class='checked' id="ordinary_person"></span>个人
+                        </div>
+                        <div class='invoice_style'>
+                            <span class='check' id="ordinary_company"></span>单位
+                        </div>
+                    </div>
+                    <div class='invoice_div' id="ordinary_name">
+                        <label>单位名称</label>
+                        <select class="companytax easyui-combobox" id="companytax" style="width:368px">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class='invoice_div' id="ordinary_num">
+                        <label>纳税人识别号</label>
+                        <input type="text" id="invoiceTaxpayerNumber" placeholder='必填，请填写纳税人识别号' class='input-name'>
+                    </div>
+                    <div class='invoice_div' id="addcompanytaxdiv">
+                        <label>&nbsp;</label>
+                        <a href="javascript:void(0)" class="addcompanytax">新增单位发票</a>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>发票内容</label>
+                        <div class='invoice_style'>
+                            <em>明细</em>
+                        </div>
+                    </div>
+                </div>
+
+                <!--电子发票-->
+                <div id="sel_electron" class="mui-slider-item mui-control-content">
+                    <span class='message'>收票人信息</span>
+                    <div class='invoice_div'>
+                        <label>收票人手机</label>
+                        <input type="text" id="txtReceivePhone" placeholder='必填，通过手机号接收开票提醒' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>收票人邮箱</label>
+                        <input type="text" id="txtReceiveEmail" placeholder='必填，用来接收电子发票' class='input-name'>
+                    </div>
+                </div>
+
+                <!--增值税发票-->
+                <div id="sel_tax" class="mui-slider-item mui-control-content">
+                    <div class='invoice_div'>
+                        <label>发票内容</label>
+                        <div class='invoice_style'>
+                            <em>明细</em>
+                        </div>
+                    </div>
+
+                    <div class='message fontweight'>增票资质<span class='small-name'>(以下各项均为必填项)</span></div>
+                    <div class='invoice_div'>
+                        <label>单位名称</label>
+                        <input type="text" id="txtZCompanyName" placeholder='必填，请填写单位名称' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>纳税人识别</label>
+                        <input type="text" id="txtZInvoiceTaxpayerNumber" placeholder='必填，请填写纳税人识别号' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>注册地址</label>
+                        <input type="text" id="txtRegisterAddress" placeholder='请填写单位注册地址' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>注册电话</label>
+                        <input type="text" id="txtRegisterTel" placeholder='请填写单位注册电话' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>开户银行</label>
+                        <input type="text" id="txtOpenBank" placeholder='请填写单位开户银行' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>银行账户</label>
+                        <input type="text" id="txtBankAccount" placeholder='请填写单位银行账户' class='input-name'>
+                    </div>
+
+                    <div class='message fontweight'>收票人信息<span class='small-name'>(以下各项均为必填项)</span></div>
+                    <div class='invoice_div'>
+                        <label>收票人姓名</label>
+                        <input type="text" id="txtReceiveName" placeholder='请填写收票人姓名' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>收票人手机</label>
+                        <input type="text" id="txtZReceivePhone" placeholder='请填写收票人手机号码 ' class='input-name'>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>收票人地区</label>
+                        <div class="input-group selectReason">
+                            <div id="vshopRegion">
+                                <asp:Literal ID="regionName" runat="server">请选择省 / 市 / 区</asp:Literal>
+                            </div>
+                            <input name="region" id="region" runat="server" clientidmode="Static" style="display: none;" />
+                        </div>
+                    </div>
+                    <div class='invoice_div'>
+                        <label>详细地址</label>
+                        <input type="text" id="txtReceiveAddress" placeholder='请填写详细地址' class='input-name'>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="att-popup-footer" style="position:fixed;bottom:0;left:0;">
+            <button id="btnTaxSave" type="button" class="btn btn-warning btn-yes" style="width: 50%;">确 定</button>
+            <button id="btnTaxCancel" type="button" class="add_cart btn b_r_0 mg_0" style="width: 50%;">取 消</button>
+        </div>
+        <script>
+            $(function () {
+                InvoiceJsonData = JSON.parse($("#hidInvoiceJson").val());
+                $.fn.combobox.defaults.icons = [{
+                    iconCls: 'icon-clear',
+                    handler: function (e) {
+                        //alert($(e.handleObj.data.target).combobox('getValue'));
+                        $(e.handleObj.data.target).combobox('clear');
+                    }
+                }];
+                $("#companytax").combobox({
+                    valueField: 'id',
+                    textField: 'text', editable: true,
+                    onChange: function (n, o) {
+                        var invoiceId = parseInt(n);
+                        if (!isNaN(invoiceId) && invoiceId > 0) {
+                            var checkedInvoiceInfo = GetInvoiceInfo(invoiceId);
+                            if (checkedInvoiceInfo != null) {
+                                if (checkedInvoiceInfo.InvoiceType == 3) {//如果是电子发票
+                                    $("#txtReceivePhone").val(checkedInvoiceInfo.ReceivePhone);
+                                    $("#txtReceiveEmail").val(checkedInvoiceInfo.ReceiveEmail);
+                                }
+                                $("#invoiceTaxpayerNumber").val(checkedInvoiceInfo.InvoiceTaxpayerNumber);
+                                if ($("#hidInvoiceType").val() == "1" || $("#hidInvoiceType").val() == "3") {
+                                    $("#hidInvoiceId").val(checkedInvoiceInfo.Id);
+                                }//如果当前选中的是企业发票则初始化发票ID
+                            }
+                        }
+                    }
+                });
+                $("#person_company").click(function () {
+                    $("#orderbody").hide();
+                    $("#invoicebody").show();
+
+                })
+                var invoiceTypeText = "普通发票";
+                //初始发票
+                var invoiceType = parseInt($("#hidInvoiceType").val());
+                if (isNaN(invoiceType)) {
+                    invoiceType = 0;
+                }
+                $("#litTaxRate").html($("#hidTaxRate").val());
+                if ($("#hidEnableTax").val() == "true") {
+                    $("#person_company .select_value").html('普通发票(个人)');
+                    invoiceTypeText = "普通发票";
+                    $("#hidInvoiceType").val("0");
+                    $("#hidoldInvoiceType").val("0");
+                    $("#hidInvoiceId").val("0");
+                    invoiceType = 0;
+                } else if ($("#hidEnableETax").val() == "true") {
+                    $("#person_company .select_value").html('电子发票(个人)');
+                    invoiceTypeText = "电子发票";
+                    $("#hidInvoiceType").val("2")
+                    $("#hidoldInvoiceType").val("2");
+                    invoiceType = 2;
+                    var temp_inoviceInfo = GetPersoanlEInvoice();
+                    if (temp_inoviceInfo.length > 0) {
+                        $("#hidInvoiceId").val(temp_inoviceInfo[0].Id);
+                    }
+                }
+                else {
+                    $("#person_company .select_value").html('增值税发票');
+                    invoiceTypeText = "增值税发票";
+                    $("#hidInvoiceType").val("4")
+                    $("#hidoldInvoiceType").val("4");
+                    var temp_inoviceInfo = GetVATInvoice();
+                    if (temp_inoviceInfo.length > 0) {
+                        $("#hidInvoiceId").val(temp_inoviceInfo[0].Id);
+                        $("#hidInvoiceTitle").val(temp_inoviceInfo[0].InvoiceTitle)
+                        $("#person_company .select_value").html('增值税发票(' + temp_inoviceInfo[0].InvoiceTitle + ')');
+                    }
+                    invoiceType = 4;
+                    $("#litTaxRate").html($("#hidVATTaxRate").val());
+                }
+
+                $("#invoiceTitle").text($("#hidInvoiceTitle").val());
+
+                $("#invoiceTaxpayerNumber").val($("#hidInvoiceTaxpayerNumber").val());
+
+
+
+                $("#sel_electron").css("display", "none");
+                $("#sel_tax").css("display", "none");
+                $("#order-tax").css("display", "none");
+                $("#ordinary_name").css("display", "none");
+                $("#ordinary_num").css("display", "none");
+                $("#electron_name").css("display", "none");
+                $("#electron_num").css("display", "none");
+                $("#addcompanytaxdiv").hide();
+                $("#tab1").click(function () {
+                   // $("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    var isPersonal = $("#hidIsPersonal").val() == "true";
+                    $(this).addClass("active");
+                    $(this).siblings().removeClass("active");
+                    $("#sel_ordinary").show();
+                    $("#sel_tax").hide();
+                    $("#sel_electron").hide();
+                    $("#order-tax").hide();
+                    if (isPersonal) {
+                        $("#hidInvoiceType").val(0);
+                    }
+                    else {
+                        $("#hidInvoiceType").val(1);
+                    }
+                })
+                $("#tab2").click(function () {
+                    //$("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    var isPersonal = $("#hidIsPersonal").val() == "true";
+                    $(this).addClass("active");
+                    $(this).siblings().removeClass("active");
+                    $("#sel_ordinary").show();
+                    $("#sel_electron").show();
+                    $("#sel_tax").hide();
+                    $("#order-tax").hide();
+                    if (isPersonal) {
+                        $("#hidInvoiceType").val(2);
+                    }
+                    else {
+                        $("#hidInvoiceType").val(3);
+                    }
+                    var invoiceInfos = null;
+                    if (isPersonal) {
+                        invoiceInfos = GetPersoanlEInvoice();
+                    }
+                    else {
+                        invoiceInfos = GetEnterpriseEInvoice();
+                    }
+                    if (invoiceInfos != null && invoiceInfos.length > 0) {
+                        var tempInvoiceInfo = invoiceInfos[0];
+                        if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                            $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                        }
+                        if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                            $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                        }
+                    }
+                })
+                $("#tab3").click(function () {
+                    var isPersonal = $("#hidIsPersonal").val() == "true";
+                    $(this).addClass("active");
+                    $(this).siblings().removeClass("active");
+                    $("#order-tax").show();
+                    $("#sel_tax").show();
+                    $("#sel_electron").hide();
+                    $("#sel_ordinary").hide();
+                    //$("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    $("#hidInvoiceType").val(4);
+                    var invoiceInfos = GetVATInvoice();
+                    if (invoiceInfos.length > 0) {
+                        var tempInvoiceInfo = invoiceInfos[0];
+                        if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                            $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                        }
+                        if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                            $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                        }
+                    }
+                })
+                $("#ordinary_company").click(function () {
+                    //$("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    $(this).removeClass("check").addClass("checked");
+                    $("#ordinary_person").removeClass("checked").addClass("check");
+                    $("#ordinary_name").show();
+                    $("#ordinary_num").show();
+                    var index = $(".invoice_tab a").index($(".invoice_tab a.active").eq(0));
+                    //如果是普通发票
+                    if (index == 0) {
+                        $("#hidInvoiceType").val(1);
+                    }
+                    else {
+                        $("#hidInvoiceType").val(3);
+                        invoiceInfos = GetEnterpriseEInvoice();
+                        if (invoiceInfos != null && invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                        }
+                    }
+                    $("#hidIsPersonal").val("false");
+                    $("#addcompanytaxdiv").show();
+                })
+                $("#ordinary_person").click(function () {
+                    //$("#hidoldInvoiceType").val($("#hidInvoiceType").val());//保存原来的，点击取消时还原
+                    $(this).removeClass("check").addClass("checked");
+                    $("#ordinary_company").removeClass("checked").addClass("check");
+                    $("#ordinary_name").hide();
+                    $("#ordinary_num").hide();
+                    var index = $(".invoice_tab a").index($(".invoice_tab a.active").eq(0));
+                    //如果是普通发票
+                    if (index == 0) {
+                        $("#hidInvoiceType").val(0);
+                    }
+                    else {
+                        $("#hidInvoiceType").val(2);
+                        invoiceInfos = GetPersoanlEInvoice();
+                        if (invoiceInfos != null && invoiceInfos.length > 0) {
+                            var tempInvoiceInfo = invoiceInfos[0];
+                            if (tempInvoiceInfo.ReceiveEmail != null && tempInvoiceInfo.ReceiveEmail != "") {
+                                $("#txtReceiveEmail").val(tempInvoiceInfo.ReceiveEmail);
+                            }
+                            if (tempInvoiceInfo.ReceivePhone != null && tempInvoiceInfo.ReceivePhone != "") {
+                                $("#txtReceivePhone").val(tempInvoiceInfo.ReceivePhone);
+                            }
+                        }
+                    }
+                    $("#hidIsPersonal").val("true");
+                    $("#addcompanytaxdiv").hide();
+                })
+
+                $("#btnTaxCancel").click(function (e) {
+                    $("#orderbody").show();
+                    $("#invoicebody").hide();
+                    if ($("#div_fapiao").is(":hidden")) {
+                        $("#chkIsNeedInvoice").iCheck('uncheck');
+                    }
+                    $("#hidInvoiceType").val($("#hidoldInvoiceType").val());//还原原来选择的发票类型
+                });
+                $("#invoiceClose").click(function (e) {
+                    $("#orderbody").show();
+                    $("#invoicebody").hide();
+                    if ($("#div_fapiao").is(":hidden")) {
+                        $("#chkIsNeedInvoice").iCheck('uncheck');
+                    }
+                    $("#hidInvoiceType").val($("#hidoldInvoiceType").val());//还原原来选择的发票类型
+                });
+            })
+        </script>
+
+        <script type="text/javascript">
+            var InvoiceInfo = {
+                Id: 0, InvoiceType: 0, InvoiceTitle: "", InvoiceTaxpayerNumber: "", OpenBank: "", BankAccount: "", ReceiveAddress: "", ReceiveEmail: "", ReceiveName: "", ReceivePhone: "", ReceiveRegionName: "", RegionId: 0, RegisterAddress: "", RegisterTel: ""
+            }
+            var InvoiceJsonData = [];
+            ///获取个人的发票信息
+            function GetPersoanlInvoice() {
+                var personalInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 0 || item.InvoiceType == 2) {
+                        personalInvoice.push(item);
+                    }
+                });
+                return personalInvoice;
+            }
+            ///获取个人电子发票信息
+            function GetPersoanlEInvoice() {
+                var personalInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 2) {
+                        personalInvoice.push(item);
+                    }
+                });
+                return personalInvoice;
+            }
+            ///获取企业电子发票信息
+            function GetEnterpriseEInvoice() {
+                var enterpriseInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 3) {
+                        enterpriseInvoice.push(item);
+                    }
+
+                });
+                return enterpriseInvoice;
+            }
+            ///获取企业的发票信息
+            function GetEnterpriseInvoice() {
+                var enterpriseInvoice = new Array();
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 1 || item.InvoiceType == 3) {
+                        enterpriseInvoice.push(item);
+                    }
+
+                });
+                return enterpriseInvoice;
+            }
+
+            ///获取专票的发票信息
+            function GetVATInvoice() {
+                var VATInvoice = new Array();
+                console.log()
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.InvoiceType == 4) {
+                        VATInvoice.push(item);
+                    }
+                });
+                return VATInvoice;
+            }
+            //根据ID获取发票信息
+            function GetInvoiceInfo(invoiceId) {
+                var ItemInvoiceInfo = null;
+                $.each(InvoiceJsonData.List, function (i, item) {
+                    if (item.Id == invoiceId) {
+                        ItemInvoiceInfo = item;
+                    }
+                });
+                return ItemInvoiceInfo;
+            }
+            //初始化企业发票列表
+            function InitEnterpriseInvoiceOption() {
+                selectedInvoiceId = parseInt($("#hidInvoiceId").val());
+                if (isNaN(selectedInvoiceId)) { selectedInvoiceId = 0; }
+
+                var EnterpriseInvoice = GetEnterpriseInvoice();
+                $("#companytax").empty();
+                var eCount = 0;
+                //初始化发票数据
+                if (EnterpriseInvoice != null && EnterpriseInvoice.length > 0) {
+                    var json = [];
+                    $.each(EnterpriseInvoice, function (i, item) {
+                        if (item.Id > 0) {
+                            json.push({ "text": item.InvoiceTitle, "id": item.Id, "selected": item.Id == selectedInvoiceId || (selectedInvoiceId == 0 && eCount == 0) });
+                            eCount += 1;
+                        }
+
+                    });
+                    if (json.length > 0) {
+                        $("#companytax").combobox({
+                            valueField: 'id',
+                            textField: 'text', editable: true
+                        });
+                        $("#companytax").combobox("loadData", json);
+                    }
+
+                }
+                if (eCount == 0) {
+                    $(".addenttax").show();
+                    $(".enttax").hide();
+                }
+                else {
+                    $(".addenttax").show();
+                    $(".enttax").show();
+                }
+            }
+
+            $(document).ready(function (e) {
+
+                //点击添加发票
+                $(".addcompanytax").click(function (e) {
+                    $(".addenttax").show();
+                    $(".enttax").show();
+                    $("#companytax").val("");
+                    $("#companytax").combobox('clear');
+                    $("#invoiceTaxpayerNumber").val("");
+                    $("#hidInvoiceId").val("0");
+                })
+                //$(".enttax").hide();
+                //$(".addenttax").show();
+
+                //初始化接收人信息
+                if (InvoiceJsonData != undefined && InvoiceJsonData.List != undefined && InvoiceJsonData.List.length > 0) {
+                    InitEnterpriseInvoiceOption();
+                    var zCount = 0;
+                    $.each(InvoiceJsonData.List, function (i, item) {
+                        if (item.InvoiceType == 1 || item.InvoiceType == 3) {
+                            if (item.ReceiveEmail != null && item.ReceiveEmail != "" && $("#txtReceiveEmail").val() == "") {
+                                $("#txtReceiveEmail").val(item.ReceiveEmail);
+                            }
+                            if (item.ReceivePhone != null && item.ReceivePhone != "" && $("#txtReceivePhone").val() == "") {
+                                $("#txtReceivePhone").val(item.ReceivePhone);
+                            }
+                        }
+                        //初始化专票信息
+                        if (item.InvoiceType == 4) {
+                            zCount += 1;
+                            if (zCount == 1) {
+                                $("#txtZCompanyName").val(item.InvoiceTitle);
+                                $("#txtZInvoiceTaxpayerNumber").val(item.InvoiceTaxpayerNumber);
+                                $("#txtRegisterAddress").val(item.RegisterAddress);
+                                $("#txtRegisterTel").val(item.RegisterTel);
+                                $("#txtOpenBank").val(item.OpenBank);
+                                $("#txtOpenBank").val(item.OpenBank);
+                                $("#txtBankAccount").val(item.BankAccount);
+                                $("#txtReceiveName").val(item.ReceiveName);
+                                $("#txtZReceivePhone").val(item.ReceivePhone);
+                                $("#vshopRegion").text(item.ReceiveRegionName);
+                                $("#region").val(item.RegionId);
+                                $("#txtReceiveAddress").val(item.ReceiveAddress);
+                            }
+                        }
+
+                    });
+                }
+                var enableTax = $("#hidEnableTax").val();
+                var enableETax = $("#hidEnableETax").val();
+                var enableVATTax = $("#hidEnableVATTax").val();
+
+                if (enableTax == "false") {
+                    $("#tab1").hide();
+                    if (enableETax == "true") {
+                        $("#tab2").trigger("click");//默认显示电子发票
+                    }
+                    else {
+                        $("#tab3").trigger("click");//默认显示专票
+                    }
+                }
+                if (enableETax == "false") {
+                    $("#tab2").hide();
+                }
+                if (enableVATTax == "false") {
+                    $("#tab3").hide();
+                }
+
+
+
+
+                //保存发票信息
+                $("#btnTaxSave").click(function (e) {
+                    var saveInvoiceInfo = InvoiceInfo;
+                    var isPersonal = $("#hidIsPersonal").val() == "true";
+                    var checkedInvoiceType = parseInt($("#hidInvoiceType").val());
+                    if (isNaN(checkedInvoiceType) || (checkedInvoiceType != 0 && checkedInvoiceType != 1 && checkedInvoiceType != 2 && checkedInvoiceType != 3 && checkedInvoiceType != 4)) {
+                        alert_h("请选择发票类型");
+                        return;
+                    }
+                    //专票
+                    if (checkedInvoiceType == 4) {
+                        $("#litTaxRate").html($("#hidVATTaxRate").val());
+                        var VATInvoices = GetVATInvoice();
+                        if (VATInvoices != null && VATInvoices.length > 0) {
+                            saveInvoiceInfo = VATInvoices[0];
+                        }
+
+                        saveInvoiceInfo.InvoiceType = checkedInvoiceType;
+                        saveInvoiceInfo.InvoiceTitle = $("#txtZCompanyName").val().trim();
+                        if (saveInvoiceInfo.InvoiceTitle == "" || saveInvoiceInfo.InvoiceTitle.length > 200) {
+                            alert_h("请填写单位名称，长度在200个字符以内");
+                            return false;
+                        }
+
+                        saveInvoiceInfo.InvoiceTaxpayerNumber = $("#txtZInvoiceTaxpayerNumber").val().trim();
+                        if (saveInvoiceInfo.InvoiceTaxpayerNumber == "" || saveInvoiceInfo.InvoiceTaxpayerNumber.length > 100) {
+                            alert_h("请填写纳税人识别号，长度在100个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.RegisterAddress = $("#txtRegisterAddress").val().trim();
+                        if (saveInvoiceInfo.RegisterAddress == "" || saveInvoiceInfo.RegisterAddress.length > 200) {
+                            alert_h("请填写注册地址，长度在200个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.RegisterTel = $("#txtRegisterTel").val().trim();
+                        if (saveInvoiceInfo.RegisterTel == "" || saveInvoiceInfo.RegisterTel.length > 50) {
+                            alert_h("请填写注册电话，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.OpenBank = $("#txtOpenBank").val().trim();
+                        if (saveInvoiceInfo.OpenBank == "" || saveInvoiceInfo.OpenBank.length > 50) {
+                            alert_h("请填写开户银行，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.BankAccount = $("#txtBankAccount").val().trim();
+                        if (saveInvoiceInfo.BankAccount == "" || saveInvoiceInfo.BankAccount.length > 50) {
+                            alert_h("请填写银行帐户，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.ReceiveName = $("#txtReceiveName").val().trim();
+                        if (saveInvoiceInfo.ReceiveName == "" || saveInvoiceInfo.ReceiveName.length > 50) {
+                            alert_h("请填写收票人姓名，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.ReceivePhone = $("#txtZReceivePhone").val().trim();
+                        if (saveInvoiceInfo.ReceivePhone == "" || saveInvoiceInfo.ReceivePhone.length > 50) {
+                            alert_h("请填写收票人电话，长度在50个字符以内");
+                            return false;
+                        }
+                        saveInvoiceInfo.ReceiveRegionName = $("#address-check-btn").text().trim();
+                        if (saveInvoiceInfo.ReceiveRegionName == "" || saveInvoiceInfo.ReceiveRegionName.length > 50) {
+                            alert_h("请填写收票人所在地区，长度在50个字符以内");
+                            return false;
+                        }
+                        var regionId = parseInt($("#region").val());
+                        saveInvoiceInfo.RegionId = isNaN(regionId) ? 0 : regionId;
+                        saveInvoiceInfo.ReceiveAddress = $("#txtReceiveAddress").val().trim();
+                        if (saveInvoiceInfo.ReceiveName == "" || saveInvoiceInfo.ReceiveName.length > 100) {
+                            alert_h("请填写收票人详细地址，长度在100个字符以内");
+                            return false;
+                        }
+                    }
+                    else {
+                        $("#litTaxRate").html($("#hidTaxRate").val());
+
+                        //电子发票验证收票人电话号码和邮箱
+                        if (checkedInvoiceType == 2 || checkedInvoiceType == 3) {
+                            saveInvoiceInfo.ReceivePhone = $("#txtReceivePhone").val().trim();
+                            if (saveInvoiceInfo.ReceivePhone == "" || saveInvoiceInfo.ReceivePhone.length > 50) {
+                                alert_h("请填写收票人电话号码，长度在50个字符以内");
+                                return false;
+                            }
+                            saveInvoiceInfo.ReceiveEmail = $("#txtReceiveEmail").val().trim();
+                            if (saveInvoiceInfo.ReceiveEmail == "" || saveInvoiceInfo.ReceiveEmail.length > 200) {
+                                alert_h("请填写收票人邮箱，长度在200个字符以内");
+                                return false;
+                            }
+                        }
+                        //如果是企业发票验证抬头和税号
+                        if (!isPersonal) {
+                            var invoiceId = parseInt($("#hidInvoiceId").val());
+                            if (isNaN(invoiceId)) { invoiceId = 0; }
+                            saveInvoiceInfo.InvoiceTitle = $("#companytax").combobox('getText');
+                            if (invoiceId > 0) {
+                                var tempInvoiceInfo = GetInvoiceInfo(invoiceId);
+                                if (tempInvoiceInfo != null) {
+                                    saveInvoiceInfo.Id = tempInvoiceInfo.Id;
+                                }
+                            }
+                            if (saveInvoiceInfo.InvoiceTitle == "" || saveInvoiceInfo.InvoiceTitle.length > 50) {
+                                alert_h("请填写发票抬头，长度在50个字符以内");
+                                return false;
+                            }
+                            saveInvoiceInfo.InvoiceTaxpayerNumber = $("#invoiceTaxpayerNumber").val().trim();
+                            if (saveInvoiceInfo.InvoiceTaxpayerNumber == "" || saveInvoiceInfo.InvoiceTaxpayerNumber.length > 100) {
+                                alert_h("请填写纳税人识别号，长度在100个字符以内");
+                                return false;
+                            }
+                        }
+                        else {
+                            var tempPInvoiceInfo = GetPersoanlInvoice();
+                            if (tempPInvoiceInfo != null && tempPInvoiceInfo.length > 0) {
+                                saveInvoiceInfo.Id = tempPInvoiceInfo[0].Id;
+                            }
+                            saveInvoiceInfo.InvoiceTitle = "个人";
+                        }
+                        saveInvoiceInfo.InvoiceType = checkedInvoiceType;
+                    }
+                    //如果是个人普通发票则不保存到数据库，否则保存
+                    if (!(saveInvoiceInfo.InvoiceTitle == "个人" && checkedInvoiceType == 0)) {
+                        $.ajax({
+                            url: "/Handler/SubmmitOrderHandler.ashx",
+                            type: 'post', dataType: 'json', timeout: 10000,
+                            data: { Action: "UpdateUserInvoice", Data: JSON.stringify(saveInvoiceInfo) },
+                            cache: false,
+                            success: function (resultData) {
+                                if (resultData.Status == "OK") {
+                                    InvoiceJsonData = resultData;
+                                    $("#hidInvoiceId").val(resultData.NewInvoiceId);
+                                    InitEnterpriseInvoiceOption();
+                                    CalculationTax();
+                                    SetUseBalance();
+                                    $("#hidoldInvoiceType").val(checkedInvoiceType);//点击保存时，覆盖选择的发票类型
+                                }
+                                else {
+                                    $("#hidInvoiceId").val("0");
+                                    alert_h("发票信息保存失败," + resultData.error_response.sub_msg);
+                                    return false;
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        $("#hidInvoiceId").val("0");
+                    }
+                    $("#orderbody").show();
+                    $("#invoicebody").hide();
+                    $("#person_company .select_value").html(checkedInvoiceType == 4 ? "增值税发票" : ((checkedInvoiceType == 0 || checkedInvoiceType == 1) ? "普通发票" : "电子发票"));
+                    invoiceTypeText = checkedInvoiceType == 4 ? "增值税发票" : ((checkedInvoiceType == 0 || checkedInvoiceType == 1) ? "普通发票" : "电子发票");
+                    $("#invoiceTitle").text(saveInvoiceInfo.InvoiceTitle);
+                    $("#person_company .select_value").html(invoiceTypeText + "(" + saveInvoiceInfo.InvoiceTitle + ")");
+                    //$("#txtInvoiceTaxpayerNumber").val(saveInvoiceInfo.InvoiceTaxpayerNumber);
+                    $("#invoiceTaxpayerNumber").val(saveInvoiceInfo.InvoiceTaxpayerNumber)
+                });
+
+            });
+
+        </script>
+        <script src="/Utility/regionSelector_FileData.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/Utility/LocateAddress.js?v=3.31"></script>
+        <style type="text/css">
+            .input-group { display: inline-block; min-height: 100%; border-left: 0; }
+
+            .input-group { display: inline-block; min-height: 100%; border-left: 0; }
+
+            .dropdown-menu { margin: 10px; }
+
+                .dropdown-menu li { width: auto; line-height: 1.5rem; float: left; display: inline-block; border: none; text-align: center; padding: 0px 15px; }
+
+                    .dropdown-menu li a { line-height: 1.5rem; }
+
+            #address-check-btn { border: none; background: #ffffff; line-height: 28px; font-size: 16px; }
+
+            .invoiceBox { margin-bottom: 2.4rem; }
+        </style>
+    </div>
+    <div class="sub_dialog">
+        <div class="dialog-box">
+            <div class="price" id="payamount">帐户余额支付开启</div>
+            <div class="txt"><input type="password" placeholder="输入交易密码" id="textfieldpassword"></div>
+            <div class="sub_btn"><a href="javascript:void(0)" class="cancle" id="canclepay">取消</a> <a href="javascript:void(0)" class="submit" id="advancepay">确定</a><a href="javascript:void(0)" class="submitloading" id="submitloading" style="display:none;"><img src="/images/icon/jiazai.gif" width="22px" alt="" /></a></div>
+            <div class="txt" style="color:red;display:none" id="errormsg"></div>
+        </div>
+    </div>
+
+    <div class="att-popup2"></div>
+
+    <!-- 订单异常弹窗 -->
+    <div class="order_dialog hide">
+        <h2><span id="spcontent">您来晚了，订单中有商品已删除或已下架。</span></h2>
+        <input type="button" class="" value="确定" />
+    </div>
+    <input type="hidden" id="hidoldInvoiceType" value="" />
+    <input runat="server" id="htmlCouponCode" type="hidden" clientidmode="Static" />
+    <input type="hidden" id="regionId" runat="server" clientidmode="Static" />
+    <input type="hidden" id="groupbuyHiddenBox" runat="server" clientidmode="Static" />
+    <input type="hidden" id="countdownHiddenBox" runat="server" clientidmode="Static" />
+    <input type="hidden" id="fightGroupActivityHiddenBox" runat="server" clientidmode="Static" />
+    <input type="hidden" id="fightGroupHiddenBox" runat="server" clientidmode="Static" />
+    <input type="hidden" id="hdCurrentckIds" runat="server" clientidmode="Static" />
+    <input type="hidden" id="hidShoppingDeduction" runat="server" clientidmode="Static" />
+    <input type="hidden" id="hidCanPointUseWithCoupon" runat="server" clientidmode="Static" />
+
+    <input type="hidden" id="hidShoppingDeductionRatio" runat="server" clientidmode="Static" />
+    <input type="hidden" id="hidMyPoints" runat="server" clientidmode="Static" />
+    <input type="hidden" id="selectShipTo" runat="server" clientidmode="Static" />
+    <input type="hidden" id="hidOrderRate" runat="server" clientidmode="Static" />
+
+    <input type="hidden" id="hidCanUsePoint" runat="server" value="false" clientidmode="static" /><!--是否可以使用积分-->
+
+    <input type="hidden" id="hidPaymentId_Podrequest" runat="server" value="" clientidmode="static" /><!--货到付款支付ID-->
+    <input type="hidden" id="hidPaymentId_Offline" runat="server" value="0" clientidmode="static" /><!--线下支付ID-->
+    <input type="hidden" id="hidTotalPrice" runat="server" value="0" clientidmode="static" /><!--商品总金额减去促销金额后的金额-->
+
+    <input type="hidden" id="hidDeliveryTime" runat="server" value="任意时间" clientidmode="static" />
+    <input type="hidden" id="inputShippingModeId" runat="server" value="0" clientidmode="static" /><!--配送方式ID-->
+    <input type="hidden" id="hidStoreId" runat="server" value="0" clientidmode="static" /><!--门店ID-->
+    <input type="hidden" id="hidChooseStoreId" runat="server" value="0" clientidmode="static" /><!--选择的门店ID-->
+    <input type="hidden" id="hidStoreName" runat="server" value="0" clientidmode="static" /><!--门店ID-->
+    <input type="hidden" id="inputPaymentModeId" runat="server" value="" clientidmode="static" /><!--支付方式-->
+    <input type="hidden" id="hidstorecount" runat="server" value="0" clientidmode="static" /><!--支付方式-->
+    <input type="hidden" id="hidOrderId" runat="server" value="" clientidmode="static" /><!--支付方式-->
+    <input type="hidden" id="hidIsMultiStore" runat="server" value="" clientidmode="static" /><!--支付方式-->
+    <input type="hidden" id="hidIsPreSale" runat="server" value="0" clientidmode="static" /><!--yushou-->
+    <input type="hidden" id="hidHasSupplierProduct" runat="server" value="0" clientidmode="static" /><!--是否有供应商商品-->
+    <input type="hidden" id="hidPointRate" runat="server" value="1" clientidmode="static" /><!--积分兑换率-->
+    <input type="hidden" id="hidParentOrderId" runat="server" value="" clientidmode="static" /><!--总订单编号-->
+    <input type="hidden" id="hidOnlinePayCount" runat="server" value="0" clientidmode="static" /><!--在线支付方式总数，等于0时不显示在线支付方式-->
+    <input type="hidden" id="hidIsStoreDelive" runat="server" value="0" clientidmode="static" /><!--是否在配送范围-->
+    <input type="hidden" id="hidIsSupportStoreDelive" runat="server" value="0" clientidmode="static" /><!--是否支持门店配送-->
+    <input type="hidden" id="hidIsSupportExpress" runat="server" value="0" clientidmode="static" /><!--是否支持快递配送-->
+    <input type="hidden" id="hidGetgoodsOnStores" runat="server" value="false" clientidmode="static" /><!-- 是否可以上门自提，（门店订单时，且收货地址在与门店同城） -->
+    <input type="hidden" id="hidIsGetMinOrderPrice" runat="server" value="false" clientidmode="static" /><!-- 是否满足起送价 -->
+    <input type="hidden" id="hidHasStoresInCity" runat="server" value="false" clientidmode="static" /><!--支持上门自提，本市是否有门店支持-->
+    <input type="hidden" id="hidPickeupInStoreRemark" runat="server" value="" clientidmode="static" /><!--支持上门自提，本市是否有门店支持-->
+    <input type="hidden" id="hidStoreFreight" runat="server" value="0" clientidmode="static" /><!-- 门店配送费 -->
+    <input type="hidden" id="hidOrderFreight" runat="server" value="0" clientidmode="static" /><!-- 运费 -->
+    <input type="hidden" id="hidHasTradePassword" runat="server" value="false" clientidmode="static" /><!-- 是否有交易密码 -->
+    <input type="hidden" id="hidIsOpenCertification" runat="server" value="" clientidmode="static" /><!--是否开启实名验证-->
+    <input type="hidden" id="hidIsSubmitInTime" runat="server" value="false" clientidmode="static" /><!-- 是否在营业时间内下单 -->
+    <input type="hidden" id="hidIsOfflinePay" runat="server" value="false" clientidmode="static" /><!-- 门店是否支付在线支付 -->
+    <input type="hidden" id="hidIsOnlinePay" runat="server" value="false" clientidmode="static" /><!-- 门店是否支付线下支付 -->
+    <input type="hidden" id="hidIsCashOnDelivery" runat="server" value="false" ClientIdMode="static" /><!-- 门店是否支付货到付款 -->
+
+    <input type="hidden" id="hidOpenBalancePay" runat="server" value="false" ClientIdMode="static" /><!-- 是否开启余额支付 -->
+    <input type="hidden" id="hidBalanceAmount" runat="server" value="0.0" ClientIdMode="static" /><!-- 帐号余额 -->
+    <input type="hidden" id="hidUseBalance" value="0" /><!--使用的余额-->
+    <input type="hidden" id="hidIsValidTradePassword" value="false" />
+
+    <input type="hidden" id="hidInvoiceTitle" runat="server" value="个人" clientidmode="Static" />
+    <input type="hidden" id="hidInvoiceTaxpayerNumber" runat="server" clientidmode="Static" />
+
+    <link href="/style/easyui.css" rel="stylesheet" />
+    <script type="text/javascript" src="/utility/jquery.easyui.min.js"></script>
+    <input type="hidden" id="hidInvoiceJson" value="" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidInvoiceType" value="0" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidInvoiceId" value="0" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidIsPersonal" value="true" runat="server" clientidmode="static" />
+    <input type="hidden" id="hidEnableTax" runat="server" clientidmode="static" value="false" />
+    <input type="hidden" id="hidEnableETax" runat="server" clientidmode="static" value="false" />
+    <input type="hidden" id="hidEnableVATTax" runat="server" clientidmode="static" value="false" />
+    <input type="hidden" id="hidTaxRate" runat="server" clientidmode="static" value="0" />
+    <input type="hidden" id="hidVATTaxRate" runat="server" clientidmode="static" value="0" />
+    <input type="hidden" id="hidVATInvoiceDays" runat="server" clientidmode="static" value="0" />
+    <input type="hidden" id="hidFightGroupPickeupInStore" runat="server" clientidmode="static" value="false" />
+</form>
+<script src="/utility/appshoping.helper.js?v=3.342" type="text/javascript"></script>
+<script type="text/javascript">
+    function showStoreProductDetail(id, storeId) {
+        var type = GetAgentType();
+        // 设置标题
+        if (type == 2)
+            window.HiCmd.webShowProduct(id, storeId);
+        else if (type == 1)
+            loadIframeURL("hishop://webShowStoreProduct/null/" + id + "/" + storeId);
+    }
+
+
+    function goChoiceAddress() {
+        //alert(11);
+        //var url = "ChoiceShippingAddress.aspx?returnUrl=" + document.location.href;
+        //var host = window.location.host;
+        //var strUrl = "http://" + host + "//appshop//" + url;
+        //goToUrl(strUrl);
+        location.href = "ChoiceShippingAddress.aspx?returnUrl=" + document.location.href;
+    }
+    function CalculationTax() {
+        var totalPrice = parseFloat($("#hidTotalPrice").val());
+        if (isNaN(totalPrice) || totalPrice < 0) { totalPrice = 0; }
+        var couponPrice = parseFloat($("#litCouponAmout").html());
+        if (isNaN(couponPrice) || couponPrice < 0) { couponPrice = 0; }
+
+        var taxRate = parseFloat($("#litTaxRate").html());
+        if (isNaN(taxRate) || taxRate < 0) { taxRate = 0; }
+        var pointAmount = parseFloat($("#litPointAmount").html());
+        if (isNaN(pointAmount) || pointAmount < 0) {
+            pointAmount = 0;
+        }
+        var tax = (totalPrice.toSub(couponPrice).toSub(pointAmount)).toMul(taxRate).toDiv(100);
+        if (tax <= 0) { tax = 0; }
+
+        $("#lblTax").html(tax.toFixed(2));
+    }
+    function SetUseBalance(checked) {
+        if (checked == undefined || checked == null) {
+            checked = $('#chkIsUseBalance').is(':checked');
+        }
+        var useBalance = CalculateUseBalance(checked);
+        if (useBalance <= 0) {
+            //如果不需要支付则关闭
+            $("#chkIsUseBalance").prop("checked", false);
+            $("#hidUseBalance").val("0");
+            $("#spanUseBalance").html("0.00");
+        }
+        else {
+            $("#hidUseBalance").val(useBalance);
+            $("#spanUseBalance").html(useBalance);
+        }
+        CalculateTotalPrice();
+    }
+
+    function CalculateUseBalance(checked) {
+        if (!checked) {//如果未开启余额支付则不返回0
+            return 0;
+        }
+        var balanceAmount = parseFloat($("#hidBalanceAmount").val());
+        var useBalance = 0;
+        if (isNaN(balanceAmount)) { balanceAmount = 0; }
+        $("#hidUseBalance").val(0);
+        CalculateTotalPrice();
+        var total = parseFloat($("#lblOrderTotal").html());
+        isPreSale = getParam("from").toLowerCase() == "presale";
+        //如果是预售
+        if (isPreSale) {
+            var deposit = parseFloat($("#lblDepositMoney").html());
+            if (isNaN(deposit)) { deposit = 0; }
+            if (balanceAmount > deposit) {
+                useBalance = deposit;
+            }
+            else {
+                useBalance = balanceAmount;
+            }
+        }
+        else {
+            if (!isNaN(total) && total > 0) {
+                if (balanceAmount < total) {
+                    useBalance = balanceAmount;
+                }
+                else {
+                    useBalance = total;
+                }
+            }
+            else {
+
+                useBalance = 0;
+            }
+        }
+        return useBalance.toFixed(2);
+
+    }
+    function GetPaymentMode(txt) {
+        if (txt == "在线支付") {
+            $("#inputPaymentModeId").val("0");
+        }
+        else if (txt == "货到付款") {
+            $("#inputPaymentModeId").val($("#hidPaymentId_Podrequest").val());
+        }
+        else if (txt == "到店支付") {
+            //到店支付
+            $("#inputPaymentModeId").val("-3");
+            var storeId = $("#hidStoreId").val();
+            if ($("#hidHasStoresInCity").val() == "false" && (storeId == "" || storeId == "0") && $("#hidIsMultiStore").val() == "1") {
+                $("#ulPayType li").eq(0).addClass("a_time").siblings().removeClass("a_time");
+            }
+        }
+        else if (txt == "线下付款") {
+            $("#inputPaymentModeId").val($("#hidPaymentId_Offline").val());
+        }
+    }
+    $(function () {
+        var taxrate = parseFloat($("#litTaxRate").html());
+        if (isNaN(taxrate) || taxrate <= 0) {
+            $("#spanTaxRate").hide();
+        }
+        //开启余额支付
+        $('#chkIsUseBalance').click(function () {
+            if ($(this).is(':checked')) {
+                if ($("#hidOpenBalancePay").val().toLowerCase() == "false") {//如果未开启余额支付则关闭
+                    $("#hidUseBalance").val("0.0");
+                    $("#spanUseBalance").html("0.00");
+                    $("#chkIsUseBalance").prop("checked", false);
+                }
+                else {
+                    SetUseBalance();
+                    if ($("#hidHasTradePassword").val() == "0") {
+                        $("#divSetPassword").addClass('is-visible');
+                    }
+                    else {
+                        if ($("#hidIsValidTradePassword").val() != "true")//如果未验证密码则提示输入密码
+                        {
+                            $(".sub_dialog").show();
+                        }
+                    }
+                }
+            }
+            else {
+                $("#hidUseBalance").val("0.0");
+                $("#spanUseBalance").html("0.00");
+                CalculateTotalPrice();
+            }
+        });
+        var balanceAmount = parseFloat($("#hidBalanceAmount").val());
+        if ($("#hidOpenBalancePay").val().toLowerCase() == "true" && (!isNaN(balanceAmount) && balanceAmount > 0)) {
+            $("#divUseBalancePay").show();
+        }
+        else {
+            $("#divUseBalancePay").hide();
+        }
+
+        $('.pay_price  input[type="password"]').bind('click', function () {
+
+            var target = this;
+            setTimeout(function () {
+                target.scrollIntoViewIfNeeded();
+            }, 100);
+
+        });
+        if ($("#hidIsMultiStore").val() == "1" && ($("#selectShipLatLng").val() == "" || $("#selectShipLatLng").val() == "," || $("#selectShipLatLng").val() == undefined)) {
+            $("#iUpdateAddress").show();
+            $("#spanTagAddress").hide();
+        }
+        else {
+            $("#iUpdateAddress").hide();
+            $("#spanTagAddress").show();
+        }
+        $("#divPublicTip").hide();
+        $("#divUpdateAddressTip").hide();
+        $(".smtishi").hide();
+        var from = getParam("from").toLowerCase();
+        if (from == "signbuy" || from == "groupbuy" || from == "presale" || from == "countdown" || from == "fightgroup") {
+            $("#gotoCart").hide();
+        }
+        var isOnlyGifts = $("#divProducts ul li").length > 0 ? false : true;
+
+        //配送方式点击事件(0=快递配送；1=门店配送；-2=上门自提）
+        $("#ulDistributionType li").on("click touchend", (function (e) {
+            if ($(this).is(":hidden")) {
+                $("#inputShippingModeId").val("");
+                return false;
+            }
+            var index = $("#ulDistributionType li").index($(this));
+            if (($("#selectShipTo").val() == "" || $("#selectShipTo").val() == undefined) && index == 2) {
+                $("#divSetAddressTip").show().delay(2000).fadeOut();
+                return false;
+            }
+            else {
+                if (($("#selectShipLatLng").val() == "" || $("#selectShipLatLng").val() == undefined) && $("#hidIsMultiStore").val() == "1") {
+                    $("#divUpdateAddressTip").show().delay(2000).fadeOut();
+                    return false;
+                }
+            }
+            $(this).addClass("a_time").siblings().removeClass("a_time");
+            var isOfflinePay = $("#hidIsOfflinePay").val().toLowerCase() == "true";
+            var isOnlinePay = $("#hidIsOnlinePay").val().toLowerCase() == "true";
+            var isCashOnDelivery = $("#hidIsCashOnDelivery").val().toLowerCase() == "true";
+            if (index == 0 || index == 1) {   //快递配送或者门店配送
+                //$("#ulPayType li").eq(0).show();
+                if (index == 0) {
+                    $("#inputShippingModeId").val("0");
+                    $("#lblShippModePrice").html($("#hidOrderFreight").val());
+                }
+                if (index == 1) {
+                    $("#inputShippingModeId").val("-1");
+                    $("#lblShippModePrice").html($("#hidStoreFreight").val());
+                }
+                //如果后台配置了货到付款方式则显示货到付款，否则不显示
+                var paymentId_PayAfterGetGoods = parseInt($("#hidPaymentId_Podrequest").val());
+                if (isCashOnDelivery && !isNaN(paymentId_PayAfterGetGoods) && paymentId_PayAfterGetGoods > 0 && (from != "fightgroup" && from != "groupbuy") && $("#hidHasSupplierProduct").val() != "1" && !isOnlyGifts) {
+                    $("#ulPayType li").eq(1).show();
+                }
+                else {
+                    $("#ulPayType li").eq(1).hide();
+                }
+                $("#ulPayType li").eq(2).hide();  //隐藏到店支付
+
+                //if ($("#hidPaymentId_Offline").val() != "2" || !isOfflinePay || $("#hidHasSupplierProduct").val() == "1" || isOnlyGifts || from == "groupbuy" || from == "fightgroup") {
+                //    $("#ulPayType li").eq(3).hide();
+                //} else {
+                //    $("#ulPayType li").eq(3).show();
+                //}
+
+                $("#ulPayType li:visible").eq(0).addClass("a_time").siblings().removeClass("a_time");
+                GetPaymentMode($("#ulPayType li:visible").eq(0).html());
+                $("#divStore").hide();
+                $("#divSendTime").show();
+                SetUseBalance();
+            }
+            else if (index == 2) {  //上门自提
+                $("#inputShippingModeId").val("-2");
+                $("#lblShippModePrice").html(0);
+                //如果门店支持线下支付并且是上门自提，并且不是团购，火拼团，预售，以及供应商商品
+                if (isOfflinePay && $("#hidGetgoodsOnStores").val() == "1" && (from.toLowerCase() != "fightgroup" && from != "groupbuy" && from != "presale") && $("#hidHasSupplierProduct").val() != "1" && !isOnlyGifts) {
+                    $("#ulPayType li").eq(2).show();
+                    $("#ulPayType li").eq(3).hide();//到店自提与线下支付不同时存在
+                }
+                else {
+                    $("#ulPayType li").eq(2).hide();
+                }
+                if (isOnlinePay) {//如果门店支持在线支付则显示，否则不显示
+                    $("#ulPayType li").eq(0).show();
+                }
+                else {
+                    $("#ulPayType li").eq(0).hide();
+                }
+                $("#ulPayType li").eq(1).hide();  //隐藏货到付款
+                //$("#ulPayType li").eq(3).hide();  //隐藏线下支付
+
+                $("#ulPayType li:visible").eq(0).addClass("a_time").siblings().removeClass("a_time");
+                GetPaymentMode($("#ulPayType li:visible").eq(0).html());
+                $("#divStore").show();
+                $("#divSendTime").hide();
+                SetUseBalance();
+            }
+        }));
+        //送货时间点击事件
+        $("#ulSendTime li").on("click touchend", (function (e) {
+            var index = $("#ulSendTime li").index($(this));
+            $(this).addClass("a_time").siblings().removeClass("a_time");
+            $("#hidDeliveryTime").val($(this).text());
+        }));
+        //支付方式点击事件
+        $("#ulPayType li").on("click touchend", (function (e) {
+            var index = $("#ulPayType li").index($(this));
+            $(this).addClass("a_time").siblings().removeClass("a_time");
+            if (index == 0) {
+                $("#inputPaymentModeId").val("0");
+            }
+            else if (index == 1) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Podrequest").val());
+            }
+            else if (index == 2) {
+                //到店支付
+                $("#inputPaymentModeId").val("-3");
+                var storeId = $("#hidStoreId").val();
+                if ($("#hidHasStoresInCity").val() == "false" && (storeId == "" || storeId == "0") && $("#hidIsMultiStore").val() == "1") {
+                    $("#ulPayType li").eq(0).addClass("a_time").siblings().removeClass("a_time");
+                }
+            }
+            else if (index == 3) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Offline").val());
+            }
+        }));
+
+
+        //如果支付方式没有配置，则
+        var onlinePayCount = parseInt($("#hidOnlinePayCount").val());
+        if (onlinePayCount <= 0) {
+            //该门店暂时无法服务您所在地址，请返回首页重新选择门店
+            $(".smtishi").show();
+            $(".smtishi span").eq(3).show().siblings().hide();
+            $("#aSubmmitorder").hide();
+            $("#ulPayType li").eq(0).hide();
+            $("#divStore").hide();
+            $("#divSendTime").hide();
+        }
+        var isOfflinePay = $("#hidIsOfflinePay").val().toLowerCase() == "true";
+        var isOnlinePay = $("#hidIsOnlinePay").val().toLowerCase() == "true";
+        var isCashOnDelivery = $("#hidIsCashOnDelivery").val().toLowerCase() == "true";
+        //没有开启在线付款
+        if (!isOnlinePay) {
+            $("#ulPayType li").eq(0).hide();
+        }
+        //没有开启货到付款
+        if (!isCashOnDelivery || $("#hidPaymentId_Podrequest").val() != "1" || $("#hidHasSupplierProduct").val() == "1" || isOnlyGifts || from == "groupbuy" || from == "fightgroup") {
+            $("#ulPayType li").eq(1).hide();
+        }
+        //不支持线下付款
+        if ($("#hidPaymentId_Offline").val() != "2" || $("#hidHasSupplierProduct").val() == "1" || isOnlyGifts || from == "groupbuy" || from == "fightgroup") {
+            $("#ulPayType li").eq(3).hide();
+        }
+
+        if ($("#hidIsSupportExpress").val() != "1") {
+            $("#ulDistributionType li").eq(0).hide();
+            $("#divSendTime").hide();
+            $("#smtishiC").hide(); //bug 37848 【APP、WAP、微信】只有快递、自提时，提交订单，不应显示门店配送类的提示语
+        }
+        if ($("#hidIsStoreDelive").val() != "1" || $("#hidIsGetMinOrderPrice").val() != "1") {
+            $("#ulDistributionType li").eq(1).hide();
+        }
+        if ($("#hidGetgoodsOnStores").val() != "1" || from == "groupbuy" || from == "presale" || (from == "fightgroup" && $("#hidFightGroupPickeupInStore").val() != "true") || (from == "countdown" && $("#hidGetgoodsOnStores").val() != "1")) {
+            $("#ulDistributionType li").eq(2).hide();
+            $("#ulPayType li").eq(2).hide();
+            $("#divStore").hide();
+        }
+        var storeId = $("#hidStoreId").val();
+        storeId = parseInt(storeId);
+        if (!isNaN(storeId) && storeId > 0) {
+            $("#divStore").removeAttr("onclick");
+            //门店支持门店配送(在配送范围，且满足起送价）
+            if ($("#hidIsStoreDelive").val() == "1" && $("#hidIsGetMinOrderPrice").val() == "1" && !$("#ulDistributionType li").eq(1).is(":hidden")) {
+                $("#ulDistributionType li").eq(0).hide();
+                $("#ulDistributionType li").eq(1).click();
+            }
+            else if (($("#hidIsStoreDelive").val() != "1" || $("#hidIsGetMinOrderPrice").val() != "1") && $("#hidIsSupportExpress").val() == "1" && !$("#ulDistributionType li").eq(0).is(":hidden")) {
+                $("#ulDistributionType li").eq(1).hide();
+                //bug 37848 【APP、WAP、微信】只有快递、自提时，提交订单，不应显示门店配送类的提示语   hidIsStoreDelive  !=-1 就不显示门店配送所以不需要提示
+                if ($("#hidIsStoreDelive").val() != "1") {//门店支持门店配送且不在配送范围之内
+                    if ($("#hidIsSupportStoreDelive").val() == "1") {
+                        //当前收货地址不在门店配送范围内，已选择快递配送
+                        $(".smtishi").show().delay(2000).fadeOut();
+                        $(".smtishi span").eq(2).show().delay(2000).fadeOut().siblings().hide();
+                    }
+                }
+                else if ($("#hidIsGetMinOrderPrice").val() != "1") {
+                    //订单未满门店起送价将由快递配送
+                    $(".smtishi").show().delay(2000).fadeOut();
+                    if ($("#hidIsSupportExpress").val() == "1")
+                        $(".smtishi span").eq(4).show().delay(2000).fadeOut().siblings().hide();
+                    else
+                        $(".smtishi span").eq(5).show().delay(2000).fadeOut().siblings().hide();
+
+                }
+                $("#ulDistributionType li").eq(0).click();
+            }
+            else if (($("#hidIsStoreDelive").val() != "1" || $("#hidIsGetMinOrderPrice").val() != "1") && $("#hidIsSupportExpress").val() != "1" && $("#hidGetgoodsOnStores").val() == "1" && !$("#ulDistributionType li").eq(2).is(":hidden")) {
+                $("#ulDistributionType li").eq(0).hide();
+                $("#ulDistributionType li").eq(1).hide();
+                $("#ulPayType li").eq(1).hide();
+                $("#ulPayType li").eq(3).hide();
+                $("#ulDistributionType li").eq(2).click();
+            }
+            else if (($("#hidIsStoreDelive").val() != "1" || $("#hidIsGetMinOrderPrice").val() != "1") && $("#hidIsSupportExpress").val() != "1" && $("#hidGetgoodsOnStores").val() != "1") {
+                $("#ulDistributionType li").eq(0).hide();
+                $("#ulDistributionType li").eq(1).hide();
+                $("#ulDistributionType li").eq(2).hide();
+                //该门店暂时无法服务您所在地址，请返回首页重新选择门店
+                $(".smtishi").show();
+                if ($("#hidIsGetMinOrderPrice").val() != "1") {
+                    if ($("#hidIsSupportExpress").val() === "1")
+                        $(".smtishi span").eq(4).show().siblings().hide();//显示未满足起送价
+                    else
+                        $(".smtishi span").eq(5).show().siblings().hide();//显示未满足起送价
+                } else {
+                    $(".smtishi span").eq(0).show().siblings().hide();
+                }
+                $("#aSubmmitorder").hide();
+                $("#divStore").hide();
+                $("#divSendTime").hide();
+            }
+        }
+        else {
+            $("#ulDistributionType li").eq(1).hide();
+            if ($("#hidGetgoodsOnStores").val() == "1" && !isOnlyGifts && $("#hidHasSupplierProduct").val() != "1") {
+                if ($("#selectShipTo").val() == "" || $("#selectShipTo").val() == undefined) {
+                    $("#divStore").removeAttr("onclick");
+                    $("#ulPayType li").eq(0).click();
+                    $("#ulDistributionType li").eq(0).click();
+                    $("#ulDistributionType li").eq(2).addClass("bggray");
+                }
+                else {
+                    if ($("#hidIsMultiStore").val() == "1") {
+                        //如果本市无门店则提示
+                        if ($("#hidHasStoresInCity").val() == "false") {
+                            $("#divStore").html("<p>本市无可自提的门店</p>");
+                            $("#divStore").removeAttr("onclick");
+                        }
+                        if ($("#hidHasStoresInCity").val() == "true" && ($("#hidChooseStoreId").val() == "0" || $("#hidChooseStoreId").val() == "")) {
+                            $("#divStore").html("<p>请选择自提门店</p>");
+                        }
+                        if ($("#inputShippingModeId").val() == "-2" || ($("#inputShippingModeId").val() == "0" && $("#ulDistributionType li").eq(0).is(":hidden") && $("#ulDistributionType li").eq(1).is(":hidden"))) {
+                            $("#ulDistributionType li").eq(2).click();
+                            $("#ulPayType li").eq(0).click();
+                        }
+                        else {
+                            $("#ulDistributionType li").eq(0).click();
+                            $("#ulPayType li").eq(0).click();
+                        }
+                    }
+                    else {
+                        if ($("#hidPickeupInStoreRemark").val() != "" && $("#hidPickeupInStoreRemark").val() != undefined) {
+                            $("#divStore").removeAttr("onclick");
+                            $("#divStore").html("<h4>" + $("#hidPickeupInStoreRemark").val() + "</h4><p></p>");
+                        }
+                        else {
+                            $("#divStore").hide();
+                        }
+                        if ($("#inputShippingModeId").val() == "-2" || ($("#inputShippingModeId").val() == "0" && $("#ulDistributionType li").eq(0).is(":hidden") && $("#ulDistributionType li").eq(1).is(":hidden"))) {
+                            $("#ulDistributionType li").eq(2).click();
+                            $("#ulPayType li").eq(0).click();
+                        }
+                        else {
+                            $("#ulDistributionType li").eq(0).click();
+                            $("#ulPayType li").eq(0).click();
+                        }
+                    }
+                }
+            }
+            else {
+                $("#divStore").hide();
+                $("#ulDistributionType li").eq(2).hide();
+                $("#ulPayType li").eq(2).hide();
+
+                $("#ulDistributionType li").eq(0).click();
+                $("#ulPayType li").eq(0).click();
+            }
+        }
+
+        //无收货地址提示
+        if ($("#selectShipTo").val() == "" || $("#selectShipTo").val() == undefined) {
+            $("#divSetAddressTip").show().delay(2000).fadeOut();
+            $("#divNoAddress").show();
+        }
+        else {
+            $("#divSetAddressTip").hide();
+            $("#divNoAddress").hide();
+        }
+        //设置默认配送时间
+        if ($("#hidDeliveryTime").val() == "工作日") {
+            $("#divSendTime li").eq(1).click();
+        }
+        else if ($("#hidDeliveryTime").val() == "节假日") {
+            $("#divSendTime li").eq(2).click();
+        }
+        else {
+            $("#divSendTime li").eq(0).click();
+        }
+
+        //默认支付方式为在线支付
+        var onlinePayCount = parseInt($("#hidOnlinePayCount").val());
+        if ($("#inputPaymentModeId").val() == "0" && onlinePayCount > 0) {
+            $("#ulPayType li").eq(0).click();
+        }
+        else if ($("#inputPaymentModeId").val() == $("#hidPaymentId_Podrequest").val()) {
+            $("#ulPayType li").eq(1).click();
+        }
+        else if ($("#inputPaymentModeId").val() == "-3") {
+            $("#ulPayType li").eq(2).click();
+        }
+        else if ($("#inputPaymentModeId").val() == $("#hidPaymentId_Offline").val()) {
+            $("#ulPayType li").eq(3).click();
+        }
+        else {
+            if ($("#ulPayType li").eq(1).is(":visible")) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Podrequest").val());
+                $("#ulPayType li").eq(1).click();
+            }
+            else if ($("#ulPayType li").eq(2).is(":visible")) {
+                $("#inputPaymentModeId").val("-3");
+                $("#ulPayType li").eq(2).click();
+            }
+            else if ($("#ulPayType li").eq(3).is(":visible")) {
+                $("#inputPaymentModeId").val($("#hidPaymentId_Offline").val());
+                $("#ulPayType li").eq(3).click();
+            }
+            else {
+                $("#inputPaymentModeId").val("");
+            }
+        }
+        //----------------------------------------------------------------------------------------
+
+
+
+        //if ($("#hlkFeeFreight").attr("href") != undefined && $("#hlkFeeFreight").attr("href") != "") {
+        //    $("#divFreight").hide();
+        //}
+        if ($("#divProducts ul li").length <= 0) {
+            $("#divProducts").hide();
+        }
+        if ($(".step2_gift").length <= 0) {
+            $("#giftTitle").hide();
+        }
+        var code = $("#htmlCouponCode").val();
+        if (code != undefined && code != "") {
+            var couponbtns = $(".btn_receive");
+            for (var i = 0; i < couponbtns.length; i++) {
+                if ($(couponbtns[i]).attr("ClaimCode") == code) {
+                    $(couponbtns[i]).text("取消");
+                }
+            }
+        }
+        if ($("#hidCanPointUseWithCoupon").val() == "false" && code != undefined && code != "") {
+            $("#txtUsePoints").val("0");
+            onPointChange($("#SubmmitOrder_txtUsePoints"), false);
+            $(".lipoint").hide();
+            $("#divPointAmount").hide();
+
+        }
+        $(".btn_receive").click(function (e) {
+            //如果是使用优惠券
+            if ($(this).text() == "选取") {
+                $(".btn_receive").text("选取");
+                $(this).text("取消");
+                var claimcode = $(this).parent().parent().find('input[class="claimcode"]').val();
+                var disprice = parseFloat($(this).parent().parent().find('input[class="disprice"]').val());
+                var couponname = $(this).parent().parent().find('input[class="couponname"]').val();
+                if (isNaN(disprice) || disprice < 0) { disprice = 0; }
+
+
+                var cartTotal = $("#lblTotalPrice").html();
+                $.ajax({
+                    url: "/Handler/SubmmitOrderHandler.ashx",
+                    type: 'post', dataType: 'json', timeout: 10000,
+                    data: { Action: "ProcessorUseCoupon", CartTotal: cartTotal, CouponCode: claimcode },
+                    cache: false,
+                    success: function (resultData) {
+                        if (resultData.Status == "OK") {
+                            $("#couponName").html("-" + "￥" + disprice.toFixed(2));
+                            $("#litCouponAmout").html(disprice);
+                            $("#htmlCouponCode").val(claimcode);
+                            $("#divCoupons").show();
+                            resetPoint();
+                            if ($('#chkIsNeedInvoice').is(':checked')) {
+                                CalculationTax();
+                            }
+                            SetUseBalance();
+                            //如果设置了积分不与优惠券同时使用，则隐藏积分抵扣相关
+                            if ($("#hidCanPointUseWithCoupon").val() == "false") {
+                                $("#txtUsePoints").val("0");
+                                onPointChange($("#SubmmitOrder_txtUsePoints"), false);
+                                $(".lipoint").hide();
+                                $("#divPointAmount").hide();
+                            }
+                        }
+                        else {
+                            $("#divCoupons").hide();
+                            alert_h("您的优惠券编号无效或者不满足使用条件");
+                        }
+                    }
+                });
+            }
+            else {
+                $(this).text("选取");
+                ClearCouponCode();
+            }
+            $("#coupons_close").trigger("click");
+        });
+        var maxPoints = parseInt($("#lblMaxPoints").html());
+        //如果不能使用积分则隐藏积分相关
+        if ($("#hidCanUsePoint").val() == "false" || isNaN(maxPoints) || maxPoints <= 0) {
+            $(".lipoint").hide();
+            $("#divPointAmount").hide();
+        }
+        else {
+            $("#divUsePoint").hide();
+            $("#divPointAmount").hide();
+            onPointCheck(false);
+        }
+
+        var promtionMoney = parseFloat($("#lblDeductibleMoney").html());
+        if (promtionMoney <= 0) {
+            $("#divPromtion").hide();
+        }
+        //如果没有可以选择的优惠券则隐藏选择,捆绑销售不能使用优惠券
+        if ($("#divCouponList ul li").length == 0) {
+            $("#coupons").hide();
+            $("#divCoupons").hide();
+        }
+
+        //if ($("#inputPaymentModeId").val() == "0") {
+        //    $("#paymentName").text("线上支付");
+        //}
+        //else if ($("#inputPaymentModeId").val() == "1") {
+        //    $("#paymentName").text("货到付款");
+        //}
+        //else if ($("#inputPaymentModeId").val() == "-3") {
+        //    $("#paymentName").text("到店支付");
+        //}
+        //else if ($("#inputPaymentModeId").val() == "2") {
+        //    $("#paymentName").text("线下付款");
+        //}
+
+        //if ($("#inputShippingModeId").val() == "0") {
+        //    $("#shippingName").text("快递配送");
+        //}
+        //else {
+        //    $("#shippingName").text("上门自提：" + $("#hidStoreName").val());
+        //}
+        ////设置默认配送时间
+        //$("#selectShipToDateDiv a").eq(0).addClass("a_time");
+        //配送方式选择事件
+
+        if ($("#divGifts span").length == 0) {
+            $("#divGifts").hide();
+        }
+
+
+        $("#chkIsNeedInvoice").click(function () {
+            if ($('#chkIsNeedInvoice').is(':checked')) {
+                $("#div_fapiao").fadeIn();
+                CalculationTax();
+                $("#taxbox").show();
+
+                $("#divTax").fadeIn();
+            } else {
+                $("#lblTax").html("0.00");
+                $("#taxbox").hide();
+                $("#div_fapiao").fadeOut();
+            }
+            SetUseBalance();
+            //resetPoint();
+        })
+
+        SetUseBalance();
+        var productSkus = $('.specification');
+        $.each(productSkus, function (i, productSKU) {
+            var text = '';
+            productSKU = $(productSKU);
+            var skus = productSKU.find('input[id="hidSkucontent"]');
+            if (skus.val()) {
+                $.each(skus.val().split(';'), function (i, sku) {
+                    if ($.trim(sku))
+                        text += '' + sku + '';
+                });
+            }
+            var promotionShortName = productSKU.find('input[name="promotionShortName"]').val();
+            if (promotionShortName) {
+                var promotionName = productSKU.find('input[name="promotionName"]').val();
+                if (promotionName != "") {
+                    $(productSKU).parent().find("span em").show();
+                    $(productSKU).parent().find("span em").click(function (e) {
+                        alert_h(promotionName);
+                    });
+                }
+                else
+                    $(productSKU).parent().find("span em").hide();
+            }
+            else {
+                $(productSKU).parent().find("span em").hide();
+            }
+            $(productSKU).parent().find("span").eq(0).html(text);
+        });
+        if ($("#liCanUse").is(":hidden") && $("#coupons").is(":hidden") && $("#divUseBalancePay").is(":hidden")) {
+            $("#coupons").parent().parent().hide();
+        }
+
+        //开启实名验证
+        if ($("#hidIsOpenCertification").val() == '1') {
+            $("#idCertification").show();
+        } else {
+            $("#idCertification").hide();
+        }
+        if (!isNaN(storeId) && storeId > 0) {
+            $("#divStore").removeAttr("onclick");
+            if ($("#hidIsSubmitInTime").val() != "1") {
+                $("#aSubmmitorder").hide();
+                $("#divPublicTip").find("span").html("非营业时间不允许下单");
+                $("#divPublicTip").show().delay(3000).fadeOut();
+            }
+        }
+    })
+
+    function goChoiceStore() {
+        var submitUrl = "OrderStoresSet.aspx" + location.search;
+        submitUrl = replaceParam(submitUrl, "deliveryTime", $("#hidDeliveryTime").val());
+        submitUrl = replaceParam(submitUrl, "ShippingModeId", $("#inputShippingModeId").val());
+        //submitUrl = replaceParam(submitUrl, "StoreId", $("#hidStoreId").val());
+        submitUrl = replaceParam(submitUrl, "ChooseStoreId", $("#hidChooseStoreId").val());
+        submitUrl = replaceParam(submitUrl, "StoreId", $("#hidStoreId").val());
+        submitUrl = replaceParam(submitUrl, "PaymentModeId", $("#inputPaymentModeId").val());
+        submitUrl = replaceParam(submitUrl, "ShipAddressId", $("#selectShipTo").val());
+        var host = window.location.host;
+        var strUrl = "http://" + host + "//appshop//" + submitUrl;
+        location.replace(submitUrl);
+    }
+
+    //清除使用优惠券
+    function ClearCouponCode() {
+        // $("#SubmitOrder_CouponName").html("");
+        $("#litCouponAmout").html("0");
+        $("#htmlCouponCode").val("");
+        $("#couponName").html("未使用");
+        resetPoint();
+        if ($('#chkIsNeedInvoice').is(':checked')) {
+            CalculationTax();
+        }
+        SetUseBalance();
+        if ($("#hidCanPointUseWithCoupon").val() == "false") {
+            var myPoints = parseInt($("#hidMyPoints").val());
+            if (myPoints > 0) {
+                $("#txtUsePoints").val("0");
+                onPointChange($("#txtUsePoints"), false);
+                $("#SubmmitOrder_tbPoint").show();
+                //$("#SubmmitOrder_divJoinView").show();
+                $(".lipoint").show();
+            }
+            else {
+                $("#txtUsePoints").val("0");
+                onPointChange($("#txtUsePoints"), false);
+                $("#lipoint").hide();
+                $("#divPointAmount").hide();
+            }
+        }
+        $("#divCoupons").hide();
+    }
+
+    //改变使用的抵扣积分触发事件
+    function onPointChange(obj, isUsePoint) {
+        //如果未选中使用商城积分
+        //alert($("#chkIsUsePoints").is(":checked"));
+        if (isUsePoint == undefined) {
+            isUsePoint = $("#chkIsUsePoints").is(":checked");
+        }
+        if (!isUsePoint) {
+            $("#litPointAmount").html("0.00");
+            $("#litPointAmount_1").html("0.00");
+            if ($('#chkIsNeedInvoice').is(':checked')) {
+                CalculationTax();
+            }
+            SetUseBalance();
+            return false;
+        }
+        var currentPoints = $(obj).val();
+        var ex = /^[1-9]\d*$/;
+        if (isNaN(currentPoints) || (!ex.test(currentPoints) && currentPoints != "0")) {
+            alert_h("积分请输入整数");
+            $(obj).val("0");
+            //   $("#SubmmitOrder_lblDeductibleMoney").text("0");
+            $("#litPointAmount").html("0");
+            $("#litPointAmount_1").html("0");
+            if ($('#chkIsNeedInvoice').is(':checked')) {
+                CalculationTax();
+            }
+            SetUseBalance();
+            return false;
+        }
+        if (currentPoints == "" || currentPoints == null || currentPoints == undefined || currentPoints == "0") {
+            $(obj).val("0");
+            //    $("#SubmmitOrder_lblDeductibleMoney").text("0");
+            $("#litPointAmount").html("0");
+            $("#litPointAmount_1").html("0");
+            //CalculateTotalPrice();
+            if ($('#chkIsNeedInvoice').is(':checked')) {
+                CalculationTax();
+            }
+            SetUseBalance();
+            return false;
+        }
+        var maxPoints = CalculateMaxDeductionPoint();
+        var currentPoints = parseInt(currentPoints);
+        if (currentPoints > maxPoints) {
+            $(obj).val("0");
+            // $("#SubmmitOrder_lblDeductibleMoney").text("0");
+            $("#litPointAmount").html("0");
+            $("#litPointAmount_1").html("0");
+            if ($('#chkIsNeedInvoice').is(':checked')) {
+                CalculationTax();
+            }
+            SetUseBalance();
+            alert_h("您输入的积分大于可用积分，请重新输入");
+            return false;
+        }
+
+        var deductionMoney = CalculatePointMaxDeduction(currentPoints);
+        var maxDeductionMoney = CalculatePointMaxDeduction(maxPoints);
+        $("#litPointAmount").html(deductionMoney);
+        $("#litPointAmount_1").html(deductionMoney);
+        $("#lblMaxPointsToPrice").html(maxDeductionMoney);
+        if ($('#chkIsNeedInvoice').is(':checked')) {
+            CalculationTax();
+        }
+        SetUseBalance();
+    }
+
+    ///计算积分最多可以抵扣的金额
+    function CalculatePointMaxDeduction(currentPoints) {
+        if (currentPoints == undefined || isNaN(currentPoints) || currentPoints < 0) {
+            var currentPoints = parseInt($("#txtUsePoints").val());
+            if (isNaN(currentPoints) || currentPoints < 0) {
+                currentPoints = 0;
+            }
+        }
+        var shoppingDeduction = parseInt($("#hidShoppingDeduction").val());
+
+        var shoppingDeduction = parseFloat(shoppingDeduction);
+        if (isNaN(shoppingDeduction) || shoppingDeduction < 0) {
+            shoppingDeduction = 0;
+        }
+        var deductionMoney = currentPoints.toDiv(shoppingDeduction);
+        deductionMoney = deductionMoney.toFixed(2);
+        return deductionMoney;
+    }
+
+    $('#chkIsUsePoints').click(function () {
+        if ($(this).is(':checked')) {
+            if ($("#hidCanPointUseWithCoupon").val() == "false") {
+                $("#coupons").hide();
+                $("#divCoupons").hide();
+            }
+            $("#divUsePoint").fadeIn();
+            $("#divPointAmount").show();
+        }
+        else {
+            if ($("#divCouponList ul li").length > 0) {
+                $("#coupons").show();
+                $("#divCoupons").show();
+            }
+            $("#divUsePoint").fadeOut();
+            $("#divPointAmount").hide();
+        }
+        onPointCheck($(this).is(':checked'));
+    });
+
+
+    //点击使用积分抵扣checkbox事件
+    function onPointCheck(isCheck) {
+        var maxPoints = CalculateMaxDeductionPoint();
+        $("#lblMaxPoints").text(maxPoints);
+        var maxDeductionMoney = CalculatePointMaxDeduction(maxPoints);
+        var deductionMoney = CalculatePointMaxDeduction();
+        //  $("#SubmmitOrder_lblDeductibleMoney").html(deductionMoney);
+        $("#litPointAmount").html(deductionMoney);
+        $("#litPointAmount_1").html(deductionMoney);
+        $("#lblMaxPointsToPrice").html(maxDeductionMoney);
+        if (isCheck == undefined) {
+            isCheck = !$("#chkIsUsePoints").is(":checked");
+        }
+        if (isCheck) {
+            $("#txtUsePoints").val(maxPoints);
+            onPointChange($("#txtUsePoints"), true);
+        }
+        else {
+            $("#txtUsePoints").val("0");
+            onPointChange($("#txtUsePoints"), false);
+
+        }
+        // CalculateTotalPrice();
+    }
+
+    //最大可抵扣积分
+    function CalculateMaxDeductionPoint() {
+        var total = CalculatePointTotalPrice();
+        var deducationRate = $("#hidShoppingDeductionRatio").val();
+        var shoppingDeduction = $("#hidShoppingDeduction").val();
+        var myPoints = $("#hidMyPoints").val();
+        var maxPoints = parseInt(deducationRate).toMul(parseFloat(total)).toMul(parseFloat(shoppingDeduction)).toDiv(100);
+        myPoints = parseInt(myPoints);
+        maxPoints = parseInt(maxPoints);
+        var lastPoint = myPoints > maxPoints ? maxPoints : myPoints;
+        return lastPoint;
+    }
+
+    // 总金额
+    function CalculateTotalPrice() {
+        var cartTotalPrice = parseFloat($("#hidTotalPrice").val());
+        if (isNaN(cartTotalPrice) || cartTotalPrice < 0) { cartTotalPrice = 0; }
+
+        var shippmodePrice = parseFloat($("#lblShippModePrice").html());
+        if (isNaN(shippmodePrice) || shippmodePrice < 0) { shippmodePrice = 0; }
+
+        var couponPrice = parseFloat($("#litCouponAmout").html());
+        if (isNaN(couponPrice) || couponPrice < 0) { couponPrice = 0; }
+
+        var tax = parseFloat($("#lblTax").html());
+        if (isNaN(tax) || tax < 0) { tax = 0; }
+
+        var pointPrice = parseFloat($("#litPointAmount").html());
+        if (isNaN(pointPrice) || pointPrice < 0) { pointPrice = 0; }
+
+        var total = (cartTotalPrice.toSub(couponPrice).toAdd(tax)).toFixed(2);
+
+        if (total < 0) { total = 0; }
+        total = (parseFloat(total).toAdd(parseFloat(shippmodePrice))).toFixed(2); // 19.98+18=37.980000000000004  js bug
+
+        //预售部分
+        if ($("#hidIsPreSale").val() == "1") {
+            var DepositMoney = parseFloat($("#lblDepositMoney").html());
+            total = total.toSub(DepositMoney);
+            //if (total - DepositMoney < 0) {
+            //    $("#lblRetainage").html("0.00");
+            //} else {
+            //    $("#lblRetainage").html((total - DepositMoney).toFixed(2));
+            //}
+            if (total < 0) total = 0;
+
+            //if ($("#hlkFeeFreight").html() == "")
+            //    total = total + shippmodePrice;
+
+            if (pointPrice) {
+                total = total.toSub(pointPrice);
+            }
+            if (total < 0) total = 0;
+            $("#lblRetainage").html(total.toFixed(2));
+
+            var FinalMoney = parseFloat($("#lblRetainage").html());
+            $("#lblAmount").html((DepositMoney.toAdd(FinalMoney)).toFixed(2));
+        }
+        else {
+            //if ($("#hlkFeeFreight").html() == "")
+            //    total = total + shippmodePrice;
+
+            if (pointPrice) {
+                total = total.toSub(pointPrice);
+            }
+            if (total < 0) total = 0;
+            var useBalance = parseFloat($("#hidUseBalance").val())
+            if (isNaN(useBalance)) { useBalance = 0; }
+            if (total - useBalance < 0) {
+                useBalance = total;
+                total = 0;
+                $("#hidUseBalance").val(useBalance.toFixed(2));
+                $("#spanUseBalance").html(useBalance.toFixed(2));
+            }
+            else {
+                total = (total.toSub(useBalance));
+            }
+            $("#lblOrderTotal").html(total.toFixed(2));
+            $("#lblTotalPrice1").html("￥" + total.toFixed(2));
+        }
+
+    }
+
+    function resetPoint() {
+        if ($("#chkIsUsePoints")) {
+            $("#chkIsUsePoints").prop("checked", false);
+            $("#divUsePoint").fadeOut();
+            onPointCheck(false);
+        }
+    }
+
+    //function registSelectShippingType() {
+    //    $('#shippingTypeUl li input[name="radioShippingTypes"]').click(function () {
+    //        //$('.selectShippingType button').html($(this).html() + '<span class="caret"></span>');
+    //        var shippingType = parseInt($(this).val());
+    //        if (shippingType == -2) {
+    //            // 如果是上门自提则显示门店
+    //            $("#divselectStore").show();
+    //        } else {
+    //            $("#divselectStore").hide();
+    //        }
+    //        var oldShipCost = parseFloat($('#shipcost').html());
+    //        var newShipCost = parseFloat($(this).attr('value'));
+
+    //        $('#shipcost').html(newShipCost);
+    //        resetPoint();
+
+    //    });
+    //}
+
+    //function ToSetShippingPayment() {
+    //    var toUrl = "OrderShippingPaymentSet.aspx" + location.search;
+    //    toUrl = replaceParam(toUrl, "deliveryTime", $("#hidDeliveryTime").val());
+    //    toUrl = replaceParam(toUrl, "ShippingModeId", $("#inputShippingModeId").val());
+    //    toUrl = replaceParam(toUrl, "StoreId", $("#hidStoreId").val());
+    //    toUrl = replaceParam(toUrl, "PaymentModeId", $("#inputPaymentModeId").val());
+    //    toUrl = replaceParam(toUrl, "ShipAddressId", $("#selectShipTo").val());
+    //    toUrl = replaceParam(toUrl, "hasSupplierProduct", $("#hidHasSupplierProduct").val());
+    //    var isOnlyGifts = $("#divProducts ul li").length > 0 ? "false" : "true";
+    //    toUrl = replaceParam(toUrl, "IsOnlyGifts", isOnlyGifts);
+
+    //    var host = window.location.host;
+    //    var strUrl = "http://" + host + "//appshop//" + toUrl;
+    //    goToUrl(strUrl)
+    //    //location.href = toUrl;
+    //}
+
+
+    $(function () {
+        //$("#chkIsUsePoints").attr("checked", false);
+        var regionId = $('#regionId').val();
+
+        if ($("#promotionDiv span").length <= 0) {
+            $("#promotionDiv").hide();
+        }
+    });
+
+    //计算积分可计算的总金额
+    function CalculatePointTotalPrice() {
+        var cartTotalPrice = parseFloat($("#hidTotalPrice").val());
+        if (isNaN(cartTotalPrice) || cartTotalPrice < 0) { cartTotalPrice = 0; }
+
+        //var shippmodePrice = parseFloat($("#lblShippModePrice").html());
+        //if (isNaN(shippmodePrice) || shippmodePrice < 0) { shippmodePrice = 0; }
+
+        var couponPrice = parseFloat($("#litCouponAmout").html());
+        if (isNaN(couponPrice) || couponPrice < 0) { couponPrice = 0; }
+
+        //var tax = 0;
+        //if ($("#chkIsNeedInvoice").is(':checked')) {
+        //    tax = parseFloat($("#lblTax").html());
+        //    if (isNaN(tax) || tax < 0) { tax = 0; }
+        //}
+        var total = cartTotalPrice.toSub(couponPrice);// + tax;
+        if (total < 0) { total = 0; }
+        if ($("#hidIsPreSale").val() == "1") {
+            var DepositMoney = parseFloat($("#lblDepositMoney").html());
+            if (isNaN(DepositMoney) || DepositMoney < 0) { DepositMoney = 0; }
+            total = total.toSub(DepositMoney);
+            if (total < 0) total = 0;
+            //if ($("#hlkFeeFreight").html() == "")
+            //    total = total + shippmodePrice;
+        }
+        //else {
+        //    if ($("#hlkFeeFreight").html() == "")
+        //        total = total + shippmodePrice;
+        //}
+
+        return total.toFixed(2);
+
+    }
+</script>
+<script src="/Utility/icheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $(".sub_diy").click(function () {
+            $(this).hide();
+            $("#shippingStoreUl").fadeIn();
+            $("body").css("overflow", "hidden");
+            $("body").append("<div class='pop_div'></div>");
+        });
+        $("ul.pay_list li:first [name='chk_paymentlist']").iCheck('check');
+
+    });
+</script>
+
+
+<hi:common_appfooter runat="server" />

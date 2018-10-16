@@ -1,0 +1,81 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<div class="main-content" id="main">
+	<div class="mainad">
+		<script src="../../../Utility/time.js"></script>
+		<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="1" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+    </div>
+<script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_1").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+<div class="mainconty">
+    <div class="w1200 o-hidden">
+        <hi:common_customad runat="server" adid="33" isdelayedloading="true"></hi:common_customad>
+        <hi:common_customad runat="server" adid="34" isdelayedloading="true"></hi:common_customad>
+    </div>
+</div>
+
+<div class="mainconty mainconte">
+    <div class="w1200 o-hidden">
+        <hi:common_customad runat="server" adid="35" isdelayedloading="true"></hi:common_customad>
+        <hi:common_customad runat="server" adid="36" isdelayedloading="true"></hi:common_customad>
+    </div>
+</div>
+
+<div class="mainconty mainconts">
+    <div class="w1200 o-hidden">
+        <hi:common_customad runat="server" adid="37" isdelayedloading="true"></hi:common_customad>
+        <div class="maincontscont">
+            <div><hi:common_customad runat="server" adid="38" isdelayedloading="true"></hi:common_customad></div>
+            <div class="maincontscontr">
+                <div class="nTab o-hidden"> 
+                    <div class="TabTitle o-hidden">
+                        <ul id="myTab">
+                            <li class="active" onmouseover="nTabs(this,0);"><hi:common_customad runat="server" adid="39" isdelayedloading="true"></hi:common_customad></li>
+                            <li class="normal" onmouseover="nTabs(this,1);"><hi:common_customad runat="server" adid="40" isdelayedloading="true"></hi:common_customad></li>		      
+                        </ul>
+                    </div>
+                    <div class="TabContent">
+                        <div id="myTab_Content0"> <%<Hi:ThemedTemplatedRepeater runat="server" ID="rptArticles" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AllArticleList.ascx" />%>
+                         <hi:common_subjectarticle commentid="19" runat="server" isdelayedloading="true"></hi:common_subjectarticle>
+                        </div>
+                        <div id="myTab_Content1" class="none">
+                          <hi:common_customad runat="server" adid="41" isdelayedloading="true"></hi:common_customad>
+                        </div>
+                    </div>	
+                </div>            
+            </div>
+        </div>
+    <!--tangou-->
+    <script type="text/javascript">
+        function nTabs(thisObj,Num){
+        if(thisObj.className == "active")return;
+        var tabObj = thisObj.parentNode.id;
+        var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+        for(i=0; i <tabList.length; i++)
+        {
+          if (i == Num)
+          {
+           thisObj.className = "active"; 
+              document.getElementById(tabObj+"_Content"+i).style.display = "block";
+          }else{
+           tabList[i].className = "normal"; 
+           document.getElementById(tabObj+"_Content"+i).style.display = "none";
+          }
+        } 
+        }
+    </script>
+    </div>
+</div>
+    
+    
+    
+	<div style="clear:both"></div>
+	
+</div>
+<!--main-content结束-->
+<%<Hi:Common_Footer runat="server"/>%>

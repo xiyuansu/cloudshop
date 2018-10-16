@@ -1,0 +1,217 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/tianpin/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/tianpin/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+<script type="text/javascript" src="/templates/master/tianpin/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="/templates/master/tianpin/js/jcarousellite.js"></script>
+ 
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		slideshowSpeed:5000,
+		pauseOnAction: false
+	});
+});
+</script>
+
+
+<script type="text/javascript">
+$(function(){
+		   $('.my_left_cat_list:last').css('border-bottom','none');
+		   $('#products_6 ul li:last').css('border-right','none')
+		   })
+
+</script>
+
+<div class="main_index" id="main">
+<div class="mainlunbo">
+<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="11" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_11").mogFocus({ scrollWidth: Width });
+        });
+    </script></div>
+<div class="lunbo_bg"></div>
+<div class="tt_box1">
+<div class="tt_box1_c">
+<div class="mxcp">
+<ul>
+<hi:common_customad runat="server" isdelayedloading="true" adid="28"></hi:common_customad>
+</ul>
+</div>
+
+<div class="shuxing">
+<ul>
+<%<Hi:Common_ProductCategoryList TemplateFile="HomeTags/Skin-Common_ProductCategoryList2.ascx"   runat="server" />%> 
+</ul>
+</div>
+
+</div>
+</div>
+
+<div class="sales_top_bg">
+<div class="sales_c">
+
+<div class="sale-top_title"></div>
+<div class="sale-top_con">
+<hi:common_customad runat="server" isdelayedloading="true" adid="29"></hi:common_customad>
+</div>
+<div class="caidai1"></div>
+<div class="caidai2"></div>
+
+</div>
+</div>
+
+
+
+
+   
+   
+     
+     <div class="lihe">
+     <div class="lihe_title"><hi:common_customad runat="server" isdelayedloading="true"  adid="31"></hi:common_customad></div>
+      <div class="lihe_con">
+      
+      <div class="carousel">
+		<a href="javascript:void(0);" class="prev" id="prev-01"><img src="../images/new/left_btn_03.png">  </a>
+		<div class="jCarouselLite" id="demo-01">
+        <div>
+			<ul>
+			<hi:common_customad runat="server" isdelayedloading="true" adid="32"></hi:common_customad>
+			
+			</ul>
+          </div>
+		</div>
+		<a href="javascript:void(0);" class="next" id="next-01"><img src="../images/new/left_btn_05.png"> </a>
+		<div class="clear"></div>   
+	</div><!--carousel end-->
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#demo-01').jCarouselLite({
+			btnPrev: '#prev-01',
+			btnNext: '#next-01',
+			visible:1,
+			auto:5000
+		});		
+	});
+	</script>
+  
+      </div>
+     </div>
+     
+
+ 
+    <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+
+  <div class="combination">
+    
+      <div class="lihe_title"><hi:common_customad runat="server" isdelayedloading="true"  adid="33"></hi:common_customad></div>
+      
+        <div class="hd">
+           <hi:common_subjectmorelink runat="server" commentid="17"></hi:common_subjectmorelink>
+        </div>
+        <div class="box_1f">
+        <ul>
+            <hi:common_subjectproduct_simple runat="server" isdelayedloading="true" subjectid="10"></hi:common_subjectproduct_simple>
+            </ul>
+           
+        </div>
+    
+    </div>
+   
+
+<div class="box_taocan_title"> <hi:common_customad runat="server" isdelayedloading="true" adid="36"></hi:common_customad></div>
+
+<div class="box_taocan">
+<div class="friend">
+    <div class="mr_frbox">
+    	<a href="javascript:void(0);" class="mr_frBtnL prev"><img src="../images/new/left_btn_03.png"> </a>
+      
+        <div class="mr_frUl">
+            <ul id="mr_fu">
+              <hi:common_customad runat="server" isdelayedloading="true" adid="35"></hi:common_customad>              
+  
+            </ul>
+        </div>
+     	<a href="javascript:void(0);" class="mr_frBtnR next" ><img src="../images/new/left_btn_05.png"> </a>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	/* 图片滚动效果 */
+	$(".mr_frbox").slide({
+		titCell: "",
+		mainCell: ".mr_frUl ul div",
+		autoPage: true,
+		effect: "leftLoop",
+		autoPlay: true,
+		vis: 4
+	});
+	
+	
+	
+});
+</script>
+
+
+</div>
+
+
+<div class="box_article">
+<div class="box_article_l"><hi:common_subjectarticle commentid="21" isdelayedloading="true"  runat="server"></hi:common_subjectarticle></div>
+<div class="box_article_m"><hi:common_subjectarticle commentid="22" isdelayedloading="true" runat="server"></hi:common_subjectarticle></div>
+<div class="box_article_r"><hi:common_subjectarticle commentid="23" risdelayedloading="true" unat="server"></hi:common_subjectarticle></div>
+</div>
+   
+  
+
+
+
+ 
+</div>
+
+
+<!--main-content结束-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片上下滚动效果 */
+		$(".brand-top").slide({
+			titCell: "",
+			mainCell: ".mr_frUl div ul",
+			effect: "top",
+			autoPlay: false,
+			scroll: 1,
+			vis: 4,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* 图片左右滚动效果 */
+		$(".review_con1").slide({
+			titCell: "",
+			mainCell: ".review_frUl > ul > div",
+			effect: "left",
+			autoPlay: false,
+			scroll: 1,
+			vis: 2,
+			pnLoop: true,
+		});
+
+	});
+</script>
+
+
+<%<hi:common_footer runat="server" />%>

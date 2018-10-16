@@ -1,0 +1,40 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .goods-box {
+        border-bottom: 1px solid #ebebeb;
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+        background: #fff;
+        min-height: 3.25rem;
+        width: 100%;
+    }
+
+    .left_img {
+        position: absolute;
+    }
+
+    .goods-box .info {
+        padding-left: 3rem;
+        position: relative;
+        padding-right: 0px;
+        min-height: 1.25rem;
+    }
+
+    .price {
+        font-size: 0.7rem;
+        color: #ff5722;
+    }
+</style>
+<img src="/images/countdown.jpg" class="img-responsive" style="width:100%;">
+<div class="pbox" style="padding:0.75rem;">
+    <hi:AppshopTemplatedRepeater id="rptCountDownProducts" templatefile="/Tags/skin-Common_CountDownProducts.ascx"
+                             runat="server" />
+    <div id="pager">
+    </div>
+</div>
+<input type="hidden" id="txtTotal" runat="server" clientidmode="Static" />
+
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    vshopPager('pager', $('#txtTotal').val(), 1, 10);
+</script>

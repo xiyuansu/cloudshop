@@ -1,0 +1,206 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/kuanping/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/kuanping/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+<style type="text/css">
+	.main1 {width: 1180px; margin: 0 auto;}
+   .top .top-main,.top .top-search,.nav-wrap {width: 1180px;}
+</style>
+
+<div class="main-content" id="main">
+    <div class="w1200 o-hidden">
+      <style>
+      .main{ margin-top:0px;}
+      </style>
+		<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+       <div style="float:left;"> <hi:common_slidead runat="server" adid="3" isdelayedloading="true"></hi:common_slidead></div>
+ 
+        <div class="favor-right float-r pt10">
+            <div class="not">
+                <div class="hd font-yh font14">商城公告</div>
+                <div class="bd">
+                    <ul>
+                       <%<Hi:Common_AfficheList runat="server" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_AfficheList.ascx" MaxNum="4" />%>
+                    </ul>
+                </div>
+            </div> 
+            
+            <div class="nTab o-hidden pt10"> 
+                <div class="TabTitle o-hidden">
+                    <ul id="myTab">
+                        <li class="active" onmouseover="nTabs(this,0);">团购</li>
+                        <li class="normal" onmouseover="nTabs(this,1);">促销</li>		      
+                    </ul>
+                </div>
+                <div class="TabContent">
+                    <div id="myTab_Content0">
+                          <script src="../../../Utility/time.js" type="text/javascript"></script>
+                          <ul>
+                            <hi:common_goodslist_latestgroupbuy runat="server" maxnum="1"></hi:common_goodslist_latestgroupbuy>
+                          </ul>
+                    </div>
+                    <div id="myTab_Content1" class="none">
+                        <hi:common_subjectproduct_simple runat="server" subjectid="11" isdelayedloading="true"></hi:common_subjectproduct_simple>
+                    </div>
+                </div>	
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="count-brand w1200 o-hidden pt10">
+       <div class="count-buy  float-l o-hidden">
+          <div class="hd font14 font-b">限时抢购</div>
+          <div class="bd o-hidden">
+            <ul><hi:common_goodslist_latestcountdownbuy runat="server" maxnum="5"></hi:common_goodslist_latestcountdownbuy></ul>
+          </div>
+       </div>   
+       <div class="brand-con float-r o-hidden">
+           <div class="hd font14 font-b">品牌专区</div>
+           <div>
+           <hi:common_subjectbrand runat="server" commentid="2" isdelayedloading="true"></hi:common_subjectbrand></div>
+       </div>
+    </div>
+    
+    <div class="hot-ran w1200 o-hidden pt10">
+        <div class="hot-comm float-l o-hidden">
+            <div class="hd font14 font-b">精选活动</div>
+            <div class="bd o-hidden">
+               <div class="section float-l o-hidden">
+                     <hi:common_imagead runat="server" adid="4" isdelayedloading="true"></hi:common_imagead>
+                     <hi:common_subjectproduct_simple runat="server" subjectid="12" isdelayedloading="true"></hi:common_subjectproduct_simple>
+                </div>
+                <div class="section float-l o-hidden">
+                     
+                     <hi:common_subjectproduct_simple runat="server" subjectid="13" isdelayedloading="true"></hi:common_subjectproduct_simple><hi:common_imagead runat="server" adid="5"></hi:common_imagead>
+                </div>
+                <div class="section float-l o-hidden">
+                     
+                     <hi:common_imagead runat="server" adid="6" isdelayedloading="true"></hi:common_imagead><hi:common_subjectproduct_simple runat="server" subjectid="14" isdelayedloading="true"></hi:common_subjectproduct_simple>
+                </div>
+            </div>
+        </div>
+        <div class="ran-con float-r o-hidden">
+            <div class="hd font14 font-b">销售排行榜</div>
+           <div><hi:common_subjectproduct_top runat="server" subjectid="3" isdelayedloading="true"></hi:common_subjectproduct_top></div>
+       </div>
+    </div>
+    
+    <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+    <div><hi:common_imagead runat="server" adid="7" isdelayedloading="true"></hi:common_imagead></div>
+    <hi:common_subjectproduct_tab runat="server" subjectid="16" isdelayedloading="true"></hi:common_subjectproduct_tab>
+    
+    
+    
+    <div class="combination w1200 o-hidden pt20">
+        <div class="hd"> 
+        <div><hi:common_subjecttitle runat="server" commentid="3"></hi:common_subjecttitle></div> 
+        <div> <hi:common_subjectkeyword runat="server" commentid="4"></hi:common_subjectkeyword></div>
+           <div><hi:common_subjectmorelink runat="server" commentid="5"></hi:common_subjectmorelink></div>
+          
+           
+           
+           
+        </div>
+        <div class="bd c-both">
+            <div class="cate">
+                <hi:common_subjectcategory runat="server" commentid="6"></hi:common_subjectcategory>
+                <hi:common_imagead runat="server" adid="8" isdelayedloading="true"></hi:common_imagead>
+                
+            </div>
+            
+           <div> <hi:common_subjectproduct_simple runat="server" subjectid="21" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+          <div> <hi:common_customad runat="server" adid="9"></hi:common_customad></div>
+        </div>
+    
+    </div>
+    
+    <div class="combination w1200 o-hidden pt20">
+        <div class="hd">
+           
+           
+           <div><hi:common_subjecttitle runat="server" commentid="7"></hi:common_subjecttitle></div>
+           <div><hi:common_subjectkeyword runat="server" commentid="8"></hi:common_subjectkeyword></div>
+           <div><hi:common_subjectmorelink runat="server" commentid="9"></hi:common_subjectmorelink></div>
+        </div>
+        <div class="bd c-both">
+            <div class="cate">
+                <hi:common_subjectcategory runat="server" commentid="10"></hi:common_subjectcategory>
+                <hi:common_imagead runat="server" adid="10" isdelayedloading="true"></hi:common_imagead>
+            </div>
+            <div><hi:common_subjectproduct_simple runat="server" subjectid="18" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+           <div> <hi:common_customad runat="server" adid="11"></hi:common_customad></div>
+        </div>
+    
+    </div>
+    
+    <div class="combination w1200 o-hidden pt20">
+        <div class="hd">
+           <div><hi:common_subjecttitle runat="server" commentid="11"></hi:common_subjecttitle></div>
+           <div><hi:common_subjectkeyword runat="server" commentid="12"></hi:common_subjectkeyword></div>
+           <div><hi:common_subjectmorelink runat="server" commentid="13"></hi:common_subjectmorelink></div>
+        </div>
+        <div class="bd c-both">
+            <div class="cate">
+                <hi:common_subjectcategory runat="server" commentid="14"></hi:common_subjectcategory>
+                <hi:common_imagead runat="server" adid="12" isdelayedloading="true"></hi:common_imagead>
+            </div>
+          <div>  <hi:common_subjectproduct_simple runat="server" subjectid="19" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+           <div> <hi:common_customad runat="server" adid="13"></hi:common_customad></div>
+        </div>
+    
+    </div>
+    
+    <div class="combination w1200 o-hidden pt20">
+        <div class="hd">
+          <div><hi:common_subjecttitle runat="server" commentid="15"></hi:common_subjecttitle></div>
+           <div><hi:common_subjectkeyword runat="server" commentid="16"></hi:common_subjectkeyword></div>
+          <div><hi:common_subjectmorelink runat="server" commentid="17"></hi:common_subjectmorelink></div>
+        </div>
+        <div class="bd c-both">
+            <div class="cate">
+                <hi:common_subjectcategory runat="server" commentid="18"></hi:common_subjectcategory>
+                <hi:common_imagead runat="server" adid="14" isdelayedloading="true"></hi:common_imagead>
+            </div>
+           <div> <hi:common_subjectproduct_simple runat="server" subjectid="20" isdelayedloading="true"></hi:common_subjectproduct_simple></div>
+           <div> <hi:common_customad runat="server" adid="15"></hi:common_customad></div>
+        </div>
+    
+    </div>
+    
+    <div class="review-order w1200 o-hidden pt10">
+       <div class="review">
+            <div class="hd">用户评论</div>
+            <div class="bd" id="div4" style="height:136px;overflow:hidden">
+                <ul>
+                   <%<hi:common_latestreview maxnum="6" templatefile="/HomeTags/Skin-Common_LatestReview.ascx" runat="server" /> %> 
+                </ul>
+            </div>
+       </div>
+        
+         
+    </div>
+<!--tangou-->
+<script type="text/javascript">
+	function nTabs(thisObj,Num){
+	if(thisObj.className == "active")return;
+	var tabObj = thisObj.parentNode.id;
+	var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+	for(i=0; i <tabList.length; i++)
+	{
+	  if (i == Num)
+	  {
+	   thisObj.className = "active"; 
+		  document.getElementById(tabObj+"_Content"+i).style.display = "block";
+	  }else{
+	   tabList[i].className = "normal"; 
+	   document.getElementById(tabObj+"_Content"+i).style.display = "none";
+	  }
+	} 
+	}
+</script>
+
+ 
+</div>
+
+<%<hi:common_footer runat="server" />%>

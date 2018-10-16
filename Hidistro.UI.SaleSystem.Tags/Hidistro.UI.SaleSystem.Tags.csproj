@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F7555FAD-919E-4985-8E36-031B378AD432}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hidistro.UI.SaleSystem.Tags</RootNamespace>
+    <AssemblyName>Hidistro.UI.SaleSystem.Tags</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\dll\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP">
+      <HintPath>..\dll\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountSummaryMoneyColumncs.cs" />
+    <Compile Include="AddCartButton.cs" />
+    <Compile Include="APPShop_SubmmitCartProducts.cs" />
+    <Compile Include="BalanceWapPaymentTypeSelect.cs" />
+    <Compile Include="BuyAmountBox.cs" />
+    <Compile Include="BuyButton.cs" />
+    <Compile Include="Common_ActivityCondition.cs" />
+    <Compile Include="Common_Address_AddressList.cs" />
+    <Compile Include="Common_Advance_AccountList.cs" />
+    <Compile Include="Common_AfficheList.cs" />
+    <Compile Include="Common_AfterSaleOrders.cs" />
+    <Compile Include="Common_AppDownloadCouponInfo.cs" />
+    <Compile Include="Common_AppDownloadQRCode.cs" />
+    <Compile Include="Common_AppFooter.cs" />
+    <Compile Include="Common_AppHeader.cs" />
+    <Compile Include="Common_AppPaymentTypeSelect.cs" />
+    <Compile Include="Common_ArticleCategoryList.cs" />
+    <Compile Include="Common_ArticleRelative.cs" />
+    <Compile Include="Common_AttributeList.cs" />
+    <Compile Include="Common_BatchBuy_ProductList.cs" />
+    <Compile Include="Common_CategoriesDropDownList.cs" />
+    <Compile Include="Common_CategoriesWithWindow.cs" />
+    <Compile Include="Common_ComBinaSKUSelector.cs" />
+    <Compile Include="Common_ContextMenu.cs" />
+    <Compile Include="Common_CopyShippingAddress.cs" />
+    <Compile Include="Common_CouponSelect.cs" />
+    <Compile Include="Common_Coupon_ChangeCouponList.cs" />
+    <Compile Include="Common_CurrentUser.cs" />
+    <Compile Include="Common_CustomAd.cs" />
+    <Compile Include="Common_CutdownSearch.cs" />
+    <Compile Include="Common_ExpandAttributes.cs" />
+    <Compile Include="Common_Favorite_ProductList.cs" />
+    <Compile Include="Common_FightGroupRule.cs" />
+    <Compile Include="Common_Footer.cs" />
+    <Compile Include="Common_FriendLinks.cs" />
+    <Compile Include="Common_GoodsList_Browsed.cs" />
+    <Compile Include="Common_GoodsList_Correlative.cs" />
+    <Compile Include="Common_GoodsList_CurrentTop.cs" />
+    <Compile Include="Common_GoodsList_LatestCountDownBuy.cs" />
+    <Compile Include="Common_GoodsList_LatestGroupBuy.cs" />
+    <Compile Include="Common_Header.cs" />
+    <Compile Include="Common_HeaderMune.cs" />
+    <Compile Include="Common_Help.cs" />
+    <Compile Include="Common_HelpCategory.cs" />
+    <Compile Include="Common_ImageAd.cs" />
+    <Compile Include="Common_LatestReview.cs" />
+    <Compile Include="Common_Link_OpenId.cs" />
+    <Compile Include="Common_Link_OpenId_Address.cs" />
+    <Compile Include="Common_Link_OpenId_Wap.cs" />
+    <Compile Include="Common_Location.cs" />
+    <Compile Include="Common_LoginLink.cs" />
+    <Compile Include="Common_Logo.cs" />
+    <Compile Include="Common_MemberCenterOrders.cs" />
+    <Compile Include="Common_MemberOrderProducts.cs" />
+    <Compile Include="Common_Messages_UserReceivedMessageList.cs" />
+    <Compile Include="Common_Messages_UserSendedMessageList.cs" />
+    <Compile Include="Common_MyAccountLink.cs" />
+    <Compile Include="Common_OnlineServer.cs" />
+    <Compile Include="Common_OrderItems_AfterSales.cs" />
+    <Compile Include="Common_OrderItem_AfterSales.cs" />
+    <Compile Include="Common_OrderManage_OrderGifts.cs" />
+    <Compile Include="Common_OrderManage_OrderItems.cs" />
+    <Compile Include="Common_OrderManage_OrderList.cs" />
+    <Compile Include="Common_OrderManage_RefundApply.cs" />
+    <Compile Include="Common_OrderManage_ReplaceApply.cs" />
+    <Compile Include="Common_OrderManage_ReturnsApply.cs" />
+    <Compile Include="Common_OrderManage_ReviewsOrderItems.cs" />
+    <Compile Include="Common_PaymentModeList.cs" />
+    <Compile Include="Common_PointGiftList.cs" />
+    <Compile Include="Common_Point_PointList.cs" />
+    <Compile Include="Common_PrimaryClass.cs" />
+    <Compile Include="Common_PrizeNames.cs" />
+    <Compile Include="Common_PrizeUsers.cs" />
+    <Compile Include="Common_ProductCategoryList.cs" />
+    <Compile Include="Common_ProductConsultations.cs" />
+    <Compile Include="Common_ProductImageAlbum.cs" />
+    <Compile Include="Common_ProductImages.cs" />
+    <Compile Include="Common_ProductSales.cs" />
+    <Compile Include="Common_Referral_MemberList.cs" />
+    <Compile Include="Common_Referral_RequestBalanceDraw.cs" />
+    <Compile Include="Common_Referral_Splitin.cs" />
+    <Compile Include="Common_Referral_SplittinDraw.cs" />
+    <Compile Include="Common_RightLink.cs" />
+    <Compile Include="Common_Search.cs" />
+    <Compile Include="Common_Search_SortPopularity.cs" />
+    <Compile Include="Common_Search_SortPrice.cs" />
+    <Compile Include="Common_Search_SortSaleCounts.cs" />
+    <Compile Include="Common_Search_SortTime.cs" />
+    <Compile Include="Common_SetDeliveryRegion.cs" />
+    <Compile Include="Common_ShippingAddress.cs" />
+    <Compile Include="Common_ShippingAddressRadioButtonList.cs" />
+    <Compile Include="Common_ShoppingCart_GiftList.cs" />
+    <Compile Include="Common_ShoppingCart_Info.cs" />
+    <Compile Include="Common_ShoppingCart_ProductList.cs" />
+    <Compile Include="Common_ShoppingCart_PromoGiftList.cs" />
+    <Compile Include="Common_ShoppingCart_StoreList.cs" />
+    <Compile Include="Common_SKUSelector.cs" />
+    <Compile Include="Common_SKUSubmitOrder.cs" />
+    <Compile Include="Common_SKUSubmitStoreOrder.cs" />
+    <Compile Include="Common_SlideAd.cs" />
+    <Compile Include="Common_SubjectArticle.cs" />
+    <Compile Include="Common_SubjectAttribute.cs" />
+    <Compile Include="Common_SubjectBrand.cs" />
+    <Compile Include="Common_SubjectCategory.cs" />
+    <Compile Include="Common_SubjectKeyword.cs" />
+    <Compile Include="Common_SubjectMoreLink.cs" />
+    <Compile Include="Common_SubjectProduct_Floor.cs" />
+    <Compile Include="Common_SubjectProduct_Simple.cs" />
+    <Compile Include="Common_SubjectProduct_Tab.cs" />
+    <Compile Include="Common_SubjectProduct_Top.cs" />
+    <Compile Include="Common_SubjectTitle.cs" />
+    <Compile Include="Common_SubmmintOrder_GiftList.cs" />
+    <Compile Include="Common_SubmmintOrder_ProductList.cs" />
+    <Compile Include="Common_SubmmitCartProducts.cs" />
+    <Compile Include="Common_SupplierList.cs" />
+    <Compile Include="Common_UserDefault_ProductList.cs" />
+    <Compile Include="Common_UserLogin.cs" />
+    <Compile Include="Common_UserRefunds.cs" />
+    <Compile Include="Common_UserReturns.cs" />
+    <Compile Include="Common_User_Menu.cs" />
+    <Compile Include="Common_ViewProduct_Consultation.cs" />
+    <Compile Include="Common_VshopQRCode.cs" />
+    <Compile Include="Common_WapFooter.cs" />
+    <Compile Include="Common_WAPGuanZhu.cs" />
+    <Compile Include="Common_WapHeader.cs" />
+    <Compile Include="Common_WAPLocateAddress.cs" />
+    <Compile Include="Common_WAPLocateAddressUpgrade.cs" />
+    <Compile Include="Common_WAPPaymentTypeSelect.cs" />
+    <Compile Include="Common_WapStoreFooter.cs" />
+    <Compile Include="ImagePosition.cs" />
+    <Compile Include="MemberSafeGradeLiteral.cs" />
+    <Compile Include="PageFooter.cs" />
+    <Compile Include="PriceLabel.cs" />
+    <Compile Include="ProductFreightLiteral.cs" />
+    <Compile Include="ProductPromote.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search_Class.cs" />
+    <Compile Include="SkuLabel.cs" />
+    <Compile Include="SKUSelector.cs" />
+    <Compile Include="StockLabel.cs" />
+    <Compile Include="TemplateStyle.cs" />
+    <Compile Include="TotalLabel.cs" />
+    <Compile Include="TradeTypesColumncs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hidistro.Context\Hidistro.Context.csproj">
+      <Project>{fe796bf0-cefd-4d7b-87d4-768a72f42bfa}</Project>
+      <Name>Hidistro.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Core\Hidistro.Core.csproj">
+      <Project>{08764b0b-caa2-4f97-8b26-67b2ec14825d}</Project>
+      <Name>Hidistro.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.Entities\Hidistro.Entities.csproj">
+      <Project>{0a26b413-4cb7-4218-bfe9-674e5d0d0713}</Project>
+      <Name>Hidistro.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.SaleSystem\Hidistro.SaleSystem.csproj">
+      <Project>{af59cc0e-5801-4db4-bf5a-9fda1659fa1d}</Project>
+      <Name>Hidistro.SaleSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hidistro.UI.Common.Controls\Hidistro.UI.Common.Controls.csproj">
+      <Project>{165d61fb-1387-4c56-8bcc-d2aa4c6c5eea}</Project>
+      <Name>Hidistro.UI.Common.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

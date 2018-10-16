@@ -1,0 +1,73 @@
+﻿<hi:Common_WapHeader runat="server" />
+<div class=" form-horizontal  userinfo"> 
+    <div class="userinfo_border">  
+    <p class="text-muted">用户名</p>
+    <input id="txtUserName" type="text" runat="server" clientidmode="Static" class="form-control" placeholder="请填写您的用户名">
+    </div> 
+    <div class="userinfo_border">
+    <p class="text-muted">手机</p>
+    <input id="txtPhone" type="text" runat="server" clientidmode="Static" class="form-control" placeholder="请填写您的手机号">
+    </div> 
+    <div class="userinfo_border">
+    <p class="text-muted">姓名</p>
+    <input id="txtRealName" type="text" runat="server" clientidmode="Static" class="form-control" placeholder="请填写您的姓名">
+    </div> 
+    <div class="userinfo_border">
+    <p class="text-muted">QQ</p>
+    <input id="txtEmail" type="text" runat="server" clientidmode="Static" class="form-control" placeholder="请填写您的QQ号码">
+    </div>     
+</div>
+<div class="userinfo_btn">
+<button id="btnSetUserName" type="button" class="btn btn-warning btn-block">确认保存</button>
+    <p id="firstLoginNote" class="text-center"><a href="default.aspx" class="text-muted">不填写，直接去首页。（后续可在个人中心修改）</a></p>
+    </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#btnSetUserName").bind("click", function() {
+        SetUserName();
+    }); //设置新昵称
+
+    if ($.trim($('#txtUserName').val()))
+        $('#txtUserName').attr('disabled', 'disabled');
+
+    if (getParam('edit'))
+        $('#firstLoginNote').hide();
+});
+
+function SetUserName() {
+    $.ajax({
+        url: "/API/VshopProcess.ashx",
+        type: 'post',
+        dataType: 'json',
+        timeout: 10000,
+        data: {
+            action: "SetUserName",
+            userName: $("#txtUserName").val(),
+            RealName: $("#txtRealName").val(),
+            CellPhone: $("#txtPhone").val(),
+            QQ: $("#txtEmail").val()
+        },
+        success: function(resultData) {
+            if (resultData.Status == "OK") {
+                alert_h("修改用户信息成功", function() {
+                    location.href = "MemberCenter.aspx";
+                });
+            }
+            else if (!!resultData.success)
+            {
+                alert_h(resultData.msg);
+            }
+            else {
+                alert_h("修改用户信息失败, 请重试");
+            }
+        }
+    });
+}
+</script>
+<script>
+//禁用右上角菜单
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+<hi:Common_WapFooter runat="server" />

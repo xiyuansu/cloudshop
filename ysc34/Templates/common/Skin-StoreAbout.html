@@ -1,0 +1,81 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .text-center {
+        text-align: center;
+        padding: 2rem 0;
+        display: none;
+    }
+
+    .main {
+        padding: 0.75rem;
+    }
+
+    .cssborder h2 {
+        font-size: 0.8rem;
+        line-height: 1.8;
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+    }
+
+
+    .art_add_c p {
+        font-size: 0.6rem !important;
+    }
+</style>
+<div class="main" id="articlelistContainer">
+    <div class="articledetail" id="articledetail">
+
+        <div class="cssborder">
+            <h2 class="h2">
+                <%<asp:Literal runat="server" ID="litSupplierName" />%>
+            </h2>
+            <div class="art_add_c">
+                <p>
+                    <%<asp:Literal runat="server" ID="litSupplierAbout" />%>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static">
+<script type="text/javascript" src="/Utility/wxShare.js?v=3.0"></script>
+<hi:common_wapfooter runat="server" />
+<script type="text/javascript">
+    $(function () {
+        $("#back").click(function (e) {
+            history.go(-1);
+        });
+    });
+    $(".hfooter .glyphicon-refresh").click(function () {
+        location.reload();
+    })
+
+    $(".hfooter .glyphicon-arrow-left").click(function () {
+        history.go(-1);
+    })
+
+    //隐藏右上角菜单
+    //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    //    WeixinJSBridge.call('hideOptionMenu');
+    //});
+
+    //隐藏底部菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+
+
+    function goUrl(url) {
+        //        alert(url);
+        //location.replace(url);
+        location.href = url;
+
+    }
+
+
+</script>

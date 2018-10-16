@@ -1,0 +1,112 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .c_1_main {
+        padding: 0.75rem 0 0 0.75rem;
+    }
+
+        .c_1_main ul li {
+            float: left;
+            text-align: center;
+            width: 4.5rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.75rem;
+            background: #fff;
+            /*border:1px solid #e7e5ea;*/
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 0.5rem 0.5rem 0 0.5rem;
+            box-shadow: 0 0 5px #eee;
+        }
+
+            .c_1_main ul li img {
+                width: 100%;
+                height: 3.5rem;
+            }
+
+            .c_1_main ul li span {
+                font-size: 0.7rem;
+                color: #333;
+                line-height: 1.2rem;
+                float: left;
+                width: 100%;
+                text-align: center;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+</style>
+<div class="s_1">
+    <label for="txtKeywords" id="search"><i class="icon_search icon-icon_search_32"></i>搜索</label>
+    <input id="txtKeywords" type="search" />
+</div>
+<div class="c_1_main">
+    <ul id="cUl">
+        <script id="cList" type="text/html">
+            {{each Result as value i}}
+            <li>
+                <a class="curl" href="/ProductList?categoryId={{Result[i].cid}}">
+                    <img src="{{Result[i].icon}}" onerror="javascript:this.src='../images/catedefaulticon.jpg'" />
+                    <span>{{Result[i].name}}</span>
+                </a>
+            </li>
+            {{/each}}
+        </script>
+    </ul>
+</div>
+<hi:common_wapguanzhu runat="server"></hi:common_wapguanzhu>
+<script src="/Utility/artTemplate.js"></script>
+<script type="text/javascript">
+    var storeId = getParam("storeId");
+    $.ajax({
+        url: "/API/VshopProcess.ashx?action=getCategories",
+        type: 'post',
+        dataType: 'json',
+        data: { pid: 0 },
+        timeout: 10000,
+        success: function (resultData) {
+            var html = template('cList', resultData);
+            document.getElementById('cUl').innerHTML += html;
+
+            var aurl = window.location.pathname;
+            var arr = aurl.split('/');
+            var burl = arr[1];
+            $(".curl").each(function () {
+                var cid = $(this).attr("href");
+                var cidA = cid.split('/');
+                $(this).attr('href', '/' + burl + '/' + cidA[1] + '&storeId=' + storeId);
+            })
+        }
+    });
+
+    $(function () {
+        $("#txtKeywords").focus(function () {
+            $("#search").hide();
+        });
+        $("#txtKeywords").blur(function () {
+            $("#search").show();
+        });
+    })
+
+    $(document).keydown(function (event) {
+        if (event.keyCode == 13) {
+            if ($("#txtKeywords").val() == "") {
+                $("#search").show();
+            }
+            searchs();
+        }
+    });
+
+
+    function searchs() {
+        var key = $("#txtKeywords").val();
+        var str = window.location.search;
+
+        var categoryId;
+        categoryId = getParam("categoryId");
+        var storeId = getParam("storeId");
+        var url = "ProductList?storeId=" + storeId + "&keyWord=" + escape(key);
+
+        window.location.href = url;
+    }
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

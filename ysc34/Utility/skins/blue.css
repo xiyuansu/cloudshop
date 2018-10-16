@@ -1,0 +1,444 @@
+﻿@charset "utf-8";
+
+/*
+ * artDialog skin
+ * http://code.google.com/p/artdialog/
+ * (c) 2009-2011 TangBin, http://www.planeArt.cn
+ *
+ * This is licensed under the GNU LGPL, version 2.1 or later.
+ * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
+ */
+
+
+/* common start */
+ 
+
+.aui_outer {
+    text-align: left;
+}
+
+table.aui_border,
+table.aui_dialog {
+    border: 0;
+    margin: 0;
+    border-collapse: collapse;
+    width: auto;
+}
+
+.aui_nw,
+.aui_n,
+.aui_ne,
+.aui_w,
+.aui_c,
+.aui_e,
+.aui_sw,
+.aui_s,
+.aui_se,
+.aui_header,
+.aui_tdIcon,
+.aui_main,
+.aui_footer {
+    padding: 0 !important;
+}
+
+.aui_header,
+.aui_buttons button {
+    font: 12px/1.11 'Microsoft Yahei', Tahoma, Arial, Helvetica, STHeiti;
+    _font-family: Tahoma, Arial, Helvetica, STHeiti;
+    -o-font-family: Tahoma, Arial;
+}
+
+.aui_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.aui_state_noTitle .aui_title {
+    display: none;
+}
+
+
+
+.aui_close:hover {
+    text-decoration: none;
+}
+
+.aui_main {
+    text-align: center;
+    min-width: 9em;
+    min-width: 0 \9 /*IE8 BUG*/
+    ;
+}
+
+.aui_content {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    text-align: left;
+    border: none 0;
+    background: #fff; 
+}
+
+    .aui_content.aui_state_full {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0 !important;
+        height: 100%;
+    }
+
+.aui_loading {
+    width: 96px;
+    height: 32px;
+    text-align: left;
+    text-indent: -999em;
+    overflow: hidden;
+    background: url(icons/loading.gif) no-repeat center center;
+}
+
+.aui_icon {
+    vertical-align: middle;
+}
+
+    .aui_icon div {
+        width: 48px;
+        height: 48px;
+        margin: 10px 0 10px 10px;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+.aui_buttons {
+    background: #fff;
+    border-top: 1px solid #ddd;
+    padding: 12px 8px 8px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+    .aui_buttons button {
+        font-size: 14px;
+        padding: 8px 20px;
+        border-radius: 3px;
+        vertical-align: top;
+        color: #333;
+        margin-left:20px;
+        border-radius: 3px;
+        filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#33bbee', endColorstr='#2288cc');
+        text-shadow: none;
+        border: solid 1px #ccc;
+        background: #fff;
+        /*background: linear-gradient(top, #FFF, #DDD);
+    background: -moz-linear-gradient(top, #FFF, #DDD);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF), to(#DDD));
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .7), 0 -1px 0 rgba(0, 0, 0, .09);
+    -moz-transition: -moz-box-shadow linear .2s;
+    -webkit-transition: -webkit-box-shadow linear .2s;
+    transition: box-shadow linear .2s;*/
+    }
+
+        .aui_buttons button::-moz-focus-inner {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .aui_buttons button:focus {
+            outline: none 0;
+            /*box-shadow: 0 0 8px rgba(66, 109, 201, .9);*/
+        }
+
+        .aui_buttons button:hover {
+            color: #000;
+            background: #f2f2f2;
+        }
+
+        .aui_buttons button:active {
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#DDDDDD', endColorstr='#FFFFFF');
+            background: linear-gradient(top, #DDD, #FFF);
+            background: -moz-linear-gradient(top, #DDD, #FFF);
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DDD), to(#FFF));
+            /*box-shadow: inset 0 1px 5px rgba(66, 109, 201, .9), inset 0 1px 1em rgba(0, 0, 0, .3);*/
+        }
+
+        .aui_buttons button[disabled] {
+            cursor: default;
+            color: #666;
+            background: #DDD;
+            border: solid 1px #999;
+            filter: alpha(opacity=50);
+            opacity: .5;
+            box-shadow: none;
+        }
+
+button.aui_state_highlight {
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 3px;
+    vertical-align: top;
+    color: #FFF;
+    border: solid 1px #0091ea;
+    background: #0091ea;
+    border-radius: 3px;
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#33bbee', endColorstr='#2288cc');
+    text-shadow: none;
+}
+
+    button.aui_state_highlight:hover {
+        color: #FFF;
+        border-color: #0074bb;
+        background: #0074bb;
+    }
+/* common end */
+
+.aui_inner {
+    background: #f7f7f7;
+}
+
+.aui_titleBar {
+    width: 100%;
+    height: 0;
+    position: relative;
+    bottom: 30px;
+    _bottom: 0;
+    _margin-top: -30px;
+}
+
+.aui_title {
+    font-size: 14px;
+    line-height: 22px;
+    color: #333;
+    margin: -5px 0 0 10px;
+}
+
+.aui_nw,
+.aui_ne,
+.aui_sw,
+.aui_se,
+.aui_n,
+.aui_s,
+.aui_close {
+    background: #fff;
+}
+
+.aui_nw {
+    width: 15px;
+    height: 38px;
+    border-radius: 5px 0 0 0;
+    padding-left: 0 !important;
+}
+
+.aui_ne {
+    width: 15px;
+    height: 38px;
+    border-radius: 0px 5px 0 0;
+}
+
+.aui_sw {
+    width: 15px;
+    height: 18px;
+    background-position: 0 -38px;
+    _png: blue/ie6/sw.png;
+}
+
+.aui_se {
+    width: 15px;
+    height: 18px;
+    background-position: -15px -38px;
+    _png: blue/ie6/se.png;
+}
+
+.aui_close {
+    top: 4px;
+    right: 4px;
+    _z-index: 9990;
+    width: 20px;
+    position: absolute;
+    height: 20px;
+    _font-size: 0;
+    _line-height: 0;
+    cursor: pointer;
+    outline: none;
+    color: #333;
+    background: #fff;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+    .aui_close:link {
+        border: none;
+        text-decoration: none;
+    }
+
+    .aui_close:hover {
+        color: #333;
+        background: #ededed;
+    }
+
+.aui_n,
+.aui_s {
+    background-repeat: repeat-x;
+}
+
+.aui_n {
+    background: #fff;
+}
+
+.aui_s {
+    background: #fff;
+}
+
+.aui_w,
+.aui_e {
+    /*background-image: url(blue/bg2.png);*/
+    background: #fff;
+    /*background-repeat: repeat-y;*/
+}
+
+.aui_w {
+    background: #fff;
+}
+
+.aui_e {
+    background: #fff;
+}
+
+.aui_icon,
+.aui_main {
+    padding-top: 3px;
+}
+
+@media screen and (min-width:0) {
+    .aui_outer {
+        border-radius: 5px;
+        overflow: hidden;
+        -webkit-box-shadow: 0 0 10px 5px rgba(0,0,0,.5);
+        -moz-box-shadow: 0 0 10px 5px rgba(0,0,0,.5);
+        box-shadow: 0 0 10px 5px rgba(0,0,0,.5);
+    }
+
+    .aui_state_drag .aui_outer {
+        box-shadow: none;
+    }
+
+    .aui_state_lock .aui_outer {
+        box-shadow: 0 3px 26px rgba(0, 0, 0, .9);
+    }
+
+    .aui_outer:active {
+        box-shadow: 0 0 5px rgba(2, 37, 69, .1) !important;
+    }
+
+    .aui_state_drag .aui_outer {
+        box-shadow: none !important;
+    }
+
+    .aui_nw,
+    .aui_ne,
+    .aui_sw,
+    .aui_se,
+    .aui_n,
+    .aui_s,
+    .aui_close {
+        background: #f6f6f6;
+    }
+
+    .aui_nw,
+    .aui_n,
+    .aui_ne {
+        border-bottom: 1px solid #b8b8b8;
+    }
+
+    .aui_nw {
+        width: 5px;
+        height: 50px;
+    }
+
+    .aui_ne {
+        width: 5px;
+        height: 35px;
+        background-position: -5px 0;
+        _png: blue/ie6/ne.png;
+    }
+
+    .aui_sw {
+        width: 5px;
+        height: 5px;
+        background-position: 0 -31px;
+    }
+
+    .aui_se {
+        width: 5px;
+        height: 5px;
+        background-position: -5px -31px;
+    }
+
+    .aui_s {
+        background-position: 0 -67px;
+    }
+
+    .aui_w,
+    .aui_e {
+        background: #fff;
+    }
+}
+
+.aui_state_noTitle .aui_nw,
+.aui_state_noTitle .aui_ne,
+.aui_state_noTitle .aui_sw,
+.aui_state_noTitle .aui_se {
+    width: 3px;
+    height: 3px;
+}
+
+.aui_state_noTitle .aui_inner {
+    border: 1px solid #666;
+    background: #FFF;
+}
+
+.aui_state_noTitle .aui_outer {
+    box-shadow: none;
+}
+
+.aui_state_noTitle .aui_nw,
+.aui_state_noTitle .aui_n,
+.aui_state_noTitle .aui_ne,
+.aui_state_noTitle .aui_w,
+.aui_state_noTitle .aui_e,
+.aui_state_noTitle .aui_sw,
+.aui_state_noTitle .aui_s,
+.aui_state_noTitle .aui_se {
+    background: rgba(0, 0, 0, .05);
+    background: #000\9 !important;
+    filter: alpha(opacity=5) !important;
+}
+
+.aui_state_noTitle .aui_titleBar {
+    bottom: 0;
+    _bottom: 0;
+    _margin-top: 0;
+}
+
+.aui_state_noTitle .aui_close {
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    text-indent: 0;
+    font-family: Helvetica, STHeiti;
+    _font-family: '\u9ed1\u4f53', 'Book Antiqua', Palatino;
+    font-size: 18px;
+    text-decoration: none;
+    color: #214FA3;
+    background: none;
+    filter: !important;
+}
+
+    .aui_state_noTitle .aui_close:hover,
+    .aui_state_noTitle .aui_close:active {
+        text-decoration: none;
+        background: #ededed;
+    }

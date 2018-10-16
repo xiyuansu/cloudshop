@@ -1,0 +1,27 @@
+﻿<hi:common_appheader runat="server" />
+<style>
+    .main {
+        background: none;
+    }
+</style>
+<Hi:HiImage runat="server" ID="imgUrl" class="img-responsive" />
+<p class="text-center list-empty hide">
+    没有找到相关商品
+</p>
+<div class="goods-detail">
+    <asp:Literal runat="server" ID="litContent" />
+</div>
+<div class="main">
+    <Hi:AppshopTemplatedRepeater ID="rptProducts" TemplateFile="/Tags/skin-Common_TopicProducts.ascx" runat="server" />
+
+    <input type="hidden" id="txtTotal" runat="server" clientidmode="Static" />
+</div>
+<div id="pager">
+</div>
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    vshopPager('pager', $('#txtTotal').val(), 1, 10);
+</script>
+
+
+

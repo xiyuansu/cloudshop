@@ -1,0 +1,178 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<script src="/utility/globals.js" type="text/javascript"></script>
+<style>
+.tab_box1 tr td img{ padding: 0px;}
+</style>
+ <form runat="server">
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置><span><a href="/">首页</a></span>><span><a href="/user/UserDefault.aspx">会员中心</a></span>><span><a href="#">收藏夹</a></span></div>
+    <div class="hyzxconter">
+        <%<Hi:Common_User_Menu runat="server" />%>
+       
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1">
+                    收藏夹</div>
+                <div class="tuikuan_con">
+                    <span>关键字：
+                        <%<asp:TextBox ID="txtKeyWord" runat="server" class="input-text1" />%>
+                    </span>
+                    <span class="chaxun">
+                        <%<asp:Button   Text ="查询" ID="imgbtnSearch" runat="server" /> %>
+                    </span>
+                </div>
+                <div class="shouhuoxx1_con">
+                    <div class="shuaixuan">
+                        <h2>
+                            标签筛选：</h2>
+                        <span><a href="./Favorites.aspx">不限</a>
+                            <%<Hi:ThemedTemplatedRepeater ID="rptFavoritesTags" runat="server" TemplateFile="/ascx/Tags/Common_UserCenter/Skin-Common_Favorite_TypeTags.ascx" />%></span>
+                    </div>
+                    <div class="shuaixuan1">
+                        <div class="quanxuan">
+                            <span><a href="javascript:void(0);" onclick="SelectAll()">全选</a></span> <span><a
+                                href="javascript:void(0)" onclick=" ReverseSelect()">反选</a></span> <span>
+                                    <%<asp:LinkButton ID="btnDeleteSelect" OnClientClick="javascript:return CheckDelete();"  runat="server"  Text="删除选定" />%></span></div>
+                    </div>
+                    <div class="pro_xuanze">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_box1 top_border">
+                            <tr id="spqingdan_title">
+                                <td width="8%" align="center">
+                                    选择
+                                </td>
+                                <td width="20%" align="center">
+                                    商品图片
+                                </td>
+                                <td width="40%" align="center">
+                                    商品名称
+                                </td>
+                                <td width="20%" align="center">
+                                    商品价格
+                                </td>
+                                <td width="12%" align="center">
+                                    操作
+                                </td>
+                            </tr>
+                            <%<Hi:ThemedTemplatedRepeater ID="rptFavorites" runat="server" TemplateFile="/ascx/Tags/Common_UserCenter/Skin-Common_Favorite_ProductList.ascx" />%>
+                        </table>
+                    </div>
+                </div>
+                <div class="page">
+                    <div class="pagination">
+                        <%<Hi:Pager runat="server" ShowTotalPages="true" ID="pager"/>%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+        function getParam(paramName) {
+            var reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        $(document).ready(function () {
+            var biaoqian = getParam("tags");
+            if (biaoqian == null || biaoqian == "undefined" || biaoqian.length <= 0) {
+                biaoqian = "不限";
+            }
+            $(".shuaixuan a:contains('" + biaoqian + "')").addClass("current");
+            EditFavorite();
+        });
+        function EditFavorite() {
+            $(".editfavorite").bind("click", function () {
+                var id = $(this).attr("id");
+                if ($(this).text() == "编辑") {
+                    $(this).text("更新");
+                    var inputtag = $("<input id=\"txttags" + id + "\" type=text/>");
+                    var tishimsg = "(最多3个，‘，’隔开)";
+                    var em = $("#em" + id).text().replace(/，|、/g, ',').replace(/\s/g, '');
+                    $(inputtag).val(em);
+                    $("#em" + id).html(inputtag);
+                    $("#em" + id).append(tishimsg);
+                }
+                else {
+                    var isvalid = true;
+                    var regu = "^[0-9a-zA-Z\u4e00-\u9fa5]{1,10}$";
+                    var re = new RegExp(regu);
+                    var data = {};
+                    data.favoriteid = id;
+                    var tagNames = $("#txttags" + id).val().replace(/，|、/g, ',').replace(/\s/g, '');
+                    data.tags = tagNames;
+                    if (data.tags.indexOf(",") >= 0) {
+                        var tagstr = new Array();
+                        tagstr = tagNames.split(',');
+                        for (var k = 0; k < tagstr.length; k++) {
+                            if (!re.test(tagstr[k])) {
+                                isvalid = false;
+                            }
+                        }
+                    }
+                    if (isvalid) {
+
+                        UpdateFavorite(data);
+                        $("#em" + id).html(data.tags);
+                        $(this).text("编辑");
+                    }
+
+
+                }
+            });
+        }
+        function UpdateFavorite(data) {
+            $.post("/Handler/MemberHandler.ashx?action=UpdateFavorite", data, function (json) {
+                if (json.success || json.success == "true") {
+                    BindFavoriteTagNum();
+                } else {
+                    alert(json.msg);
+                }
+            });
+        }
+        function DelFavorite(tag) {
+            if (window.confirm("确认要删除该收藏的商品")) {
+                var data = {};
+                data.favoriteid = $(tag).attr("tag");
+
+                $.post("/Handler/MemberHandler.ashx?action=DelFavorite", data, function (json) {
+                    if (json.success || json.success == "true") {
+                        $(tag).parents("tr").remove();
+                    }
+                });
+            }
+        }
+
+        function CheckDelete() {
+            if ($("input[name='CheckBoxGroup']:checked").length == 0) {
+                alert("还没有选择任何的收藏记录！");
+                return false;
+            }
+            return true;
+        }
+
+        function BindFavoriteTagNum() {
+            var a_link = "";
+            $.ajax({
+                url: '/Handler/MemberHandler.ashx?action=BindFavoriteTagNum',
+                type: 'POST',
+                dataType: 'json',
+                timeout: 5000,
+                error: function () {
+                    alert('操作错误,请与系统管理员联系!');
+                },
+                success: function (json) {
+                    if (json.Result.length > 0) {
+                        $(".shuaixuan span a").not(":first").empty();
+                        $(json.Result).each(function (index, item) {
+                            a_link += "<a href=\"./Favorites.aspx?keyword=" + item.TagName + "\">" + item.TagName + "(" + item.Num + ")</a>";
+                        });
+                        $(".shuaixuan span").append(a_link);
+                    }
+                }
+            });
+        }  
+
+    </script>
+    </form>
+    <%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

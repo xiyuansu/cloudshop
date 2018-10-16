@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style>
+        body
+        {
+            color: #383836;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .yanzheng_input1
+        {
+            width: 200px;
+            height: 28px;border: 1px solid #e5e5e5;
+        }
+        .shouyj
+        {
+            margin: 0 auto;
+            overflow: hidden;
+        
+        }
+        .s_time
+        {
+            color: #9e9e9e;
+            overflow: hidden;
+        }
+        .s_time span
+        {
+            float: left;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+        .s_title
+        {
+            overflow: hidden;
+        }
+        .s_content
+        {
+            overflow: hidden;
+            width: 540px;
+            white-space: normal;
+        }
+       textarea{ border: 1px solid #e5e5e5;}
+
+		.s_content p{ margin:0px;}
+        .s_conten b
+        {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .dingdanxx
+        {
+            overflow: hidden;
+            margin: 10px;
+        }
+        .yzyouxiang_box1
+        {
+            border: 1px solid #dddddd;
+            line-height: 25px;
+            padding: 25px; margin-top:20px;
+        }
+        .yzyoux
+        {
+            overflow: hidden;
+        }
+        .yzyoux em
+        {
+            font-size: 14px;
+            overflow: hidden;
+            float: left;
+            margin-right: 5px;
+            font-style: normal;
+        }
+        .yzyoux span
+        {
+            float: left;
+            overflow: hidden;
+        }
+        .tijiao
+        {
+            cursor: pointer; border-radius: 3px; background: #fe5722;
+            margin-top: 15px;
+            height: 36px; width:84px; border:0px; font-size:16px;  color:#fff;
+            overflow: hidden;
+        }
+		.btn-password{ margin-left:50px;}
+    </style>
+        <script src="/utility/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+<script src="/utility/globals.js" type="text/javascript"></script>
+<script src="/utility/Window.js" type="text/javascript"></script>
+<script src="/utility/jquery.artDialog.js" type="text/javascript"></script>
+<script src="/utility/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="/utility/skins/blue.css?v=3.0">
+</head>
+<body>
+    <form runat="server">
+    <div class="shouyj">
+        <div class="s_time">
+            <span>时间：<%<Hi:FormatedTimeLabel ID="litDate" runat="server" />%></span> <span>发件人：<%<asp:Literal ID="litAddresser" runat="server" />%></span></div>
+        <div class="s_title">
+            标题：<%<asp:Literal ID="litTitle" runat="server" />%></div>
+        <div class="s_content">
+            <p><b>内容查看：</b></p>
+            <textarea rows="13" cols="65" id="txtReplyRecord" name="txtReplyRecord" readonly="readonly" style="font-size: 12px; padding:5px;color:#A0A0A0"
+                 runat="server"></textarea></div>
+    </div>
+    <div class="yzyouxiang_box1">
+        <div class="dingdanxx">
+            <div class="yzyoux">
+                <%<Hi:SmallStatusMessage id="Status" runat="server" Visible="False" />%></div>
+            <div class="yzyoux">
+                <em>标题：</em> <span>
+                    <%<asp:TextBox id="txtReplyTitle" runat="Server" MaxLength="60" class="yanzheng_input1"></asp:TextBox> %>
+                    <%<span id="txtTitleTip" runat="server"></span>%></span>
+            </div>
+            <div class="yzyoux" style="margin-top:10px">
+                <em class="yanzhengma">内容：</em>
+                 <span>
+                    <%<asp:TextBox style="font-size:12px" id="txtReplyContent" Rows="8" Columns="45" MaxLength="300"  TextMode="MultiLine" runat="Server"></asp:TextBox>%>
+                </span>
+            </div>
+            <div class="btn-password">
+                <%<asp:Button ID="btnReplyReceivedMessage" runat="server" Text="回复" CssClass="tijiao"/>%></div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

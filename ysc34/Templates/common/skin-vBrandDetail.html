@@ -1,0 +1,80 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    .goods-box {
+        border-bottom: 1px solid #ebebeb;
+        padding: 0.375rem;
+        margin-bottom: 0.75rem;
+        background: #fff;
+        min-height: 3.25rem;
+        width: 100%;
+    }
+
+    .goods-detail {
+        line-height: 2.4;
+        padding-left: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    .goods-box .name{
+        height:auto;
+    }
+    .left_img {
+        position: absolute;
+    }
+
+    .goods-box .info {
+        padding-left: 3rem;
+        position: relative;
+        padding-right: 0px;
+        min-height: 1.375rem;
+    }
+
+    .price {
+        margin-top:0.25rem;
+        font-size: 0.7rem;
+        color: #ff5722;
+
+    }
+
+    .btn {
+        font-size: 0.7rem;
+    }
+
+    .goods-box img {
+        position: absolute;
+        left:0.5rem;
+    }
+    .price .sales{
+        font-size:0.6rem;
+        float:right;
+    }
+</style>
+<hi:hiimage runat="server" id="imgUrl" class="img-responsive" width="100%" />
+<p class="text-center list-empty hide">
+    没有找到相关商品
+</p>
+<div class="goods-detail pbox bgColor-white">
+    详情
+    <asp:literal runat="server" id="litBrandDetail" />
+</div>
+<div class="pbox" style="padding:0.75rem;">
+    <hi:WapTemplatedRepeater id="rptProducts" templatefile="/Tags/skin-Common_BrandProducts.ascx"
+                             runat="server" />
+</div>
+<div id="pager"></div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //隐藏右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+    //隐藏底部菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+
+    $(function () {
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+    });
+</script>
+<hi:common_wapfooter runat="server" />

@@ -1,0 +1,37 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<script src="/utility/validate/pagevalidator.js" type="text/javascript"></script>
+<form runat="server" id="form1">
+<style>
+.hyzxconterl3{ padding: 0px;}
+</style>
+    <div class="hyzxmain">
+        <div class="hyzxconty">当前位置><span><%<Hi:SiteUrl UrlName="home" runat="server">首页</Hi:SiteUrl>%></span>><span><%<Hi:SiteUrl UrlName="user_UserDefault" runat="server">会员中心</Hi:SiteUrl>%></span>><span><a href="#">下级会员</a></span></div>
+        <div class="hyzxconter">
+            <div class="hyzxconterl">
+                <div class="hyzxconterl3">
+                <%<Hi:Common_User_Menu runat="server" />%>
+                </div>
+            </div>
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                <div class="dingdan_box1">下级会员</div>
+                    <div class="tuikuan_con1">
+                        <span>用户名：<%<asp:TextBox ID="txtSearchText" runat="server" CssClass="UserInput" Width="120px" />%></span>
+                        <span>姓名：<%<asp:TextBox ID="txtRealName" runat="server" CssClass="UserInput" Width="120px" />%></span>
+                        <span>联系电话：<%<asp:TextBox ID="txtCellPhone" runat="server" CssClass="UserInput" Width="120px" />%></span>
+                        <span><%<asp:Button   ID="btnSearchButton" runat="server" Text="查询" /> %></span>
+                    </div>
+
+                    <div class="shouhuoxx1_con">
+                        <%<Hi:Common_Referral_MemberList runat="server" />%>
+                    </div>
+
+                    <div class="page">
+                        <%<UI:Pager runat="server" ShowTotalPages="true" ID="pager" />%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

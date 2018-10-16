@@ -1,0 +1,46 @@
+﻿<hi:Common_AppHeader runat="server" />
+<style>
+    .referral_1 {
+        float: left;
+        width: 100%;
+        line-height: 2.2rem;
+        border-bottom: 1px solid #e7e5ea;
+    }
+
+        .referral_1 div {
+            width: 33.33%;
+            float: left;
+        }
+
+            .referral_1 div:first-child {
+                text-align: left;
+            }
+
+            .referral_1 div:last-child {
+                text-align: right !important;
+                color: #333;
+            }
+            .main a:last-child .referral_1{
+                 border-bottom:0;
+            }
+</style>
+<header class="orderlist_tab">
+    <ul id="head_tab">
+        <li><a href="SplittinDraws.aspx">申请提现</a></li>
+        <li><a class="tab_active" href="#">提现记录</a></li>
+    </ul>
+</header>
+<div class="main">
+    <hi:AppshopTemplatedRepeater id="rptDrawRecodes" templatefile="/Tags/skin-Common_DrawRecords.ascx" runat="server" />
+</div>
+<div id="pager">
+</div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<hi:common_appfooter runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+
+    });
+</script>

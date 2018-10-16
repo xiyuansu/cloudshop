@@ -1,0 +1,62 @@
+﻿<%<Hi:Common_Header runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<div class="hyzxmain">
+    <style>
+        .tuikuan_con1.m_top {
+            padding-top: 0;
+        }
+    </style>
+    <div class="hyzxconty">
+        当前位置><span><a href="/">首页</a></span>><span><a href="/user/UserDefault.aspx">会员中心</a></span>><span><a href="#">账户安全</a></span>
+    </div>
+    <div class="hyzxconter">
+        <%<Hi:Common_User_Menu runat="server" />%>
+        <div class="hyzxconterr">
+            <div class="dingdanxx">
+                <div class="dingdan_box1">
+                    安全级别
+                </div>
+                <div class="tuikuan_con1 m_top">
+                    <span class="a_span2"><em>安全级别：</em> <em><%<Hi:MemberSafeGradeLiteral ID="litSafeGrade" runat="server" /> %></em></span>
+                    <span class="a_span1">建议您启动全部安全设置，以保障账户及资金安全</span>
+                </div>
+                <div class="anquan">
+                    <ul>
+                        <li>
+                            <!--<b class="anquan_b1">登录密码</b>-->
+                            <%<asp:Literal ID="litPasswordVericetionName" runat="server" /> %>
+                            <span><%<asp:Literal ID="litPasswordMsg" runat="server" /> %></span> <em>
+                                <a href="/user/UpdatePassword.aspx"><%<asp:Literal ID="litPasswordVericetionName2" runat="server" />%></a>
+                            </em>
+                        </li>
+                        <li>
+                            <%<asp:Literal ID="litTraderPasswordVericetionName" runat="server" /> %>
+                            <span>在预存款支付时使用，为了您的资金安全，请妥善保管</span>
+                            <em>
+                                <%<asp:HyperLink ID="hptraderpasswordlink" runat="server" /> %>
+                            </em>
+                        </li>
+                        <li>
+                            <%<asp:Literal ID="litEmailVericetionName" runat="server" /> %>
+                            <span>验证后，找回登录密码，接收订单提醒服务</span>
+                            <em>
+                                <%<asp:HyperLink ID="hpemaillink" runat="server" /> %>
+                            </em>
+                        </li>
+                        <li>
+                            <%<asp:Literal ID="litCellphoneVericetionName" runat="server" /> %>
+                            <span>验证后，找回登录密码，接收订单提醒服务</span> <em>
+                                <%<asp:HyperLink ID="hpcellphonelink" runat="server" /> %>
+                            </em>
+                        </li>
+                        <li>
+                            <%<asp:Literal ID="litQuesstionName" runat="server" /> %>
+                            <span>密码保护功能可以保证您的会员名更安全，当密码发生问题时，能帮您更安全快捷的取回</span>
+                            <em><a href="/user/UpdatePasswordProtection.aspx">修改>></a></em>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%<Hi:Common_Footer runat="server" SkinName="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

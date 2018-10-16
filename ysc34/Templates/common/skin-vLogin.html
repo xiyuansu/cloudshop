@@ -1,0 +1,1142 @@
+﻿<hi:common_wapheader runat="server" />
+<link rel="stylesheet" href="/Utility/mobiscrolldate/mobiscroll_date.css" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_IsAuth" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_AuthMsg" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_OpenIdType" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_OpenId" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_Token" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_RealName" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_UserId" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_Email" />
+<input type="hidden" runat="server" clientidmode="Static" id="client" />
+<input type="hidden" runat="server" clientidmode="Static" id="hid_UnionId" /><!--微信联合ID-->
+<input type="hidden" runat="server" clientidmode="Static" id="hid_WxOpenIdBindUsers" value="false" /><!--微信OpenId或者UnionId是否已绑定用户-->
+<input type="hidden" runat="server" clientidmode="Static" id="hid_OpenIdINUsers" value="false" /><!--微信OpenId是绑定一键登录账号-->
+<input type="hidden" runat="server" clientidmode="Static" id="hid_IsValidationService" value="false" /><!--微信信任登录隐藏控制-->
+<input type="hidden" runat="server" clientidmode="Static" id="hid_QuickLoginIsForceBindingMobbile" value="false" /><!--信任登录是否强制绑定手机-->
+<div class="att-popup">
+    <div class="att-popup-container deliveryed">
+        <ul id="sexed">
+            <li>男士</li>
+            <li>女士</li>
+        </ul>
+        <span class="close_pop">取消</span>
+    </div>
+</div>
+<style type="text/css">
+    body { background: #fff; }
+    #vLogin_labNickName { color: red; font-weight: bolder; }
+    .forcebind div { width: 100%; line-height: 1.5rem; font-size: 14px; color: #666; }
+        .forcebind div span { color: #000; }
+        .forcebind div.btnline, .regform div.btnline { color: #333; font-size: 12px; padding: 0 24px; width: 100%; text-align: left; margin-top: 12px; }
+    .forcebind .userhead { width: 100%; height: 3rem; padding: 1rem 0; text-align: center; }
+        .forcebind .userhead .headimage image { width: 3rem; height: 3rem; border-radius: 50%; margin: 0 auto; border: 0.1rem solid rgba(255,255,255,0.6); overflow: hidden; }
+    .forcebind .nickline { padding-bottom: 20px; }
+    .btn_phoneregister { background: #ff5722; color: #eee; text-align: center; border-radius: 0.2rem; font-size: 0.7rem; height: 1.8rem; line-height: 1.8rem; width: 100%; border: 0; display: inline-block; margin-top: 8px; }
+    .btn_binduser { background: #fff; color: #666; text-align: center; border-radius: 0.2rem; font-size: 0.7rem; height: 1.8rem; line-height: 1.8rem; width: 100%; border: 1px solid #ccc; display: inline-block; margin-top: 8px; }
+    .notice { color: #ff5722 !important; }
+    .regform { padding-top: 1.5rem; }
+        .regform div { width: 100%; line-height: 2rem; font-size: 14px; color: #666; text-align: left; }
+            .regform div.textline { text-align: center; }
+            .regform div span { width: 35%; float: left; text-align: right; font-size: 18px; }
+            .regform div input { border: 1px solid #eee; height: 1.5rem; width: 180px; color: #ccc; padding-left: 6px; }
+                .regform div input:focus { color: #333; }
+.yanzheng_captcha{ width: 100%;}      
+.gt_holder.gt_float{ margin-left: 10%; margin-bottom: 10px;} 
+.regform{ width: 100%;}    
+.phone_loginCode{width: auto !important;
+    padding: 0 0.21rem;
+    margin-left: 0!important;
+    margin-top: 0;
+    font-size: 0.32rem!important;}     
+</style>
+<script type="text/javascript" language="javascript">
+    var cellphoneInputIsFocus = false;
+    $(document).ready(function (e) {
+        $("#txtCellPhone").click(function () {
+            this.focus();
+        });
+        $("#txtNumber1,#txtPassword1").click(function (e) {
+            CheckPhone($("#txtCellPhone"));
+        })
+        $("#txtCellPhone").blur(function () {
+            CheckPhone(this);
+        });
+        $("#btnGoPhoneRegister").click(function (e) {
+            $("#divForceBindPhone").hide();
+            if ($("#hidIsOpenGeetest").val() == "0") {
+                $("#divGeetest1").hide();
+                $("#divimgcode1").show();
+            }
+            else {
+                $("#divGeetest1").show();
+                $("#divimgcode1").hide();
+            }
+            $("#divPhoneRegister").show();
+        })
+
+        $("#btnGoBindUser").click(function (e) {
+            $("#divForceBindPhone").hide();
+            $("#divUserBind").show();
+        });
+
+        $("#btnPhoneRegister").click(function (e) {
+            var openId = $("#hid_OpenId").val();
+            var openIdType = $("#hid_OpenIdType").val();
+            var nickName = $("#hid_RealName").val();
+            var unionId = $("#hid_UnionId").val();
+            var cellphone = $("#txtCellPhone").val().trim();
+            var headImage = getParam("headimage");
+            var client = $("#client").val();
+            if (cellphone == "" || cellphone.length != 11) {
+                alert_h("请输入正确的手机号码");
+                return;
+            }
+            if (!Reg_mobbile.test(cellphone)) {
+                alert_h("请输入正确的手机号码");
+                return;
+            }
+            var verfiyCode = $("#txtPhoneCode1").val().trim();
+            if (verfiyCode == "" || verfiyCode.length != 4) {
+                alert_h("请输入正确的手机验证");
+                return;
+            }
+            var password = $("#txtPassword1").val();
+            if (password == "" || password.length < 6 || password.length > 20) {
+                alert_h("请输入密码，长度在6-20位之间");
+                return false;
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "CellPhoneRegister", Cellphone: cellphone, VerfiyCode: verfiyCode, Password: password, OpenId: openId, OpenIdType: openIdType, NickName: nickName, UnionId: unionId, HeadImage: headImage,client: client },
+                success: function (resultData) {
+                    if (resultData.Status == "100") {
+                        alert_h(resultData.msg, function (e) {
+                            location.href = "/" + ClientPath + "/MemberCenter";
+                        });
+                    }
+                    else if (resultData.Status == "215") {//手机号已绑定其它账号
+                        if (window.confirm("您输入的手机号已绑定了其它账号，是否登录")) {
+                            $("#divPhoneRegister").hide();
+                            $("#divUserBind").show();
+                        }
+                    }
+                    else {
+                        alert_h(resultData.msg, function (e) {
+                            //$(".att-popup-close").trigger("click");
+                            $("#payment_close").trigger("click");
+                        });
+                    }
+                    refreshCode2();
+                }
+            });
+        });
+        $("#btnUserBind1").click(function (e) {
+            var openId = $("#openId").val();
+            var openIdType = $("#HIGW").val();
+            var nickName = $("#hidNickName").val();
+            var unionId = $("#hidUnionId").val();
+            var username = $("#txtUserName2").val().trim();
+            var password = $("#txtPassword2").val();
+            var headImage = $("#hidHeadImage").val();
+            if (username == "") {
+                alert_h("请输入正确的用户名");
+                return false;
+            }
+            if (password == "" || password.length < 6 || password.length > 20) {
+                alert_h("请输入密码，长度在6-20位之间");
+                return false;
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "OpenIdBindUser", UserName: username, Password: password, OpenId: openId, OpenIdType: openIdType, NickName: nickName, UnionId: unionId, HeadImage: headImage },
+                success: function (resultData) {
+                    if (resultData.Status == "100") {
+                        alert_h(resultData.msg, function (e) {
+                            location.replace("/" + ClientPath + "/MemberCenter");
+                        });
+                    }
+                    else {//
+                        alert_h(resultData.msg);
+                    }
+                }
+            });
+        });
+    });
+    function SetFocus(obj) {
+        if ($(obj).attr("id") == "txtCellPhone") {
+            cellphoneInputIsFocus = true;
+        }
+    }
+
+</script>
+<!---强制绑定手机选择注册或者绑定用户界面-->
+<div id="divForceBindPhone" style="display:none;">
+    <div class="forcebind">
+        <div class="userhead">
+            <div class="headimage">
+                <img src="" id="userPicture" runat="server" ClientIdModel="static" style="border-width:0px;" />
+            </div>
+            <div>
+                亲爱的用户：<asp:Label id="labNickName" runat="server"></asp:Label><br />
+                <span>为了给您更好的服务，请关联一个：已绑定手机号的账号</span>
+            </div>
+            <div class="btnline">
+                <div>还没有账号？</div>
+                <button type="button" id="btnGoPhoneRegister" tabindex="1" autofocus="autofocus" class="btn_phoneregister">快速注册</button>
+            </div>
+            <div class="btnline">
+                <div>已有账号？</div>
+                <button type="button" id="btnGoBindUser" class="btn_binduser">立即关联</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!---快速手机注册界面-->
+<div id="divPhoneRegister" style="display:none;">
+    <form id="cellphoneRegister">
+        <div class="regform">
+            <div class="textline">Hi,<asp:Label id="labNickName1" runat="server" style="float:none;width:auto; font-size:inherit"></asp:Label>，欢迎登录，账号绑定后可一键登录！</div>
+            <div class="notice textline">为了您的账号安全，请绑定手机</div>
+            <div>
+                <span>手机号码：</span>
+                <input type="text" style="width:0px;height:0px;border:none; position:absolute;top:-1000px" />
+                <input type="text" id="txtCellPhone" placeholder="建议使用常用手机" onblur="CheckPhone(this);" style="padding-left: 5px;">
+            </div>
+
+            <div ac="1" style="border-top:0; border-radius:0; display:none;" id="divimgcode1">
+                <span id="sizing-addon1">图形验证：</span>
+                <input id="txtNumber1" type="text" style="width:6rem" placeholder="输入图形验证码">
+                <img id="imgVerifyCode1" onclick="refreshCode1()" src='' style="vertical-align: middle; border-style: none;" alt="" />
+            </div>
+            <div ac="1" style="border-top:0; border-radius:0; display:none;" id="divGeetest1">
+                <span class="yanzheng_captcha" id="captcha1"></span>
+            </div>
+            <div id="phonespan1" style="display:none;">
+                <span id="sizing-addon1">手机验证：</span>
+                <input id="txtPhoneCode1" type="text" style="width:6rem" placeholder="输入手机验证码">
+                <input id="phoneVerifyCode1" type="button" class="yanzhengma_btn phone_loginCode" value="获取验证码"/>
+            </div>
+            <div style="border-radius:0;">
+                <span id="sizing-addon1">设置密码：</span>
+                <input type="password" style="position:absolute;top:-1000px;" />
+                <input id="txtPassword1" type="password" class="setinput" aria-describedby="sizing-addon1" autocomplete="off" placeholder="请输入您的密码">
+            </div>
+            <div>
+                <button type="button" id="btnPhoneRegister" tabindex="1" autofocus="autofocus" class="btn_phoneregister">立即绑定</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+<!---绑定用户界面-->
+<div id="divUserBind" style="display:none;">
+    <div class="regform">
+        <div class="textline">Hi,<asp:Label id="labNickName2" runat="server" style="float:none;width:auto; font-size:inherit"></asp:Label>,欢迎登录,账号绑定后可一键登录！</div>
+        <div style="margin-left: 15%;">
+            <span style="width: 20%;">用户名：</span>
+            <input type="text" id="txtUserName2" placeholder="请输入用户名">
+        </div>
+
+
+        <div style="border-radius:0; margin-left: 10%;">
+            <span id="sizing-addon1" style="width: 25%;">登录密码：</span>
+            <input id="txtPassword2" type="password" class="setinput" aria-describedby="sizing-addon1" placeholder="请输入您的密码">
+        </div>
+        <div class="textline">关联后,您的微信账号和商城注册账号可以登录</div>
+        <div style="padding: 0 0.75rem;">
+            <button type="button" id="btnUserBind1" class="btn_phoneregister">立即绑定</button>
+        </div>
+
+    </div>
+</div>
+
+<div id="divLogin">
+    <form runat="server">
+        <div class="l_form">
+            <div class="bgc">
+                <asp:HiddenField ID="smsenable" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="emailenable" runat="server" ClientIDMode="Static" />
+                <div class="input-group  username">
+                    <span class="input-group-addon" id="sizing-addon1">账号</span>
+                    <input type="text" id="txtUserName" ClientIDMode="Static" class=" setinput" placeholder="请输入用户名/邮箱/手机" aria-describedby="sizing-addon1" runat="server">
+                </div>
+                <div class="input-group password">
+                    <span class="input-group-addon" id="sizing-addon1">密码</span>
+                    <input type="password" id="txtPassword" class="setinput" placeholder="请输入密码" aria-describedby="sizing-addon1">
+                    <a class="showpassword">
+                        <i class="icon_hide"></i>
+                        <i class="icon_show" style="display:none;"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="login">
+                <button type="button" id="btnBindUser" class="btn_login">登 &nbsp;录</button>
+            </div>
+            <div class="skiplogin">
+                <button type="button" id="btnSkipBindUser" class="btn_qx" style="display:none;"><img src="/images/wechat.png" />微信信任登录</button>
+            </div>
+            <%<asp:HiddenField ID="hidIsNeedValidateEmail" runat="server" ClientIDMode="Static" />%>
+            <%<asp:HiddenField ID="hidIsOpenGeetest" runat="server" ClientIDMode="Static" />%>
+            <a class="reg" id="aRegister" href="javascript:void(0)">免费注册</a><a runat="server" class="reg reg_pw" id="forgetPassword" href="/Wapshop/ForgetPassword.aspx">忘记密码</a>
+            <div class="fast-login" runat="server" id="fastlogin">
+                <h3><span>快捷登录</span></h3>
+                <hi:common_link_openid_wap runat="server" id="fastlogin1" />
+            </div>
+        </div>
+    </form>
+
+</div>
+<div id="divRegister" style="display:none;">
+
+    <div class="l_form">
+        <form id="registerForm">
+            <div class="bgc reg_1">
+                <div class="input-group input-group-lg username">
+                    <span class="input-group-addon" id="sizing-addon1">用户名</span>
+                    <input type="text" id="txtRegisterUserName" clientidmode="Static" placeholder="邮箱/手机" onblur="checkLength(this);" runat="server">
+                </div>
+
+                <div class="input-group mail" style="display:none;">
+                    <input id="text_mail" type="url" class="" placeholder="请输入您的邮箱">
+                    <div id="emailList" class="input-group-btn"></div>
+                    <input type="hidden" id="text_email_domain" />
+                </div>
+                <div class="input-group password" style="border-radius:0;">
+                    <span class="input-group-addon " id="sizing-addon1">密码</span>
+                    <input id="text_password" type="password" class=" setinput" aria-describedby="sizing-addon1" placeholder="请输入您的密码">
+                </div>
+                <div class="input-group password">
+                    <span class="input-group-addon" id="sizing-addon1">确认密码</span>
+                    <input id="text_password1" type="password" class=" setinput" aria-describedby="sizing-addon1" placeholder="请确认您的密码">
+                </div>
+                <div class="input-group" id="divRealName" runat="server" visible="false" clientidmode="static">
+                    <span class="input-group-addon">真实姓名</span>
+                    <input id="txtRealName" type="text" placeholder="输入真实姓名">
+                </div>
+                <div class="input-group" id="divSex" runat="server" visible="false" clientidmode="static">
+                    <span class="input-group-addon">性别</span>
+                    <input id="txtSex" type="text" placeholder="请选择性别" readonly value="男士">
+
+                </div>
+                <div class="input-group" id="divBirthday" runat="server" visible="false" clientidmode="static">
+                    <span class="input-group-addon">生日</span>
+                    <input id="txtBirthday" type="text" placeholder="请选择日期">
+                </div>
+                <div class="input-group username" ac="1" style="border-top:0; border-radius:0; display:none;" id="divimgcode">
+                    <span class="input-group-addon" id="sizing-addon1">图形验证</span>
+                    <input id="txtNumber" type="number" style="width:6rem" placeholder="输入图形验证码">
+                    <span class="yanzheng_input2"><img id="imgVerifyCode" onclick="refreshCode()" src='' style="vertical-align: middle; border-style: none;" alt="" /><!--<a href="javascript:refreshCode();">&nbsp;&nbsp;换一张</a>--></span>
+                </div>
+                <div class="input-group username" ac="1" style="border-top:0; border-radius:0; display:none;" id="divGeetest">
+                    <span class="yanzheng_captcha" id="captcha"></span>
+                </div>
+                <div class="input-group username" style="border-top:0; border-radius:0;display:none;" id="divemailcode">
+                    <span class="input-group-addon" id="sizing-addon1">邮箱验证</span>
+                    <input id="txtEmailCode" type="number" style="width:6rem" placeholder="输入邮箱验证码">
+                    <input id="emailVerifyCode" type="button" style="width:auto !important; padding:0 0.5rem;" value="发送验证码" class="yanzhengma_btn" />
+                </div>
+                <div id="phonespan" class="input-group" style="display:none;">
+                    <span class="input-group-addon" id="sizing-addon1">手机验证</span>
+                    <input id="txtPhoneCode" type="text" style="width:6rem" placeholder="输入手机验证码">
+                    <input id="phoneVerifyCode" type="button" style="width:auto !important; padding:0 0.5rem;" value="获取验证码" class="yanzhengma_btn" />
+                </div>
+            </div>
+            <div class="login">
+                <button type="button" id="btnRegisterUser" class="btn_login">注册并绑定这个账号</button>
+            </div>
+            <div class="skiplogin">
+                <!--<button type="button" id="btnOneKeyRegister" class="btn btn-primary">一键注册</button>-->
+            </div>
+            <div class="fast-login" runat="server" id="fastlogin0">
+                <h3><span>快捷登录</span></h3>
+                <hi:common_link_openid_wap runat="server" id="fastlogin2" />
+            </div>
+
+            <p class="text-right"><a id="aLogin" href="javascript:void(0)">我已有账号，立刻去登录！</a></p>
+        </form>
+    </div>
+</div>
+<script src="/script/showpassword.js"></script>
+<script src="/Utility/vshopSelector/vshopSelector.js" type="text/javascript"></script>
+<script src="/Utility/mobiscrolldate/mobiscroll_date.js"></script>
+<script src="/Utility/mobiscrolldate/mobiscroll.js"></script>
+<script src="/Utility/gt.js"></script>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<script type="text/javascript">
+
+
+    function CheckPhone(thisObj) {
+        //alert(cellphoneInputIsFocus)
+        //if (!cellphoneInputIsFocus) {
+        //    return false;
+        //}
+        var value = $(thisObj).val();
+        if (value.length > 0 && !Reg_mobbile.test(value)) {
+            ShowMsg("请输入正确的手机号码", false);
+        }
+
+        refreshCode1();
+
+        if (Reg_mobbile.test(value)) {
+            if (c != value) {
+                refreshCode1();
+                if (captchaObj1) {
+                    captchaObj1.refresh();
+                }
+            }
+            c = value;
+
+            $("#phonespan1").show();
+            $("#divemailcode").hide();
+            if ($("#hidIsOpenGeetest").val() == "0") {
+                $("#divimgcode1").show();
+                $("#divGeetest1").hide();
+            } else {
+                $("#divGeetest1").show();
+                $("#divimgcode1").hide();
+            }
+        }
+        else {
+            $("#phonespan1").hide();
+            $("#divimgcode1").hide();
+        }
+    }
+    var isSubscribe = getParam("IsSubscribe");
+    if (isSubscribe == undefined || isSubscribe == "") {
+        isSubscribe = "false"
+    }
+
+    function refreshCode1() {
+        var img = document.getElementById("imgVerifyCode1");
+
+        if (img != null) {
+            var currentDate = new Date();
+            img.src = "/VerifyCodeImage.aspx?t=" + currentDate.getTime();
+        }
+    }
+
+    function refreshCode() {
+        var img = document.getElementById("imgVerifyCode");
+
+        if (img != null) {
+            var currentDate = new Date();
+            img.src = "/VerifyCodeImage.aspx?t=" + currentDate.getTime();
+        }
+    }
+
+    $("#emailVerifyCode").bind("click", function () {
+        var tempemail = $("#txtRegisterUserName").val();
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*([a-zA-Z0-9])+\.([a-zA-Z]{1,4})$/;
+        if (!myreg.test(tempemail)) {
+            alert('请输入正确的邮箱');
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Handler/MemberHandler.ashx?action=VerficationEmail",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            dataType: "json",
+            data: { email: tempemail },
+            success: function (result) {
+                if (result.success) {
+                    ShowMsg(result.msg, true);
+                } else {
+                    ShowMsg(result.msg, false);
+                }
+            }
+        });
+    });
+    var c;
+    function checkLength(thisObj) {
+        var value = thisObj.value;
+        var placeholder = $("#txtRegisterUserName").attr("placeholder");
+        if (placeholder == "邮箱") {
+            if (value.length > 0 && !Reg_emal.test(thisObj.value)) {
+                //ShowMsg("只能用邮箱注册", false);
+                ShowMsg("请输入正确的邮箱地址", false);
+            }
+        }
+        else if (placeholder == "手机") {
+            if (value.length > 0 && !Reg_mobbile.test(thisObj.value)) {
+                //ShowMsg("只能用手机注册", false);
+                ShowMsg("请输入正确的手机号码", false);
+            }
+        }
+
+        refreshCode();
+        if (Reg_mobbile.test(value)) {
+            if (c != value) {
+                refreshCode();
+                if (captchaObj) {
+                    captchaObj.refresh();
+                }
+            }
+            c = value;
+
+            $("#phonespan").css("display", "");
+            $("#divemailcode").hide();
+            if ($("#hidIsOpenGeetest").val() == "0") {
+                $("#divimgcode").css("display", "");
+            } else {
+                $("#divGeetest").css("display", "");
+            }
+        }
+        else {
+            $("#phonespan").css("display", "none");
+            $("#divimgcode").css("display", "none");
+            if ($("#hidIsNeedValidateEmail").val() == "1") {
+                $("#divemailcode").show();
+                refreshCode2();
+            }
+        }
+    }
+
+    function refreshCode2() {
+        var currentDate = new Date();
+        var url = "VerifyCodeImage.aspx?t=" + currentDate.getTime();
+        $.post(url);
+    }
+
+    var captchaObj, captchaObj1;
+    $(document).ready(function () {
+        if ($("#hidIsOpenGeetest").val() == "1") {//如果开启了极验验证才初始化
+            var handler = function (obj) {
+                // 将验证码加到id为captcha的元素里
+                captchaObj = obj;
+                obj.appendTo("#captcha");
+                captchaObj1 = obj;
+                obj.appendTo("#captcha1");
+            };
+            $.ajax({
+                // 获取id，challenge，success（是否启用failback）
+                url: "/getcaptcha.aspx",
+                type: "get",
+                dataType: "json", // 使用jsonp格式
+                success: function (data) {
+                    // 使用initGeetest接口
+                    // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+                    // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+                    initGeetest({
+                        gt: data.gt,
+                        challenge: data.challenge,
+                        product: "float", // 产品形式
+                        offline: !data.success
+                    }, handler);
+                }
+            });
+        }
+        refreshCode();
+        //
+        //VShop
+        var openIdINUsers = $("#hid_OpenIdINUsers").val() == "true" ? true : false;
+        var wxBindUsers = $("#hid_WxOpenIdBindUsers").val() == "true" ? true : false;
+
+        var openId = getParam("OpenId");
+        var type = $("#hid_OpenIdType").val().toLowerCase();
+        var IsValidationService = $("#hid_IsValidationService").val();
+        if (type == "weixin" || type == "hishop.plugins.openid.weixin") {
+            //   $("#btnSkipBindUser").html("一键登录");
+            //已存在一键注册会员则隐藏一键注册按钮
+            //if (openIdINUsers || wxBindUsers) {
+            //    $("#btnOneKeyRegister").hide();
+            //}
+            //如果微信OpenId或者UnionId已绑定过会员,则显示一健登录按钮
+            if (IsValidationService.toLowerCase() == "true") {
+                if (openId != null && openId != undefined && openId != "") {
+
+                    $("#btnSkipBindUser").show();
+                }
+            } else {
+                $("#btnSkipBindUser").html("跳过绑定,立即登录");
+            }
+        }
+
+
+        var isAuth = $("#hid_IsAuth").val().toLowerCase();
+        var authMsg = $("#hid_AuthMsg").val();
+
+        $("#btnBindUser").html("登录");
+        //if ((type != "weixin" && type != "hishop.plugins.openid.weixin") || openId == "" || openId == null) {
+        //$("#btnOneKeyRegister").hide();
+        //   $("#btnSkipBindUser").hide();
+        //}
+        if (isAuth != "true") {
+            $("#fastlogin").show();
+        }
+        else {
+            if (authMsg == "" && isAuth == "true") {
+                alert_h("登录成功！", function () {
+                    returnUrl = getParam("returnUrl");
+                    var toReferral = getParam("toReferral");
+                    if (toReferral != null && toReferral != "" && toReferral.toLowerCase() == "true") {
+                        location.href = "ReferralRegister.aspx";
+                    }
+                    else {
+                        if (returnUrl != "") {
+                            if (returnUrl.toLowerCase().indexOf("/login") == -1 && returnUrl.toLowerCase().indexOf("/logout") == -1)
+                                location.href = returnUrl;
+                            else
+                                location.href = "/" + ClientPath + "/" + "MemberCenter";
+
+                        }
+                        else
+                            location.href = "/" + ClientPath + "/" + "MemberCenter";
+                    }
+                });
+            }
+
+                ///已授权登录成功的用户返回原来页面
+            else if (authMsg == "Auth_Sucess") {
+
+                $("#btnSkipBindUser").show();
+                $("#fastlogin").hide();
+                $("#btnBindUser").html("确认绑定");
+                $("#btnSkipBindUser").html("跳过绑定,立即登录");
+                alert_h("授权成功！请绑定账号，或者点击跳过绑定自动生成账号。");
+            }
+            else {
+                $("#btnSkipBindUser").hide();
+                $("#fastlogin").show();
+                alert_h("授权失败！" + authMsg, function () {
+
+                });
+            }
+        }
+
+        var action = getParam("action");
+
+        if (action != null && action != "" && action.toLowerCase() == "register") {
+            document.title = "注册";
+            $("#divRegister").show();
+            $("#divLogin").hide();
+
+        }
+        else {
+            document.title = "登录";
+            $("#divRegister").hide();
+            // $("#divLogin").show();
+        }
+
+        $("#btnBindUser").bind("click", function () { BindUser(); }); //绑定商城账号
+        $("#btnSkipBindUser").bind("click", function () { SkipBindUser(); }); //跳过绑定账号自动生成账号
+        $("#btnOneKeyRegister").bind("click", function () { SkipBindUser(); }); //跳过绑定账号自动生成账号
+
+        $("#btnRegisterUser").bind("click", function () { RegisterUser(); }); //注册商城账号
+        $("#aRegister").bind("click", function () {
+            document.title = "注册";
+            $("#divLogin").hide();
+            $("#divRegister").show();
+            $("#vLogin_fastlogin0").hide();
+
+        });
+        $("#aLogin").bind("click", function () { document.title = "登录"; $("#divLogin").show(); $("#divRegister").hide(); });
+
+        var emails = [
+          { text: '@qq.com', selected: true },
+          { text: '@163.com' },
+          { text: '@126.com' },
+          { text: '@sina.com.cn' },
+          { text: '@gmail.com' },
+          { text: '@sohu.com' },
+          { text: '@hotmail.com' },
+          { type: 'divider' },
+          { text: '手动输入', href: "javascript:$('.input-group.mail').after($('#text_mail'));$('.input-group.mail').remove();" }
+        ];
+
+        $('#emailList').vshopSelector({
+            data: emails, height: '34',
+            onchanged: function (item) {
+                $('#text_email_domain').val(item.text);
+            }
+        });
+        $('#emailList .btn-group').removeClass('btn-group').addClass('input-group-btn');
+
+    });
+
+    function SkipBindUser() {
+        //如果开启了强制绑定手机
+        if ($("#hid_QuickLoginIsForceBindingMobbile").val() == "true") {
+            $("#divForceBindPhone").show();
+        }
+        var client = $("#client").val();
+        var openId = $("#hid_OpenId").val();
+        var openIdType = $("#hid_OpenIdType").val();
+        var token = $("#hid_Token").val();
+        var realName = $("#hid_RealName").val();
+        var userId = $("#hid_UserId").val();
+        var email = $("#hid_Email").val();
+        var unionId = $("#hid_UnionId").val();
+        var headImage = getParam("headimage");
+        if (realName == "") {
+            realName = getParam("nickname");
+        }
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "SkipBindUser", openId: openId, openIdType: openIdType, token: token, real_name: realName, user_id: userId, email: email, client: client, unionId: unionId, headImage: headImage, IsSubscribe: isSubscribe },
+            success: function (resultData) {
+                if (resultData.Status == "1") {
+                    //
+                    if (resultData.GiftCouponMsg) {
+                        //注册弹出提示
+                        alert_h(resultData.GiftCouponMsg, WXTrustLoginSucceed(resultData));
+                    } else {
+                        //登录
+                        WXTrustLoginSucceed(resultData);
+                    }
+                }
+                else if (resultData.Status == "-1") {
+                    alert_h("自动生成会员失败，用户名重复");
+                }
+                else if (resultData.Status == "-2") {//强制绑定手机
+                    $("#divRegister").hide();
+                    $("#divLogin").hide();
+                    $("#divFocusBindPhone").show();
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //alert(XMLHttpRequest.status + "-" + XMLHttpRequest.readyState + "-" + textStatus);
+            }
+        });
+    }
+
+    //微信信任登录成功后
+    function WXTrustLoginSucceed(resultData) {
+        if (resultData.StoreId > 0) {
+            location.href = "StoreHome?StoreId=" + resultData.StoreId + "&storeSource=4";
+        }
+        returnUrl = getParam("returnUrl");
+        var toReferral = getParam("toReferral");
+        if (toReferral != null && toReferral != "" && toReferral.toLowerCase() == "true") {
+            location.href = "ReferralRegister.aspx";
+        }
+        else {
+            if (returnUrl != "") {
+                if (returnUrl.toLowerCase().indexOf("/login") == -1 && returnUrl.toLowerCase().indexOf("/logout") == -1) {
+                    location.href = returnUrl;
+                }
+                else {
+                    location.href = "/" + ClientPath + "/" + "MemberCenter";
+                }
+
+            }
+            else {
+                location.href = "/" + ClientPath + "/" + "MemberCenter";
+            }
+        }
+    }
+
+    function BindUser() {
+
+        var username = $.trim($("#txtUserName").val()), password = $.trim($("#txtPassword").val());
+        var openId = getParam("OpenId");
+        var nickname = getParam("nickname");
+        var unionId = $("#hid_UnionId").val();
+        if (openId == null || openId == "") {
+            openId = $("#hid_OpenId").val();
+        }
+        if (nickname == "") {
+            nickname = $("#hid_RealName").val();
+        }
+        var openIdType = $("#hid_OpenIdType").val();
+
+        if (!username) {
+            //  alert_h('用户名不能为空');
+            // alert_h('请填写用户名');
+            ShowMsg('请填写用户名', false);
+        }
+        else if (!password) {
+            ShowMsg('密码不能为空', false);
+            //alert_h('密码不能为空');
+        }
+        else {
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "BindUser", userName: username, password: password, openId: openId, openIdType: openIdType, nickname: nickname, unionId: unionId, IsSubscribe: isSubscribe },
+                success: function (resultData) {
+                    if (resultData.Status == "OK") {
+                        //     ShowMsg("登录成功", true);
+                        returnUrl = getParam("returnUrl");
+                        var toReferral = getParam("toReferral");
+
+                        if (toReferral != null && toReferral != "" && toReferral.toLowerCase() == "true") {
+                            location.href = "ReferralRegister.aspx";
+                        }
+                        else {
+                            if (returnUrl != "") {
+
+                                if (returnUrl.toLowerCase().indexOf("/login") == -1 && returnUrl.toLowerCase().indexOf("/logout") == -1) {
+                                    location.href = returnUrl;
+                                }
+                                else {
+                                    location.href = "/" + ClientPath + "/" + "MemberCenter";
+                                }
+                            }
+                            else {
+                                location.href = "/" + ClientPath + "/" + "MemberCenter";
+                            }
+                        }
+
+                    }
+                    else if (resultData.Status == "-1") {
+                        // ShowMsg("用户名不存在或密码错误，请重试", false);
+                        ShowMsg("用户名不存在或密码错误", false);
+                    }
+                    else if (resultData.Status == "2") {
+                        ShowMsg("您要绑定的用户已经被系统禁止登录", false);
+                    }
+                    else if (resultData.Status == "-3") {
+                        ShowMsg("该账号已被绑定,请绑定其他账号", false);
+                    }
+                    else {
+                        ShowMsg("未知错误, 请重试");
+                    }
+                }
+            });
+        }
+    }
+
+    function RegisterUser() {
+        //VShop
+        var client = $("#client").val();
+        var toReferral = getParam("toReferral");
+        var username = $.trim($("#txtRegisterUserName").val()),
+           email = $.trim($("#text_mail").val() + ($('.input-group.mail').length > 0 ? $('#text_email_domain').val() : '')),
+           password = $.trim($("#text_password").val());
+        var password1 = $.trim($("#text_password1").val());
+        var openId = getParam("OpenId");
+        if (openId == null || openId == "")
+            openId = $("#hid_OpenId").val();
+        var nickname = getParam("nickname");
+        var openIdType = $("#hid_OpenIdType").val();
+        var smsenable = $("#smsenable").val();
+        var emailenable = $("#emailenable").val();
+        var unionId = $("#hid_UnionId").val();
+        var realName = "";
+        var sex = "";
+        var birthDay = "";
+
+        if (nickname == "") {
+            nickname = $("#hid_RealName").val();
+        }
+        if (smsenable == "false") {
+            //只验证邮箱
+            if (!Reg_emal.test(username)) {
+                ShowMsg('请输入正确的邮箱', false);
+                return;
+            }
+        }
+        else {
+            if (emailenable == "false") {
+                //只验证手机
+                if (!Reg_mobbile.test(username)) {
+                    ShowMsg('请输入正确的手机', false);
+                    return;
+                }
+            }
+            else {
+                if (!Reg_emal.test(username) && !Reg_mobbile.test(username)) {
+                    ShowMsg('请输入正确的邮箱或者电话号码', false);
+                    return;
+                }
+            }
+        }
+
+        if (!username || username.length < 6 || username.length > 50) {
+            ShowMsg('用户名不少于6个字符且不超过50字符', false);
+            return;
+        }
+
+        if (!password || password.length < 6 || password.length > 20) {
+            // ShowMsg('密码不少于6个字符且不超过20字符', false);
+            ShowMsg('密码为6-20个字符', false);
+            return;
+        }
+
+        if (password != password1) {
+            // ShowMsg("两次输入不一致.", false);
+            ShowMsg("两次输入的密码不一致", false);
+            return;
+        }
+
+        if ($("#divRealName").get(0)) {
+            realName = $("#txtRealName").val();
+            if (realName.length < 2 || realName.length > 20) {
+                //    ShowMsg('真实姓名不少于6个字符且不超过20字符', false);
+                ShowMsg('请填写您的真实姓名', false);
+                return;
+            }
+        }
+        if ($("#divBirthday").get(0)) {
+            birthDay = $("#txtBirthday").val();
+            if (birthDay.length == 0) {
+                ShowMsg('请输入生日', false);
+                return;
+            }
+        }
+        if ($("#divSex").get(0)) {
+            sex = $("#txtSex").val();
+        }
+
+        var phoneCode;
+        var imgCode;
+        var emailCode;
+        if ($("#phonespan").css("display") != "none") {
+            imgCode = $("#txtNumber").val();
+            if (imgCode.length == 0 && $("#hidIsOpenGeetest").val() == "0") {
+                ShowMsg("请输入图形验证码", false);
+                return;
+            }
+            var r = /^\s*$/g;
+            phoneCode = document.getElementById("txtPhoneCode").value;
+
+            if (r.test(phoneCode)) {
+                ShowMsg('请输入手机验证码', false);
+                return;
+            }
+        }
+
+        if (Reg_emal.test(username) && $("#hidIsNeedValidateEmail").val() == "1") {
+            emailCode = $("#txtEmailCode").val().trim();
+            if (emailCode.length == 0) {
+                ShowMsg('请输入邮箱验证码', false);
+                return;
+            }
+        }
+
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: $("#registerForm").serialize() + "&action=RegisterUser" + "&userName=" + username + "&imgCode=" + imgCode + "&VerifyCode=" + phoneCode + "&email=" + email + "&emailCode=" + emailCode + "&password=" + password + "&client=" + client + "&openId=" + openId + "&openIdType=" + openIdType + "&nickname=" + nickname + "&unionId=" + unionId + "&realName=" + realName + "&gender=" + sex + "&birthday=" + birthDay + "&IsSubscribe=" + isSubscribe,
+            success: function (resultData) {
+                if (resultData.Status == "OK") {
+                    var SuccessMsg = "注册成功！";
+                    if (resultData.GiftCouponMsg)
+                        SuccessMsg = resultData.GiftCouponMsg;
+                    ShowMsg(SuccessMsg, true, function () {
+                        var storeId = 0;
+                        if (resultData.StoreId)
+                            storeId = resultData.StoreId;
+                        if (storeId > 0) {
+                            location.href = "/" + ClientPath + "/" + "StoreHome?storeSource=4&storeId=" + storeId;
+                        } else {
+                            var toReferral = getParam("toReferral");
+                            if (toReferral != null && toReferral != "" && toReferral.toLowerCase() == "true") {
+                                location.href = "/" + ClientPath + "/" + "ReferralRegister.aspx";
+                            }
+                            else {
+                                var returnUrl = getParam("returnUrl");
+                                if (returnUrl != "" && returnUrl.toLowerCase().indexOf("/login") == -1)
+                                    location.href = returnUrl;
+                                else
+                                    location.href = "/" + ClientPath + "/" + "MemberCenter";
+                            }
+                        }
+                    });
+                }
+                else if (resultData.Status == "-1") {
+                    refreshCode();
+                    ShowMsg("用户名已被注册过, 请重试", false);
+                }
+                else if (resultData.Status == "-2") {
+                    refreshCode();
+                    ShowMsg("邮箱已经被注册过, 请重试", false);
+                }
+                else if (resultData.Status == "1") {
+                    refreshCode();
+                    ShowMsg("用户名已经存在", false);
+                }
+                else if (resultData.Status == "2") {
+                    refreshCode();
+                    ShowMsg("此邮箱已被使用", false);
+                }
+                else if (resultData.Status == "3") {
+                    refreshCode();
+                    ShowMsg(resultData.Msg, false);
+                }
+                else if (resultData.Status == "4") {
+                    refreshCode();
+                    ShowMsg("手机号码已经存在", false);
+                }
+                else if (resultData.Status == "5") {
+                    refreshCode();
+                    ShowMsg("手机服务未配置，请使用邮箱注册");
+                }
+                else if (resultData.Status == "6") {
+                    refreshCode();
+                    ShowMsg("图形验证码输入错误", false);
+                }
+                else if (resultData.Status == "8") {
+                    ShowMsg("邮箱验证码错误", false);
+                }
+                else if (resultData.Status == "9") {
+                    ShowMsg("滑动验证未通过", false);
+                }
+                else {
+                    refreshCode();
+                    ShowMsg("注册失败, 请重试", false);
+                }
+            }
+        });
+    }
+
+    //发送手机验证码
+    $(document).ready(function () {
+
+        $("#phoneVerifyCode").click(function () {
+            var phone = document.getElementById("txtRegisterUserName").value;
+            var imgCode = $("#txtNumber").val();
+            if ($("#txtNumber").val().length == 0 && $("#hidIsOpenGeetest").val() == "0") {
+                ShowMsg("请输入图形验证码", false);
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx",
+                data: $("#registerForm").serialize() + "&Phone=" + phone + "&imgCode=" + imgCode + "&action=SendVerifyCode&needValidate=0",
+                success: function (result) {
+
+                    if (result.success == "true") {
+
+                        var time = 1000;
+                        var interval;
+                        var count = 0;
+
+                        function fun() {
+
+                            count++;
+
+                            if (count >= 60) {
+                                $("#phoneVerifyCode").attr("disabled", false);
+                                $("#phoneVerifyCode").attr("value", "重新发送");
+
+                                clearInterval(interval);
+                            }
+                            else {
+                                $("#phoneVerifyCode").attr("value", "发送成功（" + (60 - count) + ")");
+                            }
+                        }
+
+                        $("#phoneVerifyCode").attr("disabled", "true");
+                        interval = setInterval(fun, time);
+                    }
+                    else {
+                        refreshCode();
+                        ShowMsg(result.msg, false);
+                    }
+                }
+            });
+
+        });
+
+        $("#phoneVerifyCode1").click(function () {
+            var phone = $("#txtCellPhone").val();
+            var imgCode = $("#txtNumber1").val();
+            if (imgCode.length == 0 && $("#hidIsOpenGeetest").val() == "0") {
+                ShowMsg("请输入图形验证码", false);
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Handler/MemberHandler.ashx",
+                data: $("#cellphoneRegister").serialize() + "&Phone=" + phone + "&imgCode=" + imgCode + "&action=SendRegisterPhoneCode&needValidate=0",
+                success: function (result) {
+
+                    if (result.success == "true") {
+
+                        var time = 1000;
+                        var interval;
+                        var count = 0;
+
+                        function fun1() {
+
+                            count++;
+
+                            if (count >= 60) {
+                                $("#phoneVerifyCode1").attr("disabled", false);
+                                $("#phoneVerifyCode1").attr("value", "重新发送");
+
+                                clearInterval(interval);
+                            }
+                            else {
+                                $("#phoneVerifyCode1").attr("value", "发送成功（" + (60 - count) + ")");
+                            }
+                        }
+
+                        $("#phoneVerifyCode1").attr("disabled", "true");
+                        interval = setInterval(fun1, time);
+                    }
+                    else {
+                        if (result.msg == "该手机已被使用") {
+                            if (window.confirm("您输入的手机号已绑定了其它账号，是否登录")) {
+                                $("#divPhoneRegister").hide();
+                                $("#divLogin").show();
+                                return;
+                            }
+                        }
+                        refreshCode1();
+
+                        ShowMsg(result.msg, false);
+                    }
+                }
+            });
+
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        var currYear = (new Date()).getFullYear();
+        var opt = {};
+        opt.date = { preset: 'date' };
+        opt.datetime = { preset: 'datetime' };
+        opt.time = { preset: 'time' };
+        opt.default = {
+            theme: 'android-ics light',
+            display: 'modal', //显示方式
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            lang: 'zh',
+            showNow: true,
+            nowText: "今天",
+            startYear: currYear - 80, //开始年份
+            endYear: currYear + 10 //结束年份
+        };
+
+        $("#txtBirthday").mobiscroll($.extend(opt['date'], opt['default']));
+
+    });
+</script>
+
+<script>
+    $(function () {
+        $(".showpassword").click(function () {
+            $('#txtPassword').togglePassword();
+            $(this).children("i").toggle();
+        })
+        if ($("#vLogin_fastlogin a").length == 0) {
+            $("#vLogin_fastlogin").hide();
+        }
+    })
+
+    $("#txtSex").click(function (e) {
+        $('.att-popup').addClass('is-visible');
+    });
+
+    $("#sexed li").click(function () {
+        $("#txtSex").val($(this).text());
+        $('.att-popup').removeClass('is-visible');
+    })
+    $(".close_pop").click(function () {
+        $('.att-popup').removeClass('is-visible');
+    });
+</script>

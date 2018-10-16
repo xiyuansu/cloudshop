@@ -1,0 +1,19 @@
+﻿<%<hi:common_wapheader runat="server" />%>
+<div class="main">
+    <form runat="server" role="form">
+        <%<input type="hidden" runat="server" clientidmode="static" value="20" id="pageTotal" />%>
+        <div class="clearfix" id="accountsummarylist">
+            <%<hi:WapTemplatedRepeater id="rptAccountSummary" templatefile="/Tags/skin-Common_AccountSummary.ascx" runat="server" />%>
+        </div>       
+    </form>
+</div>
+<div id="pager">
+</div>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        vshopPager('pager', $('#pageTotal').val(), 1, 10);
+    });
+</script>
+

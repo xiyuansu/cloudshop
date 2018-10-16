@@ -1,0 +1,243 @@
+﻿<hi:common_wapheader runat="server" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidErrorMsg" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtOrderId" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtRefundType" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtSkuId" />
+<input type="hidden" ClientIDMode="Static" id="hidUploadImages" runat="server" />
+<input type="hidden" id="hidOldImages" ClientIDMode="Static" runat="server" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="txtApplyReason" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidIsServiceOrder" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidOneRefundAmount" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidValidCodes" />
+<form id="form" role="form" runat="server">
+     <div class="att-popup refundtypelist">
+        <div class="att-popup-container">
+            <div class="pay_title">选择退款方式</div>
+            <Hi:WapRefundTypeDropDownList runat="server" id="dropRefundType" ClientIDMode="static" />
+            <a class="btn_submiit">确定</a>
+            <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="payment_close"></a>
+        </div>
+    </div>
+
+    <div class="att-popup applyreasonlist">
+        <div class="att-popup-container">
+            <div class="pay_title">选择申请原因</div>
+            <%<hi:WapAfterSalesReasonDropDownList id="RefundReasonDropDownList" ClientIDMode="static" runat="server"></hi:WapAfterSalesReasonDropDownList>%>
+            <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="payment_close"></a>
+        </div>
+        <a class="btn_submiit pop_btn">确定</a>
+
+    </div>
+
+    <div class="tk_main">
+        <div id="divorderpassword">
+            <h2 class="password-hd">订单密码</h2>
+            <div class="password_group">
+                <hi:WapTemplatedRepeater id="rptOrderPassword" runat="server" templatefile="/Tags/skin-Common_OrderPassowrd.ascx" />
+
+            </div>
+        </div>
+        <div class="tk_group" id="open_applyreason">
+            <label> 申请原因</label>
+            <div class="input-group  applyreason">
+                请选择申请原因
+            </div>
+            <span class="icon_viewdetial"></span>
+        </div>
+        <div class="tk_group">
+            <label> 退款订单</label>
+            <div class="input-group ">
+                <asp:Literal id="litOrderIds" runat="server"></asp:Literal>
+            </div>
+        </div>
+
+        <div class="tk_group" id="divRefundMoney">
+            <label>退款金额</label>
+            <div class="input-group ">
+                <samp><%<asp:Literal ID="litRefundMoney" runat="server" Text="0.00"></asp:Literal>%></samp>元<span id="groupbuyPanel" runat="server" visible="false">&nbsp;(团购商品退款金额不包含违约金)</span>
+            </div>
+        </div>
+
+        <div class="tk_group" id="open_refundtype">
+            <label>退款方式</label>
+            <div class="input-group">
+                请选择退款方式
+            </div>
+            <span class="icon_viewdetial"></span>
+        </div>
+        <div class="tk_group bankinfo"><label>开户银行</label><div class="input-group"><input type="text" placeholder="请输入开户银行" id="txtBankName" value="" maxlength="20" /></div></div>
+        <div class="tk_group bankinfo"><label>开户名字</label> <div class="input-group"><input type="text" placeholder="请输入银行开户名" id="txtBankAccountName" value="" maxlength="20"></div></div>
+        <div class="tk_group bankinfo"><label>银行账号</label> <div class="input-group"><input type="text" placeholder="请输入银行帐号" id="txtBankAccountNo" value="" maxlength="25"></div></div>
+        <div class="tk_group">
+            <label>备注</label>
+            <div class="input-group ">
+                <%<asp:TextBox ID="txtMemo" runat="server" ClientIDMode="Static" placeholder="填写退款备注信息" />%>
+            </div>
+        </div>
+
+    </div>
+    <div class="btn_tk">
+        <input type="button" id="btnApplyRefund" value="申请退款" class="btn_login" />
+        <input type="button" id="btnCancel" onclick="window.history.go(-1);" value="取消" class="btn_qx" />
+    </div>
+
+</form>
+<script language="javascript" type="text/javascript">
+    var returnUrl = getParam("returnUrl");
+    if (returnUrl == undefined || returnUrl == "") {
+        returnUrl = document.referrer;
+    }
+    if (returnUrl == undefined || returnUrl == "") {
+        returnUrl = "MemberOrders.aspx";
+    }
+    var orderpassword = [];
+   
+
+    $(document).ready(function (e) {
+        orderpassword = $("#hidValidCodes").val().split(",");
+        $("input[name='chkorderpassword']").click(function (e) {
+            var password = $(this).val();
+            if (orderpassword.indexOf(password) > -1) {
+                orderpassword.splice(orderpassword.indexOf(password), 1);
+            }
+            else {
+                orderpassword.push(password);
+            }
+            var count = orderpassword.length;
+            var oneRefundAmount = parseFloat($("#hidOneRefundAmount").val());
+            if (isNaN(oneRefundAmount) || oneRefundAmount < 0) {
+                oneRefundAmount = 0;
+            }
+            var refundAmount = (count * oneRefundAmount).toFixed(2);
+            $("#divRefundMoney samp").html(refundAmount);
+        })
+
+        if ($("#hidErrorMsg").val() != "") {
+            alert_h($("#hidErrorMsg").val(), function (e) {
+                document.location.href = returnUrl;
+            });
+
+        }
+
+        if ($("#hidIsServiceOrder").val() == "1") {
+            $("#divorderpassword").show();
+            //  $("#divRefundPassword span.password-txt").html($("#hidValidCodes").val());
+        }
+        else {
+            $("#divorderpassword").hide();
+        }
+
+        $(".bankinfo").hide();
+        $("#open_applyreason").click(function (e) {
+            $('.applyreasonlist').addClass('is-visible');
+            $(".is-visible .att-popup-container").css("top", "0")
+        });
+
+        $("#open_refundtype").click(function (e) {
+            $('.refundtypelist').addClass('is-visible');
+        });
+        if ($("input[name='chk_refundtype']:checked").length > 0) {
+            var refundtype = parseInt($("input[name='chk_refundtype']:checked").val());
+            if (!isNaN(refundtype)) {
+                if (refundtype == 2) {
+                    $(".bankinfo").show();
+                }
+                else {
+                    $(".bankinfo").hide();
+                }
+                $("#txtRefundType").val(refundtype);
+                $("#open_refundtype .input-group").text($("input[name='chk_refundtype']:checked").next().next().html());
+            }
+        }
+        //确认退款方式选择按钮点击
+        $(".refundtypelist .btn_submiit").click(function (e) {
+            var refundtype = parseInt($("input[name='chk_refundtype']:checked").val());
+            if (isNaN(refundtype)) {
+                alert_h("请选择退款方式");
+                return false;
+            }
+            else {
+                if (refundtype == 2) {
+                    $(".bankinfo").show();
+                }
+                else {
+                    $(".bankinfo").hide();
+                }
+                $("#txtRefundType").val(refundtype);
+                $("#open_refundtype .input-group").text($("input[name='chk_refundtype']:checked").next().next().html());
+            }
+            $(".refundtypelist").removeClass('is-visible');
+        });
+
+        //确认申请原因按钮点击
+        $(".applyreasonlist .btn_submiit").click(function (e) {
+            var applyreason = $("input[name='chk_applyreason']:checked").val().Trim();
+            if (applyreason == "") {
+                alert_h("请选择申请原因");
+                return false;
+            }
+            else {
+                $("#txtApplyReason").val(applyreason);
+                $("#open_applyreason .input-group").text($("input[name='chk_applyreason']:checked").next().next().html());
+            }
+            $(".applyreasonlist").removeClass('is-visible');
+        });
+
+        $("#btnApplyRefund").click(function (e) {
+            var reason = $("#txtApplyReason").val().Trim();
+            var bankName = $("#txtBankName").val().Trim();
+            var bankAccountName = $("#txtBankAccountName").val().Trim();
+            var bankAccountNo = $("#txtBankAccountNo").val().Trim();
+            var refundType = parseInt($("#txtRefundType").val().Trim());
+            var memo = $("#txtMemo").val().Trim();
+            var orderId = $("#txtOrderId").val().Trim();
+            var skuId = $("#txtSkuId").val().Trim();
+            var chkValidCodes = "";
+            if (orderpassword.length == 0) {
+                alert_h("请选择要退款的密码");
+                return false;
+            }
+            chkValidCodes = orderpassword.join(",");
+            if (reason == "") {
+                alert_h("请选择退款原因");
+                return false;
+            }
+
+            if (isNaN(refundType) && refundType != 1 && refundType != 2 && refundType != 3) {
+                alert_h("请选择退款方式");
+                return false;
+            }
+            if (refundType == 2 && (bankName == "" || bankAccountName == "" || bankAccountNo == "")) {
+                alert_h("您选择了退款到银行卡,请填写银行卡帐号信息");
+                return false;
+            }
+            var returnUrl = getParam("returnUrl");
+            if (returnUrl == undefined || returnUrl == "") {
+                returnUrl = document.referrer;
+            }
+            if (returnUrl == undefined || returnUrl == "") {
+                returnUrl = "MemberOrders.aspx";
+            }
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "ApplyRefund", orderId: orderId, Remark: memo, refundType: refundType, RefundReason: reason, BankName: bankName, BankAccountName: bankAccountName, BankAccountNo: bankAccountNo, ValidCodes: chkValidCodes },
+                success: function (resultData) {
+                    if (resultData.Status == "1") {
+                        alert_h("退款申请成功！", function () {
+                            location.href = returnUrl;
+                        });
+                    }
+                    else {
+                        alert_h(resultData.msg);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert(XMLHttpRequest.status + "-" + XMLHttpRequest.readyState + "-" + textStatus);
+                }
+            });
+        });
+    });
+
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

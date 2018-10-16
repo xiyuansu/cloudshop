@@ -1,0 +1,140 @@
+﻿<hi:common_wapheader runat="server" />
+<link rel="stylesheet" href="/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/Utility/hishopUpload/hishopUpload.css" />
+<style>
+    .tk_group .input-group input { width: 6rem; }
+    .dropdown-menu { width: 80% !important; overflow-y: scroll !important; }
+    .tk_group ul li { /*overflow: no-display;
+    float: none;
+    line-height: none;
+    padding: 5px 8px;
+    margin-right: 0.8rem;
+    text-align: center;
+    margin-bottom: 10px;*/ border: 0px solid #ddd; }
+    .dropdown-menu li { text-align: left !important; border-bottom: 1px solid #ebebeb !important; margin: 0 !important; padding: 0 !important; line-height: inherit !important; width: 100% !important; }
+    .tk_main h5 { font-style: normal; font-weight: bold; font-size: 0.7rem; }
+    .shopbanner { width: 100%; height: 60px; overflow: hidden; }
+        .shopbanner #imageContainer { width: 90px; float: left; height: 100%; display: block; }
+        .shopbanner .bannerdesc { color: #999; }
+    .modal-dialog { width: 74%; }
+</style>
+<form id="form" role="form" runat="server">
+    <asp:hiddenfield id="hdLink" runat="server" ClientIDMode="Static"></asp:hiddenfield>
+    <input type="hidden" ClientIDMode="Static" id="hidUploadImages" runat="server" />
+    <input type="hidden" ClientIDMode="Static" id="hidOldImages" runat="server" />
+    <div class="tk_main">
+        <h5>店铺Logo:</h5>
+        <div class="shopbanner">
+            <div id="imageContainer">
+                <span name="referralBanner" class="imgbox"></span>
+            </div>
+            <div class="bannerdesc">
+                点击左边的图片修改<br />建议尺寸：240*240像素 小于1MB，支持jpg、gif、png格式
+            </div>
+        </div>
+        <div class="tk_group">
+            <label for="username">店铺名称：</label>
+            <div class="input-group ">
+                <%<asp:TextBox ID="txtShopName" runat="server" ClientIDMode="Static" placeholder="填写您的店铺名称" />%>
+            </div>
+        </div>
+
+        <div class="tk_group">
+            <label>邮箱：</label>
+            <div class="input-group">
+                <%<asp:TextBox ID="txtEmail" runat="server" ClientIDMode="Static" placeholder="填写你的邮箱" />%>
+            </div>
+        </div>
+        <div class="tk_group">
+            <label>联系方式：</label>
+            <div class="input-group">
+                <%<asp:TextBox ID="txtPhone" runat="server" ClientIDMode="Static" placeholder="填写你的手机号码" />%>
+            </div>
+        </div>
+    </div>
+    <div class="btn_tk">
+        <input type="button" id="btnReferral" value="保存信息" class="btn_login" />
+    </div>
+
+</form>
+<script src="/Utility/regionSelector_FileData.js"></script>
+<script type="text/javascript" src="/utility/jquery.hishopUpload.user.js?v=3.4"></script>
+<script type="text/javascript" src="/utility/jquery.form.js"></script>
+<script type="text/javascript">
+    // 初始化图片上传控件
+    function initImageUpload() {
+        var url = ImageUploadPath;
+        var imgSrcs = $("#hidOldImages").val();
+        var arySrcs = imgSrcs.split(',');
+        $('#imageContainer span[name="referralBanner"]').hishopUpload(
+                       {
+                           title: '店铺Banner',
+                           url: url,
+                           imageDescript: '',
+                           displayImgSrc: arySrcs,
+                           imgFieldName: "referralBanner",
+                           defaultImg: '',
+                           pictureSize: '',
+                           imagesCount: 1,
+                           dataWidth: 9,
+                           showDelIcon: false,
+                           foldName: 'referral/banner'
+                       });
+
+    }
+
+    //获取上传成功后的图片路径
+    function getUploadImages() {
+        var aryImgs = $('#imageContainer span[name="referralBanner"]').hishopUpload("getImgSrc");
+        $("#hidUploadImages").val(aryImgs);
+        return true;
+    }
+
+    $(document).ready(function (e) {
+        initImageUpload();
+        $("#btnReferral").click(function (e) {
+            if (!validatorForm()) { return false; }
+            getUploadImages();
+            var data = {};
+            var email = $("#txtEmail").val().trim();
+            var phone = $("#txtPhone").val().trim();
+            var shopName = $("#txtShopName").val().trim();
+
+            data.Email = email;
+            data.Phone = phone;
+            data.ShopName = shopName;
+            data.BannerUrl = $("#hidUploadImages").val();
+            $.post("/api/VshopProcess.ashx?action=UpdateReferralSet", data, function (json) {
+                if (json.success == "true") {
+                    location.href = $("#hdLink").val();
+                }
+                else {
+                    alert_h(json.msg);
+                    refreshCode();
+                }
+            });
+        })
+    });
+    function validatorForm() {
+        if ($("#txtShopName").val().trim().length < 1 || $("#txtShopName").val().trim().length > 100) {
+            alert_h("请输入店铺名称,长度在1-10个字符之间");
+            refreshCode();
+            return false;
+        }
+
+        var tempemail = $("#txtEmail").val();
+
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*([a-zA-Z0-9])+\.([a-zA-Z]{1,4})$/;
+        if (tempemail.length > 0 && !myreg.test(tempemail)) {
+            alert_h('请输入正确的邮箱地址');
+            return false;
+        }
+
+        if ($("#txtPhone").val().length > 0 && !Reg_mobbile.test($("#txtPhone").val())) {
+            alert_h("请输入正确的手机号码");
+            return false;
+        }
+        return true;
+    }
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

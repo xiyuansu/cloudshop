@@ -1,0 +1,306 @@
+﻿<hi:common_wapheader runat="server" />
+<style type="text/css">
+    html, body {
+        height: 100%;
+    }
+</style>
+<div class="changePo">
+    <div class="plr11 search bgfff">
+        <span id="spanCityName" runat="server" ClientIDMode="Static" onclick="goToChooseMapCity()"></span>
+        <form onsubmit="searchKeyword(1); return false;">
+            <div class="memberss">
+                <input type="text" name="keyWord" id="txtKeyWord" value=""  runat="server" ClientIDMode="Static" placeholder="请输入地址" />
+                <button type="button" value="" class="sbutton" onclick="searchKeyword(1)"></button>
+            </div>
+        </form>
+    </div>
+    <div class="fujdz" id="divAdr" style="display:none;">
+        <h2 class="plr11">附近地址</h2>
+        <div class="plr11 bgfff">
+            <ul id="nearAddress"></ul>
+        </div>
+    </div>
+</div>
+<div id="container" style="height: 100%;" class="map_popup_container">
+    <iframe id="mapPage" width="100%" height="100%" frameborder=0 src=""></iframe>
+</div>
+
+<iframe id="geoPage" width=0 height=0 frameborder=0 style="display:none;" scrolling="no" src=""></iframe>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<input type="hidden" runat="server" id="hidQQMapApiKey" clientidmode="Static" />
+<input type="hidden" id="hidLatitude" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidLongitude" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidShippingId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidShipTo" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidCellphone" runat="server" ClientIDMode="Static" />
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $("#divAdr").hide();
+
+        if ($("#spanCityName").html() != "选择城市" && $("#hidLatitude").val() == "") {
+            AddressToLatLng($("#spanCityName").html());
+        } else {
+            if ($("#hidLatitude").val() == "") {
+                var geoPage = "https://apis.map.qq.com/tools/geolocation?key=" + $("#hidQQMapApiKey").val() + "&referer=hishop";
+                $("#geoPage").attr("src", geoPage);
+            } else {
+                getMap();
+            }
+        }
+
+        $("#txtKeyWord").bind('input propertychange', function () {
+            setTimeout(function () {
+                var keyword = $("#txtKeyWord").val();
+                if (keyword.length > 0) {
+                    searchKeyword(1);
+                }
+            }, 300);
+        });
+        $("#txtKeyWord").focus(function () {
+            setTimeout(function () {
+                var keyword = $("#txtKeyWord").val();
+                if (keyword.length > 0) {
+                    searchKeyword(1);
+                }
+            }, 300);
+        });
+
+    });
+    window.addEventListener('message', function (event) {
+        // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
+        var loc = event.data;
+        if (loc && loc.module == 'locationPicker') {//防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
+            $.ajax({
+                url: "/Handler/RegionHandler.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "GetCityByRegionName", city: loc.cityname, address: loc.poiaddress },
+                async: false,
+                success: function (resultData) {
+                    var returnUrl = getParam("returnUrl");
+                    if (resultData.Status == "OK") {
+                        var address = loc.poiname;
+                        address = resultData.Address + loc.poiname;
+                        var url = "region=" + resultData.RegionId + "&shipTo=" + $("#hidShipTo").val() + "&cellphone=" + $("#hidCellphone").val() + "&chooseCity=" + $("#spanCityName").html().trim() + "&latitude=" + loc.latlng.lat + "&longitude=" + loc.latlng.lng + "&regionLocation=" + resultData.County + "&address=" + address;
+                        if ($("#hidShippingId").val() > 0) {
+                            if (returnUrl != null && returnUrl != "" && returnUrl != undefined) {
+                                window.location.href = "EditShippingAddress?ShippingId=" + $("#hidShippingId").val() + "&" + url + "&returnUrl=" + returnUrl;
+                            } else {
+                                window.location.href = "EditShippingAddress?ShippingId=" + $("#hidShippingId").val() + "&" + url;
+                            }
+                        } else {
+                            if (returnUrl != null && returnUrl != "" && returnUrl != undefined) {
+                                window.location.href = "AddShippingAddress.aspx?" + url + "&returnUrl=" + returnUrl;;
+                            } else {
+                                window.location.href = "AddShippingAddress.aspx?" + url;
+                            }
+                        }
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert(XMLHttpRequest.status + "-" + XMLHttpRequest.readyState + "-" + textStatus);
+
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    //alert(XMLHttpRequest + "-" + textStatus);
+                }
+            });
+
+        }
+        if (loc && loc.module == 'geolocation') {
+            if ($("#hidLatitude").val() == "") {
+                $("#hidLatitude").val(loc.lat);
+                $("#hidLongitude").val(loc.lng);
+                $("#spanCityName").html(loc.city);
+            }
+            getMap();
+        }
+    }, false);
+
+    var newMap = "";
+    function getMap() {
+        var longitude = $("#hidLongitude").val();
+        var latitude = $("#hidLatitude").val();
+
+        var mapsrc = "https://apis.map.qq.com/tools/locpicker?search=0&type=1&policy=1&key=" + $("#hidQQMapApiKey").val() + "&referer=hishop";
+        if (longitude != "" && latitude != "") {
+            mapsrc += "&coord=" + longitude + "," + latitude;
+        }
+        if (newMap != mapsrc) {
+            newMap = mapsrc;
+            $("#mapPage").attr("src", mapsrc);
+        }
+    }
+    function goToChooseMapCity() {
+        var url = "shipTo=" + $("#hidShipTo").val() + "&cellphone=" + $("#hidCellphone").val()
+        var returnUrl = getParam("returnUrl");
+        if (returnUrl != null && returnUrl != "" && returnUrl != undefined) {
+            url = url + "&returnUrl=" + returnUrl;
+        }
+        if ($("#hidShippingId").val() > 0) {
+            window.location.href = "ChooseMapCity.aspx?ShippingId=" + $("#hidShippingId").val() + "&" + url;
+        } else {
+            window.location.href = "ChooseMapCity.aspx?" + url;
+        }
+    }
+
+    function AddressToLatLng(address) {
+
+        var data = {
+            address: address,
+            /*换成自己申请的key*/
+            key: $("#hidQQMapApiKey").val(),
+            get_poi: 0
+        }
+        var url = "https://apis.map.qq.com/ws/geocoder/v1/?";
+        data.output = "jsonp";
+        $.ajax({
+            type: "get",
+            dataType: 'jsonp',
+            data: data,
+            jsonp: "callback",
+            jsonpCallback: "QQmap",
+            url: url,
+            success: function (json) {
+                var locationObj = json.result.location;
+                $("#hidLatitude").val(locationObj.lat);
+                $("#hidLongitude").val(locationObj.lng);
+                getMap();
+            },
+            error: function (err) { alert_h("地址转换失败！"); }
+        });
+    }
+
+    var searchService;
+    var pageIndex = 0;
+    var pageCapacity = 10;
+    var geocoder;
+    var hasData = true;
+    $(document).ready(function () {
+        //设置Poi检索服务，用于本地检索、周边检索
+        searchService = new qq.maps.SearchService({
+            //检索成功的回调函数
+            complete: function (results) {
+                //设置回调函数参数
+                var pois = results.detail.pois;
+                if (pois == undefined) {
+                    $("#divMore").html("查询不到数据");
+                }
+                else {
+                    for (var i = 0, l = pois.length; i < l; i++) {
+                        var poi = pois[i];
+                        $("#nearAddress").append('<li onclick="choosePosition(\'' + poi.latLng + '\',\'' + poi.name + '\',\'' + poi.address + '\')"><h3>' + poi.name + '</h3><p>' + poi.address + '</p></li>');
+                    }
+                    if (pois.length < 10) {
+                        $("#divMore").html("附近没有更多地址了");
+                        hasData = false;
+                    }
+                    else {
+                        $("#divMore").html("加载更多...");
+                    }
+                    pageIndex++;
+                }
+            },
+            //若服务请求失败，则运行以下函数
+            error: function () {
+                $("#divMore").html("查询不到数据");
+            }
+        });
+        $("#divAdr").hide();
+        var keyword = $("#txtKeyWord").val();
+        if (keyword != "" && keyword != null) {
+            searchKeyword(1);
+        }
+    });
+
+    //设置搜索的范围和关键字等属性
+    function searchKeyword(index) {
+        if (!isRefresh && index == 2) {
+            isRefresh = true;
+            return;
+        }
+        $("#container").hide();
+        $("#divAdr").show();
+        var keyword = $("#txtKeyWord").val();
+        if (keyword == "") {
+            //alert("请输入要搜索的地址信息");
+            return;
+        }
+        var region = $("#spanCityName").html();
+        if (index == 1) {
+            pageIndex = 0;
+            hasData = true;
+            $("#nearAddress").empty();
+        }
+        else {
+            if (!hasData) {
+                return;
+            }
+        }
+        //根据输入的城市设置搜索范围
+        searchService.setLocation(region);
+        //设置搜索页码
+        searchService.setPageIndex(pageIndex);
+        //设置每页的结果数
+        searchService.setPageCapacity(pageCapacity);
+        //根据输入的关键字在搜索范围内检索
+        searchService.search(keyword);
+    }
+    //--------滚动时，往下加载数据 start--------------
+    var totalheight = 0;     //定义一个总的高度变量
+    function scrollLoadData() {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+        if ($(document).height() - 10 <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+        {
+            searchKeyword(2);
+        }
+    }
+    $(window).scroll(function () {
+        if (hasData)
+            scrollLoadData();
+    });
+    var isRefresh = true;
+    function choosePosition(latLng, name, address) {
+
+        //isRefresh = false;
+        //$("#divAdr").hide();
+        //$("#container").show();
+        //$("#hidLatitude").val(latLng.split(',')[0].trim());
+        //$("#hidLongitude").val(latLng.split(',')[1].trim());
+        //getMap();
+        var cityname = $("#spanCityName").html().trim();
+        $.ajax({
+            url: "/Handler/RegionHandler.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "GetCityByRegionName", city: cityname, address: address },
+            async: false,
+            success: function (resultData) {
+                var returnUrl = getParam("returnUrl");
+                if (resultData.Status == "OK") {
+                    var address = resultData.Address + name;
+                    var url = "region=" + resultData.RegionId + "&shipTo=" + $("#hidShipTo").val() + "&cellphone=" + $("#hidCellphone").val() + "&chooseCity=" + $("#spanCityName").html().trim() + "&latitude=" + latLng.split(',')[0].trim() + "&longitude=" + latLng.split(',')[1].trim() + "&regionLocation=" + resultData.County + "&address=" + address;
+                    if ($("#hidShippingId").val() > 0) {
+                        if (returnUrl != null && returnUrl != "" && returnUrl != undefined) {
+                            window.location.href = "EditShippingAddress?ShippingId=" + $("#hidShippingId").val() + "&" + url + "&returnUrl=" + returnUrl;
+                        } else {
+                            window.location.href = "EditShippingAddress?ShippingId=" + $("#hidShippingId").val() + "&" + url;
+                        }
+                    } else {
+                        if (returnUrl != null && returnUrl != "" && returnUrl != undefined) {
+                            window.location.href = "AddShippingAddress.aspx?" + url + "&returnUrl=" + returnUrl;;
+                        } else {
+                            window.location.href = "AddShippingAddress.aspx?" + url;
+                        }
+                    }
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //alert(XMLHttpRequest.status + "-" + XMLHttpRequest.readyState + "-" + textStatus);
+
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+                //alert(XMLHttpRequest + "-" + textStatus);
+            }
+        });
+    }
+</script>

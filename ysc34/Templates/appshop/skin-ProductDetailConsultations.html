@@ -1,0 +1,14 @@
+﻿<hi:common_appheader runat="server" skinname="/tags/skin-Common_NoLoginHeader.html" />
+<link href="/Utility/imgpreview/mobile-photo-preview.css" rel="stylesheet" />
+<div class="pro_tab mt_0" style="padding:0.75rem">
+    <div class="pro_info" id="tab2">
+        <div style="text-align:center;" visible="false" id="divConsultationEmpty" runat="server">
+            <img src="/images/comment_null.png" style="width:4rem !important;">
+            <div style="text-align:center;margin-top:0.5rem;">暂时没有咨询哦~</div>
+        </div>
+        <ul class="consult" id="ulConsultations" runat="server">
+            <Hi:AppshopTemplatedRepeater ID="rptProductConsultations" TemplateFile="/Tags/skin-Common_ProductConsultation.ascx" runat="server" />
+        </ul>
+    </div>
+</div>
+<hi:common_appfooter runat="server" />

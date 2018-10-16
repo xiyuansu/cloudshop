@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="2" Type="title" Title="" ImageTitle="/templates/master/yueer/UploadImage/titleimg/t4.jpg" TitleImageSize="231*27" />
+  <Comment Id="3" Type="title" Title="" ImageTitle="/templates/master/yueer/UploadImage/titleimg/t5.jpg" TitleImageSize="231*27" />
+  <Comment Id="4" Type="title" Title="" ImageTitle="/templates/master/yueer/UploadImage/titleimg/t6.jpg" TitleImageSize="231*27" />
+  <Comment Id="5" Type="title" Title="" ImageTitle="/templates/master/yueer/UploadImage/titleimg/t7.jpg" TitleImageSize="231*27" />
+  <Comment Id="6" Type="title" Title="" ImageTitle="/templates/master/yueer/UploadImage/titleimg/t8.jpg" TitleImageSize="231*27" />
+  <Comment Id="7" Type="title" Title="本周热销" ImageTitle="" TitleImageSize="231*27" />
+  <Comment Id="8" Type="title" Title="新品上架" ImageTitle="" TitleImageSize="231*27" />
+  <Comment Id="9" Type="title" Title="包邮专区" ImageTitle="" TitleImageSize="231*27" />
+  <Comment Id="10" Type="title" Title="清仓处理" ImageTitle="" TitleImageSize="231*27" />
+  <Comment Id="11" Type="title" Title="商城公告" ImageTitle="" TitleImageSize="231*27" />
+  <Comment Id="12" Type="title" Title="新闻中心" ImageTitle="" TitleImageSize="231*27" />
+  <Comment Id="13" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="" MaxNum="10" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="14" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="15" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="16" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="17" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="18" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="16" ImageSize="118*38" />
+  <Comment Id="19" Type="title" Title="最新上架" ImageTitle="" />
+  <Comment Id="20" Type="category" CategoryId="2" MaxNum="27" />
+  <Comment Id="21" Type="title" Title="最新上架" ImageTitle="" />
+  <Comment Id="22" Type="category" CategoryId="2" MaxNum="27" />
+  <Comment Id="23" Type="title" Title="最新上架" ImageTitle="" />
+  <Comment Id="24" Type="category" CategoryId="2" MaxNum="27" />
+  <Comment Id="25" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="75*34" />
+  <Comment Id="26" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="75*34" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

@@ -1,0 +1,39 @@
+﻿<%<hi:common_header runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Header.ascx" />%>
+<div class="hyzxmain">
+    <div class="hyzxconty">
+        当前位置><span><a href="/">首页</a></span>><span><a href="/user/UserDefault.aspx">会员中心</a></span>><span>
+            <a href="/user/UserConsultationsNotReverted.aspx">咨询回复</a>
+        </span>
+    </div>
+    <div class="hyzxconter">
+        <%<hi:common_user_menu runat="server" />%>
+        <form runat="server">
+            <div class="hyzxconterr">
+                <div class="dingdanxx">
+                    <div class="dingdan_box1">
+                        咨询/回复
+                    </div>
+                    <div class="xgmima">
+                        <div class="nTab1">
+                            <div class="TabTitle">
+                                <ul>
+                                    <li class="normal"><a href="./UserConsultations.aspx">已回复(<%<asp:Literal ID="litreply" runat="server"></asp:Literal>%>)</a></li>
+                                    <li class="active"><a href="./UserConsultationsNotReverted.aspx">未回复（<%<asp:Literal ID="litNotReverted" runat="server"></asp:Literal> %>）</a></li>
+                                </ul>
+                            </div>
+                            <div class="TabContent" style="padding: 30px 0;">
+                                <%<Hi:ThemedTemplatedRepeater ID="dlstPtConsultationReply" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_ReferAndRevert_Refer.ascx" runat="server" /> %>
+                            </div>
+                            
+                        </div>
+                        <div class="page">
+                                <%<Hi:Pager runat="server" ShowTotalPages="true" ID="pagerConsultationReply" />%>
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%<hi:common_footer runat="server" skinname="/ascx/tags/Common_UserCenter/Skin-Common_User_Footer.ascx" />%>

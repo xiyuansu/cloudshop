@@ -1,0 +1,22 @@
+﻿<hi:common_wapheader runat="server" />
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" href="/style/redenvelope.css">
+<form runat="server">
+    <img src="/images/yd_et.jpg" width="100%" />
+
+    <div style="position:relative; ">
+        <img src="/images/yd_ec.jpg" width="100%" />
+        <asp:image id="QRCode" runat="server" style="display:block; margin:0 auto;top:0; position:absolute" ClientIDMode="Static"></asp:image>
+    </div>
+    <img src="/images/yd_eb.jpg" width="100%" />
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document.body).width();
+        var k = $(document.body).width();
+        $('#QRCode').width(k * 0.3);
+        $('#QRCode').height(k * 0.3);
+        var m = $('#QRCode').width(k * 0.3);
+        $('#QRCode').css("left", k / 2 - m.width() / 1.9);
+    })
+</script>

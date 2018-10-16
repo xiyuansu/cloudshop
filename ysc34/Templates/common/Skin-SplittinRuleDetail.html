@@ -1,0 +1,44 @@
+﻿<hi:common_wapheader runat="server" />
+
+<style>
+    body {
+        background: #fff;
+    }
+</style>
+<div class="yj_notes">
+    <div class="title">活动规则</div>
+    <div class="con">
+        <div class="line"></div>
+        <div class="list">
+            <div class="dot icon-icon_dot_24"></div>
+            <b>通过您分享的链接完成注册的会员</b>
+            <em>后续消费您都能获得消费金额的
+                <%<asp:Literal ID="lblSubMemberDeduct" runat="server" />%>%作为奖励。</em>
+        </div>
+
+        <div class="list" id="secondDeduct" runat="server">
+            <div class="dot icon-icon_dot_24"></div>
+            <b>通过您所邀请的会员，后续再邀请了其他会员</b>
+            <em>
+                您能获得这部分会员消费金额的
+                <%<asp:Literal ID="lblSecondLevelDeduct" runat="server" />%>%作为奖励。
+            </em>
+        </div>
+
+        <div class="list" id="threeDeduct" runat="server">
+            <div class="dot icon-icon_dot_24"></div>
+            <b>您的下级会员所发展的会员邀请了其他会员</b>
+            <em>
+                您能获得这部分会员消费金额的
+                <%<asp:Literal ID="lblThreeLevelDeduct" runat="server" />%>%作为奖励。
+            </em>
+        </div>
+
+        <div class="list">
+            <div class="dot icon-icon_dot_24"></div>
+            <b>奖励自动结算，一键提现</b>
+            <em>自动转入您的微信零钱包或支付宝钱包。</em>
+        </div>
+    </div>
+</div>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

@@ -1,0 +1,60 @@
+﻿<Hi:Common_WapHeader  runat="server" />
+<style>
+body{
+     background:#fff;
+      overflow:hidden;
+      width:100%;
+}
+html{
+    width:100%;
+    overflow:hidden;
+}
+</style>
+<section class="c_egg">
+ <form runat="server">
+  <div class="stage">
+    <div id="shape" class="cube no"> 
+       <img src="/images/process/b_egg.jpg" id="e_img"/>
+       <img src="/images/process/t_egg.png" id="e_img2">
+       <img src="/images/process/egg.png" id="eggImg" style="visibility:hidden;position:absolute;"/>
+       <img src="/images/process/egg1.png" id="egg1Img" style="visibility:hidden;position:absolute;"/>
+       <img src="hammer.png" id="hammerImg" style="visibility:hidden;position:absolute;"/>
+       <canvas id="wheelcanvas"  width="300" height="300"></canvas>  
+       <img src="/images/process/e_e.png" id="e_img3">
+	</div>
+  </div>   
+  <div id="content">    
+    <div class="s_exp2">
+       <h2>活动说明:</h2>
+      <p>
+        <asp:Literal runat="server" ID="litActivityDesc" />
+          <input type="hidden" id="hidIsUsePoint" runat="server" clientidmode="Static" />
+      </p>
+    </div>
+    <div class="s_exp2">
+       <h2>活动时间：</h2>
+       <p><asp:Literal runat="server" ID="litStartDate" /></p>
+       <p><asp:Literal runat="server" ID="litEndDate" /></p>
+    </div>
+    <div class="s_exp2">
+       <h2>奖项设置:</h2>
+       <Hi:Common_PrizeNames runat="server" ID="litPrizeNames" />
+    </div>
+    <div class="s_exp2">
+         <h2>中奖用户:</h2>
+         <Hi:Common_PrizeUsers runat="server" ID="litPrizeUsers" />
+   </div>
+  </div>
+     <input type="hidden" id="hidFreeTimes" runat="server" clientidmode="Static" />  
+  </form>    
+    <input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+    <input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static" />
+    <input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static" />
+    <input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static" />
+    <input type="hidden" id="hdLink" runat="server" ClientIDMode="Static" />
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="/Utility/wxShare.js"></script> 
+   
+</section>
+<script type="text/javascript" src="/Utility/egg.js"></script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

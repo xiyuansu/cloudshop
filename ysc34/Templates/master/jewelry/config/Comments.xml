@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="" MaxNum="10" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="2" Type="category" CategoryId="20" MaxNum="8" />
+  <Comment Id="3" Type="title" Title="1F 珠宝手表" ImageTitle="/templates/master/jewelry/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="5" Type="title" Title="2F 珠宝手表" ImageTitle="/templates/master/jewelry/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="6" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="7" Type="title" Title="3F 珠宝手表" ImageTitle="/templates/master/jewelry/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="8" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="9" Type="title" Title="4F 珠宝手表" ImageTitle="/templates/master/jewelry/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="10" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="11" Type="article" Title="商城资讯" ImageTitle="" AdImage="/templates/master/jewelry/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="" MaxNum="5" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="12" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="10" ImageSize="80*40" />
+  <Comment Id="13" Type="title" Title="智能数码" ImageTitle="/templates/master/default/UploadImage/titleimg/floor-T.jpg" TitleImageSize="20*20" />
+  <Comment Id="14" Type="morelink" Title="更多&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="15" Type="keyword" CategoryId="273" MaxNum="10" />
+  <Comment Id="16" Type="category" CategoryId="13" MaxNum="8" />
+  <Comment Id="17" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="75*34" />
+  <Comment Id="18" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="75*34" />
+  <Comment Id="19" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="75*34" />
+  <Comment Id="20" Type="morelink" Title="更多&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="30" Type="title" Title="舒适家居" ImageTitle="/templates/master/default/UploadImage/titleimg/20160810140653_8060.png" TitleImageSize="20*20" />
+  <Comment Id="22" Type="morelink" Title="更多&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="23" Type="category" CategoryId="13" MaxNum="8" />
+  <Comment Id="24" Type="title" Title="休闲零食" ImageTitle="/templates/master/default/UploadImage/titleimg/20160712093045_3594.png" TitleImageSize="20*20" />
+  <Comment Id="25" Type="morelink" Title="更多&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="26" Type="category" CategoryId="13" MaxNum="8" />
+  <Comment Id="27" Type="title" Title="亲子时光" ImageTitle="/templates/master/default/UploadImage/titleimg/20160712093045_3594.png" TitleImageSize="20*20" />
+  <Comment Id="28" Type="morelink" Title="更多&amp;gt;&amp;gt;" CategoryId="" />
+  <Comment Id="29" Type="category" CategoryId="13" MaxNum="8" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="4" ImageSize="118*40" />
+</root>

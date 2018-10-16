@@ -1,0 +1,33 @@
+﻿<hi:Common_AppHeader runat="server" />
+<div class="pbox search">
+    <div class="input-group">
+        <input type="text" id="txtKeywords" class="form-control">
+        <span class="input-group-btn">
+            <button class="searchbtn btn-success" type="button" onclick="searchs()"><span class="glyphicon glyphicon-search"></span></button>
+        </span>
+    </div>
+</div>
+<div class="pbox">
+    <hi:AppshopTemplatedRepeater id="rptSubReferrals" templatefile="/Tags/skin-Common_SubReferrals.ascx"
+                             runat="server" />
+    <div id="pager">
+    </div>
+</div>
+<input type="hidden" value="" runat="server" clientidmode="static" id="txtTotal" />
+<hi:common_wapfooter runat="server" />
+<script src="/Utility/pager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        vshopPager('pager', $('#txtTotal').val(), 1, 10);
+        var keyword = getParam('keyword');
+        $("#txtKeywords").val(unescape(keyword));
+    });
+
+    function searchs() {
+
+        var key = $("#txtKeywords").val();        
+        var url = "/Appshop/SubReferrals?keyword=" + escape(key);
+
+        window.location.href = url;
+    }
+</script>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="4" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="150*60" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="5" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="6" Type="category" CategoryId="309" MaxNum="18" />
+  <Comment Id="7" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="8" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="9" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="10" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="11" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="13" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="14" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="15" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="16" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="17" Type="morelink" Title="更多&gt;&gt;" CategoryId="309" />
+  <Comment Id="18" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="true" MaxNum="12" ImageSize="118*40" />
+  <Comment Id="19" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="1" MaxNum="9" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="27" Type="title" Title="珠宝手表" ImageTitle="/templates/master/kuanping221/UploadImage/titleimg/20140323152551_4695.jpg" TitleImageSize="28*36" />
+  <Comment Id="28" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="1" MaxNum="7" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="29" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="1" MaxNum="7" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="32" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="" MaxNum="7" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="31" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/default/UploadImage/advertimg/20130911162752_6589.jpg" CategoryId="1" MaxNum="7" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="20" Type="title" Title="品牌推荐" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="21" Type="title" Title="限时抢购" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="22" Type="title" Title="第三方旗舰店" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="23" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="24" Type="title" Title="生活用品" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+  
+</root>

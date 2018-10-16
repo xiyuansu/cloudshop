@@ -1,0 +1,71 @@
+﻿<hi:common_wapheader runat="server" />
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<style>
+    body {
+        background: url(/images/reg_bg.jpg) no-repeat;
+        background-size: 100%;
+        text-align: center;
+        background-color: #d84315;
+    }
+
+    .reg_old {
+        width: 12rem;
+        height: 10rem;
+        display: inline-block;
+        background: url(/images/reg_old.png) no-repeat;
+        background-size: 100% 100%;
+        margin: 26% 0 0 0;
+        border-radius: 0 0 3% 3%;
+    }
+
+    .user {
+        width: 3rem;
+        height: 3rem;
+        border: 2px solid #d8d8d8;
+        margin: 0 auto;
+        margin-top: 4.25rem;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+        .user img {
+            width: 100%;
+            height: 100%;
+        }
+
+    .reg_btn {
+        margin-top: 0.75rem;
+        display: inherit;
+    }
+
+        .reg_btn img {
+            width: 9.5rem;
+        }
+
+    p {
+        text-align: center;
+        padding: 0.25rem 0;
+        line-height: 1.8;
+        font-size: 0.6rem;
+    }
+
+    .reg_old span {
+        font-size: 0.7rem;
+        margin-top: 0.75rem;
+        width: 100%;
+        float: left;
+        text-align: center;
+        padding-left: 0.75rem;
+    }
+</style>
+
+<div class="reg_old">
+    <span>您已是我们的老用户</span>
+    <div class="user">
+        <%<asp:Image ID="userPicture" runat="server" ImageUrl="/images/headerimg.png" ClientIDMode="Static" Style="border-radius:100%;" /> %>
+    </div>
+    <p><asp:literal runat="server" id="litUserName" /></p>
+</div>
+<a class="reg_btn" href="SplittinRule.aspx" runat="server" ID="linkInvitation">
+    <img src="/images/reg_old_btn.png" id="btnshare">
+</a>

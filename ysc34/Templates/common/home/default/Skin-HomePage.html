@@ -1,0 +1,666 @@
+﻿<%@ Control Language="C#" %><%@ Register TagPrefix="Hi" Namespace="Hidistro.UI.Common.Controls" Assembly="Hidistro.UI.Common.Controls" %><title>微信首页</title><Hi:WapHeadContainer ID="WapHeadContainer1" runat="server" /><script type="text/javascript">function searchs(v) {var url = "ProductList?keyWord="+v;window.location.href = url;}</script><input type="hidden" id="hdTitle" value="微信首页" /><input type="hidden" id="hdDesc" value="商城描述啊啊啊啊" /><input type="hidden" id="hdImgUrl" value="http://localhost/Storage/master/topic/201702061543555918480.jpg" /><Hi:WapAppDownloadInfo runat="server" id="appdownloadinfo" />
+          <form onsubmit="searchs(escape(($(this).find(':text').eq(0).val()))); return false;">
+        <div class="members_con">
+            <section class="members_search">
+                <input type="text" name="keyWord" id="" value="" placeholder="请输入商品关键字">
+                   <button type="button" value="" onclick="searchs(escape($($(this).prev()).val()))"></button>
+            </section>
+        </div>
+        </form>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=6" title="男鞋">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160523/6359962260703250968778327.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=59" title="休闲零食">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160524/6359968337999437598236297.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/ProductList.aspx?categoryId=52" title="中老年服装">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160524/6359968340571345511546198.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                    
+                    <span class="cur" ></span>
+                    
+                    <span  ></span>
+                    
+                    <span  ></span>
+                    
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con">
+            <section class="custom-space" style="height:10px;"></section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul style="background:#fff;">
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/VShop/FightGroupActivities.aspx"><img data-url="/storage/template/20160523/6359962226681149408616613.png" ></a></span>
+                        <a class="members_nav1_name" href="/VShop/FightGroupActivities.aspx">火拼团</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/wapshop/couponslist.aspx"><img data-url="/storage/template/20160523/6359962231326500451624694.png" ></a></span>
+                        <a class="members_nav1_name" href="/wapshop/couponslist.aspx">优惠券列表</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/CountDownProducts.aspx"><img data-url="/storage/template/20160523/6359962229896803809592241.png" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/CountDownProducts.aspx">限时购</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/vshop/GroupBuyList.aspx"><img data-url="/storage/template/20160523/6359962228892109872328056.png" ></a></span>
+                        <a class="members_nav1_name" href="/vshop/GroupBuyList.aspx">团购</a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul style="background:#fff;">
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/wapshop/couponslist.aspx"><img data-url="/storage/template/20160523/6359962230512432741044348.png" ></a></span>
+                        <a class="members_nav1_name" href="/wapshop/couponslist.aspx">优惠券列表</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/wapshop/articles"><img data-url="/storage/template/20160523/6359962229387425547481287.png" ></a></span>
+                        <a class="members_nav1_name" href="/wapshop/articles">文章列表</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/wapshop/StoreList"><img data-url="/storage/template/20160523/6359962232054630118633107.png" ></a></span>
+                        <a class="members_nav1_name" href="/wapshop/StoreList">周边门店</a>
+                    </li>
+                    
+                    
+                     
+                    <li class="lisw4">
+                        <span><a href="/wapshop/PointMall.aspx"><img data-url="/storage/template/20160523/6359962225846763727565219.png" ></a></span>
+                        <a class="members_nav1_name" href="/wapshop/PointMall.aspx">积分商城</a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="custom-space" style="height:10px;"></section>
+        </div>
+        
+        <div class="members_con">
+            <div class="fulltext"><table><tbody><tr class="firstRow"><td width="246" valign="top"><p><img data-url="/storage/template/20160524/6359968264383072613469967.png"/>
+                </p></td><td width="246" valign="top" style="word-break: break-all;"><p><img data-url="/storage/template/20160524/6359968265998718296200352.png"/>
+                </p></td></tr></tbody></table></div>
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="/vshop/Scratch.aspx?activityid=229" title="刮刮卡">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160523/6359962284403402646973492.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="/vshop/SmashEgg.aspx?activityid=230" title="砸金蛋">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160523/6359962340343137272442030.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                    
+                    <span class="cur" ></span>
+                    
+                    <span  ></span>
+                    
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160523/6359962329800814831348778.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con">
+            <section class="members_special titlestyle2 center">
+                <h2 class=" j-title">
+                    主题馆
+                </h2>
+                <!--<p class="j-subtitle">『副标题』</p>-->
+                <!---->
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <div class="fulltext"><table><tbody><tr class="firstRow"><td width="112" valign="top" style="word-break: break-all;"><p><img data-url="/storage/template/20160523/6359962358937055668904658.png"/></p><p><img data-url="/storage/template/20160523/6359962379788752434534151.png"/></p><p><img data-url="/storage/template/20160523/6359962358937055668904658.png"/></p></td><td width="112" valign="top" style="word-break: break-all;"><p><img data-url="/storage/template/20160523/6359962359580809787570384.png"/></p><p><img data-url="/storage/template/20160523/6359962380701264115713079.png"/></p><p><img data-url="/storage/template/20160523/6359962359580809787570384.png"/></p></td><td width="112" valign="top" style="word-break: break-all;"><p><img data-url="/storage/template/20160523/6359962360218313862722786.png"/></p><p><img data-url="/storage/template/20160523/6359962381446586152435879.png"/></p><p><img data-url="/storage/template/20160523/6359962360218313862722786.png"/></p><p><br/></p></td><td width="112" valign="top" style="word-break: break-all;"><p><img data-url="/storage/template/20160523/6359962360865193007847003.png"/></p><p><img data-url="/storage/template/20160523/6359962382243471354301837.png"/></p><p><img data-url="/storage/template/20160523/6359962360865193007847003.png"/></p></td></tr></tbody></table></div>
+        </div>
+        
+        <div class="members_con" style="margin:0 auto">
+            
+            <section class="members_flash j-swipe" id="mySwipe">
+                <ul class="clearfix">
+                    
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160523/6359962340343137272442030.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="" title="">
+                                    
+                                    
+                                    <img data-url="/storage/template/20160523/6359962284403402646973492.png" width="100%" />
+                                    
+                                    
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+                <section class="members_flash_time">
+                    
+                    
+                    <span class="cur" ></span>
+                    
+                    <span  ></span>
+                    
+                    
+                </section>
+            </section>
+            
+        </div>
+        
+        <div class="members_con">
+            <section class="members_special titlestyle2 left">
+                <h2 class=" j-title">
+                    猜你喜欢
+                </h2>
+                <!--<p class="j-subtitle">『副标题』</p>-->
+                <!---->
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <div class="fulltext"><table><tbody><tr class="firstRow"><td width="246" valign="top"><p><img data-url="/storage/template/20160523/6359962504330537195823566.png"/></p></td><td width="246" valign="top" style="word-break: break-all;"><p><img data-url="/storage/template/20160523/6359962504966478766746722.png"/></p></td></tr></tbody></table></div>
+        </div>
+        
+        <div class="members_con">
+            <div class="fulltext"><p><strong>    客服电话  400 888 888</strong></p><p><span style="font-size: 12px;">     Copyright@长沙互站网络科技有限公司</span></p></div>
+        </div>
+        <Hi:GoodsMobule runat="server" IsApp="False" Layout="5" ShowName="1" IDs="174,154,155,156,213" ShowIco="True" ShowPrice="True" DataUrl="/api/Hi_Ajax_GoodsList.ashx" ID="goods_5b5bbba003e14917a9affef42b83e36c" TemplateFile="/admin/shop/Modules/GoodGroup5.cshtml"    /><Hi:GoodsListModule runat="server" IsApp="False" Type="goodGroup" Layout="4" ShowName="True" ShowIco="True" ShowPrice="True" DataUrl="/api/Hi_Ajax_GoodsListGroup.ashx" ID="list_51ccdabbfeed4c3fa25c3e7d4ec55878" TemplateFile="/Admin/shop/Modules/GoodGroup4.cshtml"  GoodListSize="6" FirstPriority="1"  SecondPriority="3"  ThirdPriority="5"   />
+        <div class="members_con">
+            <section class="members_nav1">
+                <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board3 big_board">
+                        <span>
+                            <a href="/wapshop/BrandDetail.aspx?BrandId=34">
+                                
+                                <img data-url="https://imageysc.huz.cn/Storage/master//brand/fb50f9463aed4764b9d65557daa75e25.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board3 small_board">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=251">
+                                
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281511587413820.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board3 small_board">
+                        <span>
+                            <a href="/wapshop/ProductList.aspx">
+                                
+                                <img data-url="https://imageysc.huz.cn/Storage/master//brand/fb50f9463aed4764b9d65557daa75e25.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board4 big_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=253">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708290945549289180.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 mid_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=251">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281511587413820.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 small_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=249">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281509519758300.bmp">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board4 small_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=248">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708251131117414570.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board6 mid1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=253">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708290945549289180.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=250">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281510473195910.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=248">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708251131117414570.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 mid1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=247">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708241134382460660.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=247">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708241134382460660.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 small1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=250">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281510473195910.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=253">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708290945549289180.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=253">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708290945549289180.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=251">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281511587413820.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=249">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281509519758300.bmp">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=251">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281511587413820.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board6 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=253">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708290945549289180.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        
+        <div class="members_con">
+            <section class="members_nav1">
+           <ul class="clearfix">
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=253">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708290945549289180.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=251">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281511587413820.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=250">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281510473195910.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 big1_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=249">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281509519758300.bmp">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=247">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708241134382460660.jpg">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=249">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708281509519758300.bmp">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=245">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708231508151243540.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                    <li class="board8 small2_img">
+                        <span>
+                            <a href="/ProductDetails.aspx?productId=245">
+             
+                                <img data-url="/Storage/master/product/thumbs310/310_201708231508151243540.png">
+                                
+                            </a>
+                        </span>
+                    </li>
+                    
+                    
+                    
+                </ul>
+            </section>
+        </div>
+        

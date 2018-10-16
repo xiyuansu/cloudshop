@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+  <Module Title="系统" Link="store/sitecontent">
+    <Item Title="基本设置" privilege="1001" Link="store/sitecontent" icon="icon_setting" Authorization="0">
+      <PageLink Title="基本设置" Link="store/sitecontent" Authorization="0"/>
+      <PageLink Title="消息提醒" privilege="1022" Link="tools/sendmessagetemplets" Authorization="12345"/>
+      <PageLink Title="在线客服" Link="store/OnlineService" Authorization="12345"/>
+      <PageLink Title="注册设置" Link="store/RegisteSetting" Authorization="12345"/>
+    </Item>
+    <Item Title="支付配送" privilege="5011" Link="sales/paymenttypes" icon="icon_PandT" Authorization="0">
+      <PageLink  Title="运费模板" Link="sales/manageshippingtemplates" Authorization="0"/>
+      <PageLink  Title="物流公司" privilege="5026" Link="sales/LogisticsCompany" Authorization="0"/>
+      <PageLink  Title="达达物流配置" privilege="1014" Link="Store/DadaLogistics" Authorization="0"/>
+      <PageLink  Title="支付设置" Link="sales/paymenttypes" Authorization="12345"/>
+      <PageLink  Title="提现设置" Link="sales/cashsetting" Authorization="1234567"/>
+      <PageLink  Title="区域管理" Link="sales/areamanage" Authorization="0"/>
+    </Item>
+    <Item Title="权限安全"  Link="store/managers" icon="icon_authority" Authorization="0">
+      <PageLink  Title="部门管理" Link="store/roles" Authorization="0"/>
+      <PageLink  Title="管理员管理"  Link="store/managers" Authorization="0"/>
+      <PageLink  Title="操作日志" Link="store/managelogs" Authorization="0"/>
+      <PageLink  Title="数据库管理" Link="tools/restoredatabase" Authorization="0"/>
+    </Item>
+    <Item  Title="SEO优化" privilege="3022" Link="product/selectcategory" icon="icon_seo" Authorization="0">
+      <PageLink  Title="sitemap站点地图" Link="tools/sitemap" Authorization="0"/>
+    </Item>
+    <Item Title="图库" icon="icon_gallery">
+      <PageLink  Title="图片库" Link="store/imagedata" Authorization="0"/>
+      <PageLink  Title="图片分类" Link="store/imagetype" Authorization="0"/>
+    </Item>
+  </Module>
+
+  <Module Title="页面" Link="store/managethemes">
+    <Item Title="页面管理" icon="icon_pages" Authorization="12345">
+      <PageLink  Title="PC端首页模板" Link="store/managethemes" Authorization="1"/>
+      <PageLink  Title="PC端页头" Link="store/setheadermenu" Authorization="1"/>
+      <PageLink  Title="移动端首页模板" Link="store/WapThemeSettings" Authorization="234"/>
+      <PageLink  Title="移动端导航" Link="store/ShopMenu" Authorization="234"/>
+      <PageLink  Title="移动端分类模板" Link="store/WapCategoryTemplates" Authorization="2345"/>
+      <PageLink  Title="自定义页面" Link="store/WapTopicList" Authorization="12345"/>
+    </Item>
+    <Item Title="内容管理" icon="icon_content" Authorization="12345">
+      <PageLink  Title="商城公告" Link="comment/affichelist" Authorization="1"/>
+      <PageLink  Title="友情链接" Link="store/friendlylinks" Authorization="1"/>
+      <PageLink  Title="热门关键字" Link="store/managehotkeywords" Authorization="12345"/>
+    </Item>
+    <Item Title="文章列表" icon="icon_article" Authorization="12345">
+      <PageLink  Title="文章列表" Link="comment/articlelist" Authorization="12345"/>
+      <PageLink  Title="文章分类" Link="comment/ArticleCategories" Authorization="12345"/>
+    </Item>
+    <Item Title="帮助管理" icon="icon_faq" Authorization="1">
+      <PageLink  Title="帮助管理" Link="comment/helplist" Authorization="1"/>
+      <PageLink  Title="分类管理" Link="comment/HelpCategories" Authorization="1"/>
+    </Item>
+  </Module>
+
+  <Module Title="商品" Link="product/productonsales">
+    <Item Title="商品管理"  icon="icon_gmgr" Authorization="0">
+      <PageLink  Title="商品发布" Link="product/selectcategory" privilege="3040" Authorization="0"  />
+      <PageLink  Title="商品列表" Link="product/productonsales" Authorization="0"/>
+      <PageLink  Title="商品回收站" Link="product/ProductOnDeleted" Authorization="0"/>
+      <PageLink Title="商品咨询" Link="comment/productconsultations" Authorization="0"/>
+      <PageLink Title="商品评论" Link="comment/productreviews" Authorization="0"/>
+      <PageLink  Title="批量上传商品" privilege="3041" Link="product/importfromtb" Authorization="0"/>
+      <PageLink  Title="批量导出商品" privilege="3021" Link="product/exporttotb" Authorization="0"/>
+      <PageLink  Title="商品扩展分类" Link="product/ProductUnclassified" Authorization="0"/>
+    </Item>
+    <Item Title="品牌 / 标签" icon="icon_tag" Authorization="0">
+      <PageLink  Title="商品品牌" Link="product/brandcategories" Authorization="0"/>
+      <!--<PageLink  Title="品牌模板" Link="product/SetBrandCategoryTemplate"/>-->
+      <PageLink  Title="商品标签" Link="product/producttags" Authorization="0"/>
+    </Item>
+    <Item Title="商品配置"  icon="icon_goodsetting" Authorization="0">
+      <PageLink  Title="商品分类" privilege="3009" Link="product/managecategories" Authorization="0"/>
+      <PageLink  Title="商品类型" privilege="3005" Link="product/producttypes" Authorization="0"/>
+    </Item>
+    <Item Title="淘宝业务管理" Link="product/taobaonote" icon="icon_wangwang" Authorization="0">
+      <PageLink  Title="直通精灵介绍" Link="product/taobaonote" Authorization="0"/>
+    </Item>
+  </Module>
+
+  <Module Title="订单" Link="sales/manageorder">
+    <Item Title="订单管理" icon="icon_ordermanage" Authorization="0">
+      <PageLink  Title="订单列表" privilege="5001" Link="sales/manageorder" Authorization="0"/>
+      <PageLink  Title="核销码记录" Link="sales/verifications" Authorization="0"/>
+      <PageLink  Title="订单设置" Link="sales/setorderoption" Authorization="0"/>
+    </Item>
+    <Item Title="退换货(款)" icon="icon_exchange" Authorization="0">
+      <PageLink  Title="退款申请单" privilege="5011" Link="sales/refundapply" Authorization="0"/>
+      <PageLink  Title="退货申请单" privilege="5012" Link="sales/returnsapply" Authorization="0"/>
+      <PageLink  Title="换货申请单" privilege="5013" Link="sales/replaceapply" Authorization="0"/>
+    </Item>
+    <Item Title="快递单管理" icon="icon_express" Authorization="0">
+      <PageLink  Title="快递单模板" Link="sales/expresstemplates" Authorization="0"/>
+      <PageLink  Title="自定义打印项" Link="sales/customprintitems" Authorization="0"/>
+      <PageLink Title="发货人信息管理" Link="sales/shippers" Authorization="0"/>
+    </Item>
+    <Item Title="同步京东" icon="icon_syn" Authorization="0">
+      <PageLink  Title="参数设置" Link="sales/JdSettings" Authorization="0"/>
+      <PageLink  Title="同步订单" Link="sales/jdorder" Authorization="0"/>
+    </Item>
+  </Module>
+
+  <Module Title="会员" Link="member/managemembers" Authorization="0">
+    <Item Title="会员管理" privilege="4005" Link="member/managemembers" icon="icon_member" Authorization="0">
+      <PageLink Title="会员列表" Link="member/managemembers" Authorization="0"/>
+      <PageLink Title="会员等级" Link="member/membergrades" Authorization="0"/>
+      <PageLink  Title="标签管理" Link="member/MemberTags" Authorization="0"/>
+      <PageLink  Title="会员分层" Link="member/MemberChart" Authorization="0"/>
+      <PageLink Title="积分管理" Link="member/memberpointlist" Authorization="0"/>
+    </Item>
+    <Item Title="预付款管理" icon="icon_prepayment" Authorization="12345">
+      <PageLink Title="预付款管理" privilege="4010" Link="member/accountsummarylist" Authorization="12345"/>
+      <PageLink Title="预付款报表"  Link="member/balancestatistics" Authorization="12345"/>
+    </Item>
+
+    <Item Title="提现管理" icon="icon_withdraw" Authorization="12345">
+      <PageLink  Title="预存款提现" Link="sales/drawrequestconfig" Authorization="12345"/>
+      <PageLink Title="提现申请" privilege="4011" Link="member/balancedrawrequest" Authorization="12345"/>
+      <PageLink Title="提现报表" Link="member/drawrequeststatistics" Authorization="12345"/>
+    </Item>
+    <Item Title="站内信" privilege="2008" Link="distribution/distributorrequests" icon="icon_feedback" Authorization="1">
+      <PageLink  Title="收件箱" Link="comment/receivedmessages" Authorization="1"/>
+      <PageLink  Title="发件箱" Link="comment/sendedmessages" Authorization="1"/>
+    </Item>
+    <Item Title="信任登录" privilege="4018" Link="member/openidservices" icon="icon_trustlogin" Authorization="134">
+      <PageLink Title="信任登录列表" Link="member/openidservices" Authorization="134"/>
+    </Item>
+
+  </Module>
+
+  <Module Title="供应商" Link="Supplier/Order/ManageOrder">
+    <Item Title="供应商管理" Link="Supplier/SupplierList" icon="icon_frontstore" Authorization="7">
+      <PageLink  Title="供应商列表" Link="Supplier/SupplierList" Authorization="7"/>
+    </Item>
+    <Item Title="商品管理" icon="icon_gmgr" Authorization="7">
+      <PageLink  Title="待审核商品" Link="Supplier/Product/AuditProductList" Authorization="7"/>
+      <PageLink  Title="商品列表" Link="Supplier/Product/ProductList" Authorization="7"/>
+    </Item>
+    <Item Title="订单管理" icon="icon_ordermanage" Authorization="7">
+      <PageLink  Title="订单列表"   Link="Supplier/Order/ManageOrder" Authorization="7"/>
+      <PageLink  Title="退款申请单"  Link="Supplier/Order/RefundApply" Authorization="7"/>
+      <PageLink  Title="退货申请单"  Link="Supplier/Order/ReturnsApply" Authorization="7"/>
+      <PageLink  Title="换货申请单"  Link="Supplier/Order/ReplaceApply" Authorization="7"/>
+    </Item>
+    <Item Title="财务管理" icon="icon_withdraw" Authorization="7">
+      <PageLink Title="结算对账" Link="Supplier/Balance/RquestStatistics" Authorization="7"/>
+      <PageLink Title="提现申请" Link="Supplier/Balance/DrawRequest" Authorization="7"/>
+    </Item>
+  </Module>
+
+  <Module Title="门店" Link="depot/StoresList">
+    <Item Title="门店管理" Link="depot/StoresList" icon="icon_frontstore" Authorization="6">
+      <PageLink  Title="门店列表" Link="depot/StoresList" Authorization="6"/>
+      <PageLink  Title="门店分销" Link="depot/StoresExpand" Authorization="6"/>
+      <PageLink  Title="门店设置" Link="depot/Setting/Config" Authorization="6"/>
+    </Item>
+    <Item Title="结算管理" icon="icon_settlement" Authorization="6">
+      <PageLink  Title="门店账户" Link="depot/storeaccount" Authorization="6"/>
+      <PageLink  Title="结算列表" Link="depot/storebalance" Authorization="6"/>
+      <PageLink Title="提现申请" Link="Depot/DrawRequest" Authorization="6"/>
+      <PageLink  Title="发货统计" Link="depot/sendgoodorders" Authorization="6"/>
+    </Item>
+    <!--<Item Title="ibeacon管理" icon="icon_ibeacon">
+      <PageLink  Title="设备管理" Link="depot/IbeaconEquipmentList"/>
+      <PageLink  Title="页面管理" Link="depot/IbeaconPageList"/>
+      <PageLink  Title="效果统计" Link="depot/IbeaconEffectStatic"/>
+    </Item>-->
+    <Item Title="HiPOS管理" icon="icon_pos" Authorization="6">
+      <PageLink  Title="HiPOS设置" Link="depot/SetHiPOS" Authorization="6"/>
+      <PageLink  Title="HiPOS绑定" Link="depot/BindHiPOS" Authorization="6"/>
+      <PageLink  Title="HiPOS交易" Link="depot/HiPOSDetails" Authorization="6"/>
+    </Item>
+  </Module>
+
+  <Module Title="分销员" Link="member/referrals">
+    <Item Title="分销员管理" icon="icon_tuiguangyuan" Authorization="9">
+      <PageLink  Title="分销员审核" Link="member/referralrequest" Authorization="9"/>
+      <PageLink  Title="分销员列表" Link="member/referrals" Authorization="9"/>
+      <PageLink  Title="分销员等级" Link="member/ReferralGrades" Authorization="9"/>
+      <PageLink  Title="分销设置" Link="member/deductsettings" Authorization="9"/>
+    </Item>
+    <Item Title="佣金管理" icon="icon_yongjinguanli" Authorization="9">
+      <PageLink  Title="提现申请" Link="member/splittindrawrequest" Authorization="9"/>
+      <PageLink  Title="历史提现" Link="member/splittindrawrecord" Authorization="9"/>
+    </Item>
+  </Module>
+
+  <Module Title="营销" Link="promotion/PromotionAggregation" IsPromote="1">
+    <Item Title="营销中心" icon="icon_sale" Authorization="0">
+      <PageLink  Title="有买有送" Link="promotion/productpromotions" Authorization="0"/>
+    </Item>
+  </Module>
+  <Module Title="统计" Link="Report/TransactionAnalysisReport" Authorization="0">
+    <!--<Item Title="网站流量统计" icon="icon_flowstatistic">
+      <PageLink  Title="统计功能配置" Link="tools/cnzzstatisticsset"/>
+      <PageLink  Title="查看统计结果" Link="tools/cnzzstatistictotal"/>
+    </Item>-->
+    <Item Title="统计分析" icon="icon_flowstatistic" Authorization="0">
+      <PageLink  Title="交易分析" Link="Report/TransactionAnalysisReport" Authorization="0"/>
+      <PageLink  Title="流量分析" Link="Report/TrafficReport" Authorization="0"/>
+      <PageLink  Title="商品分析" Link="Report/ProductReport" Authorization="0"/>
+      <PageLink  Title="会员分析" Link="Report/MemberReport" Authorization="0"/>
+      <PageLink  Title="微信粉丝增长分析" Link="Report/WXFansReport" Authorization="2"/>
+      <PageLink  Title="微信粉丝互动分析" Link="Report/WXFansInteractReport" Authorization="2"/>
+    </Item>
+  </Module>
+
+  <Module Title="微商城" Link="vshop/VServerConfig">
+    <Item Title="微信配置" privilege="5001" Link="vshop/VServerConfig" icon="icon_wesetting" Authorization="2" >
+      <PageLink Title="基本配置" Link="vshop/VServerConfig" Authorization="2"/>
+      <PageLink Title="自定义回复" Link="vshop/ReplyOnKey" Authorization="2"/>
+      <PageLink  Title="自定义菜单" Link="vshop/ManageMenu" Authorization="2"/>
+      <!--<PageLink  Title="支付设置" Link="vshop/PayConfig"/>-->
+    </Item>
+    <!--<Item Title="店铺导航" icon="icon_template">
+      <PageLink  Title="店铺导航" Link="vshop/ShopMenu"/>
+    </Item>-->
+
+  </Module>
+  <Module Title="App" Link="App/AppProductSetting">
+    <Item Title="首页配置" privilege="6001" Link="App/AppProductSetting" icon="icon_hpsetting" Authorization="5">
+      <PageLink Title="商品配置" Link="App/AppProductSetting"  Authorization="5"/>
+      <PageLink  Title="首页编辑" Link="App/ShopTempEdit" Target="_blank" Authorization="5"/>
+    </Item>
+    <Item Title="基本设置" privilege="6002" Link="App/AndroidUpgrade" icon="icon_version" Authorization="5">
+      <PageLink Title="版本管理" Link="App/AndroidUpgrade"  Authorization="5"/>
+      <!--<PageLink  Title="启动页图片" Link="App/StartPageSet" Authorization="5"/>-->
+      <PageLink  Title="支付配置" Link="App/AppAliPaySet" Authorization="5"/>
+    </Item>
+    <Item Title="自定义推送" privilege="6003" Link="App/PushSet" icon="icon_notification" Authorization="5">
+      <PageLink  Title="推送设置" Link="App/PushSet" Authorization="5"/>
+      <PageLink  Title="消息列表" Link="App/PushRecords" Authorization="5"/>
+    </Item>
+  </Module>
+  <Module Title="生活号" Link="AliOH/AliOHServerConfig">
+    <!--<Item Title="店铺导航" icon="icon_hpsetting">
+      <PageLink  Title="店铺导航" Link="AliOH/ShopMenu"/>
+    </Item>-->
+    <Item Title="生活号配置" icon="icon_alipay" Authorization="4">
+      <PageLink  Title="基本配置" Link="AliOH/AliOHServerConfig" Authorization="4"/>
+      <PageLink  Title="自定义菜单" Link="AliOH/ManageMenu" Authorization="4"/>
+      <!--<PageLink Title="支付设置" Link="AliOH/AliOHAliPaySet" />-->
+    </Item>
+  </Module>
+  <Module Title="小程序" Link="Applet/AppletSetting">
+    <!--<Item Title="店铺导航" icon="icon_hpsetting">
+      <PageLink  Title="店铺导航" Link="WAP/ShopMenu"/>
+    </Item>-->
+    <Item Title="商城小程序" icon="icon_wesetting" Authorization="8">
+      <PageLink  Title="商品配置" Link="Applet/AppletSetting" Authorization="8"/>
+      <PageLink  Title="首页编辑" Link="Applet/XCXShopTempEdit" Target="_blank" Authorization="8"/>
+      <PageLink  Title="支付设置" Link="Applet/XCXPaySetting" Authorization="8"/>
+      <PageLink  Title="消息模板" Link="Applet/AppletTemplateSetting" Authorization="8"/>
+    </Item>
+    <Item Title="O2O小程序" icon="icon_wesetting" Authorization="a">
+      <PageLink  Title="支付设置" Link="Applet/O2OXCXPaySetting" Authorization="a"/>
+      <PageLink  Title="消息模板" Link="Applet/O2OAppletTemplateSetting" Authorization="a"/>
+    </Item>
+    <!--<Item Title="基本设置" privilege="5011" Link="WAP/PayConfig" icon="icon_payment_setting">
+      <PageLink Title="支付设置" Link="WAP/AliPaySet" />
+    </Item>-->
+  </Module>
+
+</Menu>

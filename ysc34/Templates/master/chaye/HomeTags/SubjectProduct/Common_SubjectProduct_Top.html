@@ -1,0 +1,38 @@
+﻿<ul>
+    <foreach data="Images">
+        <li class="sale_top$Number$">
+            <em>$Number$</em>
+            <div class="pic">
+                <a target="_blank" href="$Url$">
+                    <img src="$ThumbnailUrl$"
+                         alt="$ProductName$">
+                </a>
+            </div>
+            <div class="info">
+                <div class="price">
+                    <display type="Price">
+                        <b><em>￥</em>$SalePrice$</b>
+                        <span><em>￥</em>$MarketPrice$</span>
+                    </display>
+
+                </div>
+                <div class="name"><a target="_blank" href="$Url$">$ProductName$</a></div>
+                <display type="SaleCount"><div class="sale">已售出<b>$SaleCount$</b>件</div></display>
+            </div>
+        </li>
+    </foreach>
+    <foreach data="Text">
+        <li class="sale_top$Number$">
+            <em>$Number$</em>
+            <div style=" padding-left:20px;">
+                <div class="txt">
+                    <a target="_blank" href="$Url$">$ProductName$</a>
+                </div>
+                <div class="price">
+                    <display type="Price"><b><em>￥</em>$SalePrice$</b><span><em>￥</em>$MarketPrice$</span></display>
+                </div>
+                <display type="SaleCount"><div class="sale">已售出<b>$SaleCount$</b>件</div></display>
+            </div>
+        </li>
+    </foreach>
+</ul>

@@ -1,0 +1,132 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/default/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/default/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+<style type="text/css">
+	body {background: #f3f3f3;}
+	.main-content {width: auto;}
+	.main1 {width: 1180px; margin: 0 auto;}
+   .top .top-main,.top .top-search,.nav-wrap {width: 1180px;}
+</style>
+<div class="main" id="main">
+    <style>
+        .main {
+            width: auto;
+            margin: auto; clear:both;
+        }
+
+        .tab_img div {
+            height: 430px;
+        }
+    </style>
+    <div class="maincontad">
+       <script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+        <hi:common_slidead runat="server" adid="26" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+        <script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_26").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+    </div>
+
+    <div class="hotcont">
+        <div class="hotconttop"><hi:common_imagead runat="server" adid="4" /></div>
+        <div class="hotcontcont"><em><hi:common_imagead runat="server" adid="5" /></em><b><hi:common_imagead runat="server" adid="6" /></b></div>
+    </div>
+
+    <div class="xuanxiangka">
+        <script src="/utility/Tags/TagsHelper.js" type="text/javascript"></script>
+        <hi:common_subjectproduct_tab runat="server" subjectid="6" />
+
+    </div>
+
+    <div class="contentad">
+        <em><hi:common_imagead runat="server" adid="7" /></em><b><hi:common_imagead runat="server" adid="8" /></b>
+    </div>
+
+    <div class="contentgoods">
+        <div class="contentgoodstop"><hi:common_imagead runat="server" adid="9" /></div>
+        <div class="contentgoodsad"><hi:common_imagead runat="server" adid="10" /></div>
+        <div class="contentgoodscont">
+            <hi:common_subjectproduct_simple runat="server" subjectid="5" />
+        </div>
+
+    </div>
+
+    <div class="contentgoods">
+        <div class="contentgoodstop"><hi:common_imagead runat="server" adid="11" /></div>
+        <div class="contentgoodsad"><hi:common_imagead runat="server" adid="12" /></div>
+        <div class="contentgoodscont">
+            <hi:common_subjectproduct_simple runat="server" subjectid="11" />
+        </div>
+
+    </div>
+    <div class="contentgoods">
+        <div class="contentgoodstop"><hi:common_imagead runat="server" adid="13" /></div>
+        <div class="contentgoodsad"><hi:common_imagead runat="server" adid="14" /></div>
+        <div class="contentgoodscont">
+            <hi:common_subjectproduct_simple runat="server" subjectid="12" />
+        </div>
+
+    </div>
+    <div class="contentgoods">
+        <div class="contentgoodstop"><hi:common_imagead runat="server" adid="15" /></div>
+        <div class="contentgoodsad"><hi:common_imagead runat="server" adid="16" /></div>
+        <div class="contentgoodscont">
+            <hi:common_subjectproduct_simple runat="server" subjectid="13" />
+        </div>
+
+    </div>
+    <div class="contentgoods">
+        <div class="contentgoodstop"><hi:common_imagead runat="server" adid="17" /></div>
+        <div class="contentgoodsad"><hi:common_imagead runat="server" adid="18" /></div>
+        <div class="contentgoodscont">
+            <hi:common_subjectproduct_simple runat="server" subjectid="14" />
+        </div>
+
+    </div>
+
+
+
+
+
+
+<script type=text/javascript>
+    var _c = _h = 0;
+    $(function () {
+        $('#play > li').click(function () {
+            var i = $('#play > li').index($(this));
+            clearInterval(_h);
+            _c = i;
+            play();
+            change(i);
+        })
+        $("#pic div").hover(function () { clearInterval(_h) }, function () { play() });
+        play();
+    })
+    function play() {
+        _h = setInterval("auto()", 6000);
+    }
+
+    function change(i) {
+        $('#play > li').addClass("bg normal");
+
+        $("#li" + i).removeClass("bg normal");
+        $("#li" + i).addClass("bg active");
+        $("#pic div").hide().eq(i).fadeIn('slow');
+    }
+    function auto() {
+        _c = _c >= $('#play > li').length - 1 ? 0 : _c + 1;
+        change(_c);
+    }
+
+</script>
+
+
+</div>
+
+
+ 
+
+<%<hi:common_footer runat="server" />%>

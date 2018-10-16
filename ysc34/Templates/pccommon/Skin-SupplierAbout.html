@@ -1,0 +1,47 @@
+﻿<%<Hi:Common_Header runat="server" />%>
+<div class="main" id="main1">
+    <style>
+        body {
+            background: #f3f3f3;
+        }
+
+        .main {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .art_add_c img {
+            width: 100%;
+        }
+        .csslist a img{width:96%; height:auto; margin:10px 2%; }
+        .csslist a {font-size:14px;color:#333;width:100%; display:block; text-align:center;}
+    </style>
+    <div class="tqj">
+    </div>
+    <div class="container articleshelp">
+        <div class="cssleft">
+            <h6>供货商列表</h6>
+
+            <div class="csslist">
+                <%<Hi:Common_SupplierList runat="server" MaxNum="5" TemplateFile="/ascx/tags/Common_Comment/Skin-Common_SupplierList.ascx" />%>
+            </div>
+
+            <div class="left_ad"><hi:common_customad runat="server" adid="32" isdelayedloading="true"></hi:common_customad></div>
+        </div>
+        <div class="cssright">
+            <div class="cssright_h1">
+                <a href="/">首页</a> > 供货商介绍
+            </div>
+            <div class="cssborder">
+                <h2 class="cssright_h2">
+                    <%<asp:Literal runat="server" ID="litSupplierName" />%>
+                </h2>
+                <div class="art_add_c">
+                    <%<asp:Literal runat="server" ID="litSupplierAbout" />%>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<%<Hi:Common_Footer runat="server" />%>

@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+/* ? 2009.7.28*/
+body{margin:0;padding:0 0 12px 0;font-size:12px; color:#000000;line-height:1.8;font-family:"Arial","";}
+form,ul,li,ol,li,dl,dt,dd,img,p,h1,h2,h3,h4,h5,h6,input{margin:0;padding:0; }
+h1,h2,h3,h4,h5,h6{font-size:12px;}
+input,select{font-size:12px;}
+img{border:0;}
+ul,li{list-style-type:none;}
+strong{font-weight:normal;}
+em {font-style:normal;}
+h1,h2,h3,h4,h5,h6 {font-weight:normal;}
+/* Link ?? 2009.7.28 */
+a{color:#393939;text-decoration:none; cursor:pointer;}
+a:hover{color: #333333;text-decoration:underline;}
+.color_6e ,.color_6e a{ color:#6E6E6E;}
+.display_no{display:none;}
+.display_yes{display:block;}
+
+body{background: url(images_1.gif) repeat-x; height:800px;}
+.main{ width:980px; margin:0 auto; overflow:hidden;}
+.Middle{ background:url(images_3.gif) no-repeat; height:389px; overflow:hidden;}
+.btn1{width:646px;height:352px;overflow:auto; margin-left:172px; margin-top:12px; padding: 0px 0px 10px 10px; }
+.Bottom{ background:url(images_4.gif) no-repeat; height:140px; overflow:hidden; padding-left:177px; padding-top:14px;}
+.Bottom div{ float:left;}
+.bo_1{ background:url(images_5.gif) no-repeat; height:31px; width:222px; overflow:hidden; padding-right:76px;}
+.bo_1 input{ width:222px; height:31px; background:none; border:0px;}
+.bo_2{ background:url(images_6.gif) no-repeat; height:31px; width:136px; overflow:hidden;}
+.bo_2 input{ width:136px; height:31px; background:none; border:0px;}
+
+
+.footer{height:25px;line-height:25px;text-align:center;}
+
+.Install{ background:url(images_7.gif) no-repeat; height:373px; overflow:hidden; padding-left:154px; *padding-left:156px; }
+.Install ul li div{ float:left; font-size:14px;}
+.Install ul li div input{ width:208px; height:25px; overflow:hidden; background:none; border:0px; line-height:25px;}
+.Install ul{ width:780px; overflow:hidden; padding-top:19px; height:320px;}
+.Install ul li{ width:332px; float:left; margin:0 auto; height:35px; line-height:35px; margin-bottom:34px; *margin-bottom:34px; margin-right:47px;*margin-right:44px; overflow:hidden;}
+.li1{ letter-spacing:2.5px; *letter-spacing:3.5px; }
+.li2{ letter-spacing:9px;}
+.li3{ margin-left:-7px; *margin-left:0px;}
+.li4{ letter-spacing:5px;}
+.li5{ margin-left:-4px; *margin-left:2px;}
+.li6{ margin-left:2px;}
+.li7{ letter-spacing:1px; *margin-right:-1px;}
+.li8{ letter-spacing:2px; margin-left:1px;}
+.ch h2{ font-size:14px; margin-left:160px; margin-top:265px;}
+.ch h2 input{ margin-right:8px; *margin-right:5px;}
+.Ca h4{ display:block; margin-top:-290px; color:#ff0000; margin-left:105px;}
+
+.install_bottom{ background:url(images_8.gif) no-repeat; height:157px; overflow:hidden; padding-left:177px; padding-top:22px;}
+.install_bottom div{ float:left;}
+.install_bo_1{ background:url(images_9.gif) no-repeat; height:31px; width:222px; overflow:hidden; padding-right:76px;}
+.install_bo_1 input{ width:222px; height:31px; background:none; border:0px;}
+.install_bo_2{ background:url(images_10.gif) no-repeat; height:31px; width:136px; overflow:hidden;}
+.install_bo_2 input{ width:136px; height:31px; background:none; border:0px;}

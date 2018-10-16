@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+    <hi:pagetitle runat="server" />
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" name="viewport" />
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="/style/style.css?v=3.4" type="text/css" />
+    <script type="text/javascript" src="/script/flexible.debug.js"></script>
+    <script type="text/javascript" src="/script/flexible_css.debug.js"></script>	
+    <Hi:WapHeadContainer ID="WapHeadContainer1" runat="server" />
+    <script type="text/javascript" src="/script/jquery-1.11.0.min.js?v=3.0"></script>
+    <script src="/script/jquery.slides.min.js?v=3.0"></script>
+    <script type="text/javascript" src="/script/main.js?v=3.4"></script>
+    <script type="text/javascript" src="/Utility/common.js?v=3.4"></script>
+    <script src="/Utility/traffic.js?v=3.31"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function (e) {
+            var loadMessage = "";
+            if ($("#LoadMessage").length > 0)
+                loadMessage = decodeURI($("#LoadMessage").val().Trim());
+            var errorToPage = "";
+            if ($("#ErrorToPage").length > 0)
+                errorToPage = $("#ErrorToPage").val().Trim();
+            if (loadMessage != undefined && loadMessage != "") {
+                alert_h(loadMessage, function (e) {
+                    if (errorToPage != "") {
+                        returnUrl = getParam("returnUrl");
+                        referrerUrl = document.referrer;
+                        if (errorToPage == "goReturnUrl") {
+                            if (returnUrl != undefined && returnUrl != "") {
+                                document.location.replace(returnUrl);
+                            }
+                        }
+                        else if (errorToPage == "goReferralUrl") {
+                            if (referrerUrl != undefined && referrerUrl != "") {
+                                document.location.replace(referrerUrl);
+                            }
+                        }
+                        else {
+                            document.location.replace(errorToPage);
+                        }
+                    }
+                });
+            }
+        });
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    </script>
+</head>
+<body class="bg">
+

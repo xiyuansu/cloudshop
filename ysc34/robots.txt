@@ -1,0 +1,15 @@
+User-agent: *
+Disallow: /Installer/
+Disallow: /Admin/
+Disallow: /Api/
+Disallow: /config/
+Disallow: /User/
+Disallow: /Pay/
+Disallow: /Templates/
+Disallow: /kindeditor/
+Disallow: /OpenID/
+Disallow: /Storage/
+Disallow: /Utility/
+Disallow: /*?* 
+Allow: /Sitemap: http://localhost:4000/sitemapindex.xml
+

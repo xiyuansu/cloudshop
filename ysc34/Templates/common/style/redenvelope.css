@@ -1,0 +1,91 @@
+﻿body {
+    width: 100%;
+    height: 100%;
+    background: #ffecb1;
+    color:#333;
+    padding:0;
+    position:absolute;
+}
+*{
+    color:#333;
+}
+img{
+    border:0;
+    margin-top:0;
+}
+.shoppingStepBar{
+    width:100%;
+    height:100%;
+}
+.shoppingStepBar img{
+    width:100%;
+}
+.hb_dd{   
+        bottom:0px;
+        position:absolute;
+    }
+.get_r{
+    width:100%;
+    height:40px;
+}
+.get_r i{
+    width:100%;
+    height:1px;
+    background:#c4c4c4;
+    float:left;
+    margin-top:20px;
+    position:absolute;
+    z-index:0;
+
+}
+.get_r span{
+    display:block;
+    position:relative;
+    width:170px;
+    text-align:center;
+    z-index:999;
+    background:#ffecb1;
+    margin:0 auto;
+    line-height:40px;
+    height:40px;    
+}
+.userlist{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+.userlist li{
+    padding:10px 10px 10px 90px;
+    border-bottom:dashed 1px #c4c4c4;
+    height:100px;
+}
+.userlist li img{
+    width:80px;
+    position:absolute;
+    left:10px;
+    margin-top:10px;
+    height:80px;
+    border-radius:5px;
+}
+.userlist li div{
+    padding:20px 10px;
+    width:100%;
+}
+.userlist li div b,
+.userlist li div i{
+    width:100%;
+    float:left;    
+}
+.userlist li div b{
+    font-size:18px;
+    font-weight:normal;
+    margin-bottom:10px;
+}
+.userlist li  span{
+    line-height:100px;
+    position:absolute;
+    right:0;
+    margin-top:-40px;
+    font-size:"Tahoma";
+    font-size:24px;
+}

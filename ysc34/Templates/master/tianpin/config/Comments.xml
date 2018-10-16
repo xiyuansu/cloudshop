@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Comment Id="1" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="2" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="12" ImageSize="100*44" />
+  <Comment Id="3" Type="title" Title="珠宝手表" ImageTitle="/templates/master/fangmeilele/UploadImage/titleimg/20140701100031_1164.jpg" TitleImageSize="28*36" />
+  <Comment Id="4" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="5" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="6" Type="category" CategoryId="309" MaxNum="18" />
+  <Comment Id="7" Type="title" Title="生活用品" ImageTitle="/templates/master/fangmeilele/UploadImage/titleimg/20140701100036_8657.jpg" TitleImageSize="28*36" />
+  <Comment Id="8" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="9" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="10" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="11" Type="title" Title="生活用品" ImageTitle="/templates/master/fangmeilele/UploadImage/titleimg/20140701100034_2176.jpg" TitleImageSize="28*36" />
+  <Comment Id="12" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="13" Type="morelink" Title="查看更多" CategoryId="309" />
+  <Comment Id="14" Type="category" CategoryId="37" MaxNum="18" />
+  <Comment Id="15" Type="title" Title="热销推荐" ImageTitle="" TitleImageSize="28*36" />
+  <Comment Id="16" Type="keyword" CategoryId="" MaxNum="8" />
+  <Comment Id="17" Type="morelink" Title="MORE&amp;amp;gt;" CategoryId="" />
+  <Comment Id="18" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="12" ImageSize="100*44" />
+  <Comment Id="19" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/fangmeilele/UploadImage/advertimg/20140611091807_8087.jpg" CategoryId="8" MaxNum="4" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="20" Type="article" Title="时尚资讯" ImageTitle="" AdImage="/templates/master/fangmeilele/UploadImage/advertimg/20140611091807_8087.jpg" CategoryId="8" MaxNum="4" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="21" Type="article" Title="市场活动 " ImageTitle="" AdImage="/templates/master/tianpin/UploadImage/advertimg/20150526172041_9189.jpg" CategoryId="" MaxNum="2" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="22" Type="article" Title="品牌动态" ImageTitle="" AdImage="/templates/master/tianpin/UploadImage/advertimg/20150526172122_1662.jpg" CategoryId="" MaxNum="2" TitleImageSize="200*15" AdImageSize="150*98" />
+  <Comment Id="23" Type="article" Title="促销活动" ImageTitle="" AdImage="/templates/master/tianpin/UploadImage/advertimg/20150526172140_1632.jpg" CategoryId="" MaxNum="2" TitleImageSize="200*15" AdImageSize="150*98" />
+<Comment Id="24" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="12" ImageSize="100*44" />
+<Comment Id="30" Type="brand" CategoryId="" IsShowLogo="true" IsShowTitle="false" MaxNum="10" ImageSize="118*34" />
+</root>

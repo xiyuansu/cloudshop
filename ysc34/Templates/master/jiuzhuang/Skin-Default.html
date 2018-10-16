@@ -1,0 +1,101 @@
+﻿<%<hi:common_header runat="server" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script type="text/javascript" src="/templates/master/jiuzhuang/js/jquery.SuperSlide2.js"></script>
+<script src="/templates/master/jiuzhuang/plugins/jquery.cxscroll-1.2.2/js/jquery.cxscroll.min.js"></script>
+<script type="text/javascript" src="/templates/master/jiuzhuang/js/jquery.flexslider-min.js"></script>
+
+<script>
+$(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false
+	});
+});
+</script>
+<script src="/utility/Tags/MogFocus.js" type="text/javascript"></script>
+<div class="main-content" id="main">
+    <div class="top-banner">
+       <hi:common_slidead runat="server" adid="1" isdelayedloading="true" isfullscreen="true"></hi:common_slidead>
+    </div>
+    
+<script type="text/javascript">
+        $(function () {
+            var Width = $(window).width();
+            $("#ads_1").mogFocus({ scrollWidth: Width });
+        });
+    </script>
+<div class="hot-pro" >
+<div class="title"><hi:common_imagead runat="server" adid="4"  isdelayedloading="true"></hi:common_imagead></div>
+ <ul> 
+ <hi:common_subjectproduct_simple runat="server" subjectid="11"  isdelayedloading="true"></hi:common_subjectproduct_simple></ul>  
+<div class="hj_box2_con" > <hi:common_customad runat="server" adid="6" isdelayedloading="true"></hi:common_customad>  </div>               
+</div>
+
+
+<div class="hj_box2">
+<div class="hj_box2_title"> <hi:common_imagead runat="server" adid="7" isdelayedloading="true"></hi:common_imagead></div>
+<div class="hj_box3_con" > <hi:common_customad runat="server" adid="8" isdelayedloading="true"></hi:common_customad>  </div>
+</div>
+
+
+<div class="hj_box2">
+<div class="hj_box2_title"> <hi:common_imagead runat="server" adid="9"></hi:common_imagead></div>
+<div class="hj_box3_con" > 
+<ul>
+<hi:common_subjectproduct_simple runat="server" subjectid="12" isdelayedloading="true"></hi:common_subjectproduct_simple>
+</ul>
+ </div>
+</div>
+
+
+<div class="hj_box2">
+<div class="hj_box2_title"> <hi:common_imagead runat="server" adid="10" isdelayedloading="true"></hi:common_imagead></div>
+</div>
+<div class="hj_box4">
+<div class="hj_box4_con">
+<div class="hj_box4_ad1"><hi:common_imagead runat="server" adid="11" isdelayedloading="true"></hi:common_imagead></div>
+<div class="hj_box4_ad2"><hi:common_customad runat="server" adid="12" isdelayedloading="true"></hi:common_customad></div>
+<div class="hj_box4_pro">
+<ul>
+<hi:common_subjectproduct_simple runat="server" subjectid="13" isdelayedloading="true"></hi:common_subjectproduct_simple>
+</ul>
+</div>
+
+</div>
+</div>
+
+
+<div class="hj_box5">
+<div class="hj_box4_pro">
+<ul>
+<hi:common_subjectproduct_simple runat="server" subjectid="14" isdelayedloading="true"></hi:common_subjectproduct_simple>
+</ul>
+</div>
+</div>
+
+
+ 
+
+<div class="hj_box8">
+<div class="hj_box6_title"><hi:common_imagead runat="server" adid="13" isdelayedloading="true"></hi:common_imagead></div>
+<div class="review">
+<ul>
+ <%<hi:common_latestreview maxnum="6" templatefile="/HomeTags/Skin-Common_LatestReview.ascx" runat="server" /> %>
+</ul>
+</div>
+</div>
+
+
+<div class="hj_box7">
+<div class="hj_box7_title"><hi:common_imagead runat="server" adid="14" isdelayedloading="true"></hi:common_imagead></div>
+<div class="hj_box7_con">
+<hi:common_customad runat="server" adid="17" isdelayedloading="true"></hi:common_customad>
+
+</div>
+
+</div>
+  
+ 
+</div>
+
+<%<hi:common_footer runat="server" />%>

@@ -1,0 +1,439 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+	body {
+		background: url(/images/zp_bg.png) no-repeat;
+		background-color: #ff5722;
+		background-size: 100%;
+		padding: 0 0.75rem;
+		padding-bottom: 4rem;
+	}
+	
+	.clickOff {
+		position: absolute;
+		z-index: 123;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+	
+	#wheelcanvas {
+		/*position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;*/
+	}
+	
+	#wheelcanvasTemp {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 2;
+	}
+	
+	.pointer {
+		z-index: 10;
+	}
+	
+	#freeTimes {
+		z-index: 11;
+	}
+</style>
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidTitle" />
+<input type="hidden" runat="server" ClientIDMode="Static" id="hidDescription" />
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdIsLogined" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hidPoint" runat="server" ClientIDMode="Static" />
+<img src="/images/ic_coupon.png" id="youhuiquan-img" style="display:none;width:48px;height:48px;" />
+<img src="/images/ic_points.png" id="jifen-img" style="display:none;width:48px;height:48px;" />
+<img src="/images/icon_gift_m.png" id="gift-img" style="display:none;width:24px;height:24px;" />
+<div class="banner">
+	<div class="turnplate" style="background-image:url(/images/wheel.png);background-size:100% 100%;overflow: hidden;">
+		<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+		<canvas class="item" id="wheelcanvasTemp" width="422px" height="422px"></canvas>
+		<img class="pointer" src="/images/indicator.png" />
+		<span id="freeTimes" class="h_1">今天还剩0次免费</span>
+	</div>
+</div>
+<div id="info">
+	<script id="content" type="text/html">
+		<div class="a_1">
+			<span class="a_1_title">活动时间</span>
+			<p>
+				{{StartDate}}&nbsp;&nbsp;至&nbsp;&nbsp;{{EndDate}}
+			</p>
+		</div>
+		<div class="a_1">
+			<span class="a_1_title">活动奖品</span>
+			<ul>
+				{{each AwardList as value i}}
+				<li>
+					{{AwardList[i].AwardGrade}}等奖：{{AwardList[i].AwardName}} {{if AwardList[i].PrizeType==1}} 积分 {{else if AwardList[i].PrizeType==2}} 优惠券 {{/if}}
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="a_1">
+			<span class="a_1_title">活动说明</span>
+			<p>
+				{{#Description}}
+			</p>
+		</div>
+	</script>
+</div>
+<div class="btn_a">
+	<a href="myprize">我的奖品</a>
+	<a href="/Wapshop/">进店逛逛</a>
+</div>
+<div class="clickOff" style="display: none;">
+</div>
+<script type="text/javascript" src="/Utility/artTemplate.js"></script>
+<script type="text/javascript" src="/Utility/awardRotate.js"></script>
+<script type="text/javascript">
+	var turnplate = {
+		restaraunts: [], //大转盘奖品名称
+		colors: [], //大转盘奖品区块对应背景颜色
+		outsideRadius: 178, //大转盘外圆的半径
+		textRadius: 155, //大转盘奖品位置距离圆心的距离
+		insideRadius: 68, //大转盘内圆的半径
+		startAngle: 0, //开始角度
+		bRotate: false //false:停止;ture:旋转
+	};
+	var aid = getParam("activityId");
+	var freeTime = 0;
+	var integral = 0;
+	var flagNum = 0;
+	var hidPoint = $("#hidPoint").val();
+	var isLogin = $("#hdIsLogined").val();
+	var awardList = new Array();
+	var imagesArr = new Array();
+	$(document).ready(function() {
+		//动态添加大转盘的奖品与奖品区域背景颜色
+		turnplate.colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF"];
+
+		var rotateTimeOut = function() {
+			$('#wheelcanvas').rotate({
+				angle: 0,
+				animateTo: 2160,
+				duration: 8000,
+				callback: function() {
+					alert('网络超时，请检查您的网络设置！');
+				}
+			});
+		};
+
+		//旋转转盘 item:奖品位置; txt：提示语;
+		var rotateFn = function(item, txt) {
+			var angles = item * (360 / turnplate.restaraunts.length) - (360 / (turnplate.restaraunts.length * 2));
+			if(angles < 270) {
+				angles = 270 - angles;
+			} else {
+				angles = 360 - angles + 270;
+			}
+			$("#wheelcanvasTemp").css("display", "none");
+			$('#wheelcanvas').rotate({
+				angle: 0,
+				animateTo: angles + 1800,
+				duration: 8000,
+				callback: function() {
+					$(".clickOff").css("display", "none");
+					$("#wheelcanvasTemp").css("display", "block");
+					confirm_s(txt);
+					turnplate.bRotate = !turnplate.bRotate;
+				}
+			});
+		};
+
+		$('.pointer,.h_1').click(function() {
+			function getActivisys() {
+				$.ajax({
+					url: "/api/ActivitysHandler.ashx?action=ActivityDraw",
+					type: 'post',
+					dataType: 'json',
+					timeout: 10000,
+					data: {
+						ActivityId: aid,
+					},
+					success: function(resultData) {
+						var item = resultData.AwardGrade;
+						if(turnplate.bRotate) return;
+						turnplate.bRotate = !turnplate.bRotate;
+						//获取随机数(奖品个数范围内)
+						//var item = 4;
+						//奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
+						var textName = "";
+						freeTime = resultData.FreeTime;
+						var awardIndex = 0;
+						if(resultData.Code == 1001) {
+							alert_m("请您先登录，再参加活动", function() {
+								var oldHref = window.location.href;
+								var newHref = oldHref.substring(0, oldHref.lastIndexOf("/"));
+								window.location.href = newHref + "/Membercenter.aspx?ReturnUrl=" + oldHref;
+							});
+						} else if(resultData.Code == 1006) {
+							alert_m("哎！您的积分不够了！去攒点再来吧！");
+						} else if(resultData.Code == 1003) {
+							alert_m("哎！居然错过了！活动已结束，下次早点来哦！");
+							$("#freeTimes").html("活动已结束");
+						} else if(resultData.Code == 1002) {
+							alert_m("呀！您好勤快哇！活动还没开始呢！");
+							$("#freeTimes").html("活动未开始");
+						} else {
+							hidPoint -= integral;
+							if(resultData.FreeTime <= 0 && !isNaN(resultData.FreeTime)) {
+								$("#freeTimes").html("花" + integral + "积分抽奖");
+							} else {
+								$("#freeTimes").html("今天还剩" + resultData.FreeTime + "次免费");
+							}
+							if(item == 0) {
+								var textArr = ["太可惜了竟然与奖品擦肩而过", "转不中啊换个姿势吧", "没中！赶紧去拜一下春哥", "人生最重要两个字是坚持", "太可惜了只因你长的太帅"];
+								var index = Math.floor(Math.random() * 5);
+								textName = textArr[index];
+							} else {
+								for(var i = 0; i < turnplate.restaraunts.length; i++) {
+									if(awardList[item - 1].AwardName == turnplate.restaraunts[i].AwardName) {
+										console.log(awardList[item - 1].AwardName);
+										awardIndex = i;
+										break;
+									}
+								}
+								textName = turnplate.restaraunts[awardIndex].AwardName;
+								if(turnplate.restaraunts[awardIndex].PrizeType == 1) {
+									textName = "好棒!恭喜抽中" + textName + "积分";
+								} else if(turnplate.restaraunts[awardIndex].PrizeType == 2) {
+									textName = "好棒!恭喜抽中" + textName + "优惠券";
+								} else {
+									textName = "好棒!恭喜抽中" + textName;
+								}
+							}
+							$(".clickOff").css("display", "block");
+							rotateFn(awardIndex + 1, textName);
+						}
+					},
+					error: function(e) {
+						console.log(e);
+					}
+				});
+			}
+			if(hidPoint < integral && freeTime<=0) {
+				alert_m("哎！您的积分不够了！去攒点再来吧！");
+				return;
+			}
+			if(isLogin == 0) {
+				alert_m("请您先登录，再参加活动", function() {
+					var oldHref = window.location.href;
+					var newHref = oldHref.substring(0, oldHref.lastIndexOf("/"));
+					window.location.href = newHref + "/Membercenter.aspx?ReturnUrl=" + oldHref;
+				});
+			} else {
+				if(freeTime <= 0 && flagNum == 0) {
+					confirm_m("确定用" + integral + "积分抽奖么？", function() {
+						flagNum = 1;
+						$('#wheelcanvasTemp').rotate({
+							angle: 0,
+							animateTo: 1800,
+							duration: 8000,
+							callback: function() {
+								$(".clickOff").css("display", "none");
+							}
+						});
+						getActivisys();
+					}, "残忍拒绝", "确定");
+				} else {
+					$('#wheelcanvasTemp').rotate({
+						angle: 0,
+						animateTo: 1800,
+						duration: 8000,
+						callback: function() {
+							$(".clickOff").css("display", "none");
+						}
+					});
+					getActivisys();
+				}
+			}
+		});
+	});
+	$.ajax({
+		url: "/api/ActivitysHandler.ashx?action=GetActivityInfo",
+		type: 'post',
+		dataType: 'json',
+		timeout: 10000,
+		data: {
+			ActivityId: aid,
+		},
+		success: function(resultData) {
+			var data = resultData.Result;
+			var html = template('content', data);
+			document.getElementById('info').innerHTML = html;
+			var list = resultData.Result.AwardList;
+			awardList = list;
+			if(resultData.Result.FreeTimes <= 0) {
+				$("#freeTimes").html("花" + resultData.Result.ConsumptionIntegral + "积分抽奖");
+			} else {
+				if(resultData.Result.ResetType == 1) {
+					$("#freeTimes").html("今天还剩" + resultData.Result.FreeTimes + "次免费");
+				} else {
+					$("#freeTimes").html("还剩" + resultData.Result.FreeTimes + "次免费");
+				}
+			}
+			freeTime = resultData.Result.FreeTimes;
+			integral = resultData.Result.ConsumptionIntegral;
+			if(resultData.Result.Statu == 2) {
+			    $("#freeTimes").html("活动已结束");
+			    $('.pointer,.h_1').off("click");
+				alert_m("哎！居然错过了！活动已结束，下次早点来哦！");
+			}
+			if(resultData.Result.Statu == 1) {
+			    $("#freeTimes").html("活动未开始");
+			    $('.pointer,.h_1').off("click");
+				alert_m("呀！您好勤快哇！活动还没开始呢！");
+			}
+
+			var obj = new Object();
+			obj.AwardName = "只差一点";
+			switch(list.length) {
+				case 1:
+					turnplate.restaraunts = [obj, list[0], list[0], list[0], obj, list[0], list[0], list[0]];
+					break;
+				case 2:
+					turnplate.restaraunts = [obj, list[0], list[1], list[0], obj, list[1], list[0], list[1]];
+					break;
+				case 3:
+					turnplate.restaraunts = [obj, list[2], list[1], list[0], obj, list[2], list[1], list[0]];
+					break;
+				case 4:
+					turnplate.restaraunts = [obj, list[2], list[3], list[0], obj, list[2], list[3], list[1]];
+					break;
+				case 5:
+					turnplate.restaraunts = [obj, list[4], list[1], list[0], obj, list[4], list[3], list[2]];
+					break;
+				case 6:
+					turnplate.restaraunts = [obj, list[5], list[4], list[3], obj, list[2], list[1], list[0]];
+					break;
+				default:
+					break;
+			}
+
+			function downloadImg(index) {
+				if(imagesArr[index].complete) {
+					index++;
+					if(index < imagesArr.length) {
+						downloadImg(index);
+					} else {
+						drawRouletteWheel("wheelcanvas");
+						drawRouletteWheel("wheelcanvasTemp");
+					}
+				} else {
+					setTimeout(function() {
+						downloadImg(index);
+					}, 100);
+				}
+			}
+			for(var i = 0; i < list.length; i++) {
+				if(list[i].AwardPic != "") {
+					var img = new Image();
+					img.src = list[i].AwardPic;
+					imagesArr.push(img);
+				}
+			}
+			if(imagesArr.length > 0) {
+				downloadImg(0);
+			} else {
+				drawRouletteWheel("wheelcanvas");
+				drawRouletteWheel("wheelcanvasTemp");
+			}
+		}
+	});
+
+	function drawRouletteWheel(id) {
+		var canvas = document.getElementById(id);
+		if(canvas.getContext) {
+			//根据奖品个数计算圆周角度
+			var arc = Math.PI / (turnplate.restaraunts.length / 2);
+			var ctx = canvas.getContext("2d");
+			//在给定矩形内清空一个矩形
+			ctx.clearRect(0, 0, 422, 422);
+			//strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式
+			ctx.strokeStyle = "#FFBE04";
+			//font 属性设置或返回画布上文本内容的当前字体属性
+			ctx.font = '16px Microsoft YaHei';
+			for(var i = 0; i < turnplate.restaraunts.length; i++) {
+				var angle = turnplate.startAngle + i * arc;
+				ctx.fillStyle = turnplate.colors[i];
+				ctx.beginPath();
+				//arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）
+				ctx.arc(211, 211, turnplate.outsideRadius, angle, angle + arc, false);
+				ctx.arc(211, 211, turnplate.insideRadius, angle + arc, angle, true);
+				ctx.stroke();
+				ctx.fill();
+				//锁画布(为了保存之前的画布状态)
+				ctx.save();
+
+				//----绘制奖品开始----
+				ctx.fillStyle = "#ff8a60";
+				var text = turnplate.restaraunts[i].AwardName;
+				if(text.length > 6) {
+					text = text.substring(0, 6);
+					var more = "...";
+					text = text + more;
+				}
+				if(turnplate.restaraunts[i].PrizeType == 3) {
+					text = "礼品";
+				}
+				var line_height = 20;
+				//translate方法重新映射画布上的 (0,0) 位置
+				ctx.translate(211 + Math.cos(angle + arc / 2) * turnplate.textRadius, 211 + Math.sin(angle + arc / 2) * turnplate.textRadius);
+
+				//rotate方法旋转当前的绘图
+				ctx.rotate(angle + arc / 2 + Math.PI / 2);
+
+				/** 下面代码根据奖品类型、奖品名称长度渲染不同效果，如字体、颜色、图片效果。(具体根据实际情况改变) **/
+				if(text.length > 9) { //奖品名称长度超过一定范围
+					text = text.substring(0, 9) + "||" + text.substring(9);
+					var texts = text.split("||");
+					for(var j = 0; j < texts.length; j++) {
+						ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
+					}
+				} else if(text.indexOf("只差一点") != -1) {
+					text = text.substring(0, 2) + "||" + text.substring(2);
+					var texts = text.split("||");
+					for(var j = 0; j < texts.length; j++) {
+						ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
+					}
+				} else {
+					//	在画布上绘制填色的文本。文本的默认颜色是黑色
+					//measureText()方法返回包含一个对象，该对象包含以像素计的指定字体宽度
+					ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+				}
+
+				//添加对应图标
+				if(turnplate.restaraunts[i].PrizeType == 1) {
+					var img = document.getElementById("jifen-img");
+					ctx.drawImage(img, -20, 10);
+				} else if(turnplate.restaraunts[i].PrizeType == 2) {
+					var img = document.getElementById("youhuiquan-img");
+					ctx.drawImage(img, -20, 10);
+				} else if(turnplate.restaraunts[i].PrizeType == 3) {
+					if(turnplate.restaraunts[i].AwardPic == "") {
+						var img = document.getElementById("gift-img");
+						ctx.drawImage(img, -23, 15);
+					} else {
+						var img = new Image();
+						img.src = turnplate.restaraunts[i].AwardPic;
+						ctx.drawImage(img, -30, 15);
+					}
+				}
+				//把当前画布返回（调整）到上一个save()状态之前
+				ctx.restore();
+				//----绘制奖品结束----
+			}
+		}
+	}
+</script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/Utility/wxShare.js?v=3.0"></script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

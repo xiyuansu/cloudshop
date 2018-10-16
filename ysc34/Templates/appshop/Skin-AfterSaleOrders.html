@@ -1,0 +1,198 @@
+﻿<hi:common_appheader runat="server" />
+<div class="att-popup">
+    <div class="att-popup-container payment">
+        <input type="hidden" id="hidPayOrderId" value="" />
+        <div class="pay_title">选择付款方式</div>
+        <Hi:Common_WAPPaymentTypeSelect runat="server" id="paymenttypeselect" CssClass="pay_list" />
+        <div class="pay_price">订单实付：<span id="spanPayTotal"></span></div>
+        <a class="btn_submiit" id="btn_gotoPay">确定</a>
+        <a href="#" class="att-popup-close pop_close"></a>
+    </div>
+</div>
+<div id="divorderlist">
+    <hi:Common_AfterSaleOrders runat="server" />
+</div>
+
+<!-- 订单异常弹窗 -->
+<div class="order_dialog hide">
+    <h2><span id="spcontent">您来晚了，订单中有商品已删除或已下架。</span></h2>
+    <input type="button" class="" value="确定" />
+</div>
+
+<div class="modal-backdrop in hide"></div>
+
+<div class="kong">
+    <img src="/images/orderlist_null.png" />
+    <p>您还没有相关的订单~</p>
+</div>
+<script type="text/javascript" src="/utility/jquery.form.js"></script>
+<script type="text/javascript">
+    //头部筛选切换
+    $(function () {
+
+        var paytypeListHtml = $(".pay_list").html();
+
+        $(".paylink").click(function (e) {
+
+            var iscontinue = payOrderCheck(this);
+            if (!iscontinue)
+                return;
+            var fightGroupId = parseInt($(this).attr("FightGroupId"));
+            if (!isNaN(fightGroupId) && fightGroupId > 0) {
+                $("input[name='chk_paymentlist']").each(function () {
+                    if ($(this).val() != "-6" && $(this).val() != "-8" && $(this).val() != "-2" && $(this).val() != "-10" && $(this).val() != "-4") {
+                        $(this).parent().parent().remove();
+                    }
+                });
+            }
+            else {
+                $(".pay_list").html(paytypeListHtml);
+            }
+            $("input[name='chk_paymentlist']").checked = false;
+            var orderTotal = parseFloat($(this).attr("orderTotal"));
+            var orderId = $(this).attr("OrderId");
+            var paymentTypeId = parseInt($(this).attr("PaymentTypeId"));
+            if (orderId == undefined || orderId == "" || isNaN(orderTotal) || orderTotal <= 0 || isNaN(paymentTypeId)) {
+                return false;
+            }
+            if ($("input[name='chk_paymentlist'][value='" + paymentTypeId + "']").length > 0) {
+                $("input[name='chk_paymentlist'][value='" + paymentTypeId + "']").attr("checked", "checked");
+            }
+            $("#hidPayOrderId").val(orderId);
+            $("#spanPayTotal").html("￥" + orderTotal);
+            $('.att-popup').addClass('is-visible');
+        });
+        $("#btn_gotoPay").bind("click", function () {
+            gotoPay()
+        });
+    })
+
+    function payOrderCheck(ctl)
+    {
+        var b = false;
+        $.ajax({
+            url: "../API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: {
+                action: "PayCheckOrder",
+                orderId: $(ctl).attr("OrderId")
+            },
+            async: false,
+            success: function (resultData) {
+                if (resultData.ErrorCode == "0") {
+                    b = true;
+                }
+                else if (resultData.ErrorCode == "004" || resultData.ErrorCode == "005") {
+                    $(".order_dialog").removeClass("hide");
+                    $('.modal-backdrop ').removeClass("hide");
+                    if (resultData.ErrorCode == "004") {
+                        $("#spcontent").text("您来晚了，订单中有商品已删除或已下架。");
+                        $('.order_dialog input').click(function () {
+                            $('.order_dialog').addClass("hide");
+                            $('.modal-backdrop ').addClass("hide");
+                            //注意此处弹框关闭时需要刷新页面
+                            window.location.reload();
+                        })
+                    }
+                    else {
+                        $("#spcontent").text("您来晚了，订单中有商品库存不足，请联系卖家处理。");
+                        $('.order_dialog input').click(function () {
+                            $('.order_dialog').addClass("hide");
+                            $('.modal-backdrop ').addClass("hide");
+                        })
+                    }
+                }
+                else { alert(resultData.msg); }
+            }
+        });
+
+        return b;
+    }
+
+    function gotoPay() {
+        var orderId = $("#hidPayOrderId").val();
+        if (orderId == "") {
+            alert_h("错误的订单信息");
+            $(".att-popup-close").trigger("click");
+            return false;
+        }
+        if ($("input[name='chk_paymentlist']:checked").length == 0) {
+            alert_h("请选择支付方式");
+            return false;
+        }
+        var paymentTypeId = $("input[name='chk_paymentlist']:checked").val();
+        //var paymentTypeId = $("input[name='chk_paymentlist']:checked")
+        $.ajax({
+            url: "/API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: { action: "UpdatePaymentType", paymentTypeId: paymentTypeId, orderId: orderId },
+            success: function (resultData) {
+                if (resultData.Status == "OK") {
+                    location.replace(resultData.ToUrl);
+                }
+                else if (resultData.Status == "NoLogined") {
+                    alert_h(resultData.Message, function (e) {
+                        ToLogin();
+                    });
+                }
+                else {
+                    alert_h(resultData.Message, function (e) {
+                        $(".att-popup-close").trigger("click");
+                    });
+                }
+            }
+        });
+    }
+
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+
+    function FinishOrder(orderId, paymentType) {
+        var data = {};
+        data.orderId = orderId;
+        myConfirmBox('操作提示', '您确定已经收到货物了吗？', '确定收货', '取消', function () {
+            $.post("/api/VshopProcess.ashx?action=FinishOrder", data, function (json) {
+                if (json.success === true) {
+                    location.reload();
+                }
+                else {
+                    alert_h(json.msg);
+                }
+            });
+        });
+    }
+
+    function closeOrder(orderId) {
+        var data = {};
+        data.orderId = orderId;
+        myConfirmBox('操作提示', '您确定取消该订单吗？', '确定', '取消', function () {
+
+            $.post("/api/VshopProcess.ashx?action=CloseOrder", data, function (json) {
+                if (json.success === true) {
+                    ShowMsg("取消订单成功！", true, function () {
+                        location.reload();
+                    });
+                    //alert_h('取消订单成功！', function () {
+                    //    location.reload();
+                    //});
+                }
+                else {
+                    alert_h(json.msg);
+                }
+            });
+        });
+    }
+
+    $(function () {
+        if ($("#divorderlist .order-list").length == 0 || !$.trim($("#divorderlist").html())) {
+            $("#divorderlist").hide();
+            $(".kong").show();
+        }
+        else {
+            $("#divorderlist").show();
+        }
+    })
+</script>
+<%<hi:common_appfooter runat="server" />%>

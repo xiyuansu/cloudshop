@@ -1,0 +1,28 @@
+﻿<%<hi:common_wapheader runat="server" />%>
+<form runat="server" role="form">
+    <div class="cash-commission">
+        <p>可用余额</p>
+        <h2><i>￥</i><%<Hi:FormatedMoneyLabel ID="ableBalance" runat="server" clientidmode="static" />%></h2>
+        <div class="ckmx">
+            <asp:hyperlink ID="accountSummaryDetails" runat="server"><em class="glyphicon glyphicon-eye-open"></em>&nbsp;查看明细</asp:hyperlink>
+        </div>
+        <div class="cash-commission-2" runat="server" id="divmoney">
+            <div class="breadcrumb">
+                <i>￥<%<Hi:FormatedMoneyLabel ID="accountAmount" runat="server" clientidmode="static" />%></i>
+                <p>总资产</p>
+            </div>
+            <div class="breadcrumb-2">
+                <i>￥<%<Hi:FormatedMoneyLabel ID="requestBalance" runat="server" clientidmode="static" />%></i>
+                <p>提现冻结</p>
+            </div>
+        </div>
+    </div>
+    <div class="login">
+        <a href="RechargeRequest.aspx" class=" btn_login">充值</a>
+        <a href="RequestBalanceDraw.aspx" class=" btn_qx" runat="server" id="btnWithdrawals">提现</a>
+    </div>
+    <div class="clearfix" id="accountsummarylist">
+        <%<hi:WapTemplatedRepeater id="rptAccountSummary" templatefile="/Tags/skin-Common_AccountSummary.ascx" runat="server" />%>
+    </div>
+</form>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

@@ -1,0 +1,18 @@
+﻿<hi:common_wapheader runat="server" />
+<div class="main" style="padding-top: 10px;">
+    <%<asp:literal id="litAgreement" runat="server"></asp:literal> %>
+</div>
+<div class="share_bottom"><div class="btn_login"><button class="btn_login" onclick="document.location.href = 'ReferralRegisterAgreement'" id="btnAgreed">了解并同意</button></div></div>
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+    $(function () {
+        $('#ico i').each(function (i) {
+            $(this).css('background-position', '0 ' + (-i * 20) + 'px');
+        })
+    });
+
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

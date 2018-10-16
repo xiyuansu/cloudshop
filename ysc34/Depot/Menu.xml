@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+  <Module Title="店铺概况" Link="home/TodaySaleStatistics.aspx">
+    <Item Title="店铺概况" Link="home/TodaySaleStatistics.aspx">
+      <PageLink  Title="店铺概况" Link="home/TodaySaleStatistics.aspx"/>
+    </Item>
+    <Item Title="会员分层" Link="home/NonConsumptionMember.aspx">
+      <PageLink  Title="未消费会员" Link="home/NonConsumptionMember.aspx"/>
+      <PageLink  Title="活跃会员" Link="home/ActiveMember.aspx"/>
+      <PageLink  Title="休眠会员" Link="home/DormancyMember.aspx"/>
+    </Item>
+
+  </Module>
+  <Module Title="订单" Link="sales/manageorder.aspx">
+    <Item Title="订单管理" privilege="1001" Link="sales/manageorder.aspx">
+      <PageLink Title="订单列表" Link="sales/manageorder.aspx"/>
+      <PageLink  Title="退货申请单" Link="sales/returnsapply.aspx"/>
+      <PageLink  Title="换货申请单" Link="sales/replaceapply.aspx"/>
+    </Item>
+    <Item Title="核销" Link="home/ServiceVerificationRecord.aspx">
+      <PageLink  Title="服务类商品核销" Link="home/ServiceVerification.aspx"/>
+      <PageLink  Title="服务类核销记录" Link="home/ServiceVerificationRecord.aspx"/>
+    </Item>
+    <Item Title="统计" privilege="5011" Link="sales/sendgoodorders.aspx">
+      <PageLink  Title="发货统计" Link="sales/sendgoodorders.aspx"/>
+      <PageLink  Title="门店结算" Link="sales/storebalance.aspx"/>
+    </Item>
+  </Module>
+
+  <Module Title="商品" Link="product/MyStoreProducts.aspx">
+    <Item Title="商品管理">
+      <PageLink  Title="我的商品" Link="product/MyStoreProducts.aspx"/>
+      <PageLink  Title="平台商品库" Link="product/productonsales.aspx"/>
+    </Item>
+  </Module>
+
+  <Module Title="设置" Link="editstores.aspx">
+    <Item Title="基本设置">
+      <PageLink  Title="基本设置" Link="editstores.aspx" privilege="3040"/>
+    </Item>
+    <Item Title="店铺装修" Link="home/ShopDecoration.aspx">
+      <PageLink  Title="楼层管理" Link="home/ShopDecoration.aspx"/>
+      <PageLink  Title="营销图片管理" Link="home/MarketingImageManage.aspx"/>
+      <PageLink  Title="O2O小程序首页装修" Link="home/AppletConfig.aspx"/>
+    </Item>
+    <Item Title="账户管理" Link="home/ApplyCashManage.aspx">
+      <PageLink  Title="提现明细" Link="home/ApplyCashManage.aspx"/>
+      <PageLink  Title="账户设置" Link="home/AccountSettings.aspx"/>
+    </Item>
+  </Module>
+</Menu>

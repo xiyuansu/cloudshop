@@ -1,0 +1,131 @@
+﻿<hi:common_appheader runat="server" skinname="/tags/skin-Common_NoLoginHeader.html" />
+<div id="slides">
+    <hi:AppshopTemplatedRepeater id="rptProductImages" templatefile="/Tags/skin-Common_Slide.ascx"
+                             runat="server" />
+</div>
+<div class="cd_xs">
+    <div class="cd_info">
+        <div class="cd_title">
+            <asp:literal runat="server" id="litProdcutName" />
+        </div>
+
+        <div class="cd_price">
+            抢购价：¥<b><asp:literal runat="server" id="price" /></b>
+            <del id="delOldSalePrice">
+                原价：¥<asp:literal runat="server" id="salePrice" />
+            </del>
+
+        </div>
+        <div class="maxCount" id="maxCount">
+            每人限购<asp:literal runat="server"
+                             id="litMaxCount" /><asp:literal runat="server"
+             id="litUnit" />
+        </div>
+    </div>
+
+    <div class="cd_time">
+        <i class="icon_cdtime icon-icon_time"></i>
+        <span id="tuan_time"></span><span id="t_d"></span><span id="t_h"></span></span><span id="t_m"></span><span id="t_s"></span>
+    </div>
+</div>
+<div class="cd_single mt_30" id="divspecification">
+    选择规格
+    <i class="icon_angle_right"></i>
+</div>
+<div class="cd_single mt_30" onclick="javascript:location.href='ProductReview.aspx?ProductId='+$('#txtProductId').val();">
+    商品评价&nbsp;<i class="icon_pingjia">(<asp:literal runat="server" id="litReviewsCount" />)</i>
+    <i class="icon_angle_right"></i>
+</div>
+<div class="mt_30" style="text-align: left; background: #fff; width: 100%;">
+    <asp:literal runat="server" id="litDescription" />
+</div>
+<div class="cd_btn btn_1">
+    <a id="buyButtonNew">立即抢购</a>
+</div>
+<input type="hidden" runat="server" id="hidden_IsOver" clientidmode="Static" />
+<input type="text" style="display: none;" runat="server" id="txtProductId" clientidmode="Static" />
+<input type="hidden" runat="server" clientidmode="Static" id="litGroupbuyId" />
+<input type="hidden" runat="server" clientidmode="Static" id="hiddenIsLogin" />
+<input type="hidden" value="2014/04/23 9:27:46" id="startTime" runat="server" clientidmode="Static">
+<input type="hidden" value="2014/04/23 9:28:56" id="endTime" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuySoldCount" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuyMaxCount" runat="server" clientidmode="Static">
+<input type="hidden" id="groupBuyMinCount" runat="server" clientidmode="Static">
+<input type="hidden" id="nowTime" runat="server" clientidmode="Static">
+<input type="hidden" id="skuStock" value="0" runat="server" clientidmode="Static" />
+<input type="hidden" id="hdId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdCountDownId" runat="server" ClientIDMode="Static">
+<input type="hidden" id="hdAppId" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTimestamp" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdNonceStr" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdSignature" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdTitle" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdDesc" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdImgUrl" runat="server" ClientIDMode="Static" />
+<input type="hidden" id="hdLink" runat="server" ClientIDMode="Static" />
+<script src="/script/carousel.js"></script>
+<script src="/utility/vcountdown.helper.js?v=3.0" type="application/javascript"> </script>
+<script type="text/javascript" src="/Utility/jquery.scrollLoading.min.js"></script>
+<script src="/script/swipe.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var slidesImg = $('#slides img');
+		 slidesImg.css({ "width": "100%", "height": "auto" });
+        var width = 650, height = 650;
+        if (slidesImg.length > 1) {
+            $('#slides').slidesjs({
+                width: width,
+                height: height
+            });
+            $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+            $('#slides img').scrollLoading();
+        }
+        else {
+
+            $('#slides').css('display', 'block').html('<div style="width:100%;"><a href="javascript:;"></a></div>');
+            $('#slides div a').append(slidesImg);
+            $('#slides img').scrollLoading();
+        }
+    });
+
+
+    $(function () {
+        var soldCount = parseInt($('#groupBuySoldCount').val());
+        var minCount = parseInt($('#groupBuyMinCount').val());
+        if (soldCount < minCount)
+            $('#maxCount').hide();
+        else
+            $('#minCount').hide();
+
+        if (!$.trim($('#gbContent').html())) {
+            $('#gbContentContainer').hide();
+        }
+
+        $('#divspecification,#buyButtonNew').on('click', function (event) {
+            if (CheckLogin() != "") {//检查登录情况
+                event.preventDefault();
+                $('.att-popup').addClass('is-visible');
+                getDefaultCountDownPrice();
+            }
+        });
+    });
+
+    $(".slidesjs-play, .slidesjs-stop, .slidesjs-previous, .slidesjs-next").remove();
+    vGroupBuyIntervalId = setInterval(GetRTime, 1000);
+    if ($("#attrtable tr").length <= 0) {
+        $("#attrtable").parent().hide();
+    }
+
+    $(window).scroll(function () {
+        setScrollLoading();
+    });
+    function setScrollLoading() {
+        $("img").scrollLoading();
+        $("iframe").each(function () {
+            if (!$(this).attr("src")) {
+                $(this).attr("src", $(this).attr("data-url"));
+            }
+        });
+    }
+</script>
+<hi:Common_SKUSubmitOrder id="skuSubmitOrder" runat="server" />

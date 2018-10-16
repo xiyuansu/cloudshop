@@ -1,0 +1,699 @@
+﻿<hi:common_wapheader runat="server" />
+<style>
+    body {
+        background: #f5f5f5;
+    }
+    .order-list {
+        margin-top:0;
+    }
+    .step2 ul {
+        background: #fff;
+    }
+    .step2 .ztitle {
+        background: #fff;
+    }
+    .mt_30 {
+        margin-top: 0.5rem !important;
+    }
+</style>
+<div class="att-popup" id="divChoosePayType">
+    <div class="att-popup-container payment">
+        <input type="hidden" id="hidPayOrderId" value="" />
+        <div class="pay_title">选择付款方式</div>
+        <Hi:Common_WAPPaymentTypeSelect runat="server" id="paymenttypeselect" CssClass="pay_list" />
+
+        <div class="pay_price">
+            订单实付：<span id="spanPayTotal"></span>
+            <span style="color:red;margin-left:30px;" id="spandemo" runat="server" visible="false">【演示站点，请勿真实购买】</span>
+        </div>
+        <a class="btn_submiit" id="btn_gotoPay">确定</a>
+        <a href="#" class="att-popup-close pop_close"></a>
+    </div>
+</div>
+<div class="att-popup" id="divSetPassword">
+    <div class="att-popup-container payment">
+        <div class="pay_title" id="divSetPasswordTitle">请先设置交易密码</div>
+        <div class="pay_price">
+            <div><em>交易密码:</em><input type="password" placeholder="请输入交易密码" id="txtTradePassword" /></div>
+            <div><em>确认密码:</em><input type="password" placeholder="确认交易密码" id="txtTradePasswordAgain" /></div>
+        </div>
+        <a class="btn_submiit" id="btnSetTradePassword">确定</a>
+        <a href="#" class="att-popup-close pop_close icon-icon_close_48" id="tradePassword_close"></a>
+    </div>
+</div>
+<div class="pbox">
+   
+    <div class="panel panel-default order-list" id="divProducts" runat="server">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                订单清单
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body_1 step2 mt_0">
+                <hi:common_memberorderproducts runat="server"></hi:common_memberorderproducts>
+            </div>
+            <div class="gift_bdm">
+                <hi:WapTemplatedRepeater id="rptPromotionGifts" templatefile="/Tags/skin-Common_OrderPromotionGiftView.ascx" runat="server" />
+            </div>
+            <div class="panel-body_4" id="divDeposit">
+                <em class="color_price" id="emDeposit">等待支付定金</em><span>定金：<i class="color_price" id="iDeposit">￥<asp:literal runat="server" id="litDeposit"></asp:literal></i></span>
+            </div>
+            <div class="panel-body_4" id="divFinal">
+                <em id="emFinal">未开始</em> <span>尾款（尾款含运费及优惠）：<i id="iFinal">￥<asp:literal runat="server" id="litFinal"></asp:literal></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default order-list mt_30" id="divGifts" runat="server">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                礼品清单
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body_1 step2 mt_0">
+                <ul>
+                    <hi:WapTemplatedRepeater id="rptCartGifts" templatefile="/Tags/skin-Common_OrderGiftView.ascx" runat="server" />
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--核销码-->
+    <div class="vercode-info">
+        <div class="vercode-info-left">
+            <span class="vercode-info-hexiao">核销码</span>
+            <span class="vercode-info-time"><asp:literal runat="server" id="lit_ValidDate"></asp:literal></span>               
+        </div>
+        <div class="vercode-list">
+            <asp:Repeater ID="rptVerCode" runat="server">
+                <itemtemplate>
+                    <div class="vercode-item">
+                        <div class="vercode-item-left">
+                            <asp:literal runat="server" id="lit_ver_img"></asp:literal>
+                            <span class="v-code-pass">密码</span>
+                            <span class="v-code-pass"><asp:literal runat="server" id="lit_ver_pass"></asp:literal></span>
+                        </div>
+                        <div class="vercode-item-right">
+                            <asp:literal runat="server" id="lit_ver_status"></asp:literal>
+                        </div>
+                    </div>
+                </itemtemplate>
+            </asp:Repeater>
+        </div>
+    </div>
+
+    <!--支付信息-->
+    <div class="order_details_2">
+        <!--<h1>支付信息</h1>-->
+        <ul>
+           
+            <li><span>实付金额：</span><font>￥<asp:literal runat="server" id="litBuildPrice" /></font></li>
+            <li><span>支付方式：</span><font><asp:literal runat="server" id="litPaymentMode" /></font></li>
+            <li id="liBalanceAmount" runat="server"><span>余额抵扣：</span><font>¥<asp:literal runat="server" id="litBalanceAmount" /></font></li>
+            <li id="liPointPrice" runat="server"><span>积分抵扣：</span><font>¥<asp:literal runat="server" id="litPointsPrice" /></font></li>
+            <li id="liCounponPrice" runat="server"><span>优惠券：</span><font>¥<asp:literal runat="server" id="litCounponPrice" /></font></li>
+            <li id="liFullReduction" runat="server"><span>满额减：</span><font>¥<asp:literal runat="server" id="litFullCapacityReduction" /></font></li>
+            <li id="liDiscountPrice" runat="server"><span>价格调整：</span><font>¥<asp:literal runat="server" id="litDisCountPrice" /></font></li>
+            <li id="liTax" runat="server"><span>税金：</span><font>¥<asp:literal runat="server" id="litTax" /></font></li>
+            <li id="divRefund" runat="server"><span>退款金额：</span><font>¥<asp:literal runat="server" id="litRefundMoney" /></font></li>
+            <li id="divRefundPoint" runat="server"><span>退款扣积分：</span><font><asp:literal runat="server" id="litRefundPoint" /></font></li>
+        </ul>
+    </div>
+
+    <div class="order_details_2 mt_30">
+        <h1>订单信息</h1>
+        <ul>
+            <li>
+                <span>订单编号：</span><font><asp:literal runat="server" id="litOrderId" /></font>
+            </li>
+            <li id="liInvoiceTitle" runat="server" visible="false">
+                <span>发票抬头：</span><font><asp:literal runat="server" id="litInvoiceTitle" /></font>
+            </li>
+            <li id="liInvoiceTaxpayerNumber" runat="server" visible="false">
+                <span>纳税人识别号：</span><font><asp:literal runat="server" id="litInvoiceTaxpayerNumber" /></font>
+            </li>
+            <li>
+                <span>订单状态：</span><hi:FightGroupStatusLabel id="litFightGroupStatusLabel" runat="server" style="float:right;" /> <font><asp:literal runat="server" id="litOrderStatus" /></font>
+            </li>
+            <li>
+                <span>下单时间：</span><font><asp:literal runat="server" id="litOrderDate" /></font>
+            </li>
+            <li id="liDeposit" style="display:none">
+                <span>定金支付：</span><font><asp:literal runat="server" id="litDepositDate" /></font>
+            </li>
+            <li id="liFinal" style="display:none">
+                <span>尾款支付：</span><font><asp:literal runat="server" id="litFinalDate" /></font>
+            </li>
+            <li id="dvClose" runat="server">
+                <span>关闭原因：</span><font><asp:literal id="litCloseReason" runat="server" /></font>
+            </li>
+            <li id="remarkContainer">
+                <span>订单备注：</span><font id="remark1"><asp:literal runat="server" id="litRemark" /></font>
+            </li>
+
+        </ul>
+    </div>
+
+    <!--补充信息-->
+    <div class="sup-info" id="divOrderInputItemInfo" visible="false" runat="server">
+        <h1>补充信息</h1>
+        <asp:literal runat="server" id="litOrderInputItemInfo" />
+        <div class="sup-info-item">
+            <asp:Repeater ID="rptOrderInputItemInfo" runat="server">
+                <itemtemplate>
+                    <div class="sup-info-item-one" visible="false" runat="server" id="divOrderInputItemOne">
+                        <span class="item-title"><asp:literal runat="server" id="litOrderInputItemOneTtile"></asp:literal></span>
+                        <span class="item-value"><asp:literal runat="server" id="litOrderInputItemOneValue"></asp:literal></span>
+                    </div>
+                    <div class="sup-info-item-two" visible="false" runat="server" id="divOrderInputItemTwo">
+                        <div class="item-title"><asp:literal runat="server" id="litOrderInputItemTwoTtile"></asp:literal></div>
+                        <div class="item-value">
+                            <asp:literal runat="server" id="litOrderInputItemTwoValue"></asp:literal>
+                        </div>
+                    </div>
+                </itemtemplate>
+            </asp:Repeater>
+        </div>
+    </div>
+
+    <div class="order_btn" runat="server" id="divOrderBtn" clientidmode="static">
+        <a class="btn_l btn_default" id="btnOrderRefund" runat="server" visible="false">申请退款</a>
+        <a class="btn_l btn_default" id="btnOrderCancel" runat="server" visible="false">取消订单</a>
+        <a class="btn_l btn_warning" id="btnToPay" ClientIdMode="static" runat="server" visible="false">去付款</a>
+        <a id="lookupQRCode" class="btn_l btn_orange_solid" runat="server" clientidmode="static">查看提货码</a>
+        <a id="ensureRecieved" runat="server" ClientIDMode="static" href='javascript:void(0)'
+           onclick='' class="btn_l btn_orange_solid">确认收货</a>
+    </div>
+</div>
+
+<div class="modal-backdrop in hide"></div>
+
+<div class="sub_dialog">
+    <div class="price" id="payamount"><b>支付金额：</b> <em>¥439.20</em></div>
+    <div class="txt"><input type="password" placeholder="输入交易密码" id="textfieldpassword"></div>
+    <div class="sub_btn"><a href="javascript:void(0)" class="cancle" id="canclepay">取消</a> <a href="javascript:void(0)" class="submit" id="advancepay">确定</a><a href="javascript:void(0)" class="submitloading" id="submitloading" style="display:none;"><img src="/images/icon/jiazai.gif" width="22px" alt="" /></a></div>
+    <div class="txt" style="color:red;display:none" id="errormsg"></div>
+</div>
+
+<div class="att-popup2"></div>
+<input type="hidden" id="hidHasTradePassword" runat="server" value="false" ClientIdMode="static" /><!-- 是否有交易密码 -->
+<input type="hidden" runat="server" id="hidOrderId" ClientIDMode="static" />
+<input type="hidden" runat="server" id="hidpresaleStaut" ClientIDMode="static" value="0" />
+<script>
+    //禁用右上角菜单
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function (e) {
+        $("#tradePassword_close").click(function (e) {
+            document.location.reload();
+
+            
+        });
+        $("#btnToPay").click(function (e) {
+            var obj = this;
+            var tipValue = $(this).attr("NeedNotInTimeTip");
+            if (tipValue != null && tipValue != undefined && tipValue == "1") {
+                myConfirmBox('操作提示', '当前为门店非营业时间，付款后门店可能无法及时处理您的订单，确定付款吗？', '确定', '取消', function () {
+                    preOrderPay(obj);
+                }, function () {
+                    return false;
+                });
+            }
+            else {
+                preOrderPay(obj);
+            }
+        });
+        $("#btn_gotoPay").bind("click", function () { gotoPay() });
+        $("#btnSetTradePassword").bind("click", function () { setTradePassword() });
+
+        ManegePresale();
+        $.trim($("#divOrderBtn").html()).length == 0 ? $("#divOrderBtn").hide() : $("#divOrderBtn").show();
+    });
+    function preOrderPay(obj) {
+        var link = $(obj).attr("href");
+        if ($(".pay_list input").length == 0) {
+            ShowMsg("服务类订单请在微信端使用微信支付付款。", false)
+            return;
+        }
+        if (link != undefined && link != "") {
+            location.href = link;
+        }
+        else {
+            $("input[name='chk_paymentlist']").checked = false;
+            var orderTotal = parseFloat($(obj).attr("orderTotal"));
+            var orderId = $(obj).attr("OrderId");
+            var paymentTypeId = parseInt($(obj).attr("PaymentTypeId"));
+            if (orderId == undefined || orderId == "" || isNaN(orderTotal) || orderTotal <= 0 || isNaN(paymentTypeId)) {
+                return false;
+            }
+            if ($("input[name='chk_paymentlist'][value='" + paymentTypeId + "']").length > 0) {
+                $("input[name='chk_paymentlist'][value='" + paymentTypeId + "']").attr("checked", "checked");
+            }
+            $("#hidPayOrderId").val(orderId);
+            if (!payCheckOrder()) {
+                return;
+            }
+
+            $("#spanPayTotal").html("￥" + orderTotal.toFixed(2));
+            $("#divChoosePayType").addClass('is-visible');
+        }
+    }
+    function ManegePresale() {
+        var presaleStaut = $("#hidpresaleStaut").val();
+        switch (presaleStaut) {
+            case "1"://等待支付定金
+                $("#emDeposit").html("等待支付定金");
+                $("#emFinal").html("未开始");
+                break;
+            case "2"://等待尾款支付开始
+                $("#emDeposit").html("已付款");
+                $("#emDeposit").removeClass("color_price");
+                $("#iDeposit").removeClass("color_price");
+                $("#emFinal").html("未开始");
+                $("#emFinal").addClass("color_price");
+                $("#iFinal").addClass("color_price");
+                $("#liDeposit").show();
+                break;
+            case "3"://等待支付尾款
+                $("#emDeposit").html("已付款");
+                $("#emDeposit").removeClass("color_price");
+                $("#iDeposit").removeClass("color_price");
+                $("#emFinal").html("等待支付尾款");
+                $("#emFinal").addClass("color_price");
+                $("#iFinal").addClass("color_price");
+                $("#liDeposit").show();
+                break;
+            case "4"://已付款
+                $("#emDeposit").html("已付款");
+                $("#emDeposit").removeClass("color_price");
+                $("#iDeposit").removeClass("color_price");
+                $("#emFinal").html("已付款");
+                $("#liDeposit").show();
+                $("#liFinal").show();
+                break;
+            case "5"://已付定金 未付尾款关闭
+                $("#emDeposit").html("已付款");
+                $("#emDeposit").removeClass("color_price");
+                $("#iDeposit").removeClass("color_price");
+                $("#emFinal").html("未付款");
+                $("#liDeposit").show();
+                $("#liFinal").hide();
+                break;
+            case "6"://未付定金关闭
+                $("#emDeposit").html("未付款");
+                $("#emDeposit").removeClass("color_price");
+                $("#iDeposit").removeClass("color_price");
+                $("#emFinal").html("未付款");
+                $("#liDeposit").hide();
+                $("#liFinal").hide();
+                break;
+
+            default://非预售订单
+                $("#divDeposit").hide();
+                $("#divFinal").hide();
+                break;
+        }
+    }
+
+    function gotoPay() {
+        var OrderId = $("#hidPayOrderId").val();
+
+        if (OrderId == "") {
+            alert_h("错误的订单信息");
+            $(".att-popup-close").trigger("click");
+            return false;
+        }
+        if ($("input[name='chk_paymentlist']:checked").length == 0) {
+            alert_h("请选择支付方式");
+            return false;
+        }
+        var paymentTypeId = $("input[name='chk_paymentlist']:checked").val();
+
+        if (paymentTypeId == "-6") {
+
+            if ($("#hidHasTradePassword").val() != "1") {
+                $("#divChoosePayType").css('visibility', 'hidden');
+                $("#divSetPassword").addClass('is-visible');
+            }
+            else {
+                $('.att-popup').css('visibility', 'hidden');
+                $('.att-popup2').css('visibility', 'visible');
+                $(".sub_dialog").show();
+                var amount = $("#spanPayTotal").text();
+                $("#payamount").html("<b>支付金额：</b><em>" + amount + "</em>");
+                $("#advancepay").bind("click", function () {
+                    $("#errormsg").hide();
+                    $("#advancepay").hide();
+                    $("#submitloading").show();
+                    var AdvancePayPass = $("#textfieldpassword").val();
+                    if (!AdvancePayPass) {
+                        $("#errormsg").html("请输入交易密码!");
+                        $("#errormsg").show();
+                        $("#advancepay").show();
+                        $("#submitloading").hide();
+                        return false;
+                    }
+                    if ($("#advancepay").text() == "支付中..") {
+                        return false;
+                    }
+                    else {
+                        $("#advancepay").text("支付中..");
+                    }
+                    $.ajax({
+                        url: "/API/VshopProcess.ashx",
+                        type: "post",
+                        dataType: "json",
+                        timeout: 10000,
+                        data: {
+                            action: "AdvancePayPassVerify",
+                            OrderId: OrderId,
+                            AdvancePayPass: AdvancePayPass
+                        },
+                        async: false,
+                        success: function (data) {
+                            if (data.Status == undefined) {
+                                $("#errormsg").html("参数错误！");
+                                $("#errormsg").show();
+                                $("#advancepay").show();
+                                $("#submitloading").hide();
+                                $("#advancepay").text("确定");
+                                $("#advancepay").removeAttr("disabled");
+                            } else if (data.Status == "OK") {
+                                $(".sub_dialog").hide();
+                                $('.att-popup2').css('visibility', 'hidden');
+                                if (document.location.href.toLowerCase().indexOf("/vshop/") > -1) {
+                                    if (data.isFightGroup) {//火拼团并且是微信端
+                                        location.href = "/vshop/FightGroupSuccess.aspx?orderId=" + data.orderId;
+                                    } else {
+                                        //处理红包
+                                        $.ajax({
+                                            url: "/API/VshopProcess.ashx",
+                                            type: 'post', dataType: 'json',
+                                            data: { action: "CheckSendRedEnvelope", OrderId: OrderId },
+                                            success: function (resultData) {
+                                                if (resultData.success == "true") {
+                                                    //跳转到发红包页面
+                                                    location.href = "/vshop/SendRedEnvelope.aspx?OrderId=" + orderId;
+                                                }
+                                                else {
+                                                    location.href = "MemberOrderDetails.aspx?OrderId=" + OrderId;
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                                else {
+                                    location.replace("MemberOrderDetails?OrderId=" + OrderId);
+                                }
+                            } else {
+                                $("#advancepay").show();
+                                $("#submitloading").hide();
+                                if (data.Status == "001") {
+                                    $("#errormsg").html("您来晚了，订单中有商品已删除或已下架。");
+                                } else if (data.Status == "002") {
+                                    $("#errormsg").html("您来晚了，订单中有商品库存不足，请联系卖家处理。");
+                                } else if (data.Status == "003") {
+                                    $("#errormsg").html("<a href=\"ForgotTradePassword?source=pay&orderId=" + OrderId + "\" style=\"color:red;\">密码错误,<span style=\"color:#000\">忘记交易密码，</span><span style=\"color:blue\">点击去重置</span></a>");
+                                }
+                                else {
+                                    $("#errormsg").html(data.Message);
+                                }
+                                $("#errormsg").show();
+                                $("#advancepay").text("确定");
+                                $("#advancepay").removeAttr("disabled");
+                            }
+                        }
+                    });
+                });
+                $("#canclepay").bind("click", function () {
+                    window.location.reload();
+                });
+            }
+        } else {
+            $.ajax({
+                url: "/API/VshopProcess.ashx",
+                type: 'post', dataType: 'json', timeout: 10000,
+                data: { action: "UpdatePaymentType", paymentTypeId: paymentTypeId, orderId: OrderId },
+                success: function (resultData) {
+                    if (resultData.Status == "OK") {
+                        location.replace(resultData.ToUrl);
+                    }
+                    else if (resultData.Status == "NoLogined") {
+                        alert_h(resultData.Message, function (e) {
+                            location.replace("MemberCenter.aspx");
+                        });
+                    }
+                    else {
+                        alert_h(resultData.Message, function (e) {
+                            $(".att-popup-close").trigger("click");
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    function payCheckOrder() {
+        var OrderId = $("#hidPayOrderId").val();
+        var b = false;
+        $.ajax({
+            url: "../API/VshopProcess.ashx",
+            type: 'post', dataType: 'json', timeout: 10000,
+            data: {
+                action: "PayCheckOrder",
+                orderId: OrderId
+            },
+            async: false,
+            success: function (resultData) {
+                if (resultData.ErrorCode == "0") {
+                    b = true;
+                }
+                else if (resultData.ErrorCode == "004" || resultData.ErrorCode == "005") {
+                    if (resultData.ErrorCode == "004") {
+                        alert_h("您来晚了，订单中有商品已删除或已下架", function () { window.location.reload(); });
+                        b = false;
+                    }
+                    else {
+                        alert_h("您来晚了，订单中有商品库存不足，请联系卖家处理");
+                        b = false;
+                    }
+                }
+                else { alert(resultData.msg); b = false; }
+            }
+        });
+        return b;
+    }
+
+    function FinishOrder(orderId) {
+        var data = {};
+        data.orderId = orderId;
+
+        $.post("/api/VshopProcess.ashx?action=FinishOrder", data, function (json) {
+            if (json.success === true) {
+                alert_h("完成订单", function () {
+                    location.reload();
+                });
+
+            }
+            else {
+                alert_h(json.msg);
+            }
+        });
+    }
+
+    function closeOrder(orderId) {
+        var data = {};
+        data.orderId = orderId;
+        myConfirmBox('操作提示', '您确定取消该订单吗？', "确定", "取消", function () {
+            $.post("/api/VshopProcess.ashx?action=CloseOrder", data, function (json) {
+                if (json.success === true) {
+                    ShowMsg("取消订单成功！", true, function () {
+                        location.reload();
+                    });
+                    //alert_h('取消订单成功！', function () {
+                    //    location.reload();
+                    //});
+                }
+                else {
+                    alert_h(json.msg);
+                }
+            });
+        });
+    }
+
+
+    $(function () {
+        var orderId = $('#hidOrderId').val();
+        $('#ensureRecieved').click(function () {
+            FinishOrder(orderId);
+        });
+    });
+
+    $(document).ready(function () {
+        loadExpressDataInfo();
+    });
+
+    function loadExpressDataInfo() {
+        var url = '/API/VshopProcess.ashx';
+        $.ajax({
+            type: "get",
+            url: url,
+            data: { action: 'Logistic', orderId: $("#hidOrderId").val() },
+            dataType: "json",
+            success: function (data) {
+                if (data != undefined && data.success == true && data.traces != "") {
+                    var expressData = data.traces;
+                    if (expressData.length > 0) {
+                        $("#divLogiticsInfo").text(expressData[0].acceptStation);
+                        $("#divLogiticTime").text(expressData[0].acceptTime);
+                    }
+
+                } else {
+                    $("#divLogists").hide();
+                }
+            }
+        });
+    }
+
+    function setTradePassword() {
+        var password = $("#txtTradePassword").val().trim();
+        var confirmPassword = $("#txtTradePasswordAgain").val().trim();
+        if (password.length == 0) {
+            //alert_h("请输入交易密码！"); return false;
+            $("#divSetPasswordTitle").html("请输入交易密码");
+            return false;
+        }
+        if (password.length < 6 || password.length > 20) {
+            //alert_h("交易密码限制为6-20个字符！"); return false;
+            $("#divSetPasswordTitle").html("交易密码限制为6-20个字符");
+            return false;
+        }
+        if (confirmPassword.length == 0) {
+            //alert_h("请确认交易密码！"); return false;
+            $("#divSetPasswordTitle").html("请确认交易密码");
+            return false;
+        }
+        if (password != confirmPassword) {
+            //alert_h("两次输入的交易密码不一致！"); return false;
+            $("#divSetPasswordTitle").html("两次输入的交易密码不一致");
+            return false;
+        }
+        var data = {};
+        data.password = password;
+        data.confirmPassword = confirmPassword;
+        $("#btnSetTradePassword").attr("disabled", "disabled");
+        $.post("/api/VshopProcess.ashx?action=OpenBalance", data, function (json) {
+            if (json.success || json.success == "true") {
+                $("#btnSetTradePassword").text("支付中..");
+                var orderId = $("#hidOrderId").val();
+                var parentOrderId = $("#hidParentOrderId").val();
+                $.ajax({
+                    url: "/API/VshopProcess.ashx",
+                    type: "post",
+                    dataType: "json",
+                    timeout: 10000,
+                    data: {
+                        action: "AdvancePayPassVerify",
+                        OrderId: orderId,
+                        AdvancePayPass: password
+                    },
+                    async: false,
+                    success: function (data) {
+                        if (data.Status == undefined) {
+                            $("#btnSetTradePassword").text("确定");
+                            $("#btnSetTradePassword").removeAttr("disabled");
+                            $("#divSetPassword").css('visibility', 'hidden');
+                            $("#divPublicTip").find("span").html("参数错误");
+                            $("#divPublicTip").show().delay(2000).fadeOut();
+                        }
+                        else if (data.Status == "OK") {
+                            //$(".sub_dialog").hide();
+                            $("#divSetPassword").css('visibility', 'hidden');
+                            if (document.location.href.toLowerCase().indexOf("/vshop/") > -1) {
+                                if (data.isFightGroup) {//火拼团并且是微信端
+                                    location.href = "/vshop/FightGroupSuccess?orderId=" + data.orderId;
+                                }
+                                else {
+                                    //处理红包
+                                    $.ajax({
+                                        url: "/API/VshopProcess.ashx",
+                                        type: 'post', dataType: 'json',
+                                        data: { action: "CheckSendRedEnvelope", OrderId: orderId },
+                                        success: function (resultData) {
+                                            if (resultData.success == "true") {
+                                                //跳转到发红包页面
+                                                location.href = "/vshop/SendRedEnvelope?OrderId=" + orderId;
+                                            }
+                                            else {
+                                                document.location.reload();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                            else {
+                                document.location.reload();
+                            }
+                        } else {
+                            if (data.Status == "001" || data.Status == "002") {
+                                $(".order_dialog").removeClass("hide");
+                                //$(".sub_dialog").hide();
+                                $("#divSetPassword").css('visibility', 'hidden');
+                                if (data.Status == "001") {
+                                    $("#spcontent").text("您来晚了，订单中有商品已删除或已下架。");
+                                    $('.order_dialog input').click(function () {
+                                        $('.order_dialog').addClass("hide");
+                                        //$('.att-popup2').css('visibility', 'hidden');
+                                        document.location.reload();
+                                    })
+                                }
+                                else {
+                                    $("#spcontent").text("您来晚了，订单中有商品库存不足，请联系卖家处理。");
+                                    $('.order_dialog input').click(function () {
+                                        $('.order_dialog').addClass("hide");
+                                        document.location.reload();
+                                    })
+                                }
+                            } else {
+                                //$("#errormsg").html(data.Message);
+                                //$("#errormsg").show();
+                                //$("#advancepay").text("确定");
+                                //$("#advancepay").removeAttr("disabled");
+                                $("#btnSetTradePassword").text("确定");
+                                $("#btnSetTradePassword").removeAttr("disabled");
+                                $("#divSetPassword").css('visibility', 'hidden');
+                                //$("#divPublicTip").find("span").html(data.Message);
+                                //$("#divPublicTip").show().delay(2000).fadeOut();
+                                alert_h(data.Message, function (e) {
+                                    document.location.reload();
+                                });
+
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                //alert_h(json.msg);
+                $("#divSetPasswordTitle").html(json.msg);
+                return false;
+            }
+        });
+    }
+	
+$(function(){
+	var codeText=$(".vercode-list").html().length;
+	console.log(codeText);
+	if(codeText==22)
+	{
+		$(".vercode-info").hide();
+		}
+	})	
+	
+</script>
+<hi:Common_ContextMenu id="ContextMenu" runat="server" />

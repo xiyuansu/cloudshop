@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ManageTheme>
+  <ImageUrl>default.gif</ImageUrl>
+  <BigImageUrl>bigdefault.gif</BigImageUrl>
+  <Name>珠宝</Name>
+ <CustomTheme>
+   <Theme Tid="1" Name="自定义专题页1" SkinName="zhuanti.html" SourcePage="zhuanti.aspx"></Theme>
+  </CustomTheme>
+
+</ManageTheme>
+

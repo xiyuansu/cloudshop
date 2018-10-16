@@ -1,0 +1,56 @@
+﻿<hi:common_appheader runat="server" />
+<style>
+    body {
+        background: #fff;
+    }
+
+    .p_like_line h3 {
+        margin: 0 auto;
+        text-align: center;
+        height: 2rem;
+        width: 4.5rem;
+        color: #333;
+        font-size: 0.7rem;
+        line-height: 2rem;
+        margin-top: -1.35rem;
+        background: #fff;
+        position: relative;
+        z-index: 1;
+        font-weight: normal;
+    }
+</style>
+
+<form runat="server">
+    <div class="M_delete">
+        <div class="icon"><img src="../images/new/M_delete_03.jpg" style="width:4.5rem;"></div>
+        <div class="title">很抱歉，你来晚了，你查看的商品已经删除~</div>
+
+        <div class="p_like_line">
+            <span></span>
+            <h3>热销商品</h3>
+        </div>
+        <div class="members_con" style="margin:0;">
+            <section class="members_goodspic mt_0">
+                <ul>
+                    <hi:AppshopTemplatedRepeater id="rptHotProducts" templatefile="/Tags/skin-Common_HotProducts.ascx" runat="server" />
+                </ul>
+            </section>
+        </div>
+
+        <script>
+            $(function () {
+                var imgh = $("body").width();
+                $(".members_goodspic ul li img").height(imgh / 2);
+            });
+            function showProductDetail(id) {
+                var type = GetAgentType();
+                // 设置标题
+                if (type == 2)
+                    window.HiCmd.webShowProduct(id);
+                else if (type == 1)
+                    loadIframeURL("hishop://webShowProduct/null/" + id);
+            }
+        </script>
+    </div>
+    </form>
+    <hi:common_appfooter runat="server" />

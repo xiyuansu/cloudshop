@@ -1,0 +1,216 @@
+<%<hi:common_header runat="server" skinName="/HomeTags/Skin-Common_DefaultHeader.ascx" />%>
+<%<hi:common_rightlink runat="server" />%>
+<script src="/templates/master/xiaomi/js/jquery.flexslider.js" type="text/javascript"></script>
+<script src="/templates/master/xiaomi/js/scripts.js" type="text/javascript"></script>
+
+<!--<script src="/templates/master/xiaomi/js/jquery.jcarousel.pack.js" type="text/javascript"></script>-->
+
+<div class="main-content" id="main">
+	<div class="container">
+		<ul class="banner_ad">
+
+			<li>
+				<hi:common_imagead runat="server" adid="41" isdelayedloading="true"></hi:common_imagead>
+			</li>
+			<li>
+				<hi:common_imagead runat="server" adid="42" isdelayedloading="true"></hi:common_imagead>
+			</li>
+			<li>
+				<hi:common_imagead runat="server" adid="43" isdelayedloading="true"></hi:common_imagead>
+			</li>
+			<li>
+				<hi:common_imagead runat="server" adid="44" isdelayedloading="true"></hi:common_imagead>
+			</li>
+
+		</ul>
+	</div>
+	<script src="../../../Utility/xiaomi_time.js"></script>
+	<script src="../../../Utility/swiper.min.js"></script>
+	<!--限时抢购-->
+
+	<script type="text/javascript">
+		//jQuery(document).ready(function() {
+		//  jQuery('#mycarousel').jcarousel();
+		//  jQuery('#mycarousel2').jcarousel();
+		//});
+	</script>
+
+	<div class="container" style="position: relative;">
+		<div class="swiper_hd">限时抢购</div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<hi:common_goodslist_latestcountdownbuy runat="server" maxnum="5"></hi:common_goodslist_latestcountdownbuy>
+
+			</div>
+
+		</div>
+		<!-- Add Arrows -->
+		<div class="swiper-button-next" id="time_next"></div>
+		<div class="swiper-button-prev" id="time_prev"></div>
+
+		<script>
+			var swiper = new Swiper('.swiper-container', {
+				slidesPerView: 5,
+				navigation: {
+					nextEl: '#time_next',
+					prevEl: '#time_prev',
+				},
+			});
+		</script>
+
+	</div>
+
+	<div class="main1">
+
+		<div class="category01">
+			<span class="title-T">
+                <h4><hi:common_subjecttitle isdelayedloading="true" runat="server" commentid="8"></hi:common_subjecttitle></h4>
+                <div class="brand-btm"> <hi:common_subjectcategory runat="server" commentid="2"></hi:common_subjectcategory></div>
+            </span>
+			<div class="cate-wrap">
+				<div class="post-pic">
+					<hi:common_imagead runat="server" adid="9" isdelayedloading="true"></hi:common_imagead>
+				</div>
+
+				<div class="hot-pro">
+					<ul>
+						<hi:common_subjectproduct_simple runat="server" subjectid="11"></hi:common_subjectproduct_simple>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="horizontal-ad">
+			<hi:common_imagead runat="server" adid="8" isdelayedloading="true"></hi:common_imagead>
+		</div>
+
+ 
+		<div class="category01">
+			<span class="title-T">
+                <h4><hi:common_subjecttitle isdelayedloading="true" runat="server" commentid="10"></hi:common_subjecttitle></h4>
+                <div class="brand-btm">
+                    <hi:common_subjectcategory runat="server" commentid="11" skinName="/HomeTags/SubjectProduct/Common_SubjectProduct_Simp.html"></hi:common_subjectcategory>
+                </div>
+            </span>
+			<div class="cate-wrap">
+				<div class="post-pic">
+					<div class="ads_top1">
+						<hi:common_imagead runat="server" adid="45" isdelayedloading="true"></hi:common_imagead>
+					</div>
+					<div class="ads_top2">
+						<hi:common_imagead runat="server" adid="46" isdelayedloading="true"></hi:common_imagead>
+					</div>
+				</div>
+				<div class="hot-pro floor2">
+					<ul>
+						<hi:common_subjectproduct_simple runat="server" subjectid="12"></hi:common_subjectproduct_simple>
+					</ul>
+						<div class="more">
+							<Hi:Common_CustomAd runat="server" AdId="5" />
+						</div>					
+				</div>
+
+			</div>
+		</div>
+		<div class="horizontal-ad">
+			<hi:common_imagead runat="server" adid="16" isdelayedloading="true"></hi:common_imagead>
+		</div>
+ 
+		<div class="category01">
+			<span class="title-T">
+                <h4><hi:common_subjecttitle isdelayedloading="true" runat="server" commentid="13"></hi:common_subjecttitle></h4>
+                <div class="brand-btm">
+                    <hi:common_subjectcategory runat="server" commentid="16"></hi:common_subjectcategory>
+                </div>
+            </span>
+			<div class="cate-wrap">
+
+				<div class="fl sid_left">
+					<div class="ad_num1">
+						<hi:common_imagead runat="server" adid="12" isdelayedloading="true"></hi:common_imagead>
+					</div>
+					<div class="ad_num2">
+						<hi:common_imagead runat="server" adid="19" isdelayedloading="true"></hi:common_imagead>
+					</div>
+				</div>
+				<div class="hot-pro floor2">
+					<ul>
+						<hi:common_subjectproduct_simple runat="server" subjectid="13"></hi:common_subjectproduct_simple>
+					</ul>
+					<div class="more">
+							<Hi:Common_CustomAd runat="server" AdId="7" />
+						</div>
+				</div>
+
+			</div>
+			<div class="horizontal-ad">
+				<hi:common_imagead runat="server" adid="29" isdelayedloading="true"></hi:common_imagead>
+			</div>
+ 
+			<div class="category01">
+				<span class="title-T">
+                    <h4><hi:common_subjecttitle isdelayedloading="true" runat="server" commentid="21"></hi:common_subjecttitle></h4>
+                    <div class="brand-btm">
+                        <hi:common_subjectcategory runat="server" commentid="23"></hi:common_subjectcategory>
+                    </div>
+                </span>
+				<div class="cate-wrap">
+					<div class="fl sid_left">
+						<div class="ad_num1">
+							<hi:common_imagead runat="server" adid="37" isdelayedloading="true"></hi:common_imagead>
+						</div>
+						<div class="ad_num2">
+							<hi:common_imagead runat="server" adid="38" isdelayedloading="true"></hi:common_imagead>
+						</div>
+					</div>
+					<div class="hot-pro floor2">
+						<ul>
+							<hi:common_subjectproduct_simple runat="server" subjectid="14"></hi:common_subjectproduct_simple>
+						</ul>
+						<div class="more">
+								<Hi:Common_CustomAd runat="server" AdId="35" />
+							</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="horizontal-ad mb20">
+				<hi:common_imagead runat="server" adid="30" isdelayedloading="true"></hi:common_imagead>
+			</div>
+
+		</div>
+
+		<div class="container" style="position: relative;">
+			<div class="swiper_hd">为您推荐</div>
+			<div class="swiper-container" id="swiper_like">
+				<div class="swiper-wrapper">
+					<hi:common_subjectproduct_simple runat="server" subjectid="15"  skinName="/HomeTags/SubjectProduct/Common_SubjectProduct_Simp2.html"></hi:common_subjectproduct_simple>
+				</div>
+			</div>
+			<!-- Add Arrows -->
+			<div class="swiper-button-next" id="like_next"></div>
+			<div class="swiper-button-prev" id="like_prev"></div>
+
+		</div>
+
+		<div class="container pb30">
+			<hi:common_imagead runat="server" adid="39" isdelayedloading="true"></hi:common_imagead>
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+	var swiper = new Swiper('#swiper_like', {
+		slidesPerView: 5,
+		navigation: {
+			nextEl: '#like_next',
+			prevEl: '#like_prev',
+		},
+	});
+</script>
+<!--main-content结束-->
+
+<%<hi:common_footer runat="server" />%>
