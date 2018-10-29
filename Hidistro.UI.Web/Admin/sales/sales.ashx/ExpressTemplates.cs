@@ -70,7 +70,8 @@ namespace Hidistro.UI.Web.Admin.sales.ashx
 				if (File.Exists(text))
 				{
 					XmlDocument xmlDocument = new XmlDocument();
-					xmlDocument.Load(text);
+                    xmlDocument.XmlResolver = null;
+                    xmlDocument.Load(text);
 					XmlNode xmlNode = xmlDocument.SelectSingleNode("printer/pic");
 					string path = HttpContext.Current.Request.MapPath($"/Storage/master/flex/{xmlNode.InnerText}");
 					if (File.Exists(path))

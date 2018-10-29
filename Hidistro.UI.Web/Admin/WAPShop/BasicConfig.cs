@@ -29,7 +29,8 @@ namespace Hidistro.UI.Web.Admin.WAPShop
 				{
 					string xml = HiCryptographer.Decrypt(paymentModes[0].Settings);
 					XmlDocument xmlDocument = new XmlDocument();
-					xmlDocument.LoadXml(xml);
+                    xmlDocument.XmlResolver = null;
+                    xmlDocument.LoadXml(xml);
 					this.txtPartner.Text = xmlDocument.GetElementsByTagName("Partner")[0].InnerText;
 					this.txtKey.Text = xmlDocument.GetElementsByTagName("Key")[0].InnerText;
 					this.txtAccount.Text = xmlDocument.GetElementsByTagName("Seller_account_name")[0].InnerText;

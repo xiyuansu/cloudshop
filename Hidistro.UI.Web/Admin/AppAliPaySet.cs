@@ -47,7 +47,8 @@ namespace Hidistro.UI.Web.Admin
 				{
 					string xml = HiCryptographer.Decrypt(paymentMode.Settings);
 					XmlDocument xmlDocument = new XmlDocument();
-					xmlDocument.LoadXml(xml);
+                    xmlDocument.XmlResolver = null;
+                    xmlDocument.LoadXml(xml);
 					this.txtPartner.Text = xmlDocument.FirstChild.SelectSingleNode("Partner").InnerText;
 					if (xmlDocument.FirstChild.SelectSingleNode("Key") != null)
 					{
@@ -63,7 +64,8 @@ namespace Hidistro.UI.Web.Admin
 				{
 					string xml2 = HiCryptographer.Decrypt(paymentMode2.Settings);
 					XmlDocument xmlDocument2 = new XmlDocument();
-					xmlDocument2.LoadXml(xml2);
+                    xmlDocument2.XmlResolver = null;
+                    xmlDocument2.LoadXml(xml2);
 					this.txtAppPartner.Text = xmlDocument2.GetElementsByTagName("Partner")[0].InnerText;
 					this.txtAppKey.Text = xmlDocument2.GetElementsByTagName("Key")[0].InnerText;
 					this.txtAppAccount.Text = xmlDocument2.GetElementsByTagName("Seller_account_name")[0].InnerText;

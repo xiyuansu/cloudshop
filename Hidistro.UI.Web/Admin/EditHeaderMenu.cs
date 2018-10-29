@@ -64,7 +64,8 @@ namespace Hidistro.UI.Web.Admin
 				int.TryParse(base.Request.QueryString["Id"], out this.id);
 				string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				XmlNodeList childNodes = xmlDocument.SelectSingleNode("root").ChildNodes;
 				foreach (XmlNode item in childNodes)
 				{
@@ -120,7 +121,8 @@ namespace Hidistro.UI.Web.Admin
 		{
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNodeList childNodes = xmlDocument.SelectSingleNode("root").ChildNodes;
 			foreach (XmlNode item in childNodes)
 			{

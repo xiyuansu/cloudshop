@@ -390,7 +390,8 @@ namespace Hidistro.UI.Common.Controls
 		private static XmlDocument GetXmlNode()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			if (!string.IsNullOrEmpty(ExpressHelper.path))
+            xmlDocument.XmlResolver = null;
+            if (!string.IsNullOrEmpty(ExpressHelper.path))
 			{
 				xmlDocument.Load(ExpressHelper.path);
 			}

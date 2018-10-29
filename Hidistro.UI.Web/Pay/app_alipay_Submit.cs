@@ -72,7 +72,8 @@ namespace Hidistro.UI.Web.pay
 				PaymentModeInfo paymentMode = SalesHelper.GetPaymentMode("hishop.plugins.payment.ws_apppay.wswappayrequest");
 				string xml = HiCryptographer.Decrypt(paymentMode.Settings);
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(xml);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(xml);
 				XmlNodeList elementsByTagName = xmlDocument.GetElementsByTagName("Partner");
 				XmlNodeList elementsByTagName2 = xmlDocument.GetElementsByTagName("Seller_account_name");
 				XmlNodeList elementsByTagName3 = xmlDocument.GetElementsByTagName("Key");

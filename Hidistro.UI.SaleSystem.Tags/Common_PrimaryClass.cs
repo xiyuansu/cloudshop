@@ -32,7 +32,8 @@ namespace Hidistro.UI.SaleSystem.Tags
 			this.rp_MainCategorys.ItemCreated += this.rp_MainCategorys_ItemCreated;
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{HiContext.Current.SiteSettings.Theme}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("root");
 			int count = int.Parse(xmlNode.Attributes["CategoryNum"].Value);
 			IEnumerable<CategoryInfo> mainCategories = CatalogHelper.GetMainCategories();

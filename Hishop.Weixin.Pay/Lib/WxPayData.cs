@@ -74,7 +74,8 @@ namespace Hishop.Weixin.Pay.Lib
 				WxPayLog.writeLog(this.GetParam(), "", HttpContext.Current.Request.Url.ToString(), "将空的xml串转换为WxPayData不合法!", LogType.Error);
 			}
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml(xml);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.LoadXml(xml);
 			XmlNode firstChild = xmlDocument.FirstChild;
 			XmlNodeList childNodes = firstChild.ChildNodes;
 			foreach (XmlNode item in childNodes)

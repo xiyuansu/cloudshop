@@ -372,7 +372,8 @@ namespace Hidistro.UI.Web.Admin.sales
 				if (File.Exists(text))
 				{
 					XmlDocument xmlDocument = new XmlDocument();
-					xmlDocument.Load(text);
+                    xmlDocument.XmlResolver = null;
+                    xmlDocument.Load(text);
 					XmlNode xmlNode = xmlDocument.DocumentElement.SelectSingleNode("//printer");
 					this.templateName = xmlNode.SelectSingleNode("kind").InnerText;
 					string innerText = xmlNode.SelectSingleNode("pic").InnerText;
@@ -549,7 +550,8 @@ namespace Hidistro.UI.Web.Admin.sales
 			if (File.Exists(text))
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.Load(text);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(text);
 				XmlNode xmlNode = xmlDocument.DocumentElement.SelectSingleNode("//printer");
 				this.templateName = xmlNode.SelectSingleNode("kind").InnerText;
 				string innerText = xmlNode.SelectSingleNode("pic").InnerText;

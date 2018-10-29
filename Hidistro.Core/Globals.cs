@@ -1097,7 +1097,9 @@ namespace Hidistro.Core
 		{
 			string result = "";
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				xmlDocument.LoadXml(configXML);
 				XmlNode documentElement = xmlDocument.DocumentElement;

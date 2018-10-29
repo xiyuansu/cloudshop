@@ -35,7 +35,8 @@ namespace Hishop.Plugins
 		internal virtual XmlDocument GetMetaData()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml("<xml></xml>");
+            xmlDocument.XmlResolver = null;
+            xmlDocument.LoadXml("<xml></xml>");
 			PropertyInfo[] properties = base.GetType().GetProperties();
 			PropertyInfo[] array = properties;
 			foreach (PropertyInfo propertyInfo in array)

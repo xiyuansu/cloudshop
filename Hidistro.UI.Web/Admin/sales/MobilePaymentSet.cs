@@ -85,7 +85,8 @@ namespace Hidistro.UI.Web.Admin.sales
 				{
 					string xml = HiCryptographer.Decrypt(paymentMode.Settings);
 					XmlDocument xmlDocument = new XmlDocument();
-					xmlDocument.LoadXml(xml);
+                    xmlDocument.XmlResolver = null;
+                    xmlDocument.LoadXml(xml);
 					this.txtPartner.Text = xmlDocument.FirstChild.SelectSingleNode("Partner").InnerText;
 					this.txtKey.Text = xmlDocument.FirstChild.SelectSingleNode("Key").InnerText;
 					if (xmlDocument.FirstChild.SelectSingleNode("Seller_account_name") != null)
@@ -102,7 +103,8 @@ namespace Hidistro.UI.Web.Admin.sales
 				{
 					string xml2 = HiCryptographer.Decrypt(paymentMode2.Settings);
 					XmlDocument xmlDocument2 = new XmlDocument();
-					xmlDocument2.LoadXml(xml2);
+                    xmlDocument2.XmlResolver = null;
+                    xmlDocument2.LoadXml(xml2);
 					try
 					{
 						this.txtYLQQDPartner.Text = xmlDocument2.GetElementsByTagName("Vmid")[0].InnerText;
@@ -120,7 +122,8 @@ namespace Hidistro.UI.Web.Admin.sales
 				{
 					string xml3 = HiCryptographer.Decrypt(paymentMode3.Settings);
 					XmlDocument xmlDocument3 = new XmlDocument();
-					xmlDocument3.LoadXml(xml3);
+                    xmlDocument3.XmlResolver = null;
+                    xmlDocument3.LoadXml(xml3);
 					try
 					{
 						this.txtSPPartner.Text = xmlDocument3.GetElementsByTagName("SenderId")[0].InnerText;
@@ -137,7 +140,8 @@ namespace Hidistro.UI.Web.Admin.sales
 				{
 					string xml4 = HiCryptographer.Decrypt(paymentMode4.Settings);
 					XmlDocument xmlDocument4 = new XmlDocument();
-					xmlDocument4.LoadXml(xml4);
+                    xmlDocument4.XmlResolver = null;
+                    xmlDocument4.LoadXml(xml4);
 					this.txtKJZFBKey.Text = xmlDocument4.GetElementsByTagName("Key")[0].InnerText;
 					this.txtKJZFBPartner.Text = xmlDocument4.GetElementsByTagName("Partner")[0].InnerText;
 					this.txtSellerEmail.Text = xmlDocument4.GetElementsByTagName("SellerEmail")[0].InnerText;

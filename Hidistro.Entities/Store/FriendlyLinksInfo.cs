@@ -32,8 +32,9 @@ namespace Hidistro.Entities.Store
 		[IgnoreNulls]
 		[ValidatorComposition(CompositionType.Or, Ruleset = "ValFriendlyLinksInfo", MessageTemplate = "网站地址必须为有效格式")]
 		[StringLengthValidator(0, Ruleset = "ValFriendlyLinksInfo")]
-		[RegexValidator("^(http://).*[\\.]+.*", Ruleset = "ValFriendlyLinksInfo")]
-		[FieldType(FieldType.CommonField)]
+        [RegexValidator("^((http|https)://).*[\\.]+.*", Ruleset = "ValFriendlyLinksInfo")]
+        //[RegexValidator("^(((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp)://)|(www\\.))+(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(/[a-zA-Z0-9\\&%_\\./-~-]*)?$", Ruleset = "ValFriendlyLinksInfo")]
+        [FieldType(FieldType.CommonField)]
 		public string LinkUrl
 		{
 			get;

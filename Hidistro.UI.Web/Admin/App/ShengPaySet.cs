@@ -35,7 +35,8 @@ namespace Hidistro.UI.Web.Admin.App
 				{
 					string xml = HiCryptographer.Decrypt(paymentMode.Settings);
 					XmlDocument xmlDocument = new XmlDocument();
-					xmlDocument.LoadXml(xml);
+                    xmlDocument.XmlResolver = null;
+                    xmlDocument.LoadXml(xml);
 					try
 					{
 						this.txtPartner.Text = xmlDocument.GetElementsByTagName("SenderId")[0].InnerText;
@@ -52,7 +53,8 @@ namespace Hidistro.UI.Web.Admin.App
 				{
 					string xml2 = HiCryptographer.Decrypt(paymentMode2.Settings);
 					XmlDocument xmlDocument2 = new XmlDocument();
-					xmlDocument2.LoadXml(xml2);
+                    xmlDocument2.XmlResolver = null;
+                    xmlDocument2.LoadXml(xml2);
 				}
 			}
 		}

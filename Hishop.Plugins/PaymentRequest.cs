@@ -44,7 +44,8 @@ namespace Hishop.Plugins
 			if (paymentRequest != null && !string.IsNullOrEmpty(configXml))
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(configXml);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(configXml);
 				paymentRequest.InitConfig(xmlDocument.FirstChild);
 			}
 			return paymentRequest;

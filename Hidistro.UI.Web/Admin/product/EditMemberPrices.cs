@@ -168,7 +168,8 @@ namespace Hidistro.UI.Web.Admin.product
 		{
 			DataSet dataSet = null;
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				xmlDocument.LoadXml(this.txtPrices.Text);
 				XmlNodeList xmlNodeList = xmlDocument.SelectNodes("//item");

@@ -81,6 +81,12 @@
     <Compile Include="SMSSender.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hidistro.Core\Hidistro.Core.csproj">
+      <Project>{08764B0B-CAA2-4F97-8B26-67B2EC14825D}</Project>
+      <Name>Hidistro.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

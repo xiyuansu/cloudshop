@@ -204,7 +204,8 @@ namespace Hidistro.UI.Web.Admin
 		{
 			HttpContext context = HiContext.Current.Context;
 			XmlDocument xmlDocument = new XmlDocument();
-			IList<ManageThemeInfo> list = new List<ManageThemeInfo>();
+            xmlDocument.XmlResolver = null;
+            IList<ManageThemeInfo> list = new List<ManageThemeInfo>();
 			string path = context.Request.PhysicalApplicationPath + "\\Templates\\master";
 			string[] array = Directory.Exists(path) ? Directory.GetDirectories(path) : null;
 			ManageThemeInfo manageThemeInfo = null;

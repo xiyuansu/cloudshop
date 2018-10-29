@@ -48,7 +48,8 @@ namespace Hishop.Plugins
 			this.IsValid = true;
 			this.ErrorMsgs = new List<string>();
 			this.doc = new XmlDocument();
-			this.root = this.doc.CreateElement("xml");
+            this.doc.XmlResolver = null;
+            this.root = this.doc.CreateElement("xml");
 			this.doc.AppendChild(this.root);
 		}
 
@@ -57,7 +58,8 @@ namespace Hishop.Plugins
 			this.IsValid = true;
 			this.ErrorMsgs = new List<string>();
 			this.doc = new XmlDocument();
-			this.doc.LoadXml(xml);
+            this.doc.XmlResolver = null;
+            this.doc.LoadXml(xml);
 			this.root = this.doc.FirstChild;
 		}
 

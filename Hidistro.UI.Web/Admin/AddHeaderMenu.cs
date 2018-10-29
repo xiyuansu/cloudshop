@@ -70,7 +70,8 @@ namespace Hidistro.UI.Web.Admin
 		{
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("root");
 			XmlElement xmlElement = xmlDocument.CreateElement("Menu");
 			xmlElement.SetAttribute("Id", this.GetId(xmlNode));

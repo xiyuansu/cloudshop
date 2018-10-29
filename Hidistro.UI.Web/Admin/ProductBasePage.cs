@@ -119,7 +119,8 @@ namespace Hidistro.UI.Web.Admin
 			if (!string.IsNullOrEmpty(xml))
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(xml);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(xml);
 				foreach (XmlNode item in xmlDocument.DocumentElement.SelectNodes("//grande"))
 				{
 					if (!string.IsNullOrEmpty(item.Attributes["price"].Value) && item.Attributes["price"].Value.Trim().Length != 0)
@@ -133,7 +134,8 @@ namespace Hidistro.UI.Web.Admin
 		protected Dictionary<int, IList<int>> GetAttributes(string attributesXml)
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			Dictionary<int, IList<int>> dictionary = null;
+            xmlDocument.XmlResolver = null;
+            Dictionary<int, IList<int>> dictionary = null;
 			try
 			{
 				xmlDocument.LoadXml(attributesXml);
@@ -169,7 +171,8 @@ namespace Hidistro.UI.Web.Admin
 		protected Dictionary<string, SKUItem> GetSkus(string skusXml, decimal weight = default(decimal))
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			Dictionary<string, SKUItem> dictionary = null;
+            xmlDocument.XmlResolver = null;
+            Dictionary<string, SKUItem> dictionary = null;
 			try
 			{
 				xmlDocument.LoadXml(skusXml);

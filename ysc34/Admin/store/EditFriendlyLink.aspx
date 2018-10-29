@@ -91,7 +91,7 @@
 
         function InitValidators() {
             initValid(new InputValidator('ctl00_contentHolder_txtaddTitle', 0, 60, false, null, '友情链接网站的名称，长度限制在60个字符以内'))
-            initValid(new InputValidator('ctl00_contentHolder_txtaddLinkUrl', 0, 255, true, '^(http://).*(\.).*', '请输入带http的完整格式的URL地址'))
+            initValid(new InputValidator('ctl00_contentHolder_txtaddLinkUrl', 0, 255, true, '^((http|https)://).*(\.).*', '请输入带http的完整格式的URL地址'))
         }
         $(document).ready(function () { InitValidators(); initImageUpload(); });
     </script>

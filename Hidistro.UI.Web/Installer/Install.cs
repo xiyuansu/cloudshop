@@ -349,7 +349,8 @@ namespace Hidistro.UI.Web.Installer
 			try
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				SiteSettings siteSettings = new SiteSettings();
+                xmlDocument.XmlResolver = null;
+                SiteSettings siteSettings = new SiteSettings();
 				siteSettings.SiteUrl = base.Request.Url.Host;
 				siteSettings.AliOHServerUrl = "https://openapi.alipay.com/gateway.do";
 				siteSettings.SiteName = this.siteName;

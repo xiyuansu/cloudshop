@@ -92,7 +92,8 @@ namespace Hidistro.UI.Common.Controls
 			{
 				HttpContext context = HiContext.Current.Context;
 				xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				new AspNetCache().Insert("SubjectProductFileCache-Admin", xmlDocument, 1800, false);
 			}
 			return xmlDocument;
@@ -106,7 +107,8 @@ namespace Hidistro.UI.Common.Controls
 			{
 				HttpContext context = HiContext.Current.Context;
 				xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				new AspNetCache().Insert("AdFileCache-Admin", xmlDocument, 1800, false);
 			}
 			return xmlDocument;
@@ -120,7 +122,8 @@ namespace Hidistro.UI.Common.Controls
 			{
 				HttpContext context = HiContext.Current.Context;
 				xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				new AspNetCache().Insert("CommentFileCache-Admin", xmlDocument, 1800, false);
 			}
 			return xmlDocument;
@@ -134,7 +137,8 @@ namespace Hidistro.UI.Common.Controls
 			{
 				HttpContext context = HiContext.Current.Context;
 				xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				new AspNetCache().Insert("HeadMenuFileCache-Admin", xmlDocument, 1800, false);
 			}
 			return xmlDocument;

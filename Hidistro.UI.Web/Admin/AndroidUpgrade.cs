@@ -149,7 +149,8 @@ namespace Hidistro.UI.Web.Admin
 		private void LoadVersion()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				this.ooOpen.SelectedValue = this.siteSettings.EnableAppDownload;
 				xmlDocument.Load(HttpContext.Current.Request.MapPath("/Storage/data/app/android/AndroidUpgrade.xml"));

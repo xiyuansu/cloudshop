@@ -42,7 +42,8 @@ namespace Hishop.Plugins
 			if (outpayRequest != null && !string.IsNullOrEmpty(configXml))
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(configXml);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(configXml);
 				outpayRequest.InitConfig(xmlDocument.FirstChild);
 			}
 			return outpayRequest;

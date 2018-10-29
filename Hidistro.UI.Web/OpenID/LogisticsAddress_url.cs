@@ -32,7 +32,8 @@ namespace Hidistro.UI.Web.OpenID
 					return;
 				}
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(HiCryptographer.Decrypt(openIdSettings.Settings));
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(HiCryptographer.Decrypt(openIdSettings.Settings));
 				AliPayNotify aliPayNotify = new AliPayNotify(requestPost, base.Request.Form["notify_id"], xmlDocument.FirstChild.SelectSingleNode("Partner").InnerText, xmlDocument.FirstChild.SelectSingleNode("Key").InnerText);
 				string responseTxt = aliPayNotify.ResponseTxt;
 				string a = base.Request.Form["sign"];
@@ -43,7 +44,8 @@ namespace Hidistro.UI.Web.OpenID
 					if (!string.IsNullOrEmpty(text))
 					{
 						XmlDocument xmlDocument2 = new XmlDocument();
-						xmlDocument2.LoadXml(text);
+                        xmlDocument.XmlResolver = null;
+                        xmlDocument2.LoadXml(text);
 						ShippingAddressInfo shippingAddressInfo = new ShippingAddressInfo();
 						shippingAddressInfo.UserId = HiContext.Current.UserId;
 						if (xmlDocument2.SelectSingleNode("/receiveAddress/address") != null && !string.IsNullOrEmpty(xmlDocument2.SelectSingleNode("/receiveAddress/address").InnerText))

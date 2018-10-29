@@ -47,7 +47,8 @@ namespace Hidistro.UI.Web.Admin
 		private void LoadVersion()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				xmlDocument.Load(HttpContext.Current.Request.MapPath("/Storage/data/app/ios/IosUpgrade.xml"));
 				this.litVersion.Text = xmlDocument.SelectSingleNode("root/Version").InnerText;

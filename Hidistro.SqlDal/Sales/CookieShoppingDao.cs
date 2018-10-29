@@ -417,7 +417,8 @@ namespace Hidistro.SqlDal.Sales
 		private static XmlDocument CreateEmptySchema()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml("<sc><lis></lis><gf></gf></sc>");
+            xmlDocument.XmlResolver = null;
+            xmlDocument.LoadXml("<sc><lis></lis><gf></gf></sc>");
 			return xmlDocument;
 		}
 

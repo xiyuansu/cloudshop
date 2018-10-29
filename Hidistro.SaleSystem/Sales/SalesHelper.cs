@@ -181,7 +181,8 @@ namespace Hidistro.SaleSystem.Sales
 			string empty = string.Empty;
 			string xml = HiCryptographer.Decrypt(paymentMode.Settings);
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml(xml);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.LoadXml(xml);
 			int num = 0;
 			string gateway = paymentMode.Gateway;
 			if (!(gateway == "hishop.plugins.payment.alipaywx.alipaywxrequest"))

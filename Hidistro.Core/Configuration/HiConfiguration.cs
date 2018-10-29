@@ -210,7 +210,8 @@ namespace Hidistro.Core.Configuration
 			{
 				string filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\Hishop.config");
 				xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				new AspNetCache().Insert("FileCache-Configuragion", xmlDocument, 36000, false);
 			}
 			return xmlDocument;

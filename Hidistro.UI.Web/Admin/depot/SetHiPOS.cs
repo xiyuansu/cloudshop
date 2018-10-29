@@ -77,7 +77,8 @@ namespace Hidistro.UI.Web.Admin.depot
 		{
 			string result = string.Empty;
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml(xmlString);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.LoadXml(xmlString);
 			if (!xmlDocument.HasChildNodes)
 			{
 				return result;

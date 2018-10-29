@@ -164,7 +164,8 @@ namespace Hishop.Weixin.Pay
 			string text = SignHelper.BuildXml(dict, false);
 			string text2 = PayClient.PostData(PayClient.prepay_id_Url, text);
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				xmlDocument.LoadXml(text2);
 			}
@@ -303,7 +304,8 @@ namespace Hishop.Weixin.Pay
 			string text = SignHelper.BuildXml(dict, false);
 			string text2 = PayClient.PostData(PayClient.prepay_id_Url, text);
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				xmlDocument.LoadXml(text2);
 			}

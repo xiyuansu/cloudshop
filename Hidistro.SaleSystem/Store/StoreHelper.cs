@@ -227,7 +227,8 @@ namespace Hidistro.SaleSystem.Store
 			try
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				XmlNode xmlNode = xmlDocument.SelectSingleNode("root");
 				XmlElement xmlElement = xmlDocument.CreateElement("backupfile");
 				xmlElement.SetAttribute("BackupName", fileName);
@@ -253,7 +254,8 @@ namespace Hidistro.SaleSystem.Store
 			dataTable.Columns.Add("BackupTime", typeof(string));
 			string filename = HiContext.Current.Context.Request.MapPath("/config/BackupFiles.config");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNodeList childNodes = xmlDocument.SelectSingleNode("root").ChildNodes;
 			foreach (XmlNode item in childNodes)
 			{
@@ -274,7 +276,8 @@ namespace Hidistro.SaleSystem.Store
 			try
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.Load(filename);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(filename);
 				XmlNodeList childNodes = xmlDocument.SelectSingleNode("root").ChildNodes;
 				foreach (XmlNode item in childNodes)
 				{

@@ -29,7 +29,8 @@ namespace Hidistro.UI.Web.pay
 			PaymentModeInfo paymentMode = SalesHelper.GetPaymentMode("hishop.plugins.payment.ws_apppay.wswappayrequest");
 			string xml = HiCryptographer.Decrypt(paymentMode.Settings);
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml(xml);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.LoadXml(xml);
 			this._partner = xmlDocument.GetElementsByTagName("Partner")[0].InnerText;
 			this._public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
 			this._input_charset = "utf-8";

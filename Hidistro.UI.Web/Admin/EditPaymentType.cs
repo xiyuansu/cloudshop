@@ -94,7 +94,8 @@ namespace Hidistro.UI.Web.Admin
 				return this.configXml;
 			}
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				xmlDocument.LoadXml(configXML);
 				XmlNode documentElement = xmlDocument.DocumentElement;

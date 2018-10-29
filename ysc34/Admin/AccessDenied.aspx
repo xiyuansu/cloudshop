@@ -22,15 +22,15 @@
             display: none;
         }
 
-            .C_list ul li {
-                background: url(images/C_list_bg.gif) no-repeat;
-                margin-left: 12px;
-                vertical-align: middle;
-                width: 162px;
-                text-indent: 20px;
-                line-height: 28px;
-                border-bottom: #ccc 1px solid
-            }
+        .C_list ul li {
+            background: url(images/C_list_bg.gif) no-repeat;
+            margin-left: 12px;
+            vertical-align: middle;
+            width: 162px;
+            text-indent: 20px;
+            line-height: 28px;
+            border-bottom: #ccc 1px solid
+        }
 
         .sideitem {
             width: 184px;

@@ -47,7 +47,8 @@ namespace Hidistro.UI.SaleSystem.CodeBehind
 			string str = "";
 			string text5 = "";
 			XmlDocument xmlDocument = new XmlDocument();
-			AppVersionRecordInfo latestAppVersionRecord = APPHelper.GetLatestAppVersionRecord("android");
+            xmlDocument.XmlResolver = null;
+            AppVersionRecordInfo latestAppVersionRecord = APPHelper.GetLatestAppVersionRecord("android");
 			if (latestAppVersionRecord != null)
 			{
 				text4 = latestAppVersionRecord.Version.ToString();

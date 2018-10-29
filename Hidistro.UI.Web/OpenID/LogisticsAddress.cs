@@ -23,7 +23,8 @@ namespace Hidistro.UI.Web.OpenID
 			{
 				string value = base.Request.QueryString["alipaytoken"];
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(HiCryptographer.Decrypt(openIdSettings.Settings));
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(HiCryptographer.Decrypt(openIdSettings.Settings));
 				SortedDictionary<string, string> sortedDictionary = new SortedDictionary<string, string>();
 				sortedDictionary.Add("service", "user.logistics.address.query");
 				sortedDictionary.Add("partner", xmlDocument.FirstChild.SelectSingleNode("Partner").InnerText);

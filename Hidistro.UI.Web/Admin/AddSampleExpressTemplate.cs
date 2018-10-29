@@ -31,7 +31,8 @@ namespace Hidistro.UI.Web.Admin
 		private void BindDefindDataItem()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
 			XmlNodeList xmlNodeList = xmlDocument.SelectNodes("/DataItems/Item");
 			foreach (XmlNode item in xmlNodeList)
 			{

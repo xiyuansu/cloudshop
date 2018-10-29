@@ -79,7 +79,8 @@ namespace Hidistro.UI.Web.Admin
 			}
 			else
 			{
-				ValidationResults validationResults = Validation.Validate(friendlyLink, "ValFriendlyLinksInfo");
+                this.UpdateFriendlyLink(friendlyLink);
+                /*ValidationResults validationResults = Validation.Validate(friendlyLink, "ValFriendlyLinksInfo");
 				string text = string.Empty;
 				if (!validationResults.IsValid)
 				{
@@ -92,8 +93,8 @@ namespace Hidistro.UI.Web.Admin
 				else
 				{
 					this.UpdateFriendlyLink(friendlyLink);
-				}
-			}
+				}*/
+            }
 		}
 
 		private string UploadImage()

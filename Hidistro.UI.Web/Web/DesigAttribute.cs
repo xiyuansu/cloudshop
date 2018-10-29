@@ -228,7 +228,8 @@ namespace Hidistro.UI.Web
 			string filename = HttpContext.Current.Request.MapPath(HiContext.Current.GetPCHomePageSkinPath() + "/" + HiContext.Current.SiteSettings.Theme + ".xml");
 			XmlDocument xmlDocument = null;
 			xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			return xmlDocument.SelectSingleNode("//CustomTheme/Theme[@Tid=" + tid + "]").Attributes["SourcePage"].Value.ToString();
 		}
 	}

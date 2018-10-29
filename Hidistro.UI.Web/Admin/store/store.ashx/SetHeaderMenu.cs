@@ -56,7 +56,8 @@ namespace Hidistro.UI.Web.Admin.store.ashx
 			SetHeaderMenuGetList setHeaderMenuGetList = new SetHeaderMenuGetList();
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			DataTable dataTable = new DataTable();
 			dataTable.Columns.Add("Id", typeof(int));
 			dataTable.Columns.Add("Title");
@@ -100,7 +101,8 @@ namespace Hidistro.UI.Web.Admin.store.ashx
 			}
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("root");
 			XmlNodeList childNodes = xmlNode.ChildNodes;
 			foreach (XmlNode item in childNodes)
@@ -125,7 +127,8 @@ namespace Hidistro.UI.Web.Admin.store.ashx
 			}
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNodeList childNodes = xmlDocument.SelectSingleNode("root").ChildNodes;
 			foreach (XmlNode item in childNodes)
 			{
@@ -157,7 +160,8 @@ namespace Hidistro.UI.Web.Admin.store.ashx
 			}
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNodeList childNodes = xmlDocument.SelectSingleNode("root").ChildNodes;
 			foreach (XmlNode item in childNodes)
 			{
@@ -176,7 +180,8 @@ namespace Hidistro.UI.Web.Admin.store.ashx
 			int value = base.GetIntParam(context, "num", false).Value;
 			string filename = HttpContext.Current.Request.MapPath($"/Templates/master/{this.themName}/config/HeaderMenu.xml");
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(filename);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(filename);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("root");
 			xmlNode.Attributes["CategoryNum"].Value = value.ToString();
 			xmlDocument.Save(filename);

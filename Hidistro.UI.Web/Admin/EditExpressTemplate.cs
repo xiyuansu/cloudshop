@@ -40,7 +40,8 @@ namespace Hidistro.UI.Web.Admin
 				this.BindDefindDataItem();
 				DataTable expressTable = ExpressHelper.GetExpressTable();
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.Load(HttpContext.Current.Request.MapPath($"/Storage/master/flex/{text2}"));
+                xmlDocument.XmlResolver = null;
+                xmlDocument.Load(HttpContext.Current.Request.MapPath($"/Storage/master/flex/{text2}"));
 				XmlNode xmlNode = xmlDocument.SelectSingleNode("/printer/size");
 				string innerText = xmlNode.InnerText;
 				this.width = innerText.Split(':')[0];
@@ -57,7 +58,8 @@ namespace Hidistro.UI.Web.Admin
 		private void BindDefindDataItem()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
 			XmlNodeList xmlNodeList = xmlDocument.SelectNodes("/DataItems/Item");
 			foreach (XmlNode item in xmlNodeList)
 			{

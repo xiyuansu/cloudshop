@@ -180,23 +180,24 @@ namespace Hidistro.UI.Web.Admin.member.ashx
 		{
 
             return -1;
-			//int result = 0;
-			//if (!string.IsNullOrEmpty(settings.SMSSettings))
-			//{
-			//	string xml = HiCryptographer.TryDecypt(settings.SMSSettings);
-			//	XmlDocument xmlDocument = new XmlDocument();
-			//	xmlDocument.LoadXml(xml);
-			//	string innerText = xmlDocument.SelectSingleNode("xml/Appkey").InnerText;
-			//	string postData = "method=getAmount&Appkey=" + innerText;
-			//	string postData2 = WebHelper.GetPostData("http://sms.huz.cn/getAmount.aspx", postData);
-			//	int num = default(int);
-			//	if (int.TryParse(postData2, out num))
-			//	{
-			//		result = Convert.ToInt32(postData2);
-			//	}
-			//}
-			//return result;
-		}
+            //int result = 0;
+            //if (!string.IsNullOrEmpty(settings.SMSSettings))
+            //{
+            //	string xml = HiCryptographer.TryDecypt(settings.SMSSettings);
+            //	XmlDocument xmlDocument = new XmlDocument();
+            //  xmlDocument.XmlResolver = null;
+            //	xmlDocument.LoadXml(xml);
+            //	string innerText = xmlDocument.SelectSingleNode("xml/Appkey").InnerText;
+            //	string postData = "method=getAmount&Appkey=" + innerText;
+            //	string postData2 = WebHelper.GetPostData("http://sms.huz.cn/getAmount.aspx", postData);
+            //	int num = default(int);
+            //	if (int.TryParse(postData2, out num))
+            //	{
+            //		result = Convert.ToInt32(postData2);
+            //	}
+            //}
+            //return result;
+        }
 
 		private void SendEmail(HttpContext context)
 		{

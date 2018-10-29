@@ -79,7 +79,8 @@ namespace Hidistro.UI.Web.API
 		public void CreateCateXml()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlDocument.XmlResolver = null;
+            XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
 			xmlDocument.AppendChild(newChild);
 			XmlElement xmlElement = xmlDocument.CreateElement("", "urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
 			xmlDocument.AppendChild(xmlElement);
@@ -138,7 +139,8 @@ namespace Hidistro.UI.Web.API
 		public void CreateArticleXml()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlDocument.XmlResolver = null;
+            XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
 			xmlDocument.AppendChild(newChild);
 			XmlElement xmlElement = xmlDocument.CreateElement("", "urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
 			xmlDocument.AppendChild(xmlElement);
@@ -200,7 +202,8 @@ namespace Hidistro.UI.Web.API
 		public void CreateProductXml()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlDocument.XmlResolver = null;
+            XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
 			xmlDocument.AppendChild(newChild);
 			XmlElement xmlElement = xmlDocument.CreateElement("", "urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
 			xmlDocument.AppendChild(xmlElement);
@@ -263,7 +266,8 @@ namespace Hidistro.UI.Web.API
 		public void CreateIndexXml()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlDocument.XmlResolver = null;
+            XmlDeclaration newChild = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
 			xmlDocument.AppendChild(newChild);
 			XmlElement xmlElement = xmlDocument.CreateElement("", "sitemapindex", "http://www.sitemaps.org/schemas/sitemap/0.9");
 			xmlDocument.AppendChild(xmlElement);

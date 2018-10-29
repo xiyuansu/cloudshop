@@ -13,7 +13,7 @@
             <ul class="title-nav">
                 <li><a href="sendmessagetemplets.aspx">消息提醒</a></li>
                 <li class="hover"><a href="javascript:void">短信设置</a></li>
-                
+
 
             </ul>
 
@@ -41,7 +41,7 @@
             </div>
             <div class="formitem" style="margin-top: 30px;">
                 <ul>
-                     <li><span class="formitemtitle ">接收手机号：</span>
+                    <li><span class="formitemtitle ">接收手机号：</span>
                         <asp:TextBox ID="txtTestCellPhone" runat="server" CssClass="forminput form-control"></asp:TextBox>
                     </li>
 
@@ -63,7 +63,7 @@
     </div>
     <asp:HiddenField runat="server" ID="txtSelectedName" />
     <asp:HiddenField runat="server" ID="txtConfigData" />
-    <script type="text/javascript" src="/utility/plugin.js" ></script>
+    <script type="text/javascript" src="/utility/plugin.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             pluginContainer = $("#pluginContainer");
@@ -83,7 +83,6 @@
                 success: function (resultData) {
                     if (resultData.qty == 0)
                         return;
-
                     $.each(resultData.items, function (i, item) {
                         if (item.FullName == $(selectedNameCtl).val())
                             $(dropPlugins).append($(String.format("<option value=\"{0}\" selected=\"selected\">{1}</option>", item.FullName, item.DisplayName)));
@@ -96,8 +95,8 @@
                 }
             });
 
-            //$(dropPlugins).bind("change", function() { SelectPlugin("SMSSender"); });
-            $(dropPlugins).attr("disabled", "disabled");
+            $(dropPlugins).bind("change", function() { SelectPlugin("SMSSender"); });
+            //$(dropPlugins).attr("disabled", "disabled");
 
             if ($(selectedNameCtl).val().length > 0) {
                 SelectPlugin("SMSSender");

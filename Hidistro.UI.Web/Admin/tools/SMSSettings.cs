@@ -6,6 +6,7 @@ using Hidistro.UI.Common.Controls;
 using Hishop.Plugins;
 using Ionic.Zlib;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -47,10 +48,12 @@ namespace Hidistro.UI.Web.Admin
 			if (!this.Page.IsPostBack)
 			{
 				SiteSettings masterSettings = SettingsManager.GetMasterSettings();
-				if (masterSettings.SMSEnabled)
+                Globals.AppendLog(new Dictionary<string, string>(), "SMSSettings:" + masterSettings.ToString()+","+ masterSettings.SMSEnabled, "", "", "/log/SMSSettings.txt");
+                if (masterSettings.SMSEnabled)
 				{
-					string text = HiCryptographer.TryDecypt(masterSettings.SMSSettings);
-					if (text.StartsWith("<xml>") || text.StartsWith("&lt;xml>"))
+                    string text = HiCryptographer.TryDecypt(masterSettings.SMSSettings);
+                    Globals.AppendLog(new Dictionary<string, string>(), "SMSSettings:" + text, "", "", "/log/SMSSettings.txt");
+                    if (text.StartsWith("<xml>") || text.StartsWith("&lt;xml>"))
 					{
 						ConfigData configData = new ConfigData(text);
 						this.txtConfigData.Value = configData.SettingsXml;
@@ -83,7 +86,9 @@ namespace Hidistro.UI.Web.Admin
 			{
 				this.txtConfigData.Value = configData.SettingsXml;
 			}
-			return configData;
+
+            Globals.AppendLog(new Dictionary<string, string>(), "SMSSettings-LoadConfig:" + selectedName+","+ configData.ToString(), "", "", "/log/SMSSettings.txt");
+            return configData;
 		}
 
 		private void btnSaveSMSSettings_Click(object sender, EventArgs e)
@@ -160,6 +165,7 @@ namespace Hidistro.UI.Web.Admin
             //{
             //	string xml = HiCryptographer.TryDecypt(settings.SMSSettings);
             //	XmlDocument xmlDocument = new XmlDocument();
+            //  xmlDocument.XmlResolver = null;
             //	xmlDocument.LoadXml(xml);
             //	if (xmlDocument.SelectSingleNode("xml/Appkey") == null)
             //	{

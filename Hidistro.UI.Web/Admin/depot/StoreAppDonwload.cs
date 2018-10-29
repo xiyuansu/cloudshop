@@ -138,7 +138,8 @@ namespace Hidistro.UI.Web.Admin.depot
 		private void LoadVersion()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			try
+            xmlDocument.XmlResolver = null;
+            try
 			{
 				xmlDocument.Load(HttpContext.Current.Request.MapPath("/App_Data/data/storeapp/android/AndroidUpgrade.xml"));
 				this.litVersion.Text = xmlDocument.SelectSingleNode("root/Version").InnerText;

@@ -391,7 +391,8 @@ namespace Hidistro.UI.Web
 		public XmlDocument GetXmlNode()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			if (!string.IsNullOrEmpty(this.configurl))
+            xmlDocument.XmlResolver = null;
+            if (!string.IsNullOrEmpty(this.configurl))
 			{
 				xmlDocument.Load(this.configurl);
 			}

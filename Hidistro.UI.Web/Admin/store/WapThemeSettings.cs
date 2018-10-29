@@ -63,7 +63,8 @@ namespace Hidistro.UI.Web.Admin.store
 		{
 			HttpContext context = HiContext.Current.Context;
 			XmlDocument xmlDocument = new XmlDocument();
-			IList<ManageThemeInfo> list = new List<ManageThemeInfo>();
+            xmlDocument.XmlResolver = null;
+            IList<ManageThemeInfo> list = new List<ManageThemeInfo>();
 			string path = context.Request.PhysicalApplicationPath + "\\Templates\\common\\home";
 			string[] array = Directory.Exists(path) ? Directory.GetDirectories(path) : null;
 			ManageThemeInfo manageThemeInfo = null;

@@ -1,35 +1,39 @@
+using Hidistro.Core;
 using System;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace Hishop.Plugins
 {
-	public abstract class SMSSender : ConfigablePlugin, IPlugin
-	{
-		public static SMSSender CreateInstance(string name, string configXml)
-		{
-			if (string.IsNullOrEmpty(name))
-			{
-				return null;
-			}
-			Type plugin = SMSPlugins.Instance().GetPlugin("SMSSender", name);
-			if (plugin == null)
-			{
-				return null;
-			}
-			SMSSender sMSSender = Activator.CreateInstance(plugin) as SMSSender;
-			if (sMSSender != null && !string.IsNullOrEmpty(configXml))
-			{
-				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(configXml);
-				sMSSender.InitConfig(xmlDocument.FirstChild);
-			}
-			return sMSSender;
-		}
+    public abstract class SMSSender : ConfigablePlugin, IPlugin
+    {
+        public static SMSSender CreateInstance(string name, string configXml)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return null;
+            }
+            Type plugin = SMSPlugins.Instance().GetPlugin("SMSSender", name);
+            if (plugin == null)
+            {
+                return null;
+            }
+            SMSSender sMSSender = Activator.CreateInstance(plugin) as SMSSender;
+            if (sMSSender != null && !string.IsNullOrEmpty(configXml))
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(configXml);
+                sMSSender.InitConfig(xmlDocument.FirstChild);
+            }
+            Globals.AppendLog(new Dictionary<string, string>(), "SMSSender CreateInstance" + "--" + name + ":" + configXml, "", "", "/log/SMSSender.txt");
+            return sMSSender;
+        }
 
-		public static SMSSender CreateInstance(string name)
-		{
-			return SMSSender.CreateInstance(name, null);
-		}
+        public static SMSSender CreateInstance(string name)
+        {
+            return SMSSender.CreateInstance(name, null);
+        }
 
         /// <summary>
         /// 2018-7-8 新增的方法
@@ -41,9 +45,9 @@ namespace Hishop.Plugins
         ///  <param name="OutId">可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者</param>
         /// <param name="speed"></param>
         /// <returns></returns>
-        public abstract bool Send(string cellPhone, string TemplateCode, string message, out string returnMsg, string OutId="", string speed = "0");
+        public abstract bool Send(string cellPhone, string TemplateCode, string message, out string returnMsg, string OutId = "", string speed = "0");
 
         public abstract bool Send(string[] phoneNumbers, string TemplateCode, string message, out string returnMsg, string OutId = "", string speed = "1");
 
-	}
+    }
 }

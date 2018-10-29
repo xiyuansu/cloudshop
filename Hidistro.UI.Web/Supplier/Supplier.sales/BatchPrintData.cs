@@ -432,7 +432,8 @@ namespace Hidistro.UI.Web.Supplier.sales
 				if (File.Exists(text))
 				{
 					XmlDocument xmlDocument = new XmlDocument();
-					xmlDocument.Load(text);
+                    xmlDocument.XmlResolver = null;
+                    xmlDocument.Load(text);
 					XmlNode xmlNode = xmlDocument.DocumentElement.SelectSingleNode("//printer");
 					this.templateName = xmlNode.SelectSingleNode("kind").InnerText;
 					string innerText = xmlNode.SelectSingleNode("pic").InnerText;
@@ -872,7 +873,8 @@ namespace Hidistro.UI.Web.Supplier.sales
 		{
 			List<string> list = new List<string>();
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
 			XmlNodeList xmlNodeList = xmlDocument.SelectNodes("/DataItems/Item");
 			foreach (XmlNode item in xmlNodeList)
 			{

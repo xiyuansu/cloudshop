@@ -1,4 +1,6 @@
+using Hidistro.Core;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 
@@ -16,7 +18,8 @@ namespace Hishop.Plugins
 			{
 				if (HttpContext.Current != null)
 				{
-					return HttpContext.Current.Request.MapPath("~/plugins/sms");
+                    Globals.AppendLog(new Dictionary<string, string>(), "PluginLocalPath:" + HttpContext.Current.Request.MapPath("~/plugins/sms"), "", "", "/log/SMSPlugins.txt");
+                    return HttpContext.Current.Request.MapPath("~/plugins/sms");
 				}
 				string text = "plugins/sms";
 				text = text.Replace("/", "\\");
@@ -24,7 +27,8 @@ namespace Hishop.Plugins
 				{
 					text = text.TrimStart('\\');
 				}
-				return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, text);
+                Globals.AppendLog(new Dictionary<string, string>(), "PluginLocalPath:" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, text), "", "", "/log/SMSPlugins.txt");
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, text);
 			}
 		}
 

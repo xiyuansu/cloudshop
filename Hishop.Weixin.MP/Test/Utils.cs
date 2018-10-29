@@ -22,14 +22,16 @@ namespace Hishop.Weixin.MP.Test
 		public string MethodName()
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml("<xml><ToUserName><![CDATA[gh_ef4e2090afe3]]></ToUserName><FromUserName><![CDATA[opUMDj9jbOmTtbZuE2hM6wnv27B0]]></FromUserName><CreateTime>1385887183</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[s]]></Content><MsgId>5952340126940580233</MsgId></xml>");
+            xmlDocument.XmlResolver = null;
+            xmlDocument.LoadXml("<xml><ToUserName><![CDATA[gh_ef4e2090afe3]]></ToUserName><FromUserName><![CDATA[opUMDj9jbOmTtbZuE2hM6wnv27B0]]></FromUserName><CreateTime>1385887183</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[s]]></Content><MsgId>5952340126940580233</MsgId></xml>");
 			return xmlDocument.SelectSingleNode("xml/ToUserName").InnerText;
 		}
 
 		public AbstractRequest ConvertRequest<T>(Stream inputStream) where T : AbstractRequest
 		{
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(inputStream);
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(inputStream);
 			string a = xmlDocument.SelectSingleNode("xml/MsgType").InnerText.ToLower();
 			if (a != "text")
 			{

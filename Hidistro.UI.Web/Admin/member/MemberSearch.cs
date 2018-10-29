@@ -272,7 +272,8 @@ namespace Hidistro.UI.Web.Admin.member
 			{
 				string xml = HiCryptographer.TryDecypt(settings.SMSSettings);
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(xml);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(xml);
 				string innerText = xmlDocument.SelectSingleNode("xml/Appkey").InnerText;
 				string postData = "method=getAmount&Appkey=" + innerText;
 				string text = base.PostData("http://sms.huz.cn/getAmount.aspx", postData);

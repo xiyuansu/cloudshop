@@ -45,7 +45,8 @@ namespace Hishop.Plugins
 			if (refundRequest != null && !string.IsNullOrEmpty(configXml))
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(configXml);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(configXml);
 				refundRequest.InitConfig(xmlDocument.FirstChild);
 			}
 			return refundRequest;

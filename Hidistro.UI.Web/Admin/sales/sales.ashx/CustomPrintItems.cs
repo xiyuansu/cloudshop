@@ -41,7 +41,8 @@ namespace Hidistro.UI.Web.Admin.sales.ashx
 			DataGridViewModel<Dictionary<string, object>> dataGridViewModel = new DataGridViewModel<Dictionary<string, object>>();
 			dataGridViewModel.rows = new List<Dictionary<string, object>>();
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
 			XmlNodeList xmlNodeList = xmlDocument.SelectNodes("/DataItems/Item");
 			foreach (XmlNode item in xmlNodeList)
 			{
@@ -62,7 +63,8 @@ namespace Hidistro.UI.Web.Admin.sales.ashx
 				throw new HidistroAshxException("错误的参数");
 			}
 			XmlDocument xmlDocument = new XmlDocument();
-			xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
+            xmlDocument.XmlResolver = null;
+            xmlDocument.Load(HttpContext.Current.Request.MapPath(string.Format("/Storage/master/flex/PrintDefinedData.xml")));
 			XmlNodeList xmlNodeList = xmlDocument.SelectNodes("/DataItems/Item");
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("/DataItems");
 			foreach (XmlNode item in xmlNodeList)

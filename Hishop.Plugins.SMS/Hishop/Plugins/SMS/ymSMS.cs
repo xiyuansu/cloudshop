@@ -57,7 +57,7 @@ namespace Hishop.Plugins.SMS
         /// <returns></returns>
         public override bool Send(string cellPhone, string TemplateCode,string message, out string returnMsg, string OutId="", string speed = "0")
         {
-            if (((string.IsNullOrEmpty(cellPhone)  || (cellPhone.Trim().Length == 0) )
+            if (((string.IsNullOrEmpty(cellPhone)  || (cellPhone.Trim().Length == 0))))
             {
                 returnMsg = "手机号码和消息内容不能为空";
                 return false;

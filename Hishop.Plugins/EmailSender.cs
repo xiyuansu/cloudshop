@@ -22,7 +22,8 @@ namespace Hishop.Plugins
 			if (emailSender != null && !string.IsNullOrEmpty(configXml))
 			{
 				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.LoadXml(configXml);
+                xmlDocument.XmlResolver = null;
+                xmlDocument.LoadXml(configXml);
 				emailSender.InitConfig(xmlDocument.FirstChild);
 			}
 			return emailSender;
